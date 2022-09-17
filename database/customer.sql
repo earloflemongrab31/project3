@@ -10,7 +10,7 @@ customer_pw varchar2(16) not null check(regexp_like(customer_pw, '^[a-zA-Z0-9!@#
     and
     regexp_like(customer_pw, '[!@#$]') */
 ),
-customer_pwcheck varchar2(16) not null check(regexp_like(customer_pw, '^[a-zA-Z0-9!@#$]{8,16}$')),
+customer_pwcheck varchar2(16) not null check(regexp_like(customer_pwcheck, '^[a-zA-Z0-9!@#$]{8,16}$')),
 customer_nick varchar2(30) not null unique check(regexp_like(customer_nick, '^[가-힣][가-힣0-9]{0,9}$')),
 customer_name varchar2(21) not null check(regexp_like(customer_name, '^[가-힣]{2,7}$')),
 customer_post varchar2(6) not null check(regexp_like(customer_post, '^\d{5,6}$')),
