@@ -1,4 +1,4 @@
-create table love(
+create table customerlike(
 customer_id references customer(customer_id),
 item_no references item(item_no),
 like_cnt number
