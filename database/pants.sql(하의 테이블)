@@ -1,0 +1,8 @@
+create table pants(
+item_no REFERENCES item(item_no) on delete set null,
+pants_denim varchar2(30) not null,
+pants_cotton varchar2(30) not null,
+pants_skirts varchar2(30) not null,
+pants_leggings varchar2(30) not null,
+pants_slacks varchar2(30) not null
+);
