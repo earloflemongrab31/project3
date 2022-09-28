@@ -7,3 +7,5 @@ notice_read number default 0,
 notice_content varchar2(4000) not null, 
 notice_head char(6) check(notice_head = '긴급')
 );
+
+create sequence notice_seq;
