@@ -1,5 +1,7 @@
 create sequence item_seq;
 
+drop table item;
+
 create table item (
 item_no number primary key,
 item_name varchar2(30) not null,
