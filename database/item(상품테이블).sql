@@ -5,11 +5,13 @@ drop table item;
 
 create table item (
 item_no number primary key,
-item_name varchar2(30) not null,
-item_type varchar2(16) not null,
+cate_code references cate(cate_code) on delete cascade, 
+item_name varchar2(30) not null, 
+item_memo varchar2(100) not null, 
+item_content varchar2(4000) not null, 
 item_price number not null,
 item_color varchar2(10) not null,
 item_size number not null,
 item_total_cnt number not null,
-item_date date default sysdate,
+item_date date default sysdate
 );
