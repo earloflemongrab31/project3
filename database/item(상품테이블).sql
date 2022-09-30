@@ -3,7 +3,7 @@ create sequence item_seq;
 drop table item;
 
 create table item (
-item_no number primary key,
+item_no references,
 item_name varchar2(30) not null,
 item_memo varchar2(16) not null,
 item_type varchar2(16) not null,
