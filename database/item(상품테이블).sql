@@ -1,4 +1,4 @@
-drop swquence item_seq;
+drop sequence item_seq;
 create sequence item_seq;
 
 drop table item;
