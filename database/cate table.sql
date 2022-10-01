@@ -26,6 +26,11 @@ insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'skirt',
 insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'dress',500,null);
 	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'원피스',501,500);
 insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'acc',600,null);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'쥬얼리',601,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'모자',602,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'가방',603,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'신발',604,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'양말',605,600);
         
 		cate_tier.		cate_name.	cate_code.	cate_parent.
 -- 대분류		1			outer		100		null
