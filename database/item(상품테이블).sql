@@ -17,4 +17,3 @@ item_like_cnt number default 0,
 item_basket_cnt number default 0,
 item_date date default sysdate
 );
-
