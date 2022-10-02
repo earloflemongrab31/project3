@@ -17,3 +17,7 @@ item_like_cnt number default 0,
 item_basket_cnt number default 0,
 item_date date default sysdate
 );
+
+
+-- item_color 범위 s,m,l,xl,xxl 해서 varchar2(3)으로 바꿔도 될 것 같아요.
+-- 근데 어떻게 넣지...
