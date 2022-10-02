@@ -20,4 +20,5 @@ item_date date default sysdate
 
 
 -- item_color 범위 s,m,l,xl,xxl 해서 varchar2(3)으로 바꿔도 될 것 같아요.
--- 근데 어떻게 넣지...
+-- size랑 color 컬럼을 아예 여러개를 추가해서 ex)size1/size2/size3...
+-- 각 컬럼 중에 1은 not null이고 나머지는 선택으로 해가지고 저장하는 건 어떨까용?
