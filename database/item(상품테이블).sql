@@ -13,8 +13,8 @@ item_price number not null,
 item_color varchar2(10) not null,
 item_size number not null,
 item_total_cnt number default 0,
-item_like_cut number default 0,    
-item_basket_cut number default 0,
+item_like_cnt number default 0,    
+item_basket_cnt number default 0,
 item_date date default sysdate
 );
 
