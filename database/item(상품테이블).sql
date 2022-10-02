@@ -12,6 +12,6 @@ item_content varchar2(4000) not null,
 item_price number not null,
 item_color varchar2(10) not null,
 item_size number not null,
-item_total_cnt number not null,
+item_total_cnt number default 0,
 item_date date default sysdate
 );
