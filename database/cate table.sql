@@ -6,31 +6,31 @@ cate_parent references cate(cate_code)
 );
 
 insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'outer',100,null);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'자켓',101,100);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'코트',102,100);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'가디건',103,100);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'패딩',104,100);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'자켓',101,100);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'코트',102,100);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'가디건',103,100);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'패딩',104,100);
 insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'top',200,null);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'민소매',201,200);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'티셔츠',202,200);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'맨투맨',203,200);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'니트',204,200);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'블라우스',205,200);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'민소매',201,200);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'티셔츠',202,200);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'맨투맨',203,200);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'니트',204,200);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'블라우스',205,200);
 insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'pants',300,null);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'청바지',301,300);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'면바지',302,300);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'슬랙스',303,300);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'청바지',301,300);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'면바지',302,300);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'슬랙스',303,300);
 insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'skirt',400,null);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'숏기장',401,400);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'롱기장',402,400);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'숏기장',401,400);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'롱기장',402,400);
 insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'dress',500,null);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'원피스',501,500);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'원피스',501,500);
 insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'acc',600,null);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'쥬얼리',601,600);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'모자',602,600);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'가방',603,600);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'신발',604,600);
-	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (1,'양말',605,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'쥬얼리',601,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'모자',602,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'가방',603,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'신발',604,600);
+	insert into cate(cate_tier, cate_name, cate_code,cate_parent) values (2,'양말',605,600);
         
 		cate_tier.		cate_name.	cate_code.	cate_parent.
 -- 대분류		1			outer		100		null
