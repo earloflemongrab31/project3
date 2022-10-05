@@ -13,8 +13,7 @@ item_price number not null,
 item_color varchar2(10) not null,
 item_size varchar2(30) not null,
 item_total_cnt number default 0,
-item_like_cnt number default 0,    
+item_like_cnt number default 0 not null check(item_like_cnt >= 0),   
 item_basket_cnt number default 0,
-item_date date default sysdate, 
-item_like number default 0 not null check(item_like >= 0)
+item_date date default sysdate
 );
