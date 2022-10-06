@@ -1,5 +1,6 @@
 create table customer_like(
 customer_id references customer(customer_id),
 item_no references item(item_no),
-like_time date default sysdate
+like_time date default sysdate, 
+primary key(customer_id, item_no)
 );
