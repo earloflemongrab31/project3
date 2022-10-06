@@ -1,4 +1,4 @@
-create table like(
+create table item_like(
 customer_id references customer(customer_id),
 item_no references item(item_no),
 like_time date
