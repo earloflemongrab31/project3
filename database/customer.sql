@@ -26,6 +26,7 @@ customer_point number default 5000 check(customer_point >= 0),
 customer_money number default 200000 check(customer_money >=0),
 customer_grade varchar2(9) default '일반' not null check(customer_grade in('일반','VIP','관리자')),
 customer_join date default sysdate,
-customer_login date, 
-item_total_cnt number
+customer_login date
 );
+
+ALTER table customer ADD item_total_cnt NUMBER DEFAULT 0 check(item_total_cnt >= 0);
