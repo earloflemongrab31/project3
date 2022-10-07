@@ -2,7 +2,7 @@ create table admin(
 admin_id varchar2(20) not null,
 admin_pw varchar2(16) not null,
 admin_name varchar2(21) not null,
-admin_nick varchar2(30) not null,
+admin_nick varchar2(30),
 admin_grade varchar2(20)
 
 );
