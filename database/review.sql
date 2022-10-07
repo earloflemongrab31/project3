@@ -1,4 +1,5 @@
 create table review(
+review_no number primary key,
 customer_id references customer(customer_id),
 item_no references item(item_no),
 review_name varchar2(30) not null,
