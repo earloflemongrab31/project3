@@ -5,7 +5,6 @@ address_no number,
 address_name varchar2(30),
 address_post varchar2(6),
 address_host varchar2(150),
-address_detail_host varchar2(150)
-
-
+address_detail_host varchar2(150),
+address_basic char(1)
 );
