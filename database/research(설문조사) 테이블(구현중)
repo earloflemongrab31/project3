@@ -1,0 +1,6 @@
+create table research(
+customer_id varchar2(20),
+research_no number,
+research_content varchar2(150)
+
+);
