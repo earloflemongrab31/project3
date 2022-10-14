@@ -26,7 +26,6 @@ customer_login date,
 cart_total_cnt number,
 cart_total_money nubmber,
 customer_like number,
-address_basic numeber 
 );
 
 ALTER table customer ADD item_total_cnt NUMBER DEFAULT 0 check(item_total_cnt >= 0);
