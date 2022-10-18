@@ -118,4 +118,6 @@ public class CustomerDaoImpl implements CustomerDao{
 		Object[] param = {customerId};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+	
+	
 }
