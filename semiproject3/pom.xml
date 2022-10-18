@@ -70,6 +70,7 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<!-- 파일 입출력 의존성(파일업로드) -->
 		<dependency>
 		    <groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>
