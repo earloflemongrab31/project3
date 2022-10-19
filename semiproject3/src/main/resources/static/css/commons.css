@@ -112,7 +112,7 @@ h2.logo{
 */
 .btn{
     font-size: 14px;
-    padding: 0.75em;
+    padding: 0.5em;
     border: none;
     cursor: pointer;
 
@@ -120,6 +120,9 @@ h2.logo{
     display: inline-block;
     text-align: center;
     text-decoration: none;
+}
+.btn.btn-border{
+	border: 1px solid #D5D5D5;
 }
 .btn.btn-positive{
     background-color: #5E5E5E;
@@ -150,10 +153,14 @@ h2.logo{
     outline: none;
     font-size: 14px;
     padding: 0.5em;
-    border: 1px solid gray;
+    border: 1px solid #D5D5D5;
 }
 .input:focus{
-    border-color: black;
+    border-color: gray;
+}
+
+.input.input-none{
+	border: none;
 }
 
 /* 
@@ -199,7 +206,7 @@ textarea.input.fix-size{/*textarea는 class가 아니니까*/
 .table{
 border-collapse: collapse;/* 테두리 병합 */
 width: 100%;
-font-size: 16px;
+font-size: 14px;
 /* 똑같은데 쓰는 이유 : 바깥에서 바꿔도 영향을 안 받음 */
 }
 
@@ -269,16 +276,16 @@ font-size: 16px;
 /* 
     확장 스타일 : 옆이 뚫린 테이블
 */
-.table.table-slit{
-    border: 2px solid gray;
-    border-left: none;
-    border-right: none;
+.table.table-slit tbody th,
+.table.table-slit tbody td{
+    border: 1px solid #D5D5D5;
 }
-.table.table-slit > thead{
-    border-bottom: 1px solid gray;
+.table.table-slit tbody > tr > th {
+	text-align: left;
+	border-left: none;
 }
-.table.table-slit > tfoot{
-    border-top: 1px solid gray;
+.table.table-slit tbody > tr > td {
+	border-right: none;
 }
 
 /* 

@@ -34,6 +34,11 @@
 <!-- 아이콘 cdn -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
+<!-- lightpick 사용을 위한 CDN 추가 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+
 <!-- jQuery -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
@@ -69,11 +74,23 @@
 		vertical-align: middle;
 		height: 1em;
 	}
+	.required{
+		color: darkred;
+	}
 </style>
 <script>
 	$(function(){
 		$(".ad").find(".delete").click(function(){
 			$(this).parent().slideUp();
+		});
+		
+		var picker1 = new Lightpick({
+            // field : datepicker 적용 대상을 설정하는 공간
+            field:document.querySelector(".single-date-picker"),
+            // format : 선택한 날짜의 적용 형식 설정
+            format: "YYYY-MM-DD",
+            // (옵션) 미래/과거를 선택하지 못 하도록 설정(minDate, maxDate)
+            maxDate: moment()
 		});
 	});
 </script>
