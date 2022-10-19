@@ -26,9 +26,10 @@ public class ResearchController {
 	public String insert(HttpSession session) {
 		String loginId=(String)session.getAttribute("loginId");
 		//아이디 중복방지
-		//(1) 1일경우 중복 0일경우 설문조사 참여가능 
+		//(1) 1일경우 중복 0일경우 설문조사 참여가능
+		//(2) 아이디가 없을 경우 
 		int judge=researchDao.overlapId(loginId); 
-		if(judge>0) {
+		if((judge>0) || (loginId==null)) {
 			return "redirect:confirm";
 			
 		}else

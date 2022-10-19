@@ -132,6 +132,4 @@ public class NoticeDaoImpl implements NoticeDao {
 		Object[] param = {noticeNo};
 		return jdbcTemplate.update(sql, param)>0;
 	}
-
-	
 }
