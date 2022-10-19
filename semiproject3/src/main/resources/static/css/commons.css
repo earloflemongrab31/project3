@@ -99,6 +99,8 @@ h2.logo{
 .me-40{margin-right: 40px;}
 .me-50{margin-right: 50px;}
 
+
+
 /* 
     버튼은 3가지 역할이 있다고 보고 디자인한다.
     - 긍정버튼 : 현재의 작업을 완성시키는 버튼
@@ -533,6 +535,7 @@ ul.pagination > li > a{
 .flexbox{
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 aside.flexbox{

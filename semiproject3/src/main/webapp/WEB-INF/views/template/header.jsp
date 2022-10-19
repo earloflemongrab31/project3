@@ -86,7 +86,7 @@
 <!-- 
 	광고 구현 중
 	1. 구글플레이 이미지 중간 맞춤
-	2. X 누르면 광고 배너 삭제
+	2. 새로고침 할 때마다 나옴
  -->
 <div class="float-container ad">
 	"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
