@@ -67,11 +67,7 @@ public class CustomerDaoImpl implements CustomerDao{
 		}
 	};
 	
-	@Override
-	public List<CustomerDto> selectList() {
-		String sql = "select * from customer";
-		return jdbcTemplate.query(sql, mapper);
-	}
+	
 	
 	@Override
 	public List<CustomerDto> selectList(String type, String keyword) {
@@ -142,6 +138,12 @@ public class CustomerDaoImpl implements CustomerDao{
 		String sql = "delete customer where customer_id=?";
 		Object[] param = {customerId};
 		return jdbcTemplate.update(sql, param) > 0;
+	}
+
+	@Override
+	public List<CustomerDto> selectList() {
+		String sql = "select * from customer";
+		return jdbcTemplate.query(sql, mapper);
 	}
 
 	
