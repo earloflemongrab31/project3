@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.entity.ImageDto;
@@ -41,11 +42,27 @@ public class ItemController {
 	
 	@PostMapping("/insert")
 	public String insert(
-			@ModelAttribute ItemDto itemDto) {
+			@ModelAttribute ItemDto itemDto,
+			@ModelAttribute ImageDto imageDto,
+			@RequestParam MultipartFile image) {
 		int itemNo = itemDao.sequence();
 		itemDto.setItemNo(itemNo);
 		
-		itemDao.insert(itemDto); 
+		itemDao.insert(itemDto);
+		
+		//이미지 DB에 저장
+		int imageNo = imageDao.sequence();
+		imageDto.setImageNo(imageNo);
+		imageDao.insert(imageDto);
+		
+		
+		if(!image.isEmpty()) {
+//			File dir = new File("C:/study/itemImage");
+			File dir = new File("D:/study/itemImage");
+			dir.mkdirs();
+			File target = new File(dir, String.valueOf(imageNo));
+			image.transferTo(target);
+		}
 		
 		return "redirect:list";
 	}
