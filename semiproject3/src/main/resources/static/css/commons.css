@@ -569,3 +569,23 @@ aside.flexbox> div{
 	text-align: left;
 	padding: 0 20px;
 }
+
+/* 프로그레스바 설정 */
+.progressbar {
+    height:15px;
+    position: relative;
+    top:0;
+    left:0;
+    right:0;
+    overflow: hidden;/* 넘어갈 경우에 대한 처리*/
+}
+.progressbar > .inner {
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    width:0%;
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    transition: width 0.2s linear;
+}

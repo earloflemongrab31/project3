@@ -97,6 +97,7 @@
 			$(this).parent().slideUp();
 		});
 		
+		// datepicker 할 때 필요한 기능 - 안 바꿀거면 지워도 됨
 		var picker1 = new Lightpick({
             // field : datepicker 적용 대상을 설정하는 공간
             field:document.querySelector(".single-date-picker"),
@@ -105,6 +106,47 @@
             // (옵션) 미래/과거를 선택하지 못 하도록 설정(minDate, maxDate)
             maxDate: moment()
 		});
+	});
+	
+	$(function(){
+        //1. 첫번째 이전버튼과 마지막 다음버튼을 삭제
+        $(".prev").first().remove();
+        $(".next").last().remove();
+
+        //2. 1페이지만 남기고 다 숨김 처리
+        $(".page").hide();
+        $(".page").first().show();
+
+        //3. 페이지당 늘어나야 할 % 계산
+        var step = 100 / $(".page").length;
+        var percent = step;
+        $(".progressbar > .inner").css("width", percent+"%");
+
+        //4. 남은 버튼에 클릭 이벤트를 설정
+        //- 다음 버튼을 누르면 해당 페이지의 뒷 페이지 표시 및 나머지 숨김
+        //- 이전 버튼을 누르면 해당 페이지의 앞 페이지 표시 및 나머지 숨김
+        $(".next").click(function(){
+            //this == 클릭한 다음 버튼
+            //var target = $(this).parent().parent().parent().next();
+            var target = $(this).parents(".page").next();
+
+            //모든 페이지 숨기고 target만 표시
+            $(".page").hide();
+            target.show();
+
+            //% 증가
+            percent += step;
+            $(".progressbar > .inner").css("width", percent+"%");
+        });
+        $(".prev").click(function(){
+            var target = $(this).parents(".page").prev();
+            $(".page").hide();
+            target.show();
+
+            //% 감소
+            percent -= step;
+            $(".progressbar > .inner").css("width", percent+"%");
+        });
 	});
 </script>
 
@@ -194,11 +236,11 @@
 		<li class="float-right"><a href="#">MYPAGE</a></li>
 	<c:choose>
 		<c:when test="${loginId == null}">
-			<li class="float-right"><a href="#">LOGIN</a></li>
-			<li class="float-right"><a href="#">JOIN US</a></li>
+			<li class="float-right"><a href="/customer/login">LOGIN</a></li>
+			<li class="float-right"><a href="/customer/insert">JOIN US</a></li>
 		</c:when>
 		<c:otherwise>
-			<li class="float-right"><a href="#">LOGOUT</a></li>
+			<li class="float-right"><a href="/customer/logout">LOGOUT</a></li>
 		</c:otherwise>
 	</c:choose>
 </ul>
