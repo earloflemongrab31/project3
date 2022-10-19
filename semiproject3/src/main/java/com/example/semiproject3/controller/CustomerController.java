@@ -53,15 +53,16 @@ public class CustomerController {
 			return "redirect:login?error";
 		}
 		
-		boolean isLogin = findDto.getCustomerPw().equals(customerPw);
+		boolean isLogin = customerPw.equals(findDto.getCustomerPw());
 		if(isLogin) {
-			session.setAttribute("loginId", customerId);
-			session.setAttribute("loginMg", findDto.getCustomerGrade());
+			session.setAttribute(SessionConstant.ID, customerId);
+			session.setAttribute(SessionConstant.GRADE, findDto.getCustomerGrade());
+			
+			return "redirect:/";
 		}
 		else {
 			return "redirect:login?error";
 		}
-		return "redirect:/";
 	}
 	
 	@GetMapping("/logout")
