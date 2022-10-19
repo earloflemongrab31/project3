@@ -30,8 +30,8 @@ public class CustomerDaoImpl implements CustomerDao{
 				+ "customer_phone,"
 				+ "customer_tel,"
 				+ "customer_birth,"
-				+ "customer_email,"
-				+ ")"
+				+ "customer_email"
+				+ ") "
 				+ "values(?,?,?,?,?,?,?,?,?)";
 		Object[] param = {
 				dto.getCustomerId(), dto.getCustomerPw(), dto.getCustomerPwsearch(),

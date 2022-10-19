@@ -29,6 +29,7 @@ public class CustomerController {
 
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute CustomerDto dto) {
+		customerDao.insert(dto);
 		return "redirect:insert_success";
 	}
 	
