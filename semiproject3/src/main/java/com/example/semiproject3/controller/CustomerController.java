@@ -29,12 +29,12 @@ public class CustomerController {
 
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute CustomerDto dto) {
-		return "insert_success";
+		return "redirect:insert_success";
 	}
 	
 	@GetMapping("/insert_success")
 	public String insertSuccess() {
-		return "customer/insert_success";
+		return "customer/insertSuccess";
 	}
 	
 	@GetMapping("/login")
