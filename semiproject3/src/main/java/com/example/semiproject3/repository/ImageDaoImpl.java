@@ -85,4 +85,12 @@ public class ImageDaoImpl implements ImageDao{
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 
+	//아이템 이미지 관련(item_image_view 조회)
+	@Override
+	public List<ImageDto> selectItemImageList(int itemNo) {
+		String sql = "select * from item_image_view where item_no = ?";
+		Object[] param = {itemNo};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
 }

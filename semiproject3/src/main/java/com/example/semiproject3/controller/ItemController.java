@@ -2,6 +2,7 @@ package com.example.semiproject3.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,31 +45,35 @@ public class ItemController {
 	public String insert(
 			@ModelAttribute ItemDto itemDto,
 			@ModelAttribute ImageDto imageDto,
-			@RequestParam MultipartFile itemImage) throws IllegalStateException, IOException {
+			@RequestParam List<MultipartFile> itemImage) throws IllegalStateException, IOException {
 		
-		
+		//등록 아이템에 미리 번호 생성
 		int itemNo = itemDao.sequence();
 		itemDto.setItemNo(itemNo);
 		
 		itemDao.insert(itemDto);
 		
-		//이미지 DB에 저장
-		int imageNo = imageDao.sequence();
-		imageDao.insert(ImageDto.builder()
-								.imageNo(itemNo)
-								.imageName(itemImage.getOriginalFilename())
-								.imageType(itemImage.getContentType())
-								.imageSize(itemImage.getSize())
-							.build());
-		
-		
-		//파일 저장
-		if(!itemImage.isEmpty()) {
-//			File dir = new File("C:/study/itemImage");
-			File dir = new File("D:/study/itemImage");
-			dir.mkdirs();
-			File target = new File(dir, String.valueOf(itemNo));
-			itemImage.transferTo(target);
+		for(MultipartFile image : itemImage) {
+			if(!image.isEmpty()) {
+				
+				//이미지 DB에 저장
+				int imageNo = imageDao.sequence();
+				imageDao.insert(ImageDto.builder()
+						.imageNo(imageNo)
+						.imageName(image.getOriginalFilename())
+						.imageType(image.getContentType())
+						.imageSize(image.getSize())
+						.build());
+				//파일 저장
+//				File dir = new File("C:/study/itemImage");
+				File dir = new File("D:/study/itemImage");
+				dir.mkdirs();
+				File target = new File(dir, String.valueOf(imageNo));
+				image.transferTo(target);
+				
+				//+ 연결 테이블에 연결 정보를 저장(아이템 번호, 이미지 번호)
+				itemDao.connectImage(itemNo,imageNo);
+			}
 		}
 		
 		return "redirect:list";
@@ -96,6 +101,8 @@ public class ItemController {
 			@RequestParam int itemNo) {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		
+		model.addAttribute("itemImageList", imageDao.selectItemImageList(itemNo));
+		
 		return "item/detail";
 	}
 	
@@ -106,6 +113,7 @@ public class ItemController {
 		
 		//[1]DB에서 이미지 검색
 		ImageDto imageDto = imageDao.selectOne(itemNo);
+		System.out.println(imageDto);
 		if(imageDto == null) {//파일이 없으면
 			return ResponseEntity.notFound().build();//404 error 전송
 		}
@@ -113,7 +121,7 @@ public class ItemController {
 		//[2] 찾은 이미지 불러오기
 //		File dir = new File("C:/study/itemImage");
 		File dir = new File("D:/study/itemImage");
-		File target = new File(dir, String.valueOf(itemNo));
+		File target = new File(dir, String.valueOf(imageDto.getImageNo()));
 		
 		if(target.exists()) {//파일 존재
 			//[2] 해당 파일의 내용을 불러온다.(apache commons io 의존성 필요)

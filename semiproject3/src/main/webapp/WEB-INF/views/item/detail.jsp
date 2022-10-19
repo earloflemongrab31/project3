@@ -20,9 +20,11 @@
 	 	<table class="table table-border">
 	 		<tbody>
 	 		
-	 			<tr><td>
-					<img src="download?itemNo=${itemDto.itemNo}" width="200" >
-				</tr></td>
+	 			<tr>
+	 				<td>
+						<img src="download?itemNo=${itemDto.itemNo}" width="200" >
+					</td>
+				</tr>
 			
 	 			<tr>
 	 				<th>상품번호</th>
