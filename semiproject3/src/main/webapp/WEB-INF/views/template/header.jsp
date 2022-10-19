@@ -62,19 +62,38 @@
 		padding: 0.5em;
 		margin: 0;
 	}
-	.ad > span{
-		color: orange;
+	.delete{
+		cursor: pointer;
+	}
+	a img{
+		vertical-align: middle;
+		height: 1em;
 	}
 </style>
+<script>
+	$(function(){
+		$(".ad").find(".delete").click(function(){
+			$(this).parent().slideUp();
+		});
+	});
+</script>
 
 </head>
 
 <body>
 
 <header>
-<div class="row ad">
-	"쇼핑몰명 앱" 설치 시 <span>쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
-	<
+<!-- 
+	광고 구현 중
+	1. 구글플레이 이미지 중간 맞춤
+	2. X 누르면 광고 배너 삭제
+ -->
+<div class="float-container ad">
+	"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
+	<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
+		<img src="./image/googleplay.png">
+	</a>
+	<span class="float-right delete" style="font-family:sans-serif;">X</span>
 </div>
 
 <div class="row">
