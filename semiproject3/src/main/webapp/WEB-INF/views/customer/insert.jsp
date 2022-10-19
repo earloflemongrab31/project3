@@ -21,7 +21,7 @@
 		</div>
 		<div class="row">
 			<label>나의 보물 1호는?</label>
-			<input class="input w-100" type="password" name="customerPwsearch" required placeholder="질문답변">
+			<input class="input w-100" type="text" name="customerPwsearch" required placeholder="질문답변">
 		</div>
 		
 		<div class="row">

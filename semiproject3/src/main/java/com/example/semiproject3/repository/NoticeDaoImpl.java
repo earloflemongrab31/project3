@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -55,40 +57,80 @@ public class NoticeDaoImpl implements NoticeDao {
 			Dto.setAdminId(rs.getString("admin_id"));
 			Dto.setNoticeNo(rs.getInt("notice_no"));
 			Dto.setNoticeTitle(rs.getString("notice_title"));
-			Dto.setNotice
-			return null;
+			Dto.setNoticeDate(rs.getDate("notice_date"));
+			Dto.setNoticeUpdate(rs.getDate("notice_update"));
+			Dto.setNoticeContent(rs.getString("notice_content"));
+			Dto.setNoticeHead(rs.getString("notice_head"));
+			return Dto;
 		}
 	};
 	
+	private ResultSetExtractor<NoticeDto> extractor = new ResultSetExtractor<NoticeDto>() {
+
+		@Override
+		public NoticeDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				NoticeDto Dto = new NoticeDto();
+				Dto.setAdminId(rs.getString("admin_id"));
+				Dto.setNoticeNo(rs.getInt("notice_no"));
+				Dto.setNoticeTitle(rs.getString("notice_title"));
+				Dto.setNoticeDate(rs.getDate("notice_date"));
+				Dto.setNoticeUpdate(rs.getDate("notice_update"));
+				Dto.setNoticeContent(rs.getString("notice_content"));
+				Dto.setNoticeHead(rs.getString("notice_head"));
+				return Dto;
+			}
+			else {
+				return null;
+			}
+		}
+	};
 	
+	//목록
 	@Override
 	public List<NoticeDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from notice order by notice_no desc";
+		return jdbcTemplate.query(sql, mapper);
 	}
 
 	@Override
 	public List<NoticeDto> selectList(String type, String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from notice where instr(#1, ?) > 0 order by notice_no desc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	@Override
 	public NoticeDto selectOne(int noticeNo) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from notice where notice_no=?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.query(sql, extractor, param);
 	}
 
 	@Override
 	public boolean update(NoticeDto Dto) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "update notice "
+				+ "set "
+				+ "notice_title=?,"
+				+ "notice_date=?,"
+				+ "notice_content=?,"
+				+ "notice_head=?"
+				+ "where"
+				+ "notice_no=?";
+		Object[] param= {
+				Dto.getNoticeTitle(), Dto.getNoticeDate(),
+				Dto.getNoticeContent(), Dto.getNoticeHead(),
+				Dto.getNoticeNo()
+		};
+		return jdbcTemplate.update(sql, param)>0;
 	}
 
 	@Override
 	public boolean delete(int noticeNo) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "delete notice where notice_no=?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.update(sql, param)>0;
 	}
 
 	
