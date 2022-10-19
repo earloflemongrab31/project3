@@ -6,5 +6,6 @@ public interface ResearchDao {
 	
 	//insert 	
 	void insert(ResearchDto researchDto);
+	
 
 }

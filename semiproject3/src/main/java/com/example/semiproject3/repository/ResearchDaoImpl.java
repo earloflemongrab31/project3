@@ -15,9 +15,8 @@ public class ResearchDaoImpl implements ResearchDao{
 	//insert 
 	@Override
 	public void insert(ResearchDto researchDto) {
-		String sql="insert into research values(research_seq.val,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql="insert into research values(research_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,sysdate)";
 		Object param[]= {
-				researchDto.getResearchNumber(),
 				researchDto.getResearchCustomerId(),
 				researchDto.getResearchSex(),
 				researchDto.getResearchAge(),
@@ -32,5 +31,6 @@ public class ResearchDaoImpl implements ResearchDao{
 		};
 				jdbcTemplate.update(sql,param);
 	}
+	
 	
 }

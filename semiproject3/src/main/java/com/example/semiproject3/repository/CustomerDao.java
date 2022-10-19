@@ -13,4 +13,10 @@ public interface CustomerDao {
 	
 	boolean update(CustomerDto dto);
 	boolean delete(String customerId);
+	
+	//리서치 완료시 포인트 추가 
+	boolean updatePoint(String customerId);
+	//리서치 아이디중복방지
+	int overlapId(String customerId);
+
 }

@@ -22,16 +22,22 @@ public class ResearchController {
 	
 	@GetMapping("/insert")
 	public String insert() {
-		return "insert";
+		return "/research/insert";
 	}
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute ResearchDto researchDto) {
 		//db삽입 
 		researchDao.insert(researchDto);
 		//customer 포인트 +5000 업데이트 
-		//customerDao.updatePoint(researchDto.getResearchCustomerId());
-		return "/";
-		
+//		customerDao.updatePoint(researchDto.getResearchCustomerId());
+		//아이디 중복방지
+		//(1) 1일경우 중복 0일경우 설문조사 참여가능 
+//		int judge=customerDao.overlapId(researchDto.getResearchCustomerId()); 
+//		if(judge==1) {
+//			return "";
+//		}else
+//			return "/";
+		return "/research/insert";
 	}
 
 }

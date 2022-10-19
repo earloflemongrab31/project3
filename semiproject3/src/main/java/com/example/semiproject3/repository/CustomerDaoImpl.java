@@ -145,6 +145,22 @@ public class CustomerDaoImpl implements CustomerDao{
 		String sql = "select * from customer";
 		return jdbcTemplate.query(sql, mapper);
 	}
-
+	
+	
+	//리서치 완료시 포인트 +5000 NL
+	@Override
+	public boolean updatePoint(String customerId) {
+		String sql="update customer set customer_point=customer_point+5000 where customer_id=?";
+		Object[] param= {customerId};
+		return jdbcTemplate.update(sql,param)>0;
+	}
+	
+	//리서치 아이디 중복방지
+		@Override
+		public int overlapId(String customerId) {
+			String sql="select count(*) customer where customer=?";
+			Object[] param= {customerId};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
 	
 }

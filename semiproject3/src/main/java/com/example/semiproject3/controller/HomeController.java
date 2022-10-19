@@ -11,8 +11,5 @@ public class HomeController {
 	public String home(){
 		return "home";
 	}
-	@GetMapping("/research")
-	public String research() {
-		return "research";
-	}
+	
 }
