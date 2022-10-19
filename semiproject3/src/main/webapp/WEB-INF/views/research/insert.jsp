@@ -9,7 +9,7 @@
 <body>
 <form action="insert" method="post">
 
-	<input name="ResearchCustomerId" placeholder="hello1234">
+	<input name="ResearchCustomerId" placeholder="hello1234" value="${loginId}" hidden>
 	<br>
  	<label>1. 고객님의 성별에 체크해주세요</label>
     <br>
