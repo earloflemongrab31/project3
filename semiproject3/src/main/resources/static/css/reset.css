@@ -55,6 +55,10 @@ a{
 	color: black;
 }
 
+a:hover{
+	font-weight: bolder;
+}
+
 html{
     font-family: 'Noto Serif KR', sans-serif;
 }
