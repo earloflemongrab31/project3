@@ -18,40 +18,9 @@
 	
 	<div class = "row">
 	<label> 카테고리
-		<select name="cateCode">
+		<select class = "input w-100"" name ="cateCode">
 			<option value="">선택</option>
-			<optgroup label="OUTER">
-				<option value="101">자켓</option>
-				<option value="102">코트</option>
-				<option value="103">가디건</option>
-				<option value="104">패딩</option>
-			</optgroup>
-			<optgroup label="TOP">
-				<option value="201">민소매</option>
-				<option value="202">티셔츠</option>
-				<option value="203">맨투맨</option>
-				<option value="204">니트</option>
-				<option value="205">블라우스</option>
-			</optgroup>
-			<optgroup label="PANTS">
-				<option value="301">청바지</option>
-				<option value="302">면바지</option>
-				<option value="303">슬랙스</option>
-			</optgroup>
-			<optgroup label="SKIRT">
-				<option value="401">숏기장</option>
-				<option value="402">롱기장</option>
-			</optgroup>
-			<optgroup label="DRESS">
-				<option value="501">원피스</option>
-			</optgroup>
-			<optgroup label="ACC">
-				<option value="601">쥬얼리</option>
-				<option value="602">모자</option>
-				<option value="603">가방</option>
-				<option value="604">신발</option>
-				<option value="605">양말</option>
-			</optgroup>
+			<option val></option>
 		</select>
 	</label>
 	</div>
@@ -76,31 +45,19 @@
 	
 	<div class = "row">
 	<label> 색상
-		<select name="itemColor">
-			<option value="">선택</option>
-			<option>Black</option>
-			<option>White</option>
-			<option>Blue</option>
-			<option>Red</option>
-		</select>
+		<input name="itemColor" type="text" required class = "input w-100"  autocomplete="off">
 	</label>
 	</div>
 	
 	<div class = "row">
 	<label> 사이즈
-		<select name="itemSize">
-			<option value="">선택</option>
-			<option>S</option>
-			<option>M</option>
-			<option>L</option>
-			<option>XL</option>
-		</select>
+		<input name="itemSize" type="text" required class = "input w-100"  autocomplete="off">
 	</label>
 	</div>
 	
 	<div class = "row">
 	<label> 상품 설명
-		 <textarea name="itemContent" rows="10" cols="55" required ></textarea>
+		 <textarea name="itemContent" rows="10" cols="56" required ></textarea>
 	</label>
 	</div>
 	
