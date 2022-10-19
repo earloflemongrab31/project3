@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>3조 세미프로젝트 방문을 환영합니다.</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<a href="research/insert">리서치페이지</a>
+ 리서치페이지입니다.
 </body>
 </html>
