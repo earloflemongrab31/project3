@@ -165,11 +165,11 @@
 		<li class="float-right"><a href="#">MYPAGE</a></li>
 	<c:choose>
 		<c:when test="${loginId == null}">
-			<li class="float-right"><a href="#">LOGIN</a></li>
-			<li class="float-right"><a href="#">JOIN US</a></li>
+			<li class="float-right"><a href="/customer/login">LOGIN</a></li>
+			<li class="float-right"><a href="/customer/insert">JOIN US</a></li>
 		</c:when>
 		<c:otherwise>
-			<li class="float-right"><a href="#">LOGOUT</a></li>
+			<li class="float-right"><a href="/customer/logout">LOGOUT</a></li>
 		</c:otherwise>
 	</c:choose>
 </ul>

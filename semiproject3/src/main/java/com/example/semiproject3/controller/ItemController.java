@@ -3,8 +3,6 @@ package com.example.semiproject3.controller;
 import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -19,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
+import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
 
 @Controller
@@ -29,6 +29,9 @@ public class ItemController {
 	
 	@Autowired
 	private ItemDao itemDao;
+	
+	@Autowired
+	private ImageDao imageDao;
 	
 	//상품 등록
 	@GetMapping("/insert")
@@ -72,37 +75,44 @@ public class ItemController {
 		return "item/detail";
 	}
 	
-	//첨부 파일
-//	@GetMapping("/download")
-//	@ResponseBody
-//	public ResponseEntity<ByteArrayResource> download(@RequestParam int itemNo) throws IOException {
-//		//[1] 파일 찾기
-////		File dir = new File("C:/study/itemImage");
-//		File dir = new File("D:/study/itemImage");
-//		File target = new File(dir, String.valueOf(itemNo));
-//		
-//		if(target.exists()) {//파일 존재
-//			//[2] 해당 파일의 내용을 불러온다.(apache commons io 의존성 필요)
-//			byte[] data = FileUtils.readFileToByteArray(target);
-//			ByteArrayResource resource = new ByteArrayResource(data);
-//			
-//			//[3] 사용자에게 보낼 응답 생성
-//			//- header에는 보낼 파일의 정보를, body에는 보낼 파일의 내용을 첨부
-//			return ResponseEntity.ok()//ResponseEntity(응답 객체)
-//									.header("Content-Encoding", "UTF-8")
-//									.header("Content-Length", String.valueOf(data.length))
-//									.header("Content-Disposition", "attachment; filename="+itemNo)
-//									.header("Content-Type", "application/octet-stream")//현재 보내는 데이터 유형 , "무조건 다운받아라"
-//									.body(resource);
-//		}
-//		else {//파일 없음
-//			//1) 우리가 정한 예외를 발생시키는 방법
-//			throw new TargetNotFoundException("아이템 없음");
-//			
-//			//2) 사용자에게 못 찾았음(404)을 전송
-////			return ResponseEntity.notFound().build();
-//		}
-//	}
+	//이미지 첨부 파일
+	@GetMapping("/download")
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> download(@RequestParam int itemNo) throws IOException {
+		
+		//[1]DB에서 이미지 검색
+		ImageDto imageDto = imageDao.selectOne(itemNo);
+		if(imageDto == null) {//파일이 없으면
+			return ResponseEntity.notFound().build();//404 error 전송
+		}
+		
+		//[2] 찾은 이미지 불러오기
+//		File dir = new File("C:/study/itemImage");
+		File dir = new File("D:/study/itemImage");
+		File target = new File(dir, String.valueOf(itemNo));
+		
+		if(target.exists()) {//파일 존재
+			//[2] 해당 파일의 내용을 불러온다.(apache commons io 의존성 필요)
+			byte[] data = FileUtils.readFileToByteArray(target);
+			ByteArrayResource resource = new ByteArrayResource(data);
+			
+			//[3] 사용자에게 보낼 응답 생성
+			//- header에는 보낼 파일의 정보를, body에는 보낼 파일의 내용을 첨부
+			return ResponseEntity.ok()//ResponseEntity(응답 객체)
+									.header("Content-Encoding", "UTF-8")
+									.header("Content-Length", String.valueOf(data.length))
+									.header("Content-Disposition", "attachment; filename="+itemNo)
+									.header("Content-Type", "application/octet-stream")//현재 보내는 데이터 유형 , "무조건 다운받아라"
+									.body(resource);
+		}
+		else {//파일 없음
+			//1) 우리가 정한 예외를 발생시키는 방법
+			throw new TargetNotFoundException("아이템 없음");
+			
+			//2) 사용자에게 못 찾았음(404)을 전송
+//			return ResponseEntity.notFound().build();
+		}
+	}
 	
 	//상품 수정
 	@GetMapping("/update")
