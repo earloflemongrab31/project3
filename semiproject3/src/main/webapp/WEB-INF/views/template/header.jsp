@@ -55,6 +55,16 @@
 		width: 50px;
 		padding-right: 20px;
 	}
+	.ad{
+		background-color: black;
+		text-align: center;
+		color: white;
+		padding: 0.5em;
+		margin: 0;
+	}
+	.ad > span{
+		color: orange;
+	}
 </style>
 
 </head>
@@ -62,9 +72,16 @@
 <body>
 
 <header>
+<div class="row ad">
+	"쇼핑몰명 앱" 설치 시 <span>쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
+	<
+</div>
+
+<div class="row">
 	<h2 class="logo">
 		<a href="/">Logo</a>
 	</h2>
+</div>
 </header>
 
 <!-- 드롭다운 메뉴 -->
