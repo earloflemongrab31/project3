@@ -32,5 +32,12 @@ public class ResearchDaoImpl implements ResearchDao{
 				jdbcTemplate.update(sql,param);
 	}
 	
-	
+		//리서치 아이디 중복방지
+		@Override
+		public int overlapId(String customerId) {
+		String sql="select count(*) from research where research_customerId=?";
+		Object[] param= {customerId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
 }
