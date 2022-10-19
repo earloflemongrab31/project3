@@ -24,8 +24,8 @@ customer_grade varchar2(9) default '일반' not null check(customer_grade in('�
 customer_join date default sysdate,
 customer_login date,
 cart_total_cnt number,
-cart_total_money nubmber,
-customer_like number,
+cart_total_money number,
+customer_like number
 );
 
 ALTER table customer ADD item_total_cnt NUMBER DEFAULT 0 check(item_total_cnt >= 0);
