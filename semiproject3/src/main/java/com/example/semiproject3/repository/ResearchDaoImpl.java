@@ -27,7 +27,7 @@ public class ResearchDaoImpl implements ResearchDao{
 				researchDto.getResearchPayment(),
 				researchDto.getResearchPurpose(),
 				researchDto.getResearchComplain(),
-				researchDto.getResearchIdea(),
+				researchDto.getResearchIdea()
 		};
 				jdbcTemplate.update(sql,param);
 	}
