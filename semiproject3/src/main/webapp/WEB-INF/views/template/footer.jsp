@@ -3,10 +3,9 @@
     
 </main>
 
-<hr>
-<div class="row center">
+<footer class="row center">
 	<h3>푸터 영역 구현 중</h3>
-</div>
+</footer>
 
 </body>
 

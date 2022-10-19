@@ -4,8 +4,9 @@
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
-<div class="center">
-	<h1>메인 사진 들어갈 자리</h1>
+<!-- 사진 넣고 지우기 -->
+<div class="center" style="background-color:#ede8e4; min-height:400px">
+	<h1 style="margin:0;"></h1>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

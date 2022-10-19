@@ -4,15 +4,13 @@
     홈페이지 레이아웃을 설정하는 스타일시트
 */
 main{
-    width: 1000px;
     margin: 0 auto;
-    min-height: 400px;
+    min-height: 500px;
 }
 header{
     padding: 20px;
 }
 nav{
-	border-bottom: 1px solid gray;
 }
 aside{
     padding: 20px;
@@ -27,5 +25,6 @@ section{
     min-height: 400px;
 }
 footer{
+	border-top: 1px solid gray;
     padding: 20px;
 }
