@@ -21,8 +21,10 @@
 	 		<tbody>
 	 		
 	 			<tr>
-	 				<td>
-						<img src="download?itemNo=${itemDto.itemNo}" width="200" >
+	 				<td class="center" colspan="2">
+						<c:forEach var="itemImageView" items="${itemImageList}">
+							<img src="/image/download/${itemImageView.imageNo}" width="200" >
+						</c:forEach>
 					</td>
 				</tr>
 			
