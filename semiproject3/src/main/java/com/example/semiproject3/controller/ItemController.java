@@ -44,7 +44,7 @@ public class ItemController {
 		
 		itemDao.insert(itemDto);
 		
-		return "redirect:list";
+		return "redirect:/";
 	}
 	
 	//상품 목록
