@@ -53,7 +53,7 @@ public class ItemController {
 		itemDao.insert(itemDto);
 		
 		//이미지 DB에 저장
-//		int imageNo = imageDao.sequence();
+		int imageNo = imageDao.sequence();
 		imageDao.insert(ImageDto.builder()
 								.imageNo(itemNo)
 								.imageName(itemImage.getOriginalFilename())
