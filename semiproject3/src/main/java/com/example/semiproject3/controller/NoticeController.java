@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.entity.NoticeDto;
+import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.NoticeDao;
 
 @Controller
@@ -55,4 +57,35 @@ public class NoticeController {
 	return "notice/detail";
 	}
 	
+	@GetMapping("/edit")
+	public String edit(Model model, @RequestParam int noticeNo) {
+		model.addAttribute("noticeDto",noticeDao.selectOne(noticeNo));
+		return "notice/edit";
+	}
+	
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute NoticeDto Dto, RedirectAttributes attr) {
+	boolean result = noticeDao.update(Dto);
+	if(result) {
+		attr.addAttribute("noticeNo",Dto.getNoticeNo());
+		return "redirect:detail";
+		}
+		else {
+		throw new TargetNotFoundException("공지사항 번호없음");
+		}
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam int noticeNo) {
+		boolean result = noticeDao.delete(noticeNo);
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			throw new TargetNotFoundException("공지사항 번호없음");
+		}
+	}
+	
 }
+	
