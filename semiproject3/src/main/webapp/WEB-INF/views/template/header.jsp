@@ -48,6 +48,7 @@
 <header>
 	<h2 class="logo">
 		<a href="/">Logo</a>
+		<a href="customer/login">로그인</a>
 	</h2>
 </header>
 <nav>
