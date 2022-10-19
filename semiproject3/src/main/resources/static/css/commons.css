@@ -49,6 +49,9 @@ h2.logo{
 .w-100{
     width: 100%;
 }
+.w-75{
+	width: 75%;
+}
 .w-50{
     width: 50%;
 }
@@ -119,11 +122,11 @@ h2.logo{
     text-decoration: none;
 }
 .btn.btn-positive{
-    background-color: #2980b9;
+    background-color: #5E5E5E;
     color: white;
 }
 .btn.btn-positive:hover{
-    background-color: #2473a6;
+    background-color: #545454;
 }
 .btn.btn-neutral{
     background-color: white;
