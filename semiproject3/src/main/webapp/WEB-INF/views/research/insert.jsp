@@ -89,7 +89,7 @@
 	
 	<div class="page">
 		<div class="row">
-        	<input name="ResearchCustomerId" placeholder="회원 아이디">
+        	<input name="ResearchCustomerId" placeholder="회원 아이디" value="${loginId}" hidden>
         </div>
         
         <div class="row mt-50">
