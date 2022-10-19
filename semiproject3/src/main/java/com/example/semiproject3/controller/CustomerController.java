@@ -58,6 +58,9 @@ public class CustomerController {
 			session.setAttribute(SessionConstant.ID, customerId);
 			session.setAttribute(SessionConstant.GRADE, findDto.getCustomerGrade());
 			
+			//로그인 시간을 갱신시키는 작업
+			customerDao.updateLoginTime(findDto.getCustomerId());
+			
 			return "redirect:/";
 		}
 		else {
@@ -76,7 +79,7 @@ public class CustomerController {
 	public String mypage(Model model, HttpSession session) {
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("dto", customerDao.selectOne(loginId));
-		return "customer/mypage";
+		return "customer/detail";
 	}
 	
 	@GetMapping("/list")
