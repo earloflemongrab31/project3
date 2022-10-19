@@ -31,7 +31,7 @@ public class NoticeDaoImpl implements NoticeDao {
 				+ "notice_read,"
 				+ "notice_content,"
 				+ "notice_head) "
-				+ "values(?, ?, ?, sysdate, ?, ?, ?, ?)";
+				+ "values(notice_seq.nextval, ?, ?, sysdate, ?, ?, ?, ?)";
 		
 		Object[] param = {
 				Dto.getAdminId(), Dto.getNoticeNo(), Dto.getNoticeTitle(),
@@ -132,4 +132,20 @@ public class NoticeDaoImpl implements NoticeDao {
 		Object[] param = {noticeNo};
 		return jdbcTemplate.update(sql, param)>0;
 	}
+
+	//조회수 중복 방지 처리
+	@Override
+	public NoticeDto read(int noticeNo) {
+		this.updateReadcount(noticeNo);
+		return this.selectOne(noticeNo);
+	}
+
+	//조회수 중복 방지 처리
+	@Override
+	public boolean updateReadcount(int noticeNo) {
+		String sql = "update notice set notice_read = notice_read + 1 where notice_no = ?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+	
 }
