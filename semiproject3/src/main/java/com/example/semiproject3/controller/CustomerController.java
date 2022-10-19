@@ -67,8 +67,8 @@ public class CustomerController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("loginId");
-		session.removeAttribute("loginMg");
+		session.removeAttribute(SessionConstant.ID);
+		session.removeAttribute(SessionConstant.GRADE);
 		return "redirect:login";
 	}
 	
