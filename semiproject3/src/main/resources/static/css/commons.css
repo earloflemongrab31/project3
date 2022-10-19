@@ -386,6 +386,11 @@ ul.pagination > li > a{
 
     background-color: rgba(0, 0, 0, 0.5);
 }
+.fullscreen > .modal {
+            width: 400px;
+            height: 400px;
+            background-color: white;
+}
 .screen-center{
     position: absolute;
 

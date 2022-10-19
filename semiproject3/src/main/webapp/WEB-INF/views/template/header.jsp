@@ -77,6 +77,11 @@
 	.required{
 		color: darkred;
 	}
+	.modal.survey{
+		background-image: url("/image/survey.png");
+	    background-size: 100%;
+	    background-repeat: no-repeat;
+	}
 </style>
 <script>
 	$(function(){
@@ -91,6 +96,11 @@
             format: "YYYY-MM-DD",
             // (옵션) 미래/과거를 선택하지 못 하도록 설정(minDate, maxDate)
             maxDate: moment()
+		});
+		
+		$(".survey").find(".delete").click(function(){
+			$(this).parents().removeClass("fullscreen");
+			$(this).parent().removeClass("modal").removeClass("screen-center");
 		});
 	});
 </script>
