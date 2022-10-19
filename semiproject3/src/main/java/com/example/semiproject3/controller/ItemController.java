@@ -44,24 +44,31 @@ public class ItemController {
 	public String insert(
 			@ModelAttribute ItemDto itemDto,
 			@ModelAttribute ImageDto imageDto,
-			@RequestParam MultipartFile image) {
+			@RequestParam MultipartFile itemImage) throws IllegalStateException, IOException {
+		
+		
 		int itemNo = itemDao.sequence();
 		itemDto.setItemNo(itemNo);
 		
 		itemDao.insert(itemDto);
 		
 		//이미지 DB에 저장
-		int imageNo = imageDao.sequence();
-		imageDto.setImageNo(imageNo);
-		imageDao.insert(imageDto);
+//		int imageNo = imageDao.sequence();
+		imageDao.insert(ImageDto.builder()
+								.imageNo(itemNo)
+								.imageName(itemImage.getOriginalFilename())
+								.imageType(itemImage.getContentType())
+								.imageSize(itemImage.getSize())
+							.build());
 		
 		
-		if(!image.isEmpty()) {
+		//파일 저장
+		if(!itemImage.isEmpty()) {
 //			File dir = new File("C:/study/itemImage");
 			File dir = new File("D:/study/itemImage");
 			dir.mkdirs();
-			File target = new File(dir, String.valueOf(imageNo));
-			image.transferTo(target);
+			File target = new File(dir, String.valueOf(itemNo));
+			itemImage.transferTo(target);
 		}
 		
 		return "redirect:list";
@@ -92,7 +99,7 @@ public class ItemController {
 		return "item/detail";
 	}
 	
-	//이미지 첨부 파일
+	//이미지 불러오기
 	@GetMapping("/download")
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> download(@RequestParam int itemNo) throws IOException {
