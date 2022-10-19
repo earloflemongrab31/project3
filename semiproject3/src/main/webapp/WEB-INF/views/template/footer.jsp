@@ -28,6 +28,7 @@
 			<div class="row">토요일, 공휴일 휴무</div>
 		</div>
 		<div class="w-50">
+			<!-- 고객센터 밑으로 뺐는데 hover 효과가 좀 작은 것 같음 고민 해보기 -->
 			<div class="row">고객소통게시판</div>
 			<div class="row"><a href="#">공지사항</a></div>
 			<div class="row"><a href="#">Q & A / 자주 묻는 질문</a></div>
