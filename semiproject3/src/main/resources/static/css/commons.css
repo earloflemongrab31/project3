@@ -124,9 +124,16 @@ h2.logo{
 .btn.btn-border{
 	border: 1px solid #D5D5D5;
 }
+.btn.btn-border:hover{
+	border: 1px solid #949494;
+}
 .btn.btn-positive{
     background-color: #5E5E5E;
     color: white;
+}
+.btn.btn-positive[disabled],
+.btn.btn-positive[disabled]:hover{
+	background-color: lightgray;
 }
 .btn.btn-positive:hover{
     background-color: #545454;
@@ -193,6 +200,7 @@ h2.logo{
     - resize 속성
 */
 textarea.input{/*textarea 중 input class인 것만*/
+    height: 100px;
     resize: vertical;
 }
 textarea.input.fix-size{/*textarea는 class가 아니니까*/
@@ -541,7 +549,6 @@ ul.pagination > li > a{
 
 .float-left{
     float: left;
-    padding: 10px;
 }
 .float-right{
     float: right;
