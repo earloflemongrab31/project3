@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>3조 세미프로젝트 방문을 환영합니다.</title>
+<title>회원 등록 완료 페이지</title>
 </head>
 <body>
-	<h1>3조 세미프로젝트 방문을 환영합니다</h1>
+	<h1>회원등록이 완료되었습니다</h1>
 </body>
 </html>

@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>3조 세미프로젝트 방문을 환영합니다.</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>3조 세미프로젝트 방문을 환영합니다</h1>
+
 </body>
 </html>
