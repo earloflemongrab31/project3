@@ -9,7 +9,7 @@ public interface ItemDao {
 	int sequence();
 	
 	//상품 등록
-	void add(ItemDto itemDto);
+	void insert(ItemDto itemDto);
 	
 	//상품 목록 및 검색
 	List<ItemDto> selectList();
