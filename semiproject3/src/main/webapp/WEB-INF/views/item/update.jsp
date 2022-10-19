@@ -4,19 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="상품 등록 페이지" name="title"/>
+	<jsp:param value="상품 수정 페이지" name="title"/>
 </jsp:include>
 
 
-<form action = "insert" method="post" enctype ="multipart/form-data">
+<form action = "update" method="post" enctype ="multipart/form-data">
+
+<input type="hidden" name="itemNo" value="${itemDto.itemNo}">
 
 <div class ="container-600 mt-40 mb-40">
 
 	<div class = "row center">
-		<h1>상품 등록 페이지</h1>
+		<h1>상품 수정</h1>
 	</div>
 	
-	<div class = "row">
+<div class = "row">
 	<label> 카테고리
 		<select name="cateCode">
 			<option value="">선택</option>
@@ -113,5 +115,10 @@
 
 </div>
 </form>
+	
+	
+	
+	
+	
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
