@@ -1,12 +1,13 @@
-@charset "UTF-8";
-
 /* 
     http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126
     License: none (public domain)
 */
+
+@charset "UTF-8";
+
 html, body, div, span, applet, object, iframe,
-p, blockquote, pre,
+blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -21,10 +22,9 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-family: Noto Serif KR;
+    font-family: inherit;
 	vertical-align: baseline;
 }
-
 /* HTML5 display-role reset for older browsers */
 main, article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -42,23 +42,14 @@ q:before, q:after {
 	content: none;
 }
 
-/* 
+/*
     전체 스타일
     - 폭 설정 기준을 테두리(border-box)로 지정
 */
-*{
+* {
     box-sizing: border-box;
 }
 
-a{
-	text-decoration: none;
-	color: black;
-}
-
-a:hover{
-	font-weight: bolder;
-}
-
-html{
-    font-family: 'Noto Serif KR', sans-serif;
+html {
+    font-family: 'Noto Sans KR', sans-serif;
 }

@@ -8,6 +8,7 @@
 </jsp:include>
 
 
+
 <div class ="container-800 mt-40 mb-40">
 
 	<div class = "row center">
@@ -18,24 +19,21 @@
 		<table class="table table-hover table-border">
 			<thead>
 				<tr>
-					<th>상품번호</th>
 					<th>상품메모</th>
 					<th>상품명</th>
 					<th>상품금액</th>
-					
 				</tr>
 			</thead>
 				
 			<tbody align="center">
 			<c:forEach var="itemDto" items="${list}">
-				
-				<%-- 이미지  
-				<tr><td> 
-					<img src="download?itemNo=${itemDto.itemNo}" width="200" > 
-				</tr></td> --%>
 			
+			<!-- 이미지 -->
+				<tr><td>
+					<img src="download?itemNo=${itemDto.itemNo}" width="200" >
+				</tr></td>
+				
 				<tr>
-				<td>${itemDto.itemNo}</td>
 					<td>${itemDto.itemMemo}</td>
 					<td>
 						<a href="detail?itemNo=${itemDto.itemNo}">
@@ -49,10 +47,6 @@
 		</table>
 	</div>
 	
-	<div class="row right">
-		<a class="btn btn-positive" href="insert">상품등록</a>
-	</div>
-	
 </div>
 	
 <!-- 검색창 -->
@@ -60,8 +54,8 @@
 	<div class="row center">
 		
 		<select class="input" name="type" required>
-		<option value="item_name" <c:if test="${type == 'item_name'}"></c:if>>상품명</option>
-		<option value="cate_code" <c:if test="${type == 'cate_code'}"></c:if>>카테고리</option>
+			<option value="itemName">상품명</option>
+			<option value="cateCode">카테고리</option>
 		</select>
 			
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>

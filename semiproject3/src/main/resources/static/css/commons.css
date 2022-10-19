@@ -3,7 +3,8 @@
 h2.logo{
 	text-decoration: none;
 	color: black;
-	margin: 0;
+	margin: 10px;
+	padding: 10px 20px;
 }
 
  /* 
@@ -98,6 +99,8 @@ h2.logo{
 .me-40{margin-right: 40px;}
 .me-50{margin-right: 50px;}
 
+
+
 /* 
     버튼은 3가지 역할이 있다고 보고 디자인한다.
     - 긍정버튼 : 현재의 작업을 완성시키는 버튼
@@ -105,7 +108,7 @@ h2.logo{
     - 부정버튼 : 현재의 작업이 위험함을 알리거나 부정적인 효과를 처리하는 버튼
 */
 .btn{
-    font-size: 20px;
+    font-size: 14px;
     padding: 0.75em;
     border: none;
     cursor: pointer;
@@ -125,10 +128,8 @@ h2.logo{
 .btn.btn-neutral{
     background-color: white;
     color: gray;
-    border: 1px solid gray;
 }
 .btn.btn-neutral:hover{
-    border: 1px solid black;
     color: black;
 }
 .btn.btn-negative{
@@ -144,8 +145,8 @@ h2.logo{
 */
 .input{
     outline: none;
-    font-size: 20px;
-    padding: 0.75em;
+    font-size: 14px;
+    padding: 0.5em;
     border: 1px solid gray;
 }
 .input:focus{
@@ -166,14 +167,14 @@ h2.logo{
 /* 
     배경 이미지가 들어가는 입력창
 */
-.input.input-icon{
+/* .input.input-icon{
     padding-left: 2.5em;
-    /* background-image: url("./image/search.png"); 쓸 때 넣으면 됨*/
+    background-image: url("./image/search.png"); 쓸 때 넣으면 됨
     background-size: 1em;
     background-repeat: no-repeat;
     background-position-x: 0.75em;
     background-position-y: center;
-}
+} */
 
 /* 
     textarea는 기본적으로 폭 조절이 가능하여 디자인에 어려움이 많다.
@@ -401,7 +402,7 @@ ul.pagination > li > a{
 }
 
 .dropdown-menu{
-    font-size: 20px;
+    font-size: 14px;
     position: relative;
 }
 
@@ -412,7 +413,7 @@ ul.pagination > li > a{
 */
 .dropdown-menu > li{
     display: inline-block;
-    width: 150px;
+    width: 90px;
     position: relative;
     padding: 0.5em;
 }
@@ -431,13 +432,13 @@ ul.pagination > li > a{
 }
 .dropdown-menu li:hover > ul{
     display: block;
-    border-top: 1px solid gray;
 }
 
 /* 
     드롭다운메뉴 내 링크에 대한 설정
 */
 .dropdown-menu a{
+	padding: 3px;
     display: block;
     text-align: center;
     text-decoration: none;
@@ -449,7 +450,7 @@ ul.pagination > li > a{
     드롭다운메뉴 전체에 hover를 걸면 전체에 변경되는 설정
 */
 .dropdown-menu li:hover{
-    background-color: lightgray;
+	cursor: pointer;
 }
 
 /* 
@@ -534,6 +535,7 @@ ul.pagination > li > a{
 .flexbox{
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 aside.flexbox{

@@ -42,9 +42,9 @@ public class ItemController {
 		int itemNo = itemDao.sequence();
 		itemDto.setItemNo(itemNo);
 		
-		itemDao.insert(itemDto);
+		itemDao.insert(itemDto); 
 		
-		return "redirect:/";
+		return "redirect:list";
 	}
 	
 	//상품 목록
