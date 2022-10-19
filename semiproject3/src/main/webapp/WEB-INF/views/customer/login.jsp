@@ -14,11 +14,11 @@
 	</div>
 	
 	<div class="row left">
-		<input class="input w-100" type="text" name="memberId" placeholder="아이디" required autocomplete="off">
+		<input class="input w-100" type="text" name="customerId" placeholder="아이디" required autocomplete="off">
 	</div>
 	
 	<div class="row left">
-		<input class="input w-100" type="password" name="memberPw" placeholder="비밀번호" required>
+		<input class="input w-100" type="password" name="customerPw" placeholder="비밀번호" required>
 	</div>
 	
 	<div class="row left">
