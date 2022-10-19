@@ -8,6 +8,7 @@
 </head>
 <body>
 	<a href="research/insert">리서치페이지</a>
+	(아이디 : ${loginId})
 </body>
 </html>
 <jsp:include page="/WEB-INF/views/template/header.jsp">

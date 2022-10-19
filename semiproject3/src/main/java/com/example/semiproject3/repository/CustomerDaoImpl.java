@@ -164,7 +164,7 @@ public class CustomerDaoImpl implements CustomerDao{
 	//리서치 아이디 중복방지
 		@Override
 		public int overlapId(String customerId) {
-			String sql="select count(*) customer where customer=?";
+			String sql="select count(*) from customer where customer_id=?";
 			Object[] param= {customerId};
 			return jdbcTemplate.queryForObject(sql, int.class, param);
 		}
