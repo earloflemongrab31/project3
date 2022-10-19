@@ -26,5 +26,8 @@ public interface CustomerDao {
 	boolean updatePoint(String customerId);
 	//리서치 아이디중복방지
 	int overlapId(String customerId);
+	
+	//로그인 시간 갱신
+	boolean updateLoginTime(String customerId);
 
 }
