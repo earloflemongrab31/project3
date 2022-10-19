@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-.logo{
+h2.logo{
 	text-decoration: none;
 	color: black;
-	padding: 10px 10px;
+	margin: 0;
 }
 
  /* 
