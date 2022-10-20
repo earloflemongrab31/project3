@@ -33,7 +33,7 @@ public class CenterController {
 		int centerNo = centerDao.sequence();
 		centerDto.setCenterNo(centerNo);
 		centerDao.insert(centerDto);
-		return "redirect:center/list";
+		return "redirect:list";
 	}
 	
 	//목록(타입&키워드)
@@ -50,13 +50,13 @@ public class CenterController {
 		}
 		return "center/list";
 	}
-	
+	 
 	//상세
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam int centerNo) {
 		CenterDto centerDto = centerDao.selectOne(centerNo);
 		model.addAttribute("centerDto", centerDto);
-		return "customer/detail";
+		return "center/detail";
 	}
 	
 	//수정
@@ -67,7 +67,7 @@ public class CenterController {
 	}
 	
 	@PostMapping("/edit")
-	public String update(@ModelAttribute CenterDto centerDto, RedirectAttributes attr) {
+	public String edit(@ModelAttribute CenterDto centerDto, RedirectAttributes attr) {
 		boolean result = centerDao.update(centerDto);
 		if(result) {
 			attr.addAttribute("centerNo",centerDto.getCenterNo());
@@ -77,5 +77,15 @@ public class CenterController {
 			throw new TargetNotFoundException("고객센터 번호 없음");
 		}
 	}		
-
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam int centerNo) {
+		boolean result =centerDao.delete(centerNo);
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			throw new TargetNotFoundException("공지사항 번호없음");
+		}
+	}
 }
