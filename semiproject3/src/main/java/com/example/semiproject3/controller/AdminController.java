@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AdminDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AdminDao;
@@ -47,4 +50,34 @@ public class AdminController {
 		}
 		
 	}
+	
+	@PostMapping("/login")
+	public String login(HttpSession session,
+			@RequestParam String adminId,
+			@RequestParam String adminPw) {
+		AdminDto findDto = adminDao.selectOne(adminId);
+		
+		if(findDto == null) {
+			return "redirect:/customer/login?error";
+		}
+		
+		boolean isLogin = adminPw.equals(findDto.getAdminPw());
+		if(isLogin) {
+			session.setAttribute(SessionConstant.ID, adminId);
+			session.setAttribute(SessionConstant.GRADE, findDto.getAdminGrade());
+			
+			return "redirect:/admin/";
+		}
+		else {
+			return "redirect:/customer/login?error";
+		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute(SessionConstant.ID);
+		session.removeAttribute(SessionConstant.GRADE);
+		return "redirect:/login";
+	}
+	
 }
