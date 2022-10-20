@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/inven")
 public class InvenController {
 
-	@Autowired
-	private InvenDao invenDao;
+
 	
 }
