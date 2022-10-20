@@ -77,13 +77,24 @@
 	.required{
 		color: darkred;
 	}
+	
+	/* 설문조사 */
 	.fullscreen > .modal.survey{
 		background-image: url("/image/survey.png");
 	    background-size: 100%;
 	    background-repeat: no-repeat;
 	}
-	.hide{
-		display: none;
+	
+	/* 로그인 토글 디자인 */
+	.user{
+		padding: 0.75em;
+		border: 1px solid #D5D5D5;
+		border-bottom: none;
+		cursor: pointer;
+	}
+	.user.unchecked{
+		color: white;
+		background-color: lightgray;
 	}
 </style>
 <script>
@@ -108,6 +119,7 @@
 		});
 	});
 	
+	/* 프로그레스바 */
 	$(function(){
         //1. 첫번째 이전버튼과 마지막 다음버튼을 삭제
         $(".prev").first().remove();
@@ -148,6 +160,26 @@
             $(".progressbar > .inner").css("width", percent+"%");
         });
 	});
+	
+	/* 로그인 페이지 토글 */
+	$(function(){
+		$(".user-admin").click(function(){
+			$(this).removeClass("unchecked");
+			$(this).prev("div").addClass("unchecked");
+			$(".customer-join").addClass("hide");
+			$(".login-form").attr("action", "/admin/login");
+			$(".login-form").find(".id").attr("name", "adminId");
+			$(".login-form").find(".pw").attr("name", "adminPw");
+		});
+		$(".user-customer").click(function(){
+			$(this).removeClass("unchecked");
+			$(this).next("div").addClass("unchecked");
+			$(".customer-join").removeClass("hide");
+			$(".login-form").attr("action", "login");
+			$(".login-form").find(".id").attr("name", "customerId");
+			$(".login-form").find(".pw").attr("name", "customerPw");
+		});
+	});
 </script>
 
 </head>
@@ -159,19 +191,34 @@
 	광고 구현 중
 	1. 구글플레이 이미지 중간 맞춤
 	2. 새로고침 할 때마다 나옴
+	3. 관리자 페이지 들어가면 없애야 할 듯
  -->
-<div class="float-container ad">
-	"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
-	<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
-		<img src="/image/googleplay.png">
-	</a>
-	<span class="float-right delete" style="font-family:sans-serif;">X</span>
-</div>
+<c:if test="${loginGrade != '관리자'}">
+	<div class="float-container ad">
+		"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
+		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
+			<img src="/image/googleplay.png">
+		</a>
+		<span class="float-right delete" style="font-family:sans-serif;">X</span>
+	</div>
+</c:if>
 
-<div class="row">
-	<h2 class="logo">
-		<a href="/">Logo</a>
-	</h2>
+<div class="float-container">
+	<div class="float-left">
+		<h2 class="logo">
+			<a href="/">Logo</a>
+		</h2>
+	</div>
+	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
+		<div class="float-right	">
+			${loginId}님, 안녕하세요.
+		</div>
+	</c:if>
+	<c:if test="${loginGrade == '관리자' }">
+		<div class="float-right	">
+			<a href="/admin/">관리자페이지</a>
+		</div>
+	</c:if>
 </div>
 </header>
 

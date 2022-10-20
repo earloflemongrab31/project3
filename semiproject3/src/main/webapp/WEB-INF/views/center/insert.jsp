@@ -4,31 +4,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="공지사항 등록 페이지" name="title"/>
+    <jsp:param value="문의사항 등록페이지" name="title"/>
 </jsp:include>
  
 
 
-<form action="insert" method="post" enctype="multipart/form-data">
-<input name="adminId" type="hidden" value="${noticeDto.adminId}" >
+<form action="insert" method="post">
+<input name="customerId" type="hidden" value="${loginId}" >
+
 	<div class ="container-600">
 	
 	<div class="row">
-		<h1>공지 사항 작성</h1>
+		<h1>Q&A 등록</h1>
 		<hr>
 	</div>
 	
-	<div class = "row">
-		<label> 말머리 <select name="noticeHead">
-			<option value="">선택</option>
-			<option>긴급</option>
-            <option>이벤트</option>
-			</select>
-			</label>
-	</div>
-	
 	<div class="row">
-		<label>제목 <input name="noticeTitle" type="text" required
+		<label>제목 <input name="centerTitle" type="text" required
 			class="input mt-10 w-100" autocomplete="off">
 		</label>
 	</div>
@@ -36,7 +28,7 @@
 
 	<div class="row w-100">
 		<label> 내용 <textarea class="input mt-10 w-100"
-				name="noticeContent" rows="10" cols="75" required></textarea>
+				name="customerContent" rows="10" cols="75" required></textarea>
 		</label>
 	</div>
 
