@@ -78,6 +78,7 @@ public class CenterController {
 		}
 	}		
 	
+
 	@GetMapping("/delete")
 	public String delete(@RequestParam int centerNo) {
 		boolean result =centerDao.delete(centerNo);

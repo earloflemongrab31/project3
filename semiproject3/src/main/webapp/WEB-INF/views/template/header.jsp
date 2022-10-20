@@ -70,7 +70,7 @@
 	.delete{
 		cursor: pointer;
 	}
-	a img{
+	.ad a img{
 		vertical-align: middle;
 		height: 1em;
 	}
@@ -275,7 +275,7 @@
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right cart"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+	<li class="float-right cart"><a href="/cart/cartList"><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
 	<form action="#" method="get">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input class="float-right input input-underline find" name="#" id="search" placeholder="가을 신상">
