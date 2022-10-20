@@ -7,7 +7,7 @@
 
 <div class="float-left w-50">
 	<div class="row">
-		<h3>쇼핑몰</h3>
+		<h3>쇼핑몰명</h3>
 	</div>
 	<div class="flexbox">
 		<div class="w-100">
@@ -30,8 +30,8 @@
 		<div class="w-50">
 			<!-- 고객센터 밑으로 뺐는데 hover 효과가 좀 작은 것 같음 고민 해보기 -->
 			<div class="row">고객소통게시판</div>
-			<div class="row"><a href="#">공지사항</a></div>
-			<div class="row"><a href="#">Q & A / 자주 묻는 질문</a></div>
+			<div class="row"><a href="/notice/list">공지사항</a></div>
+			<div class="row"><a href="/center/list">Q & A / 자주 묻는 질문</a></div>
 		</div>
 	</div>
 </div>
