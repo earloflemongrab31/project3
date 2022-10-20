@@ -21,5 +21,6 @@ public interface ImageDao {
 	boolean delete(int imageNo);
 	
 	//아이템 이미지 관련(item_image_view 조회)
+	List<ImageDto> selectItemImageList();
 	List<ImageDto> selectItemImageList(int itemNo);
 }

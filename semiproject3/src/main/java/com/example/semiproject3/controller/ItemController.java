@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
@@ -85,7 +87,7 @@ public class ItemController {
 		return "redirect:list";
 	}
 	
-	//상품 목록
+	//상품 목록(관리자)
 	@GetMapping("/list")
 	public String list(Model model,
 			@RequestParam(required = false) String type,
@@ -145,11 +147,32 @@ public class ItemController {
 		
 	}
 	
-//	@GetMapping("/buylist")
-//	public String buylist(Model model, 
-//			@RequestParam int itemNo, HttpSession session) {
-//		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
-//		
+	//상품 리스트(회원)
+	@GetMapping("/buylist")
+	public String buylist(Model model,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) {
+			model.addAttribute("list", itemDao.selectList(type, keyword));
+			//상품 정보에 이미지 불러오기
+			model.addAttribute("itemImageList", imageDao.selectItemImageList());
+		}
+		else {
+			model.addAttribute("list", itemDao.selectList());
+			//상품 정보에 이미지 불러오기
+			model.addAttribute("itemImageList", imageDao.selectItemImageList());
+		}
+		
+		return "item/buylist";
+	}
+	
+	//상품 구매(회원)
+	@GetMapping("/buy")
+	public String buy(Model model, 
+			@RequestParam int itemNo, HttpSession session) {
+		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
+		
 //		//(+추가) 좋아요 기록이 있는지 조회하여 첨부
 //		String loginId = (String) session.getAttribute(SessionConstant.ID);
 //		
@@ -159,10 +182,10 @@ public class ItemController {
 //			customerLikeDto.setItemNo(itemNo);
 //			model.addAttribute("isLike", customerLikeDao.check(customerLikeDto));
 //		}
-//		
-//		return "item/buylist";
-//	}
-//	
+		
+		return "item/buy";
+	}
+	
 //	//좋아요
 //	@GetMapping("/like")
 //	public String customerLike(@RequestParam int itemNo, 

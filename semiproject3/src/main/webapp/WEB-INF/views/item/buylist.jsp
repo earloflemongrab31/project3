@@ -12,39 +12,20 @@
 <div class ="container-800 mt-40 mb-40">
 
 	<div class = "row center">
-		<h1>상품 목록</h1>
+		<h1>상품 리스트</h1>
 	</div>
-	
 	<div class = "row">
-		<table class="table table-hover table-border">
-			<thead>
-				<tr>
-					<th>상품메모</th>
-					<th>상품명</th>
-					<th>상품금액</th>
-				</tr>
-			</thead>
-				
-			<tbody align="center">
-			<c:forEach var="itemDto" items="${list}">
-			
-			<!-- 이미지 -->
-				<tr><td>
-					<img src="download?itemNo=${itemDto.itemNo}" width="200" >
-				</tr></td>
-				
-				<tr>
-					<td>${itemDto.itemMemo}</td>
-					<td>
-						<a href="detail?itemNo=${itemDto.itemNo}">
-							${itemDto.itemName}
-						</a>
-					</td>
-					<td>${itemDto.itemPrice}원</td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<c:forEach var="itemDto" items="${list}">
+<%-- 			<c:forEach var="itemImageView" items="${itemImageList}"> --%>
+				<div class="row w-33">
+					<img src="/image/download/${itemDto.itemNo}" width="200" >
+					${itemDto.itemNo}<br>
+					${itemDto.itemName}<br>
+					${itemDto.itemPrice}원<br>
+					${itemDto.itemColor}<br><br>
+				</div>
+<%-- 			</c:forEach> --%>
+		</c:forEach>
 	</div>
 	
 </div>
