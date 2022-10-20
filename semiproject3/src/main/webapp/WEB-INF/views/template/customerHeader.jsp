@@ -5,9 +5,9 @@
 </jsp:include>
 
 <aside class="right">
-	<ul class="side-menu">
+	<ul class="side-menu accordian">
 		<li>
-			<span class="toggle">MY 정보</span>
+			<span>MY 정보</span>
 			<ul>
 				<li><a href="/customer/detail">개인정보 조회/수정</a></li>
 				<li><a href="#">배송지 관리</a></li>
@@ -15,7 +15,7 @@
 			</ul>
 		</li>
 		<li>
-			<span class="toggle">쇼핑 정보</span>
+			<span>쇼핑 정보</span>
 			<ul>
 				<li><a href="#">주문/배송 조회</a></li>
 				<li><a href="#">찜하기 내역</a></li>

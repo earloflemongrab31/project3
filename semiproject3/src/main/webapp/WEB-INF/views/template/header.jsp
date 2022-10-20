@@ -183,7 +183,7 @@
 	
 	/* 사이드메뉴 토글 */
 	$(function(){
-		$(".toggle").click(function(e){
+		$(".accodrdian").find("li").click(function(e){
 			e.stopPropagation();
 
             $(this).children("ul").toggle();			
