@@ -29,43 +29,43 @@
 			</thead>
 				
 			<tbody align="center">
-			<c:forEach var="Dto" items="${list}">
+			<c:forEach var="noticeDto" items="${list}">
 			
 				<tr>
 				
-				<td>${Dto.noticeNo}</td>
+				<td>${noticeDto.noticeNo}</td>
 
 				<td>
-					<c:if test="${Dto.noticeHead != null}">
-						${Dto.noticeHead}
+					<c:if test="${noticeDto.noticeHead != null}">
+						${noticeDto.noticeHead}
 					</c:if>
 				</td>
 					
 				<td>
-					<a href="detail?noticeNo=${Dto.noticeNo}">
-						${Dto.noticeTitle}
+					<a href="detail?noticeNo=${noticeDto.noticeNo}">
+						${noticeDto.noticeTitle}
 					</a>
 				</td>
 					
-				<td>${Dto.adminId}</td>
+				<td>${noticeDto.adminId}</td>
 				
 				<td>
 					<c:set var="current">
-						<fmt:formatDate value="${Dto.noticeDate}" pattern="yyyy-MM-dd"/>
+						<fmt:formatDate value="${noticeDto.noticeDate}" pattern="yyyy-MM-dd"/>
 					</c:set>
 					<c:choose>
 						<c:when test="${today == current}">
-							<fmt:formatDate value="${Dto.noticeDate}" 
+							<fmt:formatDate value="${noticeDto.noticeDate}" 
 													pattern="HH:mm"/>
 						</c:when>
 						<c:otherwise>
-							<fmt:formatDate value="${Dto.noticeDate}" 
+							<fmt:formatDate value="${noticeDto.noticeDate}" 
 													pattern="yyyy-MM-dd"/>
 						</c:otherwise>
 					</c:choose>
 				</td>
 			
-				<td>${Dto.noticeRead}</td>
+				<td>${noticeDto.noticeRead}</td>
 				</tr>
 				</c:forEach>
 			</tbody>
