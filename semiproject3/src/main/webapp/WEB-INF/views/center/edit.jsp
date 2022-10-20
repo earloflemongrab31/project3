@@ -27,7 +27,7 @@
 			<table class="table table-border">
 				<tbody>
 					<tr>
-						<th>문의제목</th>
+						<th width="25%">문의제목</th>
 						<td>${centerDto.centerTitle}</td>
 					</tr>
 

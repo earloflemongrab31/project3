@@ -25,7 +25,7 @@
 	
 	 	<table class="table table-border">
 	 		<tbody>
-	 		
+	 			
 	 			<tr>
 	 				<th>글번호</th>
 	 				<td>${centerDto.centerNo}</td>
@@ -60,8 +60,9 @@
 	 </div>
 	 
 	 
-		<div class ="row">
-		
+	 <c:if test="${centerDto.adminContent != null}">
+	<div class ="row">
+	
 		<div class = "row">
 			<h2>답변내용</h2>
 		</div>
@@ -91,11 +92,10 @@
 				</tr>
 			 </c:if>
 			 
-			 
-			 
 	 		</tbody>
 	 	</table>
 	 </div>
+	 </c:if>
 	 
 	 	<div class="row right">
 		<a class="btn btn-positive" href="edit?centerNo=${centerDto.centerNo}">답변등록</a>
