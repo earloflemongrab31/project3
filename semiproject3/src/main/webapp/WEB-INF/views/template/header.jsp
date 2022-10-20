@@ -183,10 +183,10 @@
 	
 	/* 사이드메뉴 토글 */
 	$(function(){
-		$(".accodrdian").find("li").click(function(e){
+		$(".accordian").find("li").click(function(e){
 			e.stopPropagation();
-
-            $(this).children("ul").toggle();			
+			
+          	$(this).children("ul").toggle();			
 		});
 	});
 </script>

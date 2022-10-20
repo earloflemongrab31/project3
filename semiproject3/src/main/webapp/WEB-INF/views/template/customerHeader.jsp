@@ -5,7 +5,7 @@
 </jsp:include>
 
 <aside class="right">
-	<ul class="side-menu accordian">
+	<ul class="accordian">
 		<li>
 			<span>MY 정보</span>
 			<ul>
