@@ -21,7 +21,7 @@ public class HomeController {
 			Model model,
 			HttpSession session){
 			String loginId = (String)session.getAttribute(SessionConstant.ID);
-			model.addAttribute("countCart",cartDao.selectCart(loginId));
+			session.setAttribute("countCart", cartDao.selectCart(loginId));
 			return "home";
 		}
 		

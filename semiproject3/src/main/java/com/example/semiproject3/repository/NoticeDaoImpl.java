@@ -228,6 +228,7 @@ public class NoticeDaoImpl implements NoticeDao {
 		};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+
 	
 	//더미 테스트용 클리어
 	@Override
@@ -235,7 +236,7 @@ public class NoticeDaoImpl implements NoticeDao {
 		String sql = "delete notice";
 		jdbcTemplate.update(sql);
 	}
-	
+
 }
 
 

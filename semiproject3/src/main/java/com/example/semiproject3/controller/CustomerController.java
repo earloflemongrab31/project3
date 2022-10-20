@@ -73,6 +73,7 @@ public class CustomerController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		session.removeAttribute(SessionConstant.GRADE);
+		session.removeAttribute("countCart");
 		return "redirect:login";
 	}
 	

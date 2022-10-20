@@ -28,6 +28,7 @@ import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Controller
 @RequestMapping("/item")
@@ -99,16 +100,14 @@ public class ItemController {
 	
 	//상품 목록(관리자)
 	@GetMapping("/list")
-	public String list(Model model,
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("list", itemDao.selectList(type, keyword));
-		}
-		else {
-			model.addAttribute("list", itemDao.selectList());
-		}
+	public String list(Model model, 
+			@ModelAttribute(name="vo") ItemListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = itemDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", itemDao.selectList(vo));
 		
 		return "item/list";
 	}
@@ -121,16 +120,6 @@ public class ItemController {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		//상품 정보에 이미지 불러오기
 		model.addAttribute("itemImageList", imageDao.selectItemImageList(itemNo));
-		//장바구니 기록있는 조회하여 첨부 
-		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		if(loginId !=null) {
-			CartDto cartDto = new CartDto();
-			cartDto.setCustomerId(loginId);
-			cartDto.setItemNo(itemNo);
-			model.addAttribute("isCart", cartDao.check(cartDto));
-		}
-
-		
 		return "item/detail";
 	}
 	
@@ -221,9 +210,16 @@ public class ItemController {
 	public String buy(Model model, 
 			@RequestParam int itemNo, HttpSession session) {
 		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
-		
-		//(+추가) 찜 기록이 있는지 조회하여 첨부
+		//장바구니 기록있는 조회하여 첨부 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		if(loginId !=null) {
+		CartDto cartDto = new CartDto();
+		cartDto.setCustomerId(loginId);
+		cartDto.setItemNo(itemNo);
+		model.addAttribute("isCart", cartDao.check(cartDto));
+		}
+
+		//(+추가) 찜 기록이 있는지 조회하여 첨부
 		
 		if(loginId != null) {//회원이라면 좋아요 기록을 조회하여 model에 추가
 			CustomerLikeDto customerLikeDto = new CustomerLikeDto();
