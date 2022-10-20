@@ -26,7 +26,6 @@ public interface NoticeDao {
 	int searchCount(NoticeListSearchVO vo);
 	int listCount(NoticeListSearchVO vo);
 	
-	
 	//상세
 	NoticeDto selectOne(int noticeNo);
 	NoticeDto read(int noticeNo);//조회수 증가
