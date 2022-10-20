@@ -24,10 +24,10 @@
  		<td>${cartDto.cartItemColor}</td>
  		<td>${cartDto.cartItemSize}</td>
  		<td>${cartDto.cartItemPrice}</td>
- 		
  		<td>삭제</td>
  	</tbody>
  	</c:forEach>
+ 	총수량 ${cartCount}
  	
  </table>
 </body>

@@ -9,7 +9,9 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
+import com.example.semiproject3.vo.BuyListVO;
 
 @Repository
 public class ItemDaoImpl implements ItemDao {
@@ -34,10 +36,51 @@ public class ItemDaoImpl implements ItemDao {
 				.build();
 	};
 	
+	//RowMapper buyList 전용
+	private RowMapper<BuyListVO> buyListMapper = (rs, idx) -> {
+		return BuyListVO.builder()
+							.imageNo(rs.getInt("image_no"))
+							.itemNo(rs.getInt("item_no"))
+							.cateCode(rs.getString("cate_code"))
+							.itemName(rs.getString("item_name"))
+							.itemMemo(rs.getString("item_memo"))
+							.itemContent(rs.getString("item_content"))
+							.itemPrice(rs.getInt("item_price"))
+							.itemColor(rs.getString("item_color"))
+							.itemSize(rs.getString("item_size"))
+							.itemTotalCnt(rs.getInt("item_total_cnt"))
+							.itemLikeCnt(rs.getInt("item_like_cnt"))
+							.itemDate(rs.getDate("item_date"))
+				.build();
+	};
+	
 	//ResultSetExtractor
 	private ResultSetExtractor<ItemDto> extractor = (rs) -> {
 		if(rs.next()) {
 			return ItemDto.builder()
+								.itemNo(rs.getInt("item_no"))
+								.cateCode(rs.getString("cate_code"))
+								.itemName(rs.getString("item_name"))
+								.itemMemo(rs.getString("item_memo"))
+								.itemContent(rs.getString("item_content"))
+								.itemPrice(rs.getInt("item_price"))
+								.itemColor(rs.getString("item_color"))
+								.itemSize(rs.getString("item_size"))
+								.itemTotalCnt(rs.getInt("item_total_cnt"))
+								.itemLikeCnt(rs.getInt("item_like_cnt"))
+								.itemDate(rs.getDate("item_date"))
+					.build();
+		}
+		else {
+			return null;
+		}
+	};
+	
+	//ResultSetExtractor 구매 전용
+	private ResultSetExtractor<BuyListVO> buyExtractor = (rs) -> {
+		if(rs.next()) {
+			return BuyListVO.builder()
+								.imageNo(rs.getInt("image_no"))
 								.itemNo(rs.getInt("item_no"))
 								.cateCode(rs.getString("cate_code"))
 								.itemName(rs.getString("item_name"))
@@ -151,6 +194,20 @@ public class ItemDaoImpl implements ItemDao {
 		String sql = "insert into item_image(item_no, image_no) values(?,?)";
 		Object[] param = {itemNo, imageNo};
 		jdbcTemplate.update(sql, param);
+	}
+	
+	//상품 목록(회원용)
+	@Override
+	public List<BuyListVO> selectBuyList() {
+		String sql = "select * from buy_list_view";
+		return jdbcTemplate.query(sql, buyListMapper);
+	}
+	
+	@Override
+	public BuyListVO selectBuyOne(int itemNo) {
+		String sql = "select * from buy_list_view where item_no = ?";
+		Object[] param = {itemNo};
+		return jdbcTemplate.query(sql, buyExtractor, param);
 	}
 		
 }

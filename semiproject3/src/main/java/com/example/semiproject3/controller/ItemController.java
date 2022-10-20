@@ -94,7 +94,7 @@ public class ItemController {
 		return "redirect:list";
 	}
 	
-	//상품 목록
+	//상품 목록(관리자)
 	@GetMapping("/list")
 	public String list(Model model,
 			@RequestParam(required = false) String type,
@@ -188,7 +188,7 @@ public class ItemController {
 			cartDao.insert(cartDto);
 			//+ 추가 될 때마다 customer table countcount- totalmoney -;
 		}
-		return "redirect:detail?itemNo="+itemNo;
+		return "redirect:buydetail?itemNo="+itemNo;
 	};
 	
 	
@@ -197,6 +197,28 @@ public class ItemController {
 //			@RequestParam int itemNo, HttpSession session) {
 //		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 //		
+	//상품 리스트(회원)
+	@GetMapping("/buylist")
+	public String buylist(Model model, 
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) {
+			model.addAttribute("buylist", itemDao.selectBuyList());
+		}
+		else {
+			model.addAttribute("buylist", itemDao.selectBuyList());
+		}
+		
+		return "item/buylist";
+	}
+	
+	//상품 구매(회원)
+	@GetMapping("/buydetail")
+	public String buy(Model model, 
+			@RequestParam int itemNo, HttpSession session) {
+		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
+		
 //		//(+추가) 좋아요 기록이 있는지 조회하여 첨부
 //		String loginId = (String) session.getAttribute(SessionConstant.ID);
 //		
@@ -206,10 +228,10 @@ public class ItemController {
 //			customerLikeDto.setItemNo(itemNo);
 //			model.addAttribute("isLike", customerLikeDao.check(customerLikeDto));
 //		}
-//		
-//		return "item/buylist";
-//	}
-//	
+		
+		return "item/buydetail";
+	}
+	
 //	//좋아요
 //	@GetMapping("/like")
 //	public String customerLike(@RequestParam int itemNo, 

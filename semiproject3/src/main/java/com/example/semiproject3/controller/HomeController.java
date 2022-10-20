@@ -17,7 +17,11 @@ public class HomeController {
 	CartDao cartDao;
 	
 	@GetMapping("/")
-	public String home(){
+	public String home(
+			Model model,
+			HttpSession session){
+			String loginId = (String)session.getAttribute(SessionConstant.ID);
+			model.addAttribute("countCart",cartDao.selectCart(loginId));
 			return "home";
 		}
 		

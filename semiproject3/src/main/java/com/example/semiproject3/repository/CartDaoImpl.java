@@ -76,21 +76,15 @@ public class CartDaoImpl implements CartDao{
 		Object[] param= {loginId};
 		return jdbcTemplate.query(sql,mapper,param);
 	}
+	
 	@Override
 	public int selectCart(String loginId) {
-		String sql="select count(*) cart where customer_id=?";
+		String sql="select count(*) from cart where customer_id=?";
 		Object[] param= {loginId};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
-	@Override
-	public void plusItem(CartDto cartDto) {
-		String sql="update cart set cart_item_money=cart_item_money+cart_item_price where customer_id='test1234' and item_no='7'";
-	}
-	@Override
-	public void minusItem(CartDto cartDto) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
+		
+	
+
