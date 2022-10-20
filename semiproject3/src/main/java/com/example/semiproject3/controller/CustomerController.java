@@ -28,8 +28,8 @@ public class CustomerController {
 	}
 
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute CustomerDto dto) {
-		customerDao.insert(dto);
+	public String insert(@ModelAttribute CustomerDto customerDto) {
+		customerDao.insert(customerDto);
 		return "redirect:insert_success";
 	}
 	
@@ -98,23 +98,23 @@ public class CustomerController {
 	
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam String customerId) {
-		CustomerDto dto = customerDao.selectOne(customerId);
-		model.addAttribute("dto", dto);
+		CustomerDto customerDto = customerDao.selectOne(customerId);
+		model.addAttribute(customerDto);
 		return "customer/detail";
 	}
 	
 	@GetMapping("/edit")
 	public String edit(Model model,@RequestParam String customerId) {
-		CustomerDto dto = customerDao.selectOne(customerId);
-		model.addAttribute("dto",dto);
+		CustomerDto customerDto = customerDao.selectOne(customerId);
+		model.addAttribute("customerDto", customerDto);
 		return "customer/edit";
 	}
 
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute CustomerDto dto) {
-	boolean result = customerDao.update(dto);
+	public String edit(@ModelAttribute CustomerDto customerDto) {
+	boolean result = customerDao.update(customerDto);
 	if(result) {
-		return "redirect:detail?customer_id="+dto.getCustomerId();
+		return "redirect:detail?customer_id="+customerDto.getCustomerId();
 	}
 	else {
 		return "redirect:edit_fail";
