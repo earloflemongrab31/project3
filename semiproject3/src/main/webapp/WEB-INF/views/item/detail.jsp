@@ -8,21 +8,26 @@
 </jsp:include>
 
 
-<form action = "insert" method="post" enctype ="multipart/form-data">
+<form action = "detail" method="post" enctype ="multipart/form-data">
 
 <div class ="container-600 mt-40 mb-40">
 
 	<div class = "row center">
 		<h1>상품 상세 정보</h1>
+			<hr>
 	</div>
 	
 	<div class ="row">
 	 	<table class="table table-border">
 	 		<tbody>
 	 		
-	 			<tr><td>
-					<img src="download?itemNo=${itemDto.itemNo}" width="200" >
-				</tr></td>
+	 			<tr>
+	 				<td class="center" colspan="2">
+						<c:forEach var="itemImageView" items="${itemImageList}">
+							<img src="/image/download/${itemImageView.imageNo}" width="200" >
+						</c:forEach>
+					</td>
+				</tr>
 			
 	 			<tr>
 	 				<th>상품번호</th>
@@ -40,8 +45,8 @@
 	 			</tr>
 	 			
 	 			<tr>
-	 				<th>상품번호</th>
-	 				<td>${itemDto.itemNo}</td>
+	 				<th>상품가격</th>
+	 				<td>${itemDto.itemPrice}원</td>
 	 			</tr>
 	 			
 	 			<tr>
@@ -70,7 +75,8 @@
 	 	</table>
 	 	
 	 	<div class="row right">
-		<a href="detail?itemNo=${itemDto.itemNo}"><button>장바구니</button></a>	
+	 	
+		<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>	
 		<a class="btn btn-positive" href="update?itemNo=${itemDto.itemNo}">수정하기</a>
 		<a class="btn btn-negative" href="delete?itemNo=${itemDto.itemNo}">삭제하기</a>
 		<a class="btn btn-neutral" href="list">목록</a>

@@ -10,7 +10,13 @@
 
 <form action="insert" method="post" enctype="multipart/form-data">
 
-
+	<div class ="container-600">
+	
+	<div class="row">
+		<h1>상품 등록</h1>
+		<hr>
+	</div>
+	
 	<div class="row">
 		<label> 카테고리 <select name="cateCode">
 				<option value="">선택</option>
@@ -87,10 +93,11 @@
 				name="itemContent" rows="10" cols="75" required></textarea>
 		</label>
 	</div>
-
+	
+	<!-- 이미지 첨부파일 -->
 	<div class="row">
 		<label> 상품 이미지 <input class="input mt-10 w-100 "
-			name="itemImage" type="file" accept=".png, .jpg">
+			name="itemImage" type="file" accept=".png, .jpg" multiple>
 		</label>
 	</div>
 

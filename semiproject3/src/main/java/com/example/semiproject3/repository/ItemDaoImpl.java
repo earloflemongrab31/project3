@@ -144,5 +144,13 @@ public class ItemDaoImpl implements ItemDao {
 		Object[] param = {itemNo};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
-
+	
+	//아이템과 이미지 연결
+	@Override
+	public void connectImage(int itemNo, int imageNo) {
+		String sql = "insert into item_image(item_no, image_no) values(?,?)";
+		Object[] param = {itemNo, imageNo};
+		jdbcTemplate.update(sql, param);
+	}
+		
 }

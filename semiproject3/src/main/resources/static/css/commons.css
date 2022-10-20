@@ -49,6 +49,9 @@ h2.logo{
 .w-100{
     width: 100%;
 }
+.w-75{
+	width: 75%;
+}
 .w-50{
     width: 50%;
 }
@@ -109,7 +112,7 @@ h2.logo{
 */
 .btn{
     font-size: 14px;
-    padding: 0.75em;
+    padding: 0.5em;
     border: none;
     cursor: pointer;
 
@@ -118,12 +121,22 @@ h2.logo{
     text-align: center;
     text-decoration: none;
 }
+.btn.btn-border{
+	border: 1px solid #D5D5D5;
+}
+.btn.btn-border:hover{
+	border: 1px solid #949494;
+}
 .btn.btn-positive{
-    background-color: #2980b9;
+    background-color: #5E5E5E;
     color: white;
 }
+.btn.btn-positive[disabled],
+.btn.btn-positive[disabled]:hover{
+	background-color: lightgray;
+}
 .btn.btn-positive:hover{
-    background-color: #2473a6;
+    background-color: #545454;
 }
 .btn.btn-neutral{
     background-color: white;
@@ -147,10 +160,14 @@ h2.logo{
     outline: none;
     font-size: 14px;
     padding: 0.5em;
-    border: 1px solid gray;
+    border: 1px solid #D5D5D5;
 }
 .input:focus{
-    border-color: black;
+    border-color: gray;
+}
+
+.input.input-none{
+	border: none;
 }
 
 /* 
@@ -183,6 +200,7 @@ h2.logo{
     - resize 속성
 */
 textarea.input{/*textarea 중 input class인 것만*/
+    height: 100px;
     resize: vertical;
 }
 textarea.input.fix-size{/*textarea는 class가 아니니까*/
@@ -196,7 +214,7 @@ textarea.input.fix-size{/*textarea는 class가 아니니까*/
 .table{
 border-collapse: collapse;/* 테두리 병합 */
 width: 100%;
-font-size: 16px;
+font-size: 14px;
 /* 똑같은데 쓰는 이유 : 바깥에서 바꿔도 영향을 안 받음 */
 }
 
@@ -266,16 +284,16 @@ font-size: 16px;
 /* 
     확장 스타일 : 옆이 뚫린 테이블
 */
-.table.table-slit{
-    border: 2px solid gray;
-    border-left: none;
-    border-right: none;
+.table.table-slit tbody th,
+.table.table-slit tbody td{
+    border: 1px solid #D5D5D5;
 }
-.table.table-slit > thead{
-    border-bottom: 1px solid gray;
+.table.table-slit tbody > tr > th {
+	text-align: left;
+	border-left: none;
 }
-.table.table-slit > tfoot{
-    border-top: 1px solid gray;
+.table.table-slit tbody > tr > td {
+	border-right: none;
 }
 
 /* 
@@ -375,6 +393,11 @@ ul.pagination > li > a{
     opacity: 50%; */
 
     background-color: rgba(0, 0, 0, 0.5);
+}
+.fullscreen > .modal {
+            width: 400px;
+            height: 400px;
+            background-color: white;
 }
 .screen-center{
     position: absolute;
@@ -526,7 +549,6 @@ ul.pagination > li > a{
 
 .float-left{
     float: left;
-    padding: 10px;
 }
 .float-right{
     float: right;
@@ -546,4 +568,24 @@ aside.flexbox{
 aside.flexbox> div{
 	text-align: left;
 	padding: 0 20px;
+}
+
+/* 프로그레스바 설정 */
+.progressbar {
+    height:15px;
+    position: relative;
+    top:0;
+    left:0;
+    right:0;
+    overflow: hidden;/* 넘어갈 경우에 대한 처리*/
+}
+.progressbar > .inner {
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    width:0%;
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    transition: width 0.2s linear;
 }

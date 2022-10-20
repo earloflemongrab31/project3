@@ -7,7 +7,7 @@ import com.example.semiproject3.entity.CustomerDto;
 public interface CustomerDao {
 	
 	//회원 등록
-	void insert(CustomerDto dto);
+	void insert(CustomerDto customerDto);
 	
 	//회원 목록 및 검색
 	List<CustomerDto> selectList();
@@ -17,7 +17,7 @@ public interface CustomerDao {
 	CustomerDto selectOne(String customerId);
 	
 	//회원 수정
-	boolean update(CustomerDto dto);
+	boolean update(CustomerDto customerDto);
 	
 	//회원 삭제
 	boolean delete(String customerId);

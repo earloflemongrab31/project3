@@ -12,11 +12,11 @@ public class CartDto {
 	private int cartNo;
 	private String customerId;
 	private int itemNo;
+	private int cartItemMoney;
 	private String cartItemName;
 	private int cartItemPrice;
 	private String cartItemColor;
 	private String cartItemSize;
-	private Date cartdate;
-	private int cartItemMoney;
+	private Date cartDate;
 }
 
