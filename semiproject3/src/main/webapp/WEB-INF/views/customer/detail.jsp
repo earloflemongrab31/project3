@@ -12,7 +12,7 @@
 		<h1>${customerDto.customerId} 회원 정보</h1>
 	</div>
 	
-	<div class="row mb-30">
+	<div class="row mb-30 w-75">
 		
 		<table class="table table-border">
 			<tr>
