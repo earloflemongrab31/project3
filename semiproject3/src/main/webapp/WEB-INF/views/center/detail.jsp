@@ -8,7 +8,7 @@
 </jsp:include>
 
 
-<form action ="detail" method="post" >
+
 
 <div class ="container-600 mt-40 mb-40">
 
@@ -104,6 +104,5 @@
 		</div>
 		
 	</div>
-	</form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
