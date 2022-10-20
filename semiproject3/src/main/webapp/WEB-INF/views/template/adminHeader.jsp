@@ -55,10 +55,15 @@
 
 <header>
 
-<div class="row">
-	<h2 class="logo">
-		<a href="/">Logo</a>
-	</h2>
+<div class="float-container">
+	<div class="float-left">
+		<h2 class="logo">
+			<a href="/admin/">Logo</a>
+		</h2>
+	</div>
+	<div class="float-right">
+		<a href="/">회원페이지</a>
+	</div>
 </div>
 
 </header>

@@ -209,9 +209,14 @@
 			<a href="/">Logo</a>
 		</h2>
 	</div>
-	<c:if test="${loginId != null}">
+	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
 		<div class="float-right	">
 			${loginId}님, 안녕하세요.
+		</div>
+	</c:if>
+	<c:if test="${loginGrade == '관리자' }">
+		<div class="float-right	">
+			<a href="/admin/">관리자페이지</a>
 		</div>
 	</c:if>
 </div>
