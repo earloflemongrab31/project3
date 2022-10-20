@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.semiproject3.entity.NoticeDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.NoticeDao;
+import com.example.semiproject3.vo.NoticeListSearchVO;
 
 @Controller
 @RequestMapping("/notice")
@@ -43,11 +44,9 @@ public class NoticeController {
 	
 	@GetMapping("/list")
 	public String list(Model model, 
-					@RequestParam(required = false) String type,
-					@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) { // 검색
-			model.addAttribute("list", noticeDao.selectList(type, keyword));
+					@ModelAttribute(name="vo") NoticeListSearchVO vo){
+		if(vo.isSearch()) { // 검색
+			model.addAttribute("list", noticeDao.selectList(vo));
 		}
 		else { //목록
 			model.addAttribute("list", noticeDao.selectList());
