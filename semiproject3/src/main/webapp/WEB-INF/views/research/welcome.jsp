@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="설문조사 중복 페이지" name="title"/>
+    <jsp:param value="설문조사" name="title"/>
 </jsp:include>
 
 <div class="container-300 mt-50 mb-50">
