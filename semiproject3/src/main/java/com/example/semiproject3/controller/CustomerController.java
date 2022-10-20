@@ -78,7 +78,7 @@ public class CustomerController {
 	@GetMapping("/mypage")
 	public String mypage(Model model, HttpSession session) {
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("dto", customerDao.selectOne(loginId));
+		model.addAttribute("customerDto", customerDao.selectOne(loginId));
 		return "customer/detail";
 	}
 	
