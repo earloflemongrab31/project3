@@ -33,7 +33,7 @@
 				
 				<tr>
 					<th>제목</th>
-					<td>${centerDto.center_title}</td>
+					<td>${centerDto.centerTitle}</td>
 				</tr>
 				
 				<tr>
@@ -45,7 +45,7 @@
 				<th>문의내용</th>
 					<td>
 						<!-- pre 태그는 엔터, 띄어쓰기, 탭키 등을 있는 그대로 표시하는 영역 -->
-						<pre>${centerDto.customerConternt}</pre>
+						<pre>${centerDto.customerContent}</pre>
 					</td>
 				</tr>
 				
@@ -68,22 +68,20 @@
 		
 	 	<table class="table table-border">
 	 		<tbody>
-				<c:if test="${centerDto.adminId != null}">
+	 		
+				
 		 		<tr>
 					<th>답변자</th>
 					<td>${centerDto.adminId}</td>
 				</tr>
-				</c:if>
-				
-				<c:if test="${centerDto.adminConternt != null}">
+
 		 		<tr height="200" valign="top">
 				<th>답변내용</th>
 					<td>
-						<pre>${centerDto.adminConternt}</pre>
+						<pre>${centerDto.adminContent}</pre>
 					</td>
 				</tr>
-		 		</c:if>
-	 		
+				
 				<c:if test="${centerDto.adminDate != null}">
 				<tr>
 					<th>등록일</th>
@@ -91,13 +89,16 @@
 						<fmt:formatDate value="${centerDto.adminDate}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
 					</td>
 				</tr>
-				</c:if>
+			 </c:if>
+			 
+			 
+			 
 	 		</tbody>
 	 	</table>
 	 </div>
 	 
 	 	<div class="row right">
-		<a class="btn btn-positive" href="update?centerNo=${centerDto.centerNo}">수정하기</a>
+		<a class="btn btn-positive" href="edit?centerNo=${centerDto.centerNo}">답변등록</a>
 		<a class="btn btn-negative" href="delete?centerNo=${centerDto.centerNo}">삭제하기</a>
 		<a class="btn btn-neutral" href="list">목록</a>
 		</div>

@@ -60,6 +60,7 @@
 						<fmt:formatDate value="${noticeDto.noticeDate}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
 					</td>
 				</tr>
+				
 				<c:if test="${noticeDto.noticeUpdate != null}">
 				<tr>
 					<th>수정일</th>

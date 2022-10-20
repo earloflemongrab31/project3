@@ -26,7 +26,7 @@
 			</thead>
 				
 			<tbody align="center">
-			<c:forEach var="center" items="${list}">
+			<c:forEach var="centerDto" items="${list}">
 			
 				<tr>
 				
@@ -34,7 +34,7 @@
 					
 				<td>
 					<a href="detail?centerNo=${centerDto.centerNo}">
-						${centerDto.center_title}
+						${centerDto.centerTitle}
 					</a>
 				</td>
 					

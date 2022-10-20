@@ -9,7 +9,8 @@
  
 
 
-<form action="insert" method="post" enctype="multipart/form-data">
+<form action="insert" method="post">
+<input name="customerId" type="hidden" value="${loginId}" >
 
 	<div class ="container-600">
 	

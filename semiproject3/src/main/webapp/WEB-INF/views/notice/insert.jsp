@@ -10,7 +10,7 @@
 
 
 <form action="insert" method="post" enctype="multipart/form-data">
-
+<input name="adminId" type="hidden" value="${noticeDto.adminId}" >
 	<div class ="container-600">
 	
 	<div class="row">
