@@ -19,10 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
+import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.entity.CustomerLikeDto;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
@@ -39,7 +41,9 @@ public class ItemController {
 	
 	@Autowired
 	private CustomerLikeDao customerLikeDao;
-	
+
+	@Autowired
+	private CartDao cartDao;
 	
 //	private final File directory = new File("C:/study/itemImage");
 	private final File directory = new File("D:/study/itemImage");
@@ -49,6 +53,7 @@ public class ItemController {
 	public void prepare() {//최소 실행시 딱 한번만 실행되는 코드
 		directory.mkdirs();
 	}
+
 	
 	//상품 등록
 	@GetMapping("/insert")
@@ -108,14 +113,23 @@ public class ItemController {
 		return "item/list";
 	}
 	
-	//상품 정보
+	//상품 정보 //장바구니+
 	@GetMapping("/detail")
 	public String detail(Model model, 
-			@RequestParam int itemNo) {
+			@RequestParam int itemNo,
+			HttpSession session) {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
-		
 		//상품 정보에 이미지 불러오기
 		model.addAttribute("itemImageList", imageDao.selectItemImageList(itemNo));
+		//장바구니 기록있는 조회하여 첨부 
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		if(loginId !=null) {
+			CartDto cartDto = new CartDto();
+			cartDto.setCustomerId(loginId);
+			cartDto.setItemNo(itemNo);
+			model.addAttribute("isCart", cartDao.check(cartDto));
+		}
+
 		
 		return "item/detail";
 	}
@@ -152,6 +166,40 @@ public class ItemController {
 		
 	}
 	
+	//카트
+	@GetMapping("/cart")
+	public String cart(
+			@RequestParam int itemNo,
+			HttpSession session
+			) {
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		//하나의아이템 정보가지고오기 
+		ItemDto itemDto=itemDao.selectOne(itemNo);
+		//cartDto에 정보 삽입
+		CartDto cartDto=new CartDto();
+		cartDto.setCustomerId(loginId);
+		cartDto.setItemNo(itemNo);
+		cartDto.setCartItemName(itemDto.getItemName());
+		cartDto.setCartItemPrice(itemDto.getItemPrice());
+		cartDto.setCartItemColor(itemDto.getItemColor());
+		cartDto.setCartItemSize(itemDto.getItemSize());
+		//db에 있으면 지움 없으면 추가
+		if(cartDao.check(cartDto)) {
+			cartDao.delete(cartDto);
+			//+ 삭제 될 때마다 customer table countcount- totalmoney -; 
+		}else {
+			cartDao.insert(cartDto);
+			//+ 추가 될 때마다 customer table countcount- totalmoney -;
+		}
+		return "redirect:buydetail?itemNo="+itemNo;
+	};
+	
+	
+//	@GetMapping("/buylist")
+//	public String buylist(Model model, 
+//			@RequestParam int itemNo, HttpSession session) {
+//		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
+//		
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
 	public String buylist(Model model, 
