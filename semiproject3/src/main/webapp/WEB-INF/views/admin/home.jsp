@@ -4,6 +4,5 @@
 	<jsp:param value="관리자 페이지" name="title"/>
 </jsp:include>
 
-<
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
