@@ -13,6 +13,9 @@
 		<h1>LOGIN</h1>
 	</div>
 	
+	<!-- 
+		로그인 에러 뜨면 토글이 자동으로 회원으로 넘어감 -> 수정 필요
+	 -->
 	<div class="flexbox">
 		<div class='w-50 center user user-customer'>
 			회원
@@ -46,6 +49,15 @@
 			<span class="w-25 right"><i class="fa-solid fa-arrow-right"></i></span>
 		</a>
 	</div>
+	
+	<c:if test="${param.error != null}">
+		<div class="row center mt-20">
+			<span style="color:darkred;">아이디 / 비밀번호를 잘못 입력했습니다.</span>
+		</div>
+		<div class="row center">
+			<span style="color:darkred;">입력하신 내용을 다시 확인해주세요.</span>
+		</div>
+	</c:if>
 		
 
 </div>

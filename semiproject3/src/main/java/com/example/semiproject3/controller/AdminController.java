@@ -58,7 +58,7 @@ public class AdminController {
 		AdminDto findDto = adminDao.selectOne(adminId);
 		
 		if(findDto == null) {
-			return "redirect:login?error";
+			return "redirect:/customer/login?error";
 		}
 		
 		boolean isLogin = adminPw.equals(findDto.getAdminPw());
@@ -69,8 +69,15 @@ public class AdminController {
 			return "redirect:/admin/";
 		}
 		else {
-			return "redirect:login?error";
+			return "redirect:/customer/login?error";
 		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute(SessionConstant.ID);
+		session.removeAttribute(SessionConstant.GRADE);
+		return "redirect:/login";
 	}
 	
 }
