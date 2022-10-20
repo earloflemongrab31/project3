@@ -8,14 +8,12 @@
 </jsp:include>
 
   <style>
-        .progressbar {
-            height:15px;
-            position: fixed;
-            top:0;
-            left:0;
-            right:0;
-            overflow: hidden;/* 넘어갈 경우에 대한 처리*/
-        }
+       .progressbar {
+    height:10px;
+    width:100%;
+    overflow: hidden;/* 넘어갈 경우에 대한 처리*/
+    position:relative;
+}
         .progressbar > .inner {
             position: absolute;
             top:0;
@@ -89,7 +87,11 @@
 	
 	<div class="page">
 		<div class="row">
+
+        	<input name="ResearchCustomerId" placeholder="회원 아이디" type = "hidden">
+
         	<input name="ResearchCustomerId" placeholder="회원 아이디" value="${loginId}" hidden>
+
         </div>
         
         <div class="row mt-50">
