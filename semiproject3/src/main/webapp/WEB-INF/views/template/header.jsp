@@ -70,7 +70,7 @@
 	.delete{
 		cursor: pointer;
 	}
-	a img{
+	.ad a img{
 		vertical-align: middle;
 		height: 1em;
 	}
