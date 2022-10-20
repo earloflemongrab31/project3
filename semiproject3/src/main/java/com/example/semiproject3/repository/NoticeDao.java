@@ -15,8 +15,17 @@ public interface NoticeDao {
 	List<NoticeDto> selectList(String type, String keyword);
 	
 	NoticeDto selectOne(int noticeNo);
+	NoticeDto read(int noticeNo);
 	
+
 	boolean update(NoticeDto noticeDto);
+
+
+	boolean updateReadcount(int noticeNo);
+	
+
 	boolean delete(int noticeNo);
+
+
 	
 }

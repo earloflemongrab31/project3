@@ -15,7 +15,7 @@ public class ImageDto {
 	private int imageNo;
 	private String imageName;
 	private String imageType;
-	private int imageSize;
+	private Long imageSize;
 	private Date imageTime;
 	
 }
