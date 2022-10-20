@@ -180,6 +180,15 @@
 			$(".login-form").find(".pw").attr("name", "customerPw");
 		});
 	});
+	
+	/* 사이드메뉴 토글 */
+	$(function(){
+		$(".accordian").find("li").click(function(e){
+			e.stopPropagation();
+			
+          	$(this).children("ul").slideToggle();			
+		});
+	});
 </script>
 
 </head>
@@ -280,7 +289,7 @@
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input class="float-right input input-underline find" name="#" id="search" placeholder="가을 신상">
 	</form>
-		<li class="float-right"><a href="#">MYPAGE</a></li>
+		<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
 	<c:choose>
 		<c:when test="${loginId == null}">
 			<li class="float-right"><a href="/customer/login">LOGIN</a></li>
