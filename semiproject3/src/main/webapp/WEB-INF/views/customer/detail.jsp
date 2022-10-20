@@ -7,12 +7,13 @@
 		<jsp:param value="마이페이지" name="title"/>
 </jsp:include>
 
-<section class="mt-50 mb-50">
+<section class="mb-50">
+	<div class="container-600">
 	<div class="row center mb-50">
 		<h1>${customerDto.customerId} 회원 정보</h1>
 	</div>
 	
-	<div class="row mb-30 w-75">
+	<div class="row mb-30 w-100">
 		
 		<table class="table table-border">
 			<tr>
@@ -72,6 +73,7 @@
 		<div class="flex-left w-33 center">
 			<a class="btn btn-neutral" href="goodbye">회원 탈퇴</a>
 		</div>
+	</div>
 	</div>
 </section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

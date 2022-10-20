@@ -180,6 +180,15 @@
 			$(".login-form").find(".pw").attr("name", "customerPw");
 		});
 	});
+	
+	/* 사이드메뉴 토글 */
+	$(function(){
+		$(".toggle").click(function(e){
+			e.stopPropagation();
+
+            $(this).children("ul").toggle();			
+		});
+	});
 </script>
 
 </head>

@@ -527,6 +527,38 @@ ul.pagination > li > a{
     right: 0;
 }
 
+.side-menu, 
+.side-menu ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.side-menu{
+    font-size: 18px;
+    cursor: pointer;
+}
+.side-menu > li{
+    width: 100%;
+    padding: 0 0 0.5em 0;
+}
+
+.side-menu ul{
+	padding-bottom: 0.5em; 
+    width: 150px;
+}
+.side-menu a{
+    text-align: center;
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+    width: 100%;
+}
+.side-menu li:hover{
+	cursor: pointer;
+}
+.side-menu li:hover > a{
+    color: black;
+}
+
 /* 
     float 설정
     - float를 설정하면 현재 영역에서 left 혹은 right 방향에 붙는다.(ex 자석)
