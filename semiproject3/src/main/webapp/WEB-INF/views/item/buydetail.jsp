@@ -7,9 +7,6 @@
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
 
-
-<form action="insert" method="post" enctype="multipart/form-data">
-
 	<div class="container-600 mt-40 mb-40">
 
 		<div class="row center">
@@ -19,66 +16,75 @@
 		<div class="row">
 			<table class="table table-border">
 				<tbody>
-
-					<tr>
-						<td><img src="download?itemNo=${itemDto.itemNo}" width="200">
-					</tr>
+				<tr>
+					<td>
+						<img src="/image/download/${itemDto.imageNo}" width="200" >
 					</td>
-
-					<tr>
-						<th>상품번호</th>
-						<td>${itemDto.itemNo}</td>
-					</tr>
-
-					<tr>
-						<th>카테고리</th>
-						<td>${itemDto.cateCode}</td>
-					</tr>
-
-					<tr>
-						<th>상품메모</th>
-						<td>${itemDto.itemMemo}</td>
-					</tr>
-
-					<tr>
-						<th>상품번호</th>
-						<td>${itemDto.itemNo}</td>
-					</tr>
-
-					<tr>
-						<th>상품명</th>
-						<td>${itemDto.itemName} <%-- 	 <!-- 좋아요 하트 -->
-				         <c:if test="${isLike == null}">
-				         ♥
-				         </c:if>
-				         
-				         <c:if test="${isLike == true}">
-				            <a href="like?itemNo=${itemDto.itemNo}">♥</a>
-				         </c:if>
-				         
-				         <c:if test="${isLike == false}">
-				            <a href="like?itemNo=${itemDto.itemNo}">♡</a>
-				         </c:if>
-				            
-				         <!-- 좋아요 개수 출력 -->
-				         <c:if test="${itemDto.itemLikeCnt > 0}">
-				          ${itemDto.itemLikeCnt}개
-				          
-				         </c:if> --%>
-
-						</td>
-					</tr>
-
-					<tr>
-						<th>상품내용</th>
-						<td><pre>${itemDto.itemContent}</pre></td>
-					</tr>
-
-				</tbody>
+				</tr>
+				<tr>
+					<th colspan="2">${itemDto.itemMemo}</th>
+				</tr>
+<!-- 				<tr> -->
+<%-- 					<th colspan="2">${itemDto.itemContent}</th> --%>
+<!-- 				</tr> -->
+				<tr>
+					<th class="table-headcolor">Price</th>
+					<td>
+						<fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0 원"></fmt:formatNumber>
+					</td>
+				</tr>
+				<tr>
+					<th class="table-headcolor">Color</th>
+					<td>
+						<select name="itemColor">
+							<option value="">선택</option>
+							<option>Black</option>
+							<option>White</option>
+							<option>Blue</option>
+							<option>Red</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th class="table-headcolor">Size</th>
+					<td>
+						<select name="itemSize">
+							<option value="">선택</option>
+							<option>S</option>
+							<option>M</option>
+							<option>L</option>
+							<option>XL</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th class="table-headcolor">Qnty</th>
+					<td>
+						<input class="w-20" type="number" name="itemTotalCnt" min="0">
+					</td>
+				</tr>
+<!-- 				<tr> -->
+<!-- 					<th class="table-headcolor">좋아요</th> -->
+<!-- 					<td> -->
+<%-- 					${itemDto.itemLikeCnt} --%>
+					
+<!-- 						좋아요 하트 -->
+<%-- 						<c:if test="${isLike == null}"> --%>
+<!-- 							♥ -->
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${isLike == true}"> --%>
+<%-- 							<a href="like?itemNo=${itemDto.itemNo}">♥</a> --%>
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${isLike == false}"> --%>
+<%-- 							<a href="like?itemNo=${itemDto.itemNo}">♡</a> --%>
+<%-- 						</c:if> --%>
+<!-- 					</td> -->
+<!-- 				</tr> -->
+			</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="2" align="right"><a href="#">구매하기</a> <a
-							href="#">장바구니담기</a> <a href="list">목록으로</a></td>
+							href="#">장바구니담기</a> <a href="buylist">목록으로</a></td>
 					</tr>
 				</tfoot>
 			</table>
