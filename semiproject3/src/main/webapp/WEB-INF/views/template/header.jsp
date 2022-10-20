@@ -186,7 +186,7 @@
 		$(".accordian").find("li").click(function(e){
 			e.stopPropagation();
 			
-          	$(this).children("ul").toggle();			
+          	$(this).children("ul").slideToggle();			
 		});
 	});
 </script>

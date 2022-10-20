@@ -542,6 +542,9 @@ ul.pagination > li > a{
 .accordian ul{
 	font-size: 16px;
 }
+.accordian ul > li{
+	padding: 0.25em 0;
+}
 .accordian > li{
     width: 100%;
     padding: 0 0 0.5em 0;
