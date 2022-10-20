@@ -81,26 +81,29 @@
 	<!-- 페이지 네비게이터 -->
 <div class="row center">
 <h3>
-&laquo;
+<a href="list?p=${vo.firstBlock()}">&laquo;</a>
+
 
 <!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내-->
 <a href="list?p=${vo.prevBlock()}">&lt;</a>
 <c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
 	<a href="list?p=${i}">${i}</a>
+
 </c:forEach>
 
 <!--  다음을 누르면 다음 구간의 마지막 페이지로 안내 -->
-<a href="list?p=">&gt;</a>
-&raquo;
+<a href="list?p=${vo.nextBlock()}">&gt;</a>
+
+<a href="list?p=${vo.pageCount()}">&raquo;</a>
 </h3>
 
 
 </div>
 
 
-<%-- 	<c:choose> --%>
-<%-- 		<c:when test="${not vo.isFirst()}"> --%>
-<%-- 			<a href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a> --%>
+ 	<c:choose>
+	<c:when test="${not vo.isFirst()}"> --%>
+ 			<a href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a> --%>
 <%-- 		</c:when> --%>
 <%-- 		<c:otherwise> --%>
 <!-- 			<a href="#">&laquo;</a> -->
