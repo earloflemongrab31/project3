@@ -9,4 +9,6 @@ public interface AdminDao {
 	
 	//삭제
 	boolean delete(String adminId);
+
+	AdminDto selectOne(String adminId);
 }

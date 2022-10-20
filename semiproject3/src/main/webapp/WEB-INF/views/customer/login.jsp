@@ -6,9 +6,7 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 
-
-
-<form action="login" method="post">
+<form class="login-form" action="login" method="post" autocomplete="off">
 <div class="container-300 mt-50">
 	<!-- 정상/이상 모두 나오는 화면 -->
 	<div class="row center mb-50">
@@ -25,15 +23,15 @@
 	</div>
 	
 	<div class="row">
-		<input class="input w-100" type="text" name="customerId" placeholder="아이디" required autocomplete="off">
+		<input class="input w-100 id" type="text" name="customerId" placeholder="아이디" required autocomplete="off">
 	</div>
 	
 	<div class="row">
-		<input class="input w-100" type="password" name="customerPw" placeholder="비밀번호" required>
+		<input class="input w-100 pw" type="password" name="customerPw" placeholder="비밀번호" required>
 	</div>
 	
 	<div class="row mt-30 mb-50">
-		<button type="submit" class="btn btn-positive w-100">로그인</button>
+		<button type="submit" class="btn btn-positive w-100 btn-login">로그인</button>
 	</div>
 	
 	<div class="row">
