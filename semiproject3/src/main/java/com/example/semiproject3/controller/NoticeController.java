@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.NoticeDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.NoticeDao;
@@ -33,13 +34,17 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute NoticeDto noticeDto) {
-		int noticeNo = noticeDao.sequence();
-		noticeDto.setNoticeNo(noticeNo);
+	public String insert(@ModelAttribute NoticeDto noticeDto, 
+			HttpSession session, RedirectAttributes attr) {
+		String adminId = (String) session.getAttribute(SessionConstant.ID);
+		noticeDto.setAdminId(adminId);
 		
-		noticeDao.insert(noticeDto);
+//		noticeDao.insert(noticeDto);
+//		return "redirect:list";
 		
-		return "redirect:list";
+		int noticeNo = noticeDao.insert2(noticeDto);
+		attr.addAttribute("noticeNo",noticeNo);
+		return "redirect:detail";
 	}
 	
 	@GetMapping("/list")
@@ -60,6 +65,8 @@ public class NoticeController {
 			HttpSession session) {
 	//NoticeDto Dto = noticeDao.selectOne(noticeNo);
 	//model.addAttribute("Dto",Dto);
+		
+//	model.addAttribute("noticeDto", noticeDao.read(noticeNo));
 	
 	//(조회수 중복 방지 처리)
 	Set<Integer> history = (Set<Integer>) session.getAttribute("history"); 

@@ -8,8 +8,6 @@
 </jsp:include>
 
 
-<form action ="detail" method="post" >
-
 <div class ="container-600 mt-40 mb-40">
 
 	<div class = "row center">
@@ -79,7 +77,7 @@
 		</div>
 		
 	</div>
-	
+</div>
 	
 	
 	
