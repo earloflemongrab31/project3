@@ -13,7 +13,7 @@
 	<div class="row center">
 		<h3>이미 설문조사에 참여하셨습니다.</h3>
 	</div>
-	<div class="row center">
+	<div class="row center mb-50">
 		<h3>감사합니다.</h3>
 	</div>
 	<div class="row">
