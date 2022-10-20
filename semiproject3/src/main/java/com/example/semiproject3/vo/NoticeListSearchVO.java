@@ -6,7 +6,8 @@ import lombok.ToString;
 @Data
 public class NoticeListSearchVO {
 
-	private String type, keyword;
+private String type, keyword;
+	
 	@ToString.Include
 	public boolean isSearch() {
 		return type != null && keyword != null;
@@ -79,7 +80,6 @@ public class NoticeListSearchVO {
 	
 	//검색이나 크기 등이 유지될 수 있도록 Query String을 생성
 	//- p를 제외한 나머지 항목들에 대한 파라미터 생성
-	
 	@ToString.Include
 	public String parameter() {
 		if(isSearch()) {
@@ -91,4 +91,5 @@ public class NoticeListSearchVO {
 		
 	}
 }
+
 
