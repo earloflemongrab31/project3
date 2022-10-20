@@ -44,13 +44,14 @@ public class NoticeController {
 	
 	@GetMapping("/list")
 	public String list(Model model, 
-					@ModelAttribute(name="vo") NoticeListSearchVO vo){
-		if(vo.isSearch()) { // 검색
-			model.addAttribute("list", noticeDao.selectList(vo));
-		}
-		else { //목록
-			model.addAttribute("list", noticeDao.selectList());
-		}
+			@ModelAttribute(name="vo") NoticeListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = noticeDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", noticeDao.selectList(vo));
+		
 		return "notice/list";
 	}
 	
