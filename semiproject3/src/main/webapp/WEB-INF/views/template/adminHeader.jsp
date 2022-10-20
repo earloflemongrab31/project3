@@ -1,10 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<%-- <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="${param.title}" name="title"/>
-</jsp:include>
+</jsp:include> --%>
 
-<aside>
-	관리자 메뉴 추가 예정
-</aside>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>
+	관리자페이지
+</title>
+
+<!-- 글꼴 cdn -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+
+<!-- 디자인 틀 -->
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons.css">
+<link rel="stylesheet" type="text/css" href="/css/layout.css">
+
+<!-- 틀 선 디자인할 때 주석 풀기 -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+
+<!-- 아이콘 cdn -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+
+<!-- lightpick 사용을 위한 CDN 추가 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+
+<!-- jQuery -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+<script src="http://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- 배포 시 min 버전으로 -->
+<!-- <script src="http://code.jquery.com/jquery-3.6.1.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+<style>
+
+</style>
+<script>
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="row">
+	<h2 class="logo">
+		<a href="/">Logo</a>
+	</h2>
+</div>
+
+</header>
+
+<!-- 드롭다운 메뉴 -->
+<nav>
+<div class="float-container">
+<ul class="dropdown-menu">
+	<!-- 좌측 드롭다운 메뉴 -->
+	<li class="float-left">
+		<a href="#">상품관리</a>
+		<ul>
+			<li><a href="/item/list">상품목록</a></li>
+			<li><a href="/item/insert">상품등록</a></li>
+		</ul>
+	</li>
+	<li class="float-left">
+		<a href="#">주문관리</a>
+		<ul>
+			<li><a href="#">주문목록</a></li>
+		</ul>
+	</li>
+	<li class="float-left">
+		<a href="#">회원관리</a>
+		<ul>
+			<li><a href="/customer/list">회원목록</a></li>
+		</ul>
+	</li>
+	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
+	<li class="float-right"><a href="/customer/logout">LOGOUT</a></li>
+	<li class="float-right">
+		${loginId}님
+	</li>
+</ul>
+</div>
+</nav>
+
+<main>

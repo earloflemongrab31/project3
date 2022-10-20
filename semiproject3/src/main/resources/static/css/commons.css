@@ -130,6 +130,7 @@ h2.logo{
 .btn.btn-positive{
     background-color: #5E5E5E;
     color: white;
+    border: 1px solid #5E5E5E;
 }
 .btn.btn-positive[disabled],
 .btn.btn-positive[disabled]:hover{

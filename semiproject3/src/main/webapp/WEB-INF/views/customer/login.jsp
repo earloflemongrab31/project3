@@ -14,7 +14,7 @@
 	</div>
 	
 	<!-- 
-		로그인 에러 뜨면 토글이 자동으로 회원으로 넘어감 -> 수정 필요
+		로그인 에러 뜨면 토글이 자동으로 회원으로 넘어감 -> 수정 필요>
 	 -->
 	<div class="flexbox">
 		<div class='w-50 center user user-customer'>

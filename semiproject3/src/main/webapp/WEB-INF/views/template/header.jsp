@@ -210,7 +210,7 @@
 		</h2>
 	</div>
 	<c:if test="${loginId != null}">
-		<div class="float-right">
+		<div class="float-right	">
 			${loginId}님, 안녕하세요.
 		</div>
 	</c:if>
