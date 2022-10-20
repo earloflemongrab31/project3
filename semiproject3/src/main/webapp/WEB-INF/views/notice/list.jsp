@@ -81,9 +81,7 @@
 	<div class="row right">
 		<a class="btn btn-positive" href="insert">공지사항 등록</a>
 	</div>
-	
 
-<<<<<<< HEAD
 <!-- 페이지 네비게이터 -->
 <!-- 선택된 페이지 표시해야 함 -->
 <div class="row center">
@@ -149,62 +147,6 @@
 </ul>
 
 </div>
-=======
-	<!-- 페이지 네비게이터 -->
-	<div class="row center">
-	
-		<h3> 
-		
-		<!-- 제일 첫 페이지로 이동 -->
-		<c:choose>
-			<c:when test="${not vo.isFirst()}">
-				<a href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#">&laquo;</a>
-			</c:otherwise>
-		</c:choose>
-		
-		<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
-		<c:choose>
-			<c:when test="${vo.hasPrev()}">
-				<a href="list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#">&lt;</a>
-			</c:otherwise>
-		</c:choose>
-		 
-		<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-			<a href="list?p=${i}&${vo.parameter()}">${i}</a>
-		</c:forEach>
-		
-		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-		<c:choose>
-			<c:when test="${vo.hasNext()}">
-				<a href="list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#">&gt;</a>
-			</c:otherwise>
-		</c:choose>
-		
-		<!-- 제일 마지막 페이지로 이동 -->
-		
-		<c:choose>
-			<c:when test="${not vo.isLast()}">
-				<a href="list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#">&raquo;</a>
-			</c:otherwise>
-		</c:choose>
-		
-		</h3>
-	
-	</div>
->>>>>>> refs/remotes/origin/main
-
 
 <!-- 검색창 -->
 <form action = "list" method="get" >

@@ -150,6 +150,7 @@ h2.logo{
 .btn.btn-negative{
     background-color: #ecf0f1;
     color: gray;
+    border: 1px solid #ecf0f1;
 }
 .btn.btn-negative:hover{
     background-color: #d0dadc;
