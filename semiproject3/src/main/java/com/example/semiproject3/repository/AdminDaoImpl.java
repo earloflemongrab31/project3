@@ -2,6 +2,7 @@ package com.example.semiproject3.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.AdminDto;
@@ -35,6 +36,28 @@ public class AdminDaoImpl implements AdminDao {
 		String sql = "delete admin where admin_id=?";
 		Object[] param = {adminId};
 		return jdbcTemplate.update(sql, param) > 0;
+	}
+
+	private ResultSetExtractor<AdminDto> extractor = (rs)->{
+		if(rs.next()) {
+			return AdminDto.builder()
+					.adminId(rs.getString("admin_id"))
+					.adminPw(rs.getString("admin_pw"))
+					.adminName(rs.getString("admin_name"))
+					.adminNick(rs.getString("admin_nick"))
+					.adminGrade(rs.getString("admin_grade"))
+					.build();
+		}
+		else {
+			return null;
+		}
+	};
+	
+	@Override
+	public AdminDto selectOne(String adminId) {
+		String sql = "select * from admin where admin_id=?";
+		Object[] param = {adminId};
+		return jdbcTemplate.query(sql, extractor, param);
 	}
 	
 }
