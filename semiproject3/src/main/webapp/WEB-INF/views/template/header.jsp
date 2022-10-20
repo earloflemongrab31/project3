@@ -82,9 +82,6 @@
 	    background-size: 100%;
 	    background-repeat: no-repeat;
 	}
-	.hide{
-		display: none;
-	}
 </style>
 <script>
 	$(function(){

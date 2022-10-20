@@ -446,6 +446,7 @@ ul.pagination > li > a{
     - 평소에는 안 보이게 해놓고 hover 사용으로 나타나게 하기
 */
 .dropdown-menu ul{
+	padding-bottom: 0.5em; 
     position: absolute;
     top: 100%;
     left: 0;
@@ -588,4 +589,8 @@ aside.flexbox> div{
     background: rgb(131,58,180);
     background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
     transition: width 0.2s linear;
+}
+
+.hide{
+	display: none;
 }
