@@ -16,6 +16,7 @@
 
 	<div class = "row center">
 		<h1>상품 수정</h1>
+		<hr>
 	</div>
 	
 <div class = "row">

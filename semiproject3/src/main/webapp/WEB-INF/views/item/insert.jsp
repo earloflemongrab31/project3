@@ -10,7 +10,13 @@
 
 <form action="insert" method="post" enctype="multipart/form-data">
 
-
+	<div class ="container-600">
+	
+	<div class="row">
+		<h1>상품 등록</h1>
+		<hr>
+	</div>
+	
 	<div class="row">
 		<label> 카테고리 <select name="cateCode">
 				<option value="">선택</option>

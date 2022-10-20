@@ -32,13 +32,13 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute NoticeDto Dto) {
+	public String insert(@ModelAttribute NoticeDto noticeDto) {
 		int noticeNo = noticeDao.sequence();
-		Dto.setNoticeNo(noticeNo);
+		noticeDto.setNoticeNo(noticeNo);
 		
-		noticeDao.insert(Dto);
+		noticeDao.insert(noticeDto);
 		
-		return "redirect:/";
+		return "redirect:list";
 	}
 	
 	@GetMapping("/list")
@@ -81,16 +81,17 @@ public class NoticeController {
 	
 	@GetMapping("/edit")
 	public String edit(Model model, @RequestParam int noticeNo) {
+		
 		model.addAttribute("noticeDto",noticeDao.selectOne(noticeNo));
 		return "notice/edit";
 	}
 	
 	
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute NoticeDto Dto, RedirectAttributes attr) {
-	boolean result = noticeDao.update(Dto);
+	public String edit(@ModelAttribute NoticeDto noticeDto, RedirectAttributes attr) {
+	boolean result = noticeDao.update(noticeDto);
 	if(result) {
-		attr.addAttribute("noticeNo",Dto.getNoticeNo());
+		attr.addAttribute("noticeNo",noticeDto.getNoticeNo());
 		return "redirect:detail";
 		}
 		else {
