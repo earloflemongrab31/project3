@@ -50,7 +50,7 @@ public class CenterController {
 		}
 		return "center/list";
 	}
-	
+	 
 	//상세
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam int centerNo) {

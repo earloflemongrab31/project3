@@ -62,7 +62,7 @@
 	</div>
 	
 	<div class="row right">
-		<a class="btn btn-positive" href="insert">공지사항 등록</a>
+		<a class="btn btn-positive" href="insert">문의사항 등록</a>
 	</div>
 	
 

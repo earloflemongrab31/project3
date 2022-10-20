@@ -68,21 +68,21 @@
 		
 	 	<table class="table table-border">
 	 		<tbody>
-	
+				<c:if test="${centerDto.adminId != null}">
 		 		<tr>
 					<th>답변자</th>
 					<td>${centerDto.adminId}</td>
 				</tr>
+				</c:if>
 				
-			
-				
+				<c:if test="${centerDto.adminConternt != null}">
 		 		<tr height="200" valign="top">
 				<th>답변내용</th>
 					<td>
-						<pre>${centerDto.customerConternt}</pre>
+						<pre>${centerDto.adminConternt}</pre>
 					</td>
 				</tr>
-		 		
+		 		</c:if>
 	 		
 				<c:if test="${centerDto.adminDate != null}">
 				<tr>
@@ -103,6 +103,6 @@
 		</div>
 		
 	</div>
-	
+	</form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
