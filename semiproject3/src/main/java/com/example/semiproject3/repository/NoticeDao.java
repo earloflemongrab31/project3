@@ -7,7 +7,7 @@ import com.example.semiproject3.entity.NoticeDto;
 public interface NoticeDao {
 	
 	
-	void insert(NoticeDto Dto);
+	void insert(NoticeDto noticeDto);
 	
 	int sequence();
 	
@@ -15,8 +15,17 @@ public interface NoticeDao {
 	List<NoticeDto> selectList(String type, String keyword);
 	
 	NoticeDto selectOne(int noticeNo);
+	NoticeDto read(int noticeNo);
 	
-	boolean update(NoticeDto Dto);
+
+	boolean update(NoticeDto noticeDto);
+
+
+	boolean updateReadcount(int noticeNo);
+	
+
 	boolean delete(int noticeNo);
+
+
 	
 }

@@ -34,6 +34,11 @@
 <!-- 아이콘 cdn -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
+<!-- lightpick 사용을 위한 CDN 추가 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+
 <!-- jQuery -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
@@ -44,7 +49,7 @@
 <style>
 	.input.find{
 	    padding-left: 2em;
-		background-image: url("./image/search.webp");
+		background-image: url("/image/search.webp");
 	    background-size: 1em;
 	    background-repeat: no-repeat;
 	    background-position-x: 0.5em;
@@ -69,12 +74,79 @@
 		vertical-align: middle;
 		height: 1em;
 	}
+	.required{
+		color: darkred;
+	}
+	.fullscreen > .modal.survey{
+		background-image: url("/image/survey.png");
+	    background-size: 100%;
+	    background-repeat: no-repeat;
+	}
+	.hide{
+		display: none;
+	}
 </style>
 <script>
 	$(function(){
+		$(".survey").find(".delete").click(function(){
+			$(".fullscreen").removeClass("fullscreen");
+			$(".survey").children().addClass("hide");
+		});
+		
 		$(".ad").find(".delete").click(function(){
 			$(this).parent().slideUp();
 		});
+		
+		// datepicker 할 때 필요한 기능 - 안 바꿀거면 지워도 됨
+		var picker1 = new Lightpick({
+            // field : datepicker 적용 대상을 설정하는 공간
+            field:document.querySelector(".single-date-picker"),
+            // format : 선택한 날짜의 적용 형식 설정
+            format: "YYYY-MM-DD",
+            // (옵션) 미래/과거를 선택하지 못 하도록 설정(minDate, maxDate)
+            maxDate: moment()
+		});
+	});
+	
+	$(function(){
+        //1. 첫번째 이전버튼과 마지막 다음버튼을 삭제
+        $(".prev").first().remove();
+        $(".next").last().remove();
+
+        //2. 1페이지만 남기고 다 숨김 처리
+        $(".page").hide();
+        $(".page").first().show();
+
+        //3. 페이지당 늘어나야 할 % 계산
+        var step = 100 / $(".page").length;
+        var percent = step;
+        $(".progressbar > .inner").css("width", percent+"%");
+
+        //4. 남은 버튼에 클릭 이벤트를 설정
+        //- 다음 버튼을 누르면 해당 페이지의 뒷 페이지 표시 및 나머지 숨김
+        //- 이전 버튼을 누르면 해당 페이지의 앞 페이지 표시 및 나머지 숨김
+        $(".next").click(function(){
+            //this == 클릭한 다음 버튼
+            //var target = $(this).parent().parent().parent().next();
+            var target = $(this).parents(".page").next();
+
+            //모든 페이지 숨기고 target만 표시
+            $(".page").hide();
+            target.show();
+
+            //% 증가
+            percent += step;
+            $(".progressbar > .inner").css("width", percent+"%");
+        });
+        $(".prev").click(function(){
+            var target = $(this).parents(".page").prev();
+            $(".page").hide();
+            target.show();
+
+            //% 감소
+            percent -= step;
+            $(".progressbar > .inner").css("width", percent+"%");
+        });
 	});
 </script>
 
@@ -91,7 +163,7 @@
 <div class="float-container ad">
 	"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
 	<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
-		<img src="./image/googleplay.png">
+		<img src="/image/googleplay.png">
 	</a>
 	<span class="float-right delete" style="font-family:sans-serif;">X</span>
 </div>
@@ -99,7 +171,6 @@
 <div class="row">
 	<h2 class="logo">
 		<a href="/">Logo</a>
-		<a href="customer/login">로그인</a>
 	</h2>
 </div>
 </header>

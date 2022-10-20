@@ -24,25 +24,25 @@ public class CustomerDaoImpl implements CustomerDao{
 
 		@Override
 		public CustomerDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			CustomerDto dto = new CustomerDto();
-			dto.setCustomerId(rs.getString("customer_id"));
-			dto.setCustomerPw(rs.getString("customer_pw"));
-			dto.setCustomerPwsearch(rs.getString("customer_pwsearch"));
-			dto.setCustomerNick(rs.getString("customer_nick"));
-			dto.setCustomerName(rs.getString("customer_name"));
-			dto.setCustomerPhone(rs.getString("customer_phone"));
-			dto.setCustomerTel(rs.getString("customer_tel"));
-			dto.setCustomerBirth(rs.getDate("customer_birth"));
-			dto.setCustomerEmail(rs.getString("customer_email"));
-			dto.setCustomerPoint(rs.getInt("customer_point"));
-			dto.setCustomerMoney(rs.getInt("customer_money"));
-			dto.setCustomerGrade(rs.getString("customer_grade"));
-			dto.setCustomerJoin(rs.getDate("customer_join"));
-			dto.setCustomerLogin(rs.getDate("customer_login"));
-			dto.setCartTotalCnt(rs.getInt("cart_total_cnt"));
-			dto.setCartTotalMoney(rs.getInt("cart_total_money"));
-			dto.setCustomerLike(rs.getInt("customer_like"));
-			return dto;
+			CustomerDto customerDto = new CustomerDto();
+			customerDto.setCustomerId(rs.getString("customer_id"));
+			customerDto.setCustomerPw(rs.getString("customer_pw"));
+			customerDto.setCustomerPwsearch(rs.getString("customer_pwsearch"));
+			customerDto.setCustomerNick(rs.getString("customer_nick"));
+			customerDto.setCustomerName(rs.getString("customer_name"));
+			customerDto.setCustomerPhone(rs.getString("customer_phone"));
+			customerDto.setCustomerTel(rs.getString("customer_tel"));
+			customerDto.setCustomerBirth(rs.getDate("customer_birth"));
+			customerDto.setCustomerEmail(rs.getString("customer_email"));
+			customerDto.setCustomerPoint(rs.getInt("customer_point"));
+			customerDto.setCustomerMoney(rs.getInt("customer_money"));
+			customerDto.setCustomerGrade(rs.getString("customer_grade"));
+			customerDto.setCustomerJoin(rs.getDate("customer_join"));
+			customerDto.setCustomerLogin(rs.getDate("customer_login"));
+			customerDto.setCartTotalCnt(rs.getInt("cart_total_cnt"));
+			customerDto.setCartTotalMoney(rs.getInt("cart_total_money"));
+			customerDto.setCustomerLike(rs.getInt("customer_like"));
+			return customerDto;
 		}
 	};
 	
@@ -52,25 +52,25 @@ public class CustomerDaoImpl implements CustomerDao{
 		@Override
 		public CustomerDto extractData(ResultSet rs) throws SQLException, DataAccessException {
 			if(rs.next()) {
-				CustomerDto dto = new CustomerDto();
-				dto.setCustomerId(rs.getString("customer_id"));
-				dto.setCustomerPw(rs.getString("customer_pw"));
-				dto.setCustomerPwsearch(rs.getString("customer_pwsearch"));
-				dto.setCustomerNick(rs.getString("customer_nick"));
-				dto.setCustomerName(rs.getString("customer_name"));
-				dto.setCustomerPhone(rs.getString("customer_phone"));
-				dto.setCustomerTel(rs.getString("customer_tel"));
-				dto.setCustomerBirth(rs.getDate("customer_birth"));
-				dto.setCustomerEmail(rs.getString("customer_email"));
-				dto.setCustomerPoint(rs.getInt("customer_point"));
-				dto.setCustomerMoney(rs.getInt("customer_money"));
-				dto.setCustomerGrade(rs.getString("customer_grade"));
-				dto.setCustomerJoin(rs.getDate("customer_join"));
-				dto.setCustomerLogin(rs.getDate("customer_login"));
-				dto.setCartTotalCnt(rs.getInt("cart_total_cnt"));
-				dto.setCartTotalMoney(rs.getInt("cart_total_money"));
-				dto.setCustomerLike(rs.getInt("customer_like"));
-				return dto;
+				CustomerDto customerDto = new CustomerDto();
+				customerDto.setCustomerId(rs.getString("customer_id"));
+				customerDto.setCustomerPw(rs.getString("customer_pw"));
+				customerDto.setCustomerPwsearch(rs.getString("customer_pwsearch"));
+				customerDto.setCustomerNick(rs.getString("customer_nick"));
+				customerDto.setCustomerName(rs.getString("customer_name"));
+				customerDto.setCustomerPhone(rs.getString("customer_phone"));
+				customerDto.setCustomerTel(rs.getString("customer_tel"));
+				customerDto.setCustomerBirth(rs.getDate("customer_birth"));
+				customerDto.setCustomerEmail(rs.getString("customer_email"));
+				customerDto.setCustomerPoint(rs.getInt("customer_point"));
+				customerDto.setCustomerMoney(rs.getInt("customer_money"));
+				customerDto.setCustomerGrade(rs.getString("customer_grade"));
+				customerDto.setCustomerJoin(rs.getDate("customer_join"));
+				customerDto.setCustomerLogin(rs.getDate("customer_login"));
+				customerDto.setCartTotalCnt(rs.getInt("cart_total_cnt"));
+				customerDto.setCartTotalMoney(rs.getInt("cart_total_money"));
+				customerDto.setCustomerLike(rs.getInt("customer_like"));
+				return customerDto;
 			}
 			else {
 				return null;
@@ -80,7 +80,7 @@ public class CustomerDaoImpl implements CustomerDao{
 	
 	//회원 등록
 	@Override
-	public void insert(CustomerDto dto) {
+	public void insert(CustomerDto customerDto) {
 		String sql = "insert into customer("
 				+ "customer_id,"
 				+ "customer_pw,"
@@ -94,9 +94,9 @@ public class CustomerDaoImpl implements CustomerDao{
 				+ ") "
 				+ "values(?,?,?,?,?,?,?,?,?)";
 		Object[] param = {
-				dto.getCustomerId(), dto.getCustomerPw(), dto.getCustomerPwsearch(),
-				dto.getCustomerNick(), dto.getCustomerName(), dto.getCustomerPhone(),
-				dto.getCustomerTel(), dto.getCustomerBirth(), dto.getCustomerEmail()
+				customerDto.getCustomerId(), customerDto.getCustomerPw(), customerDto.getCustomerPwsearch(),
+				customerDto.getCustomerNick(), customerDto.getCustomerName(), customerDto.getCustomerPhone(),
+				customerDto.getCustomerTel(), customerDto.getCustomerBirth(), customerDto.getCustomerEmail()
 		};
 		jdbcTemplate.update(sql, param);
 	}
@@ -128,7 +128,7 @@ public class CustomerDaoImpl implements CustomerDao{
 	
 	//회원 수정
 	@Override
-	public boolean update(CustomerDto dto) {
+	public boolean update(CustomerDto customerDto) {
 		String sql = "update customer set "
 				+ "customer_nick=?,"
 				+ "customer_name=?,"
@@ -137,9 +137,9 @@ public class CustomerDaoImpl implements CustomerDao{
 				+ "where "
 				+ "customer_id = ?";
 		Object[] param = {
-				dto.getCustomerNick(), dto.getCustomerName(),
-				dto.getCustomerPhone(),dto.getCustomerEmail(),
-				dto.getCustomerId()
+				customerDto.getCustomerNick(), customerDto.getCustomerName(),
+				customerDto.getCustomerPhone(), customerDto.getCustomerEmail(),
+				customerDto.getCustomerId()
 		};
 		
 		return jdbcTemplate.update(sql, param) > 0;

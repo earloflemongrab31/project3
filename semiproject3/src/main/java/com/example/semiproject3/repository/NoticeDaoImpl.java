@@ -21,22 +21,22 @@ public class NoticeDaoImpl implements NoticeDao {
 	
 	//등록
 	@Override
-	public void insert(NoticeDto Dto) {
+	public void insert(NoticeDto noticeDto) {
 		String sql = "insert into notice("
 				+ "admin_id,"
 				+ "notice_no,"
 				+ "notice_title,"
 				+ "notice_date,"
-				+ "notice_update,"
-				+ "notice_read,"
 				+ "notice_content,"
 				+ "notice_head) "
-				+ "values(?, ?, ?, sysdate, ?, ?, ?, ?)";
+
+				+ "values(?,notice_seq.nextval, ?, sysdate, ?, ?)";
+
+
 		
 		Object[] param = {
-				Dto.getAdminId(), Dto.getNoticeNo(), Dto.getNoticeTitle(),
-				Dto.getNoticeDate(), Dto.getNoticeUpdate(), Dto.getNoticeRead(),
-				Dto.getNoticeContent(), Dto.getNoticeHead()
+				noticeDto.getAdminId(), noticeDto.getNoticeTitle(),
+				noticeDto.getNoticeContent(), noticeDto.getNoticeHead()
 		};
 		jdbcTemplate.update(sql, param);
 	}
@@ -53,15 +53,15 @@ public class NoticeDaoImpl implements NoticeDao {
 
 		@Override
 		public NoticeDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			NoticeDto Dto = new NoticeDto();
-			Dto.setAdminId(rs.getString("admin_id"));
-			Dto.setNoticeNo(rs.getInt("notice_no"));
-			Dto.setNoticeTitle(rs.getString("notice_title"));
-			Dto.setNoticeDate(rs.getDate("notice_date"));
-			Dto.setNoticeUpdate(rs.getDate("notice_update"));
-			Dto.setNoticeContent(rs.getString("notice_content"));
-			Dto.setNoticeHead(rs.getString("notice_head"));
-			return Dto;
+			NoticeDto noticeDto = new NoticeDto();
+			noticeDto.setAdminId(rs.getString("admin_id"));
+			noticeDto.setNoticeNo(rs.getInt("notice_no"));
+			noticeDto.setNoticeTitle(rs.getString("notice_title"));
+			noticeDto.setNoticeDate(rs.getDate("notice_date"));
+			noticeDto.setNoticeUpdate(rs.getDate("notice_update"));
+			noticeDto.setNoticeContent(rs.getString("notice_content"));
+			noticeDto.setNoticeHead(rs.getString("notice_head"));
+			return noticeDto;
 		}
 	};
 	
@@ -70,15 +70,15 @@ public class NoticeDaoImpl implements NoticeDao {
 		@Override
 		public NoticeDto extractData(ResultSet rs) throws SQLException, DataAccessException {
 			if(rs.next()) {
-				NoticeDto Dto = new NoticeDto();
-				Dto.setAdminId(rs.getString("admin_id"));
-				Dto.setNoticeNo(rs.getInt("notice_no"));
-				Dto.setNoticeTitle(rs.getString("notice_title"));
-				Dto.setNoticeDate(rs.getDate("notice_date"));
-				Dto.setNoticeUpdate(rs.getDate("notice_update"));
-				Dto.setNoticeContent(rs.getString("notice_content"));
-				Dto.setNoticeHead(rs.getString("notice_head"));
-				return Dto;
+				NoticeDto noticeDto = new NoticeDto();
+				noticeDto.setAdminId(rs.getString("admin_id"));
+				noticeDto.setNoticeNo(rs.getInt("notice_no"));
+				noticeDto.setNoticeTitle(rs.getString("notice_title"));
+				noticeDto.setNoticeDate(rs.getDate("notice_date"));
+				noticeDto.setNoticeUpdate(rs.getDate("notice_update"));
+				noticeDto.setNoticeContent(rs.getString("notice_content"));
+				noticeDto.setNoticeHead(rs.getString("notice_head"));
+				return noticeDto;
 			}
 			else {
 				return null;
@@ -108,23 +108,13 @@ public class NoticeDaoImpl implements NoticeDao {
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 
+	
 	@Override
-	public boolean update(NoticeDto Dto) {
-		String sql = "update notice "
-				+ "set "
-				+ "notice_title=?,"
-				+ "notice_date=?,"
-				+ "notice_content=?,"
-				+ "notice_head=?"
-				+ "where"
-				+ "notice_no=?";
-		Object[] param= {
-				Dto.getNoticeTitle(), Dto.getNoticeDate(),
-				Dto.getNoticeContent(), Dto.getNoticeHead(),
-				Dto.getNoticeNo()
-		};
-		return jdbcTemplate.update(sql, param)>0;
-	}
+	public boolean update(NoticeDto noticeDto) {
+		String sql = "update notice set notice_title=?, notice_content=?, notice_head=?, notice_update=sysdate where notice_no=?";
+		Object[]param = {noticeDto.getNoticeTitle(), noticeDto.getNoticeContent(), noticeDto.getNoticeHead(), noticeDto.getNoticeNo()};
+		return jdbcTemplate.update(sql,param)>0;
+		}
 
 	@Override
 	public boolean delete(int noticeNo) {
@@ -132,4 +122,20 @@ public class NoticeDaoImpl implements NoticeDao {
 		Object[] param = {noticeNo};
 		return jdbcTemplate.update(sql, param)>0;
 	}
+
+	//조회수 중복 방지 처리
+	@Override
+	public NoticeDto read(int noticeNo) {
+		this.updateReadcount(noticeNo);
+		return this.selectOne(noticeNo);
+	}
+
+	//조회수 중복 방지 처리
+	@Override
+	public boolean updateReadcount(int noticeNo) {
+		String sql = "update notice set notice_read = notice_read + 1 where notice_no = ?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+	
 }

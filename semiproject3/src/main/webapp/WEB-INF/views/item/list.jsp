@@ -18,10 +18,11 @@
 		<table class="table table-hover table-border">
 			<thead>
 				<tr>
-					
+					<th>상품번호</th>
 					<th>상품메모</th>
 					<th>상품명</th>
 					<th>상품금액</th>
+					
 				</tr>
 			</thead>
 				
@@ -34,6 +35,7 @@
 				</tr></td> --%>
 			
 				<tr>
+				<td>${itemDto.itemNo}</td>
 					<td>${itemDto.itemMemo}</td>
 					<td>
 						<a href="detail?itemNo=${itemDto.itemNo}">
