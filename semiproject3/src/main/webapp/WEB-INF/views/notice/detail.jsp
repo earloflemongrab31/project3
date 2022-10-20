@@ -7,8 +7,6 @@
     <jsp:param value="상품 상세 페이지" name="title"/>
 </jsp:include>
 
-
-
 <div class ="container-600 mt-40 mb-40">
 
 	<div class = "row center">
@@ -78,7 +76,7 @@
 		</div>
 		
 	</div>
-	
+</div>
 	
 	
 	

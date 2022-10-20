@@ -219,9 +219,7 @@ public class ItemController {
 		model.addAttribute("isCart", cartDao.check(cartDto));
 		}
 
-		
 		//(+추가) 찜 기록이 있는지 조회하여 첨부
-		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
 		if(loginId != null) {//회원이라면 좋아요 기록을 조회하여 model에 추가
 			CustomerLikeDto customerLikeDto = new CustomerLikeDto();

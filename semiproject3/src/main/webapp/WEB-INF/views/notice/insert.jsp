@@ -10,7 +10,7 @@
 
 
 <form action="insert" method="post" enctype="multipart/form-data">
-<input name="adminId" type="hidden" value="${noticeDto.adminId}" >
+<%-- <input name="adminId" type="hidden" value="${noticeDto.adminId}" > --%>
 	<div class ="container-600">
 	
 	<div class="row">
@@ -19,12 +19,15 @@
 	</div>
 	
 	<div class = "row">
-		<label> 말머리 <select name="noticeHead">
-			<option value="">선택</option>
-			<option>긴급</option>
-            <option>이벤트</option>
-			</select>
-			</label>
+		<label> 말머리
+			<c:if test="${loginGrade == '관리자'}">
+				<select name="noticeHead">
+					<option value="">선택</option>
+					<option>긴급</option>
+		            <option>이벤트</option>
+				</select>
+			</c:if>
+		</label>
 	</div>
 	
 	<div class="row">
