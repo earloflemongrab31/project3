@@ -32,7 +32,6 @@ public class NoticeDaoImpl implements NoticeDao {
 
 				+ "values(?,notice_seq.nextval, ?, sysdate, ?, ?)";
 
-				+ "values(notice_seq.nextval, ?, ?, sysdate, ?, ?, ?, ?)";
 
 		
 		Object[] param = {
