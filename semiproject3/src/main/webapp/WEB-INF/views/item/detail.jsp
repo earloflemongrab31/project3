@@ -70,6 +70,7 @@
 	 	</table>
 	 	
 	 	<div class="row right">
+		<a href="detail?itemNo=${itemDto.itemNo}"><button>장바구니</button></a>	
 		<a class="btn btn-positive" href="update?itemNo=${itemDto.itemNo}">수정하기</a>
 		<a class="btn btn-negative" href="delete?itemNo=${itemDto.itemNo}">삭제하기</a>
 		<a class="btn btn-neutral" href="list">목록</a>

@@ -3,6 +3,8 @@ package com.example.semiproject3.controller;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
 
@@ -33,6 +37,9 @@ public class ItemController {
 	
 	@Autowired
 	private ImageDao imageDao;
+	
+	@Autowired
+	private CartDao cartDao;
 	
 	//상품 등록
 	@GetMapping("/insert")
@@ -90,11 +97,18 @@ public class ItemController {
 		return "item/list";
 	}
 	
-	//상품 정보
+	//상품 정보 //장바구니+
 	@GetMapping("/detail")
 	public String detail(Model model, 
-			@RequestParam int itemNo) {
+			@RequestParam int itemNo,
+			HttpSession session) {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
+		
+		//(1)장바구니 구현
+		//(2)하나의 아이템 정보를 가지고 온다. 
+		ItemDto itemDto=itemDao.selectOne(itemNo);
+		//(3)정보를 
+		
 		
 		return "item/detail";
 	}
@@ -169,6 +183,7 @@ public class ItemController {
 		}
 		
 	}
+	
 	
 //	@GetMapping("/buylist")
 //	public String buylist(Model model, 
