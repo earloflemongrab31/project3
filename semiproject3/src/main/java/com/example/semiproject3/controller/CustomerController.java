@@ -112,17 +112,13 @@ public class CustomerController {
 
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute CustomerDto customerDto) {
-	boolean result = customerDao.update(customerDto);
-	if(result) {
-		return "redirect:detail?customer_id="+customerDto.getCustomerId();
-	}
-	else {
-		return "redirect:edit_fail";
-	}
-}
-	@GetMapping("/edit_fail")
-	public String editFail() {
-		return "customer/edit_fail";
+		boolean result = customerDao.update(customerDto);
+		if(result) {
+			return "redirect:detail?customer_id="+customerDto.getCustomerId();
+		}
+		else {
+			return "redirect:edit?error";
+		}
 	}
 	
 	@GetMapping("/delete")
