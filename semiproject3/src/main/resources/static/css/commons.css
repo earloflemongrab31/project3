@@ -279,7 +279,7 @@ font-size: 14px;
 /* .table.table-hover > thead > tr:hover,  */
 .table.table-hover > tbody > tr:hover, 
 .table.table-hover > tfoot > tr:hover{
-    background-color: rgb(243, 247, 252);
+    background-color: #FAF9F7;
 }
 
 /* 
