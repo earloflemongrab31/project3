@@ -20,6 +20,11 @@ public class AdminController {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@GetMapping("/")
+	public String home() {
+		return "admin/home";
+	}
+	
 	@GetMapping("/insert")
 	public String insert() {
 		return "admin/insert";

@@ -114,16 +114,31 @@ public class AddressDaoImpl implements AddressDao{
 
 	@Override
 	public boolean update(AddressDto addressDto) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "update address "
+				+"set "
+				+"customer_id=?,"
+				+"address_name=?,"
+				+"address_post=?,"
+				+"address_host=?,"
+				+"address_detail_host=?,"
+				+"address_basic=?"
+				+"where address_no = ?";
+		Object[] param = {
+				addressDto.getCustomerId(), addressDto.getAddressName(),
+				addressDto.getAddressPost(), addressDto.getAddressHost(),
+				addressDto.getAddressDetailHost(), addressDto.getAddressBasic(),
+				addressDto.getAddressNo()
+		};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 
+	//주소 삭제
 	@Override
 	public boolean delete(int addressNo) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "delete address where address_no = ?";
+		Object[] param = {addressNo};
+		return jdbcTemplate.update(sql, param ) > 0;
 	}
 
-	
 	
 }
