@@ -6,33 +6,7 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 
-<style>
-	.user{
-		padding: 0.75em;
-		border: 1px solid #D5D5D5;
-		border-bottom: none;
-		cursor: pointer;
-	}
-	.user.unchecked{
-		color: white;
-		background-color: lightgray;
-	}
-</style>
-<script>
-	$(function(){
-		$(".user-admin").click(function(){
-			$(this).removeClass("unchecked");
-			$(this).prev("div").addClass("unchecked");
-			$(".customer-join").addClass("hide");
-		});
-		$(".user-customer").click(function(){
-			$(this).removeClass("unchecked");
-			$(this).next("div").addClass("unchecked");
-			$(".customer-join").removeClass("hide");
-		});
-	});
-	
-</script>
+
 
 <form action="login" method="post">
 <div class="container-300 mt-50">

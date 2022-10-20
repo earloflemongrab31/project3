@@ -77,10 +77,24 @@
 	.required{
 		color: darkred;
 	}
+	
+	/* 설문조사 */
 	.fullscreen > .modal.survey{
 		background-image: url("/image/survey.png");
 	    background-size: 100%;
 	    background-repeat: no-repeat;
+	}
+	
+	/* 로그인 토글 디자인 */
+	.user{
+		padding: 0.75em;
+		border: 1px solid #D5D5D5;
+		border-bottom: none;
+		cursor: pointer;
+	}
+	.user.unchecked{
+		color: white;
+		background-color: lightgray;
 	}
 </style>
 <script>
@@ -105,6 +119,7 @@
 		});
 	});
 	
+	/* 프로그레스바 */
 	$(function(){
         //1. 첫번째 이전버튼과 마지막 다음버튼을 삭제
         $(".prev").first().remove();
@@ -145,6 +160,20 @@
             $(".progressbar > .inner").css("width", percent+"%");
         });
 	});
+	
+	/* 로그인 페이지 토글 */
+	$(function(){
+		$(".user-admin").click(function(){
+			$(this).removeClass("unchecked");
+			$(this).prev("div").addClass("unchecked");
+			$(".customer-join").addClass("hide");
+		});
+		$(".user-customer").click(function(){
+			$(this).removeClass("unchecked");
+			$(this).next("div").addClass("unchecked");
+			$(".customer-join").removeClass("hide");
+		});
+	});
 </script>
 
 </head>
@@ -156,6 +185,7 @@
 	광고 구현 중
 	1. 구글플레이 이미지 중간 맞춤
 	2. 새로고침 할 때마다 나옴
+	3. 관리자 페이지 들어가면 없애야 할 듯
  -->
 <div class="float-container ad">
 	"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
