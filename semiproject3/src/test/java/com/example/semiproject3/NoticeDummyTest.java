@@ -24,7 +24,7 @@ public class NoticeDummyTest {
 		for(int i = 1; i <= 7905; i++) {
 			
 			noticeDao.insert(NoticeDto.builder()
-						.adminId("test2")
+						.adminId("admin1")
 						.noticeTitle("테스트"+i)
 						.noticeContent("테스트"+i)
 						.noticeHead(null)
