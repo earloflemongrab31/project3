@@ -29,10 +29,12 @@
 			<tbody align="center">
 			<c:forEach var="itemDto" items="${list}">
 				
-				<%-- 이미지  
-				<tr><td> 
-					<img src="download?itemNo=${itemDto.itemNo}" width="200" > 
-				</tr></td> --%>
+<%--			이미지   --%>
+<!-- 				<tr><td>  -->
+<%-- 					<c:forEach var="itemImageView" items="${itemImageList}"> --%>
+<%-- 							<img src="/image/download/${itemImageView.imageNo}" width="200" > --%>
+<%-- 						</c:forEach> --%>
+<!-- 				</tr></td> -->
 			
 				<tr>
 				<td>${itemDto.itemNo}</td>
