@@ -8,12 +8,13 @@
 </jsp:include>
 
 
-<form action = "insert" method="post" enctype ="multipart/form-data">
+<form action = "detail" method="post" enctype ="multipart/form-data">
 
 <div class ="container-600 mt-40 mb-40">
 
 	<div class = "row center">
 		<h1>상품 상세 정보</h1>
+			<hr>
 	</div>
 	
 	<div class ="row">
@@ -40,8 +41,8 @@
 	 			</tr>
 	 			
 	 			<tr>
-	 				<th>상품번호</th>
-	 				<td>${itemDto.itemNo}</td>
+	 				<th>상품가격</th>
+	 				<td>${itemDto.itemPrice}원</td>
 	 			</tr>
 	 			
 	 			<tr>

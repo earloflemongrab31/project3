@@ -4,7 +4,6 @@
 	<jsp:param value="설문조사" name="title"/>
 </jsp:include>
 
-
 <form action="insert" method="post">
 
 <div class="container-800 mt-50">
@@ -34,7 +33,7 @@
     <div class="row float-container">
         <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
         <button type="button" class="next btn btn-neutral btn-border float-right">다음</button>
-    </div>
+	</div>
 </div>
 <div class="page">
 	<div class="row">
