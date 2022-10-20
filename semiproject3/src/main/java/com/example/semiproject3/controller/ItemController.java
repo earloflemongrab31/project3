@@ -2,11 +2,11 @@ package com.example.semiproject3.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
-import org.apache.commons.io.FileUtils;
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,6 +33,16 @@ public class ItemController {
 	@Autowired
 	private ImageDao imageDao;
 	
+	
+//	private final File directory = new File("C:/study/itemImage");
+	private final File directory = new File("D:/study/itemImage");
+	
+	//이미지 저장소 폴더 생성
+	@PostConstruct
+	public void prepare() {//최소 실행시 딱 한번만 실행되는 코드
+		directory.mkdirs();
+	}
+	
 	//상품 등록
 	@GetMapping("/insert")
 	public String insert() {
@@ -43,32 +52,34 @@ public class ItemController {
 	@PostMapping("/insert")
 	public String insert(
 			@ModelAttribute ItemDto itemDto,
-			@ModelAttribute ImageDto imageDto,
-			@RequestParam MultipartFile itemImage) throws IllegalStateException, IOException {
+			@RequestParam List<MultipartFile> itemImage) throws IllegalStateException, IOException {
 		
-		
+		//등록 아이템에 미리 번호 생성
 		int itemNo = itemDao.sequence();
 		itemDto.setItemNo(itemNo);
 		
 		itemDao.insert(itemDto);
 		
-		//이미지 DB에 저장
-		int imageNo = imageDao.sequence();
-		imageDao.insert(ImageDto.builder()
-								.imageNo(itemNo)
-								.imageName(itemImage.getOriginalFilename())
-								.imageType(itemImage.getContentType())
-								.imageSize(itemImage.getSize())
-							.build());
-		
-		
-		//파일 저장
-		if(!itemImage.isEmpty()) {
-//			File dir = new File("C:/study/itemImage");
-			File dir = new File("D:/study/itemImage");
-			dir.mkdirs();
-			File target = new File(dir, String.valueOf(itemNo));
-			itemImage.transferTo(target);
+		//아이템을 등록한 후 이미지를 등록 및 연결
+		for(MultipartFile image : itemImage) {
+			
+			if(!image.isEmpty()) {//이미지가 있다면
+				
+				//이미지 DB에 저장
+				int imageNo = imageDao.sequence();
+				imageDao.insert(ImageDto.builder()
+										.imageNo(imageNo)
+										.imageName(image.getOriginalFilename())
+										.imageType(image.getContentType())
+										.imageSize(image.getSize())
+									.build());
+				//파일 저장
+				File target = new File(directory, String.valueOf(imageNo));
+				image.transferTo(target);
+				
+				//+ 연결 테이블에 연결 정보를 저장(아이템 번호, 이미지 번호)
+				itemDao.connectImage(itemNo,imageNo);
+			}
 		}
 		
 		return "redirect:list";
@@ -96,46 +107,10 @@ public class ItemController {
 			@RequestParam int itemNo) {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		
+		//상품 정보에 이미지 불러오기
+		model.addAttribute("itemImageList", imageDao.selectItemImageList(itemNo));
+		
 		return "item/detail";
-	}
-	
-	//이미지 불러오기
-	@GetMapping("/download")
-	@ResponseBody
-	public ResponseEntity<ByteArrayResource> download(@RequestParam int itemNo) throws IOException {
-		
-		//[1]DB에서 이미지 검색
-		ImageDto imageDto = imageDao.selectOne(itemNo);
-		if(imageDto == null) {//파일이 없으면
-			return ResponseEntity.notFound().build();//404 error 전송
-		}
-		
-		//[2] 찾은 이미지 불러오기
-//		File dir = new File("C:/study/itemImage");
-		File dir = new File("D:/study/itemImage");
-		File target = new File(dir, String.valueOf(itemNo));
-		
-		if(target.exists()) {//파일 존재
-			//[2] 해당 파일의 내용을 불러온다.(apache commons io 의존성 필요)
-			byte[] data = FileUtils.readFileToByteArray(target);
-			ByteArrayResource resource = new ByteArrayResource(data);
-			
-			//[3] 사용자에게 보낼 응답 생성
-			//- header에는 보낼 파일의 정보를, body에는 보낼 파일의 내용을 첨부
-			return ResponseEntity.ok()//ResponseEntity(응답 객체)
-									.header("Content-Encoding", "UTF-8")
-									.header("Content-Length", String.valueOf(data.length))
-									.header("Content-Disposition", "attachment; filename="+itemNo)
-									.header("Content-Type", "application/octet-stream")//현재 보내는 데이터 유형 , "무조건 다운받아라"
-									.body(resource);
-		}
-		else {//파일 없음
-			//1) 우리가 정한 예외를 발생시키는 방법
-			throw new TargetNotFoundException("아이템 없음");
-			
-			//2) 사용자에게 못 찾았음(404)을 전송
-//			return ResponseEntity.notFound().build();
-		}
 	}
 	
 	//상품 수정
