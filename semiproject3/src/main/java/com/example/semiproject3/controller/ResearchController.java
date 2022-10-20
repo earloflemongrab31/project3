@@ -31,7 +31,7 @@ public class ResearchController {
 		int judge=researchDao.overlapId(loginId);
 		//아이디가 없다면 로그인화면으로 보내세요.
 		if(loginId==null) {
-			return "/customer/login";
+			return "customer/login";
 		}
 		//아이디가 있는데 이미 참여한 사람 
 		if(judge>0) {
@@ -39,7 +39,7 @@ public class ResearchController {
 
 		//설문조사에 처음 참여하는 사람
 		}else
-			return "/research/insert";
+			return "research/insert";
 			
 		}
 
@@ -56,12 +56,12 @@ public class ResearchController {
 	//설문조사 참여완료
 	@GetMapping("/welcome")
 	public String welcome() {
-		return "/research/welcome";
+		return "research/welcome";
 	}
 	//이미참여한사람
 	@GetMapping("/confirm")
 	public String confirm() {
-		return "/research/confirm";
+		return "research/confirm";
 	}
 
 }
