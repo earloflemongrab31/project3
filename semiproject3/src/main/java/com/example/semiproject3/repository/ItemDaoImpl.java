@@ -2,16 +2,15 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListVO;
+import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Repository
 public class ItemDaoImpl implements ItemDao {
@@ -208,6 +207,72 @@ public class ItemDaoImpl implements ItemDao {
 		String sql = "select * from buy_list_view where item_no = ?";
 		Object[] param = {itemNo};
 		return jdbcTemplate.query(sql, buyExtractor, param);
+	}
+
+	//통합목록
+	@Override
+	public List<ItemDto> selectList(ItemListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+
+	//목록
+	@Override
+	public List<ItemDto> list(ItemListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from item order by item_no desc"
+				+ ")TMP "
+			+") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	//검색
+	@Override
+	public List<ItemDto> search(ItemListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select * from item "
+				+ "where instr(#1, ?) > 0 "
+				+ "order by item_no desc"
+			+ ")TMP"
+		+ ") where rn between ? and ?";		
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	//카운트
+	@Override
+	public int count(ItemListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return searchCount(vo);
+		}
+		else { //목록이라면
+			return listCount(vo);
+		}
+	}
+
+	//검색 카운트
+	@Override
+	public int searchCount(ItemListSearchVO vo) {
+		String sql = "select count(*) from item where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	//목록 카운트
+	@Override
+	public int listCount(ItemListSearchVO vo) {
+		String sql = "select count(*) from item";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 		
 }

@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.NoticeDto;
+import com.example.semiproject3.vo.NoticeListSearchVO;
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao {
@@ -65,6 +66,9 @@ public class NoticeDaoImpl implements NoticeDao {
 		}
 	};
 	
+	
+	
+	//리절트셋
 	private ResultSetExtractor<NoticeDto> extractor = new ResultSetExtractor<NoticeDto>() {
 
 		@Override
@@ -137,5 +141,70 @@ public class NoticeDaoImpl implements NoticeDao {
 		Object[] param = {noticeNo};
 		return jdbcTemplate.update(sql, param)>0;
 	}
+
+	//카운트
+	@Override
+	public int count(NoticeListSearchVO vo) {
+		if(vo.isSearch()) { //검색이라면
+			return searchCount(vo);
+		}
+		else { //목록이라면
+			return listCount(vo);
+		}
+	}
+
+	//리스트카운트
+	@Override
+	public int listCount(NoticeListSearchVO vo) {
+		String sql = "select count(*) from notice";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	//서치카운트
+	@Override
+	public int searchCount(NoticeListSearchVO vo) {
+		String sql = "select count(*) from notice where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	@Override
+	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+
+	@Override
+	public List<NoticeDto> list(NoticeListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from notice order by notice_no desc"
+				+ ")TMP "
+			+") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public List<NoticeDto> search(NoticeListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select * from notice "
+				+ "where instr(#1, ?) > 0 "
+				+ "order by notice_no desc"
+			+ ")TMP"
+		+ ") where rn between ? and ?";		
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 }
+
+

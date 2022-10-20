@@ -20,12 +20,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CartDto;
+import com.example.semiproject3.entity.CustomerLikeDto;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.CartDao;
+import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Controller
 @RequestMapping("/item")
@@ -37,10 +40,11 @@ public class ItemController {
 	@Autowired
 	private ImageDao imageDao;
 	
+	@Autowired
+	private CustomerLikeDao customerLikeDao;
 
 	@Autowired
 	private CartDao cartDao;
-
 	
 //	private final File directory = new File("C:/study/itemImage");
 	private final File directory = new File("D:/study/itemImage");
@@ -96,16 +100,14 @@ public class ItemController {
 	
 	//상품 목록(관리자)
 	@GetMapping("/list")
-	public String list(Model model,
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("list", itemDao.selectList(type, keyword));
-		}
-		else {
-			model.addAttribute("list", itemDao.selectList());
-		}
+	public String list(Model model, 
+			@ModelAttribute(name="vo") ItemListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = itemDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", itemDao.selectList(vo));
 		
 		return "item/list";
 	}
@@ -218,39 +220,39 @@ public class ItemController {
 		}
 
 		
-//		//(+추가) 좋아요 기록이 있는지 조회하여 첨부
-//		String loginId = (String) session.getAttribute(SessionConstant.ID);
-//		
-//		if(loginId != null) {//회원이라면 좋아요 기록을 조회하여 model에 추가
-//			CustomerLikeDto customerLikeDto = new CustomerLikeDto();
-//			customerLikeDto.setCustomerId(loginId);
-//			customerLikeDto.setItemNo(itemNo);
-//			model.addAttribute("isLike", customerLikeDao.check(customerLikeDto));
-//		}
+		//(+추가) 찜 기록이 있는지 조회하여 첨부
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
+		if(loginId != null) {//회원이라면 좋아요 기록을 조회하여 model에 추가
+			CustomerLikeDto customerLikeDto = new CustomerLikeDto();
+			customerLikeDto.setCustomerId(loginId);
+			customerLikeDto.setItemNo(itemNo);
+			model.addAttribute("isLike", customerLikeDao.check(customerLikeDto));
+		}
 		
 		return "item/buydetail";
 	}
 	
-//	//좋아요
-//	@GetMapping("/like")
-//	public String customerLike(@RequestParam int itemNo, 
-//			HttpSession session, RedirectAttributes attr) {
-//		String loginId = (String)session.getAttribute(SessionConstant.ID);
-//		CustomerLikeDto customerLikeDto = new CustomerLikeDto();
-//		customerLikeDto.setCustomerId(loginId);
-//		customerLikeDto.setItemNo(itemNo);
-//		
-//		if(customerLikeDao.check(customerLikeDto)) {//좋아요를 한 생태면
-//			customerLikeDao.delete(customerLikeDto);//지우세요
-//		}
-//		else {//좋아요를 한 적이 없는 상태면
-//			customerLikeDao.insert(customerLikeDto);//추가하세요
-//		}
-//		
-//		customerLikeDao.refresh(itemNo);//좋아요 조회수 갱신
-//		
-//		attr.addAttribute("itemNo",itemNo);
-//		return "redirect:/item/buylist";
-//		
-//	}
+	//찜
+	@GetMapping("/like")
+	public String customerLike(@RequestParam int itemNo, 
+			HttpSession session, RedirectAttributes attr) {
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		CustomerLikeDto customerLikeDto = new CustomerLikeDto();
+		customerLikeDto.setCustomerId(loginId);
+		customerLikeDto.setItemNo(itemNo);
+		
+		if(customerLikeDao.check(customerLikeDto)) {//좋아요를 한 생태면
+			customerLikeDao.delete(customerLikeDto);//지우세요
+		}
+		else {//좋아요를 한 적이 없는 상태면
+			customerLikeDao.insert(customerLikeDto);//추가하세요
+		}
+		
+		customerLikeDao.refresh(itemNo);//좋아요 조회수 갱신
+		
+		attr.addAttribute("itemNo",itemNo);
+		return "redirect:/item/buydetail";
+		
+	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.repository.CustomerDao;
+import com.example.semiproject3.vo.NoticeListSearchVO;
 
 @Controller
 @RequestMapping("/customer")
@@ -95,13 +96,6 @@ public class CustomerController {
 			model.addAttribute("list", customerDao.selectList());
 		}
 		return "customer/list";
-	}
-	
-	@GetMapping("/detail")
-	public String detail(Model model, @RequestParam String customerId) {
-		CustomerDto customerDto = customerDao.selectOne(customerId);
-		model.addAttribute(customerDto);
-		return "customer/detail";
 	}
 	
 	@GetMapping("/edit")

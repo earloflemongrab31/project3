@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CenterDto;
-import com.example.semiproject3.entity.NoticeDto;
 
 @Repository
 public class CenterDaoImpl implements CenterDao {
@@ -80,6 +79,7 @@ public class CenterDaoImpl implements CenterDao {
 			
 			System.out.println(centerDto);
 		}	
+
 		
 		
 	//목록
@@ -122,13 +122,11 @@ public class CenterDaoImpl implements CenterDao {
 	}
 
 	//수정
-			@Override
-			public boolean update(CenterDto centerDto) {
-				String sql = "update center set admin_content=?, center_title=?, customer_content=?, admin_date=sysdate where center_no=?";
-				Object[]param = {centerDto.getAdminContent(), centerDto.getCenterTitle(), centerDto.getCustomerContent(), centerDto.getCenterNo()};		
-			return jdbcTemplate.update(sql, param) > 0;
+	@Override
+	public boolean update(CenterDto centerDto) {
+	String sql = "update center set admin_content=?, center_title=?, customer_content=?, admin_date=sysdate where center_no=?";
+	Object[]param = {centerDto.getAdminContent(), centerDto.getCenterTitle(), centerDto.getCustomerContent(), centerDto.getCenterNo()};		
+	return jdbcTemplate.update(sql, param) > 0;
 		}
-	
-
 }
 	
