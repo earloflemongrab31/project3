@@ -72,7 +72,7 @@ public class AddressController {
 	else {
 		throw new TargetNotFoundException("주소 없음");
 	}
-	}
+}
 	
 	//삭제
 	@GetMapping("/delete")

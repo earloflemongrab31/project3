@@ -10,7 +10,6 @@ public interface NoticeDao {
 	
 	void insert(NoticeDto noticeDto);//번호를 만들면서 생성하는 메소드
 	int sequence(); // 시퀀스 발행
-	void insert2(NoticeDto noticeDto);//번호까지 합쳐서 등록하는 메소드
 	
 	
 	List<NoticeDto> selectList(); 
