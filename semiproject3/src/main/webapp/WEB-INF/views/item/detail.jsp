@@ -21,9 +21,13 @@
 	 	<table class="table table-border">
 	 		<tbody>
 	 		
-	 			<tr><td>
-					<img src="download?itemNo=${itemDto.itemNo}" width="200" >
-				</tr></td>
+	 			<tr>
+	 				<td class="center" colspan="2">
+						<c:forEach var="itemImageView" items="${itemImageList}">
+							<img src="/image/download/${itemImageView.imageNo}" width="200" >
+						</c:forEach>
+					</td>
+				</tr>
 			
 	 			<tr>
 	 				<th>상품번호</th>

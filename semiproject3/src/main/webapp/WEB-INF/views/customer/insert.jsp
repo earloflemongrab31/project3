@@ -70,7 +70,7 @@
 				<tr>
 					<th>휴대전화<span class="required">*</span></td>
 					<td>
-						<input class="input" type="tel" name="customerTel" required>
+						<input class="input" type="tel" name="customerPhone" required maxlength="11">
 					</td>
 				</tr>
 			</tbody>
@@ -94,7 +94,7 @@
 				<tr>
 					<th>일반전화</td>
 					<td>
-						<input class="input w-75" type="tel" name="customerPhone">
+						<input class="input w-75" type="tel" name="customerTel" maxlength="11">
 					</td>
 				</tr>
 				<tr>

@@ -26,4 +26,7 @@ public interface ItemDao {
 	
 	//좋아요 구현
 	boolean like(int itemNo);
+	
+	//아이템과 이미지 연결
+	void connectImage(int itemNo, int imageNo);
 }
