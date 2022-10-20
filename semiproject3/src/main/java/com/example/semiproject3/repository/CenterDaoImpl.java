@@ -67,18 +67,14 @@ public class CenterDaoImpl implements CenterDao {
 		String sql = "insert into center ("
 				+"center_no,"
 				+"customer_id,"
-				+"admin_id,"
 				+"center_title,"
 				+"customer_content,"
-				+"admin_content,"
-				+"customer_date,"
-				+"admin_date) "
-				+"values (?, ?, ?, ?, ?, ?, ?, ?)";
+				+"customer_date)"
+				+"values (center_seq.nextval, ?, ?, ?, sysdate)";
 		Object[] param = {
 				centerDto.getCenterNo(), centerDto.getCustomerId(),
-				centerDto.getAdminId(), centerDto.getCenterTitle(),
-				centerDto.getCustomerContent(), centerDto.getAdminContent(),
-				centerDto.getCustomerDate(), centerDto.getAdminDate()
+				centerDto.getCenterTitle(), centerDto.getCustomerContent(),
+				centerDto.getAdminDate()
 		};
 		jdbcTemplate.update(sql, param);
 	}	
@@ -127,20 +123,18 @@ public class CenterDaoImpl implements CenterDao {
 	@Override
 	public boolean update(CenterDto centerDto) {
 		String sql = "update center"
-				+"set"
-				+"customer_id=?,"
+				+"set"				
+				+"admin_content=?,"
 				+"center_title=?,"
 				+"customer_content=?,"
-				+"admin_content=?,"
-				+"customer_date=?,"
 				+"admin_date=?"
 				+"where"
 				+"center_no=?";
 		Object[] param = {
-				centerDto.getCustomerId(), centerDto.getCenterTitle(),
-				centerDto.getCustomerContent(), centerDto.getAdminContent(),
-				centerDto.getCustomerDate(), centerDto.getAdminDate(),
+				centerDto.getAdminContent(), centerDto.getCenterTitle(),
+				centerDto.getCustomerContent(), centerDto.getAdminDate(),
 				centerDto.getCenterNo()
+				
 		};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
