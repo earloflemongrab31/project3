@@ -59,6 +59,7 @@ public class AddressController {
 		
 		model.addAttribute("addressDto", addressDao.selectOne(addressNo));
 		return "address/edit";
+		
 	}
 	
 	@PostMapping("/edit")
@@ -77,8 +78,10 @@ public class AddressController {
 	//삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int addressNo) {
+		
 		boolean result = addressDao.delete(addressNo);
-		if(result) {
+		
+		if(true) {	
 			return "redirect:list";
 		}
 		else {

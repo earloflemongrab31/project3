@@ -9,13 +9,22 @@
 
 <script src="/confirm-link.js"></script> 
 <script src="/checkbox.js"></script> 
+<script>
 
+
+
+
+</script>
+
+<form action="list" method="post" >
 <div class ="container-800 mt-40 mb-40">
 
 	<div class = "row center">
 		<h1>주소목록</h1>
 		<hr>
 	</div>
+
+
 
 	<div class = "row">
 		<table class="table table-hover table-border">
@@ -45,12 +54,14 @@
 						<td>${addressDto.addressHost}</td>
 						<td>${addressDto.addressDetailHost}</td>
 				
-			
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+
+
+
 
 	<div class="row right">
 		<a class="btn btn-positive" href="insert">새주소 등록</a>
@@ -59,5 +70,5 @@
 	</div>
 
 </div>
-
+</form>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
