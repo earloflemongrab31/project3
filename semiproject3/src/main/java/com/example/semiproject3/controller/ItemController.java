@@ -28,6 +28,7 @@ import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Controller
 @RequestMapping("/item")
@@ -99,16 +100,14 @@ public class ItemController {
 	
 	//상품 목록(관리자)
 	@GetMapping("/list")
-	public String list(Model model,
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("list", itemDao.selectList(type, keyword));
-		}
-		else {
-			model.addAttribute("list", itemDao.selectList());
-		}
+	public String list(Model model, 
+			@ModelAttribute(name="vo") ItemListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = itemDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", itemDao.selectList(vo));
 		
 		return "item/list";
 	}
