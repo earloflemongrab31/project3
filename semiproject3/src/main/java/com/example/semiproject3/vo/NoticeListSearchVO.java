@@ -38,8 +38,15 @@ public class NoticeListSearchVO {
 		return (count + size - 1) / size;
 	}
 	
-	public int endBlock() {
-		return (p+9);
+	@ToString.Include
+	public int startBlock() {
+		return endBlock() - (blockSize-1);
 	}
 	
+	@ToString.Include
+	public int endBlock() {
+		return (p+blockSize-1) / blockSize * blockSize;
+	}
+	
+	//public int 
 }

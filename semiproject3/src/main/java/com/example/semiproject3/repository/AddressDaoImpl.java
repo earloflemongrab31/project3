@@ -30,14 +30,14 @@ public class AddressDaoImpl implements AddressDao{
 	@Override
 	public void insert(AddressDto addressDto) {
 		String sql = "insert into address("
-				+"address_no,"
-				+"customer_id,"
-				+"address_name,"
-				+"address_post,"
-				+"address_host,"
-				+"address_detail_host,"
-				+"address_basic)"
-				+"values(?, ?, ?, ?, ?, ?, ?)";
+				+ "address_no,"
+				+ "customer_id,"
+				+ "address_name,"
+				+ "address_post,"
+				+ "address_host,"
+				+ "address_detail_host,"
+				+ "address_basic)"
+				+ "values(address_seq.nextval, ?, ?, ?, ?, ?, ?)";
 		Object[] param = {
 				addressDto.getAddressNo(), addressDto.getCustomerId(),
 				addressDto.getAddressName(), addressDto.getAddressPost(),
@@ -114,15 +114,14 @@ public class AddressDaoImpl implements AddressDao{
 
 	@Override
 	public boolean update(AddressDto addressDto) {
-		String sql = "update address "
-				+"set "
-				+"customer_id=?,"
-				+"address_name=?,"
-				+"address_post=?,"
-				+"address_host=?,"
-				+"address_detail_host=?,"
-				+"address_basic=?"
-				+"where address_no = ?";
+		String sql = "update address set "
+				+ "customer_id=?,"
+				+ "address_name=?,"
+				+ "address_post=?,"
+				+ "address_host=?,"
+				+ "address_detail_host=?,"
+				+ "address_basic=?"
+				+ "where address_no = ?";
 		Object[] param = {
 				addressDto.getCustomerId(), addressDto.getAddressName(),
 				addressDto.getAddressPost(), addressDto.getAddressHost(),
