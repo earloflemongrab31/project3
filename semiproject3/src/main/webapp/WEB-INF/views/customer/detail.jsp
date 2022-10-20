@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-		<jsp:param value="${customerDto.customerId} 회원 정보" name="title"/>
+<jsp:include page="/WEB-INF/views/template/customerHeader.jsp">
+		<jsp:param value="마이페이지" name="title"/>
 </jsp:include>
 
-<div class="container-600 mt-50 mb-50">
+<section class="mt-50 mb-50">
 	<div class="row center mb-50">
 		<h1>${customerDto.customerId} 회원 정보</h1>
 	</div>
@@ -73,6 +73,6 @@
 			<a class="btn btn-neutral" href="goodbye">회원 탈퇴</a>
 		</div>
 	</div>
-</div>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+</section>
+<jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
 
