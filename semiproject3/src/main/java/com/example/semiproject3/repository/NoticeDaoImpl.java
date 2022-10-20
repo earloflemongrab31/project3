@@ -204,13 +204,6 @@ public class NoticeDaoImpl implements NoticeDao {
 		};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-
-	@Override
-	public void insert2(NoticeDto noticeDto) {
-		
-	}
-
-	
 	
 }
 
