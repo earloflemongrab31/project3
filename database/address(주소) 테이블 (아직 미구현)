@@ -1,10 +1,12 @@
-create sequence address_seq;
 create table address(
 
-address_no number,
+address_no number primary key,
+customer_id references customer(customer_id),
 address_name varchar2(30),
 address_post varchar2(6),
 address_host varchar2(150),
 address_detail_host varchar2(150),
 address_basic char(1)
 );
+
+create sequence address_seq;
