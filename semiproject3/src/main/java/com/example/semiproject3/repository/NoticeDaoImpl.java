@@ -21,42 +21,36 @@ public class NoticeDaoImpl implements NoticeDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	//로우매퍼
-	private RowMapper<NoticeDto> mapper = new RowMapper<NoticeDto>() {
-
-		@Override
-		public NoticeDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			NoticeDto noticeDto = new NoticeDto();
-			noticeDto.setAdminId(rs.getString("admin_id"));
-			noticeDto.setNoticeNo(rs.getInt("notice_no"));
-			noticeDto.setNoticeTitle(rs.getString("notice_title"));
-			noticeDto.setNoticeDate(rs.getDate("notice_date"));
-			noticeDto.setNoticeUpdate(rs.getDate("notice_update"));
-			noticeDto.setNoticeContent(rs.getString("notice_content"));
-			noticeDto.setNoticeHead(rs.getString("notice_head"));
-			return noticeDto;
-		}
+	private RowMapper<NoticeDto> mapper = (rs, idx) -> {
+		return NoticeDto.builder()
+							.adminId(rs.getString("admin_id"))
+							.noticeNo(rs.getInt("notice_no"))
+							.noticeTitle(rs.getString("notice_title"))
+							.noticeDate(rs.getDate("notice_date"))
+							.noticeUpdate(rs.getDate("notice_update"))
+							.noticeRead(rs.getInt("notice_read"))
+							.noticeContent(rs.getString("notice_content"))
+							.noticeHead(rs.getString("notice_head"))
+						.build();
 	};
 		
 		
 	//리절트셋
-	private ResultSetExtractor<NoticeDto> extractor = new ResultSetExtractor<NoticeDto>() {
-
-		@Override
-		public NoticeDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-			if(rs.next()) {
-				NoticeDto noticeDto = new NoticeDto();
-				noticeDto.setAdminId(rs.getString("admin_id"));
-				noticeDto.setNoticeNo(rs.getInt("notice_no"));
-				noticeDto.setNoticeTitle(rs.getString("notice_title"));
-				noticeDto.setNoticeDate(rs.getDate("notice_date"));
-				noticeDto.setNoticeUpdate(rs.getDate("notice_update"));
-				noticeDto.setNoticeContent(rs.getString("notice_content"));
-				noticeDto.setNoticeHead(rs.getString("notice_head"));
-				return noticeDto;
-			}
-			else {
-				return null;
-			}
+	private ResultSetExtractor<NoticeDto> extractor = (rs) -> {
+		if(rs.next()) {
+			return NoticeDto.builder()
+								.adminId(rs.getString("admin_id"))
+								.noticeNo(rs.getInt("notice_no"))
+								.noticeTitle(rs.getString("notice_title"))
+								.noticeDate(rs.getDate("notice_date"))
+								.noticeUpdate(rs.getDate("notice_update"))
+								.noticeRead(rs.getInt("notice_read"))
+								.noticeContent(rs.getString("notice_content"))
+								.noticeHead(rs.getString("notice_head"))
+							.build();
+		}
+		else {
+			return null;
 		}
 	};
 

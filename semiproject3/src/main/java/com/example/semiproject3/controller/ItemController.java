@@ -184,11 +184,6 @@ public class ItemController {
 	};
 	
 	
-//	@GetMapping("/buylist")
-//	public String buylist(Model model, 
-//			@RequestParam int itemNo, HttpSession session) {
-//		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
-//		
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
 	public String buylist(Model model, 
