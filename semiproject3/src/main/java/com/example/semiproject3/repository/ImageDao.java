@@ -19,4 +19,7 @@ public interface ImageDao {
 	
 	//이미지 삭제
 	boolean delete(int imageNo);
+	
+	//아이템 이미지 관련(item_image_view 조회)
+	List<ImageDto> selectItemImageList(int itemNo);
 }
