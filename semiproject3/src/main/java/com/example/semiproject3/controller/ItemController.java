@@ -118,16 +118,6 @@ public class ItemController {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		//상품 정보에 이미지 불러오기
 		model.addAttribute("itemImageList", imageDao.selectItemImageList(itemNo));
-		//장바구니 기록있는 조회하여 첨부 
-		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		if(loginId !=null) {
-			CartDto cartDto = new CartDto();
-			cartDto.setCustomerId(loginId);
-			cartDto.setItemNo(itemNo);
-			model.addAttribute("isCart", cartDao.check(cartDto));
-		}
-
-		
 		return "item/detail";
 	}
 	
@@ -218,6 +208,15 @@ public class ItemController {
 	public String buy(Model model, 
 			@RequestParam int itemNo, HttpSession session) {
 		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
+		//장바구니 기록있는 조회하여 첨부 
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		if(loginId !=null) {
+		CartDto cartDto = new CartDto();
+		cartDto.setCustomerId(loginId);
+		cartDto.setItemNo(itemNo);
+		model.addAttribute("isCart", cartDao.check(cartDto));
+		}
+
 		
 //		//(+추가) 좋아요 기록이 있는지 조회하여 첨부
 //		String loginId = (String) session.getAttribute(SessionConstant.ID);
