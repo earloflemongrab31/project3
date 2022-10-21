@@ -29,5 +29,11 @@ public interface CustomerDao {
 	
 	//로그인 시간 갱신
 	boolean updateLoginTime(String customerId);
+	
+	//비밀번호 찾기
+	boolean checkPassword(String customerId, String customerPwsearch);
+	
+	//비밀번호 변경
+	void changePassword(String customerPw, String customerId);
 
 }
