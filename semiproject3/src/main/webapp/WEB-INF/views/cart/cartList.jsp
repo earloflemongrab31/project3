@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="장바구니" name="title" />
+	<jsp:param value="장바구니" name="title"/>
 </jsp:include>
 
 <div class="container-600 mt-50 mb-50">
