@@ -201,4 +201,12 @@ public class CustomerDaoImpl implements CustomerDao{
 			
 		}
 
+	//닉네임 찾기
+		@Override
+		public CustomerDto findByNick(String customerNick) {
+			String sql = "select * from customer where customer_nick=?";
+			Object[] param = {customerNick};
+			return jdbcTemplate.query(sql, extractor, param);
+		}
+
 }
