@@ -132,8 +132,7 @@ public class CustomerDaoImpl implements CustomerDao{
 		String sql = "update customer set customer_point=?, customer_money=?, customer_grade=? where customer_id = ?";
 		Object[] param = {
 				customerDto.getCustomerPoint(), customerDto.getCustomerMoney(),
-				customerDto.getCustomerGrade(), 	
-				customerDto.getCustomerId()
+				customerDto.getCustomerGrade(), customerDto.getCustomerId()
 		};
 		
 		return jdbcTemplate.update(sql, param) > 0;

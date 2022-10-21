@@ -52,7 +52,7 @@ $(function(){
     
 <form action="edit" method="post" >
 
-<input name="addressNo" type="hidden" value="${adressDto.addressNo}">
+<input name="addressNo" type="hidden" value="${addressDto.addressNo}">
 	
 	<div class="container-600 mt-40 mb-40">
  
