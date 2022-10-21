@@ -379,10 +379,25 @@
             }
         });
 
-        $(window).change(function(){
-            if(inputStatus){
-                $(".btn-join").attr("disabled", false);
+        var inputStatus = {
+                memberIdValid:false,
+                memberNickValid:false,
+                memberPwValid:false,
+                memberPwcheckValid:false,
+                memberPwsearchValid:false,
+                memberNameValid:false,
+                memberPhoneValid:false,
+                valid:function(){
+                    return this.memberIdValid && this.memberNameValid && this.memberNickValid && this.memberPhoneValid 
+                            && this.memberPwValid && this.memberPwcheckValid && this.memberPwsearchValid;
+                }
+            };
+            
+        $(".join-form").submit(function(){
+            if(!inputStatus.valid()){
+                return false;
             }
+            return true;
         });
     });
 </script>
