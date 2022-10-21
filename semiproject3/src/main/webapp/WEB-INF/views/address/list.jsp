@@ -67,11 +67,12 @@
 function delNo(){
 
     alert("일로오나?");
-    alert($("input[name='addressNo']:checked"));
+  
     // name이 같은 체크박스의 값들을 배열에 담는다.
     var checkboxValues = [];
     $("input[name='addressNo']:checked").each(function(i) {
         checkboxValues.push($(this).val());
+        alert(checkboxValues[i]);
     });
      
     // 사용자 ID(문자열)와 체크박스 값들(배열)을 name/value 형태로 담는다.
