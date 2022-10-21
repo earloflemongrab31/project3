@@ -31,7 +31,7 @@ public class ResearchController {
 		int judge=researchDao.overlapId(loginId);
 		//아이디가 없다면 로그인화면으로 보내세요.
 		if(loginId==null) {
-			return "customer/login";
+			return "redirect:/customer/login";
 		}
 		//아이디가 있는데 이미 참여한 사람 
 		if(judge>0) {

@@ -81,7 +81,7 @@
 	<div class="row right">
 		<a class="btn btn-positive" href="insert">공지사항 등록</a>
 	</div>
-	
+
 
 
 <!-- 페이지 네비게이터 -->

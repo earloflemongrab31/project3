@@ -14,29 +14,26 @@
 
 <form action="edit" method="post">
 
+<input name="customerPoint"  type="hidden"  value="${customerDto.customerId}">
+
 <div class="container-300 mt-40">
 	<div class="row center">
 		<h1>회원 정보 수정</h1>
 	</div>
-	
+
 	<div class="row left">
-		<label>회원 아이디</label>
-		<input class="input w-100" name="customerId" value="${dto.customerId}">
+		<label>회원 포인트</label>
+		<input class="input w-100" name="customerPoint" value="${customerDto.customerPoint}">
 	</div>
 		
 	<div class="row left">
-		<label>이름</label>
-		<input class="input w-100" name="customerName" value="${dto.customerName}">
+		<label>회원 등급</label>
+		<input class="input w-100" name="customerGrade" value="${customerDto.customerGrade}">
 	</div>
 	
 	<div class="row left">
-		<label>핸드폰번호</label>
-		<input class="input w-100" name="customerPhone" value="${dto.customerPhone}">
-	</div>
-	
-	<div class="row left">
-		<label>이메일</label>
-		<input class="input w-100" name="customerEmail" value="${dto.customerEmail}">
+		<label>회원 적립금</label>
+		<input class="input w-100" name="customerMoney" value="${customerDto.customerMoney}">
 	</div>
 	
 	
