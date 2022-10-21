@@ -1,7 +1,5 @@
 package com.example.semiproject3.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.OrderDto;
 import com.example.semiproject3.error.TargetNotFoundException;
-import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.OrderDao;
 
 @Controller
@@ -24,9 +20,6 @@ public class OrderController {
 	
 	@Autowired
 	private OrderDao orderDao;
-	
-	@Autowired
-	private CustomerDao customerDao;
 	
 	
 	//등록
@@ -46,19 +39,25 @@ public class OrderController {
 		return "redirect:order/list";
 	}
 	
-	//목록
+	//리스트(검색+목록)
 	@GetMapping("/list")
 	public String list(Model model,
-			HttpSession session) {
-	String loginId = (String) session.getAttribute(SessionConstant.ID);
-	model.addAttribute("order",orderDao.selectList(loginId));
+			@RequestParam(required = false)String type,
+			@RequestParam(required = false)String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) { //검색
+			model.addAttribute("list",orderDao.selectList(type,keyword));	
+		}
+		else { //목록
+			model.addAttribute("list",orderDao.selectList());
+		}
 	return "order/list";
 	}
 	
 	//수정
 		@GetMapping("/edit")
-		public String edit(Model model,@RequestParam String loginId) {
-			OrderDto orderDto = orderDao.selectOne(loginId);
+		public String edit(Model model,@RequestParam int orderNo) {
+			OrderDto orderDto = orderDao.selectOne(orderNo);
 			model.addAttribute("orderDto", orderDto);
 			return "order/edit";
 		}
@@ -68,11 +67,11 @@ public class OrderController {
 				RedirectAttributes attr) {
 			boolean result = orderDao.update(orderDto);
 			if(result) {
-				attr.addAttribute("orderNo", orderDto.getCustomerId());
+				attr.addAttribute("orderNo", orderDto.getOrderNo());
 				return "redirect:detail";
 			}
 			else {
-				throw new TargetNotFoundException("주문이 존재하지 않음");
+				throw new TargetNotFoundException("주문번호 존재하지 않음");
 			}
 		}
 		

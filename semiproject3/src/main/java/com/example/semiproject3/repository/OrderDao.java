@@ -13,10 +13,11 @@ public interface OrderDao {
 	void insert(OrderDto orderDto);
 	
 	//목록
-	List<OrderDto> selectList(String loginId);
+	List<OrderDto> selectList();
+	List<OrderDto> selectList(String type, String keyword);
 	
 	//정보
-	OrderDto selectOne(String loginId);
+	OrderDto selectOne(int orderNo);
 	
 	//수정,삭제
 	boolean update(OrderDto orderDto);

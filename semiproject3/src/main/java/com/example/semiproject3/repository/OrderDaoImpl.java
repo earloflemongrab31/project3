@@ -20,6 +20,7 @@ public class OrderDaoImpl implements OrderDao {
 	private JdbcTemplate jdbcTemplate;
 
 	
+	
 	@Override
 	public int sequence() {
 		String sql = "select order_seq.nextval from dual";
@@ -92,16 +93,23 @@ public class OrderDaoImpl implements OrderDao {
 	};
 	
 	@Override
-	public List<OrderDto> selectList(String loginId) {
-		String sql="select * from order where customer_id=?";
-		Object[] param= {loginId};
-		return jdbcTemplate.query(sql,mapper,param);
+	public List<OrderDto> selectList() {
+		String sql = "select * from order order by order_no desc";
+		return jdbcTemplate.query(sql, mapper);
 	}
-	
+
 	@Override
-	public OrderDto selectOne(String loginId) {
-		String sql = "select * from order where customer_id=?";
-		Object[] param = {loginId};
+	public List<OrderDto> selectList(String type, String keyword) {
+		String sql = "select * from order where instr(#1, ?) > 0 order by order_no desc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public OrderDto selectOne(int orderNo) {
+		String sql = "select * from order where order_no=?";
+		Object[] param = {orderNo};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 
