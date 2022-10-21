@@ -30,6 +30,11 @@ public class OrderController {
 		
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute OrderDto orderDto) {
+		
+		//번호 생성
+		int orderNo = orderDao.sequence();
+		orderDao.insert(orderDto);
+		
 		orderDao.insert(orderDto);
 		return "redirect:order/list";
 	}

@@ -19,14 +19,14 @@ public class OrderDaoImpl implements OrderDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	
-	
+	//주문 번호 생생
 	@Override
 	public int sequence() {
 		String sql = "select order_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
+	//주문 등록
 	@Override
 	public void insert(OrderDto orderDto) {
 		String sql = "insert into order(order_no, customer_id, cart_no, item_no, address_no, item_name, item_price, item_color, item_size, order_cnt, order_date, buy_fee, customer_phone) values(order_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?)";
@@ -121,7 +121,7 @@ public class OrderDaoImpl implements OrderDao {
 				orderDto.getOrderCnt(), orderDto.getCustomerPhone(),
 				orderDto.getOrderNo()
 		};
-		return false; //색상, 크기, 주문수량, 휴대폰 번호 변경
+		return jdbcTemplate.update(sql, param) > 0; //색상, 크기, 주문수량, 휴대폰 번호 변경
 	}
 
 	@Override

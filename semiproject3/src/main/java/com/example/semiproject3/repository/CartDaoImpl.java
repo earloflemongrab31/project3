@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CartDto;
+import com.example.semiproject3.vo.CartListVO;
 
 @Repository
 public class CartDaoImpl implements CartDao{
@@ -32,6 +33,21 @@ public class CartDaoImpl implements CartDao{
 			dto.setCartItemMoney(rs.getInt("cart_item_money"));
 			return dto;
 		}
+	};
+	
+	private RowMapper<CartListVO> cartListMapper = (rs, idx) -> {
+		return CartListVO.builder()
+								.imageNo(rs.getInt("image_no"))
+								.cartNo(rs.getInt("cart_no"))
+								.customerId(rs.getString("customer_id"))
+								.itemNo(rs.getInt("item_no"))
+								.cartItemName(rs.getString("cart_item_name"))
+								.cartItemPrice(rs.getInt("cart_item_price"))
+								.cartItemColor(rs.getString("cart_item_color"))
+								.cartItemSize(rs.getString("cart_item_size"))
+								.cartDate(rs.getDate("cart_date"))
+								.cartItemMoney(rs.getInt("cart_item_money"))
+							.build();
 	};
 	
 	@Override
@@ -84,6 +100,13 @@ public class CartDaoImpl implements CartDao{
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
+	//장바구니 이미지 추가 리스트
+	@Override
+	public List<CartListVO> selectCartList(String loginId) {
+		String sql = "select * from cart_list_view where customer_id = ?";
+		Object[] param = {loginId};
+		return jdbcTemplate.query(sql, cartListMapper, param);
+	}
 }
 		
 	
