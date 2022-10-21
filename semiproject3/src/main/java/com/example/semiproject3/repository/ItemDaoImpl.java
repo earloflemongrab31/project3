@@ -235,11 +235,11 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List<ItemDto> search(ItemListSearchVO vo) {
 		String sql = "select * from ("
-				+ "select * from item "
-				+ "where instr(#1, ?) > 0 "
-				+ "order by #1 desc"
-			+ ")TMP "
-		+ ") where rn between ? and ?";		
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from item where instr(#1,?) > 0 "
+					+ "order by item_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
 				vo.getKeyword(), vo.startRow(), vo.endRow()

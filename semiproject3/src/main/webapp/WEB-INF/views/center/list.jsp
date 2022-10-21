@@ -35,7 +35,11 @@
 				<td>
 					<a href="detail?centerNo=${centerDto.centerNo}">
 						${centerDto.centerTitle}
+						<c:if test="${centerDto.adminContent != null}">
+							[답변완료]
+						</c:if>
 					</a>
+					
 				</td>
 					
 				<td>${centerDto.customerId}</td>
