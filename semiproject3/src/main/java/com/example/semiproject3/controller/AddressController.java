@@ -80,8 +80,8 @@ public class AddressController {
    //삭제
    @GetMapping("/delete")
    public String delete(@RequestParam(value="addressNo[]") List<Integer> addressNo) {
-      
-    //boolean result = addressDao.delete(addressNo);
+      System.out.println(addressNo);
+    boolean result = addressDao.delete(addressNo);
 
       if(true) {   
          return "redirect:list";

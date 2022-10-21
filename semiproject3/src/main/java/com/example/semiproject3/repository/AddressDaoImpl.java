@@ -130,7 +130,7 @@ public class AddressDaoImpl implements AddressDao{
 
 	//주소 삭제
 	@Override
-	public boolean delete(int addressNo) {
+	public boolean delete(List<Integer> addressNo) {
 		String sql = "delete address where address_no = ?";
 		Object[] param = {addressNo};
 		return jdbcTemplate.update(sql, param ) > 0;

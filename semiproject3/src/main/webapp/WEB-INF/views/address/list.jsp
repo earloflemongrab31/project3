@@ -79,7 +79,7 @@ function delNo(){
     var allData = { "addressNo": checkboxValues };
      
     $.ajax({
-        url:"goUrl.do",
+        url:"delete",
         type:'GET',
         data: allData,
  
