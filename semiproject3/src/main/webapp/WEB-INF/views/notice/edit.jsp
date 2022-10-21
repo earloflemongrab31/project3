@@ -29,7 +29,7 @@
 	
 	<div class="row">
 		<label>제목 <input name="noticeTitle" type="text" required
-			class="input mt-10 w-100" autocomplete="off">
+			class="input mt-10 w-100" autocomplete="off" value="${noticeDto.noticeTitle}">
 		</label>
 	</div>
 
