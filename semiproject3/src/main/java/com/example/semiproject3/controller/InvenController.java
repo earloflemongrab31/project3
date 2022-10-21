@@ -27,6 +27,7 @@ public class InvenController {
 		model.addAttribute("itemList",itemDao.selectList());
 		return "warehouse/itemList";
 	}
+	
 	@GetMapping("/insert")
 	public String insert(
 			@RequestParam int itemNo,

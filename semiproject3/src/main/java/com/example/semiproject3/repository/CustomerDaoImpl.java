@@ -129,7 +129,7 @@ public class CustomerDaoImpl implements CustomerDao{
 	//회원 수정
 	@Override
 	public boolean update(CustomerDto customerDto) {
-		String sql = "update customer set customer_point=?, customer_money=?, customer_grade=? where customer_id = ?";
+		String sql = "update customer set customer_point = ?, customer_money = ?, customer_grade = ? where customer_id = ?";
 		Object[] param = {
 				customerDto.getCustomerPoint(), customerDto.getCustomerMoney(),
 				customerDto.getCustomerGrade(), customerDto.getCustomerId()

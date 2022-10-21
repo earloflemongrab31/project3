@@ -1,18 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
- <h1>입출고상태</h1> 
- <table>
- 	<thead>
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
+	<jsp:param value="입출고 상태 페이지" name="title"/>
+</jsp:include>
+
+<div class ="container-900 mt-40 mb-40">
+        
+        <div class="row">
+            <h1>상품 입/출고 기록</h1>
+            <hr>
+        </div>
+
+ 
+ <div class ="row center">
+         <table class="table table-border table-hover"  >
+           <thead>
  		<tr>
  			<th>카테고리</th>
  			<th>상품명</th>
@@ -43,6 +48,17 @@
  		</c:forEach>
  	</tbody>
  </table>
+ </div>
  
+
+ <div class="row right">
+ <a class="btn btn-positive" href="itemList">입/출고 목록 </a>
+		</div>
+</div>
+
+  
+  
 </body>
 </html>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
