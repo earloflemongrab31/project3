@@ -60,6 +60,7 @@ public class NoticeController {
 		return "notice/list";
 	}
 	
+	
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam int noticeNo,
 			HttpSession session) {
