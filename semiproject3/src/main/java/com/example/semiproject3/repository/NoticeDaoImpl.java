@@ -200,10 +200,10 @@ public class NoticeDaoImpl implements NoticeDao {
 	@Override
 	public List<NoticeDto> list(NoticeListSearchVO vo) {
 		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ("
+				+ "select rownum rn, TMP.* from("
 					+ "select * from notice order by notice_no desc"
-				+ ")TMP "
-			+") where rn between ? and ?";
+				+ ")TMP"
+			+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
@@ -211,11 +211,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	@Override
 	public List<NoticeDto> search(NoticeListSearchVO vo) {
 		String sql = "select * from ("
-				+ "select * from notice "
-				+ "where instr(#1, ?) > 0 "
-				+ "order by notice_no desc"
-			+ ")TMP"
-		+ ") where rn between ? and ?";		
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from notice where instr(#1,?) > 0 "
+					+ "order by notice_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
 				vo.getKeyword(), vo.startRow(), vo.endRow()
