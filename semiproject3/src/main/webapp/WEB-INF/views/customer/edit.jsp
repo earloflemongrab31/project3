@@ -14,7 +14,7 @@
 
 <form action="edit" method="post">
 
-<input name="customerPoint"  type="hidden"  value="${customerDto.customerId}">
+<input name="customerId"  type="hidden"  value="${customerDto.customerId}">
 
 <div class="container-300 mt-40">
 	<div class="row center">
@@ -23,7 +23,7 @@
 
 	<div class="row left">
 		<label>회원 포인트</label>
-		<input class="input w-100" name="customerPoint" value="${customerDto.customerPoint}">
+		<input class="input w-100" name="customerPoint"  value="${customerDto.customerPoint}">
 	</div>
 		
 	<div class="row left">

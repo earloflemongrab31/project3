@@ -8,77 +8,43 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.InvenDto;
-import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.InvenDao;
+import com.example.semiproject3.repository.ItemDao;
 
 @Controller
-@RequestMapping("/inven")
+@RequestMapping("/warehouse")
 public class InvenController {
-
+	
 	@Autowired
-	private InvenDao invenDao;
+	ItemDao itemDao;
+	@Autowired
+	InvenDao invenDao;
 	
-	
-	@GetMapping("/insert")
-	public String insert() {
-		return "inven/insert";
+	@GetMapping("/itemList")
+	public String itemList(Model model) {
+		model.addAttribute("itemList",itemDao.selectList());
+		return "warehouse/itemList";
 	}
 	
+	@GetMapping("/insert")
+	public String insert(
+			@RequestParam int itemNo,
+			Model model) {
+		//하나의 아이템정보를 가지고와서 화면에 뿌려준다. 
+		model.addAttribute("itemList",itemDao.selectOne(itemNo));
+		return "warehouse/insert";
+	}
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute InvenDto invenDto) {
 		invenDao.insert(invenDto);
-		return "redirect:list";
+		return "redirect:invenList";
+	}
+	@GetMapping("/invenList")
+	public String invenList(Model model) {
+		model.addAttribute("invenList",invenDao.selectList());
+		return "/warehouse/invenList";
 	}
 	
-	//리스트
-	@GetMapping("/list")
-	public String list(Model model,
-			@RequestParam(required = false)String type,
-			@RequestParam(required = false)String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) { //검색
-			model.addAttribute("list",invenDao.selectList(type,keyword));	
-		}
-		else { //목록
-			model.addAttribute("list",invenDao.selectList());
-		}
-	return "inven/list";
-	}
-	
-	//수정
-	@GetMapping("/edit")
-	public String edit(Model model,@RequestParam int itemNo) {
-		InvenDto invenDto = invenDao.selectOne(itemNo);
-		model.addAttribute("invenDto", invenDto);
-		return "inven/edit";
-	}
-	
-	@PostMapping("/edit")
-	public String edit(@ModelAttribute InvenDto invenDto,
-			RedirectAttributes attr) {
-		boolean result = invenDao.update(invenDto);
-		if(result) {
-			attr.addAttribute("itemNo", invenDto.getItemNo());
-			return "redirect:detail";
-		}
-		else {
-			throw new TargetNotFoundException("재고 없음");
-		}
-	}
-	
-	//삭제
-	@GetMapping("/delete")
-	public String delete(@RequestParam int itemNo) {
-		boolean result = invenDao.delete(itemNo);
-		if(result) {
-			return "redirect:list";
-		}
-		else {
-			throw new TargetNotFoundException("재고 없음");
-		}
-	}
 }

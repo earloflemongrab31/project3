@@ -10,9 +10,16 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder 
 public class InvenDto {
-	
-	private int itemNo, itemCnt;
-	private Date itemIn, itemOut;
-	private String itemSize, itemColor;
-	
+	private int invenNo;
+	private int itemNo;
+	private int itemCate;
+	private String itemName;
+	private String itemSize;
+	private String itemColor;
+	private String invenInout;
+	private Date invenDate;
+	private String invenName;
+	private String invenPhone;
+	private String invenStatus;
+	private int invenQuantity;
 }

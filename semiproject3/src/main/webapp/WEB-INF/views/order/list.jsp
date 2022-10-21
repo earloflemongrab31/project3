@@ -10,14 +10,14 @@
 </c:set>
    
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="공지사항" name="title"/>
+    <jsp:param value="주문 목록" name="title"/>
 </jsp:include>
 
 
 <div class ="container-800 mt-40 mb-40">
 
 	<div class = "row center">
-		<h1>공지사항</h1>
+		<h1>목록</h1>
 	</div>
 	
 	<div class = "row">
@@ -84,79 +84,15 @@
 
 
 
-<!-- 페이지 네비게이터 -->
-<!-- 선택된 페이지 표시해야 함 -->
-<div class="row center">
 
-<ul class="pagination">
-<li>
-	<c:choose>
-		<c:when test="${not vo.isFirst()}">
-			<a href="list?p=${vo.firstBlock()}&${vo.parameter()}">
-				<i class="fa-solid fa-angles-left"></i>
-			</a>
-		</c:when>
-		<c:otherwise>
-			<a href="#"><i class="fa-solid fa-angles-left"></i></a>
-		</c:otherwise>
-	</c:choose>
-</li>
-
-<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
-<li>
-	<c:choose>
-		<c:when test="${vo.hasPrev()}">
-			<a href="list?p=${vo.prevBlock()}&${vo.parameter()}">
-				<i class="fa-solid fa-chevron-left"></i>
-			</a>
-		</c:when>
-		<c:otherwise>
-			<a href="#"><i class="fa-solid fa-chevron-left"></i></a>
-		</c:otherwise>
-	</c:choose>
-</li>
- 
-<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<li><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
-</c:forEach>
-
-<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-<li>
-	<c:choose>
-		<c:when test="${vo.hasNext()}">
-			<a href="list?p=${vo.nextBlock()}&${vo.parameter()}">
-				<i class="fa-solid fa-chevron-right"></i>
-			</a>
-		</c:when>
-		<c:otherwise>
-			<a href="#"><i class="fa-solid fa-chevron-right"></i></a>
-		</c:otherwise>
-	</c:choose>
-</li>
-
-<li>
-	<c:choose>
-		<c:when test="${not vo.isLast()}">
-			<a href="list?p=${vo.lastBlock()}&${vo.parameter()}">
-				<i class="fa-solid fa-angles-right"></i>
-			</a>
-		</c:when>
-		<c:otherwise>
-			<a href="#"><i class="fa-solid fa-angles-right"></i></a>
-		</c:otherwise>
-	</c:choose>
-</li>
-</ul>
-
-</div>
 
 <!-- 검색창 -->
 <form action = "list" method="get" >
 	<div class="row center">
 		<input type="hidden" name="size" value="${vo.size}">
 		<select class="input" name="type" required>
-		<option value="notice_title" <c:if test="${vo.type == 'notice_title'}"></c:if>>공지사항제목</option>
-		<option value="notice_no" <c:if test="${vo.type == 'notice_no'}"></c:if>>공지번호</option>
+		<option value="notice_title" <c:if test="${type == 'notice_title'}"></c:if>>공지사항제목</option>
+		<option value="notice_no" <c:if test="${type == 'notice_no'}"></c:if>>공지번호</option>
 		</select>
 			
 		<input class="input" name="keyword" type="search" placeholder="검색어" required="required" value="${param.keyword}">
