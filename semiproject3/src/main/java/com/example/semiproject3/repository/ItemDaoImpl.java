@@ -136,8 +136,7 @@ public class ItemDaoImpl implements ItemDao {
 	//상품 검색
 	@Override
 	public List<ItemDto> selectList(String type, String keyword) {
-		String sql = "select * from item "
-				+ "where instr(#1, ?) > 0 order by item_no desc";
+		String sql = "select * from item where instr(#1, ?) > 0 order by #1 desc";
 		sql = sql.replace("#1", type);
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapper, param);
@@ -224,10 +223,10 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List<ItemDto> list(ItemListSearchVO vo) {
 		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from("
-					+ "select * from item order by item_no desc"
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from item order by item_no desc "
 				+ ")TMP"
-			+ ") where rn between ? and ?";
+			+") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
@@ -262,7 +261,7 @@ public class ItemDaoImpl implements ItemDao {
 	//검색 카운트
 	@Override
 	public int searchCount(ItemListSearchVO vo) {
-		String sql = "select count(*) from item where instr(#1, ?) > 0";
+		String sql = "select count(*) from item where instr(#1, ?) > 0 ";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
