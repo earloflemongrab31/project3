@@ -20,7 +20,6 @@ public class OrderDaoImpl implements OrderDao {
 	private JdbcTemplate jdbcTemplate;
 
 	
-	
 	@Override
 	public int sequence() {
 		String sql = "select order_seq.nextval from dual";
@@ -94,7 +93,7 @@ public class OrderDaoImpl implements OrderDao {
 	
 	@Override
 	public List<OrderDto> selectList() {
-		String sql = "select * from order order by order_no desc";
+		String sql = "select * from order";
 		return jdbcTemplate.query(sql, mapper);
 	}
 
