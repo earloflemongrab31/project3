@@ -121,7 +121,7 @@ public class OrderDaoImpl implements OrderDao {
 				orderDto.getOrderCnt(), orderDto.getCustomerPhone(),
 				orderDto.getOrderNo()
 		};
-		return false; //색상, 크기, 주문수량, 휴대폰 번호 변경
+		return jdbcTemplate.update(sql, param) > 0; //색상, 크기, 주문수량, 휴대폰 번호 변경
 	}
 
 	@Override

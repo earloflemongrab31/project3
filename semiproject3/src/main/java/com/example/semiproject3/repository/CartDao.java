@@ -17,6 +17,7 @@ public interface CartDao {
 	List<CartDto> selectList(String loginId);
 	//회원이 선택한 총 장바구니갯수 구하기
 	int selectCart(String loginId);
+	
 //	//상품 가격 더하기  
 //	void plusItem(String loginId);
 //	//상품 가격 빼기
