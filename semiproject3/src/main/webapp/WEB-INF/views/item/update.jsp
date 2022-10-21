@@ -87,19 +87,19 @@
 	
 	<div class = "row">
 	<label> 상품메모
-		<input name="itemMemo" type="text" required class = "input mt-10 w-100"  autocomplete="off">
+		<input name="itemMemo" type="text" required class = "input mt-10 w-100" value="${itemDto.itemMemo}" autocomplete="off">
 	</label>
 	</div>
 	
 	<div class = "row">
 	<label> 가격
-		<input name="itemPrice" type="number" required class = "input mt-10 w-100"  autocomplete="off">
+		<input name="itemPrice" type="number" required class = "input mt-10 w-100"  value="${itemDto.itemPrice}"autocomplete="off">
 	</label>
 	</div>
 	
 	<div class = "row w-100">
 	<label> 상품 설명
-		 <textarea class = "input mt-10 w-100" name="itemContent" rows="10" cols="75" required ></textarea>
+		 <textarea class = "input mt-10 w-100" name="itemContent" rows="10" cols="75" required>"${itemDto.itemContent}"</textarea>
 	</label>
 	</div>
 	
