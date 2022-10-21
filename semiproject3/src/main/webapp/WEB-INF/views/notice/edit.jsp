@@ -35,7 +35,7 @@
 	
 	<div class="row w-100">
 		<label> 내용 <textarea class="input mt-10 w-100"
-				name="noticeContent" rows="10" cols="75" required></textarea>
+				name="noticeContent" rows="10" cols="75" required >"${noticeDto.noticeContent}"</textarea>
 		</label>
 	</div>
 
