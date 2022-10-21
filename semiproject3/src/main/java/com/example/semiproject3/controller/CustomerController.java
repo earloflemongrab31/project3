@@ -109,7 +109,7 @@ public class CustomerController {
 	public String edit(@ModelAttribute CustomerDto customerDto, RedirectAttributes attr)  {
 		boolean result = customerDao.update(customerDto);
 		if(result) {
-			attr.addAttribute("memberId", customerDto.getCustomerId());
+			attr.addAttribute("customerId", customerDto.getCustomerId());
 			return "redirect:list";
 		}
 		else {

@@ -82,10 +82,8 @@
 		<a class="btn btn-positive" href="insert">공지사항 등록</a>
 	</div>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/main
+
 <!-- 페이지 네비게이터 -->
 <!-- 선택된 페이지 표시해야 함 -->
 <div class="row center">

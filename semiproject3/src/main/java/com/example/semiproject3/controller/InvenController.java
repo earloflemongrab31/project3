@@ -15,7 +15,7 @@ import com.example.semiproject3.repository.ItemDao;
 
 @Controller
 @RequestMapping("/warehouse")
-public class invenController {
+public class InvenController {
 	
 	@Autowired
 	ItemDao itemDao;
