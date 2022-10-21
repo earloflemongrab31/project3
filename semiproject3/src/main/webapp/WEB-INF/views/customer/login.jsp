@@ -38,7 +38,7 @@
 	</div>
 	
 	<div class="row">
-		<a href="#" class="flexbox">
+		<a href="checkPassword" class="flexbox">
 			<span class="w-75">아이디 / 비밀번호 찾기</span>
 			<span class="w-25 right"><i class="fa-solid fa-arrow-right"></i></span>
 		</a>
