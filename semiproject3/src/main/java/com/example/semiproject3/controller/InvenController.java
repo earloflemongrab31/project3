@@ -38,7 +38,16 @@ public class InvenController {
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute InvenDto invenDto) {
 		invenDao.insert(invenDto);
-		return "redirect:invenList";
+		if((invenDto.getInvenStatus()).equals("입고완료")){
+			invenDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+			return "redirect:invenList";
+		}else if((invenDto.getInvenStatus()).equals("출고완료")) {
+			invenDao.minus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+			return "redirect:invenList";
+		}else {
+			return "redirect:invenList";
+		}
+		
 	}
 	@GetMapping("/invenList")
 	public String invenList(Model model) {

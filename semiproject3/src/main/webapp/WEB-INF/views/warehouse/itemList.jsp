@@ -26,7 +26,7 @@
  	<c:forEach var="item" items="${itemList}">
  	<tr>
 		<td>${item.cateCode}</td>
-		<td>${item.itemName }</td>
+		<td>${item.itemName}</td>
 		<td>${item.itemSize}</td>
 		<td>${item.itemColor}</td>
 		<td>${item.itemTotalCnt}</td>
