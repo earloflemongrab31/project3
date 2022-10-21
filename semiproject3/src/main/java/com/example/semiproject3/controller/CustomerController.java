@@ -128,4 +128,33 @@ public class CustomerController {
 			return "customer/editFail";
 		}
 	}
+	
+	@GetMapping("/checkPassword")
+	public String checkPassword() {
+		return"customer/checkPassword";
+	}
+	
+	@PostMapping("/checkPassword")
+	public String checkPassword(
+			@RequestParam String customerId,
+			@RequestParam String customerPwsearch) {
+		boolean checkPassword=customerDao.checkPassword(customerId, customerPwsearch);
+		if(checkPassword) {
+			return "redirect:changePassword";
+		}else {
+			return "redirect:checkPassword";
+		}
+	}
+	@GetMapping("/changePassword")
+	public String changePassword() {
+		return "customer/changePassword";
+	}
+	@PostMapping("/changePassword")
+	public String changePassword(
+			@RequestParam String customerPw,
+			HttpSession session) {
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		customerDao.changePassword(customerPw, loginId);
+		return "redirect:login";
+	}
 }

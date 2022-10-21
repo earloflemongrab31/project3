@@ -25,7 +25,6 @@
 					<th>아이디<span class="required">*</span></td>
 					<td>
 						<input class="input" type="text" name="customerId" required>
-						<button class="btn btn-neutral btn-border" type="button">중복 확인</button>
 						<span>(영문 소문자/숫자, 5~20자)</span>
 					</td>
 				</tr>

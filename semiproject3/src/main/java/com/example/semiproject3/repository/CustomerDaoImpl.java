@@ -170,5 +170,29 @@ public class CustomerDaoImpl implements CustomerDao{
 			Object[] param = {customerId};
 			return jdbcTemplate.update(sql, param) > 0;
 		}
+	
+	//비밀번호 찾기 
+		@Override
+		public boolean checkPassword(String customerId, String customerPwsearch) {
+			String sql="select count(*) from customer where customer_id=? and customer_pwsearch=?";
+			Object[] param= {
+					customerId,
+					customerPwsearch
+			};
+			return jdbcTemplate.queryForObject(sql,int.class,param)>0;
+		}
+		
+	//비밀번호 변경
+		@Override
+		public void changePassword(String customerPw, String customerId) {
+			String sql="update customer set customer_pw=? where customer_id=?";
+			Object[] param= {
+					customerPw,
+					customerId
+			};
+			jdbcTemplate.update(sql,param);
+			
+			
+		}
 
 }
