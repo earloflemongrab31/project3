@@ -155,8 +155,8 @@
 	<div class="row center">
 		
 		<select class="input" name="type" required>
-		<option value="notice_title" <c:if test="${type == 'notice_title'}"></c:if>>공지사항제목</option>
-		<option value="notice_no" <c:if test="${type == 'notice_no'}"></c:if>>공지번호</option>
+		<option value="notice_title" <c:if test="${vo.type == 'notice_title'}"></c:if>>공지사항제목</option>
+		<option value="notice_no" <c:if test="${vo.type == 'notice_no'}"></c:if>>공지번호</option>
 		</select>
 			
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>
