@@ -15,13 +15,14 @@ nav{
 aside{
     padding: 20px;
     float: left;
-    width: 25%;
+    width: 20%;
     min-height: 400px;
 }
 section{
+    margin: 0 auto;
     padding: 20px;
     float: left;
-    width: 75%;
+    width: 80%;
     min-height: 400px;
 }
 footer{

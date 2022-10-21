@@ -73,13 +73,14 @@ public class CustomerController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		session.removeAttribute(SessionConstant.GRADE);
+		session.removeAttribute("countCart");
 		return "redirect:login";
 	}
 	
 	@GetMapping("/mypage")
 	public String mypage(Model model, HttpSession session) {
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("dto", customerDao.selectOne(loginId));
+		model.addAttribute("customerDto", customerDao.selectOne(loginId));
 		return "customer/detail";
 	}
 	
@@ -106,17 +107,13 @@ public class CustomerController {
 
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute CustomerDto customerDto) {
-	boolean result = customerDao.update(customerDto);
-	if(result) {
-		return "redirect:detail?customer_id="+customerDto.getCustomerId();
-	}
-	else {
-		return "redirect:edit_fail";
-	}
-}
-	@GetMapping("/edit_fail")
-	public String editFail() {
-		return "customer/edit_fail";
+		boolean result = customerDao.update(customerDto);
+		if(result) {
+			return "redirect:detail?customer_id="+customerDto.getCustomerId();
+		}
+		else {
+			return "redirect:edit?error";
+		}
 	}
 	
 	@GetMapping("/delete")

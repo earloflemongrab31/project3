@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.NoticeDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.NoticeDao;
@@ -33,13 +34,17 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute NoticeDto noticeDto) {
-		int noticeNo = noticeDao.sequence();
-		noticeDto.setNoticeNo(noticeNo);
+	public String insert(@ModelAttribute NoticeDto noticeDto, 
+			HttpSession session, RedirectAttributes attr) {
+		String adminId = (String) session.getAttribute(SessionConstant.ID);
+		noticeDto.setAdminId(adminId);
 		
-		noticeDao.insert(noticeDto);
+//		noticeDao.insert(noticeDto);
+//		return "redirect:list";
 		
-		return "redirect:list";
+		int noticeNo = noticeDao.insert2(noticeDto);
+		attr.addAttribute("noticeNo",noticeNo);
+		return "redirect:detail";
 	}
 	
 	@GetMapping("/list")
@@ -58,25 +63,29 @@ public class NoticeController {
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam int noticeNo,
 			HttpSession session) {
-	//NoticeDto Dto = noticeDao.selectOne(noticeNo);
-	//model.addAttribute("Dto",Dto);
+		
+//		NoticeDto Dto = noticeDao.selectOne(noticeNo);
+//		model.addAttribute("Dto",Dto);
+		
+		//조회수 증가
+//		model.addAttribute("noticeDto", noticeDao.read(noticeNo));
+		
+		//(조회수 중복 방지 처리)
+		Set<Integer> history = (Set<Integer>) session.getAttribute("history"); 
+		if(history == null) { //history가 없다면 신규 생성이 된다.
+			history = new HashSet<>();
+		}
+		
+		// 현재 글 번호 읽은적이 있는 지 검사
+		if(history.add(noticeNo)) {//추가된 경우 - 처음 읽는 번호면
+			model.addAttribute("noticeDto", noticeDao.read(noticeNo));
+		}
+		else {//추가가 안된 경우 - 읽은 적이 있는 번호면
+			model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
+		}
+		session.setAttribute("history", history);
 	
-	//(조회수 중복 방지 처리)
-	Set<Integer> history = (Set<Integer>) session.getAttribute("history"); 
-	if(history == null) { //history가 없다면 신규 생성이 된다.
-		history = new HashSet<>();
-	}
-	
-	// 현재 글 번호 읽은적이 있는 지 검사
-	if(history.add(noticeNo)) {//추가된 경우 - 처음 읽는 번호면
-		model.addAttribute("noticeDto", noticeDao.read(noticeNo));
-	}
-	else {//추가가 안된 경우 - 읽은 적이 있는 번호면
-		model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
-	}
-	session.setAttribute("history", history);
-	
-	return "notice/detail";
+		return "notice/detail";
 	}
 	
 	@GetMapping("/edit")

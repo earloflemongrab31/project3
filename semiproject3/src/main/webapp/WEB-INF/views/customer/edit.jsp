@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="회원 정보 수정" name="title"/>
+	<jsp:param value="회원정보수정" name="title"/>
 </jsp:include>
 
 

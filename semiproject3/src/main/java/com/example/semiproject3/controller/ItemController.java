@@ -120,16 +120,6 @@ public class ItemController {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		//상품 정보에 이미지 불러오기
 		model.addAttribute("itemImageList", imageDao.selectItemImageList(itemNo));
-		//장바구니 기록있는 조회하여 첨부 
-		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		if(loginId !=null) {
-			CartDto cartDto = new CartDto();
-			cartDto.setCustomerId(loginId);
-			cartDto.setItemNo(itemNo);
-			model.addAttribute("isCart", cartDao.check(cartDto));
-		}
-
-		
 		return "item/detail";
 	}
 	
@@ -194,11 +184,6 @@ public class ItemController {
 	};
 	
 	
-//	@GetMapping("/buylist")
-//	public String buylist(Model model, 
-//			@RequestParam int itemNo, HttpSession session) {
-//		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
-//		
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
 	public String buylist(Model model, 
@@ -220,9 +205,20 @@ public class ItemController {
 	public String buy(Model model, 
 			@RequestParam int itemNo, HttpSession session) {
 		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
-		
-		//(+추가) 찜 기록이 있는지 조회하여 첨부
+		//장바구니 기록있는 조회하여 첨부 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		if(loginId !=null) {
+		CartDto cartDto = new CartDto();
+		cartDto.setCustomerId(loginId);
+		cartDto.setItemNo(itemNo);
+		model.addAttribute("isCart", cartDao.check(cartDto));
+		}
+
+		//(+추가) 찜 기록이 있는지 조회하여 첨부
+<<<<<<< HEAD
+		
+=======
+>>>>>>> refs/remotes/origin/main
 		
 		if(loginId != null) {//회원이라면 좋아요 기록을 조회하여 model에 추가
 			CustomerLikeDto customerLikeDto = new CustomerLikeDto();
