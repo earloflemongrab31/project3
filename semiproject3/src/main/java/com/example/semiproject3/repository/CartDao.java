@@ -3,6 +3,7 @@ package com.example.semiproject3.repository;
 import java.util.List;
 
 import com.example.semiproject3.entity.CartDto;
+import com.example.semiproject3.vo.CartListVO;
 
 public interface CartDao {
 
@@ -20,4 +21,7 @@ public interface CartDao {
 //	void plusItem(String loginId);
 //	//상품 가격 빼기
 //	void minusItem(String loginId);
+	
+	//장바구니 이미지 추가
+	List<CartListVO> selectCartList(String loginId);
 }
