@@ -10,8 +10,10 @@ public interface InvenDao {
 	void insert(InvenDto invenDto);
 	//전체선택
 	List<InvenDto> selectList();
-	//입고완료 상태일때만 재고 업데이트 
-	void plus(int itemNo);
+	//입고완료 상태일때만 아이템 총수량 업데이트 
+	void plus(int quantity, int itemNo);
+	//출고완료 상태일때만 아이템 총수량 업데이트
+	void minus(int quantity, int itemNo);
 	
 	
 }

@@ -96,6 +96,18 @@
 		color: white;
 		background-color: lightgray;
 	}
+	.input.NNNNN ~ .NNNNN-message,
+    .input.NNNNY ~ .NNNNY-message,
+    .input.fail ~ .fail-message,
+    .input.admin ~ .admin-message{
+        display: inline-block;
+    }
+    .NNNNN-message,
+    .NNNNY-message,
+    .fail-message,
+    .admin-message{
+        display: none;
+    }
 </style>
 <script>
 	$(function(){
@@ -189,6 +201,205 @@
           	$(this).children("ul").slideToggle();			
 		});
 	});
+	
+	/* 회원가입 */
+    $(function(){
+
+        var inputStatus = {
+            memberIdValid:false,
+            memberNickValid:false,
+            memberPwValid:false,
+            memberPwcheckValid:false,
+            memberPwsearchValid:false,
+            memberNameValid:false,
+            memberPhoneValid:false
+        };
+
+        $(".input[name=customerId]").blur(function(){
+            var inputId = $(this).val();
+            var regex = /^[a-z][a-z0-9_-]{4,19}$/;
+            var judge = regex.test(inputId);
+
+            $(this).removeClass("fail NNNNN NNNNY");
+            if(judge){
+
+                var that = this;
+                $.ajax({
+                    url: "http://localhost:8888/rest/customer/id",
+                    method: "post",
+                    data: {
+                        inputId: inputId
+                    },
+                    success:function(resp){
+                        if(resp == "NNNNY"){
+                            $(that).addClass("NNNNY");
+                            inputStatus.memberIdValid = true;
+                        }
+                        else{
+                            $(that).addClass("NNNNN");
+                            inputStatus.memberIdValid = false;
+                        }
+                    }
+                });
+            }
+            else{
+                $(this).addClass("fail");
+                inputStatus.memberIdValid = false;
+            }
+        });
+
+        $(".input[name=customerPw").blur(function(){
+            var inputPw = $(this).val();
+            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
+            var judge = regex.test(inputPw);
+
+            $(this).removeClass("fail NNNNY");
+            if(judge){
+                $(this).addClass("NNNNY");
+                inputStatus.memberPwValid = true;
+            }
+            else{
+                $(this).addClass("fail");
+                inputStatus.memberPwValid = false;
+            }
+            $("#customer-pwcheck").blur();
+        });
+
+        $("#customer-pwcheck").blur(function(){
+            var pwCheck = $(this).val();
+            if(!pwCheck){
+                $(this).removeClass("fail NNNNY");
+                inputStatus.memberPwcheckValid = false;
+                return;
+            };
+            if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
+            var pw = $(".input[name=customerPw").val();
+            var judge = pw == pwCheck;
+            
+            $(this).removeClass("fail NNNNY");
+            if(judge){
+                $(this).addClass("NNNNY");
+                inputStatus.memberPwcheckValid = true;
+            }
+            else{
+                $(this).addClass("fail");
+                inputStatus.memberPwcheckValid = false;
+            }
+        });
+
+        $(".input[name=customerNick]").blur(function(){
+            var inputNick = $(this).val();
+            var regex = /^[가-힣][가-힣0-9]{0,9}$/;
+            var judge = regex.test(inputNick);
+
+            $(this).removeClass("fail NNNNN NNNNY admin");
+            if(inputNick == '관리자'){
+                $(this).addClass("admin");
+                inputStatus.memberNickValid = false;
+                return;
+            }
+            if(judge){
+                var that = this;
+                $.ajax({
+                    url: "http://localhost:8888/rest/customer/nick",
+                    method: "post",
+                    data: {
+                        inputNick: inputNick
+                    },
+                    success: function(resp){
+                        if(resp == "NNNNY"){
+                            $(that).addClass("NNNNY");
+                            inputStatus.memberNickValid = true;
+                        }
+                        else{
+                            $(that).addClass("NNNNN");
+                            inputStatus.memberNickValid = false;
+                        }
+                    }
+                });
+            }
+            else{
+                $(this).addClass("fail");
+                inputStatus.memberNickValid = false;
+            }
+        });
+
+        $(".input[name=customerPwsearch").blur(function(){
+            var pwsearch = $(this).val();
+            $(this).removeClass("fail");
+            if(pwsearch == ""){
+                $(this).addClass("fail");
+                inputStatus.memberPwsearchValid = false;
+            }
+            else{
+                $(this).removeClass("fail");
+                inputStatus.memberPwsearchValid = true;
+            }
+        });
+        
+        $(".input[name=customerName").blur(function(){
+            var name = $(this).val();
+            var regex = /^[가-힣]{2,7}$/;
+            var judge = regex.test(name);
+            
+            $(this).removeClass("fail NNNNN");
+            if(name == ""){
+                $(this).addClass("fail");
+                inputStatus.memberNameValid = false;
+            }
+            else{
+                if(!judge){
+                    $(this).addClass("NNNNN");
+                    inputStatus.memberNameValid = false;
+                    return;
+                }
+                $(this).removeClass("fail");
+                inputStatus.memberNameValid = true;
+            }
+        });
+
+        $(".input[name=customerPhone").blur(function(){
+            var phone = $(this).val();
+            var regex = /^01[016789][1-9]\d{6,7}$/;
+            var judge = regex.test(phone);
+            
+            $(this).removeClass("fail NNNNN");
+            if(phone == ""){
+                $(this).addClass("fail");
+                inputStatus.memberPhoneValid = false;
+            }
+            else{
+                if(!judge){
+                    $(this).addClass("NNNNN");
+                    inputStatus.memberPhoneValid = false;
+                    return;
+                }
+                $(this).removeClass("fail");
+                inputStatus.memberPhoneValid = true;
+            }
+        });
+
+        var inputStatus = {
+                memberIdValid:false,
+                memberNickValid:false,
+                memberPwValid:false,
+                memberPwcheckValid:false,
+                memberPwsearchValid:false,
+                memberNameValid:false,
+                memberPhoneValid:false,
+                valid:function(){
+                    return this.memberIdValid && this.memberNameValid && this.memberNickValid && this.memberPhoneValid 
+                            && this.memberPwValid && this.memberPwcheckValid && this.memberPwsearchValid;
+                }
+            };
+            
+        $(".join-form").submit(function(){
+            if(!inputStatus.valid()){
+                return false;
+            }
+            return true;
+        });
+    });
 </script>
 
 </head>
