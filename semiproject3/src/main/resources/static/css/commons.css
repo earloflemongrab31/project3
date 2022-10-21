@@ -135,6 +135,7 @@ h2.logo{
 .btn.btn-positive[disabled],
 .btn.btn-positive[disabled]:hover{
 	background-color: lightgray;
+	border: 1px solid lightgray;
 }
 .btn.btn-positive:hover{
     background-color: #545454;
@@ -279,7 +280,7 @@ font-size: 14px;
 /* .table.table-hover > thead > tr:hover,  */
 .table.table-hover > tbody > tr:hover, 
 .table.table-hover > tfoot > tr:hover{
-    background-color: rgb(243, 247, 252);
+    background-color: #FAF9F7;
 }
 
 /* 
@@ -525,6 +526,42 @@ ul.pagination > li > a{
     top: 0;
     left: 0;
     right: 0;
+}
+
+.accordian, 
+.accordian ul{
+    color: #474748;
+    margin: 0;
+    padding: 0.25em;
+    list-style: none;
+}
+.accordian{
+    font-size: 18px;
+    cursor: pointer;
+}
+.accordian ul{
+	font-size: 16px;
+}
+.accordian ul > li{
+	padding: 0.25em 0;
+}
+.accordian > li{
+    width: 100%;
+    padding: 0 0 0.5em 0;
+	padding-bottom: 20px;
+}
+
+.accordian a{
+    text-align: center;
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+    width: 100%;
+}
+.accordian li:hover{
+	cursor: pointer;
+}
+.accordian li:hover > a{
+    color: black;
 }
 
 /* 
