@@ -1,5 +1,7 @@
 package com.example.semiproject3.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -18,15 +20,12 @@ public class BuyDaoImpl implements BuyDao {
 	private RowMapper<BuyDto> mapper = (rs, idx) -> {
 		return BuyDto.builder()
 							.buyNo(rs.getInt("buy_no"))
+							.orderNo(rs.getInt("order_no"))
 							.CustomerId(rs.getString("customer_id"))
-							.itemName(rs.getString("item_Name"))
-							.itemPrice(rs.getInt("item_price"))
-							.itemColor(rs.getString("item_color"))
-							.itemSize(rs.getString("item_size"))
+							.itemNo(rs.getInt("item_no"))
+							.addressNo(rs.getInt("address_no"))
 							.buyCnt(rs.getInt("buy_cnt"))
 							.buyDate(rs.getDate("buy_date"))
-							.buyFee(rs.getInt("buy_fee"))
-							.customerPhone(rs.getString("customer_phone"))
 						.build();
 	};
 	
@@ -35,15 +34,12 @@ public class BuyDaoImpl implements BuyDao {
 		if(rs.next()) {
 			return BuyDto.builder()
 					.buyNo(rs.getInt("buy_no"))
+					.orderNo(rs.getInt("order_no"))
 					.CustomerId(rs.getString("customer_id"))
-					.itemName(rs.getString("item_Name"))
-					.itemPrice(rs.getInt("item_price"))
-					.itemColor(rs.getString("item_color"))
-					.itemSize(rs.getString("item_size"))
+					.itemNo(rs.getInt("item_no"))
+					.addressNo(rs.getInt("address_no"))
 					.buyCnt(rs.getInt("buy_cnt"))
 					.buyDate(rs.getDate("buy_date"))
-					.buyFee(rs.getInt("buy_fee"))
-					.customerPhone(rs.getString("customer_phone"))
 				.build();
 		}
 		else {
@@ -54,13 +50,54 @@ public class BuyDaoImpl implements BuyDao {
 	//번호 생성
 	@Override
 	public int sequence() {
-		String sql = "";
-		return 0;
+		String sql = "select buy_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
+	//구매
 	@Override
 	public void insert(BuyDto buyDto) {
-		String sql = "insert into buy(buy_seq.netxval,";
-		
+		String sql = "insert into buy("
+				+ "buy_no, "
+				+ "order_no, "
+				+ "customer_id, "
+				+ "item_no, "
+				+ "address_no, "
+				+ "buy_cnt, "
+				+ "buy_date) "
+				+ "values(?, ?, ? ,? ,? ,?, ?)";
+		Object[] param = {
+				buyDto.getBuyNo(), buyDto.getOrderNo(),
+				buyDto.getCustomerId(), buyDto.getItemNo(),
+				buyDto.getAddressNo(), buyDto.getBuyCnt(),
+				buyDto.getBuyDate()
+		};
+		jdbcTemplate.update(sql, param);
 	}
+
+	//구매 목록
+	@Override
+	public List<BuyDto> selectList() {
+		String sql = "select * from buy order by buy_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+
+	//구매 목록 검색
+	@Override
+	public List<BuyDto> selectList(String type, String keyword) {
+		String sql = "select * from buy "
+				+ "where instr(#1, ?) > 0 order by buy_no desc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	//구매 정보
+	@Override
+	public BuyDto selectOne(int buyNo) {
+		String sql = "select * from buy where buy_no = ?";
+		Object[] param = {buyNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+
 }

@@ -13,13 +13,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BuyDto {
 	private int buyNo;
+	private int orderNo;
 	private String CustomerId;
-	private String itemName;
-	private int itemPrice;
-	private String itemColor;
-	private String itemSize;
+	private int itemNo;
+	private int addressNo;
 	private int buyCnt;
 	private Date buyDate;
-	private int buyFee;
-	private String customerPhone;
 }

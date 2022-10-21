@@ -1,17 +1,23 @@
 package com.example.semiproject3.repository;
 
+import java.util.List;
+
 import com.example.semiproject3.entity.BuyDto;
 
 public interface BuyDao {
 	
-	//구매 번호 생성
+	//구매내역 번호 생성
 	int sequence();
 	
-	//구매
+	//구매내역 삽입
 	void insert(BuyDto buyDto);
 	
-	//수정
-	boolean update(int buyNo);
+	//구매 목록
+	List<BuyDto> selectList();
+	List<BuyDto> selectList(String type, String keyword);
+	
+	//구매 정보
+	BuyDto selectOne(int buyNo);
 	
 	
 }
