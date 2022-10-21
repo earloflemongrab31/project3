@@ -98,19 +98,19 @@ public class ItemController {
 		return "redirect:list";
 	}
 	
-//	//상품 목록(관리자)
-//	@GetMapping("/list")
-//	public String list(Model model, 
-//			@ModelAttribute(name="vo") ItemListSearchVO vo) {
-//
-//		//페이지 네비게이터를 위한 게시글 수를 전달
-//		int count = itemDao.count(vo);
-//		vo.setCount(count);
-//		
-//		model.addAttribute("list", itemDao.selectList(vo));
-//		
-//		return "item/list";
-//	}
+	//상품 목록(관리자)
+	@GetMapping("/list")
+	public String list(Model model, 
+			@ModelAttribute(name="vo") ItemListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = itemDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", itemDao.selectList(vo));
+		
+		return "item/list";
+	}
 	
 	//상품 정보 //장바구니+
 	@GetMapping("/detail")

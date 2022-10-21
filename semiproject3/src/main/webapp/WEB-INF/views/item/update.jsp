@@ -81,7 +81,7 @@
 	
 	<div class = "row">
 	<label> 상품명
-		<input name="itemName" type="text" required class = "input mt-10 w-100"  autocomplete="off">
+		<input name="itemName" type="text" required class = "input mt-10 w-100"  value="${itemDto.itemName}" autocomplete="off">
 	</label>
 	</div>
 	
