@@ -18,7 +18,7 @@
  	<c:forEach var="cartDto" items="${cart}">
  		<tr>
 	 		<td rowspan="3">
-	 			<img src="/image/download/${itemDto.imageNo}" width="200">
+	 			<img src="/image/download/${cartDto.imageNo}" width="200">
 	 		</td>
 	 		<td colspan="2">${cartDto.cartItemName}</td>
 	 		<td class="right"><a href="delete?itemNo=${cartDto.itemNo}">삭제</a></td>

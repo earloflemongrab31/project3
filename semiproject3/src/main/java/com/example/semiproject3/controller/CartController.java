@@ -26,7 +26,8 @@ public class CartController {
 			HttpSession session) {
 		//아이디가지고오기 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		model.addAttribute("cart",cartDao.selectList(loginId));
+//		model.addAttribute("cart",cartDao.selectList(loginId));
+		model.addAttribute("cart",cartDao.selectCartList(loginId));
 		model.addAttribute("cartCount",cartDao.selectCart(loginId));
 		return "cart/cartList";
 	}
