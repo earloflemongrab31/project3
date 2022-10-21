@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.repository.CustomerDao;
-import com.example.semiproject3.vo.NoticeListSearchVO;
 
 @Controller
 @RequestMapping("/customer")
@@ -106,15 +106,17 @@ public class CustomerController {
 	}
 
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute CustomerDto customerDto) {
+	public String edit(@ModelAttribute CustomerDto customerDto, RedirectAttributes attr)  {
 		boolean result = customerDao.update(customerDto);
 		if(result) {
-			return "redirect:detail?customer_id="+customerDto.getCustomerId();
+			attr.addAttribute("customerId", customerDto.getCustomerId());
+			return "redirect:list";
 		}
 		else {
 			return "redirect:edit?error";
 		}
 	}
+	
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam String customerId) {

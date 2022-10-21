@@ -21,5 +21,7 @@ public interface AddressDao {
 	
 	//수정 , 삭제
 	boolean update(AddressDto addressDto);
-	boolean delete(int addressNo);
+	boolean delete(List<Integer> addressNo);
+
+
 }

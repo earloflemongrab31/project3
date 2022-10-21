@@ -14,7 +14,7 @@
 <div class ="container-600 mt-40 mb-40">
 	
 	<div class="row">
-		<h1>공지사항 수정</h1>
+		<h1>공지사항 수정</h1>s
 		<hr>
 	</div>
 	
@@ -29,13 +29,13 @@
 	
 	<div class="row">
 		<label>제목 <input name="noticeTitle" type="text" required
-			class="input mt-10 w-100" autocomplete="off">
+			class="input mt-10 w-100" autocomplete="off" value="${noticeDto.noticeTitle}">
 		</label>
 	</div>
-
+	
 	<div class="row w-100">
 		<label> 내용 <textarea class="input mt-10 w-100"
-				name="noticeContent" rows="10" cols="75" required></textarea>
+				name="noticeContent" rows="10" cols="75" required >"${noticeDto.noticeContent}"</textarea>
 		</label>
 	</div>
 

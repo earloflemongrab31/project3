@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.InvenDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.InvenDao;
@@ -49,6 +50,13 @@ public class InvenController {
 	}
 	
 	//수정
+	@GetMapping("/edit")
+	public String edit(Model model,@RequestParam int itemNo) {
+		InvenDto invenDto = invenDao.selectOne(itemNo);
+		model.addAttribute("invenDto", invenDto);
+		return "inven/edit";
+	}
+	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute InvenDto invenDto,
 			RedirectAttributes attr) {
