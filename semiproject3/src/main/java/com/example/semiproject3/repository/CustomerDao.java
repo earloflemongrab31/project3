@@ -36,4 +36,7 @@ public interface CustomerDao {
 	//비밀번호 변경
 	void changePassword(String customerPw, String customerId);
 
+	//닉네임 찾기
+	CustomerDto findByNick(String customerNick);
+
 }
