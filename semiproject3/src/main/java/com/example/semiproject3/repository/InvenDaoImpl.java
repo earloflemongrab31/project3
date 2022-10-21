@@ -22,6 +22,7 @@ public class InvenDaoImpl implements InvenDao{
 		return InvenDto.builder()
 							.invenNo(rs.getInt("inven_no"))
 							.itemNo(rs.getInt("item_no"))
+							.itemName(rs.getString("item_Name"))
 							.itemCate(rs.getInt("item_cate"))
 							.itemSize(rs.getString("item_size"))
 							.itemColor(rs.getString("item_color"))
@@ -55,14 +56,26 @@ public class InvenDaoImpl implements InvenDao{
 	}
 	@Override
 	public List<InvenDto> selectList() {
-		String sql="select * from inven";
+		String sql="select * from inven order by inven_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
 	@Override
-	public void plus(int itemNo) {
-	
-		String sql="update item set item_total_cnt=(select inven_quantity from inven where item_no=? and inven_status='입고완료' ) where item_no=11";
-		
+	public void plus(int quantity, int itemNo) {
+		String sql="update item set item_total_cnt=item_total_cnt + ? where item_no=?";
+		Object[] param= {
+				quantity,
+				itemNo
+		};
+		jdbcTemplate.update(sql,param);
+	}
+	@Override
+	public void minus(int quantity, int itemNo) {
+		String sql="update item set item_total_cnt=item_total_cnt - ? where item_no=?";
+		Object[] param= {
+				quantity,
+				itemNo
+		};
+		jdbcTemplate.update(sql,param);
 	}
 }
