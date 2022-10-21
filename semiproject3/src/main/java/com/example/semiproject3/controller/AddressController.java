@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,72 +20,75 @@ import com.example.semiproject3.repository.AddressDao;
 @RequestMapping("/address")
 
 public class AddressController {
-	
-	@Autowired
-	private AddressDao addressDao;
-	
-	//등록
-	@GetMapping("/insert")
-	public String insert() {
-		return "address/insert";
-	}
-	
-	@PostMapping("/insert")
-	public String insert(@ModelAttribute AddressDto addressDto) {
-		int addressNo = addressDao.sequence();
-		addressDto.setAddressNo(addressNo);
-		
-		addressDao.insert(addressDto);
-		
-		return "redirect:list";
-	}
-	
-	//목록
-	@GetMapping("/list")
-	public String list(Model model, 
-					@RequestParam(required = false) String type,
-					@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) { // 검색
-			model.addAttribute("list", addressDao.selectList(type, keyword));
-		}
-		else { //목록
-			model.addAttribute("list", addressDao.selectList());
-		}
-		return "address/list";
-	}
-	
-	//수정
-	@GetMapping("/edit")
-	public String edit(Model model, @RequestParam int addressNo) {
-		
-		model.addAttribute("addressDto", addressDao.selectOne(addressNo));
-		return "address/edit";
-	}
-	
-	@PostMapping("/edit")
-	public String edit(@ModelAttribute AddressDto addressDto,
-			RedirectAttributes attr) {
-	boolean result = addressDao.update(addressDto);
-	if(result) {
-		attr.addAttribute("addressNo", addressDto.getAddressNo());
-		return "redirect:detail";
-	}
-	else {
-		throw new TargetNotFoundException("주소 없음");
-	}
+   
+   @Autowired
+   private AddressDao addressDao;
+   
+   //등록
+   @GetMapping("/insert")
+   public String insert() {
+      return "address/insert";
+   }
+   
+   @PostMapping("/insert")
+   public String insert(@ModelAttribute AddressDto addressDto) {
+      int addressNo = addressDao.sequence();
+      addressDto.setAddressNo(addressNo);
+      
+      addressDao.insert(addressDto);
+      
+      return "redirect:list";
+   }
+   
+   //목록
+   @GetMapping("/list")
+   public String list(Model model, 
+               @RequestParam(required = false) String type,
+               @RequestParam(required = false) String keyword) {
+      boolean isSearch = type != null && keyword != null;
+      if(isSearch) { // 검색
+         model.addAttribute("list", addressDao.selectList(type, keyword));
+      }
+      else { //목록
+         model.addAttribute("list", addressDao.selectList());
+      }
+      return "address/list";
+   }
+   
+   //수정
+   @GetMapping("/edit")
+   public String edit(Model model, @RequestParam int addressNo) {
+      
+      model.addAttribute("addressDto", addressDao.selectOne(addressNo));
+      return "address/edit";
+      
+   }
+   
+   @PostMapping("/edit")
+   public String edit(@ModelAttribute AddressDto addressDto,
+         RedirectAttributes attr) {
+   boolean result = addressDao.update(addressDto);
+   if(result) {
+      attr.addAttribute("addressNo", addressDto.getAddressNo());
+      return "redirect:detail";
+   }
+   else {
+      throw new TargetNotFoundException("주소 없음");
+   }
 }
-	
-	//삭제
-	@GetMapping("/delete")
-	public String delete(@RequestParam int addressNo) {
-		boolean result = addressDao.delete(addressNo);
-		if(result) {
-			return "redirect:list";
-		}
-		else {
-			throw new TargetNotFoundException("주소 없음");
-		}
-	}
-	
+   
+   //삭제
+   @GetMapping("/delete")
+   public String delete(@RequestParam(value="addressNo[]") List<Integer> addressNo) {
+      System.out.println(addressNo);
+    boolean result = addressDao.delete(addressNo);
+
+      if(true) {   
+         return "redirect:list";
+      }
+      else {
+         throw new TargetNotFoundException("주소 없음");
+      }
+   }
+   
 }

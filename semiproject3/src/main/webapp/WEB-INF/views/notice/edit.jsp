@@ -32,7 +32,7 @@
 			class="input mt-10 w-100" autocomplete="off" value="${noticeDto.noticeTitle}">
 		</label>
 	</div>
-
+	
 	<div class="row w-100">
 		<label> 내용 <textarea class="input mt-10 w-100"
 				name="noticeContent" rows="10" cols="75" required></textarea>
