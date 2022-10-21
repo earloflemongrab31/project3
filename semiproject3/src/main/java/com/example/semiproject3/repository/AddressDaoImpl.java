@@ -35,14 +35,13 @@ public class AddressDaoImpl implements AddressDao{
 				+ "address_name,"
 				+ "address_post,"
 				+ "address_host,"
-				+ "address_detail_host,"
-				+ "address_basic)"
-				+ "values(address_seq.nextval, ?, ?, ?, ?, ?, ?)";
+				+ "address_detail_host)"
+				+ "values(address_seq.nextval, ?, ?, ?, ?, ?)";
 		Object[] param = {
-				addressDto.getAddressNo(), addressDto.getCustomerId(),
+				addressDto.getCustomerId(),
 				addressDto.getAddressName(), addressDto.getAddressPost(),
-				addressDto.getAddressHost(), addressDto.getAddressDetailHost(),
-				addressDto.getAddressBasic()
+				addressDto.getAddressHost(), addressDto.getAddressDetailHost()
+				
 		};
 		jdbcTemplate.update(sql, param);
 	}
@@ -91,7 +90,7 @@ public class AddressDaoImpl implements AddressDao{
 	//주소 목록
 	@Override
 	public List<AddressDto> selectList() {
-		String sql = "select * from address order by address_no desc";
+		String sql = "select * from address order by address_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 
@@ -115,17 +114,15 @@ public class AddressDaoImpl implements AddressDao{
 	@Override
 	public boolean update(AddressDto addressDto) {
 		String sql = "update address set "
-				+ "customer_id=?,"
 				+ "address_name=?,"
 				+ "address_post=?,"
 				+ "address_host=?,"
-				+ "address_detail_host=?,"
-				+ "address_basic=?"
+				+ "address_detail_host=?"
 				+ "where address_no = ?";
 		Object[] param = {
-				addressDto.getCustomerId(), addressDto.getAddressName(),
+				addressDto.getAddressName(),
 				addressDto.getAddressPost(), addressDto.getAddressHost(),
-				addressDto.getAddressDetailHost(), addressDto.getAddressBasic(),
+				addressDto.getAddressDetailHost(), 
 				addressDto.getAddressNo()
 		};
 		return jdbcTemplate.update(sql, param) > 0;

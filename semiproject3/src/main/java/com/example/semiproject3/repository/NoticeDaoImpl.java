@@ -20,6 +20,40 @@ public class NoticeDaoImpl implements NoticeDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	//로우매퍼
+	private RowMapper<NoticeDto> mapper = (rs, idx) -> {
+		return NoticeDto.builder()
+							.adminId(rs.getString("admin_id"))
+							.noticeNo(rs.getInt("notice_no"))
+							.noticeTitle(rs.getString("notice_title"))
+							.noticeDate(rs.getDate("notice_date"))
+							.noticeUpdate(rs.getDate("notice_update"))
+							.noticeRead(rs.getInt("notice_read"))
+							.noticeContent(rs.getString("notice_content"))
+							.noticeHead(rs.getString("notice_head"))
+						.build();
+	};
+		
+		
+	//리절트셋
+	private ResultSetExtractor<NoticeDto> extractor = (rs) -> {
+		if(rs.next()) {
+			return NoticeDto.builder()
+								.adminId(rs.getString("admin_id"))
+								.noticeNo(rs.getInt("notice_no"))
+								.noticeTitle(rs.getString("notice_title"))
+								.noticeDate(rs.getDate("notice_date"))
+								.noticeUpdate(rs.getDate("notice_update"))
+								.noticeRead(rs.getInt("notice_read"))
+								.noticeContent(rs.getString("notice_content"))
+								.noticeHead(rs.getString("notice_head"))
+							.build();
+		}
+		else {
+			return null;
+		}
+	};
+
 	//등록
 	@Override
 	public void insert(NoticeDto noticeDto) {
@@ -30,17 +64,38 @@ public class NoticeDaoImpl implements NoticeDao {
 				+ "notice_date,"
 				+ "notice_content,"
 				+ "notice_head) "
-
 				+ "values(?,notice_seq.nextval, ?, sysdate, ?, ?)";
 
-
-		
 		Object[] param = {
 				noticeDto.getAdminId(), noticeDto.getNoticeTitle(),
 				noticeDto.getNoticeContent(), noticeDto.getNoticeHead()
 		};
 		jdbcTemplate.update(sql, param);
 	}
+	
+	@Override
+	public int insert2(NoticeDto noticeDto) {
+		//번호를 미리 생성한 뒤 등록하는 기능
+		String sql = "select notice_seq.nextval from dual";
+		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+		
+		sql = "insert into notice("
+				+ "admin_id,"
+				+ "notice_no,"
+				+ "notice_title,"
+				+ "notice_content,"
+				+ "notice_head) "
+				+ "values(?,?,?,?,?)";
+		Object[] param = {
+				noticeDto.getAdminId(), 
+				noticeNo,
+				noticeDto.getNoticeTitle(),
+				noticeDto.getNoticeContent(),
+				noticeDto.getNoticeHead()};
+		jdbcTemplate.update(sql,param);
+		return noticeNo;
+	}
+		
 
 	//번호 
 	@Override
@@ -49,46 +104,7 @@ public class NoticeDaoImpl implements NoticeDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
-	//로우매퍼
-	private RowMapper<NoticeDto> mapper = new RowMapper<NoticeDto>() {
-
-		@Override
-		public NoticeDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			NoticeDto noticeDto = new NoticeDto();
-			noticeDto.setAdminId(rs.getString("admin_id"));
-			noticeDto.setNoticeNo(rs.getInt("notice_no"));
-			noticeDto.setNoticeTitle(rs.getString("notice_title"));
-			noticeDto.setNoticeDate(rs.getDate("notice_date"));
-			noticeDto.setNoticeUpdate(rs.getDate("notice_update"));
-			noticeDto.setNoticeContent(rs.getString("notice_content"));
-			noticeDto.setNoticeHead(rs.getString("notice_head"));
-			return noticeDto;
-		}
-	};
 	
-	
-	
-	//리절트셋
-	private ResultSetExtractor<NoticeDto> extractor = new ResultSetExtractor<NoticeDto>() {
-
-		@Override
-		public NoticeDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-			if(rs.next()) {
-				NoticeDto noticeDto = new NoticeDto();
-				noticeDto.setAdminId(rs.getString("admin_id"));
-				noticeDto.setNoticeNo(rs.getInt("notice_no"));
-				noticeDto.setNoticeTitle(rs.getString("notice_title"));
-				noticeDto.setNoticeDate(rs.getDate("notice_date"));
-				noticeDto.setNoticeUpdate(rs.getDate("notice_update"));
-				noticeDto.setNoticeContent(rs.getString("notice_content"));
-				noticeDto.setNoticeHead(rs.getString("notice_head"));
-				return noticeDto;
-			}
-			else {
-				return null;
-			}
-		}
-	};
 	
 	//목록
 	@Override
@@ -137,9 +153,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	//조회수 중복 방지 처리
 	@Override
 	public boolean updateReadcount(int noticeNo) {
-		String sql = "update notice set notice_read = notice_read + 1 where notice_no = ?";
+		String sql = "update notice "
+				+ "set notice_read = notice_read + 1 "
+				+ "where notice_no = ?";
 		Object[] param = {noticeNo};
-		return jdbcTemplate.update(sql, param)>0;
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 
 	//카운트
@@ -204,7 +222,15 @@ public class NoticeDaoImpl implements NoticeDao {
 		};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+
 	
+	//더미 테스트용 클리어
+	@Override
+	public void clear() {
+		String sql = "delete notice";
+		jdbcTemplate.update(sql);
+	}
+
 }
 
 
