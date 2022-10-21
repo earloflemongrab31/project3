@@ -10,9 +10,7 @@
 	<div class="row center">
 		<h1>회원 목록</h1>
 	</div>
-	<div class="row right">
-		<a class="btn btn-neutral" href="insert">등록</a>
-	</div>
+	
 	<div class="row">
 		<table class="table table-border table-stripe">
 			<thead>
@@ -21,16 +19,21 @@
 					<th>닉네임</th>
 					<th>핸드폰번호</th>
 					<th>이메일</th>
+					<th>회원관리</th>
 				</tr>
 			</thead>
 			<tbody align="center">
 				<%-- for(PocketMonsterDto dto : list){} --%>
-				<c:forEach var="dto" items="${list}">
+				<c:forEach var="customerDto" items="${list}">
 				<tr>
-					<td>${dto.customerId}</td>
-					<td>${dto.customerNick}</td>
-					<td>${dto.customerPhone}</td>
-					<td>${dto.customerEmail}</td>
+					<td>${customerDto.customerId}</td>
+					<td>${customerDto.customerNick}</td>
+					<td>${customerDto.customerPhone}</td>
+					<td>${customerDto.customerEmail}</td>
+					<td>
+						<a href="edit?customerId=${customerDto.customerId}">수정</a>
+						<a href="delete?customerId=${customerDto.customerId}">삭제</a>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>

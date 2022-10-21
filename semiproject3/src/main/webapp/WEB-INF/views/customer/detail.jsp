@@ -20,6 +20,11 @@
 				<th width="25%">아이디</th>
 				<td>${customerDto.customerId}</td>
 			</tr>
+		
+			<tr>
+				<th width="25%">아이디</th>
+				<td>${customerDto.customerId}</td>
+			</tr>
 			<tr>
 				<th>닉네임</th>
 				<td>${customerDto.customerNick}</td>
