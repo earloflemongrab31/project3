@@ -46,7 +46,7 @@ public class InvenController {
 		else { //목록
 			model.addAttribute("list",invenDao.selectList());
 		}
-	return "list";
+	return "inven/list";
 	}
 	
 	//수정

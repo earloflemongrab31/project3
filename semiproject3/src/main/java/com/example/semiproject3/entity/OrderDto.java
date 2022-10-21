@@ -19,6 +19,7 @@ public class OrderDto {
 	private String itemName;
 	private int itemPrice;
 	private String itemColor;
+	private String itemSize;
 	private int orderCnt;
 	private Date orderDate;
 	private int buyFee;
