@@ -1,3 +1,4 @@
+drop table review;
 create table review(
 review_no number primary key,
 customer_id references customer(customer_id),
