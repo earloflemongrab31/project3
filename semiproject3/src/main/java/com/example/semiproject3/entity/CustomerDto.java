@@ -7,7 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CustomerDto {
 	private String customerId;
 	private String customerPw;
@@ -26,5 +29,5 @@ public class CustomerDto {
 	private int cartTotalCnt;
 	private int cartTotalMoney;
 	private int customerLike;
-	
+
 }
