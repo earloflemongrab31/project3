@@ -14,7 +14,7 @@
 <div class ="container-600 mt-40 mb-40">
 	
 	<div class="row">
-		<h1>공지사항 수정</h1>
+		<h1>공지사항 수정</h1>s
 		<hr>
 	</div>
 	
