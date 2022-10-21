@@ -95,7 +95,7 @@ public class CartDaoImpl implements CartDao{
 	
 	@Override
 	public int selectCart(String loginId) {
-		String sql="select count(*) from cart where customer_id=?";
+		String sql="select count(*) from cart_list_view where customer_id=?";
 		Object[] param= {loginId};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
