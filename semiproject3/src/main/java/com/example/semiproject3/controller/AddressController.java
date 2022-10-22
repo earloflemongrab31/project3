@@ -80,7 +80,7 @@ public class AddressController {
    }
 }
    
-   //삭제
+   //주소 목록에서 바로 삭제
    @GetMapping("/delete")
    public String delete(@RequestParam(value="addressNo[]") List<Integer> addressNo) {
 	   
