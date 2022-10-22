@@ -20,7 +20,7 @@
 
 <div class="page">
 	<div class="row">
-	 	<h2>1. 고객님의 성별에 체크해주세요</h2>
+	 	<h2>1. 고객님의 성별에 체크해주세요.</h2>
 	</div>
 	<div class="row">
 		<label>
@@ -37,7 +37,7 @@
 </div>
 <div class="page">
 	<div class="row">
-	    <h2>2. 나이를 선택해주세요</h2>
+	    <h2>2. 나이를 선택해주세요.</h2>
 	</div>
 	<div class="row">
 		<label>
@@ -63,7 +63,7 @@
 </div>
 <div class="page">
 	<div class="row">
-	    <h2>3. 고객님이 사이트를 알게된 경로를 선택해주세요</h2>
+	    <h2>3. 고객님이 사이트를 알게된 경로를 선택해주세요.</h2>
 	</div>
 	<div class="row">
 		<label>
@@ -144,7 +144,7 @@
 </div>
 <div class="page">
 	<div class="row">
-	    <h2>6. 쇼핑몰에 만족도를 선택해주세요</h2>
+	    <h2>6. 쇼핑몰에 만족도를 선택해주세요.</h2>
 	</div>
 	<div class="row">
 		<label>
@@ -170,7 +170,7 @@
 </div>
 <div class="page">
 	<div class="row">
-	    <h2>7. 고객님의 지불방식을 선택해주세요</h2>
+	    <h2>7. 고객님의 지불방식을 선택해주세요.</h2>
 	</div>
 	<div class="row">
 		<label>
@@ -206,7 +206,7 @@
 </div>
 <div class="page">
 	<div class="row">
-	    <h2>9. 쇼핑몰 이용시 불편사항을 적어주세요</h2>
+	    <h2>9. 쇼핑몰 이용시 불편사항을 적어주세요.</h2>
 	    <textarea class="input w-100 fix-size" name="researchComplain"></textarea>
 	</div>
     <div class="row float-container">
@@ -216,7 +216,7 @@
 </div>
 <div class="page">
 	<div class="row">
-	    <h2>10. 온라인몰 관련 개선사항 등 여러 아이디어를 기술해주세요</h2>
+	    <h2>10. 온라인몰 관련 개선사항 등 여러 아이디어를 기술해주세요.</h2>
 	    <textarea class="input w-100 fix-size" name="researchIdea"></textarea>
 	</div>
 	<div class="row float-container">
@@ -225,7 +225,7 @@
 	</div>
 </div>
 <!-- 설문조사 끝나면 활성화시키기 -->
-<div class="row center">
+<div class="row right">
     <button type="submit" class="btn btn-positive" disabled>제출하기</button>
 </div>
 
