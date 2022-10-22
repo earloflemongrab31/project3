@@ -6,7 +6,7 @@
 
 <form action="insert" method="post" class="research-form">
 
-	<div class="container-800 mt-50">
+	<div class="container-700 mt-50">
 	
 	<div class="row center mb-50">
 	    <h1>고객만족 설문조사</h1>
