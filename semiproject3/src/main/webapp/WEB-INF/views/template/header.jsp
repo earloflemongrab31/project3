@@ -131,7 +131,7 @@
 		});
 	});
 	
-	/* 프로그레스바 */
+	/* 설문조사 버튼 & 프로그레스바 */
 	$(function(){
         //1. 첫번째 이전버튼과 마지막 다음버튼을 삭제
         $(".prev").first().remove();
@@ -170,6 +170,30 @@
             //% 감소
             percent -= step;
             $(".progressbar > .inner").css("width", percent+"%");
+        });
+        
+        //항목에 체크가 되어야 다음 버튼 활성화
+        $("input").on("input", function(){
+            // console.log($(this).parent().parent().next().find(".next"));
+            if($(this).prop("checked")){
+                $(this).parent().parent().next().find(".next").attr("disabled", false);
+            }
+        });
+        
+        $("textarea").on("input", function(){
+            // console.log($(this).val().length);
+            if($(this).val().length >= 10){
+                $(this).parent().next().find(".next").attr("disabled", false);
+            }
+        });
+
+        // 모든 항목 입려 시 제출 버튼 활성화
+        $(".research-form").submit(function(){
+            var successAnswer = $(".last-answer").val().length >= 10;
+            if(successAnswer){
+                return true;
+            }
+            return false;
         });
 	});
 	
