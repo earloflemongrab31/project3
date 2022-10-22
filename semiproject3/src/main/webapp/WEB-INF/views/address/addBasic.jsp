@@ -30,6 +30,7 @@
                <th width="10%">우편번호</th>
                <th width="35%">기본주소</th>
                <th width="25%">상세주소</th>
+               <th width="10%">대표여부</th>
             </tr>
          </thead>
             
@@ -44,7 +45,7 @@
                   <td>   ${addressDto.addressPost}</td>
                   <td>${addressDto.addressHost}</td>
                   <td>${addressDto.addressDetailHost}</td>
-            
+            	  <td>${addressDto.addressBasic}</td>
          
                </tr>
             </c:forEach>
@@ -54,9 +55,7 @@
 
    <div class="row right">
       <a class="btn btn-positive" href="insert">새주소 등록</a>
-      <input type="button" onclick="upGo()"; value="수정하기" />
-      <input type="button" onclick="delNo()"; value="삭제하기" />
-       <input type="button" onclick="add()"; value="기본등록하기" />
+      <input type="button" onclick="upGo()"; value="기본배송지 설정" />
    </div>
 
 </div>
@@ -73,35 +72,24 @@ function upGo(){
 					count += 1;
     });
 	
+	
+	
 	if(count > 1 || count == 0){
+		alert("기본배송지는 하나만 선택 가능합니다.");
 		return false;
 	}else{
-	$("input[name='addressNo']:checked").each(function(i) {
-		checkboxValues.push($(this).val());
-    });
-	window.location = "http://localhost:8888/address/edit?addressNo=" + checkboxValues;
+		
+	    $("input[name='addressNo']:checked").each(function(i) {
+	        checkboxValues.push($(this).val());
+	        alert(checkboxValues);
+	    });
+	    alert(checkboxValues);
+	    var allData = { "addressNo": checkboxValues, "addressBasic" :  "Y"};
 	}
-}
-
-function add(){
-	window.location = "http://localhost:8888/address/addBasic"
-	}
-
-
-function delNo(){
-  
-    // name이 같은 체크박스의 값들을 배열에 담는다.
-    var checkboxValues = [];
-    $("input[name='addressNo']:checked").each(function(i) {
-        checkboxValues.push($(this).val());
-    });
-     
-    // 사용자 ID(문자열)와 체크박스 값들(배열)을 name/value 형태로 담는다.
-    var allData = { "addressNo": checkboxValues };
-     
+	
     $.ajax({
-        url:"delete",
-        type:'GET',
+        url:"addBasic",
+        type:'POST',
         data: allData,
  
  

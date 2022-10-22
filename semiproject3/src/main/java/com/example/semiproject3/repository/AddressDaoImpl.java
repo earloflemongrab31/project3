@@ -28,22 +28,26 @@ public class AddressDaoImpl implements AddressDao{
 
 	//등록
 	@Override
-	public void insert(AddressDto addressDto) {
+	public List<AddressDto> insert(AddressDto addressDto) {
 		String sql = "insert into address("
 				+ "address_no,"
 				+ "customer_id,"
 				+ "address_name,"
 				+ "address_post,"
 				+ "address_host,"
-				+ "address_detail_host)"
-				+ "values(address_seq.nextval, ?, ?, ?, ?, ?)";
+				+ "address_detail_host,"
+				+ "address_basic)"
+				+ "values(?, ?, ?, ?, ?, ?,'Y')";
 		Object[] param = {
+				addressDto.getAddressNo(),
 				addressDto.getCustomerId(),
 				addressDto.getAddressName(), addressDto.getAddressPost(),
 				addressDto.getAddressHost(), addressDto.getAddressDetailHost()
 				
+				
 		};
 		jdbcTemplate.update(sql, param);
+		return null;
 	}
 
 	//RowMapper
@@ -130,10 +134,45 @@ public class AddressDaoImpl implements AddressDao{
 
 	//주소 삭제
 	@Override
-	public boolean delete(List<Integer> addressNo) {
+	public boolean delete(int addressNo) {
 		String sql = "delete address where address_no = ?";
 		Object[] param = {addressNo};
 		return jdbcTemplate.update(sql, param ) > 0;
+	}
+	
+	// 기본배송지 업데이트
+	@Override
+	public boolean addBasic(int addressNo, String addBasic) {
+		String sql = "update address set "
+				+ "address_basic=? where address_no = ?";
+		Object[] param = {
+				addBasic, 
+				addressNo
+		};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	@Override
+	public boolean addBasicUpdate(int addressNo) {
+		String sql = "update address set "
+				+ "address_basic= 'N' where address_no != ?";
+		Object[] param = {
+				addressNo
+		};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+
+		//처음 주소 등록할때 
+	@Override
+	public boolean basicUpdate(int addressNo) {
+//		System.out.println("이값이 뭐죠? :" +addressNo);
+		String sql = "update address set "
+				+ "address_basic='N'"
+				+ "where address_no != ?";
+		Object[] param = {
+				addressNo
+		};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 
 	

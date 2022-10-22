@@ -37,6 +37,9 @@ public class AddressController {
       
       addressDao.insert(addressDto);
       
+      addressDao.basicUpdate(addressNo);
+      
+      
       return "redirect:list";
    }
    
@@ -58,7 +61,6 @@ public class AddressController {
    //수정
    @GetMapping("/edit")
    public String edit(Model model, @RequestParam int addressNo) {
-      
       model.addAttribute("addressDto", addressDao.selectOne(addressNo));
       return "address/edit";
       
@@ -67,10 +69,11 @@ public class AddressController {
    @PostMapping("/edit")
    public String edit(@ModelAttribute AddressDto addressDto,
          RedirectAttributes attr) {
+	  
    boolean result = addressDao.update(addressDto);
    if(result) {
       attr.addAttribute("addressNo", addressDto.getAddressNo());
-      return "redirect:detail";
+      return "redirect:list";
    }
    else {
       throw new TargetNotFoundException("주소 없음");
@@ -80,9 +83,10 @@ public class AddressController {
    //삭제
    @GetMapping("/delete")
    public String delete(@RequestParam(value="addressNo[]") List<Integer> addressNo) {
-      System.out.println(addressNo);
-    boolean result = addressDao.delete(addressNo);
-
+	   
+     for( int i = 0; i < addressNo.size(); i++) {
+    	 boolean result = addressDao.delete(addressNo.get(i));
+     }
       if(true) {   
          return "redirect:list";
       }
