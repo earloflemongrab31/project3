@@ -15,7 +15,20 @@ public class ResearchDaoImpl implements ResearchDao{
 	//insert 
 	@Override
 	public void insert(ResearchDto researchDto) {
-		String sql="insert into research values(research_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,sysdate)";
+		String sql="insert into research("
+				+ "research_number,"
+				+ "research_customerid,"
+				+ "research_sex,"
+				+ "research_age,"
+				+ "research_path,"
+				+ "research_interest,"
+				+ "research_best,"
+				+ "research_satisfaction,"
+				+ "research_payment,"
+				+ "research_purpose,"
+				+ "research_complain,"
+				+ "research_idea) "
+				+ "values(research_seq.nextval,?,?,?,?,?,?,?,?,?,?,?)";
 		Object param[]= {
 				researchDto.getResearchCustomerId(),
 				researchDto.getResearchSex(),

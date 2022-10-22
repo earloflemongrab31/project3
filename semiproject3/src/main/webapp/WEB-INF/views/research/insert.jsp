@@ -12,7 +12,7 @@
 	<h1>고객만족 설문조사</h1>
 </div>
 <div class="row">
-	<input type="hidden" name="ResearchCustomerId" class="input input-none" value="아이디">
+	<input type="hidden" name="researchCustomerId" class="input input-none" value="${loginId}">
 </div>
 <div class="row">
 	<div class="progressbar"><div class="inner"></div></div>
@@ -148,10 +148,10 @@
 	</div>
 	<div class="row">
 		<label>
-		    <input type="radio" name="researchSatisfaction" value="매우 만족스럽다.">매우 만족스럽다.
+		    <input type="radio" name="researchSatisfaction" value="매우 만족">매우 만족
 		</label>
 		<label>
-		    <input type="radio" name="researchSatisfaction" value="만족스럽다.">만족스럽다.
+		    <input type="radio" name="researchSatisfaction" value="만족">만족
 		</label>
 		<label>
 		    <input type="radio" name="researchSatisfaction" value="보통">보통
@@ -226,7 +226,7 @@
 </div>
 <!-- 설문조사 끝나면 활성화시키기 -->
 <div class="row right">
-    <button type="submit" class="btn btn-positive" disabled>제출하기</button>
+    <button type="submit" class="btn btn-positive">제출하기</button>
 </div>
 
 </div>
