@@ -171,6 +171,30 @@
             percent -= step;
             $(".progressbar > .inner").css("width", percent+"%");
         });
+        
+        //항목에 체크가 되어야 다음 버튼 활성화
+        $("input").on("input", function(){
+            // console.log($(this).parent().parent().next().find(".next"));
+            if($(this).prop("checked")){
+                $(this).parent().parent().next().find(".next").attr("disabled", false);
+            }
+        });
+        
+        $("textarea").on("input", function(){
+            // console.log($(this).val().length);
+            if($(this).val().length >= 10){
+                $(this).parent().next().find(".next").attr("disabled", false);
+            }
+        });
+
+        // 모든 항목 입려 시 제출 버튼 활성화
+        $(".research-form").submit(function(){
+            var successAnswer = $(".last-answer").val().length >= 10;
+            if(successAnswer){
+                return true;
+            }
+            return false;
+        });
 	});
 	
 	/* 로그인 페이지 토글 */
