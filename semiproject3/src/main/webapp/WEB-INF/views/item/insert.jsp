@@ -21,11 +21,11 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<td>카테고리</td>
+					<td class="w-25">카테고리</td>
 					<td>
 				        <select name="main">
 				            <option>대분류</option>
-				            <option>------</option>
+				            <option disabled>------</option>
 
 				            <option data-main="outer">OUTER</option>
 				            <option data-main="top">TOP</option>
@@ -36,7 +36,7 @@
 				        </select>
 				        <select name="cateCode">
 				            <option>소분류</option>
-				            <option>------</option>
+				            <option disabled>------</option>
 				
 				            <option class="option-hide outer" value="101">자켓</option>
 				            <option class="option-hide outer" value="102">코트</option>
@@ -66,67 +66,82 @@
 				        </select>
 					</td>
 				</tr>
+				<tr>
+					<td>색상</td>
+					<td>
+						<select name="itemColor">
+							<option value="">선택</option>
+				            <option disabled>------</option>
+							<option>Black</option>
+							<option>White</option>
+							<option>Blue</option>
+							<option>Red</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>사이즈</td>
+					<td>
+						<select name="itemSize">
+							<option value="">선택</option>
+				            <option disabled>------</option>
+							<option>S</option>
+							<option>M</option>
+							<option>L</option>
+							<option>XL</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>상품명</td>
+					<td>
+						<input name="itemName" type="text" required
+							class="input w-100" autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>상품 요약설명</td>
+					<td>
+						<input name="itemMemo" type="text" required
+							class="input w-100" autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>가격</td>
+					<td>
+						<input name="itemPrice" type="number" required
+							class="input w-100" autocomplete="off">
+					</td>
+				</tr>
+				<tr valign="middle">
+					<td>상품 상세설명</td>
+					<td>
+						<textarea class="input w-100 fix-size"
+							name="itemContent" rows="10" cols="75" required></textarea>
+					</td>
+				</tr>
+				<tr>
+					<!-- 이미지 첨부파일 -->
+					<td>상품 이미지</td>
+					<td>
+						<input class="input w-100"
+							name="itemImage" type="file" accept=".png, .jpg" multiple>
+					</td>
+				</tr>
 			</tbody>
+			<tfoot>
+				<tr class="right">
+					<td colspan="2">
+						<a class="btn btn-neutral" href="list">목록</a>
+						<button class="btn btn-positive" type="submit">등록</button>
+					</td>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
-	<div class="row">
-		<label> 색상 <select name="itemColor">
-				<option value="">선택</option>
-				<option>Black</option>
-				<option>White</option>
-				<option>Blue</option>
-				<option>Red</option>
-		</select>
-		</label>
-	</div>
-	<div class="row">
-		<label> 사이즈 <select name="itemSize">
-				<option value="">선택</option>
-				<option>S</option>
-				<option>M</option>
-				<option>L</option>
-				<option>XL</option>
-		</select>
-		</label>
-	</div>	
-
-	<div class="row">
-		<label> 상품명 <input name="itemName" type="text" required
-			class="input mt-10 w-100" autocomplete="off">
-		</label>
-	</div>
-
-	<div class="row">
-		<label> 상품메모 <input name="itemMemo" type="text" required
-			class="input mt-10 w-100" autocomplete="off">
-		</label>
-	</div>
-
-	<div class="row">
-		<label> 가격 <input name="itemPrice" type="number" required
-			class="input mt-10 w-100" autocomplete="off">
-		</label>
-	</div>
-
-	<div class="row w-100">
-		<label> 상품 설명 <textarea class="input mt-10 w-100"
-				name="itemContent" rows="10" cols="75" required></textarea>
-		</label>
-	</div>
 	
-	<!-- 이미지 첨부파일 -->
-	<div class="row">
-		<label> 상품 이미지 <input class="input mt-10 w-100 "
-			name="itemImage" type="file" accept=".png, .jpg" multiple>
-		</label>
 	</div>
 
-	<div class="row right">
-		<a class="btn btn-neutral" href="list">목록</a>
-		<button class="btn btn-positive" type="submit">등록</button>
-	</div>
-
-	</div>
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
