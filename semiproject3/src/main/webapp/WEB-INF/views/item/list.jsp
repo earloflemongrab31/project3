@@ -19,6 +19,7 @@
 			<thead>
 				<tr>
 					<th>상품번호</th>
+					<th>카테고리번호</th>
 					<th>상품메모</th>
 					<th>상품명</th>
 					<th>상품금액</th>
@@ -38,6 +39,7 @@
 			
 				<tr>
 				<td>${itemDto.itemNo}</td>
+				<td>${itemDto.cateCode}</td>
 					<td>${itemDto.itemMemo}</td>
 					<td>
 						<a href="detail?itemNo=${itemDto.itemNo}">
