@@ -48,7 +48,7 @@ public class AddBasicController {
 	   for(int i = 0; i < addressNo.size(); i++) {
     	 result = addressDao.addBasic(addressNo.get(i),addressBasic);
     		if(result) {
-//    			System.out.println("통과되나?");
+//    			System.out.println("통과체크");
     		addressDao.addBasicUpdate(addressNo.get(i));
     		}
 	   }

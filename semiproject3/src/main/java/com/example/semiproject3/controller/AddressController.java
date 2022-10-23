@@ -55,6 +55,12 @@ public class AddressController {
       else { //목록
          model.addAttribute("list", addressDao.selectList());
       }
+      
+      
+
+    List<AddressDto>listBaisc=addressDao.selectOneBasic();
+  	model.addAttribute("listBaisc", listBaisc);
+        
       return "address/list";
    }
    

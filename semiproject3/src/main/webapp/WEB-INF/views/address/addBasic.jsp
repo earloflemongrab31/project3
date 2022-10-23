@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="주소목록" name="title"/>
+    <jsp:param value="기본배송지 등록" name="title"/>
 </jsp:include>
 
 <script src="/confirm-link.js"></script> 
@@ -13,9 +13,16 @@
 <div class ="container-800 mt-40 mb-40">
 
    <div class = "row center">
-      <h1>주소목록</h1>
+      <h1>기본 배송지 등록	</h1>
       <hr>
    </div>
+   
+      <div class="row right">
+		<a class="btn btn-positive" href="insert">새주소 등록</a>
+		<a class="btn btn-positive" href="list">주소 목록으로 돌아가기</a>
+	</div>
+   
+   
 
    <div class = "row">
       <table class="table table-hover table-border">
@@ -25,12 +32,12 @@
                   <input type="checkbox" class="check-all">
                </th>
                
-               <th>번호</th>
-               <th width="20%">배송지명</th>
+               <th width="10%">번호</th>
+               <th width="10%">배송지명</th>
                <th width="10%">우편번호</th>
-               <th width="35%">기본주소</th>
-               <th width="25%">상세주소</th>
-               <th width="10%">대표여부</th>
+               <th width="30%">기본주소</th>
+               <th width="20%">상세주소</th>
+               <th width="15%">기본배송지여부</th>
             </tr>
          </thead>
             
@@ -40,9 +47,9 @@
                   <td>
                      <input type="checkbox" class="check-item" name="addressNo" value="${addressDto.addressNo}">
                   </td>
-                  <td>   ${addressDto.addressNo}</td>
-                  <td>   ${addressDto.addressName}</td>
-                  <td>   ${addressDto.addressPost}</td>
+                  <td>${addressDto.addressNo}</td>
+                  <td>${addressDto.addressName}</td>
+                  <td>${addressDto.addressPost}</td>
                   <td>${addressDto.addressHost}</td>
                   <td>${addressDto.addressDetailHost}</td>
             	  <td>${addressDto.addressBasic}</td>
@@ -54,8 +61,7 @@
    </div>
 
    <div class="row right">
-      <a class="btn btn-positive" href="insert">새주소 등록</a>
-      <input type="button" onclick="upGo()"; value="기본배송지 설정" />
+      <input type="button"  class="btn btn-positive" onclick="upGo()"; value="기본배송지등록" />
    </div>
 
 </div>
@@ -75,15 +81,15 @@ function upGo(){
 	
 	
 	if(count > 1 || count == 0){
-		alert("기본배송지는 하나만 선택 가능합니다.");
+		alert("미선택 또는 복수선택은 불가합니다.");
 		return false;
 	}else{
 		
 	    $("input[name='addressNo']:checked").each(function(i) {
 	        checkboxValues.push($(this).val());
-	        alert(checkboxValues);
+	     //   alert(checkboxValues); 값 체크
 	    });
-	    alert(checkboxValues);
+	//   alert(checkboxValues); 값 체크
 	    var allData = { "addressNo": checkboxValues, "addressBasic" :  "Y"};
 	}
 	
@@ -103,7 +109,7 @@ function upGo(){
 //에러가 발생되면 출력되는 메시지
  
         error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+            alert("미선택 또는 복수선택은 불가합니다." + textStatus + " : " + errorThrown);
             self.close();
         }
     });

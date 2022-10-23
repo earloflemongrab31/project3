@@ -16,8 +16,13 @@ public interface AddressDao {
 	List<AddressDto> selectList();
 	List<AddressDto> selectList(String type, String keyword);
 	
+	
+	List<AddressDto> selectOneBasic();
+	
+	
 	//셀렉트원
 	AddressDto selectOne(int addressNo);
+
 	
 	//수정 , 삭제
 	boolean update(AddressDto addressDto);

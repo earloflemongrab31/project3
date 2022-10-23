@@ -175,5 +175,11 @@ public class AddressDaoImpl implements AddressDao{
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 
+	@Override
+	public List<AddressDto> selectOneBasic() {
+			String sql = "select * from address where address_basic = 'Y'";
+			return jdbcTemplate.query(sql, mapper);
+		}
+
 	
 }
