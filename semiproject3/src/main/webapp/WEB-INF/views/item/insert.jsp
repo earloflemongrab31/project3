@@ -10,58 +10,77 @@
 
 <form action="insert" method="post" enctype="multipart/form-data">
 
-	<div class ="container-600">
+	<div class ="container-600 mt-50 mb-50">
 	
-	<div class="row">
+	<div class="row center mb-30">
 		<h1>상품 등록</h1>
 		<hr>
 	</div>
 	
 	<div class="row">
-		<label> 카테고리 <select name="cateCode">
-				<option value="">선택</option>
-				<optgroup label="OUTER">
-					<option value="101">자켓</option>
-					<option value="102">코트</option>
-					<option value="103">가디건</option>
-					<option value="104">패딩</option>
-				</optgroup>
-				<optgroup label="TOP">
-					<option value="201">민소매</option>
-					<option value="202">티셔츠</option>
-					<option value="203">맨투맨</option>
-					<option value="204">니트</option>
-					<option value="205">블라우스</option>
-				</optgroup>
-				<optgroup label="PANTS">
-					<option value="301">청바지</option>
-					<option value="302">면바지</option>
-					<option value="303">슬랙스</option>
-				</optgroup>
-				<optgroup label="SKIRT">
-					<option value="401">숏기장</option>
-					<option value="402">롱기장</option>
-				</optgroup>
-				<optgroup label="DRESS">
-					<option value="501">원피스</option>
-				</optgroup>
-				<optgroup label="ACC">
-					<option value="601">쥬얼리</option>
-					<option value="602">모자</option>
-					<option value="603">가방</option>
-					<option value="604">신발</option>
-					<option value="605">양말</option>
-				</optgroup>
-		</select>
-		
-		</label> <label> 색상 <select name="itemColor">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td>카테고리</td>
+					<td>
+				        <select name="main">
+				            <option>대분류</option>
+				            <option>------</option>
+
+				            <option data-main="outer">OUTER</option>
+				            <option data-main="top">TOP</option>
+				            <option data-main="pants">PANTS</option>
+				            <option data-main="skirt">SKIRT</option>
+				            <option data-main="dress">DRESS</option>
+				            <option data-main="acc">ACC</option>
+				        </select>
+				        <select name="cateCode">
+				            <option>소분류</option>
+				            <option>------</option>
+				
+				            <option class="option-hide outer" value="101">자켓</option>
+				            <option class="option-hide outer" value="102">코트</option>
+				            <option class="option-hide outer" value="103">가디건</option>
+				            <option class="option-hide outer" value="104">패딩</option>
+				
+				            <option class="option-hide top" value="201">민소매</option>
+				            <option class="option-hide top" value="202">티셔츠</option>
+				            <option class="option-hide top" value="203">맨투맨</option>
+				            <option class="option-hide top" value="204">니트</option>
+				            <option class="option-hide top" value="205">블라우스</option>
+				
+				            <option class="option-hide pants" value="301">청바지</option>
+				            <option class="option-hide pants" value="302">면바지</option>
+				            <option class="option-hide pants" value="303">슬랙스</option>
+				
+				            <option class="option-hide skirt" value="401">숏기장</option>
+				            <option class="option-hide skirt" value="402">롱기장</option>
+				
+				            <option class="option-hide dress" value="501">원피스</option>
+				
+				            <option class="option-hide acc" value="601">쥬얼리</option>
+				            <option class="option-hide acc" value="602">모자</option>
+				            <option class="option-hide acc" value="603">가방</option>
+				            <option class="option-hide acc" value="604">신발</option>
+				            <option class="option-hide acc" value="605">양말</option>
+				        </select>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<label> 색상 <select name="itemColor">
 				<option value="">선택</option>
 				<option>Black</option>
 				<option>White</option>
 				<option>Blue</option>
 				<option>Red</option>
 		</select>
-		</label> <label> 사이즈 <select name="itemSize">
+		</label>
+	</div>
+	<div class="row">
+		<label> 사이즈 <select name="itemSize">
 				<option value="">선택</option>
 				<option>S</option>
 				<option>M</option>
@@ -69,7 +88,7 @@
 				<option>XL</option>
 		</select>
 		</label>
-	</div>
+	</div>	
 
 	<div class="row">
 		<label> 상품명 <input name="itemName" type="text" required
