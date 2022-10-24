@@ -109,9 +109,10 @@
 
 <!--고객 관리 테이블   -->
     <div class="row corp-list">
-    <div class="row">
-        <h2>협력사 리스트</h2>
-    </div>
+	    <div class="row">
+	        <h2>협력사 리스트</h2>
+	    </div>
+	</div>
     <div class="row">
     <table class="table table-border">
             <thead>
