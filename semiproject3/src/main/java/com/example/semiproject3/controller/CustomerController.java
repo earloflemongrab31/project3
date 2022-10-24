@@ -154,6 +154,8 @@ public class CustomerController {
 			return "redirect:checkPassword";
 		}
 	}
+	
+	//비밀번호 변경
 	@GetMapping("/changePassword")
 	public String changePassword() {
 		return "customer/changePassword";
