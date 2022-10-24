@@ -42,11 +42,46 @@
 <!-- <script src="http://code.jquery.com/jquery-3.6.1.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
+<!-- summernote 라이브러리 -->
+<link rel="stylesheet" type="text/css" href="/summernote/summernote-lite.css">
+<script src="/summernote/summernote-lite.js"></script>
+<script src="/summernote/lang/summernote-ko-KR.min.js"></script>
+
 <style>
-
+    /* 카테고리 대분류-소분류 */
+  	option.option-hide{
+        display: none;
+    }
+    option.option-view{
+        display: block;
+    }
 </style>
-<script>
+<script type="text/javascript">
 
+	//카테고리 대분류 선택 시 해당 소분류 출력
+	$(function(){
+	    $("select[name=main]").on("input", function(){
+	        var main = $(this).find("option:selected").data("main");
+	
+	        //소분류 option-view 클래스 우선 지우기
+	        $("select[name=cateCode]").children().removeClass("option-view");
+	
+	        //대분류에 속한 소분류 option-view 클래스 추가
+	        $(".option-hide."+main).addClass("option-view");
+	        
+	    });
+	});
+	
+    $(function(){
+        $("textarea.content").summernote({
+            height: 200,//높이
+            minHeight: 300,
+            maxHeight: 300,
+            placeholder: "내용을 작성하세요.",//도움말
+            lang: "ko-KR"//언어 설정
+        });
+    });
+	
 </script>
 
 </head>

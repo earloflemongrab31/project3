@@ -85,8 +85,37 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public int selectOrders(String loginId) {
-		String sql = "select count(*) from orders_list_view where customer_id=?";
+		String sql = "select count(*) from orders where customer_id=?";
 		Object[] param = {loginId};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	
+	//번호를 미리 생성한 뒤 등록하는 기능
+	@Override
+	public int insert2(OrdersDto ordersDto) {
+		String sql = "select orders_seq.nextval from dual";
+		int itemNo = jdbcTemplate.queryForObject(sql, int.class);
+		
+		sql = "insert into orders(orders_no, item_no, item_name, item_color, item_size, orders_cnt, customer_phone) values(?,?,?,?,?,?,?)";
+		Object[] param = {
+				ordersDto.getOrdersNo(),
+				itemNo,
+				ordersDto.getItemName(),
+				ordersDto.getItemColor(),
+				ordersDto.getItemSize(),
+				ordersDto.getOrdersCnt(),
+				ordersDto.getCustomerPhone()
+				
+		};
+		jdbcTemplate.update(sql, param);
+		return itemNo;
+		
+	}
+
+	@Override
+	public int sequnece() {
+		String sql = "select ordres_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 }

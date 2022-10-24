@@ -9,8 +9,13 @@
 <body>
 비밀번호 변경페이지<br>
 <form action="changePassword" method="post">
+	
+	<label>아이디 입력</label><br>
+	<input type="text" name="customerId"><br>
+	
 	<label>비밀번호 입력</label><br>
-	<input name="customerPw"><br>
+	<input type="password" name="customerPw"><br>
+	
 	<button type="submit">확인</button>
 </form>
 </body>
