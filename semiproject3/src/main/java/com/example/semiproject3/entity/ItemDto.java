@@ -23,4 +23,6 @@ public class ItemDto {
 	private int itemTotalCnt;
 	private int itemLikeCnt;
 	private Date itemDate;
+	private int invenIn;
+	private int invenOut;
 }

@@ -161,9 +161,10 @@ public class CustomerController {
 	@PostMapping("/changePassword")
 	public String changePassword(
 			@RequestParam String customerPw,
-			HttpSession session) {
-		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		customerDao.changePassword(customerPw, loginId);
+			@RequestParam String customerId
+		) {
+		
+		customerDao.changePassword(customerPw, customerId);
 		return "redirect:login";
 	}
 }
