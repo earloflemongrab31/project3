@@ -14,6 +14,7 @@
 	<div class="row">
 	    <input type="hidden" name="researchCustomerId" class="input input-none" value="${loginId}">
 	</div>
+	
 	<div class="row">
 	    <div class="progressbar"><div class="inner"></div></div>
 	</div>
