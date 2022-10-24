@@ -14,7 +14,18 @@
             <hr>
         </div>
 
- 
+ <div class="row center">
+	<form action="invenList" method="get">
+		<select class="input" name="type" required>
+			<option value="item_cate">카테고리</option>
+			<option value="item_name">상품명</option>
+			<option value="inven_inout">입고/출고</option>
+			<option value="inven_name">회사명</option>
+		</select>
+		<input class="input"  name="keyword" required>
+		<button class="btn btn-positive">검색</button>
+	</form>
+	</div>
  <div class ="row center">
          <table class="table table-border table-hover"  >
            <thead>

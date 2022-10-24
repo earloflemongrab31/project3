@@ -39,4 +39,8 @@ public interface CustomerDao {
 	//닉네임 찾기
 	CustomerDto findByNick(String customerNick);
 
+	//개인정보 변경
+	boolean changeInformation(CustomerDto customerDto);
+
+	
 }
