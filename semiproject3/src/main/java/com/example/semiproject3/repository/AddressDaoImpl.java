@@ -93,9 +93,10 @@ public class AddressDaoImpl implements AddressDao{
 	
 	//주소 목록
 	@Override
-	public List<AddressDto> selectList() {
-		String sql = "select * from address order by address_no asc";
-		return jdbcTemplate.query(sql, mapper);
+	public List<AddressDto> selectList(String loginId) {
+		String sql = "select * from address where customer_id = ? order by address_no asc";
+		Object[] param = {loginId};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	//주소 검색
