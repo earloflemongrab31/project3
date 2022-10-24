@@ -9,19 +9,18 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 
-public class OrderDto {
+public class OrdersDto {
 
-	private int orderNo;
+	private int ordersNo;
 	private String customerId;
-	private int cartNo;
 	private int itemNo;
 	private int addressNo;
 	private String itemName;
 	private int itemPrice;
 	private String itemColor;
 	private String itemSize;
-	private int orderCnt;
-	private Date orderDate;
+	private int ordersCnt;
+	private Date ordersDate;
 	private int buyFee;
 	private String customerPhone;
 	
