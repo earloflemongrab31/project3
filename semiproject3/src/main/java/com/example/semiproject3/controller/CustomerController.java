@@ -1,7 +1,5 @@
 package com.example.semiproject3.controller;
 
-import java.util.Set;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CustomerDto;
+import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CenterDao;
 import com.example.semiproject3.repository.CustomerDao;
@@ -32,6 +31,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CartDao cartDao;
+	
+	@Autowired
+	private AddressDao addressDao;
 	
 	
 	@GetMapping("/insert")
@@ -92,6 +94,14 @@ public class CustomerController {
 	public String mypage(Model model, HttpSession session) {
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("customerDto", customerDao.selectOne(loginId));
+		
+		
+		CustomerDto customerDto = customerDao.selectOne(loginId);
+		
+		model.addAttribute("customerDto", customerDto);
+		
+		model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
+		
 		return "customer/detail";
 	}
 	

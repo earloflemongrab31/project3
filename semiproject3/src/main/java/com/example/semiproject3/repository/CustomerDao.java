@@ -2,6 +2,7 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
+import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerDto;
 
 public interface CustomerDao {
@@ -41,6 +42,10 @@ public interface CustomerDao {
 
 	//개인정보 변경
 	boolean changeInformation(CustomerDto customerDto);
+
+
+	List<CustomerDto> selectAddressList(String addressNo, int begin, int end);
+
 
 	
 }
