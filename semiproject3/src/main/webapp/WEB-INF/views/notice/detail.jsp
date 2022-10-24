@@ -8,9 +8,9 @@
 </jsp:include>
 
 
-<div class ="container-600 mt-40 mb-40">
+<div class ="container-600 mt-50 mb-50">
 
-	<div class = "row center">
+	<div class = "row center mb-30">
 		<h1>공지사항 상세내용</h1>
 			<hr>
 	</div>
@@ -68,19 +68,21 @@
 				</tr>
 				</c:if>
 	 		</tbody>
+	 		<tfoot>
+	 			<tr>
+	 				<td class="right" colspan="2">
+						<a class="btn btn-neutral" href="list">목록</a>
+						<c:if test="${loginGrade == '관리자'}">
+							<a class="btn btn-positive" href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>
+							<a class="btn btn-negative" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
+						</c:if>
+					</td>
+				</tr>
+			</tfoot>
 	 	</table>
 	 	
-	 	<div class="row right">
-		<a class="btn btn-positive" href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>
-		<a class="btn btn-negative" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
-		<a class="btn btn-neutral" href="list">목록</a>
-		</div>
 		
 	</div>
 </div>
-	
-	
-	
-	
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
