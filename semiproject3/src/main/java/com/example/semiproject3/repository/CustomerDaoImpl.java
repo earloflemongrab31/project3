@@ -202,4 +202,22 @@ public class CustomerDaoImpl implements CustomerDao{
 			return jdbcTemplate.query(sql, extractor, param);
 		}
 
+	//개인정보 변경
+		@Override
+		public boolean changeInformation(CustomerDto customerDto) {
+			String sql = "update set customer_nick=?, customer_name=?, customer_phone=?, customer_email=?, customer_like=? where customer_id=?";
+			Object[] param = {
+					customerDto.getCustomerNick(), 
+					customerDto.getCustomerName(), 
+					customerDto.getCustomerPhone(), 
+					customerDto.getCustomerEmail(), 
+					customerDto.getCustomerLike(), 
+					customerDto.getCustomerId()
+			};
+			return jdbcTemplate.update(sql, param) > 0;
+		}
+	
+	
+		
+
 }
