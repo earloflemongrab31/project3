@@ -26,17 +26,27 @@
 					<th>상품번호</th>
 					<th>상품명</th>
 					<th>상품금액</th>
-					<th>색상</th>
-					<th>크기</th>
-					<th>주문수량</th>
-					<th>주문날짜</th>
-					<th>배송료</th>
-					<th>핸드폰번호</th>
+					
 				</tr>
 			</thead>
 				
 			<tbody align="center">
-			<c:forEach var="itemDto" items="${list}">
+			<c:forEach var="ordersDto" items="${orders}">
+				
+				
+		<table class="table table-hover table-border">
+		<tbody>
+			<tr>
+			<th>색상</th>
+			<th>크기</th>
+			<th>주문수량</th>
+			<th>주문날짜</th>
+			<th>배송료</th>
+			<th>핸드폰번호</th>
+			</tr>
+		</tbody>
+		</table>
+
 				
 <%--			이미지   --%>
 <!-- 				<tr><td>  -->
@@ -46,15 +56,14 @@
 <!-- 				</tr></td> -->
 			
 				<tr>
-				<td>${itemDto.itemNo}</td>
-					<td>${itemDto.itemMemo}</td>
+				<td>${ordersDto.ordersNo}</td>
+					<td>${ordersDto.customerId}</td>
 					<td>
-						<a href="detail?itemNo=${itemDto.itemNo}">
-							${itemDto.itemName}
+						<a href="detail?itemNo=${ordersDto.itemNo}">
+							${ordersDto.itemName}
 						</a>
 					</td>
-					<td>${itemDto.itemPrice}원</td>
-				</tr>
+						</tr>
 				</c:forEach>
 			</tbody>
 		</table>
