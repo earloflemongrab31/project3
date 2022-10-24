@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,13 +148,17 @@ public class CustomerController {
 	@PostMapping("/checkPassword")
 	public String checkPassword(
 			@RequestParam String customerId,
-			@RequestParam String customerPwsearch) {
+			@RequestParam String customerPwsearch,
+			@RequestParam String customerPw) {
 		boolean checkPassword=customerDao.checkPassword(customerId, customerPwsearch);
+		customerDao.changePassword(customerPw, customerId);
+		
 		if(checkPassword) {
 			return "redirect:changePassword";
 		}else {
-			return "redirect:checkPassword";
+			return "redirect:checkPassword?error";
 		}
+	
 	}
 	@GetMapping("/changePassword")
 	public String changePassword() {

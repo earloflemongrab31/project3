@@ -10,9 +10,12 @@
 
 <div class ="container-800 mt-40 mb-40">
 
+
 	<div class = "row center">
 		<h1>상품 목록</h1>
 	</div>
+	
+	
 	
 	<div class = "row">
 		<table class="table table-hover table-border">
