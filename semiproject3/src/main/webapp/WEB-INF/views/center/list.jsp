@@ -10,7 +10,7 @@
 
 <div class ="container-800 mt-50 mb-50">
 
-	<div class = "row center">
+	<div class = "row center mb-30">
 		<h1>Q&A게시판</h1>
 	</div>
 	

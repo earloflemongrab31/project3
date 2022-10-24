@@ -46,6 +46,11 @@
 <!-- <script src="http://code.jquery.com/jquery-3.6.1.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
+<!-- summernote 라이브러리 -->
+<link rel="stylesheet" type="text/css" href="/summernote/summernote-lite.css">
+<script src="/summernote/summernote-lite.js"></script>
+<script src="/summernote/lang/summernote-ko-KR.min.js"></script>
+
 <style>
 	.input.find{
 	    padding-left: 2em;
@@ -110,7 +115,7 @@
     }
     
 </style>
-<script>
+<script type="text/javascript">
 	$(function(){
 		$(".survey").find(".delete").click(function(){
 			$(".fullscreen").removeClass("fullscreen");
@@ -423,6 +428,16 @@
                 return false;
             }
             return true;
+        });
+    });
+	
+    $(function(){
+        $("[name=customerContent]").summernote({
+            height: 200,//높이
+            minHeight: 300,
+            maxHeight: 300,
+            placeholder: "내용을 작성하세요.",//도움말
+            lang: "ko-KR"//언어 설정
         });
     });
 </script>

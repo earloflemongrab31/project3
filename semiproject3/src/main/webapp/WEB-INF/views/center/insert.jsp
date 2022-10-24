@@ -8,35 +8,46 @@
 </jsp:include>
  
 
-
 <form action="insert" method="post">
 <input name="customerId" type="hidden" value="${loginId}" >
 
-	<div class ="container-600">
+	<div class ="container-800 mt-50 mb-50">
 	
-	<div class="row">
+	<div class="row center mb-30">
 		<h1>Q&A 등록</h1>
 		<hr>
 	</div>
 	
-	<div class="row">
-		<label>제목 <input name="centerTitle" type="text" required
-			class="input mt-10 w-100" autocomplete="off">
-		</label>
-	</div>
-
-
-	<div class="row w-100">
-		<label> 내용 <textarea class="input mt-10 w-100"
-				name="customerContent" rows="10" cols="75" required></textarea>
-		</label>
-	</div>
-
-	<div class="row right">
-		<a class="btn btn-neutral" href="list">목록</a>
-		<button class="btn btn-positive" type="submit">등록</button>
-	</div>
-
+	<table class="table">
+		<tbody>
+			<tr>
+				<td>제목</td>
+			</tr>
+			<tr>
+				<td>
+					<input name="centerTitle" type="text" required
+						class="input mt-10 w-100" autocomplete="off">
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea name="customerContent" rows="10" cols="75" required></textarea>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class="right">
+					<a class="btn btn-neutral" href="list">목록</a>
+					<button class="btn btn-positive" type="submit">등록</button>
+				</td>
+			</tr>
+		</tfoot>				
+	</table>
+	
 	</div>
 </form>
  
