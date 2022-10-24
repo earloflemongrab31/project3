@@ -103,14 +103,14 @@
  	
 <div class="row">
     <button class="btn btn-neutral btn-corp" type="button">
-        협업사 리스트 <i class="fa-solid fa-chevron-right"></i>
+        협력사 리스트 <i class="fa-solid fa-chevron-right"></i>
     </button>
 </div> 	
 
 <!--고객 관리 테이블   -->
-    <div class="row mt-50 corp-list">
+    <div class="row corp-list">
     <div class="row">
-        <h2>협업사 리스트</h2>
+        <h2>협력사 리스트</h2>
     </div>
     <div class="row">
     <table class="table table-border">
