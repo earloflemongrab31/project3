@@ -194,7 +194,7 @@ public class CustomerController {
 		if(passwordMatch) {
 			//(2) 비밀번호 검사를 통과했다면 정보를 변경하도록 처리
 			customerDao.changeInformation(inputDto);
-			return "redirect:detail";
+			return "redirect:mypage";
 		}
 		else {//비밀번호가 틀린 경우
 			return "redirect:information?error";
