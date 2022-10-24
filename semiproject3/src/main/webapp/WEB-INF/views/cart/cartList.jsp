@@ -11,18 +11,20 @@
 	 <h1>CART</h1>
 </div>
 <div class="row center">
-	장바구니 상품(${cartCount})
+		장바구니 상품(${cartCount})
 </div>
 <table class="table table-border">
  	<tbody>
  	<c:forEach var="cartDto" items="${cart}">
- 		<tr>
-	 		<td rowspan="3">
-	 			<img src="/image/download/${cartDto.imageNo}" width="200">
-	 		</td>
-	 		<td colspan="2">${cartDto.cartItemName}</td>
-	 		<td class="right"><a href="delete?itemNo=${cartDto.itemNo}">삭제</a></td>
-		</tr>
+ 		<c:if test="${cartDto.imageMain == 1}">
+	 		<tr>
+		 		<td rowspan="3">
+		 			<img src="/image/download/${cartDto.imageNo}" width="200">
+		 		</td>
+		 		<td colspan="2">${cartDto.cartItemName}</td>
+		 		<td class="right"><a href="delete?itemNo=${cartDto.itemNo}">삭제</a></td>
+			</tr>
+ 		</c:if>
 		<tr>
 			<td>수량</td>
 			<td>?</td>
