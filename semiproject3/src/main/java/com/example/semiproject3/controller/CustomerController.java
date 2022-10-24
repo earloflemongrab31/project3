@@ -177,7 +177,9 @@ public class CustomerController {
 		session.removeAttribute(checkId);
 		return "redirect:login";
 	}
-
+	
+	
+	// 마이페이지 비밀번호 변경
 	@GetMapping("/changePw")
 	public String changePw() {
 		return "customer/changePw";
@@ -187,11 +189,11 @@ public class CustomerController {
 			@RequestParam String customerPw,
 			HttpSession session) {
 		
-		String checkId = (String) session.getAttribute("customerId");
-		CustomerDto dto = customerDao.selectOne(checkId);
-		customerDao.changePassword(customerPw, dto.getCustomerId());
-		session.removeAttribute(checkId);
-		return "redirect:login";
+		String loginId = (String) session.getAttribute("customerId");
+
+		customerDao.changePassword(customerPw, loginId);
+		
+		return "redirect:mypage";
 	}
 
 
