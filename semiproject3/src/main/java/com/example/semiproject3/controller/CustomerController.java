@@ -178,6 +178,22 @@ public class CustomerController {
 		return "redirect:login";
 	}
 
+	@GetMapping("/changePw")
+	public String changePw() {
+		return "customer/changePw";
+	}
+	@PostMapping("/changePw")
+	public String changePw(
+			@RequestParam String customerPw,
+			HttpSession session) {
+		
+		String checkId = (String) session.getAttribute("customerId");
+		CustomerDto dto = customerDao.selectOne(checkId);
+		customerDao.changePassword(customerPw, dto.getCustomerId());
+		session.removeAttribute(checkId);
+		return "redirect:login";
+	}
+
 
 	//개인정보 변경!
 	@GetMapping("/information")

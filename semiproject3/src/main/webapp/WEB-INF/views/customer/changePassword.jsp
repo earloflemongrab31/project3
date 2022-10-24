@@ -4,9 +4,6 @@
 	<jsp:param value="비밀번호 변경 페이지" name="title" />
 </jsp:include>
 
-
-
-
 <form action="changePassword" method="post" autocomplete="off">
 
 	<div class="container-600 mt-40 mb-40">
@@ -36,6 +33,5 @@
 	</div>
 
 </form>
-
 
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
