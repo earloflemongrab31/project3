@@ -65,6 +65,7 @@ public class ItemController {
 	@PostMapping("/insert")
 	public String insert(
 			@ModelAttribute ItemDto itemDto,
+			@RequestParam MultipartFile mainImage,
 			@RequestParam List<MultipartFile> itemImage) throws IllegalStateException, IOException {
 		
 		//등록 아이템에 미리 번호 생성
@@ -73,19 +74,39 @@ public class ItemController {
 		
 		itemDao.insert(itemDto);
 		
+		//번호 생성
+		int imageNo = imageDao.sequence();
+		
 		//아이템을 등록한 후 이미지를 등록 및 연결
-		for(MultipartFile image : itemImage) {
+		//메인 이미지 등록
+		if(!mainImage.isEmpty()) {//메인 이미지가 있다면
+			String imageMain = "1";
+			imageDao.insert(ImageDto.builder()
+					.imageNo(imageNo)
+					.imageName(mainImage.getOriginalFilename())
+					.imageType(mainImage.getContentType())
+					.imageSize(mainImage.getSize())
+					.imageMain(imageMain)
+				.build());
 			
+			//파일 저장
+			File target = new File(directory, String.valueOf(imageNo));
+			mainImage.transferTo(target);
+			
+			//+ 연결 테이블에 연결 정보를 저장(아이템 번호, 이미지 번호)
+			itemDao.connectImage(itemNo,imageNo);
+		}
+		
+		//아이템 이미지 등록
+		for(MultipartFile image : itemImage) {
 			if(!image.isEmpty()) {//이미지가 있다면
-				
 				//이미지 DB에 저장
-				int imageNo = imageDao.sequence();
 				imageDao.insert(ImageDto.builder()
-										.imageNo(imageNo)
-										.imageName(image.getOriginalFilename())
-										.imageType(image.getContentType())
-										.imageSize(image.getSize())
-									.build());
+						.imageNo(imageNo)
+						.imageName(image.getOriginalFilename())
+						.imageType(image.getContentType())
+						.imageSize(image.getSize())
+						.build());
 				//파일 저장
 				File target = new File(directory, String.valueOf(imageNo));
 				image.transferTo(target);

@@ -122,9 +122,16 @@
 				</tr>
 				<tr>
 					<!-- 이미지 첨부파일 -->
-					<td>상품 이미지</td>
+					<td>대표 이미지</td>
 					<td>
 						<input class="input w-100"
+							name="mainImage" type="file" accept=".png, .jpg" >
+					</td>
+				</tr>
+				<tr>
+					<td>상품 이미지</td>
+					<td>
+						<input class="input w-100 "
 							name="itemImage" type="file" accept=".png, .jpg" multiple>
 					</td>
 				</tr>
@@ -141,11 +148,7 @@
 	</div>
 	
 	</div>
-	<div class="row">
-		<label> 상품 이미지 <input class="input mt-10 w-100 "
-			name="itemImage" type="file" accept=".png, .jpg" multiple>
-		</label>
-	</div>
+	
 
 </form>
 
