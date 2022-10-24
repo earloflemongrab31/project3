@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CenterDto;
+import com.example.semiproject3.vo.CenterListSearchVO;
 
 @Repository
 public class CenterDaoImpl implements CenterDao {
@@ -128,5 +129,72 @@ public class CenterDaoImpl implements CenterDao {
 	Object[]param = {centerDto.getAdminContent(), centerDto.getCenterTitle(), centerDto.getCustomerContent(), centerDto.getCenterNo()};		
 	return jdbcTemplate.update(sql, param) > 0;
 		}
+
+	//페이징
+	@Override
+	public int count(CenterListSearchVO vo) {
+		if(vo.isSearch()) { //검색이라면
+			return searchCount(vo);
+		}
+		else { //목록이라면
+			return listCount(vo);
+		}
+	}
+
+	@Override
+	public int searchCount(CenterListSearchVO vo) {
+		String sql = "select count(*) from center where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	@Override
+	public int listCount(CenterListSearchVO vo) {
+		String sql = "select count(*) from center";
+		
+		return jdbcTemplate.queryForObject(sql, int.class);		
+	}
+
+	@Override
+	public List<CenterDto> selectList(CenterListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+
+
+
+	@Override
+	public List<CenterDto> list(CenterListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from center order by center_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+
+
+	@Override
+	public List<CenterDto> search(CenterListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from center where instr(#1,?) > 0 "
+					+ "order by center_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword(), vo.startRow(), vo.endRow()};
+		
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 }
 	

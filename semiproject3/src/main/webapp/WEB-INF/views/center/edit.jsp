@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="문의사항 답변페이지" name="title" />
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
+	<jsp:param value="Q&A게시판" name="title" />
 </jsp:include>
 
 
@@ -16,9 +16,9 @@
 	<input name="centerTitle" type="hidden" value="${centerDto.centerTitle}">
 	<input name="customerContent" type="hidden" value="${centerDto.customerContent}">
 
-	<div class="container-600">
+	<div class="container-800 mt-50 mb-50">
 
-		<div class="row">
+		<div class="row mb-30">
 			<h1>Q&A 답변</h1>
 			<hr>
 		</div>
@@ -40,16 +40,27 @@
 		</div>
 
 
-		<div class="row w-100 mt-50">
-			<label> 답변 <textarea class="input mt-10 w-100"
-					name="adminContent" rows="10" cols="75"></textarea>
-			</label>
-		</div>
-
-
-		<div class="row right">
-			<a class="btn btn-neutral" href="list">목록</a>
-			<button class="btn btn-positive" type="submit">등록</button>
+		<div class="row w-100 mt-30">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>답변</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea class="content" name="adminContent" required></textarea>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="right">
+							<a class="btn btn-neutral" href="list">목록</a>
+							<button class="btn btn-positive" type="submit">등록</button>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
 		</div>
 
 	</div>
