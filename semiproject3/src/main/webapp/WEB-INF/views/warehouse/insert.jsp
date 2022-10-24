@@ -97,8 +97,43 @@
                 </div>
 
     </div>
-        
+    
   </form>
+ 	
+ 	
+ 	
+ <!--고객 관리 테이블   -->
+  <table>
+		<thead>
+			<tr>
+				<th>회사 이름</th>
+				<th>회사 전화번호</th>
+				<th>회사 주소</th>
+				<th>관리자 이름</th>
+				<th>관리자 직급</th>
+				<th>관리자 전화번호</th>
+				<th>특이사항</th>
+				<th>수정/삭제</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="list"  items="${companyList}">
+				<tr>
+					<td>${list.companyName}</td>
+					<td>${list.companyNumber}</td>
+					<td>${list.companyAddress}</td>
+					<td>${list.customerName}</td>
+					<td>${list.customerRank}</td>
+					<td>${list.customerNumber}</td>
+					<td>${list.companyExplan}</td>
+					<td>
+						<a href="/company/update?companyNo=${list.companyNo}"><button>수정</button></a>
+						<a href="/company/delete?companyNo=${list.companyNo}"><button>삭제</button></a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 
 </body>
 </html>

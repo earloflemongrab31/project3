@@ -62,7 +62,5 @@ public class OrdersController {
 	ordersDao.delete(ordersDto);
 		return "redirect:orders/list";
 	}
-	
-		
-	}
+
 }

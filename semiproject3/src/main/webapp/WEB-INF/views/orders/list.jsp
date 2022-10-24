@@ -8,13 +8,11 @@
 
 
 
-
-
 <div class ="container-800 mt-40 mb-40">
 
 
 	<div class = "row center">
-		<h1>상품 목록</h1>
+		<h1>주문 목록</h1>
 	</div>
 	
 	
@@ -23,11 +21,17 @@
 		<table class="table table-hover table-border">
 			<thead>
 				<tr>
+					<th>주문번호</th>
+					<th>회원아이디</th>
 					<th>상품번호</th>
-					<th>상품메모</th>
 					<th>상품명</th>
 					<th>상품금액</th>
-					
+					<th>색상</th>
+					<th>크기</th>
+					<th>주문수량</th>
+					<th>주문날짜</th>
+					<th>배송료</th>
+					<th>핸드폰번호</th>
 				</tr>
 			</thead>
 				
@@ -126,7 +130,9 @@
 		</select>
 			
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>
-			<button class="btn btn-positive">검색</button>
+			<button class="btn btn-positive">검색</button><br><br>
+			<button class="btn btn-postive">결제하기</button><br><br>	
+			<button class="btn btn-positive">돌아가기</button><br><br>
 	</div>
 </form>
 

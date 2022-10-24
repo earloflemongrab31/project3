@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class CompanyDto {
-
+	
 	private int companyNo;
 	private String companyName;
 	private String companyNumber;
@@ -15,7 +15,5 @@ public class CompanyDto {
 	private String customerName;
 	private String customerRank;
 	private String customerNumber;
-	private String customerExplan;
-	
-	
+	private String companyExplan;
 }

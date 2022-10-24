@@ -10,9 +10,18 @@
         
         <div class="row">
             <h1>상품 입/출고 목록</h1>
+            <div class="row center">
+			<form action="itemList" method="get">
+				<select class="input" name="type" required>
+					<option value="cate_code">카테고리</option>
+					<option value="item_name">상품명</option>
+				</select>
+			<input class="input"  name="keyword" required>
+		<button class="btn btn-positive">검색</button>
+	</form>
+	</div>
             <hr>
         </div>
-    
         <div class ="row center">
          	<table class="table table-border table-hover"  >
           		<thead>
