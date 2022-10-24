@@ -1,51 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="비밀번호변경" name="title"/>
+	<jsp:param value="비밀번호 변경 페이지" name="title" />
 </jsp:include>
 
-<form action="changePassword" method="post">
-    <div class="container-300 mt-50 mb-50">
-    
-    <div class="row center mb-30">
-        <h1>비밀번호 변경</h1>
-    </div>
-    
-    <input type="hidden" name="loginId" value="${loginId}">
+<form action="changePassword" method="post" autocomplete="off">
 
-    <div class="row check-pw">
-        <div class="row">
-            <label>기존 비밀번호 입력
-            <input class="input w-100" type="password" name="checkPw">
-            <span class="NNNNN-message">입력하신 정보를 확인해주세요.</span>
-            </label>
-        </div>
-        
-        <div class="row mt-30">
-            <button class="btn btn-neutral w-100 btn-check-pw" type="button">비밀번호 확인</button>
-        </div>
-    </div>
+	<div class="container-600 mt-40 mb-40">
 
-    <div class="row change-pw">
-        <div class="row">
-            <label>변경 비밀번호 입력
-            <input class="input w-100" type="password" name="customerPw">
-            </label>
-        </div>
-        
-        <div class="row">
-            <label>변경 비밀번호 확인
-            <input class="input w-100" type="password" name="repeatPw">
-            </label>
-        </div>
-            
-        <div class="row mt-30">
-            <button class="btn btn-positive w-100" type="submit">변경하기</button>
-        </div>
-    </div>
-        
-    </div>
-    
+		<div class="row center">
+			<h1>비밀번호 변경</h1>
+		</div>
+
+		<div class="row">
+			<h3>비밀번호 입력</h3>
+			<hr>
+		</div>
+
+		<div class="row">
+			<label>변경할 비밀번호</label>
+		</div>
+
+
+		<div class="row">
+			<input type="text" name="customerPw" class="input" required>
+		</div>
+
+
+		<div class="row right">
+			<button class="btn btn-positive w-25 btn-join" type="submit">변경하기</button>
+		</div>
+	</div>
+
 </form>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
