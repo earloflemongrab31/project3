@@ -30,7 +30,7 @@ public class ItemListSearchVO {
 	private int count;
 
 	//화면에 표시할 블럭 개수
-	private int blockSize = 10;
+	private int blockSize = 5;
 	
 	@ToString.Include
 	public int pageCount() {

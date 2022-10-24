@@ -4,9 +4,6 @@
 	<jsp:param value="비밀번호 변경 페이지" name="title" />
 </jsp:include>
 
-
-
-
 <form action="changePassword" method="post" autocomplete="off">
 
 	<div class="container-600 mt-40 mb-40">
@@ -34,6 +31,7 @@
 			<button class="btn btn-positive w-25 btn-join" type="submit">변경하기</button>
 		</div>
 	</div>
+
 </form>
 
 
