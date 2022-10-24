@@ -115,10 +115,10 @@
     }
     
     /* 비밀번호 변경 */
-    .change-pw{
+    .input-pw{
         display: none;
     }
-    .change-pw.NNNNY{
+    .input-pw.NNNNY{
         display: block;
     }
     .check-pw.NNNNY{
@@ -467,7 +467,7 @@
         $(".btn-check-pw").click(function(){
             var inputPw = $(".input[name=checkPw]").val();
             var loginId = $("input[name=loginId]").val();
-            // console.log(inputPw);
+            //console.log(inputPw);
             
             $.ajax({
                 url: "http://localhost:8888/rest/customer/pw",
@@ -478,8 +478,8 @@
                 },
                 success: function(resp){
                     if(resp == "NNNNY"){
-                        $(".input.check-pw").addClass("NNNNY");
-                        $(".input.change-pw").addClass("NNNNY");
+                        $(".check-pw").addClass("NNNNY");
+                        $(".input-pw").addClass("NNNNY");
                     }
                     else{
                     	$(".input[name=checkPw]").addClass("NNNNN");
@@ -487,6 +487,20 @@
                 }
             });
         });
+    });
+    
+    $(function(){
+    	
+	    $("form.change-pw").submit(function(){
+	        $(".input[name=customerPw").blur();
+	        $("#customer-pwcheck").blur();
+	
+	        if($(".input.NNNNY").length == 2){
+	            return true;
+	        }
+	        return false;
+	    });
+	    
     });
 </script>
 
