@@ -17,15 +17,17 @@
 	<div class = "row">
 	
 		<c:forEach var="itemDto" items="${buylist}">
-			<div class="row w-33">
-				<a href="buydetail?itemNo=${itemDto.itemNo}">
-					<img src="/image/download/${itemDto.imageNo}" width="200" height="200" >
-				</a>
-				${itemDto.itemNo}<br>
-				${itemDto.itemName}<br>
-				${itemDto.itemPrice}원<br>
-				${itemDto.itemColor}<br><br>
-			</div>
+			<c:if test="${itemDto.imageMain == 1}">
+				<div class="row w-33">
+					<a href="buydetail?itemNo=${itemDto.itemNo}">
+						<img src="/image/download/${itemDto.imageNo}" width="200" height="200" >
+					</a>
+					${itemDto.itemNo}<br>
+					${itemDto.itemName}<br>
+					${itemDto.itemPrice}원<br>
+					${itemDto.itemColor}<br><br>
+				</div>
+			</c:if>
 		</c:forEach>
 	</div>
 	

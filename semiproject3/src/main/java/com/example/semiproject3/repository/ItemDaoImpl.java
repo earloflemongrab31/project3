@@ -52,6 +52,7 @@ public class ItemDaoImpl implements ItemDao {
 							.itemTotalCnt(rs.getInt("item_total_cnt"))
 							.itemLikeCnt(rs.getInt("item_like_cnt"))
 							.itemDate(rs.getDate("item_date"))
+							.imageMain(rs.getString("image_main"))
 				.build();
 	};
 	
@@ -93,6 +94,7 @@ public class ItemDaoImpl implements ItemDao {
 								.itemTotalCnt(rs.getInt("item_total_cnt"))
 								.itemLikeCnt(rs.getInt("item_like_cnt"))
 								.itemDate(rs.getDate("item_date"))
+								.imageMain(rs.getString("image_main"))
 					.build();
 		}
 		else {
@@ -201,6 +203,13 @@ public class ItemDaoImpl implements ItemDao {
 	public List<BuyListVO> selectBuyList() {
 		String sql = "select * from buy_list_view";
 		return jdbcTemplate.query(sql, buyListMapper);
+	}
+	
+	@Override
+	public List<BuyListVO> selectBuyList(int itemNo) {
+		String sql = "select * from buy_list_view where item_no = ?";
+		Object[] param = {itemNo};
+		return jdbcTemplate.query(sql, buyListMapper, param);
 	}
 	
 	@Override
