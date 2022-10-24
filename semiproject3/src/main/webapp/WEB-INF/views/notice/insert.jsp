@@ -25,6 +25,7 @@
 			<td>
 				<select name="noticeHead">
 					<option value="">선택</option>
+					<option disabled>------</option>
 					<option>긴급</option>
 		            <option>이벤트</option>
 				</select>
