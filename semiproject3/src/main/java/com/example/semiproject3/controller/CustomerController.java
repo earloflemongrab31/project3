@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,24 +140,28 @@ public class CustomerController {
 		}
 	}
 	
+	
 	@GetMapping("/checkPassword")
 	public String checkPassword() {
+		
 		return"customer/checkPassword";
 	}
 	
 	@PostMapping("/checkPassword")
 	public String checkPassword(
 			@RequestParam String customerId,
-			@RequestParam String customerPwsearch) {
+			@RequestParam String customerPwsearch,
+			HttpSession session) {
 		boolean checkPassword=customerDao.checkPassword(customerId, customerPwsearch);
 		if(checkPassword) {
+			session.setAttribute("customerId", customerId);
+			
 			return "redirect:changePassword";
 		}else {
-			return "redirect:checkPassword";
+			return "redirect:checkPassword?error";
 		}
 	}
-	
-	//비밀번호 변경
+
 	@GetMapping("/changePassword")
 	public String changePassword() {
 		return "customer/changePassword";
@@ -163,13 +169,16 @@ public class CustomerController {
 	@PostMapping("/changePassword")
 	public String changePassword(
 			@RequestParam String customerPw,
-			@RequestParam String customerId
-		) {
-		
-		customerDao.changePassword(customerPw, customerId);
+			
+			HttpSession session) {
+		String checkId = (String) session.getAttribute("customerId");
+		CustomerDto dto = customerDao.selectOne(checkId);
+		customerDao.changePassword(customerPw, dto.getCustomerId());
+		session.removeAttribute(checkId);
 		return "redirect:login";
 	}
-	
+
+
 	//개인정보 변경!
 	@GetMapping("/information")
 	public String information(HttpSession session, Model model) {
