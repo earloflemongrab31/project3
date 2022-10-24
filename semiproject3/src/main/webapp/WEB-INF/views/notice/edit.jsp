@@ -59,7 +59,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<textarea name="noticeContent">${noticeDto.noticeContent}</textarea>
+				<textarea class="content" name="noticeContent">${noticeDto.noticeContent}</textarea>
 			</td>
 		</tr>
 	</tbody>
@@ -74,6 +74,7 @@
 	</table>
 
 	</div>
+</div>
 </form>
 
 
