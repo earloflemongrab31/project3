@@ -64,7 +64,7 @@ $(function(){
 
  	<div class="row">
 		<label>배송지명 <input name="addressName" type="text" required
-			class="input mt-10 w-100" autocomplete="off">
+			class="input mt-10 w-100" autocomplete="off" value="${addressDto.addressName}">
 		</label>
 		
 	</div>
@@ -84,20 +84,20 @@ $(function(){
 	</div>
        
     <div class="row">
-        <input type="text" class="input w-100" name="addressHost" placeholder="기본주소" required>
+        <input type="text" class="input w-100" name="addressHost" placeholder="기본주소" required value="${addressDto.addressHost}">
     </div>
 
     <div class="row">
-        <input type="text" class="input w-100" name="addressDetailHost" placeholder="상세주소">
+        <input type="text" class="input w-100" name="addressDetailHost" placeholder="상세주소" value="${addressDto.addressDetailHost}">
     </div>
     
-    
+
     <div class="row right">
 		<button class="btn btn-positive" type="submit">수정</button>
 	</div>
 
 </div>
-</form>
+    </form>
  
 
 

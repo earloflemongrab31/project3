@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,21 @@ public class OrderController {
 	@Autowired
 	private OrderDao orderDao;
 	
+	//기본 주소지 조회
+	@GetMapping("/byOrder")
+	public String selectOrder(HttpSession session, Model model) {
+	   String id = (String) session.getAttribute("loginId");
+	   
+	   model.addAttribute("list",orderDao.selectByOrder(id));	
+	   
+		return "order/byOrder";
+	}
+	
+	@PostMapping("/byOrder")
+	public String UpdateOrder() {
+		return "order/byOrder";
+	}
+		
 	
 	//등록
 	@GetMapping("/insert")

@@ -130,4 +130,11 @@ public class OrderDaoImpl implements OrderDao {
 		Object[] param = {orderNo};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+
+	@Override
+	public OrderDto selectByOrder(String id) {
+		String sql = "select * from customer a left outer join address b on a.customer_id = b.customer_id where a.customer_id=?";
+		Object[] param = {id};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
 }

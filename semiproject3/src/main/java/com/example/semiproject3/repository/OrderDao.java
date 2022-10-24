@@ -15,6 +15,7 @@ public interface OrderDao {
 	//주문 목록
 	List<OrderDto> selectList();
 	List<OrderDto> selectList(String type, String keyword);
+	OrderDto selectByOrder(String id);
 	
 	//주문 정보
 	OrderDto selectOne(int orderNo);

@@ -13,49 +13,93 @@
 <div class ="container-800 mt-40 mb-40">
 
    <div class = "row center">
-      <h1>주소목록</h1>
+      <h1>내 주소 목록</h1>
       <hr>
    </div>
-
-   <div class = "row">
-      <table class="table table-hover table-border">
-         <thead>
-            <tr>
-               <th>
-                  <input type="checkbox" class="check-all">
-               </th>
-               
-               <th>번호</th>
-               <th width="20%">배송지명</th>
-               <th width="10%">우편번호</th>
-               <th width="35%">기본주소</th>
-               <th width="25%">상세주소</th>
-            </tr>
-         </thead>
-            
-         <tbody align="center">
-            <c:forEach var="addressDto" items="${list}">
-               <tr>
-                  <td>
-                     <input type="checkbox" class="check-item" name="addressNo" value="${addressDto.addressNo}">
-                  </td>
-                  <td>   ${addressDto.addressNo}</td>
-                  <td>   ${addressDto.addressName}</td>
-                  <td>   ${addressDto.addressPost}</td>
-                  <td>${addressDto.addressHost}</td>
-                  <td>${addressDto.addressDetailHost}</td>
-            
-         
-               </tr>
-            </c:forEach>
-         </tbody>
-      </table>
-   </div>
-
+   
+   
    <div class="row right">
-      <a class="btn btn-positive" href="insert">새주소 등록</a>
-      <a class="btn btn-positive" href="edit?addressNo=${addressDto.addressNo}">수정하기</a>
-      <input type="button" onclick="delNo()";>삭제하기</a>
+		  <a class="btn btn-positive" href="insert">새주소 등록</a>
+	</div>
+   
+    <div class = "row ">
+      <h3>기본 배송지</h3>
+      <hr>
+      
+      <div class = "row">
+        <table class="table table-hover table-border">
+	         <thead>
+	            <tr>
+	               <th>번호</th>
+	               <th width="20%">배송지명</th>
+	               <th width="10%">우편번호</th>
+	               <th width="35%">기본주소</th>
+	               <th width="25%">상세주소</th>
+	            </tr>
+	         </thead>
+	            
+	         <tbody align="center">
+	            <c:forEach var="addressDto" items="${listBaisc}">
+	               <tr>
+	                  <td>${addressDto.addressNo}</td>
+	                  <td>${addressDto.addressName}</td>
+	                  <td>${addressDto.addressPost}</td>
+	                  <td>${addressDto.addressHost}</td>
+	                  <td>${addressDto.addressDetailHost}</td>
+	               </tr>
+	            </c:forEach>
+	         </tbody>
+	      </table>
+	      
+		  <div class="row right">
+     	 <input type="button" onclick="add()";  class="btn btn-positive"  value="기본배송지 변경하러 가기" />
+   		</div>
+      </div>
+  
+   
+ 
+    <div class = "row ">
+      <h3>배송지 목록</h3>
+      <hr>
+  
+	   <div class = "row">
+	      <table class="table table-hover table-border">
+	         <thead>
+	            <tr>
+	               <th>
+	                  <input type="checkbox" class="check-all">
+	               </th>
+	               
+	               <th>번호</th>
+	               <th width="20%">배송지명</th>
+	               <th width="10%">우편번호</th>
+	               <th width="35%">기본주소</th>
+	               <th width="25%">상세주소</th>
+	            </tr>
+	         </thead>
+	            
+	         <tbody align="center">
+	            <c:forEach var="addressDto" items="${list}">
+	               <tr>
+	                  <td>
+	                     <input type="checkbox" class="check-item" name="addressNo" value="${addressDto.addressNo}">
+	                  </td>
+	                  <td>${addressDto.addressNo}</td>
+	                  <td>${addressDto.addressName}</td>
+	                  <td>${addressDto.addressPost}</td>
+	                  <td>${addressDto.addressHost}</td>
+	                  <td>${addressDto.addressDetailHost}</td>
+	               </tr>
+	            </c:forEach>
+	         </tbody>
+	      </table>
+	   </div>
+	 </div>
+   
+   <div class="row right">
+
+      <input type="button" onclick="upGo()";  class="btn btn-positive"  value="수정하기" />
+      <input type="button" onclick="delNo()"; class="btn btn-positive"  value="삭제하기" />
    </div>
 
 </div>
@@ -64,15 +108,36 @@
 
 
 <script>
-function delNo(){
 
-    alert("일로오나?");
+function upGo(){
+	var checkboxValues = [];
+	var count = 0;
+	$("input[name='addressNo']:checked").each(function(i) {
+					count += 1;
+    });
+	
+	if(count > 1 || count == 0){
+		alert("미선택 또는 복수선택은 불가합니다.");
+		return false;
+	}else{
+	$("input[name='addressNo']:checked").each(function(i) {
+		checkboxValues.push($(this).val());
+    });
+	window.location = "http://localhost:8888/address/edit?addressNo=" + checkboxValues;
+	}
+}
+
+function add(){
+	window.location = "http://localhost:8888/address/addBasic"
+	}
+
+
+function delNo(){
   
     // name이 같은 체크박스의 값들을 배열에 담는다.
     var checkboxValues = [];
     $("input[name='addressNo']:checked").each(function(i) {
         checkboxValues.push($(this).val());
-        alert(checkboxValues[i]);
     });
      
     // 사용자 ID(문자열)와 체크박스 값들(배열)을 name/value 형태로 담는다.
@@ -87,20 +152,17 @@ function delNo(){
 //데이터 전송이 완료되면 출력되는 메시지
  
         success:function(data){
-            alert("완료!");
-            window.opener.location.reload();
-            self.close();
+        	
+            location.replace("list");
         },
  
 //에러가 발생되면 출력되는 메시지
  
         error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+        	alert("미선택 또는 복수선택은 불가합니다.");
             self.close();
         }
     });
 }
-
-
 
 </script>
