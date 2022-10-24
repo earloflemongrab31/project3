@@ -25,7 +25,6 @@ public class OrdersDaoImpl implements OrdersDao {
 			OrdersDto ordersDto = new OrdersDto();
 			ordersDto.setOrdersNo(rs.getInt("orders_no"));
 			ordersDto.setCustomerId(rs.getString("customer_id"));
-			ordersDto.setCartNo(rs.getInt("cart_no"));
 			ordersDto.setItemNo(rs.getInt("item_no"));
 			ordersDto.setAddressNo(rs.getInt("address_no"));
 			ordersDto.setItemName(rs.getString("item_name"));
@@ -42,10 +41,9 @@ public class OrdersDaoImpl implements OrdersDao {
 	
 	@Override
 	public void insert(OrdersDto ordersDto) {
-		String sql = "insert into orders values(orders_seq.nextval,?,?,?,?,?,?,?,?,0,sysdate,3000,?)";
+		String sql = "insert into orders values(orders_seq.nextval,?,?,?,?,?,?,?,0,sysdate,3000,?)";
 		Object[] param = {
 				ordersDto.getCustomerId(),
-				ordersDto.getCartNo(),
 				ordersDto.getItemNo(),
 				ordersDto.getAddressNo(),
 				ordersDto.getItemName(),

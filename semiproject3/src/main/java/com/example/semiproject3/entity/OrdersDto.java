@@ -13,7 +13,6 @@ public class OrdersDto {
 
 	private int ordersNo;
 	private String customerId;
-	private int cartNo;
 	private int itemNo;
 	private int addressNo;
 	private String itemName;

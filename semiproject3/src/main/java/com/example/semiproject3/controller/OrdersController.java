@@ -20,6 +20,7 @@ public class OrdersController {
 	@Autowired
 	private OrdersDao ordersDao;
 	
+	//목록
 	@GetMapping("/list")
 	public String list(Model model, HttpSession session) {
 		
@@ -29,6 +30,7 @@ public class OrdersController {
 		return "orders/list";
 	}
 	
+	//삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int itemNo,HttpSession session) {
 	
