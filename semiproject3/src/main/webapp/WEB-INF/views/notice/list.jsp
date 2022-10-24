@@ -26,7 +26,7 @@
 				<tr>
 					<th>공지번호</th>
 					<th>말머리</th>
-					<th class="50">제목</th>
+					<th class="w-50">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
