@@ -21,6 +21,8 @@
  						<th>상품이름</th>
 				 		<th>상품사이즈</th>
 				 		<th>상품컬러</th>
+				 		<th>총입고</th>
+				 		<th>총출고</th>
 				 		<th>현재재고</th>
 				 		<th>등록</th>
  					</tr>
@@ -33,6 +35,8 @@
 							<td>${item.itemName }</td>
 							<td>${item.itemSize}</td>
 							<td>${item.itemColor}</td>
+							<td>${item.invenIn}</td>
+							<td>${item.invenOut}</td>
 							<td>${item.itemTotalCnt}</td>
 							<td>
 								<a href="insert?itemNo=${item.itemNo}">
@@ -42,6 +46,7 @@
  					</c:forEach>
  				</tbody>
        		</table>
+       	
         </div>
     </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

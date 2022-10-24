@@ -47,4 +47,5 @@ public interface ItemDao {
 	
 	//상품 구매(회원용)
 	BuyListVO selectBuyOne(int itemNo);
+	
 }

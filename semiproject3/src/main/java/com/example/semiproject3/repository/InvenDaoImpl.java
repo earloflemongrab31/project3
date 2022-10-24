@@ -78,4 +78,32 @@ public class InvenDaoImpl implements InvenDao{
 		};
 		jdbcTemplate.update(sql,param);
 	}
+	@Override
+	public void invenIn(int quantity,int itemNo) {
+		String sql="update item set inven_in=inven_in+? where item_no=?";
+		Object[] param= {
+				quantity,
+				itemNo
+		};
+		jdbcTemplate.update(sql,param);
+		
+	}
+	@Override
+	public void invenOut(int quantity,int itemNo) {
+		String sql="update item set inven_out=inven_out+? where item_no=?";
+		Object[] param= {
+				quantity,
+				itemNo
+		};
+		jdbcTemplate.update(sql,param);
+		
+	}
+	
+	@Override
+	public List<InvenDto> selectList(String type, String keyword) {
+		String sql="select * from inven where instr(#1,?)>0";
+		sql=sql.replace("#1", type);
+		Object[] param= {keyword};
+		return jdbcTemplate.query(sql, mapper,param);
+	}
 }
