@@ -28,59 +28,15 @@
 				        <select name="main">
 				            <option>대분류</option>
 				            <option disabled>------</option>
-							<c:choose>
-							<c:when test="${itemDto.cateCode == '101' || itemDto.cateCode == '102' 
-									|| itemDto.cateCode == '103' || itemDto.cateCode == '104'}">
-					            <option data-main="outer" selected>OUTER</option>
-					            <option data-main="top">TOP</option>
-					            <option data-main="pants">PANTS</option>
-					            <option data-main="skirt">SKIRT</option>
-					            <option data-main="dress">DRESS</option>
-					            <option data-main="acc">ACC</option>
-				            </c:when>
-							<c:when test="${itemDto.cateCode == '201' || itemDto.cateCode == '202' 
-									|| itemDto.cateCode == '203' || itemDto.cateCode == '204' || itemDto.cateCode == '205'}">
-					            <option data-main="outer">OUTER</option>
-					            <option data-main="top" selected>TOP</option>
-					            <option data-main="pants">PANTS</option>
-					            <option data-main="skirt">SKIRT</option>
-					            <option data-main="dress">DRESS</option>
-					            <option data-main="acc">ACC</option>
-				            </c:when>
-							<c:when test="${itemDto.cateCode == '301' || itemDto.cateCode == '302' || itemDto.cateCode == '303'}">
-				        	    <option data-main="outer">OUTER</option>
-				    	        <option data-main="top">TOP</option>
-					            <option data-main="pants" selected>PANTS</option>
-					            <option data-main="skirt">SKIRT</option>
-					            <option data-main="dress">DRESS</option>
-					            <option data-main="acc">ACC</option>
-				            </c:when>
-							<c:when test="${itemDto.cateCode == '401' || itemDto.cateCode == '402'}">
-					            <option data-main="outer">OUTER</option>
-					            <option data-main="top">TOP</option>
-					            <option data-main="pants">PANTS</option>
-					            <option data-main="skirt" selected>SKIRT</option>
-					            <option data-main="dress">DRESS</option>
-					            <option data-main="acc">ACC</option>
-				            </c:when>
-							<c:when test="${itemDto.cateCode == '501'}">
-					            <option data-main="outer">OUTER</option>
-					            <option data-main="top">TOP</option>
-					            <option data-main="pants">PANTS</option>
-					            <option data-main="skirt">SKIRT</option>
-					            <option data-main="dress" selected>DRESS</option>
-				    	        <option data-main="acc">ACC</option>
-				            </c:when>
-				            <c:otherwise>
-					            <option data-main="outer">OUTER</option>
-					            <option data-main="top">TOP</option>
-					            <option data-main="pants">PANTS</option>
-					            <option data-main="skirt">SKIRT</option>
-					            <option data-main="dress">DRESS</option>
-					            <option data-main="acc" selected>ACC</option>
-				            </c:otherwise>
-				            </c:choose>
+				            
+				            <option <c:if test="${itemDto.cateCode == '101'}">selected</c:if>data-main="outer" selected>OUTER</option>
+				            <option data-main="top">TOP</option>
+				            <option data-main="pants">PANTS</option>
+				            <option <c:if test="${itemDto.cateCode == '401'}">selected</c:if>data-main="skirt">SKIRT</option>
+				            <option data-main="dress">DRESS</option>
+				            <option data-main="acc">ACC</option>
 				        </select>
+				        
 				        <select name="cateCode">
 				            <option>소분류</option>
 				            <option disabled>------</option>
