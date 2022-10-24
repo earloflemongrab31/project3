@@ -29,10 +29,10 @@
 				            <option>대분류</option>
 				            <option disabled>------</option>
 				            
-				            <option <c:if test="${itemDto.cateCode == '101'}">selected</c:if>data-main="outer" selected>OUTER</option>
+				            <option data-main="outer">OUTER</option>
 				            <option data-main="top">TOP</option>
 				            <option data-main="pants">PANTS</option>
-				            <option <c:if test="${itemDto.cateCode == '401'}">selected</c:if>data-main="skirt">SKIRT</option>
+				            <option data-main="skirt">SKIRT</option>
 				            <option data-main="dress">DRESS</option>
 				            <option data-main="acc">ACC</option>
 				        </select>
@@ -41,7 +41,7 @@
 				            <option>소분류</option>
 				            <option disabled>------</option>
 				
-				            <option <c:if test="${itemDto.cateCode == '101'}">selected</c:if>class="option-hide outer" value="101">자켓</option>
+				            <option class="option-hide outer" value="101">자켓</option>
 				            <option class="option-hide outer" value="102">코트</option>
 				            <option class="option-hide outer" value="103">가디건</option>
 				            <option class="option-hide outer" value="104">패딩</option>
