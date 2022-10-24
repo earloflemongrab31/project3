@@ -16,9 +16,9 @@
 	<input name="centerTitle" type="hidden" value="${centerDto.centerTitle}">
 	<input name="customerContent" type="hidden" value="${centerDto.customerContent}">
 
-	<div class="container-600">
+	<div class="container-800 mt-50 mb-50">
 
-		<div class="row">
+		<div class="row mb-30">
 			<h1>Q&A 답변</h1>
 			<hr>
 		</div>
@@ -41,8 +41,18 @@
 
 
 		<div class="row w-100 mt-50">
-			<label> 답변 <textarea class="input mt-10 w-100"
-					name="adminContent" rows="10" cols="75"></textarea>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>답변</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea class="content" name="adminContent" required></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 			</label>
 		</div>
 

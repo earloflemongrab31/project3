@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<textarea name="noticeContent"></textarea>
+				<textarea class="content" name="noticeContent" required></textarea>
 			</td>
 		</tr>
 	</tbody>

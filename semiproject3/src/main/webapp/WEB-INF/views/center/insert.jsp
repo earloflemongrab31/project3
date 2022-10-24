@@ -34,7 +34,7 @@
 			</tr>
 			<tr>
 				<td>
-					<textarea name="customerContent" rows="10" cols="75" required></textarea>
+					<textarea class="content" name="customerContent" required></textarea>
 				</td>
 			</tr>
 		</tbody>
