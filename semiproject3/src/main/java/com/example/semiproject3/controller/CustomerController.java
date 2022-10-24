@@ -166,4 +166,70 @@ public class CustomerController {
 		customerDao.changePassword(customerPw, loginId);
 		return "redirect:login";
 	}
+	
+	//개인정보 변경!
+	@GetMapping("/information")
+	public String information(HttpSession session, Model model) {
+		String customerId = (String) session.getAttribute(SessionConstant.ID);
+		CustomerDto customerDto = customerDao.selectOne(customerId);
+		model.addAttribute("customerDto", customerDto);
+		return "customer/information";
+	}
+	
+	@PostMapping("/information")
+	public String information(
+			HttpSession session, 
+			@ModelAttribute CustomerDto inputDto) {
+		
+		String customerId = (String)session.getAttribute(SessionConstant.ID);
+		inputDto.setCustomerId(customerId);
+		
+		
+		//(1) 비밀번호를 검사
+		CustomerDto findDto = customerDao.selectOne(customerId);
+		boolean passwordMatch = 
+				inputDto.getCustomerPw().equals(findDto.getCustomerPw());
+		
+		if(passwordMatch) {
+			//(2) 비밀번호 검사를 통과했다면 정보를 변경하도록 처리
+			customerDao.changeInformation(inputDto);
+			return "redirect:detail";
+		}
+		else {//비밀번호가 틀린 경우
+			return "redirect:information?error";
+		}
+	}
+	
+	//회원 탈퇴 기능
+	@GetMapping("/goodbye")
+	public String goodbye() {
+		return "customer/goodbye";
+	}
+	
+	@PostMapping("/goodbye")
+	public String goodbye(HttpSession session, 
+						@RequestParam String customerPw) {
+		String customerId = (String)session.getAttribute(SessionConstant.ID);
+		CustomerDto customerDto = customerDao.selectOne(customerId);
+		boolean passwordMatch = 
+				customerPw.equals(customerDto.getCustomerPw());
+		if(passwordMatch) {
+			//회원 탈퇴
+			customerDao.delete(customerId);
+			
+			//로그 아웃
+			session.removeAttribute(SessionConstant.ID);
+			session.removeAttribute(SessionConstant.GRADE);
+			return "redirect:goodbye_result";
+		}
+		else {
+			return "redirect:goodbye?error";
+		}
+	}
+	
+	@GetMapping("/goodbye_result")
+	public String goodbyeResult() {
+		return "customer/goodbyeResult";
+	}
+
 }
