@@ -23,8 +23,17 @@ public class InvenController {
 	InvenDao invenDao;
 	
 	@GetMapping("/itemList")
-	public String itemList(Model model) {
-		model.addAttribute("itemList",itemDao.selectList());
+	public String itemList(
+			Model model,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
+			boolean isSearch = type != null && keyword != null;
+			if(isSearch) {//검색
+				model.addAttribute("itemList", itemDao.selectList(type, keyword));
+				}
+			else {//목록
+				model.addAttribute("itemList", itemDao.selectList());
+				}
 		return "warehouse/itemList";
 	}
 	

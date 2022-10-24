@@ -146,7 +146,8 @@ public class CustomerController {
 	@PostMapping("/checkPassword")
 	public String checkPassword(
 			@RequestParam String customerId,
-			@RequestParam String customerPwsearch) {
+			@RequestParam String customerPwsearch,
+			HttpSession session) {
 		boolean checkPassword=customerDao.checkPassword(customerId, customerPwsearch);
 		if(checkPassword) {
 			return "redirect:changePassword";
