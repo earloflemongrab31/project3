@@ -46,6 +46,7 @@ public interface ItemDao {
 	List<BuyListVO> selectBuyList();
 	
 	//상품 구매(회원용)
+	List<BuyListVO> selectBuyList(int itemNo);
 	BuyListVO selectBuyOne(int itemNo);
 	
 }
