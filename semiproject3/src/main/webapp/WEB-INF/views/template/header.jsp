@@ -598,9 +598,10 @@
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
 	<li class="float-right cart"><a href="/cart/cartList"><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
-	<form action="#" method="get">
+	<form action="buylist" method="get">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
-		<input class="float-right input input-underline find" name="#" id="search" placeholder="가을 신상">
+		<input type="hidden" name="type" value="item_name">
+		<input class="float-right input input-underline find" name="keyword" id="search" placeholder="가을 신상">
 	</form>
 		<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
 	<c:choose>
