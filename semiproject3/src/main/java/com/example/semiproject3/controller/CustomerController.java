@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CustomerDto;
+import com.example.semiproject3.repository.CartDao;
+import com.example.semiproject3.repository.CenterDao;
 import com.example.semiproject3.repository.CustomerDao;
 
 @Controller
@@ -23,6 +25,13 @@ public class CustomerController {
 	@Autowired
 	private CustomerDao customerDao;
 
+	@Autowired
+	private CenterDao centerDao;
+	
+	@Autowired
+	private CartDao cartDao;
+	
+	
 	@GetMapping("/insert")
 	public String insert() {
 		return "customer/insert";
