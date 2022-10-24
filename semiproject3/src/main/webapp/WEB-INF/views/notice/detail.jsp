@@ -2,10 +2,11 @@
 		pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-   
+
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="상품 상세 페이지" name="title"/>
+    <jsp:param value="공지사항" name="title"/>
 </jsp:include>
+
 
 <div class ="container-600 mt-40 mb-40">
 

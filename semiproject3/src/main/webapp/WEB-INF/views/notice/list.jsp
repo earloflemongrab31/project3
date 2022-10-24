@@ -14,9 +14,9 @@
 </jsp:include>
 
 
-<div class ="container-800 mt-40 mb-40">
+<div class ="container-800 mt-50 mb-50">
 
-	<div class = "row center">
+	<div class = "row center mb-30">
 		<h1>공지사항</h1>
 	</div>
 	
@@ -26,7 +26,7 @@
 				<tr>
 					<th>공지번호</th>
 					<th>말머리</th>
-					<th width="45%">제목</th>
+					<th class="50">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
@@ -81,7 +81,6 @@
 	<div class="row right">
 		<a class="btn btn-positive" href="insert">공지사항 등록</a>
 	</div>
-
 
 
 <!-- 페이지 네비게이터 -->
@@ -164,5 +163,7 @@
 	</div>
 	
 </form>
+
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
