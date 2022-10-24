@@ -4,12 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-    <jsp:param value="공지사항 등록 페이지" name="title"/>
+    <jsp:param value="공지사항" name="title"/>
 </jsp:include>
  
 
-<form action="insert" method="post" enctype="multipart/form-data">
-<%-- <input name="adminId" type="hidden" value="${noticeDto.adminId}" > --%>
+<form action="insert" method="post">
+<input name="adminId" type="hidden" value="${loginId}" >
 	<div class ="container-800 mt-50 mb-50">
 	
 	<div class="row center mb-30">
