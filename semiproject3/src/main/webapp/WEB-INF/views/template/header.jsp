@@ -432,7 +432,7 @@
     });
 	
     $(function(){
-        $("[name=customerContent]").summernote({
+        $("textarea.content").summernote({
             height: 200,//높이
             minHeight: 300,
             maxHeight: 300,

@@ -40,7 +40,7 @@
 		</div>
 
 
-		<div class="row w-100 mt-50">
+		<div class="row w-100 mt-30">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -52,14 +52,15 @@
 						</td>
 					</tr>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td class="right">
+							<a class="btn btn-neutral" href="list">목록</a>
+							<button class="btn btn-positive" type="submit">등록</button>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
-			</label>
-		</div>
-
-
-		<div class="row right">
-			<a class="btn btn-neutral" href="list">목록</a>
-			<button class="btn btn-positive" type="submit">등록</button>
 		</div>
 
 	</div>
