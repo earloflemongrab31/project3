@@ -24,4 +24,5 @@ public class BuyListVO {
 	private int itemTotalCnt;
 	private int itemLikeCnt;
 	private Date itemDate;
+	private String imageMain;
 }
