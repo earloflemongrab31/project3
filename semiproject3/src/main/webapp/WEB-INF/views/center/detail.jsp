@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="Q&A 페이지" name="title"/>
+    <jsp:param value="Q&A게시판" name="title"/>
 </jsp:include>
 
 
