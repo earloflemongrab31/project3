@@ -17,7 +17,7 @@
          	<table class="table table-border table-hover"  >
           		<thead>
  					<tr>
- 						<th>주문번호</th>
+ 						<th>회원아이디</th>
  						<th>회원아이디</th>
 				 		<th>상품번호</th>
 				 		<th>주소번호</th>
@@ -34,6 +34,14 @@
  					</tr>
  				</thead>
         
+        <table class="table table-border table-hover" >
+        	<thead>
+        		<tr>
+        		
+        	
+         		</tr>
+         		</thead>
+        </table>
            		<tbody>
 				 <c:forEach var="orders" items="${orders}">
 				 		<tr>
