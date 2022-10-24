@@ -69,7 +69,7 @@
 				<tr>
 					<th>Qnty</th>
 					<td>
-						<input class="w-20" type="number" name="itemTotalCnt" min="0">
+						<input class="w-20" type="number" name="itemCnt" min="0">
 					</td>
 				</tr>
 				<tr>

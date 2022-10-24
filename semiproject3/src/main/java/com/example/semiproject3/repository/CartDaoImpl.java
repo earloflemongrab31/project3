@@ -47,6 +47,7 @@ public class CartDaoImpl implements CartDao{
 								.cartItemSize(rs.getString("cart_item_size"))
 								.cartDate(rs.getDate("cart_date"))
 								.cartItemMoney(rs.getInt("cart_item_money"))
+								.imageMain(rs.getString("image_main"))
 							.build();
 	};
 	
@@ -93,9 +94,16 @@ public class CartDaoImpl implements CartDao{
 		return jdbcTemplate.query(sql,mapper,param);
 	}
 	
+//	@Override
+//	public int selectCart(String loginId) {
+//		String sql="select count(*) from cart where customer_id=?";
+//		Object[] param= {loginId};
+//		return jdbcTemplate.queryForObject(sql, int.class, param);
+//	}
+	
 	@Override
 	public int selectCart(String loginId) {
-		String sql="select count(*) from cart where customer_id=?";
+		String sql="select count(*) from cart_list_view where customer_id=? and image_main = 1";
 		Object[] param= {loginId};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
