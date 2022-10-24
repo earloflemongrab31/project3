@@ -2,14 +2,15 @@
 		pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-   
+
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="상품 상세 페이지" name="title"/>
+    <jsp:param value="공지사항" name="title"/>
 </jsp:include>
 
-<div class ="container-600 mt-40 mb-40">
 
-	<div class = "row center">
+<div class ="container-600 mt-50 mb-50">
+
+	<div class = "row center mb-30">
 		<h1>공지사항 상세내용</h1>
 			<hr>
 	</div>
@@ -22,15 +23,15 @@
 	 				<th>공지번호</th>
 	 				<td>${noticeDto.noticeNo}</td>
 	 			</tr>
-	 			
-	 			<tr>
-				<th>말머리</th>
-				<td>${noticeDto.noticeHead}</td>
-				</tr>
 				
 				<tr>
 					<th>제목</th>
-					<td>${noticeDto.noticeTitle}</td>
+					<td>
+						<c:if test="${noticeDto.noticeHead != null}">
+							[${noticeDto.noticeHead}]
+						</c:if>	
+						${noticeDto.noticeTitle}
+					</td>
 				</tr>
 				
 				<tr>
@@ -67,19 +68,21 @@
 				</tr>
 				</c:if>
 	 		</tbody>
+	 		<tfoot>
+	 			<tr>
+	 				<td class="right" colspan="2">
+						<a class="btn btn-neutral" href="list">목록</a>
+						<c:if test="${loginGrade == '관리자'}">
+							<a class="btn btn-positive" href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>
+							<a class="btn btn-negative" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
+						</c:if>
+					</td>
+				</tr>
+			</tfoot>
 	 	</table>
 	 	
-	 	<div class="row right">
-		<a class="btn btn-positive" href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>
-		<a class="btn btn-negative" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
-		<a class="btn btn-neutral" href="list">목록</a>
-		</div>
 		
 	</div>
 </div>
-	
-	
-	
-	
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

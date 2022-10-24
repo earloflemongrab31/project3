@@ -4,17 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="Q&A 페이지" name="title"/>
+    <jsp:param value="Q&A게시판" name="title"/>
 </jsp:include>
 
 
 
 
-<div class ="container-600 mt-40 mb-40">
+<div class ="container-600 mt-50 mb-50">
 
-	<div class = "row center">
+	<div class = "row center mb-30">
 		<h1>Q&A</h1>
-			<hr>
+		<hr>
 	</div>
 	
 <div class ="row">
@@ -52,7 +52,7 @@
 		 		<tr>
 					<th>작성일</th>
 					<td>
-						<fmt:formatDate value="${centerDto.customerDate}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+						<fmt:formatDate value="${centerDto.customerDate}" pattern="y년 M월 d일 E요일 hh:mm:ss"/>
 					</td>
 				</tr>
 		 	</tbody>
@@ -60,7 +60,7 @@
 	 </div>
 	 
 	 
-	 <c:if test="${centerDto.adminContent != null}">
+	<c:if test="${centerDto.adminContent != null}">
 	<div class ="row">
 	
 		<div class = "row">
@@ -87,7 +87,7 @@
 				<tr>
 					<th>등록일</th>
 					<td>
-						<fmt:formatDate value="${centerDto.adminDate}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+						<fmt:formatDate value="${centerDto.adminDate}" pattern="y년 M월 d일 E요일 hh:mm:ss"/>
 					</td>
 				</tr>
 			 </c:if>
@@ -98,9 +98,11 @@
 	 </c:if>
 	 
 	 	<div class="row right">
-		<a class="btn btn-positive" href="edit?centerNo=${centerDto.centerNo}">답변등록</a>
-		<a class="btn btn-negative" href="delete?centerNo=${centerDto.centerNo}">삭제하기</a>
 		<a class="btn btn-neutral" href="list">목록</a>
+		<c:if test="${loginGrade == '관리자'}">
+			<a class="btn btn-positive" href="edit?centerNo=${centerDto.centerNo}">답변등록</a>
+			<a class="btn btn-negative" href="delete?centerNo=${centerDto.centerNo}">삭제하기</a>
+		</c:if>
 		</div>
 		
 	</div>

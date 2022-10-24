@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.semiproject3.entity.CenterDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.CenterDao;
+import com.example.semiproject3.vo.CenterListSearchVO;
 
 @Controller
 @RequestMapping("/center")
@@ -38,16 +39,16 @@ public class CenterController {
 	
 	//목록(타입&키워드)
 	@GetMapping("/list")
-	public String list(Model model, 
-					@RequestParam(required = false) String type,
-					@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) { // 검색
-			model.addAttribute("list", centerDao.selectList(type, keyword));
-		}
-		else { //목록
-			model.addAttribute("list", centerDao.selectList());
-		}
+	public String list(
+			Model model, 
+			@ModelAttribute(name="vo") CenterListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = centerDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", centerDao.selectList(vo));
+		
 		return "center/list";
 	}
 	 

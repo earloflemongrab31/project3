@@ -33,7 +33,7 @@ public class InvenController {
 			@RequestParam int itemNo,
 			Model model) {
 		//하나의 아이템정보를 가지고와서 화면에 뿌려준다. 
-		model.addAttribute("itemList",itemDao.selectOne(itemNo));
+			model.addAttribute("itemList", itemDao.selectOne(itemNo));
 		return "warehouse/insert";
 	}
 	@PostMapping("/insert")
@@ -41,9 +41,11 @@ public class InvenController {
 		invenDao.insert(invenDto);
 		if((invenDto.getInvenStatus()).equals("입고완료")){
 			invenDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+			invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
 			return "redirect:invenList";
 		}else if((invenDto.getInvenStatus()).equals("출고완료")) {
 			invenDao.minus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+			invenDao.invenOut(invenDto.getInvenQuantity(), invenDto.getItemNo());
 			return "redirect:invenList";
 		}else {
 			return "redirect:invenList";
@@ -51,8 +53,18 @@ public class InvenController {
 		
 	}
 	@GetMapping("/invenList")
-	public String invenList(Model model) {
-		model.addAttribute("invenList",invenDao.selectList());
+	public String invenList(
+			Model model,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
+		
+			boolean isSearch = type != null && keyword != null;
+				if(isSearch) {//검색
+					model.addAttribute("invenList", invenDao.selectList(type, keyword));
+					}
+				else {//목록
+					model.addAttribute("invenList", invenDao.selectList());
+					}
 		return "/warehouse/invenList";
 	}
 	
