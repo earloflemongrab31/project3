@@ -8,9 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class AddressDto {
+public class AddressEditDto {
 
-	private int addressNo;
+	private List<Integer> addressNo;
 	private String customerId;
 	private String addressName;
 	private String addressPost;
@@ -19,3 +19,4 @@ public class AddressDto {
 	private String addressBasic;
 	
 }
+

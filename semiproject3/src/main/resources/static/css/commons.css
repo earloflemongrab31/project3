@@ -612,7 +612,7 @@ aside.flexbox> div{
 
 /* 프로그레스바 설정 */
 .progressbar {
-    height:15px;
+    height:5px;
     position: relative;
     top:0;
     left:0;
@@ -625,8 +625,8 @@ aside.flexbox> div{
     left:0;
     bottom:0;
     width:0%;
-    background: rgb(131,58,180);
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+	background: #D0CCB1;
+	background: linear-gradient(90deg, #D0CCB1);
     transition: width 0.2s linear;
 }
 

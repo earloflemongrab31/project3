@@ -17,7 +17,7 @@
 		<h3>가입 축하금 5000P 지급되었습니다.</h3>
 	</div>
 	<div class="row">
-		<a href="/" class="btn btn-positive w-100">쇼핑하러 가기</a>
+		<a href="login" class="btn btn-positive w-100">로그인 하러 가기</a>
 	</div>
 	<div class="row center">
 		&copy; Semi3 Corp. All rights reserved.

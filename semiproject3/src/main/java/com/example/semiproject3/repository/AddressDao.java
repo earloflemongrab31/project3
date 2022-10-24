@@ -10,18 +10,27 @@ public interface AddressDao {
 	int sequence();
 	
 	//등록
-	void insert(AddressDto addressDto);
+	List<AddressDto> insert(AddressDto addressDto);
 	
 	//목록 & 타입키워드 목록
 	List<AddressDto> selectList();
 	List<AddressDto> selectList(String type, String keyword);
 	
+	
+	List<AddressDto> selectOneBasic();
+	
+	
 	//셀렉트원
 	AddressDto selectOne(int addressNo);
+
 	
 	//수정 , 삭제
 	boolean update(AddressDto addressDto);
-	boolean delete(List<Integer> addressNo);
+	boolean delete(int addressNo);
+	boolean addBasic(int addressNo, String addBasic);
+	boolean addBasicUpdate(int addressNo);
+	boolean basicUpdate(int addressNo);
+	
 
 
 }
