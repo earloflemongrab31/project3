@@ -72,7 +72,7 @@
 	
 	<div class="flexbox">
 		<div class="flex-left w-33 center">
-			<a class="btn btn-neutral" href="changePassword" type="password">비밀번호 변경</a>
+			<a class="btn btn-neutral" href="changePw">비밀번호 변경</a>
 		</div>
 		<div class="flex-left w-34 center">
 			<a class="btn btn-neutral" href="information">개인정보 변경</a>

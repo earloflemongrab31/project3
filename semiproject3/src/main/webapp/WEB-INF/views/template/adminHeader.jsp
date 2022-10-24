@@ -55,6 +55,14 @@
     option.option-view{
         display: block;
     }
+    
+    /* 협업사 리스트 */
+    .corp-list{
+        display: none;
+    }
+    .corp-list.show{
+        display: block;
+    }
 </style>
 <script type="text/javascript">
 
@@ -79,6 +87,18 @@
             maxHeight: 300,
             placeholder: "내용을 작성하세요.",//도움말
             lang: "ko-KR"//언어 설정
+        });
+    });
+    
+    //협엽사 리스트
+    $(function(){
+        $(".btn-corp").click(function(){
+            if($(".corp-list").hasClass("show")){
+                $(".corp-list").removeClass("show");
+            }
+            else{
+                $(".corp-list").addClass("show");
+            }
         });
     });
 	
@@ -113,6 +133,7 @@
 		<ul>
 			<li><a href="/item/list">상품목록</a></li>
 			<li><a href="/item/insert">상품등록</a></li>
+			<li><a href="/warehouse/invenList">재고관리</a></li>
 		</ul>
 	</li>
 	<li class="float-left">

@@ -17,9 +17,18 @@
 			<table class="table">
 				<tbody>
 				<tr>
-					<th colspan="2">
-						<img src="/image/download/${itemDto.imageNo}" width="200" >
-					</th>
+						<th colspan="2">
+							<img src="/image/download/${itemDto.imageNo}" width="200" >
+						</th>
+				</tr>
+				<tr>
+					<c:forEach var="itemDto" items="${buylist}">
+						<c:if test="${itemDto.imageMain == 0}">
+							<th colspan="2">
+								<img src="/image/download/${itemDto.imageNo}" width="100" >
+							</th>
+						</c:if>
+					</c:forEach>
 				</tr>
 				<tr>
 					<th colspan="2">${itemDto.itemMemo}</th>
@@ -60,7 +69,7 @@
 				<tr>
 					<th>Qnty</th>
 					<td>
-						<input class="w-20" type="number" name="itemTotalCnt" min="0">
+						<input class="w-20" type="number" name="itemCnt" min="0">
 					</td>
 				</tr>
 				<tr>

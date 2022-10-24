@@ -24,6 +24,7 @@ public class ImageDaoImpl implements ImageDao{
 							.imageType(rs.getString("image_type"))
 							.imageSize(rs.getLong("image_size"))
 							.imageTime(rs.getDate("image_time"))
+							.imageMain(rs.getString("image_main"))
 						.build();
 	};
 	
@@ -36,6 +37,7 @@ public class ImageDaoImpl implements ImageDao{
 					.imageType(rs.getString("image_type"))
 					.imageSize(rs.getLong("image_size"))
 					.imageTime(rs.getDate("image_time"))
+					.imageMain(rs.getString("image_main"))
 				.build();
 		}
 		else {
@@ -54,11 +56,12 @@ public class ImageDaoImpl implements ImageDao{
 	@Override
 	public void insert(ImageDto imageDto) {
 		String sql = "insert into image("
-				+ "image_no, image_name, image_type, image_size"
-				+ ") values(?, ?, ?, ?)";
+				+ "image_no, image_name, image_type, image_size, image_main"
+				+ ") values(?, ?, ?, ?, ?)";
 		Object[] param = {
 				imageDto.getImageNo(), imageDto.getImageName(), 
-				imageDto.getImageType(), imageDto.getImageSize()};
+				imageDto.getImageType(), imageDto.getImageSize(),
+				imageDto.getImageMain()};
 		jdbcTemplate.update(sql, param);
 	}
 	

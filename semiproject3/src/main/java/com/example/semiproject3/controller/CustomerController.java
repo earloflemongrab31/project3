@@ -186,6 +186,24 @@ public class CustomerController {
 		session.removeAttribute(checkId);
 		return "redirect:login";
 	}
+	
+	
+	// 마이페이지 비밀번호 변경
+	@GetMapping("/changePw")
+	public String changePw() {
+		return "customer/changePw";
+	}
+	@PostMapping("/changePw")
+	public String changePw(
+			@RequestParam String customerPw,
+			HttpSession session) {
+		
+		String loginId = (String) session.getAttribute("customerId");
+
+		customerDao.changePassword(customerPw, loginId);
+		
+		return "redirect:mypage";
+	}
 
 
 	//개인정보 변경!

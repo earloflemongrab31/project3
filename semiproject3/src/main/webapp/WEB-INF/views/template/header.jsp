@@ -114,6 +114,27 @@
         display: none;
     }
     
+    /* 비밀번호 변경 */
+    .input-pw{
+        display: none;
+    }
+    .input-pw.NNNNY{
+        display: block;
+    }
+    .check-pw.NNNNY{
+        display: none;
+    }
+
+    .input.NNNNN{
+        border: 1px solid black;
+    }
+    .input.NNNNN ~ .NNNNN-message{
+        display:block;
+    }
+    .NNNNN-message{
+        display:none;
+    }
+
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -439,6 +460,47 @@
             placeholder: "내용을 작성하세요.",//도움말
             lang: "ko-KR"//언어 설정
         });
+    });
+    
+    /* 비밀번호 변경 */
+    $(function(){
+        $(".btn-check-pw").click(function(){
+            var inputPw = $(".input[name=checkPw]").val();
+            var loginId = $("input[name=loginId]").val();
+            //console.log(inputPw);
+            
+            $.ajax({
+                url: "http://localhost:8888/rest/customer/pw",
+                method:"post",
+                data:{
+                    inputPw: inputPw,
+                    loginId: loginId
+                },
+                success: function(resp){
+                    if(resp == "NNNNY"){
+                        $(".check-pw").addClass("NNNNY");
+                        $(".input-pw").addClass("NNNNY");
+                    }
+                    else{
+                    	$(".input[name=checkPw]").addClass("NNNNN");
+                    }
+                }
+            });
+        });
+    });
+    
+    $(function(){
+    	
+	    $("form.change-pw").submit(function(){
+	        $(".input[name=customerPw").blur();
+	        $("#customer-pwcheck").blur();
+	
+	        if($(".input.NNNNY").length == 2){
+	            return true;
+	        }
+	        return false;
+	    });
+	    
     });
 </script>
 

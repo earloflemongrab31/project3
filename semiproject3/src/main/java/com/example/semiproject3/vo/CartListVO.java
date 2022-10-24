@@ -22,4 +22,5 @@ public class CartListVO {
 	private String cartItemColor;
 	private String cartItemSize;
 	private Date cartDate;
+	private String imageMain;
 }
