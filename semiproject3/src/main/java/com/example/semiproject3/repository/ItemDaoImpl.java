@@ -32,6 +32,8 @@ public class ItemDaoImpl implements ItemDao {
 							.itemTotalCnt(rs.getInt("item_total_cnt"))
 							.itemLikeCnt(rs.getInt("item_like_cnt"))
 							.itemDate(rs.getDate("item_date"))
+							.invenIn(rs.getInt("inven_in"))
+							.invenOut(rs.getInt("inven_out"))
 				.build();
 	};
 	

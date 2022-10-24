@@ -43,10 +43,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
 <style>
-
+    /* 카테고리 대분류-소분류 */
+  	option.option-hide{
+        display: none;
+    }
+    option.option-view{
+        display: block;
+    }
 </style>
 <script>
 
+	//카테고리 대분류 선택 시 해당 소분류 출력
+	$(function(){
+	    $("select[name=main]").on("input", function(){
+	        var main = $(this).find("option:selected").data("main");
+	
+	        //소분류 option-view 클래스 우선 지우기
+	        $("select[name=cateCode]").children().removeClass("option-view");
+	
+	        //대분류에 속한 소분류 option-view 클래스 추가
+	        $(".option-hide."+main).addClass("option-view");
+	        
+	    });
+	});
 </script>
 
 </head>

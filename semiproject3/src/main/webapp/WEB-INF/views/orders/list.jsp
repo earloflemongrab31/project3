@@ -2,9 +2,8 @@
 		pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-   
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="관리자 상품 목록" name="title"/>
+	<jsp:param value="주문 목록" name="title"/>
 </jsp:include>
 
 
@@ -129,3 +128,4 @@
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+

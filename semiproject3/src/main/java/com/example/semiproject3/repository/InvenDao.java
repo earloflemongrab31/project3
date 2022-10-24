@@ -15,5 +15,11 @@ public interface InvenDao {
 	//출고완료 상태일때만 아이템 총수량 업데이트
 	void minus(int quantity, int itemNo);
 	
+	//총입고수량
+	void invenIn(int quantity,int itemNo);
+	//총출고수량
+	void invenOut(int quantity,int itemNo);
+	//검색 선택
+	List<InvenDto> selectList(String type, String keyword);
 	
 }

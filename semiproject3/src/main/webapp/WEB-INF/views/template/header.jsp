@@ -108,6 +108,7 @@
     .admin-message{
         display: none;
     }
+    
 </style>
 <script>
 	$(function(){
@@ -195,8 +196,8 @@
             }
             return false;
         });
-	});
-	
+    });
+        
 	/* 로그인 페이지 토글 */
 	$(function(){
 		$(".user-admin").click(function(){
