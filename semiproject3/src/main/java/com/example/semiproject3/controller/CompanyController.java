@@ -1,7 +1,5 @@
 package com.example.semiproject3.controller;
 
-import java.io.Console;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,9 +28,10 @@ public class CompanyController {
 	public String insert(
 			@ModelAttribute CompanyDto companyDto,
 			RedirectAttributes attr) {
-		companyDto.setCompanyNo(companyDao.sequence());
+		int no=companyDao.sequence();
+		companyDto.setCompanyNo(no);
 		companyDao.insert(companyDto);
-		attr.addAttribute("companyNo",companyDao.sequence());
+		attr.addAttribute("companyNo",companyDto.getCompanyNo());
 		return "redirect:detail";
 	}
 	
@@ -41,7 +40,34 @@ public class CompanyController {
 			@RequestParam int companyNo,
 			Model model
 			){
-		model.addAttribute("a",companyDao.selectOne(companyNo));
+		model.addAttribute("companyDto",companyDao.selectOne(companyNo));
 		return "company/detail";
 	}
+	@GetMapping("/list")
+	public String list(Model model){
+		model.addAttribute("list",companyDao.selectList());
+		return "company/list";
+	}
+	@GetMapping("/delete")
+	public String delete(@RequestParam int companyNo) {
+		companyDao.delete(companyNo);
+		return "redirect:list";
+	}
+	@GetMapping("/update")
+	public String update(
+			@RequestParam int companyNo,
+			Model model) {
+		//하나의 정보를 불러와 jsp에 뿌려준다. 
+		model.addAttribute("companyDto",companyDao.selectOne(companyNo));
+		return "company/update";
+	}
+	@PostMapping("/update")
+	public String update(
+			@ModelAttribute CompanyDto companyDto,
+			RedirectAttributes attr) {
+		companyDao.update(companyDto);
+		attr.addAttribute("companyNo",companyDto.getCompanyNo());
+		return "redirect:detail";
+	}
+	
 }

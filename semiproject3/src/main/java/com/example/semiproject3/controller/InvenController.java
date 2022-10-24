@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.entity.InvenDto;
+import com.example.semiproject3.repository.CompanyDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemDao;
 
@@ -21,6 +22,8 @@ public class InvenController {
 	ItemDao itemDao;
 	@Autowired
 	InvenDao invenDao;
+	@Autowired
+	CompanyDao companyDao;
 	
 	@GetMapping("/itemList")
 	public String itemList(
@@ -43,6 +46,8 @@ public class InvenController {
 			Model model) {
 		//하나의 아이템정보를 가지고와서 화면에 뿌려준다. 
 			model.addAttribute("itemList", itemDao.selectOne(itemNo));
+		//회사 정보를 가지고와서 화면에 뿌려준다. 
+			model.addAttribute("companyList",companyDao.selectList());
 		return "warehouse/insert";
 	}
 	@PostMapping("/insert")

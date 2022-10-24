@@ -14,5 +14,9 @@ public interface CompanyDao {
 	List<CompanyDto> selectList();
 	//디테일목록 
 	CompanyDto selectOne(int companyNo);
+	//삭제
+	boolean delete(int companyNo);
+	//수정
+	boolean update(CompanyDto companyDto);
 	
 }
