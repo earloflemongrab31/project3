@@ -58,8 +58,8 @@ public class AddressController {
       
       
 
-    List<AddressDto>listBaisc=addressDao.selectOneBasic();
-  	model.addAttribute("listBaisc", listBaisc);
+    List<AddressDto>listBasic=addressDao.selectOneBasic();
+  	model.addAttribute("listBasic", listBasic);
         
       return "address/list";
    }
