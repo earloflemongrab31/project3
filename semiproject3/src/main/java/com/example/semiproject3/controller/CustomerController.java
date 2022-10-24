@@ -161,7 +161,6 @@ public class CustomerController {
 			return "redirect:checkPassword?error";
 		}
 	}
-	
 	@GetMapping("/changePassword")
 	public String changePassword() {
 		return "customer/changePassword";
