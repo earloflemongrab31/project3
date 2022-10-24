@@ -8,7 +8,7 @@
 </jsp:include>
 
 
-<div class ="container-800 mt-40 mb-40">
+<div class ="container-800 mt-50 mb-50">
 
 	<div class = "row center">
 		<h1>Q&A게시판</h1>
@@ -19,7 +19,7 @@
 			<thead>
 				<tr>
 					<th>글번호</th>
-					<th width="45%">제목</th>
+					<th width="50%">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
 				</tr>

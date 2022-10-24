@@ -23,15 +23,15 @@
 	 				<th>공지번호</th>
 	 				<td>${noticeDto.noticeNo}</td>
 	 			</tr>
-	 			
-	 			<tr>
-				<th>말머리</th>
-				<td>${noticeDto.noticeHead}</td>
-				</tr>
 				
 				<tr>
 					<th>제목</th>
-					<td>${noticeDto.noticeTitle}</td>
+					<td>
+						<c:if test="${noticeDto.noticeHead != null}">
+							[${noticeDto.noticeHead}]
+						</c:if>	
+						${noticeDto.noticeTitle}
+					</td>
 				</tr>
 				
 				<tr>
