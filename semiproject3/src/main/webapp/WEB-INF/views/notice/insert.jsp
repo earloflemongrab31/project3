@@ -3,55 +3,66 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-    <jsp:param value="공지사항 등록 페이지" name="title"/>
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
+    <jsp:param value="공지사항" name="title"/>
 </jsp:include>
  
 
-
-<form action="insert" method="post" enctype="multipart/form-data">
-<%-- <input name="adminId" type="hidden" value="${noticeDto.adminId}" > --%>
-	<div class ="container-600">
+<form action="insert" method="post">
+<input name="adminId" type="hidden" value="${loginId}" >
+	<div class ="container-800 mt-50 mb-50">
 	
-	<div class="row">
+	<div class="row center mb-30">
 		<h1>공지 사항 작성</h1>
 		<hr>
 	</div>
 	
 	<div class = "row">
-		<label> 말머리
-			<c:if test="${loginGrade == '관리자'}">
+	<table class="table">
+	<tbody>
+		<tr>
+			<td class="w-25">말머리</td>
+			<td>
 				<select name="noticeHead">
 					<option value="">선택</option>
-					<option>긴급</option>
-		            <option>이벤트</option>
+					<option disabled>------</option>
+					<option value="">공지</option>
+					<option value="긴급">긴급</option>
+		            <option value="이벤트">이벤트</option>
 				</select>
-			</c:if>
-		</label>
+			</td>
+		</tr>
+		<tr>
+			<td>제목</td>
+			<td>
+				<input name="noticeTitle" type="text" required	class="input w-100" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">내용</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<textarea class="content" name="noticeContent" required></textarea>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td class="right" colspan="2">
+				<a class="btn btn-neutral" href="list">목록</a>
+				<button class="btn btn-positive" type="submit">등록</button>
+			</td>
+		</tr>
+	</tfoot>
+	</table>
+
 	</div>
 	
-	<div class="row">
-		<label>제목 <input name="noticeTitle" type="text" required
-			class="input mt-10 w-100" autocomplete="off">
-		</label>
-	</div>
-
-
-	<div class="row w-100">
-		<label> 내용 <textarea class="input mt-10 w-100"
-				name="noticeContent" rows="10" cols="75" required></textarea>
-		</label>
-	</div>
-
-	<div class="row right">
-		<a class="btn btn-neutral" href="list">목록</a>
-		<button class="btn btn-positive" type="submit">등록</button>
-	</div>
-
 	</div>
 </form>
  
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include> 
     

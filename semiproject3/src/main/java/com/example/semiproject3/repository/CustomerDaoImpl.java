@@ -205,13 +205,11 @@ public class CustomerDaoImpl implements CustomerDao{
 	//개인정보 변경
 		@Override
 		public boolean changeInformation(CustomerDto customerDto) {
-			String sql = "update set customer_nick=?, customer_name=?, customer_phone=?, customer_email=?, customer_like=? where customer_id=?";
+			String sql = "update customer set customer_nick=?, customer_phone=?, customer_email=? where customer_id=?";
 			Object[] param = {
-					customerDto.getCustomerNick(), 
-					customerDto.getCustomerName(), 
-					customerDto.getCustomerPhone(), 
-					customerDto.getCustomerEmail(), 
-					customerDto.getCustomerLike(), 
+					customerDto.getCustomerNick(),
+					customerDto.getCustomerPhone(),
+					customerDto.getCustomerEmail(),
 					customerDto.getCustomerId()
 			};
 			return jdbcTemplate.update(sql, param) > 0;
