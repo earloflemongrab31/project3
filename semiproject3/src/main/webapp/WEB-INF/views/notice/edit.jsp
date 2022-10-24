@@ -14,7 +14,7 @@
 <div class ="container-600 mt-40 mb-40">
 	
 	<div class="row">
-		<h1>공지사항 수정</h1>s
+		<h1>공지사항 수정</h1>
 		<hr>
 	</div>
 	
@@ -34,8 +34,8 @@
 	</div>
 	
 	<div class="row w-100">
-		<label> 내용 <textarea class="input mt-10 w-100"
-				name="noticeContent" rows="10" cols="75" required >"${noticeDto.noticeContent}"</textarea>
+		<label> 내용 <textarea class="input w-100 fix-size"
+				name="noticeContent" rows="10" cols="75" required >${noticeDto.noticeContent}</textarea>
 		</label>
 	</div>
 
