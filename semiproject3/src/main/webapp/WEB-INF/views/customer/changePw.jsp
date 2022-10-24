@@ -4,7 +4,7 @@
 	<jsp:param value="비밀번호변경" name="title"/>
 </jsp:include>
 
-<form action="changePassword" method="post">
+<form action="changePw" method="post" class="change-pw">
     <div class="container-300 mt-50 mb-50">
     
     <div class="row center mb-30">
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="row change-pw">
+    <div class="row input-pw">
         <div class="row">
             <label>변경 비밀번호 입력
             <input class="input w-100" type="password" name="customerPw">
@@ -35,7 +35,7 @@
         
         <div class="row">
             <label>변경 비밀번호 확인
-            <input class="input w-100" type="password" name="repeatPw">
+            <input class="input w-100" type="password" id="customer-pwcheck">
             </label>
         </div>
             
