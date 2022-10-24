@@ -101,6 +101,11 @@
 			name="itemImage" type="file" accept=".png, .jpg" multiple>
 		</label>
 	</div>
+	<div class="row">
+		<label> 상품 이미지 <input class="input mt-10 w-100 "
+			name="itemImage" type="file" accept=".png, .jpg" multiple>
+		</label>
+	</div>
 
 	<div class="row right">
 		<a class="btn btn-neutral" href="list">목록</a>
