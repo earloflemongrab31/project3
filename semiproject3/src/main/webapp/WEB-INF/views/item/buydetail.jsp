@@ -92,8 +92,12 @@
 				<tfoot>
 					<tr>
 						<td colspan="2" align="right">
+
 						<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 						<a href="#">구매하기</a> 
+
+						<a href="/orders/insert?itemNo=${itemDto.itemNo}">구매하기</a> 
+
 						<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>	 
 						<a href="buylist">목록으로</a>
 					</td>
