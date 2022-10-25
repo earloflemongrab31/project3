@@ -42,9 +42,16 @@ public interface ItemDao {
 	//아이템과 이미지 연결
 	void connectImage(int itemNo, int imageNo);
 	
-	//상품 목록(회원용)
-	List<BuyListVO> selectBuyList();
+	//상품 검색+목록(회원용)
+	List<BuyListVO> selectBuyList(ItemListSearchVO vo);
+	List<BuyListVO> buyList(ItemListSearchVO vo);
+	List<BuyListVO> buySearch(ItemListSearchVO vo);
 	
+	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
+	int buyCount(ItemListSearchVO vo);
+	int buyListCount(ItemListSearchVO vo);
+	int buySearchCount(ItemListSearchVO vo);
+		
 	//상품 구매(회원용)
 	List<BuyListVO> selectBuyList(int itemNo);
 	BuyListVO selectBuyOne(int itemNo);
