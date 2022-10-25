@@ -57,6 +57,7 @@ public class AddressController {
                @RequestParam(required = false) String type,
                @RequestParam(required = false) String keyword) {
 	   
+	  String loginId = (String)session.getAttribute(SessionConstant.ID);
 	  
       boolean isSearch = type != null && keyword != null;
       if(isSearch) { // 검색
@@ -66,11 +67,10 @@ public class AddressController {
          model.addAttribute("list", addressDao.selectList());
       }
       
-    List<AddressDto>listBaisc=addressDao.selectOneBasic();
+    List<AddressDto>listBasic=addressDao.selectOneBasic();
     
-    String loginId = (String)session.getAttribute(SessionConstant.ID);
 	model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
-  	model.addAttribute("listBaisc", listBaisc);
+  	model.addAttribute("listBasic", listBasic);
   	
       return "address/list";
    }
