@@ -28,7 +28,7 @@
   
 	<div class="row left">
 		<c:choose>
-			<c:when test="${listBaisc.isEmpty()}">
+			<c:when test="${listBasic.isEmpty()}">
 				<h4 style="padding-left:20px">
 				 등록된 기본 배송지가 없습니다.
 				</h4>
@@ -50,7 +50,7 @@
 	               <tr>
 <!-- 	               <th width="25%">상세주소</tr> -->
 <!-- 					</thead> -->
-					
+
 <!-- 					<tbody align="center"> -->
 <%-- 						   <c:forEach var="addressDto" items="${listBaisc}"> --%>
 <!-- 							<tr> -->
