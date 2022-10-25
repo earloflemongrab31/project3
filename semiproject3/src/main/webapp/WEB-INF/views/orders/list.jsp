@@ -15,7 +15,7 @@
 		<h1>주문 목록</h1>
 	</div>
 	
-	
+
 	
 	<div class = "row">
 		<table class="table table-hover table-border">
