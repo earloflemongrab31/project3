@@ -18,7 +18,7 @@
 			<span>쇼핑 정보</span>
 			<ul>
 				<li><a href="#">주문/배송 조회</a></li>
-				<li><a href="/customerLike/list"">찜하기 내역</a></li>
+				<li><a href="/customerLike/list">찜하기 내역</a></li>
 			</ul>
 		</li>
 	</ul>
