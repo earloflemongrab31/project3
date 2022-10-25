@@ -42,7 +42,7 @@ public class OrdersDaoImpl implements OrdersDao {
 			ordersDto.setCustomerPost(rs.getString("customer_post"));
 			ordersDto.setCustomerHost(rs.getString("customer_host"));
 			ordersDto.setCustomerDetailHost(rs.getString("customer_detail_host"));
-			ordersDto.setCustomerMoney(rs.getString("customer_money"));
+			ordersDto.setCustomerMoney(rs.getInt("customer_money"));
 			return ordersDto;
 		}
 	};
@@ -70,7 +70,7 @@ public class OrdersDaoImpl implements OrdersDao {
 				ordersDto.setCustomerPost(rs.getString("customer_post"));
 				ordersDto.setCustomerHost(rs.getString("customer_host"));
 				ordersDto.setCustomerDetailHost(rs.getString("customer_detail_host"));
-				ordersDto.setCustomerMoney(rs.getString("customer_money"));
+				ordersDto.setCustomerMoney(rs.getInt("customer_money"));
 				return ordersDto;	
 			}
 			else {
@@ -82,13 +82,11 @@ public class OrdersDaoImpl implements OrdersDao {
 	
 	@Override
 	public void insert(OrdersDto ordersDto) {
-		String sql = "insert into orders values(orders_seq.nextval, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, 0, 3000, ?, ?, ?, ?, 0)";
+		String sql = "insert into orders values(?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, 0, 3000, ?, ?, ?, ?, 0)";
 		Object[] param = {
-				ordersDto.getOrdersNo(), ordersDto.getCustomerId(),
-				ordersDto.getItemNo(), ordersDto.getAddressNo(),
-				ordersDto.getCustomerName(), ordersDto.getCustomerNick(),
-				ordersDto.getCustomerPhone(), ordersDto.getItemName(),
-				ordersDto.getItemColor(), ordersDto.getItemSize(),
+				ordersDto.getOrdersNo(), ordersDto.getCustomerId(), ordersDto.getItemNo(), ordersDto.getAddressNo(),
+				ordersDto.getCustomerName(), ordersDto.getCustomerNick(),ordersDto.getCustomerPhone(), 
+				ordersDto.getItemName(), ordersDto.getItemColor(), ordersDto.getItemSize(),
 				ordersDto.getAddressName(), ordersDto.getCustomerPost(),
 				ordersDto.getCustomerHost(), ordersDto.getCustomerDetailHost()
 		};

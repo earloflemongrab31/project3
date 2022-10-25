@@ -13,6 +13,7 @@ import com.example.semiproject3.entity.InvenDto;
 import com.example.semiproject3.repository.CompanyDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.vo.InvenListSearchVO;
 
 @Controller
 @RequestMapping("/warehouse")
@@ -69,16 +70,13 @@ public class InvenController {
 	@GetMapping("/invenList")
 	public String invenList(
 			Model model,
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
+			@ModelAttribute(name="vo") InvenListSearchVO vo) {
+			//페이지 네비게이터를 위한 게시글 수를 전달
+			int count = invenDao.count(vo);
+			vo.setCount(count);
 		
-			boolean isSearch = type != null && keyword != null;
-				if(isSearch) {//검색
-					model.addAttribute("invenList", invenDao.selectList(type, keyword));
-					}
-				else {//목록
-					model.addAttribute("invenList", invenDao.selectList());
-					}
+			model.addAttribute("invenList", invenDao.selectList(vo));
+
 		return "/warehouse/invenList";
 	}
 	

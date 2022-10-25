@@ -2,8 +2,10 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListVO;
+import com.example.semiproject3.vo.InvenListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
 
 public interface ItemDao {
@@ -48,5 +50,6 @@ public interface ItemDao {
 	//상품 구매(회원용)
 	List<BuyListVO> selectBuyList(int itemNo);
 	BuyListVO selectBuyOne(int itemNo);
+	
 	
 }

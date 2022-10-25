@@ -91,13 +91,17 @@ public class CustomerDaoImpl implements CustomerDao{
 				+ "customer_phone,"
 				+ "customer_tel,"
 				+ "customer_birth,"
-				+ "customer_email"
+				+ "customer_email,"
+				+ "customer_point,"
+				+ "customer_money"
 				+ ") "
-				+ "values(?,?,?,?,?,?,?,?,?)";
+				+ "values(?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] param = {
 				customerDto.getCustomerId(), customerDto.getCustomerPw(), customerDto.getCustomerPwsearch(),
 				customerDto.getCustomerNick(), customerDto.getCustomerName(), customerDto.getCustomerPhone(),
-				customerDto.getCustomerTel(), customerDto.getCustomerBirth(), customerDto.getCustomerEmail()
+				customerDto.getCustomerTel(), customerDto.getCustomerBirth(), customerDto.getCustomerEmail(),
+				customerDto.getCustomerPoint(), customerDto.getCustomerMoney()
+				
 		};
 		jdbcTemplate.update(sql, param);
 	}
