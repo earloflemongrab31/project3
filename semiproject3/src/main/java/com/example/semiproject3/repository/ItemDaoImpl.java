@@ -199,13 +199,68 @@ public class ItemDaoImpl implements ItemDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
-	//상품 목록(회원용)
+	//상품 검색+목록(회원용)
 	@Override
-	public List<BuyListVO> selectBuyList() {
-		String sql = "select * from buy_list_view";
-		return jdbcTemplate.query(sql, buyListMapper);
+	public List<BuyListVO> selectBuyList(ItemListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return buySearch(vo);
+		}
+		else {
+			return buyList(vo);
+		}
 	}
 	
+	@Override
+	public List<BuyListVO> buyList(ItemListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from buy_list_view order by item_no desc "
+				+ ")TMP"
+			+") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, buyListMapper, param);
+	}
+	
+	@Override
+	public List<BuyListVO> buySearch(ItemListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from buy_list_view where instr(#1,?) > 0 "
+					+ "order by item_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, buyListMapper, param);
+	}
+	
+	@Override
+	public int buyCount(ItemListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return buySearchCount(vo);
+		}
+		else { //목록이라면
+			return buyListCount(vo);
+		}
+	}
+	
+	@Override
+	public int buyListCount(ItemListSearchVO vo) {
+		String sql = "select count(*) from buy_list_view";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public int buySearchCount(ItemListSearchVO vo) {
+		String sql = "select count(*) from buy_list_view where instr(#1, ?) > 0 ";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	//상품 상세 이미지를 위한 리스트
 	@Override
 	public List<BuyListVO> selectBuyList(int itemNo) {
 		String sql = "select * from buy_list_view where item_no = ?";

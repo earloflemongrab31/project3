@@ -60,9 +60,6 @@
     .corp-list{
         display: none;
     }
-    .corp-list.show{
-        display: block;
-    }
 </style>
 <script type="text/javascript">
 
@@ -90,15 +87,10 @@
         });
     });
     
-    //협엽사 리스트
+    //협력사 리스트
     $(function(){
         $(".btn-corp").click(function(){
-            if($(".corp-list").hasClass("show")){
-                $(".corp-list").removeClass("show");
-            }
-            else{
-                $(".corp-list").addClass("show");
-            }
+            $(".corp-list").slideToggle();
         });
     });
 	
