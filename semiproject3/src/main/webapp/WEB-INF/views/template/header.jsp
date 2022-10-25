@@ -595,53 +595,179 @@
 	<li class="float-left">
 		<a href="#">outer</a>
 		<ul>
-			<li><a href="#">자켓</a></li>
-			<li><a href="#">코트</a></li>
-			<li><a href="#">가디건</a></li>
-			<li><a href="#">패딩</a></li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">자켓</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="101">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">코트</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="102">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">가디건</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="103">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">패딩</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="104">
+				</form>
+			</li>
 		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">top</a>
 		<ul>
-			<li><a href="#">민소매</a></li>
-			<li><a href="#">티셔츠</a></li>
-			<li><a href="#">맨투맨</a></li>
-			<li><a href="#">니트</a></li>
-			<li><a href="#">블라우스</a></li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">민소매</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="201">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">티셔츠</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="202">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">맨투맨</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="203">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">니트</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="204">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">블라우스</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="205">
+				</form>
+			</li>
 		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">pants</a>
 		<ul>
-			<li><a href="#">청바지</a></li>
-			<li><a href="#">면바지</a></li>
-			<li><a href="#">슬랙스</a></li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">청바지</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="301">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">면바지</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="302">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">슬랙스</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="303">
+				</form>
+			</li>
 		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">skirt</a>
 		<ul>
-			<li><a href="#">숏치마</a></li>
-			<li><a href="#">롱치마</a></li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">숏기장</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="401">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">롱기장</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="402">
+				</form>
+			</li>
 		</ul>
 	</li>
-	<li class="float-left"><a href="#">dress</a></li>
+	<li class="float-left">
+		<a href="#">dress</a>
+		<ul>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">원피스</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="501">
+				</form>
+			</li>
+		</ul>
+	</li>
 	<li class="float-left">
 		<a href="#">acc</a>
 		<ul>
-			<li><a href="#">쥬얼리</a></li>
-			<li><a href="#">모자</a></li>
-			<li><a href="#">가방</a></li>
-			<li><a href="#">신발</a></li>
-			<li><a href="#">양말</a></li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">쥬얼리</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="601">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">모자</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="602">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">가방</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="603">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">신발</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="604">
+				</form>
+			</li>
+			<li>
+				<form action="/item/buylist" method="get">
+					<button class="btn btn-neutral menu" type="submit">양말</button>
+					<input type="hidden" name="type" value="cate_code">
+					<input type="hidden" name="keyword" value="605">
+				</form>
+			</li>
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
 	<li class="float-right cart"><a href="/cart/cartList"><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
-	<form action="#" method="get">
+	<form action="/item/buylist" method="get">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
-		<input class="float-right input input-underline find" name="#" id="search" placeholder="가을 신상">
+		<input type="hidden" name="type" value="item_name">
+		<input class="float-right input input-underline find" name="keyword" id="search" placeholder="가을 신상">
 	</form>
 		<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
 	<c:choose>

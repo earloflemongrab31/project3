@@ -26,21 +26,19 @@ public class AddBasicController {
    
    @GetMapping("/addBasic")
    // 기본주소 리스트 출력
-	   public String addBasic(Model model, HttpSession session,
-	               @RequestParam(required = false) String type,
-	               @RequestParam(required = false) String keyword) {
-	      boolean isSearch = type != null && keyword != null;
-	      if(isSearch) { // 검색
-	         model.addAttribute("list", addressDao.selectList(type, keyword));
-	      }
-	      else { //목록
-	         model.addAttribute("list", addressDao.selectList());
-	      }
-	      
-	      String loginId = (String)session.getAttribute(SessionConstant.ID);
-	  	model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
-//	    	
-         return "address/addBasic";
+   public String addBasic(Model model, HttpSession session, 
+		   @RequestParam(required = false) String type, 
+		   @RequestParam(required = false) String keyword) {
+
+	   String loginId = (String) session.getAttribute(SessionConstant.ID);
+	   boolean isSearch = type != null && keyword != null;
+	   if(isSearch) { // 검색
+		   model.addAttribute("list", addressDao.selectList(type, keyword));
+	   }
+	   else { //목록
+		   model.addAttribute("list", addressDao.selectList(loginId));
+	   }
+	   return "address/addBasic";
    }
    
    //기본정보 업데이트

@@ -22,6 +22,7 @@
 					<a href="buydetail?itemNo=${itemDto.itemNo}">
 						<img src="/image/download/${itemDto.imageNo}" width="200" height="200" >
 					</a>
+					<br>
 					${itemDto.itemNo}<br>
 					${itemDto.itemName}<br>
 					${itemDto.itemPrice}원<br>
@@ -32,19 +33,5 @@
 	</div>
 	
 </div>
-	
-<!-- 검색창 -->
-<form action = "list" method="get" >
-	<div class="row center">
-		
-		<select class="input" name="type" required>
-			<option value="itemName">상품명</option>
-			<option value="cateCode">카테고리</option>
-		</select>
-			
-		<input class="input" type="search" name="keyword" placeholder="검색어" required>
-			<button class="btn btn-positive">검색</button>
-	</div>
-</form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
