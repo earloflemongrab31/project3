@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,9 +43,7 @@ public class OrdersController {
 	@GetMapping("/insert")
 	public String insert(
 			HttpSession session,
-			@RequestParam int itemNo
-			//@RequestParam int itemCnt
-			){
+			@RequestParam int itemNo,@RequestParam int itemCnt){
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 			ItemDto itemDto = itemDao.selectOne(itemNo);
 			CustomerDto customerDto = customerDao.selectOne(loginId);
@@ -63,7 +62,7 @@ public class OrdersController {
 				.itemName(itemDto.getItemName())
 				.itemColor(itemDto.getItemColor())
 				.itemSize(itemDto.getItemSize())
-				.itemCnt(1)
+				.itemCnt(itemCnt)
 				.itemFee(3000)
 				.addressName(addressDto.getAddressName())
 				.customerPost(addressDto.getAddressPost())
@@ -72,6 +71,21 @@ public class OrdersController {
 				.customerMoney(customerDto.getCustomerMoney())
 				.build());
 		return "orders/insert";
+	}
+	
+	@GetMapping("/list")
+	public String list(Model model, 
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) {
+			model.addAttribute("list", ordersDao.selectList(type, keyword));
+		}
+		else {
+			model.addAttribute("list", ordersDao.selectList());
+		}
+		
+		return "orders/list";
 	}
 	
 }
