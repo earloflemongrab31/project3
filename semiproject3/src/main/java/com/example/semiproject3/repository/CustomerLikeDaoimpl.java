@@ -44,15 +44,33 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 		Object[] param = {itemNo};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
+	
+	@Override
+	public int likeCount(String loginId) {
+		String sql = "select count(*) from customer_like where customer_id = ?";
+		Object[] param = {loginId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 
 	//찜 갱신
 	@Override
 	public void refresh(int itemNo) {
 		String sql = "update item set item_like_cnt = ("
 				+ "select count(*) from customer_like "
-				+ "where item_no = ?)"
-				+ " where item_no = ?";
+				+ "where item_no = ?) "
+				+ "where item_no = ?";
 		Object[] param = {itemNo, itemNo};
 		jdbcTemplate.update(sql, param);
+	}
+	
+	@Override
+	public void likeRefresh(String loginId) {
+		String sql = "update customer set customer_like = ("
+				+ "select count(*) from customer_like "
+				+ "where customer_id = ?) "
+				+ "where customer_id = ?";
+		Object[] param = {loginId, loginId};
+		jdbcTemplate.update(sql, param);
+		
 	}
 }

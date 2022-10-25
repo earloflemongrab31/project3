@@ -45,7 +45,5 @@ public interface CustomerDao {
 
 
 	List<CustomerDto> selectAddressList(String addressNo, int begin, int end);
-
-
 	
 }
