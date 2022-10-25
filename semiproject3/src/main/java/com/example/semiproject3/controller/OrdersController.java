@@ -12,7 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
+import com.example.semiproject3.entity.AddressDto;
+import com.example.semiproject3.entity.CustomerDto;
+import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.entity.OrdersDto;
+import com.example.semiproject3.repository.AddressDao;
+import com.example.semiproject3.repository.CustomerDao;
+import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
 
 @Controller
@@ -22,6 +28,15 @@ public class OrdersController {
 	@Autowired
 	private OrdersDao ordersDao;
 		
+	@Autowired
+	private AddressDao addressDao;
+	
+	@Autowired
+	private CustomerDao customerDao;
+	
+	@Autowired
+	private ItemDao itemDao;
+	
 	//등록
 	@GetMapping("insert")
 	public String insert() {
@@ -29,7 +44,9 @@ public class OrdersController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute OrdersDto ordersDto) {
+	public String insert(@ModelAttribute OrdersDto ordersDto,
+			@ModelAttribute ItemDto itemDto, @ModelAttribute AddressDto addressDto,
+			@ModelAttribute CustomerDto customerDto,HttpSession session) {
 		ordersDao.insert(ordersDto);
 		return "redirect:/list";
 	}
