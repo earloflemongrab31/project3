@@ -135,4 +135,18 @@ public class OrdersDaoImpl implements OrdersDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
+	@Override
+	public List<OrdersDto> selectList() {
+		String sql = "select * from orders order by orders_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+
+	@Override
+	public List<OrdersDto> selectList(String type, String keyword) {
+		String sql = "select * from orders where instr(#1, ?) > 0 order by #1 asc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
 }
