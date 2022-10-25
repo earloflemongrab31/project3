@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -42,6 +44,39 @@ public class OrdersDaoImpl implements OrdersDao {
 			ordersDto.setCustomerDetailHost(rs.getString("customer_detail_host"));
 			ordersDto.setCustomerMoney(rs.getString("customer_money"));
 			return ordersDto;
+		}
+	};
+	
+	private ResultSet<OrdersDto> extractor = new ResultSetExtractor<OrdersDto>() {
+
+		@Override
+		public OrdersDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				OrdersDto ordersDto = new OrdersDto();
+				ordersDto.setOrdersNo(rs.getInt("orders_no"));
+				ordersDto.setCustomerId(rs.getString("customer_id"));
+				ordersDto.setItemNo(rs.getInt("item_no"));
+				ordersDto.setAddressNo(rs.getInt("address_no"));
+				ordersDto.setAddressName(rs.getString("customer_name"));
+				ordersDto.setCustomerNick(rs.getString("customer_nick"));
+				ordersDto.setCustomerPhone(rs.getString("customer_phone"));
+				ordersDto.setCustomerPoint(rs.getInt("customer_point"));
+				ordersDto.setItemName(rs.getString("item_name"));
+				ordersDto.setItemColor(rs.getString("item_color"));
+				ordersDto.setItemSize(rs.getString("item_size"));
+				ordersDto.setItemCnt(rs.getInt("item_cnt"));
+				ordersDto.setItemFee(rs.getInt("item_fee"));
+				ordersDto.setAddressName(rs.getString("address_name"));
+				ordersDto.setCustomerPost(rs.getString("customer_post"));
+				ordersDto.setCustomerHost(rs.getString("customer_host"));
+				ordersDto.setCustomerDetailHost(rs.getString("customer_detail_host"));
+				ordersDto.setCustomerMoney(rs.getString("customer_money"));
+				return ordersDto;	
+			}
+			else {
+				return null;	
+			}
+			
 		}
 	};
 	
