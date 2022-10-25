@@ -67,6 +67,8 @@
 			</tr>
 		</table>
 	</div>
+		
+	
 	
 	<div class="flexbox">
 		<div class="flex-left w-33 center">
