@@ -56,25 +56,6 @@ public class AddressController {
    public String list(Model model, HttpSession session,
                @RequestParam(required = false) String type,
                @RequestParam(required = false) String keyword) {
-<<<<<<< HEAD
-      
-     String loginId = (String)session.getAttribute(SessionConstant.ID);
-     
-      boolean isSearch = type != null && keyword != null;
-      if(isSearch) { // 검색
-         model.addAttribute("list", addressDao.selectList(type, keyword));
-      }
-      else { //목록
-         model.addAttribute("list", addressDao.selectList());
-      }
-      
-    List<AddressDto>listBasic=addressDao.selectOneBasic();
-    
-   model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
-     model.addAttribute("listBasic", listBasic);
-     
-      return "address/list";
-=======
 
 		  String loginId = (String) session.getAttribute(SessionConstant.ID);
 
@@ -90,7 +71,6 @@ public class AddressController {
 	      model.addAttribute("listBasic", listBasic);
   	
 	      return "address/list";
->>>>>>> refs/remotes/origin/main
    }
    
    //수정
