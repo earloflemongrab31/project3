@@ -2,7 +2,6 @@ package com.example.semiproject3.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +25,7 @@ import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.CartDao;
+import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
@@ -43,6 +43,9 @@ public class ItemController {
 	
 	@Autowired
 	private CustomerLikeDao customerLikeDao;
+	
+	@Autowired
+	private CustomerDao customerDao;
 
 	@Autowired
 	private CartDao cartDao;
@@ -261,7 +264,7 @@ public class ItemController {
 	
 	//찜
 	@GetMapping("/like")
-	public String customerLike(@RequestParam int itemNo, 
+	public String customerLike(@RequestParam int itemNo,
 			HttpSession session, RedirectAttributes attr) {
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		CustomerLikeDto customerLikeDto = new CustomerLikeDto();
@@ -276,6 +279,7 @@ public class ItemController {
 		}
 		
 		customerLikeDao.refresh(itemNo);//좋아요 조회수 갱신
+		customerLikeDao.likeRefresh(loginId);
 		
 		attr.addAttribute("itemNo",itemNo);
 		return "redirect:/item/buydetail";
