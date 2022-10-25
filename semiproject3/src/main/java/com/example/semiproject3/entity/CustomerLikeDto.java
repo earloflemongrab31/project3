@@ -15,6 +15,6 @@ public class CustomerLikeDto {
 	
 		private String customerId;
 		private int itemNo;
-		private Date likeDate;
+		private Date likeTime;
 	
 }

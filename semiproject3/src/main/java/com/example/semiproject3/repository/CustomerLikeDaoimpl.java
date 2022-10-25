@@ -29,7 +29,7 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 			CustomerLikeDto customerLikeDto = new CustomerLikeDto();
 			customerLikeDto.setCustomerId(rs.getString("customer_id"));
 			customerLikeDto.setItemNo(rs.getInt("item_no"));
-			customerLikeDto.setLikeDate(rs.getDate("like_date"));
+			customerLikeDto.setLikeTime(rs.getDate("like_time"));
 			return customerLikeDto;
 		}
 	};
@@ -42,7 +42,7 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 				CustomerLikeDto customerLikeDto = new CustomerLikeDto();
 				customerLikeDto.setCustomerId(rs.getString("customer_id"));
 				customerLikeDto.setItemNo(rs.getInt("item_no"));
-				customerLikeDto.setLikeDate(rs.getDate("like_date"));
+				customerLikeDto.setLikeTime(rs.getDate("like_time"));
 				return customerLikeDto;
 			}
 			else {
