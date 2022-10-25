@@ -80,4 +80,16 @@ public class AdminController {
 		return "redirect:/login";
 	}
 	
+	@GetMapping("/main")
+	public String main() {
+		return "admin/main";
+	}
+	
+//	@PostMapping("main")
+//	public String main(
+//			HttpSession session,
+//			@ModelAttribute MainDto mainDto) {
+//		
+//	}
+	
 }

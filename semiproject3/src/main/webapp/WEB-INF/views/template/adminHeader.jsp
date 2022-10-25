@@ -83,7 +83,16 @@
             minHeight: 300,
             maxHeight: 300,
             placeholder: "내용을 작성하세요.",//도움말
-            lang: "ko-KR"//언어 설정
+//             lang: "ko-KR"//언어 설정
+			toolbar: [
+			   // [groupName, [list of button]]
+			   ['style', ['bold', 'italic', 'underline', 'clear']],
+			   ['font', ['strikethrough', 'superscript', 'subscript']],
+			   ['fontsize', ['fontsize']],
+			   ['color', ['color']],
+			   ['para', ['ul', 'ol', 'paragraph']],
+			   ['height', ['height']]
+			 ]
         });
     });
     
@@ -120,6 +129,9 @@
 <div class="float-container">
 <ul class="dropdown-menu">
 	<!-- 좌측 드롭다운 메뉴 -->
+	<li class="float-left">
+		<a href="/admin/main">메인관리</a>
+	</li>
 	<li class="float-left">
 		<a href="#">상품관리</a>
 		<ul>
