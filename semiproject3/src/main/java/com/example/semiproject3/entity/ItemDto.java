@@ -20,6 +20,7 @@ public class ItemDto {
 	private int itemPrice;
 	private String itemColor;
 	private String itemSize;
+	private int itemCnt;
 	private int itemTotalCnt;
 	private int itemLikeCnt;
 	private Date itemDate;

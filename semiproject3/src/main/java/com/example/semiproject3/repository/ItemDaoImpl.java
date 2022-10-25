@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
@@ -339,5 +340,6 @@ public class ItemDaoImpl implements ItemDao {
 		String sql = "select count(*) from item";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+
 		
 }
