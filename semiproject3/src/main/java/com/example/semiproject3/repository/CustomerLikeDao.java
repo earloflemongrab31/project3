@@ -1,5 +1,8 @@
 package com.example.semiproject3.repository;
 
+import java.util.List;
+
+import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerLikeDto;
 
 public interface CustomerLikeDao {
@@ -17,4 +20,8 @@ public interface CustomerLikeDao {
 	void refresh(int itemNo);
 	
 	void likeRefresh(String loginId);
+
+	List<CustomerLikeDto> selectList(String loginId);
+
+	
 }

@@ -1,0 +1,37 @@
+create sequence address_seq;
+create table address(
+
+address_no number,
+address_name varchar2(30),
+address_post varchar2(6),
+address_host varchar2(150),
+address_detail_host varchar2(150),
+address_basic char(1)
+);
+
+drop table customer_like;
+
+create table customer_like(
+customer_id references customer(customer_id) on delete cascade not null,
+item_no references item(item_no) on delete cascade not null,
+like_time date default sysdate not null,
+primary key(customer_id, item_no)
+);
+
+
+
+
+create table notice(
+admin_id references admin(admin_id) on delete set null, 
+notice_no number primary key, 
+notice_title varchar2(100) not null,
+notice_date date default sysdate,
+notice_update date,
+notice_read number default 0,
+notice_content varchar2(4000) not null, 
+notice_head varchar2(9) check(notice_head in('긴급','이벤트'))
+);
+
+create sequence notice_seq;
+
+commit;

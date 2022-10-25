@@ -187,6 +187,8 @@ public class NoticeDaoImpl implements NoticeDao {
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
+	
+	//셀렉트리스트
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면

@@ -25,7 +25,7 @@ public class OrdersDto {
 	private String customerPost;
 	private String customerHost;
 	private String customerDetailHost;
-	private String customerMoney;
+	private int customerMoney;
 	
 	
 }

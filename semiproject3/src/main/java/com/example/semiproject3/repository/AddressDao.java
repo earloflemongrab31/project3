@@ -22,7 +22,7 @@ public interface AddressDao {
 	
 	//셀렉트원
 	AddressDto selectOne(int addressNo);
-
+	AddressDto selectOne(String loginId);
 	
 	//수정 , 삭제
 	boolean update(AddressDto addressDto);
