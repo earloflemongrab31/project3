@@ -13,7 +13,7 @@ public interface AddressDao {
 	List<AddressDto> insert(AddressDto addressDto);
 	
 	//목록 & 타입키워드 목록
-	List<AddressDto> selectList();
+	List<AddressDto> selectList(String loginId);
 	List<AddressDto> selectList(String type, String keyword);
 	
 	

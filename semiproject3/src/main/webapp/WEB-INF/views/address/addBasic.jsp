@@ -25,7 +25,7 @@
    
 <div class="row left">
 		<c:choose>
-			<c:when test="${selectAddressList.isEmpty()}">
+			<c:when test="${list.isEmpty()}">
 				<h4 style="padding-left:20px">
 				 등록된 기본 배송지가 없습니다.
 				</h4>
@@ -46,7 +46,7 @@
 					</thead>
 					
 					<tbody align="center">
-						   <c:forEach var="addressDto" items="${selectAddressList}">
+						   <c:forEach var="addressDto" items="${list}">
 							<tr>
 							  <td>
                      <input type="checkbox" class="check-item" name="addressNo" value="${addressDto.addressNo}">

@@ -47,8 +47,8 @@ public class ItemController {
 	@Autowired
 	private CartDao cartDao;
 	
-//	private final File directory = new File("C:/study/itemImage");
-	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("C:/study/itemImage");
+//	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -214,15 +214,12 @@ public class ItemController {
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
 	public String buylist(Model model, 
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("buylist", itemDao.selectBuyList());
-		}
-		else {
-			model.addAttribute("buylist", itemDao.selectBuyList());
-		}
+			@ModelAttribute(name="vo") ItemListSearchVO vo) {
+		
+		int count = itemDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("buylist", itemDao.selectBuyList(vo));
 		
 		return "item/buylist";
 	}
