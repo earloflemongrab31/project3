@@ -6,7 +6,7 @@
 	<jsp:param value="상품 입/출고 목록" name="title"/>
 </jsp:include>
 
-    <div class ="container-900 mt-40 mb-40">
+<div class ="container-900 mt-40 mb-40">
         
         <div class="row">
             <h1>상품 입/출고 목록</h1>
@@ -59,6 +59,9 @@
         </div>
         
         <div class="row center">
+
+<!-- 페이지 네비게이터 -->
+<div class="row center">
 
 <ul class="pagination">
 <li>
@@ -119,6 +122,8 @@
 	</c:choose>
 </li>
 </ul>
+
+</div>	
 
 </div>	
         
