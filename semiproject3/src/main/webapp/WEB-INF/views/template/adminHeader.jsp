@@ -102,6 +102,18 @@
             $(".corp-list").slideToggle();
         });
     });
+    
+    //추가 버튼 클릭 -> 이미지 추가 가능
+    $(function(){
+        $(".add-image").last().remove();
+        
+        $(".image-box").hide();
+        $(".image-box").first().show();
+
+        $(".add-image").click(function(){
+            $(this).parents(".image-box").next().show();
+        });
+    });
 	
 </script>
 
