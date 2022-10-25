@@ -18,7 +18,7 @@
 </div>
 
 <div class="row left">
-	<h3>메인이미지</h3>
+	<h3>이미지1</h3>
 </div>
 <div class="row flexbox">
 	<label class="w-50">파일</label>
@@ -26,23 +26,33 @@
 </div>
 <div class="row flexbox">
 	<input class="input w-50" type="file" name="mainImage">
-	<input class="input w-50" type="text" name="mainPath">
+	<input class="input w-50" type="text" name="imagePath">
+</div>
+<div class="row left">
+	<h3>이미지2</h3>
+</div>
+<div class="row flexbox">
+	<label class="w-50">파일</label>
+	<label class="w-50">경로</label>
+</div>
+<div class="row flexbox">
+	<input class="input w-50" type="file" name="mainImage">
+	<input class="input w-50" type="text" name="imagePath">
+</div>
+<div class="row left">
+	<h3>이미지3</h3>
+</div>
+<div class="row flexbox">
+	<label class="w-50">파일</label>
+	<label class="w-50">경로</label>
+</div>
+<div class="row flexbox">
+	<input class="input w-50" type="file" name="mainImage">
+	<input class="input w-50" type="text" name="imagePath">
 </div>
 
-<div class="row left">
-	<h3>서브이미지</h3>
-</div>
-<div class="row flexbox">
-	<label class="w-50">파일</label>
-	<label class="w-50">경로</label>
-</div>
-<div class="row flexbox">
-	<input class="input w-50" type="file" name="mainImage">
-	<input class="input w-50" type="text" name="mainPath">
-</div>
-	
 <div class="row center mt-30">
-	<button class="btn btn-positive">수정</button>
+	<button class="btn btn-positive" type="submit">수정</button>
 </div>	
 </form>
 

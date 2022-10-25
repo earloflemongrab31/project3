@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.semiproject3.entity.MainEditDto;
-
 @Repository
 public class MainEditDaoImpl implements MainEditDao{
 
@@ -13,8 +11,10 @@ public class MainEditDaoImpl implements MainEditDao{
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void insert(MainEditDto mainEditDto) {
-		String sql = "insert into main_edit(image_path, ";
+	public void update(String mainEditor, String mainContent) {
+		String sql = "update main_edit set main_editor=?, main_content=? where main_no=1";
+		Object[] param = {mainEditor, mainContent};
+		jdbcTemplate.update(sql, param);
 	}
 	
 	

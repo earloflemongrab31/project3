@@ -5,15 +5,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PathImageDaoImpl implements PathImageDao{
+public class MainImageDaoImpl implements MainImageDao{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public void insert(String imagePath, int imageNo) {
-		String sql = "insert into path_image(image_path, image_no) values(?, ?)";
-		Object[] param = {imagePath, imageNo};
+	public void insert(int imageNo, String imagePath) {
+		String sql = "insert into main_image(main_no, image_no, image_path) values(1, ?, ?)";
+		Object[] param = {imageNo, imagePath};
 		jdbcTemplate.update(sql, param);
 	}
 

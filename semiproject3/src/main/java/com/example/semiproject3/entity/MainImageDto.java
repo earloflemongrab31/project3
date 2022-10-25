@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class mainImageDto {
+public class MainImageDto {
 	private int mainNo;
 	private int imageNo;
 	private String imagePath;
