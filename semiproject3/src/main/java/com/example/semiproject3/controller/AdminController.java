@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AdminDto;
+import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.MainEditDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AdminDao;
+import com.example.semiproject3.repository.ImageDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -23,6 +28,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminDao adminDao;
+	
+	@Autowired
+	private ImageDao imageDao;
 	
 	@GetMapping("/")
 	public String home() {
@@ -89,8 +97,10 @@ public class AdminController {
 	@PostMapping("/main")
 	public String main(
 			HttpSession session,
+			@RequestParam List<MultipartFile> mainImage,
 			@ModelAttribute MainEditDto mainEditDto) {
-		return "redirec";
+		
+		return "redirect:/";
 	}
 	
 }
