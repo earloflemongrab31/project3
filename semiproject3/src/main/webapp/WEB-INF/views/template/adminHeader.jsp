@@ -60,6 +60,14 @@
     .corp-list{
         display: none;
     }
+    
+    .admin-header,
+    .admin-header .dropdown-menu,
+    .admin-header .logo,
+    .admin-header a{
+    	background-color: #ede8e4;
+    	color: gray;
+    }
 </style>
 <script type="text/javascript">
 
@@ -121,6 +129,7 @@
 
 <body>
 
+<div class="admin-header">
 <header>
 
 <div class="float-container">
@@ -172,5 +181,6 @@
 </ul>
 </div>
 </nav>
+</div>
 
 <main>

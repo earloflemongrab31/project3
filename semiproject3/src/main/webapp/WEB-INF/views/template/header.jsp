@@ -813,7 +813,7 @@
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
 	<li class="float-right cart"><a href="/cart/cartList"><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
-	<form action="/item/buylist" method="get">
+	<form action="/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
 		<input class="float-right input input-underline find" name="keyword" id="search" placeholder="가을 신상">
