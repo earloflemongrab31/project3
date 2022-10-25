@@ -65,15 +65,6 @@ public class AddressController {
       else { //목록
          model.addAttribute("list", addressDao.selectList());
       }
-      
-    List<AddressDto>listBaisc=addressDao.selectOneBasic();
-    
-    String loginId = (String)session.getAttribute(SessionConstant.ID);
-	model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
-  	model.addAttribute("listBaisc", listBaisc);
-  	
-      return "address/list";
-   }
    
    //수정
    @GetMapping("/edit")
