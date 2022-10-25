@@ -26,7 +26,9 @@
     <!-- 사진 테이블 연결해서 여러개 출력하기 -->
 	   	<c:forEach var="mainImageDto" items="${mainImageList}">
 	    	<div class="swiper-slide">
-				<img src="/image/download/${mainImageDto.imageNo}" class="w-100">
+	    		<a href="${mainImageDto.imagePath}">
+					<img src="/image/download/${mainImageDto.imageNo}" class="w-100">
+	    		</a>
 		    </div>
 		</c:forEach>
     </div>
@@ -35,8 +37,8 @@
     <div class="swiper-pagination"></div>
   
     <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+<!--     <div class="swiper-button-prev"></div> -->
+<!--     <div class="swiper-button-next"></div> -->
   
 </div>
 
