@@ -104,6 +104,40 @@
 					</tr>
 				</tfoot>
 			</table>
+			
+			<!--리뷰테이블 구현중 -->
+			<table width="1000">
+			<thead>
+				<tr>
+					<th>회원아이디</th>
+					<th>작성시간</th>
+					<th>주문한상품명</th>
+					<th>별점</th>
+					<th>포장상태</th>
+					<th>배송상태</th>
+					<th>내용</th>
+					<th>사진</th>
+					<th>좋아요</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="list" items="${reviewList}">
+					<tr>
+						<td>${list.customerId}/신고</td>
+						<td>${list.reviewDate}</td>
+						<td>주문상품(구매테이블구현시)</td>
+						<td>${list.reviewStar}/5</td>
+						<td>${list.reviewPackaging}</td>
+						<td>${list.reviewShipping}</td>
+						<td>${list.reviewContent}</td>
+						<td>사진(들어갈예정)</td>
+						<td>좋아요</td>
+						
+		
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 		</div>
 
 
