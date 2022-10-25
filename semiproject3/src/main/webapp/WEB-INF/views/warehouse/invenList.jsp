@@ -68,6 +68,9 @@
 
 <div class="row center">
 
+<!-- 페이지 네비게이터 -->
+<div class="row center">
+
 <ul class="pagination">
 <li>
 	<c:choose>
@@ -127,6 +130,12 @@
 	</c:choose>
 </li>
 </ul>
+
+</div>	
+
+
+
+
 
 </div>
 

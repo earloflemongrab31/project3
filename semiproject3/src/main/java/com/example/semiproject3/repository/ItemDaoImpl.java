@@ -8,9 +8,9 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListVO;
+import com.example.semiproject3.vo.InvenListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Repository
@@ -291,7 +291,7 @@ public class ItemDaoImpl implements ItemDao {
 	public List<ItemDto> list(ItemListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from item order by item_no desc "
+					+ "select * from item order by item_no desc"
 				+ ")TMP"
 			+") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -303,7 +303,7 @@ public class ItemDaoImpl implements ItemDao {
 	public List<ItemDto> search(ItemListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from item where instr(#1,?) > 0 "
+					+ "select * from item where instr(#1,?) > 0"
 					+ "order by item_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
@@ -328,7 +328,7 @@ public class ItemDaoImpl implements ItemDao {
 	//검색 카운트
 	@Override
 	public int searchCount(ItemListSearchVO vo) {
-		String sql = "select count(*) from item where instr(#1, ?) > 0 ";
+		String sql = "select count(*) from item where instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
@@ -341,5 +341,60 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
+	@Override
+	public List<ItemDto> selectList(InvenListSearchVO vo) {
+		String sql = "select * from item order by item_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+
+	@Override
+	public List<ItemDto> list(InvenListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from item order by item_no desc"
+				+ ")TMP"
+			+") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public List<ItemDto> search(InvenListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from item where instr(#1,?) > 0"
+					+ "order by item_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public int count(InvenListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return searchCount(vo);
+		}
+		else { //목록이라면
+			return listCount(vo);
+		}
+	}
+
+	@Override
+	public int searchCount(InvenListSearchVO vo) {
+		String sql = "select count(*) from item where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	@Override
+	public int listCount(InvenListSearchVO vo) {
+		String sql = "select count(*) from item";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
 		
 }

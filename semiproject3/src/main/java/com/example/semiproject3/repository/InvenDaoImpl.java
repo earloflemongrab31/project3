@@ -59,13 +59,13 @@ public class InvenDaoImpl implements InvenDao{
 	}
 	@Override
 	public List<InvenDto> selectList() {
-		String sql="select * from inven order by inven_no desc";
+		String sql= "select * from inven order by inven_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
 	@Override
 	public void plus(int quantity, int itemNo) {
-		String sql="update item set item_total_cnt=item_total_cnt + ? where item_no=?";
+		String sql= "update item set item_total_cnt=item_total_cnt + ? where item_no=?";
 		Object[] param= {
 				quantity,
 				itemNo
@@ -74,7 +74,7 @@ public class InvenDaoImpl implements InvenDao{
 	}
 	@Override
 	public void minus(int quantity, int itemNo) {
-		String sql="update item set item_total_cnt=item_total_cnt - ? where item_no=?";
+		String sql= "update item set item_total_cnt=item_total_cnt - ? where item_no=?";
 		Object[] param= {
 				quantity,
 				itemNo
@@ -83,7 +83,7 @@ public class InvenDaoImpl implements InvenDao{
 	}
 	@Override
 	public void invenIn(int quantity,int itemNo) {
-		String sql="update item set inven_in=inven_in+? where item_no=?";
+		String sql= "update item set inven_in=inven_in+? where item_no=?";
 		Object[] param= {
 				quantity,
 				itemNo
@@ -93,7 +93,7 @@ public class InvenDaoImpl implements InvenDao{
 	}
 	@Override
 	public void invenOut(int quantity,int itemNo) {
-		String sql="update item set inven_out=inven_out+? where item_no=?";
+		String sql= "update item set inven_out=inven_out+? where item_no=?";
 		Object[] param= {
 				quantity,
 				itemNo
@@ -104,7 +104,7 @@ public class InvenDaoImpl implements InvenDao{
 	
 	@Override
 	public List<InvenDto> selectList(String type, String keyword) {
-		String sql="select * from inven where instr(#1,?)>0";
+		String sql="select * from inven where instr(#1,?) > 0";
 		sql=sql.replace("#1", type);
 		Object[] param= {keyword};
 		return jdbcTemplate.query(sql, mapper,param);
@@ -125,7 +125,7 @@ public class InvenDaoImpl implements InvenDao{
 	public List<InvenDto> list(InvenListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
-					+ "select * from inven order by inven_no desc"
+					+ "select * from inven order by inven_no desc "
 				+ ")TMP"
 			+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};

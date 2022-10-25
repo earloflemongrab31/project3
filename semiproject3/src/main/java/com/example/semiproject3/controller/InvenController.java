@@ -1,6 +1,7 @@
 package com.example.semiproject3.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.web.server.ConditionalOnManagementPort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,24 +22,56 @@ public class InvenController {
 	
 	@Autowired
 	ItemDao itemDao;
+	
 	@Autowired
+	
 	InvenDao invenDao;
+	
 	@Autowired
+	
 	CompanyDao companyDao;
 	
+//	@GetMapping("/itemList")
+//	public String itemList(
+//			Model model,
+//			@RequestParam(required = false) String type,
+//			@RequestParam(required = false) String keyword) {
+//			boolean isSearch = type != null && keyword != null;
+//			if(isSearch) {//검색
+//				model.addAttribute("itemList", itemDao.selectList(type, keyword));
+//				}
+//			else {//목록
+//				model.addAttribute("itemList", itemDao.selectList());
+//				}
+//		return "warehouse/itemList";
+//	}
+	
+	
+	//아이템리스트
 	@GetMapping("/itemList")
-	public String itemList(
+	public String itemList(Model model, 
+			@ModelAttribute(name="vo") InvenListSearchVO vo) {
+			//페이지 네비게이터를 위한 게시글 수를 전달
+			int count = itemDao.count(vo);
+			vo.setCount(count);
+	
+			model.addAttribute("itemList", itemDao.selectList(vo));
+			
+			return "warehouse/itemList";
+	}
+	
+	//인벤리스트
+	@GetMapping("/invenList")
+	public String invenList(
 			Model model,
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-			boolean isSearch = type != null && keyword != null;
-			if(isSearch) {//검색
-				model.addAttribute("itemList", itemDao.selectList(type, keyword));
-				}
-			else {//목록
-				model.addAttribute("itemList", itemDao.selectList());
-				}
-		return "warehouse/itemList";
+			@ModelAttribute(name="vo") InvenListSearchVO vo) {
+			//페이지 네비게이터를 위한 게시글 수를 전달
+			int count = invenDao.count(vo);
+			vo.setCount(count);
+		
+			model.addAttribute("invenList", invenDao.selectList(vo));
+
+		return "warehouse/invenList";
 	}
 	
 	@GetMapping("/insert")
@@ -67,17 +100,6 @@ public class InvenController {
 		}
 		
 	}
-	@GetMapping("/invenList")
-	public String invenList(
-			Model model,
-			@ModelAttribute(name="vo") InvenListSearchVO vo) {
-			//페이지 네비게이터를 위한 게시글 수를 전달
-			int count = invenDao.count(vo);
-			vo.setCount(count);
-		
-			model.addAttribute("invenList", invenDao.selectList(vo));
-
-		return "/warehouse/invenList";
-	}
+	
 	
 }
