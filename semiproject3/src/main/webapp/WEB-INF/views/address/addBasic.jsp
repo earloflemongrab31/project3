@@ -46,7 +46,7 @@
 					</thead>
 					
 					<tbody align="center">
-						   <c:forEach var="addressDto" items="${selectAddressList}">
+						   <c:forEach var="addressDto" items="${list}">
 							<tr>
 							  <td>
                      <input type="checkbox" class="check-item" name="addressNo" value="${addressDto.addressNo}">

@@ -41,19 +41,19 @@
 	               <th width="20%">배송지명</th>
 	               <th width="10%">우편번호</th>
 	               <th width="35%">기본주소</th>
-<!-- 	               <th width="25%">상세주소</th> -->
-<!-- 	            </tr> -->
-<!-- 	         </thead> -->
+	               <th width="25%">상세주소</th>
+	            </tr>
+	         </thead>
 	            
-<!-- 	         <tbody align="center"> -->
-<%-- 	            <c:forEach var="addressDto" items="${listBasic}"> --%>
-<!-- 	               <tr> -->
-	               <th width="25%">상세주소</tr>
-					</thead>
+	         <tbody align="center">
+	            <c:forEach var="addressDto" items="${listBasic}">
+	               <tr>
+<!-- 	               <th width="25%">상세주소</tr> -->
+<!-- 					</thead> -->
 					
-					<tbody align="center">
-						   <c:forEach var="addressDto" items="${listBaisc}">
-							<tr>
+<!-- 					<tbody align="center"> -->
+<%-- 						   <c:forEach var="addressDto" items="${listBaisc}"> --%>
+<!-- 							<tr> -->
 	                  <td>${addressDto.addressNo}</td>
 	                  <td>${addressDto.addressName}</td>
 	                  <td>${addressDto.addressPost}</td>

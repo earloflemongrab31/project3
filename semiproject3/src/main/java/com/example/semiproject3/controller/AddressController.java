@@ -57,22 +57,21 @@ public class AddressController {
                @RequestParam(required = false) String type,
                @RequestParam(required = false) String keyword) {
 	   
-	   String loginId = (String)session.getAttribute(SessionConstant.ID);
-	   
-	   boolean isSearch = type != null && keyword != null;
-	   if(isSearch) { // 검색
-		   model.addAttribute("list", addressDao.selectList(type, keyword));
-		   }
-	   else { //목록
-		   model.addAttribute("list", addressDao.selectList());
-		   }
+
+		  String loginId = (String) session.getAttribute(SessionConstant.ID);
+
+	      boolean isSearch = type != null && keyword != null;
+	      if(isSearch) { // 검색
+	         model.addAttribute("list", addressDao.selectList(type, keyword));
+	      }
+	      else { //목록
+	         model.addAttribute("list", addressDao.selectList(loginId));
+	      }
       
-	   List<AddressDto>listBasic=addressDao.selectOneBasic();
-	   
-	   model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
-	   model.addAttribute("listBasic", listBasic);
+	      List<AddressDto>listBasic=addressDao.selectOneBasic();
+	      model.addAttribute("listBasic", listBasic);
   	
-      return "address/list";
+	      return "address/list";
    }
    
    //수정
