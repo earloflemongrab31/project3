@@ -37,19 +37,21 @@ public class OrdersController {
 	private ItemDao itemDao;
 	
 	@Autowired
-	private CartDao cartDao; 
+	private CartDao cartDao;
 		
 	//등록
 	@GetMapping("/insert")
 	public String insert(
 			HttpSession session,
-			@RequestParam int itemNo){
+			@RequestParam int itemNo,Model model){
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 			
 			ItemDto itemDto = itemDao.selectOne(itemNo);
 			CustomerDto customerDto = customerDao.selectOne(loginId);
 			AddressDto addressDto = addressDao.selectOne(loginId);
 
+			//model.addAttribute("orders",ordersDao.selectList(loginId));
+			
 		int ordersNo = ordersDao.sequnece();
 		ordersDao.insert(OrdersDto.builder()
 				.ordersNo(ordersNo)
@@ -72,19 +74,5 @@ public class OrdersController {
 				.customerMoney(customerDto.getCustomerMoney())
 				.build());
 		return "orders/insert";
-	}
-	
-	@GetMapping("/list")
-	public String list(Model model, 
-					@RequestParam(required = false) String type,
-					@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) { // 검색
-			model.addAttribute("list", ordersDao.selectList(type, keyword));
-		}
-		else { //목록
-			model.addAttribute("list", ordersDao.selectList());
-		}
-		return "orders/list";
 	}
 }
