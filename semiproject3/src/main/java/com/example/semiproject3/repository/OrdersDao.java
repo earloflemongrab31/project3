@@ -27,6 +27,5 @@ public interface OrdersDao {
 	//회원이 선택한 총 주문수 
 	int selectOrders(String loginId);
 
-	List<OrdersDto> selectList(String customerId);
-	
+	List<OrdersDto> selectList(String loginId);
 }

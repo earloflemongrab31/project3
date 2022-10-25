@@ -43,8 +43,9 @@ public class OrdersController {
 	@GetMapping("/insert")
 	public String insert(
 			HttpSession session,
-			@RequestParam int itemNo,@RequestParam int itemCnt){
+			@RequestParam int itemNo){
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
+			
 			ItemDto itemDto = itemDao.selectOne(itemNo);
 			CustomerDto customerDto = customerDao.selectOne(loginId);
 			AddressDto addressDto = addressDao.selectOne(loginId);
@@ -62,7 +63,7 @@ public class OrdersController {
 				.itemName(itemDto.getItemName())
 				.itemColor(itemDto.getItemColor())
 				.itemSize(itemDto.getItemSize())
-				.itemCnt(itemCnt)
+				//.itemCnt(1)
 				.itemFee(3000)
 				.addressName(addressDto.getAddressName())
 				.customerPost(addressDto.getAddressPost())
@@ -75,17 +76,15 @@ public class OrdersController {
 	
 	@GetMapping("/list")
 	public String list(Model model, 
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
+					@RequestParam(required = false) String type,
+					@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {
+		if(isSearch) { // 검색
 			model.addAttribute("list", ordersDao.selectList(type, keyword));
 		}
-		else {
+		else { //목록
 			model.addAttribute("list", ordersDao.selectList());
 		}
-		
 		return "orders/list";
 	}
-	
 }
