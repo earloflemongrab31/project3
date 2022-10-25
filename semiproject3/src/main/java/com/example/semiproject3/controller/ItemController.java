@@ -142,7 +142,7 @@ public class ItemController {
 		int count = itemDao.count(vo);
 		vo.setCount(count);
 		
-		model.addAttribute("list", itemDao.selectList(vo));
+		model.addAttribute("list", itemDao.selectBuyList(vo));
 		
 		return "item/list";
 	}
