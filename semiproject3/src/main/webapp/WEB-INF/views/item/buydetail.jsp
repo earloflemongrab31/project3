@@ -52,6 +52,7 @@
 							<option>Blue</option>
 							<option>Red</option>
 						</select>
+<%-- 						${itemDto.itemColor} --%>
 					</td>
 				</tr>
 				<tr>
@@ -64,6 +65,7 @@
 							<option>L</option>
 							<option>XL</option>
 						</select>
+<%-- 						${itemDto.itemSize} --%>
 					</td>
 				</tr>
 				<tr>

@@ -11,10 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BuyListVO {
-	private int imageNo;
+public class ItemListVO {
+	
+//	private int imageNo;
 	private int itemNo;
-	private String cateCode;
+	private String itemCate;
 	private String itemName;
 	private String itemMemo;
 	private String itemContent;
@@ -26,4 +27,7 @@ public class BuyListVO {
 	private Date itemDate;
 	private String imageMain;
 	private int invenQuantity;
+	private int invenIn;
+	private int invenOut;
+	
 }
