@@ -8,7 +8,7 @@
 </head>
 <body>
 		<h2>고객사 정보입력</h2>
-<form action="insert" method="post">
+<form action="insert" method="post" enctype="multipart/form-data">
 회사이름 :<input name="companyName"><br>
 회사 전화번호 : <input name="companyNumber"><br>
 회사 주소 : <input name="companyAddress"><br>
@@ -16,6 +16,7 @@
 직원 직책 : <input name="customerRank"><br>
 직원 전화번호 : <input name="customerNumber"><br>
 특이사항 :<input name="companyExplan"><br>
+명함사진 :<input type="file" name="card"><br>
 <button type="submit">입력</button>
 </form>
 </body>

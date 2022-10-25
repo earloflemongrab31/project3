@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CartDto;
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.repository.CartDao;
 
 @Controller
@@ -37,6 +38,7 @@ public class CartController {
 			HttpSession session	) {
 		//아이디 가지고 오기 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
 		CartDto cartDto=new CartDto();
 		cartDto.setCustomerId(loginId);
 		cartDto.setItemNo(itemNo);
