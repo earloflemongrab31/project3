@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
-
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
 public class OrdersDto {
 
 	private int ordersNo;
@@ -21,6 +20,7 @@ public class OrdersDto {
 	private String itemColor;
 	private String itemSize;
 	private int itemCnt;
+	private int itemFee;
 	private String addressName;
 	private String customerPost;
 	private String customerHost;
