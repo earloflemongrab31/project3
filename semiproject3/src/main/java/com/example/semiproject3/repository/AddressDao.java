@@ -13,7 +13,7 @@ public interface AddressDao {
 	List<AddressDto> insert(AddressDto addressDto);
 	
 	//목록 & 타입키워드 목록
-	List<AddressDto> selectList(String loginId);
+	List<AddressDto> selectList();
 	List<AddressDto> selectList(String type, String keyword);
 	
 	
@@ -30,6 +30,10 @@ public interface AddressDao {
 	boolean addBasic(int addressNo, String addBasic);
 	boolean addBasicUpdate(int addressNo);
 	boolean basicUpdate(int addressNo);
+	
+
+	List<AddressDto> selectAddressList(String customerId, int begin, int end);
+	
 	
 
 

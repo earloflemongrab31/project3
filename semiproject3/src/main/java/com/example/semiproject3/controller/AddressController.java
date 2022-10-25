@@ -18,14 +18,19 @@ import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AddressDao;
+import com.example.semiproject3.repository.CustomerDao;
 
 @Controller
 @RequestMapping("/address")
 
 public class AddressController {
    
-   @Autowired
-   private AddressDao addressDao;
+	@Autowired
+	private AddressDao addressDao;
+   
+   
+	@Autowired
+	private CustomerDao customerDao;
    
    //등록
    @GetMapping("/insert")
@@ -51,22 +56,22 @@ public class AddressController {
    public String list(Model model, HttpSession session,
                @RequestParam(required = false) String type,
                @RequestParam(required = false) String keyword) {
-	  
-	  String loginId = (String) session.getAttribute(SessionConstant.ID);
-	  
-      boolean isSearch = type != null && keyword != null;
-      if(isSearch) { // 검색
-         model.addAttribute("list", addressDao.selectList(type, keyword));
-      }
-      else { //목록
-         model.addAttribute("list", addressDao.selectList(loginId));
-      }
+	   
+	   String loginId = (String)session.getAttribute(SessionConstant.ID);
+	   
+	   boolean isSearch = type != null && keyword != null;
+	   if(isSearch) { // 검색
+		   model.addAttribute("list", addressDao.selectList(type, keyword));
+		   }
+	   else { //목록
+		   model.addAttribute("list", addressDao.selectList());
+		   }
       
-      
-
-    List<AddressDto>listBasic=addressDao.selectOneBasic();
-  	model.addAttribute("listBasic", listBasic);
-        
+	   List<AddressDto>listBasic=addressDao.selectOneBasic();
+	   
+	   model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
+	   model.addAttribute("listBasic", listBasic);
+  	
       return "address/list";
    }
    
