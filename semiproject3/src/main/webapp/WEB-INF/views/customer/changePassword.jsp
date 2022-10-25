@@ -4,6 +4,10 @@
 	<jsp:param value="비밀번호 변경 페이지" name="title" />
 </jsp:include>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> refs/remotes/origin/main
 <form action="changePassword" method="post" autocomplete="off">
 
 	<div class="container-600 mt-40 mb-40">
@@ -21,9 +25,8 @@
 			<label>변경할 비밀번호</label>
 		</div>
 
-
 		<div class="row">
-			<input type="text" name="customerPw" class="input" required>
+			<input type="password" name="customerPw" class="input" required>
 		</div>
 
 

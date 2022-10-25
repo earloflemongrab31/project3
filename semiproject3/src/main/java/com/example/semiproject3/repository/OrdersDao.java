@@ -9,9 +9,6 @@ public interface OrdersDao {
 	//시퀀스 발행
 	int sequnece();
 	
-	//번호 발행
-	int insert2(OrdersDto ordersDto);
-	
 	//주문 입력
 	void insert(OrdersDto ordersDto);
 	

@@ -4,9 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="주문 상품 등록" name="title"/>
+	<jsp:param value="주문 상품 배송지" name="title"/>
 </jsp:include>
 
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <div class ="container-800 mt-40 mb-40">
 
     <div class = "row ">
@@ -21,13 +22,13 @@
 	               <th>번호</th>
 	               <th width="20%">배송지명</th>
 	               <th width="10%">우편번호</th>
-	               <th width="35%">기본주소</th>
+	               <th width="30%">기본주소</th>
 	               <th width="25%">상세주소</th>
 	            </tr>
 	         </thead>
 	            
 	         <tbody align="center">
-	            <c:forEach var="addressDto" items="${listBaisc}">
+	            <c:forEach var="addressDto" items="${listBasic}">
 	               <tr>
 	                  <td>${addressDto.addressNo}</td>
 	                  <td>${addressDto.addressName}</td>

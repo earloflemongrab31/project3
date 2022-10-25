@@ -56,7 +56,6 @@ public class AddressController {
    public String list(Model model, HttpSession session,
                @RequestParam(required = false) String type,
                @RequestParam(required = false) String keyword) {
-	   
 
 		  String loginId = (String) session.getAttribute(SessionConstant.ID);
 
