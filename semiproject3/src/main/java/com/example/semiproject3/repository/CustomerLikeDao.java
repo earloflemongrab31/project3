@@ -12,5 +12,9 @@ public interface CustomerLikeDao {
 	
 	int count(int itemNo);
 	
+	int likeCount(String loginId);
+	
 	void refresh(int itemNo);
+	
+	void likeRefresh(String loginId);
 }
