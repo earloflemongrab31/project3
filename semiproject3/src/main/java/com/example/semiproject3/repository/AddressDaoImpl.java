@@ -93,9 +93,10 @@ public class AddressDaoImpl implements AddressDao{
 	
 	//주소 목록
 	@Override
-	public List<AddressDto> selectList() {
-		String sql = "select * from address order by address_no asc";
-		return jdbcTemplate.query(sql, mapper);
+	public List<AddressDto> selectList(String loginId) {
+		String sql = "select * from address where customer_id = ? order by address_no asc";
+		Object[] param = {loginId};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	//주소 검색
@@ -152,12 +153,16 @@ public class AddressDaoImpl implements AddressDao{
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+
 	@Override
-	public boolean addBasicUpdate(int addressNo) {
-		String sql = "update address set "
-				+ "address_basic= 'N' where address_no != ?";
+	public boolean addBasicUpdate(int addressNo, String loginId) {
+		String sql = "update address set address_basic= 'N' where address_no != ? and customer_id = ?";
+//		"update address set "
+//		+ "address_basic= 'N' where address_no != ?";
+		
 		Object[] param = {
-				addressNo
+				addressNo,
+				loginId
 		};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
@@ -174,11 +179,17 @@ public class AddressDaoImpl implements AddressDao{
 		};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+	
+	
+
 
 	@Override
-	public List<AddressDto> selectOneBasic() {
-			String sql = "select * from address where address_basic = 'Y'";
-			return jdbcTemplate.query(sql, mapper);
+	public List<AddressDto> selectOneBasic(String loginId) {
+			String sql = "select * from address where address_basic = 'Y' and customer_id=? ";
+			Object[] param = {
+					loginId
+			};
+			return jdbcTemplate.query(sql, mapper, param);
 		}
 
 	@Override

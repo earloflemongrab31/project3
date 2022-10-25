@@ -25,12 +25,12 @@ import com.example.semiproject3.repository.CustomerDao;
 
 public class AddressController {
    
-   @Autowired
-   private AddressDao addressDao;
+	@Autowired
+	private AddressDao addressDao;
    
    
-   @Autowired
-   private CustomerDao customerDao;
+	@Autowired
+	private CustomerDao customerDao;
    
    //등록
    @GetMapping("/insert")
@@ -56,6 +56,7 @@ public class AddressController {
    public String list(Model model, HttpSession session,
                @RequestParam(required = false) String type,
                @RequestParam(required = false) String keyword) {
+<<<<<<< HEAD
       
      String loginId = (String)session.getAttribute(SessionConstant.ID);
      
@@ -73,6 +74,23 @@ public class AddressController {
      model.addAttribute("listBasic", listBasic);
      
       return "address/list";
+=======
+
+		  String loginId = (String) session.getAttribute(SessionConstant.ID);
+
+	      boolean isSearch = type != null && keyword != null;
+	      if(isSearch) { // 검색
+	         model.addAttribute("list", addressDao.selectList(type, keyword));
+	      }
+	      else { //목록
+	         model.addAttribute("list", addressDao.selectList(loginId));
+	      }
+      
+	      List<AddressDto>listBasic=addressDao.selectOneBasic(loginId);
+	      model.addAttribute("listBasic", listBasic);
+  	
+	      return "address/list";
+>>>>>>> refs/remotes/origin/main
    }
    
    //수정

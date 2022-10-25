@@ -2,7 +2,6 @@ package com.example.semiproject3.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +25,7 @@ import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.CartDao;
+import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
@@ -43,11 +43,19 @@ public class ItemController {
 	
 	@Autowired
 	private CustomerLikeDao customerLikeDao;
+	
+	@Autowired
+	private CustomerDao customerDao;
 
 	@Autowired
 	private CartDao cartDao;
 	
+
+//	맥북용
+//	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
+//	화니꼬
 //	private final File directory = new File("C:/study/itemImage");
+//	D드라이브용
 	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
@@ -214,15 +222,12 @@ public class ItemController {
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
 	public String buylist(Model model, 
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("buylist", itemDao.selectBuyList());
-		}
-		else {
-			model.addAttribute("buylist", itemDao.selectBuyList());
-		}
+			@ModelAttribute(name="vo") ItemListSearchVO vo) {
+		
+		int count = itemDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("buylist", itemDao.selectBuyList(vo));
 		
 		return "item/buylist";
 	}
@@ -259,7 +264,7 @@ public class ItemController {
 	
 	//찜
 	@GetMapping("/like")
-	public String customerLike(@RequestParam int itemNo, 
+	public String customerLike(@RequestParam int itemNo,
 			HttpSession session, RedirectAttributes attr) {
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		CustomerLikeDto customerLikeDto = new CustomerLikeDto();
@@ -274,6 +279,7 @@ public class ItemController {
 		}
 		
 		customerLikeDao.refresh(itemNo);//좋아요 조회수 갱신
+		customerLikeDao.likeRefresh(loginId);
 		
 		attr.addAttribute("itemNo",itemNo);
 		return "redirect:/item/buydetail";
