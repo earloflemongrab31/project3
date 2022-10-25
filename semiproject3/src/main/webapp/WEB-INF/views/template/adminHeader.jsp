@@ -66,7 +66,7 @@
     .admin-header .logo,
     .admin-header a{
     	background-color: #ede8e4;
-    	color: gray;
+    	color: #25201d;
     }
 </style>
 <script type="text/javascript">
