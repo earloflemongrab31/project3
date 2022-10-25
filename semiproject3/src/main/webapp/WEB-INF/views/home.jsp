@@ -23,14 +23,13 @@
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
     <!-- Slides -->
-    <!-- 사진 테이블 연결해서 여러개 출력하기 -->
-	   	<c:forEach var="mainImageDto" items="${mainImageList}">
-	    	<div class="swiper-slide">
-	    		<a href="${mainImageDto.imagePath}">
-					<img src="/image/download/${mainImageDto.imageNo}" class="w-100">
-	    		</a>
-		    </div>
-		</c:forEach>
+   	<c:forEach var="mainImageDto" items="${mainImageList}">
+    	<div class="swiper-slide">
+    		<a href="${mainImageDto.imagePath}">
+				<img src="/image/download/${mainImageDto.imageNo}" class="w-100">
+    		</a>
+	    </div>
+	</c:forEach>
     </div>
 
     <!-- If we need pagination -->

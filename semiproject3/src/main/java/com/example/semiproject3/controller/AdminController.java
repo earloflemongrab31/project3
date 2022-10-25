@@ -114,6 +114,12 @@ public class AdminController {
 			HttpServletRequest request,
 			HttpServletResponse response) throws IllegalStateException, IOException {
 		
+		//기존 이미지 삭제
+		List<MainImageDto> mainImageList = mainImageDao.selectAll();
+		for(MainImageDto dto : mainImageList) {
+			imageDao.delete(dto.getImageNo());
+		}
+		
 		//로그인 된 아이디 수정한 사람으로 저장
 		String editor = (String)session.getAttribute(SessionConstant.ID);
 
@@ -134,7 +140,7 @@ public class AdminController {
 				
 				imageDao.insert(ImageDto.builder()
 						.imageNo(imageNo)
-						.imageName(image.getName())
+						.imageName(image.getOriginalFilename())
 						.imageType(image.getContentType())
 						.imageSize(image.getSize())
 						.imageMain("0")

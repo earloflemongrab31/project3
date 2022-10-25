@@ -142,7 +142,7 @@
 	/* swiper */
     .swiper{
         width: 100%;
-        z-index: -1;
+        z-index: 0;
     }
 </style>
 <script type="text/javascript">
@@ -527,11 +527,11 @@
             },
 
             // 좌우 버튼 옵션
-            navigation: {
+            /* navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
-            },
-
+            }, */
+            
             // 자동재생 옵션
             autoplay: {
                 delay: 5000
