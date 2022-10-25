@@ -115,7 +115,7 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 
 	   @Override
 	   public List<CustomerLikeDto>selectList(String loginId) {
-	      String sql = "select * from customer_like  where customer_id = ?";
+	      String sql = "select * from customer_like where customer_id=?";
 	      Object[] param = {loginId};
 		return jdbcTemplate.query(sql, mapper, param);
 	   }
