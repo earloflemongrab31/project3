@@ -1,4 +1,4 @@
-package com.example.semiproject3.vo;
+	package com.example.semiproject3.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

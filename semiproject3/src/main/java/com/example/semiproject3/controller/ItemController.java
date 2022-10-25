@@ -139,7 +139,7 @@ public class ItemController {
 		return "item/list";
 	}
 	
-	//상품 정보 //장바구니+
+	//상품 정보(관리자)
 	@GetMapping("/detail")
 	public String detail(Model model, 
 			@RequestParam int itemNo,
@@ -245,13 +245,7 @@ public class ItemController {
 		model.addAttribute("isCart", cartDao.check(cartDto));
 		}
 
-
-
 		//(+추가) 찜 기록이 있는지 조회하여 첨부
-
-		
-		
-		
 
 		if(loginId != null) {//회원이라면 좋아요 기록을 조회하여 model에 추가
 			CustomerLikeDto customerLikeDto = new CustomerLikeDto();

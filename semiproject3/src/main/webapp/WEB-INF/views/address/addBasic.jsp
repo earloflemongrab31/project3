@@ -23,42 +23,45 @@
 	</div>
    
    
-
-   <div class = "row">
-      <table class="table table-hover table-border">
-         <thead>
-            <tr>
-               <th>
+<div class="row left">
+		<c:choose>
+			<c:when test="${selectAddressList.isEmpty()}">
+				<h4 style="padding-left:20px">
+				 등록된 기본 배송지가 없습니다.
+				</h4>
+			</c:when>
+			<c:otherwise>
+				<table class="table table-border">
+					<thead>
+				 <tr>
+				  <th>
                   <input type="checkbox" class="check-all">
                </th>
                
-               <th width="10%">번호</th>
-               <th width="10%">배송지명</th>
-               <th width="10%">우편번호</th>
-               <th width="30%">기본주소</th>
-               <th width="20%">상세주소</th>
-               <th width="15%">기본배송지여부</th>
-            </tr>
-         </thead>
-            
-         <tbody align="center">
-            <c:forEach var="addressDto" items="${list}">
-               <tr>
-                  <td>
+	               <th>번호</th>
+	               <th width="20%">배송지명</th>
+	               <th width="10%">우편번호</th>
+	               <th width="35%">기본주소</th>
+	               <th width="25%">상세주소</tr>
+					</thead>
+					
+					<tbody align="center">
+						   <c:forEach var="addressDto" items="${selectAddressList}">
+							<tr>
+							  <td>
                      <input type="checkbox" class="check-item" name="addressNo" value="${addressDto.addressNo}">
                   </td>
-                  <td>${addressDto.addressNo}</td>
-                  <td>${addressDto.addressName}</td>
-                  <td>${addressDto.addressPost}</td>
-                  <td>${addressDto.addressHost}</td>
-                  <td>${addressDto.addressDetailHost}</td>
-            	  <td>${addressDto.addressBasic}</td>
-         
-               </tr>
-            </c:forEach>
-         </tbody>
-      </table>
-   </div>
+	                  <td>${addressDto.addressNo}</td>
+	                  <td>${addressDto.addressName}</td>
+	                  <td>${addressDto.addressPost}</td>
+	                  <td>${addressDto.addressHost}</td>
+	                  <td>${addressDto.addressDetailHost}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:otherwise>
+		</c:choose>
 
    <div class="row right">
       <input type="button"  class="btn btn-positive" onclick="upGo()"; value="기본배송지등록" />
