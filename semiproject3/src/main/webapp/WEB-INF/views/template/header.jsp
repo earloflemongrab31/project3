@@ -39,6 +39,10 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 
+<!-- swiper 의존성 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
 <!-- jQuery -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
@@ -135,6 +139,11 @@
         display:none;
     }
 
+	/* swiper */
+    .swiper{
+        width: 100%;
+        z-index: -1;
+    }
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -501,6 +510,38 @@
 	        return false;
 	    });
 	    
+    });
+    
+    /* 스와이퍼 */
+    $(function(){
+        var swiper = new Swiper('.swiper', {
+            // 화면 넘기기 옵션
+            direction: 'horizontal',
+            loop: true,
+
+            // 페이징 옵션
+            pagination: {
+                el: '.swiper-pagination',// 페이징 적용 대상
+                type: 'bullets',// 페이징 도구 모양
+                clickable: true
+            },
+
+            // 좌우 버튼 옵션
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // 자동재생 옵션
+            autoplay: {
+                delay: 5000
+            }, 
+
+            //페이지 전환 효과
+//             effect: "slide",//기본 방식
+            effect: "fade",//페이드 인-아웃 효과
+
+        });
     });
 </script>
 
