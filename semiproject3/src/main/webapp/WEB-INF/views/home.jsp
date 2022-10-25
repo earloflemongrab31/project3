@@ -5,17 +5,17 @@
 </jsp:include>
 
 <!-- 풀스크린 수정 필요할 듯... -->
-<!-- <div class="fullscreen"> -->
-<!-- 	<div class="modal screen-center survey"> -->
-<!-- 		<div class="row right delete" style="font-family:sans-serif; margin:5px;">X</div> -->
-<!-- 		<div class="row" style="min-height:285px; opacity:0;"> -->
-<!-- 			<span>-</span> -->
-<!-- 		</div> -->
-<!-- 		<div class="row center"> -->
-<!-- 			<h3><a href="research/insert">설문조사 페이지 이동</a></h3> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
+<div class="fullscreen">
+	<div class="modal screen-center survey">
+		<div class="row right delete" style="font-family:sans-serif; margin:5px;">X</div>
+		<div class="row" style="min-height:285px; opacity:0;">
+			<span>-</span>
+		</div>
+		<div class="row center">
+			<h3><a href="research/insert">설문조사 페이지 이동</a></h3>
+		</div>
+	</div>
+</div>
 
 <!-- Slider main container -->
 <div class="swiper">
