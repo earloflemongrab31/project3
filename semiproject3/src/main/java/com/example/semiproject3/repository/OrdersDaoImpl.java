@@ -82,9 +82,9 @@ public class OrdersDaoImpl implements OrdersDao {
 	
 	@Override
 	public void insert(OrdersDto ordersDto) {
-		String sql = "insert into orders values(?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, 0, 3000, ?, ?, ?, ?, 0)";
+		String sql = "insert into orders values(orders_seq.nextval, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, 0, 3000, ?, ?, ?, ?, 0)";
 		Object[] param = {
-				ordersDto.getOrdersNo(), ordersDto.getCustomerId(), ordersDto.getItemNo(), ordersDto.getAddressNo(),
+				ordersDto.getCustomerId(), ordersDto.getItemNo(), ordersDto.getAddressNo(),
 				ordersDto.getCustomerName(), ordersDto.getCustomerNick(),ordersDto.getCustomerPhone(), 
 				ordersDto.getItemName(), ordersDto.getItemColor(), ordersDto.getItemSize(),
 				ordersDto.getAddressName(), ordersDto.getCustomerPost(),
@@ -128,7 +128,7 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public List<OrdersDto> selectList() {
-		String sql = "select * from orders order by orders_no desc";
+		String sql = "select * from orders order by orders_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 
