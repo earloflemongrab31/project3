@@ -47,8 +47,8 @@ public class ItemController {
 	@Autowired
 	private CartDao cartDao;
 	
-	private final File directory = new File("C:/study/itemImage");
-//	private final File directory = new File("D:/study/itemImage");
+//	private final File directory = new File("C:/study/itemImage");
+	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
