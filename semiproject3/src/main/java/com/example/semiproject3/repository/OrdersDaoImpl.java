@@ -47,7 +47,7 @@ public class OrdersDaoImpl implements OrdersDao {
 		}
 	};
 	
-	private ResultSet<OrdersDto> extractor = new ResultSetExtractor<OrdersDto>() {
+	private ResultSetExtractor<OrdersDto> extractor = new ResultSetExtractor<OrdersDto>() {
 
 		@Override
 		public OrdersDto extractData(ResultSet rs) throws SQLException, DataAccessException {
