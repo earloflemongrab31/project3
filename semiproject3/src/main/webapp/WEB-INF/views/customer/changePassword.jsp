@@ -21,9 +21,8 @@
 			<label>변경할 비밀번호</label>
 		</div>
 
-
 		<div class="row">
-			<input type="text" name="customerPw" class="input" required>
+			<input type="password" name="customerPw" class="input" required>
 		</div>
 
 

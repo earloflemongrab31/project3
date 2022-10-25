@@ -72,6 +72,7 @@ public class AddressController {
 	model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
   	model.addAttribute("listBasic", listBasic);
   	
+  	
       return "address/list";
    }
    
