@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AdminDto;
+import com.example.semiproject3.entity.MainEditDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AdminDao;
 
@@ -85,11 +86,11 @@ public class AdminController {
 		return "admin/main";
 	}
 	
-//	@PostMapping("main")
-//	public String main(
-//			HttpSession session,
-//			@ModelAttribute MainDto mainDto) {
-//		
-//	}
+	@PostMapping("/main")
+	public String main(
+			HttpSession session,
+			@ModelAttribute MainEditDto mainEditDto) {
+		return "redirec";
+	}
 	
 }
