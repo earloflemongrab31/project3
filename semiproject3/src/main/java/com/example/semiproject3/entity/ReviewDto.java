@@ -9,8 +9,13 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ReviewDto {
-
-	private int reviewNo, itemNo, reviewStar;
-	private String customerId, reviewName, reviewContent;
+	private int reviewNo;
+	private String customerId;
+	private int itemNo;
+	private String reviewContent;
+	private int reviewStar;
+	private String reviewShipping;
+	private String reviewPackaging;
 	private Date reviewDate;
+	
 }
