@@ -65,6 +65,8 @@ public class AddressController {
       else { //목록
          model.addAttribute("list", addressDao.selectList());
       }
+      return "address/list";
+   }
    
    //수정
    @GetMapping("/edit")
