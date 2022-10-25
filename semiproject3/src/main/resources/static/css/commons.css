@@ -450,7 +450,6 @@ ul.pagination > li > a{
     - 평소에는 안 보이게 해놓고 hover 사용으로 나타나게 하기
 */
 .dropdown-menu ul{
-	padding-bottom: 0.5em; 
     position: absolute;
     top: 100%;
     left: 0;
@@ -465,15 +464,7 @@ ul.pagination > li > a{
 /* 
     드롭다운메뉴 내 링크에 대한 설정
 */
-.dropdown-menu a{
-	padding: 3px;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    color: rgb(100, 100, 100);
-    width: 100%;
-}
-
+.dropdown-menu a,
 .dropdown-menu .menu{
 	padding: 3px;
     display: block;
