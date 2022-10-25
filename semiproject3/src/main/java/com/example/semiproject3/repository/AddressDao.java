@@ -17,7 +17,7 @@ public interface AddressDao {
 	List<AddressDto> selectList(String type, String keyword);
 	
 	
-	List<AddressDto> selectOneBasic();
+	List<AddressDto> selectOneBasic(String loginId);
 	
 	
 	//셀렉트원
@@ -28,11 +28,13 @@ public interface AddressDao {
 	boolean update(AddressDto addressDto);
 	boolean delete(int addressNo);
 	boolean addBasic(int addressNo, String addBasic);
-	boolean addBasicUpdate(int addressNo);
+	boolean addBasicUpdate(int addressNo,String loginId);
 	boolean basicUpdate(int addressNo);
 	
 
 	List<AddressDto> selectAddressList(String customerId, int begin, int end);
+
+	
 	
 	
 
