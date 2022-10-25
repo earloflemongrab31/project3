@@ -23,4 +23,5 @@ public interface OrdersDao {
 	
 	//회원이 선택한 총 주문수 
 	int selectOrders(String loginId);
+	
 }

@@ -135,6 +135,4 @@ public class OrdersDaoImpl implements OrdersDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
-	
-
 }
