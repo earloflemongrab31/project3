@@ -19,6 +19,24 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	private RowMapper<ReviewDto> mapper=new RowMapper<ReviewDto>() {
+		
+		@Override
+		public ReviewDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return ReviewDto.builder()
+					.reviewNo(rs.getInt("review_no"))
+					.customerId(rs.getString("customer_id"))
+					.itemNo(rs.getInt("item_no"))
+					.reviewContent(rs.getString("review_content"))
+					.reviewStar(rs.getInt("review_star"))
+					.reviewShipping(rs.getString("review_shipping"))
+					.reviewPackaging(rs.getString("review_packaging"))
+					.reviewDate(rs.getDate("review_date"))
+					.build();
+		}
+	}; 
+	
+	
 	@Override
 	public void insert(ReviewDto reviewDto) {
 		String sql="insert into review values(review_seq.nextval,?,?,?,?,?,?,sysdate)";
@@ -33,4 +51,10 @@ public class ReviewDaoImpl implements ReviewDao {
 		jdbcTemplate.update(sql,param);
 	}
 	
+	@Override
+	public List<ReviewDto> selectList(int itemNo) {
+		String sql="select * from review where item_no=?";
+		Object[] param= {itemNo};
+		return jdbcTemplate.query(sql, mapper,param);
+	}
 }
