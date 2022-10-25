@@ -32,5 +32,9 @@ public interface AddressDao {
 	boolean basicUpdate(int addressNo);
 	
 
+	List<AddressDto> selectAddressList(String customerId, int begin, int end);
+	
+	
+
 
 }

@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerDto;
 
 @Repository
@@ -214,7 +215,19 @@ public class CustomerDaoImpl implements CustomerDao{
 			};
 			return jdbcTemplate.update(sql, param) > 0;
 		}
-	
+
+		@Override
+		public List<CustomerDto> selectAddressList(String addressNo, int begin, int end) {
+				String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select * from customer "
+							+ "where address_no = ? "
+							+ "order by customer_id desc"
+						+ ")TMP"
+					+ ") where rn between ? and ?";
+		Object[] param = {addressNo, begin, end};
+		return jdbcTemplate.query(sql, mapper, param);
+		}
 	
 		
 

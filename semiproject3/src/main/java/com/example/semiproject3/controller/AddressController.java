@@ -2,6 +2,8 @@ package com.example.semiproject3.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AddressDao;
+import com.example.semiproject3.repository.CustomerDao;
 
 @Controller
 @RequestMapping("/address")
@@ -23,6 +27,10 @@ public class AddressController {
    
    @Autowired
    private AddressDao addressDao;
+   
+   
+   @Autowired
+   private CustomerDao customerDao;
    
    //등록
    @GetMapping("/insert")
@@ -45,9 +53,11 @@ public class AddressController {
    
    //목록
    @GetMapping("/list")
-   public String list(Model model, 
+   public String list(Model model, HttpSession session,
                @RequestParam(required = false) String type,
                @RequestParam(required = false) String keyword) {
+	   
+	  
       boolean isSearch = type != null && keyword != null;
       if(isSearch) { // 검색
          model.addAttribute("list", addressDao.selectList(type, keyword));
@@ -55,14 +65,6 @@ public class AddressController {
       else { //목록
          model.addAttribute("list", addressDao.selectList());
       }
-      
-      
-
-    List<AddressDto>listBasic=addressDao.selectOneBasic();
-  	model.addAttribute("listBasic", listBasic);
-        
-      return "address/list";
-   }
    
    //수정
    @GetMapping("/edit")

@@ -10,7 +10,7 @@
 			<span>MY 정보</span>
 			<ul>
 				<li><a href="/customer/detail">개인정보 조회/수정</a></li>
-				<li><a href="#">배송지 관리</a></li>
+				<li><a href="/address/list">배송지 관리</a></li>
 				<li><a href="/customer/delete">회원 탈퇴</a></li>
 			</ul>
 		</li>

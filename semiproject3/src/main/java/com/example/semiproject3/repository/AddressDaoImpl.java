@@ -181,5 +181,18 @@ public class AddressDaoImpl implements AddressDao{
 			return jdbcTemplate.query(sql, mapper);
 		}
 
+	@Override
+	public List<AddressDto> selectAddressList(String customerId, int begin, int end) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from address "
+					+ "where customer_id = ? "
+					+ "order by address_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+Object[] param = {customerId, begin, end};
+return jdbcTemplate.query(sql, mapper, param);
+}
+
 	
 }
