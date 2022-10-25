@@ -180,7 +180,7 @@ public class CustomerController {
 			@RequestParam String customerPw,
 			
 			HttpSession session) {
-		String checkId = (String) session.getAttribute("customerId");
+		String checkId = (String)session.getAttribute(SessionConstant.ID);
 		CustomerDto dto = customerDao.selectOne(checkId);
 		customerDao.changePassword(customerPw, dto.getCustomerId());
 		session.removeAttribute(checkId);
@@ -197,8 +197,8 @@ public class CustomerController {
 	public String changePw(
 			@RequestParam String customerPw,
 			HttpSession session) {
-		
-		String loginId = (String) session.getAttribute("customerId");
+
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
 
 		customerDao.changePassword(customerPw, loginId);
 		

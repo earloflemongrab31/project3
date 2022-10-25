@@ -137,6 +137,19 @@
     }
     .NNNNN-message{
         display:none;
+    } 
+
+    .input.NNNNN ~ .NNNNN-message,
+    .input.NNNNY ~ .NNNNY-message,
+    .input.fail ~ .fail-message,
+    .input.admin ~ .admin-message{
+        display: inline-block;
+    }
+    .NNNNN-message,
+    .NNNNY-message,
+    .fail-message,
+    .admin-message{
+        display: none;
     }
 
 	/* swiper */
@@ -496,12 +509,47 @@
                 }
             });
         });
-    });
-    
-    $(function(){
+        
+        $(".input[name=customerPw").blur(function(){
+            var inputPw = $(this).val();
+            if(!inputPw){
+	            $("#customer-pwcheck").removeClass("fail NNNNY");
+            }
+            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
+            var judge = regex.test(inputPw);
+
+            $(this).removeClass("fail NNNNY");
+            if(judge){
+                $(this).addClass("NNNNY");
+            }
+            else{
+                $(this).addClass("fail");
+            }
+            $("#customer-pwcheck").blur();
+        });
+
+        $("#customer-pwcheck").blur(function(){
+            var pwCheck = $(this).val();
+            if(!pwCheck){
+                $(this).removeClass("fail NNNNY");
+                return;
+            };
+            if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
+
+            var pw = $(".input[name=customerPw").val();
+            var judge = pw == pwCheck;
+            
+            $(this).removeClass("fail NNNNY");
+            if(judge){
+                $(this).addClass("NNNNY");
+            }
+            else{
+                $(this).addClass("fail");
+            }
+        });
     	
-	    $("form.change-pw").submit(function(){
-	        $(".input[name=customerPw").blur();
+	    $(".change-pw").submit(function(){
+	        $(".input[name=customerPw]").blur();
 	        $("#customer-pwcheck").blur();
 	
 	        if($(".input.NNNNY").length == 2){
