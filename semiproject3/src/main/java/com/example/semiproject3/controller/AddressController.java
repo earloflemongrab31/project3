@@ -84,7 +84,7 @@ public class AddressController {
    @PostMapping("/edit")
    public String edit(@ModelAttribute AddressDto addressDto,
          RedirectAttributes attr) {
-	  
+     
    boolean result = addressDao.update(addressDto);
    if(result) {
       attr.addAttribute("addressNo", addressDto.getAddressNo());
@@ -98,9 +98,9 @@ public class AddressController {
    //주소 목록에서 바로 삭제
    @GetMapping("/delete")
    public String delete(@RequestParam(value="addressNo[]") List<Integer> addressNo) {
-	   
+      
      for( int i = 0; i < addressNo.size(); i++) {
-    	 boolean result = addressDao.delete(addressNo.get(i));
+        boolean result = addressDao.delete(addressNo.get(i));
      }
       if(true) {   
          return "redirect:list";

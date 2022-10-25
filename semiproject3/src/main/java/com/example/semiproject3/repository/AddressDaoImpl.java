@@ -205,5 +205,10 @@ Object[] param = {customerId, begin, end};
 return jdbcTemplate.query(sql, mapper, param);
 }
 
-	
+	@Override
+	public AddressDto selectOne(String loginId) {
+		String sql = "select * from address where customer_id=?";
+		Object[] param = {loginId};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
 }
