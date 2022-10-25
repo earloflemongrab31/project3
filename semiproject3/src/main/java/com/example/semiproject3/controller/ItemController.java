@@ -47,8 +47,12 @@ public class ItemController {
 	@Autowired
 	private CartDao cartDao;
 	
-	private final File directory = new File("C:/study/itemImage");
-//	private final File directory = new File("D:/study/itemImage");
+//	맥북용
+//	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
+//	화니꼬
+//	private final File directory = new File("C:/study/itemImage");
+//	D드라이브용
+	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
