@@ -29,7 +29,7 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 			CustomerLikeDto customerLikeDto = new CustomerLikeDto();
 			customerLikeDto.setCustomerId(rs.getString("customer_id"));
 			customerLikeDto.setItemNo(rs.getInt("item_no"));
-			customerLikeDto.setLikeDate(rs.getDate("like_date"));
+			customerLikeDto.setLikeTime(rs.getDate("like_time"));
 			return customerLikeDto;
 		}
 	};
@@ -42,7 +42,7 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 				CustomerLikeDto customerLikeDto = new CustomerLikeDto();
 				customerLikeDto.setCustomerId(rs.getString("customer_id"));
 				customerLikeDto.setItemNo(rs.getInt("item_no"));
-				customerLikeDto.setLikeDate(rs.getDate("like_date"));
+				customerLikeDto.setLikeTime(rs.getDate("like_time"));
 				return customerLikeDto;
 			}
 			else {
@@ -115,7 +115,7 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 
 	   @Override
 	   public List<CustomerLikeDto>selectList(String loginId) {
-	      String sql = "select * from customer_like  where customer_id = ?";
+	      String sql = "select * from customer_like where customer_id=?";
 	      Object[] param = {loginId};
 		return jdbcTemplate.query(sql, mapper, param);
 	   }
