@@ -473,6 +473,15 @@ ul.pagination > li > a{
     width: 100%;
 }
 
+.dropdown-menu .menu{
+	padding: 3px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+    width: 100%;
+}
+
 /* 
     드롭다운메뉴 전체에 hover를 걸면 전체에 변경되는 설정
 */

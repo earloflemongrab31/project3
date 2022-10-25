@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -27,30 +29,68 @@ public class OrdersDaoImpl implements OrdersDao {
 			ordersDto.setCustomerId(rs.getString("customer_id"));
 			ordersDto.setItemNo(rs.getInt("item_no"));
 			ordersDto.setAddressNo(rs.getInt("address_no"));
+			ordersDto.setAddressName(rs.getString("customer_name"));
+			ordersDto.setCustomerNick(rs.getString("customer_nick"));
+			ordersDto.setCustomerPhone(rs.getString("customer_phone"));
+			ordersDto.setCustomerPoint(rs.getInt("customer_point"));
 			ordersDto.setItemName(rs.getString("item_name"));
-			ordersDto.setItemPrice(rs.getInt("item_price"));
 			ordersDto.setItemColor(rs.getString("item_color"));
 			ordersDto.setItemSize(rs.getString("item_size"));
-			ordersDto.setOrdersCnt(rs.getInt("orders_cnt"));
-			ordersDto.setOrdersDate(rs.getDate("orders_date"));
-			ordersDto.setBuyFee(rs.getInt("buy_fee"));
-			ordersDto.setCustomerPhone(rs.getString("customer_phone"));
+			ordersDto.setItemCnt(rs.getInt("item_cnt"));
+			ordersDto.setItemFee(rs.getInt("item_fee"));
+			ordersDto.setAddressName(rs.getString("address_name"));
+			ordersDto.setCustomerPost(rs.getString("customer_post"));
+			ordersDto.setCustomerHost(rs.getString("customer_host"));
+			ordersDto.setCustomerDetailHost(rs.getString("customer_detail_host"));
+			ordersDto.setCustomerMoney(rs.getString("customer_money"));
 			return ordersDto;
+		}
+	};
+	
+	private ResultSetExtractor<OrdersDto> extractor = new ResultSetExtractor<OrdersDto>() {
+
+		@Override
+		public OrdersDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				OrdersDto ordersDto = new OrdersDto();
+				ordersDto.setOrdersNo(rs.getInt("orders_no"));
+				ordersDto.setCustomerId(rs.getString("customer_id"));
+				ordersDto.setItemNo(rs.getInt("item_no"));
+				ordersDto.setAddressNo(rs.getInt("address_no"));
+				ordersDto.setAddressName(rs.getString("customer_name"));
+				ordersDto.setCustomerNick(rs.getString("customer_nick"));
+				ordersDto.setCustomerPhone(rs.getString("customer_phone"));
+				ordersDto.setCustomerPoint(rs.getInt("customer_point"));
+				ordersDto.setItemName(rs.getString("item_name"));
+				ordersDto.setItemColor(rs.getString("item_color"));
+				ordersDto.setItemSize(rs.getString("item_size"));
+				ordersDto.setItemCnt(rs.getInt("item_cnt"));
+				ordersDto.setItemFee(rs.getInt("item_fee"));
+				ordersDto.setAddressName(rs.getString("address_name"));
+				ordersDto.setCustomerPost(rs.getString("customer_post"));
+				ordersDto.setCustomerHost(rs.getString("customer_host"));
+				ordersDto.setCustomerDetailHost(rs.getString("customer_detail_host"));
+				ordersDto.setCustomerMoney(rs.getString("customer_money"));
+				return ordersDto;	
+			}
+			else {
+				return null;	
+			}
+			
 		}
 	};
 	
 	@Override
 	public void insert(OrdersDto ordersDto) {
-		String sql = "insert into orders values(orders_seq.nextval,?,?,?,?,?,?,?,0,sysdate,3000,?)";
+		String sql = "insert into orders values(orders_seq.nextval, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, 0, 3000, ?, ?, ?, ?, 0)";
 		Object[] param = {
-				ordersDto.getCustomerId(),
-				ordersDto.getItemNo(),
-				ordersDto.getAddressNo(),
-				ordersDto.getItemName(),
-				ordersDto.getItemPrice(),
-				ordersDto.getItemColor(),
-				ordersDto.getItemSize(),
-				ordersDto.getCustomerPhone()
+				ordersDto.getOrdersNo(), ordersDto.getCustomerId(),
+				ordersDto.getItemNo(), ordersDto.getAddressNo(),
+				ordersDto.getCustomerName(), ordersDto.getCustomerNick(),
+				ordersDto.getCustomerPhone(), ordersDto.getItemName(),
+				ordersDto.getItemColor(), ordersDto.getItemSize(),
+				ordersDto.getAddressName(), ordersDto.getCustomerPost(),
+				ordersDto.getCustomerHost(), ordersDto.getCustomerDetailHost()
 		};
 		jdbcTemplate.update(sql, param);
 	}
@@ -77,45 +117,24 @@ public class OrdersDaoImpl implements OrdersDao {
 	}
 
 	@Override
-	public List<OrdersDto> selectList(String loginId) {
+	public List<OrdersDto> selectList(String customerId) {
 		String sql = "select * from orders where customer_id=?";
-		Object[] param = {loginId};
+		Object[] param = {customerId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	@Override
-	public int selectOrders(String loginId) {
+	public int selectOrders(String customerId) {
 		String sql = "select count(*) from orders where customer_id=?";
-		Object[] param = {loginId};
+		Object[] param = {customerId};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
-	
-	
-	//번호를 미리 생성한 뒤 등록하는 기능
-	@Override
-	public int insert2(OrdersDto ordersDto) {
-		String sql = "select orders_seq.nextval from dual";
-		int itemNo = jdbcTemplate.queryForObject(sql, int.class);
-		
-		sql = "insert into orders(orders_no, item_no, item_name, item_color, item_size, orders_cnt, customer_phone) values(?,?,?,?,?,?,?)";
-		Object[] param = {
-				ordersDto.getOrdersNo(),
-				itemNo,
-				ordersDto.getItemName(),
-				ordersDto.getItemColor(),
-				ordersDto.getItemSize(),
-				ordersDto.getOrdersCnt(),
-				ordersDto.getCustomerPhone()
-				
-		};
-		jdbcTemplate.update(sql, param);
-		return itemNo;
-		
-	}
 
-	@Override
 	public int sequnece() {
-		String sql = "select ordres_seq.nextval from dual";
+		String sql = "select orders_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+
+	
+
 }

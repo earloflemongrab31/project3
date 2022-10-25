@@ -229,6 +229,4 @@ public class CustomerDaoImpl implements CustomerDao{
 		return jdbcTemplate.query(sql, mapper, param);
 		}
 	
-		
-
 }
