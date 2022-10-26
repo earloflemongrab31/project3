@@ -7,6 +7,8 @@
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
 
+<form action="/orders/insert" method="post">
+
 	<div class="container-600 mt-40 mb-40">
 
 		<div class="row center">
@@ -97,7 +99,7 @@
 
 						<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 
-						<a href="/orders/insert?itemNo=${itemDto.itemNo}">구매하기</a> 
+						<button class="btn btn-positive" type="submit">구매하기</button>
 
 						<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>	 
 						<a href="buylist">목록으로</a>
@@ -145,7 +147,8 @@
 		</div>
 
 
-
+</div>
+</form>
 
 
 
