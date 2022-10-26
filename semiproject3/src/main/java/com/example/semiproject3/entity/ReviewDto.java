@@ -17,6 +17,5 @@ public class ReviewDto {
 	private String reviewShipping;
 	private String reviewPackaging;
 	private Date reviewDate;
-	private int iamgeNo;
-	
+	private int imageNo;
 }

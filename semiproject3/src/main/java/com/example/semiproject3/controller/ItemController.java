@@ -271,12 +271,12 @@ public class ItemController {
 		}
 		
 
-		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
-		model.addAttribute("reviewList",reviewDao.selectList2(itemNo));
+		  model.addAttribute("reviewList",reviewDao.selectList2(itemNo));
+		//model.addAttribute("reviewList",reviewDao.selectList2(itemNo));
 		
 
-		model.addAttribute("reviewList",reviewDao.selectList(itemNo));
-//		model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
+		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
+		//model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 
 		
 		return "item/buydetail";
