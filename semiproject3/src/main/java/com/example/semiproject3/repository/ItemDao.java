@@ -43,7 +43,7 @@ public interface ItemDao {
 	int listCount(InvenListSearchVO vo);
 	
 	//상품 정보
-	ItemDto selectOne(int itemNo);
+	ItemDto selectOne(int itemCnt);
 	
 	//상품 수정
 	boolean update(ItemDto itemDto);

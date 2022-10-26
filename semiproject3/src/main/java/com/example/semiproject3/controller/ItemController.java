@@ -31,6 +31,7 @@ import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.ReviewDao;
+import com.example.semiproject3.repository.ReviewLikeDao;
 import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Controller
@@ -57,6 +58,8 @@ public class ItemController {
 	
 	@Autowired
 	private ReviewDao reviewDao;
+	@Autowired
+	private ReviewLikeDao reviewLikeDao;
 	
 
 //	맥북용
@@ -267,9 +270,8 @@ public class ItemController {
 			model.addAttribute("isLike", customerLikeDao.check(customerLikeDto));
 		}
 		
-		//리뷰댓글기능
 		model.addAttribute("reviewList",reviewDao.selectList(itemNo));
-		
+		model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 		
 		return "item/buydetail";
 	}
