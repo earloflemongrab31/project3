@@ -120,7 +120,6 @@
 					<th>배송상태</th>
 					<th>내용</th>
 					<th>사진</th>
-					<th>좋아요</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -137,11 +136,9 @@
 						<td>${list.reviewShipping}</td>
 						<td>${list.reviewContent}</td>
 						<td>사진(들어갈예정)</td>
-						<td>좋아요</td>
-						
-		
 					</tr>
 				</c:forEach>
+				
 			</tbody>
 		</table>
 		</div>
@@ -149,7 +146,6 @@
 
 </div>
 </form>
-
 
 
 		<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

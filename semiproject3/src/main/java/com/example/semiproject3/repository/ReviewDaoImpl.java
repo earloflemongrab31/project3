@@ -61,8 +61,9 @@ public class ReviewDaoImpl implements ReviewDao {
 	
 	@Override
 	public void insert(ReviewDto reviewDto) {
-		String sql="insert into review values(review_seq.nextval,?,?,?,?,?,?,sysdate)";
+		String sql="insert into review values(?,?,?,?,?,?,?,sysdate)";
 		Object[] param= {
+				reviewDto.getReviewNo(),
 				reviewDto.getCustomerId(),
 				reviewDto.getItemNo(),
 				reviewDto.getReviewContent(),
@@ -85,5 +86,20 @@ public class ReviewDaoImpl implements ReviewDao {
 		String sql="select * from review where review_no=?";
 		Object[] param= {reviewNo};
 		return jdbcTemplate.query(sql,extractor,param);
+	}
+	//시퀀스번호 생성
+	@Override
+	public int sequence() {
+		String sql = "select orders_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);		
+		
+	}
+	//사진
+	@Override
+	public void connectAttachment(int reviewNo, int imageNo) {
+		String sql="insert into review_image(review_no, image_no) values(?,?)";
+		Object[] param= {reviewNo,imageNo};
+		jdbcTemplate.update(sql,param); 
+		
 	}
 }

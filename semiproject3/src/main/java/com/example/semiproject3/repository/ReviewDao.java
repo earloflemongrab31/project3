@@ -6,6 +6,8 @@ import com.example.semiproject3.entity.ReviewDto;
 
 public interface ReviewDao {
 
+	//시퀀스 번호 생성
+	int sequence();
 	//리뷰작성 
 	void insert(ReviewDto reviewDto);
 	
@@ -14,4 +16,7 @@ public interface ReviewDao {
 	
 	//하나의관한 리뷰 
 	ReviewDto selectOne(int reviewNo);
+	
+	//리뷰이미지 연결
+	void connectAttachment(int reviewNo, int imageNo);
 }
