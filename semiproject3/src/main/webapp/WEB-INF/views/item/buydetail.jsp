@@ -52,6 +52,7 @@
 							<option>Blue</option>
 							<option>Red</option>
 						</select>
+<%-- 						${itemDto.itemColor} --%>
 					</td>
 				</tr>
 				<tr>
@@ -64,12 +65,13 @@
 							<option>L</option>
 							<option>XL</option>
 						</select>
+<%-- 						${itemDto.itemSize} --%>
 					</td>
 				</tr>
 				<tr>
 					<th>Qnty</th>
 					<td>
-						<input class="w-20" type="number" name="itemCnt" min="0">
+						<input class="w-20" type="number" name="itemCnt" min="0" max="${itemDto.itemTotalCnt}">
 					</td>
 				</tr>
 				<tr>
@@ -122,7 +124,10 @@
 			<tbody>
 				<c:forEach var="list" items="${reviewList}">
 					<tr>
-						<td>${list.customerId}/신고</td>
+						<td>
+						${list.customerId}/
+						<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
+						</td>
 						<td>${list.reviewDate}</td>
 						<td>주문상품(구매테이블구현시)</td>
 						<td>${list.reviewStar}/5</td>

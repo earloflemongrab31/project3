@@ -39,10 +39,26 @@
                     	value="${itemList.cateCode}" readonly></td>
                     <td><input class="input w-100 input-none center" name="itemName" 
                      	value="${itemList.itemName}" readonly></td>
-                    <td><input class="input w-100 input-none center" name="itemSize" 
-                    	value="${itemList.itemSize}" readonly></td>
-                    <td><input class="input w-100 input-none center" name="itemColor" 
-                    	value="${itemList.itemColor}" readonly></td>
+                    <td>
+                   		<select name="itemSize">
+							<option value="">선택</option>
+				            <option disabled>------</option>
+							<option>S</option>
+							<option>M</option>
+							<option>L</option>
+							<option>XL</option>
+						</select>
+                    </td>
+                    <td>
+                    	<select name="itemColor">
+							<option value="">선택</option>
+				            <option disabled>------</option>
+							<option>Black</option>
+							<option>White</option>
+							<option>Blue</option>
+							<option>Red</option>
+						</select>
+					</td>
                 </tr>
             </tbody>
         </table>

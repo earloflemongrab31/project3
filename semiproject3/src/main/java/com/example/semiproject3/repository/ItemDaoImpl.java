@@ -12,6 +12,7 @@ import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListVO;
 import com.example.semiproject3.vo.InvenListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
+import com.example.semiproject3.vo.ItemListVO;
 
 @Repository
 public class ItemDaoImpl implements ItemDao {
@@ -33,6 +34,28 @@ public class ItemDaoImpl implements ItemDao {
 							.itemTotalCnt(rs.getInt("item_total_cnt"))
 							.itemLikeCnt(rs.getInt("item_like_cnt"))
 							.itemDate(rs.getDate("item_date"))
+							.invenIn(rs.getInt("inven_in"))
+							.invenOut(rs.getInt("inven_out"))
+				.build();
+	};
+	
+	//RowMapper(상품용)
+	private RowMapper<ItemListVO> itemMapper = (rs, idx) -> {
+		return ItemListVO.builder()
+//							.imageNo(rs.getInt("image_no"))
+							.itemNo(rs.getInt("item_no"))
+							.itemCate(rs.getString("cate_code"))
+							.itemName(rs.getString("item_name"))
+							.itemMemo(rs.getString("item_memo"))
+							.itemContent(rs.getString("item_content"))
+							.itemPrice(rs.getInt("item_price"))
+							.itemColor(rs.getString("item_color"))
+							.itemSize(rs.getString("item_size"))
+							.itemTotalCnt(rs.getInt("item_total_cnt"))
+							.itemLikeCnt(rs.getInt("item_like_cnt"))
+							.itemDate(rs.getDate("item_date"))
+							.imageMain(rs.getString("image_main"))
+							.invenQuantity(rs.getInt("inven_quantity"))
 							.invenIn(rs.getInt("inven_in"))
 							.invenOut(rs.getInt("inven_out"))
 				.build();
@@ -72,6 +95,33 @@ public class ItemDaoImpl implements ItemDao {
 								.itemTotalCnt(rs.getInt("item_total_cnt"))
 								.itemLikeCnt(rs.getInt("item_like_cnt"))
 								.itemDate(rs.getDate("item_date"))
+					.build();
+		}
+		else {
+			return null;
+		}
+	};
+	
+	//ResultSetExtractor(상품용)
+	private ResultSetExtractor<ItemListVO> itemExtractor = (rs) -> {
+		if(rs.next()) {
+			return ItemListVO.builder()
+//								.imageNo(rs.getInt("image_no"))
+								.itemNo(rs.getInt("item_no"))
+								.itemCate(rs.getString("cate_code"))
+								.itemName(rs.getString("item_name"))
+								.itemMemo(rs.getString("item_memo"))
+								.itemContent(rs.getString("item_content"))
+								.itemPrice(rs.getInt("item_price"))
+								.itemColor(rs.getString("item_color"))
+								.itemSize(rs.getString("item_size"))
+								.itemTotalCnt(rs.getInt("item_total_cnt"))
+								.itemLikeCnt(rs.getInt("item_like_cnt"))
+								.itemDate(rs.getDate("item_date"))
+								.imageMain(rs.getString("image_main"))
+								.invenQuantity(rs.getInt("inven_quantity"))
+								.invenIn(rs.getInt("inven_in"))
+								.invenOut(rs.getInt("inven_out"))
 					.build();
 		}
 		else {
@@ -119,15 +169,13 @@ public class ItemDaoImpl implements ItemDao {
 						+ "item_name, "
 						+ "item_memo, "
 						+ "item_content, "
-						+ "item_price, "
-						+ "item_color, "
-						+ "item_size) "
-						+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
+						+ "item_price) "
+						+ "values(?, ?, ?, ?, ?, ?)";
 		Object[] param = {
 				itemDto.getItemNo(), itemDto.getCateCode(), 
 				itemDto.getItemName(), itemDto.getItemMemo(), 
 				itemDto.getItemContent(), itemDto.getItemPrice(), 
-				itemDto.getItemColor(), itemDto.getItemSize()};
+		};
 		jdbcTemplate.update(sql, param);
 	}
 
@@ -275,7 +323,8 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.query(sql, buyExtractor, param);
 	}
 
-	//통합목록
+	
+	//통합목록(관리자)
 	@Override
 	public List<ItemDto> selectList(ItemListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면
@@ -293,7 +342,7 @@ public class ItemDaoImpl implements ItemDao {
 				+ "select rownum rn, TMP.* from ("
 					+ "select * from item order by item_no desc"
 				+ ")TMP"
-			+") where rn between ? and ?";
+				+") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
@@ -306,7 +355,7 @@ public class ItemDaoImpl implements ItemDao {
 					+ "select * from item where instr(#1,?) > 0"
 					+ "order by item_no desc"
 				+ ")TMP"
-			+ ") where rn between ? and ?";
+				+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
 				vo.getKeyword(), vo.startRow(), vo.endRow()
@@ -337,7 +386,7 @@ public class ItemDaoImpl implements ItemDao {
 	//목록 카운트
 	@Override
 	public int listCount(ItemListSearchVO vo) {
-		String sql = "select count(*) from item";
+		String sql = "select count(*) from inven";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
