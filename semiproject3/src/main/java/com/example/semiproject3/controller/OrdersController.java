@@ -44,7 +44,8 @@ public class OrdersController {
 	@GetMapping("/insert")
 	public String insert(
 			HttpSession session,
-			@RequestParam int itemNo,Model model){
+			@RequestParam int itemNo
+			){
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 						
 			ItemDto itemDto = itemDao.selectOne(itemNo);
