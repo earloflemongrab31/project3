@@ -11,8 +11,8 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerDto;
+import com.example.semiproject3.vo.CustomerListSearchVO;
 
 @Repository
 public class CustomerDaoImpl implements CustomerDao{
@@ -232,5 +232,70 @@ public class CustomerDaoImpl implements CustomerDao{
 		Object[] param = {addressNo, begin, end};
 		return jdbcTemplate.query(sql, mapper, param);
 		}
-	
+
+		//셀렉트리스트
+		@Override
+		public List<CustomerDto> selectList(CustomerListSearchVO vo) {
+			if(vo.isSearch()) {//검색이라면
+				return search(vo);
+			}
+			else {
+				return list(vo);
+			}
+		}
+		
+		//리스트
+		@Override
+		public List<CustomerDto> list(CustomerListSearchVO vo) {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from("
+						+ "select * from customer order by customer_id desc"
+					+ ")TMP"
+				+ ") where rn between ? and ?";
+			Object[] param = {vo.startRow(), vo.endRow()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+
+		//검색
+		@Override
+		public List<CustomerDto> search(CustomerListSearchVO vo) {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+						+ "select * from customer where instr(#1,?) > 0 "
+						+ "order by customer_id desc"
+					+ ")TMP"
+				+ ") where rn between ? and ?";
+			sql = sql.replace("#1", vo.getType());
+			Object[] param = {
+					vo.getKeyword(), vo.startRow(), vo.endRow()
+			};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+
+
+		
+		@Override
+		public int count(CustomerListSearchVO vo) {
+			if(vo.isSearch()) { //검색이라면
+				return searchCount(vo);
+			}
+			else { //목록이라면
+				return listCount(vo);
+			}
+		}
+
+		@Override
+		public int searchCount(CustomerListSearchVO vo) {
+			String sql = "select count(*) from customer where instr(#1, ?) > 0";
+			sql = sql.replace("#1", vo.getType());
+			Object[] param = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
+
+		@Override
+		public int listCount(CustomerListSearchVO vo) {
+			String sql = "select count(*) from customer";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+		
 }
