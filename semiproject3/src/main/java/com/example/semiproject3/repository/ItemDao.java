@@ -32,7 +32,6 @@ public interface ItemDao {
 	List<ItemDto> selectList(InvenListSearchVO vo);
 	List<ItemDto> list(InvenListSearchVO vo);
 	List<ItemDto> search(InvenListSearchVO vo);
-
 		
 	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
 	int count(ItemListSearchVO vo);

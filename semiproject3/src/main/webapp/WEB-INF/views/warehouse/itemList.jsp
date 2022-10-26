@@ -10,7 +10,7 @@
         
 
 <div class="row center mb-30">
-	<h1>상품 입/출고 목록</h1>
+	<h1>전체 상품 현황</h1>
 	<hr>
 </div>
           
@@ -29,28 +29,25 @@
 	<table class="table table-border table-hover"  >
 	<thead>
 		<tr>
-			<th>카테고리</th>
 			<th>상품번호</th>
+			<th>카테고리</th>
 			<th>상품이름</th>
 			<th>상품사이즈</th>
 			<th>상품컬러</th>
-	 		<th>입/출고</th>
-	 		<th>수량</th>
-			<th>등록</th>
+	 		<th>상품수량</th>
 		</tr>	
 	</thead>
 	<tbody>
 		<c:forEach var="inven" items="${invenList}">
 		<tr>
-			<td>${inven.itemCate}</td>
 			<td>${inven.itemNo}</td>
+			<td>${inven.itemCate}</td>
 			<td>${inven.itemName}</td>
 			<td>${inven.itemSize}</td>
 			<td>${inven.itemColor}</td>
-			<td>${inven.invenInout}</td>
-			<td>${inven.invenQuantity}</td>
+			<td>${inven.itemTotalCnt}</td>
 			<td>
-				<a class="btn btn-nuetral btn-border" href="insert?itemNo=${inven.itemNo}">입고/출고</a>
+				<a class="btn btn-nuetral btn-border" href="insert?itemNo=${inven.itemNo}&itemSize=${inven.itemSize}&itemColor=${inven.itemColor}">입고/출고</a>
 			</td>
 		</tr> 	
 		</c:forEach>
@@ -60,69 +57,69 @@
 </div>
    
 <!-- 페이지 네비게이터 -->
-<%-- <div class="row center">
-
-<ul class="pagination">
-	<li>
-		<c:choose>
-		<c:when test="${not vo.isFirst()}">
-			<a href="invenList?p=${vo.firstBlock()}&${vo.parameter()}">
-				<i class="fa-solid fa-angles-left"></i>
-			</a>
-		</c:when>
-		<c:otherwise>
-			<a href="#"><i class="fa-solid fa-angles-left"></i></a>
-		</c:otherwise>
-		</c:choose>
-	</li>
+<div class="row center">
 	
-	<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
-	<li>
-		<c:choose>
-		<c:when test="${vo.hasPrev()}">
-			<a href="invenList?p=${vo.prevBlock()}&${vo.parameter()}">
-				<i class="fa-solid fa-chevron-left"></i>
-			</a>
-		</c:when>
-		<c:otherwise>
-			<a href="#"><i class="fa-solid fa-chevron-left"></i></a>
-		</c:otherwise>
-		</c:choose>
-	</li>
-	 
-	<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-		<li><a href="invenList?p=${i}&${vo.parameter()}">${i}</a></li>
-	</c:forEach>
+	<ul class="pagination">
+		<li>
+			<c:choose>
+			<c:when test="${not vo.isFirst()}">
+				<a href="invenList?p=${vo.firstBlock()}&${vo.parameter()}">
+					<i class="fa-solid fa-angles-left"></i>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angles-left"></i></a>
+			</c:otherwise>
+			</c:choose>
+		</li>
+		
+		<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
+		<li>
+			<c:choose>
+			<c:when test="${vo.hasPrev()}">
+				<a href="invenList?p=${vo.prevBlock()}&${vo.parameter()}">
+					<i class="fa-solid fa-chevron-left"></i>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-chevron-left"></i></a>
+			</c:otherwise>
+			</c:choose>
+		</li>
+		 
+		<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
+			<li><a href="invenList?p=${i}&${vo.parameter()}">${i}</a></li>
+		</c:forEach>
+		
+		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+		<li>
+			<c:choose>
+			<c:when test="${vo.hasNext()}">
+				<a href="invenList?p=${vo.nextBlock()}&${vo.parameter()}">
+					<i class="fa-solid fa-chevron-right"></i>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-chevron-right"></i></a>
+			</c:otherwise>
+			</c:choose>
+		</li>
+		
+		<li>
+			<c:choose>
+			<c:when test="${not vo.isLast()}">
+				<a href="invenList?p=${vo.lastBlock()}&${vo.parameter()}">
+					<i class="fa-solid fa-angles-right"></i>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angles-right"></i></a>
+			</c:otherwise>
+			</c:choose>
+		</li>
+	</ul>
 	
-	<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-	<li>
-		<c:choose>
-		<c:when test="${vo.hasNext()}">
-			<a href="invenList?p=${vo.nextBlock()}&${vo.parameter()}">
-				<i class="fa-solid fa-chevron-right"></i>
-			</a>
-		</c:when>
-		<c:otherwise>
-			<a href="#"><i class="fa-solid fa-chevron-right"></i></a>
-		</c:otherwise>
-		</c:choose>
-	</li>
-	
-	<li>
-		<c:choose>
-		<c:when test="${not vo.isLast()}">
-			<a href="invenList?p=${vo.lastBlock()}&${vo.parameter()}">
-				<i class="fa-solid fa-angles-right"></i>
-			</a>
-		</c:when>
-		<c:otherwise>
-			<a href="#"><i class="fa-solid fa-angles-right"></i></a>
-		</c:otherwise>
-		</c:choose>
-	</li>
-</ul>
-
-</div> --%>	
+	</div>
 
 </div>
         

@@ -65,7 +65,7 @@
  
 
 <div class="row right">
- 	<a class="btn btn-positive" href="itemList">입/출고 목록 </a>
+ 	<a class="btn btn-positive" href="itemList">전체 상품 현황</a>
 </div>
 
 <div class="row center">
