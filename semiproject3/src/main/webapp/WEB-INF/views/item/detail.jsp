@@ -73,6 +73,18 @@
 	 					<pre>${itemDto.itemContent}</pre>
 	 				</td>
 	 			</tr>
+	 			<tr>
+	 				<th>상품색상</th>
+	 				<td>
+	 					<pre>${itemDto.itemColor}</pre>
+	 				</td>
+	 			</tr>
+	 			<tr>
+	 				<th>상품사이즈</th>
+	 				<td>
+	 					<pre>${itemDto.itemSize}</pre>
+	 				</td>
+	 			</tr>
 	 			
 	 			<tr>
 	 				<th>등록일</th>
