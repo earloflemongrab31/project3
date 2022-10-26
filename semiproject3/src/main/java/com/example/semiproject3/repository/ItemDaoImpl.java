@@ -317,6 +317,20 @@ public class ItemDaoImpl implements ItemDao {
 		Object[] param = {itemNo};
 		return jdbcTemplate.query(sql, buyExtractor, param);
 	}
+	
+	@Override
+	public List<ItemListVO> selectItemList(int itemNo) {
+		String sql = "select * from item_list_view where item_no = ?";
+		Object[] param = {itemNo};
+		return jdbcTemplate.query(sql, itemMapper, param);
+	}
+
+	@Override
+	public ItemListVO selectItemOne(int itemNo) {
+		String sql = "select * from item_list_view where item_no = ?";
+		Object[] param = {itemNo};
+		return jdbcTemplate.query(sql, itemExtractor, param);
+	}
 
 	
 	//통합목록(관리자)
@@ -477,5 +491,5 @@ public class ItemDaoImpl implements ItemDao {
 		};
 		return jdbcTemplate.query(sql, itemMapper, param);
 	}
-		
+
 }
