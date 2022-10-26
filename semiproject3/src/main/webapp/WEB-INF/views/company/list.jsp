@@ -59,6 +59,10 @@ td, th {
 			</tbody>
 		</table>
 	</div>
+	
+	<div class="row right">
+			<a href="cardList"><button  class="btn btn-positive" type="submit">명함목록</button></a>
+		</div>
 </div>
 
     
