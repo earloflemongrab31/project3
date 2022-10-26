@@ -39,6 +39,61 @@
 	   		  <hr>
 		</div>
 		
+		<div class="row">
+			<h3>신고대상 ID 및 내용</h3>
+		</div>
+		<div class="row">
+		 <input style="border-bottom:0px;" class="input w-100 w-100 " name="reviewShipping" type="text" value="${review.customerId}" readonly>
+		
+		 <textarea style="border-top:0px;"  class="input w-100 fix-size" rows="10" name="reviewShipping" readonly>${review.reviewContent}</textarea>
+		</div>
+		
+		<div class="row">
+			<h3>신고사유</h3>
+		</div>
+		<div class="row">
+			<ul>
+				<label>
+					<input type="radio" name="reportRadio" value="관련없는 이미지">
+					관련없는 이미지
+				</label>
+		
+				<label>
+					<input type="radio" name="reportRadio" value="관련없는 내용">
+					관련없는 내용
+				</label>
+		
+				<label>
+					<input type="radio" name="reportRadio" value="욕설/비방">
+					욕설/비방
+				</label>
+			</ul>
+			<ul class="mt-10">
+				<label>
+					<input type="radio" name="reportRadio" value="광고/홍보글">
+					광고/홍보글
+				</label>
+			
+				<label>
+					<input type="radio" name="reportRadio" value="개인정보유출">
+					개인정보유출
+				</label>
+			
+				<label>
+					<input type="radio" name="reportRadio" value="게시글도배">
+					게시글도배/비방
+				</label>
+			</ul>
+			<ul class="mt-10">
+				<label>
+					<input type="radio" name="reportRadio" value="음란/선정성">
+					음란/선정성
+				</label>
+		
+				<label>
+					<input type="radio" name="reportRadio" value="기타">
+					기타
+				</label>
 		
 	</div>
 
