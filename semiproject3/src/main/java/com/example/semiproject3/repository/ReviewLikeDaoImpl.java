@@ -35,6 +35,7 @@ public class ReviewLikeDaoImpl implements ReviewLikeDao{
 		
 		jdbcTemplate.update(sql,param);
 	}
+	
 	//좋아요갯수 체크
 	@Override
 	public boolean check(ReviewLikeDto dto) {
