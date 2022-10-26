@@ -13,21 +13,18 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ItemListVO {
 	
-//	private int imageNo;
 	private int itemNo;
+	private String itemSize;
+	private String itemColor;
+	private int itemTotalCnt;
 	private String itemCate;
 	private String itemName;
 	private String itemMemo;
 	private String itemContent;
 	private int itemPrice;
-	private String itemColor;
-	private String itemSize;
-	private int itemTotalCnt;
 	private int itemLikeCnt;
 	private Date itemDate;
+	private int imageNo;
 	private String imageMain;
-	private int invenQuantity;
-	private int invenIn;
-	private int invenOut;
 	
 }

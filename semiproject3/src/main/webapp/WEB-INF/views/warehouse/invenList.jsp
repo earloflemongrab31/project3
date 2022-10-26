@@ -30,6 +30,7 @@
         <table class="table table-border" >
           <thead>
       <tr>
+      	<th>입/출고번호</th>
          <th>카테고리</th>
          <th>상품명</th>
          <th>상품사이즈</th>
@@ -45,6 +46,7 @@
    <tbody>
       <c:forEach var="invenList" items="${invenList}">
          <tr>
+         	<td>${invenList.invenNo}</td>
             <td>${invenList.itemCate}</td>
             <td>${invenList.itemName}</td>
             <td>${invenList.itemSize}</td>
@@ -63,7 +65,7 @@
  
 
 <div class="row right">
- 	<a class="btn btn-positive" href="itemList">입/출고 목록 </a>
+ 	<a class="btn btn-positive" href="itemList">전체 상품 현황</a>
 </div>
 
 <div class="row center">

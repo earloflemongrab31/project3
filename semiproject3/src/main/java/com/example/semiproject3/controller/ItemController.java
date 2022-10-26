@@ -28,6 +28,7 @@ import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
+import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.repository.ReviewLikeDao;
@@ -42,6 +43,9 @@ public class ItemController {
 	
 	@Autowired
 	private ImageDao imageDao;
+	
+	@Autowired
+	private InvenDao invenDao;
 	
 	@Autowired
 	private CustomerLikeDao customerLikeDao;
@@ -266,9 +270,14 @@ public class ItemController {
 			model.addAttribute("isLike", customerLikeDao.check(customerLikeDto));
 		}
 		
+
 		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
 		model.addAttribute("reviewList",reviewDao.selectList2(itemNo));
 		
+
+		model.addAttribute("reviewList",reviewDao.selectList(itemNo));
+//		model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
+
 		
 		return "item/buydetail";
 	}

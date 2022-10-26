@@ -47,7 +47,7 @@
 	 			
 	 			<tr>
 	 				<th>카테고리</th>
-	 				<td>${itemDto.cateCode}</td>
+	 				<td>${itemDto.itemCate}</td>
 	 			</tr>
 	 			
 	 			<tr>
@@ -73,18 +73,18 @@
 	 					<pre>${itemDto.itemContent}</pre>
 	 				</td>
 	 			</tr>
-	 			<tr>
-	 				<th>상품색상</th>
-	 				<td>
-	 					<pre>${itemDto.itemColor}</pre>
-	 				</td>
-	 			</tr>
-	 			<tr>
-	 				<th>상품사이즈</th>
-	 				<td>
-	 					<pre>${itemDto.itemSize}</pre>
-	 				</td>
-	 			</tr>
+<!-- 	 			<tr> -->
+<!-- 	 				<th>상품색상</th> -->
+<!-- 	 				<td> -->
+<%-- 	 					<pre>${itemDto.itemColor}</pre> --%>
+<!-- 	 				</td> -->
+<!-- 	 			</tr> -->
+<!-- 	 			<tr> -->
+<!-- 	 				<th>상품사이즈</th> -->
+<!-- 	 				<td> -->
+<%-- 	 					<pre>${itemDto.itemSize}</pre> --%>
+<!-- 	 				</td> -->
+<!-- 	 			</tr> -->
 	 			
 	 			<tr>
 	 				<th>등록일</th>
@@ -98,6 +98,7 @@
 	 	</table>
 	 	
 	 	<div class="row right">
+	 	<a class="btn btn-nuetral btn-border" href="../warehouse/detail?itemNo=${itemDto.itemNo}">재고관리</a>
 		<a class="btn btn-positive" href="update?itemNo=${itemDto.itemNo}">수정하기</a>
 		<a class="btn btn-negative" href="delete?itemNo=${itemDto.itemNo}">삭제하기</a>
 		<a class="btn btn-neutral" href="list">목록</a>

@@ -8,19 +8,15 @@
 </jsp:include>
 
 <section class="mb-50">
-	<div class="container-600">
+	<div class="container-550">
 	<div class="row center mb-50">
 		<h1>${customerDto.customerId} 회원 정보</h1>
+		<hr>
 	</div>
 	
 	<div class="row mb-30 w-100">
 		
 		<table class="table table-border">
-			<tr>
-				<th width="25%">아이디</th>
-				<td>${customerDto.customerId}</td>
-			</tr>
-		
 			<tr>
 				<th width="25%">아이디</th>
 				<td>${customerDto.customerId}</td>
@@ -48,7 +44,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>권한</th>
+				<th>회원등급</th>
 				<td>
 					${customerDto.customerGrade}
 				</td>

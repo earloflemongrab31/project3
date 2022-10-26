@@ -23,9 +23,9 @@
 					<th>상품메모</th>
 					<th>상품명</th>
 					<th>상품금액</th>
-					<th>상품수량</th>
-					<th>상품색상</th>
-					<th>상품사이즈</th>
+<!-- 					<th>상품수량</th> -->
+<!-- 					<th>상품색상</th> -->
+<!-- 					<th>상품사이즈</th> -->
 					
 				</tr>
 			</thead>
@@ -42,7 +42,7 @@
 			
 				<tr>
 					<td>${itemDto.itemNo}</td>
-					<td>${itemDto.cateCode}</td>
+					<td>${itemDto.itemCate}</td>
 					<td>${itemDto.itemMemo}</td>
 					<td>
 						<a href="detail?itemNo=${itemDto.itemNo}">
@@ -50,9 +50,9 @@
 						</a>
 					</td>
 					<td>${itemDto.itemPrice}원</td>
-					<td>${itemDto.itemTotalCnt}</td>
-					<td>${itemDto.itemColor}</td>
-					<td>${itemDto.itemSize}</td>
+<%-- 					<td>${itemDto.itemTotalCnt}</td> --%>
+<%-- 					<td>${itemDto.itemColor}</td> --%>
+<%-- 					<td>${itemDto.itemSize}</td> --%>
 				</tr>
 				</c:forEach>
 			</tbody>
