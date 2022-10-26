@@ -53,6 +53,7 @@ public class OrdersController {
 			CustomerDto customerDto = customerDao.selectOne(loginId);
 			AddressDto addressDto = addressDao.selectOne(loginId);
 
+			
 		return "orders/insert";
 	}
 	
@@ -66,6 +67,7 @@ public class OrdersController {
 //		return "orders/list";
 //	}
 //	
+	
 	//목록(페이징)
 	@GetMapping("/list")
 	public String list(Model model, 
