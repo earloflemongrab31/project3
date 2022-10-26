@@ -114,12 +114,27 @@ public class CompanyController {
 		attr.addAttribute("companyNo",companyDto.getCompanyNo());
 		return "redirect:detail";
 	}
-	// 명함 이미지 
+	
+//	// 명함 이미지 
+//	@GetMapping("/cardList")
+//	public String cardlist(Model model) {
+//		model.addAttribute("list", cardDao.selectList());
+//		return "company/cardList";
+//	}	
+	
 	@GetMapping("/cardList")
-	public String cardlist(Model model) {
-		model.addAttribute("list", cardDao.selectList());
+	public String cardList(Model model, 
+			@ModelAttribute(name="vo") CompanyListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = companyDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("cardList", companyDao.selectList(vo));
+		
 		return "company/cardList";
 	}
+	
 	@GetMapping("/download")
 	public ResponseEntity<ByteArrayResource> download(
 			@RequestParam int cardNo) throws IOException{
