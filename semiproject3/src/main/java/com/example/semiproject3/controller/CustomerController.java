@@ -195,11 +195,17 @@ public class CustomerController {
 			@RequestParam String customerPw,
 			
 			HttpSession session) {
-		String checkId = (String)session.getAttribute(SessionConstant.ID);
+		String checkId = (String)session.getAttribute("customerId");
+		try {
 		CustomerDto dto = customerDao.selectOne(checkId);
 		customerDao.changePassword(customerPw, dto.getCustomerId());
 		session.removeAttribute(checkId);
 		return "redirect:login";
+		}
+		catch(Exception e) {
+			return "redirect:changePassword?error";
+		}
+	
 	}
 	
 	

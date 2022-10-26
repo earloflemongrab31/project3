@@ -22,7 +22,7 @@
 				</h4>
 			</c:when>
 			<c:otherwise>
-				<table class="table table-border">
+				<table class="table table-border table-hover">
 					<thead>
 				 <tr>
 	               <th width="10%">상품 번호</th>
@@ -35,12 +35,12 @@
 	            <c:forEach var="customerLikeDto" items="${list}">
 	               <tr>
 	                  <td>
-	                  ${customerLikeDto.itemNo}
+	                 	 ${customerLikeDto.itemNo}
 	                  </td>
 	                  <td>${customerLikeDto.likeTime}</td>
+	                  
 	                   <td>
-	                   <a href=" http://localhost:8888/item/buydetail?itemNo=${customerLikeDto.itemNo}"></a>
-	                  확인
+	                   <a href="http://localhost:8888/item/buydetail?itemNo=${customerLikeDto.itemNo}">확인</a>
 	                   </td>
 						</tr>
 						

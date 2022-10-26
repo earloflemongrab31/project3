@@ -24,6 +24,7 @@ import com.example.semiproject3.entity.CustomerLikeDto;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
+import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
@@ -60,6 +61,8 @@ public class ItemController {
 	private ReviewDao reviewDao;
 	@Autowired
 	private ReviewLikeDao reviewLikeDao;
+	@Autowired
+	private AddressDao addressDao;
 	
 
 //	맥북용
@@ -272,15 +275,10 @@ public class ItemController {
 			model.addAttribute("isLike", customerLikeDao.check(customerLikeDto));
 		}
 		
-
-		  model.addAttribute("reviewList",reviewDao.selectList2(itemNo));
-		//model.addAttribute("reviewList",reviewDao.selectList2(itemNo));
-		
-
+		 model.addAttribute("reviewList",reviewDao.selectList2(itemNo));
 		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
 		//model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 
-		
 		return "item/buydetail";
 	}
 	
