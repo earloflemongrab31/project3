@@ -35,6 +35,7 @@
 			<th>상품사이즈</th>
 			<th>상품컬러</th>
 	 		<th>상품수량</th>
+	 		<th>상품찜수</th>
 		</tr>	
 	</thead>
 	<tbody>
@@ -46,6 +47,7 @@
 			<td>${inven.itemSize}</td>
 			<td>${inven.itemColor}</td>
 			<td>${inven.itemTotalCnt}</td>
+			<td>${inven.itemLikeCnt}</td>
 			<td>
 				<a class="btn btn-nuetral btn-border" href="insert?itemNo=${inven.itemNo}&itemSize=${inven.itemSize}&itemColor=${inven.itemColor}">입고/출고</a>
 			</td>
