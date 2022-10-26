@@ -7,6 +7,13 @@
     <jsp:param value="협력사 리스트" name="title"/>
 </jsp:include>
 
+<style>
+td, th {
+  text-align : center;
+  vertical-align : middle;
+}
+</style>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class ="container-900 mt-40">
