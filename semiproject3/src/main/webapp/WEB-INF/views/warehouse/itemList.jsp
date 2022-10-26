@@ -65,7 +65,7 @@
 		<li>
 			<c:choose>
 			<c:when test="${not vo.isFirst()}">
-				<a href="invenList?p=${vo.firstBlock()}&${vo.parameter()}">
+				<a href="itemList?p=${vo.firstBlock()}&${vo.parameter()}">
 					<i class="fa-solid fa-angles-left"></i>
 				</a>
 			</c:when>
@@ -79,7 +79,7 @@
 		<li>
 			<c:choose>
 			<c:when test="${vo.hasPrev()}">
-				<a href="invenList?p=${vo.prevBlock()}&${vo.parameter()}">
+				<a href="itemList?p=${vo.prevBlock()}&${vo.parameter()}">
 					<i class="fa-solid fa-chevron-left"></i>
 				</a>
 			</c:when>
@@ -90,14 +90,14 @@
 		</li>
 		 
 		<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-			<li><a href="invenList?p=${i}&${vo.parameter()}">${i}</a></li>
+			<li><a href="itemList?p=${i}&${vo.parameter()}">${i}</a></li>
 		</c:forEach>
 		
 		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 		<li>
 			<c:choose>
 			<c:when test="${vo.hasNext()}">
-				<a href="invenList?p=${vo.nextBlock()}&${vo.parameter()}">
+				<a href="itemList?p=${vo.nextBlock()}&${vo.parameter()}">
 					<i class="fa-solid fa-chevron-right"></i>
 				</a>
 			</c:when>
@@ -110,7 +110,7 @@
 		<li>
 			<c:choose>
 			<c:when test="${not vo.isLast()}">
-				<a href="invenList?p=${vo.lastBlock()}&${vo.parameter()}">
+				<a href="itemList?p=${vo.lastBlock()}&${vo.parameter()}">
 					<i class="fa-solid fa-angles-right"></i>
 				</a>
 			</c:when>
