@@ -22,7 +22,7 @@
         </div>
 
         <div class ="row">
-        <input name="itemNo" value="${itemList.itemNo}" type="hidden">
+        <input name="itemNo" value="${itemDto.itemNo}" type="hidden">
         <table class="table table-border">
 	        <thead>
 	            <tr>
@@ -42,7 +42,8 @@
                     <td>
                     	<c:choose>
                     	<c:when test="${itemCntDto.itemSize != null}">
-                    		<input class="input input-none w-100" type="text" name="itemSize" value="${itemCntDto.itemColor}" readonly>
+                    		<input class="input input-none w-100 center" type="text" 
+                    			name="itemSize" value="${itemCntDto.itemSize}" readonly>
                    		</c:when>
                     	<c:otherwise>
 	                   		<select class="input w-100" name="itemSize">
@@ -60,7 +61,8 @@
                     <td>
                     	<c:choose>
                     	<c:when test="${itemCntDto.itemColor != null}">
-                    		<input class="input input-none w-100" type="text" name="itemColor" value="${itemCntDto.itemColor}" readonly>
+                    		<input class="input input-none w-100 center" type="text" 
+                    			name="itemColor" value="${itemCntDto.itemColor}" readonly>
                     	</c:when>
                     	<c:otherwise>
 	                    	<select class="input w-100" name="itemColor">

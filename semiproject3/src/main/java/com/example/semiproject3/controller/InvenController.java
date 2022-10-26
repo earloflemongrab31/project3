@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.entity.InvenDto;
-import com.example.semiproject3.entity.ItemCntDto;
 import com.example.semiproject3.repository.CompanyDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemCntDao;
@@ -103,28 +102,33 @@ public class InvenController {
 		model.addAttribute("companyList",companyDao.selectList());
 		return "warehouse/insert";
 	}
+	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute InvenDto invenDto) {
+	public String insert(
+			@ModelAttribute InvenDto invenDto, 
+			RedirectAttributes attr) {
 		
 		invenDao.insert(invenDto);
 
+		attr.addAttribute("itemNo", invenDto.getItemNo());
+		
 		if(itemCntDao.selectOne(invenDto) == null) {
 			itemCntDao.insert(invenDto);
 			invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
 			itemCntDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
-			return "redirect:invenList";
+			return "redirect:detail";
 		}
 		else {
 			if((invenDto.getInvenStatus()).equals("입고완료")){
 				itemCntDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
 				invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
-				return "redirect:invenList";
+				return "redirect:detail";
 			}else if((invenDto.getInvenStatus()).equals("출고완료")) {
 				itemCntDao.minus(invenDto.getInvenQuantity(),invenDto.getItemNo());
 				invenDao.invenOut(invenDto.getInvenQuantity(), invenDto.getItemNo());
-				return "redirect:invenList";
+				return "redirect:detail";
 			}else {
-				return "redirect:invenList";
+				return "redirect:detail";
 			}
 		}
 	}
