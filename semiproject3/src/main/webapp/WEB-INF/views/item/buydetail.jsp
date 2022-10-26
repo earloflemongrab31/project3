@@ -135,7 +135,8 @@
 						<td>${list.reviewPackaging}</td>
 						<td>${list.reviewShipping}</td>
 						<td>${list.reviewContent}</td>
-						<td>사진(들어갈예정)</td>
+						<td><img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
+						
 					</tr>
 				</c:forEach>
 				
