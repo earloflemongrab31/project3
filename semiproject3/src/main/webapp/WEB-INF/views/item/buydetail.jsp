@@ -6,8 +6,8 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
-<h5>상품정보 ${itemDto}</h5>
-<h5>상품이미지 ${buyImageList}</h5>
+<%-- <h5>상품정보 ${itemDto}</h5> --%>
+<%-- <h5>상품이미지 ${buyImageList}</h5> --%>
 <h5>상품옵션 ${buylist}</h5>
 
 <style>
@@ -16,6 +16,23 @@ td, th {
   vertical-align : middle;
 }
 </style>
+
+<script type="text/javascript"> 
+        $(function(){
+            $("select[name=itemColor]").change(function(){
+                var color = $(this).val();
+                var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
+				console.log(color);
+                console.log(size);
+                if(color & size){
+	                $("select[name=itemSize]").change(function(){
+	                	
+	                });
+                }
+
+            });
+        });
+</script>
 
 <form action="/orders/insert" method="post">
 
@@ -64,7 +81,7 @@ td, th {
 						<select class="input w-100" name="itemColor">
 							<option value="">선택</option>
 							<c:forEach var="itemDto" items="${buylist}">
-								<option>${itemDto.itemColor}</option>
+								<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}">${itemDto.itemColor}</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -74,9 +91,9 @@ td, th {
 					<td>
 						<select class="input w-100" name="itemSize">
 							<option value="">선택</option>
-							<c:forEach var="itemDto" items="${buylist}">
-								<option>${itemDto.itemSize}</option>
-							</c:forEach>
+								<c:forEach var="itemDto" items="${buylist}">
+									<option>${itemDto.itemSize}</option>
+								</c:forEach>
 						</select>
 					</td>
 				</tr>
