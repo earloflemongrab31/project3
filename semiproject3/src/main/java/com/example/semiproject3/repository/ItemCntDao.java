@@ -10,10 +10,12 @@ public interface ItemCntDao {
 	void insert(InvenDto invenDto);
 	
 	//재고 입출력 시 총수량 수정 기능
-	void plus(int quantity, int itemNo);
-	void minus(int quantity, int itemNo);
+	void plus(InvenDto invenDto);
+	
+	void minus(InvenDto invenDto);
 	
 	ItemCntDto selectOne(InvenDto invenDto);
 
 	List<ItemCntDto> selectList(int itemNo);
+
 }
