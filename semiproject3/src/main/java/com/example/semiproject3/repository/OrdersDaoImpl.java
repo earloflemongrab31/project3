@@ -139,7 +139,26 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public void insert(OrdersDto ordersDto) {
-		String sql = "insert into orders values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into orders("
+						+ "orders_no,"
+						+ "customer_id,"
+						+ "item_no,"
+						+ "address_no,"
+						+ "customer_name,"
+						+ "customer_nick,"
+						+ "customer_phone,"
+						+ "item_name,"
+						+ "item_color,"
+						+ "item_size,"
+						+ "addressName,"
+						+ "customer_post,"
+						+ "customer_host,"
+						+ "customer_detail_host,"
+						+ "customer_point,"
+						+ "item_cnt,"
+						+ "item_fee,"
+						+ "customer_money) "
+						+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] param = { 
 			ordersDto.getOrdersNo(), ordersDto.getCustomerId(), 
 			ordersDto.getItemNo(), ordersDto.getAddressNo(),
