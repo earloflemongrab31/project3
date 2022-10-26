@@ -11,4 +11,7 @@ public interface ReviewDao {
 	
 	//itemNo에 달린 리뷰글 
 	List<ReviewDto> selectList(int itemNo);
+	
+	//하나의관한 리뷰 
+	ReviewDto selectOne(int reviewNo);
 }
