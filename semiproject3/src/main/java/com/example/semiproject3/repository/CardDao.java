@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.example.semiproject3.entity.CardDto;
 import com.example.semiproject3.entity.CartDto;
+import com.example.semiproject3.entity.CardDto;
+import com.example.semiproject3.vo.CardListSearchVO;
 
 public interface CardDao {
 		
@@ -17,6 +19,18 @@ public interface CardDao {
 		CardDto selectOne(int cardNo);
 		//이미지 삭제 
 		boolean delete(int cardNo);
+		
+		//통합 메소드(검색+목록)
+		List<CardDto> selectList(CardListSearchVO vo);
+		List<CardDto> list(CardListSearchVO vo);
+		List<CardDto> search(CardListSearchVO vo);
+			
+		//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
+		int count(CardListSearchVO vo);
+		int searchCount(CardListSearchVO vo);
+		int listCount(CardListSearchVO vo);
+		
+		
 		
 		
 }
