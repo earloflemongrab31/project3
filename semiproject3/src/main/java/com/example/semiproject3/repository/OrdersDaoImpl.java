@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.OrdersDto;
+import com.example.semiproject3.vo.OrdersListSearchVO;
 
 @Repository
 public class OrdersDaoImpl implements OrdersDao {
@@ -151,5 +152,65 @@ public class OrdersDaoImpl implements OrdersDao {
 			ordersDto.getItemFee(), ordersDto.getCustomerMoney()
 		};
 		jdbcTemplate.update(sql, param);
+	}
+
+	@Override
+	public List<OrdersDto> selectList(OrdersListSearchVO vo) {
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+
+	@Override
+	public List<OrdersDto> list(OrdersListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from orders order by orders_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public List<OrdersDto> search(OrdersListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from orders where instr(#1,?) > 0 "
+					+ "order by orders_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public int count(OrdersListSearchVO vo) {
+		if(vo.isSearch()) {
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+	
+	@Override
+	public int searchCount(OrdersListSearchVO vo) {
+		String sql = "select count(*) from orders where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	@Override
+	public int listCount(OrdersListSearchVO vo) {
+		String sql = "select count(*) from orders";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 }

@@ -20,6 +20,7 @@ import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
+import com.example.semiproject3.vo.OrdersListSearchVO;
 
 @Controller
 @RequestMapping("/orders")
@@ -55,13 +56,27 @@ public class OrdersController {
 		return "orders/insert";
 	}
 	
-	//목록
+//	//목록
+//	@GetMapping("/list")
+//	public String list(Model model, HttpSession session) {
+//		
+//		String loginId = (String)session.getAttribute(SessionConstant.ID);
+//		model.addAttribute("orders",ordersDao.selectList(loginId));
+//		model.addAttribute("oredresCount",ordersDao.selectOrders(loginId));
+//		return "orders/list";
+//	}
+//	
+	//목록(페이징)
 	@GetMapping("/list")
-	public String list(Model model, HttpSession session) {
+	public String list(Model model, 
+			@ModelAttribute(name="vo") OrdersListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = ordersDao.count(vo);
+		vo.setCount(count);
 		
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("orders",ordersDao.selectList(loginId));
-		model.addAttribute("oredresCount",ordersDao.selectOrders(loginId));
+		model.addAttribute("list", ordersDao.selectList(vo));
+		
 		return "orders/list";
 	}
 	

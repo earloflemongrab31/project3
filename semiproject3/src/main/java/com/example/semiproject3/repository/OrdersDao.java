@@ -3,6 +3,8 @@ package com.example.semiproject3.repository;
 import java.util.List;
 
 import com.example.semiproject3.entity.OrdersDto;
+import com.example.semiproject3.entity.OrdersDto;
+import com.example.semiproject3.vo.OrdersListSearchVO;
 
 public interface OrdersDao {
 
@@ -28,4 +30,16 @@ public interface OrdersDao {
 	int selectOrders(String loginId);
 
 	List<OrdersDto> selectList(String loginId);
+	
+	
+	//통합 메소드(검색+목록)
+	List<OrdersDto> selectList(OrdersListSearchVO vo);
+	List<OrdersDto> list(OrdersListSearchVO vo);
+	List<OrdersDto> search(OrdersListSearchVO vo);
+	
+	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
+	int count(OrdersListSearchVO vo);
+	int searchCount(OrdersListSearchVO vo);
+	int listCount(OrdersListSearchVO vo);
+	
 }
