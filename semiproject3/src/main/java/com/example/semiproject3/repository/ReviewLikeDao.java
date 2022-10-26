@@ -12,4 +12,6 @@ public interface ReviewLikeDao {
 	boolean check(ReviewLikeDto dto);
 	//갯수확인
 	int count(int reviewNo);
+	
 }
+

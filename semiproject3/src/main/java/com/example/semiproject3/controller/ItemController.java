@@ -267,7 +267,7 @@ public class ItemController {
 		}
 		
 		model.addAttribute("reviewList",reviewDao.selectList(itemNo));
-		model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
+//		model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 		
 		return "item/buydetail";
 	}
