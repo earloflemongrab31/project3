@@ -52,50 +52,6 @@ public class OrdersController {
 			CustomerDto customerDto = customerDao.selectOne(loginId);
 			AddressDto addressDto = addressDao.selectOne(loginId);
 
-			int ordersNo = ordersDao.sequnece();
-			
-			ordersDao.insert(OrdersDto.builder()
-					.ordersNo(ordersNo)
-					.customerId(loginId)
-					.itemNo(itemDto.getItemNo())
-					.addressNo(addressDto.getAddressNo())
-					.customerName(customerDto.getCustomerName())
-					.customerNick(customerDto.getCustomerNick())
-					.customerPhone(customerDto.getCustomerPhone())
-					.itemName(itemDto.getItemName())
-					.itemColor(itemDto.getItemColor())
-					.itemSize(itemDto.getItemSize())
-					//.itemCnt(1)
-					.itemFee(3000)
-					.addressName(addressDto.getAddressName())
-					.customerPost(addressDto.getAddressPost())
-					.customerHost(addressDto.getAddressHost())
-					.customerDetailHost(addressDto.getAddressDetailHost())
-					.customerMoney(customerDto.getCustomerMoney())
-								
-					.build());
-		
-		
-//		ordersDao.insert(OrdersDto.builder()
-//				.ordersNo(ordersNo)
-//				.customerId(loginId)
-//				.itemNo(itemNo)
-//				.addressNo(addressDto.getAddressNo())
-//				.customerName(customerDto.getCustomerName())
-//				.customerNick(customerDto.getCustomerNick())
-//				.customerPhone(customerDto.getCustomerPhone())
-//				.customerPoint(customerDto.getCustomerPoint())
-//				.itemName(itemDto.getItemName())
-//				.itemColor(itemDto.getItemColor())
-//				.itemSize(itemDto.getItemSize())
-//				//.itemCnt(1)
-//				.itemFee(3000)
-//				.addressName(addressDto.getAddressName())
-//				.customerPost(addressDto.getAddressPost())
-//				.customerHost(addressDto.getAddressHost())
-//				.customerDetailHost(addressDto.getAddressDetailHost())
-//				.customerMoney(customerDto.getCustomerMoney())
-//				.build());
 		return "orders/insert";
 	}
 	
