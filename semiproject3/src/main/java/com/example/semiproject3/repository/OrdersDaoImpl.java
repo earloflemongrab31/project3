@@ -128,7 +128,7 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public List<OrdersDto> selectList() {
-		String sql = "select * from orders order by orders_no desc";
+		String sql = "select * from orders order by orders_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 
