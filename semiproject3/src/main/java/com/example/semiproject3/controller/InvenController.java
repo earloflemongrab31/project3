@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.entity.InvenDto;
 import com.example.semiproject3.repository.CompanyDao;
@@ -21,18 +22,17 @@ import com.example.semiproject3.vo.InvenListSearchVO;
 public class InvenController {
 	
 	@Autowired
-	ItemDao itemDao;
+	private ItemDao itemDao;
 	
 	@Autowired
 	
-	InvenDao invenDao;
+	private InvenDao invenDao;
 	
+	@Autowired
+	private CompanyDao companyDao;
+
 	@Autowired
 	private ItemCntDao itemCntDao;
-	
-	@Autowired
-	
-	CompanyDao companyDao;
 	
 //	@GetMapping("/itemList")
 //	public String itemList(
@@ -52,13 +52,14 @@ public class InvenController {
 	
 	//아이템리스트
 	@GetMapping("/itemList")
-	public String itemList(Model model, 
+	public String itemList(
+			Model model, 
 			@ModelAttribute(name="vo") InvenListSearchVO vo) {
 			//페이지 네비게이터를 위한 게시글 수를 전달
-			int count = itemDao.count(vo);
+			int count = invenDao.count(vo);
 			vo.setCount(count);
-	
-			model.addAttribute("itemList", itemDao.selectList(vo));
+			
+			model.addAttribute("invenList", invenDao.selectList(vo));
 			
 			return "warehouse/itemList";
 	}
@@ -80,39 +81,70 @@ public class InvenController {
 	@GetMapping("/insert")
 	public String insert(
 			@RequestParam int itemNo,
+			@RequestParam(required = false) String itemSize,
+			@RequestParam(required = false) String itemColor,
 			Model model) {
+		//사이즈, 색상을 처음 등록할 때 값이 없음
+		boolean repeat = itemSize != null && itemColor != null;
+		
+		InvenDto invenDto = InvenDto.builder()
+										.itemNo(itemNo)
+										.itemSize(itemSize)
+										.itemColor(itemColor)
+									.build();
+		if(repeat) {
+			model.addAttribute("itemCntDto", itemCntDao.selectOne(invenDto));
+		}
+
 		//하나의 아이템정보를 가지고와서 화면에 뿌려준다. 
-			model.addAttribute("itemList", itemDao.selectOne(itemNo));
+		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		//회사 정보를 가지고와서 화면에 뿌려준다. 
-			model.addAttribute("companyList",companyDao.selectList());
+		model.addAttribute("companyList",companyDao.selectList());
 		return "warehouse/insert";
 	}
+	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute InvenDto invenDto) {
-		boolean search = itemCntDao.selectOne(invenDto) == null;
+	public String insert(
+			@ModelAttribute InvenDto invenDto, 
+			RedirectAttributes attr) {
 		
+		boolean search = itemCntDao.selectOne(invenDto) == null;
+
 		invenDao.insert(invenDto);
+
+		attr.addAttribute("itemNo", invenDto.getItemNo());
+		
 		if(search) {
 			itemCntDao.insert(invenDto);
+			invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
+			itemCntDao.plus(invenDto);
+			return "redirect:detail";
 		}
 		else {
 			if((invenDto.getInvenStatus()).equals("입고완료")){
-				invenDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+				itemCntDao.plus(invenDto);
 				invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
-				itemCntDao.update(invenDto);
-				return "redirect:invenList";
+				return "redirect:detail";
 			}else if((invenDto.getInvenStatus()).equals("출고완료")) {
-				invenDao.minus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+				itemCntDao.minus(invenDto);
 				invenDao.invenOut(invenDto.getInvenQuantity(), invenDto.getItemNo());
-				itemCntDao.update(invenDto);
-				return "redirect:invenList";
+				return "redirect:detail";
 			}else {
-				return "redirect:invenList";
+				return "redirect:detail";
 			}
 		}
-		return "redirect:invenList";
-		
 	}
 	
-	
+	@GetMapping("/detail")
+	public String detail(
+			RedirectAttributes attr,
+			Model model,
+			@RequestParam int itemNo) {
+		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
+		
+		model.addAttribute("itemCntList", itemCntDao.selectList(itemNo));
+		
+		attr.addAttribute(itemNo);
+		return "warehouse/detail";
+	}
 }

@@ -2,8 +2,9 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
-import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerDto;
+import com.example.semiproject3.vo.CustomerListSearchVO;
+import com.example.semiproject3.vo.NoticeListSearchVO;
 
 public interface CustomerDao {
 	
@@ -45,5 +46,17 @@ public interface CustomerDao {
 
 
 	List<CustomerDto> selectAddressList(String addressNo, int begin, int end);
+	
+	
+	//통합 메소드(검색+목록)
+	List<CustomerDto> selectList(CustomerListSearchVO vo);
+	List<CustomerDto> list(CustomerListSearchVO vo);
+	List<CustomerDto> search(CustomerListSearchVO vo);
+	
+	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
+	int count(CustomerListSearchVO vo);
+	int searchCount(CustomerListSearchVO vo);
+	int listCount(CustomerListSearchVO vo);
+	
 	
 }

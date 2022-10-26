@@ -124,7 +124,10 @@
 			<tbody>
 				<c:forEach var="list" items="${reviewList}">
 					<tr>
-						<td>${list.customerId}/신고</td>
+						<td>
+						${list.customerId}/
+						<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
+						</td>
 						<td>${list.reviewDate}</td>
 						<td>주문상품(구매테이블구현시)</td>
 						<td>${list.reviewStar}/5</td>

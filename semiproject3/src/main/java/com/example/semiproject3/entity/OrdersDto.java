@@ -15,17 +15,17 @@ public class OrdersDto {
 	private String customerName;
 	private String customerNick;
 	private String customerPhone;
-	private int customerPoint;
 	private String itemName;
 	private String itemColor;
 	private String itemSize;
-	private int itemCnt;
-	private int itemFee;
 	private String addressName;
 	private String customerPost;
 	private String customerHost;
 	private String customerDetailHost;
-	private int customerMoney;
+	private int customerPoint; //0
+	private int itemCnt; //0
+	private int itemFee; //3000
+	private int customerMoney; //0
 	
 	
 }

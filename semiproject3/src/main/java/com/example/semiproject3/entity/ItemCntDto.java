@@ -14,5 +14,4 @@ public class ItemCntDto {
 	private String itemSize;
 	private String itemColor;
 	private int itemTotalCnt;
-	
 }
