@@ -21,6 +21,7 @@ import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.ImageDao;
+import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.MainEditDao;
 import com.example.semiproject3.repository.MainImageDao;
 
@@ -46,6 +47,9 @@ public class HomeController {
 	@Autowired
 	private ImageDao imageDao;
 	
+	@Autowired
+	private ItemDao itemDao;
+	
 	@GetMapping("/")
 	public String home(
 			Model model,
@@ -60,6 +64,10 @@ public class HomeController {
 		
 		//메인내용
 		model.addAttribute("mainEditDto", mainEditDao.select());
+		
+		//새상품 리스트-이미지 등록된 상품 시간 역순
+		model.addAttribute("itemList", itemDao.selectList());
+		
 		return "home";
 
 	}

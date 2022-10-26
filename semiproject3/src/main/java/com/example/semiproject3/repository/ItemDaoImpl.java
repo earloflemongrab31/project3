@@ -176,7 +176,13 @@ public class ItemDaoImpl implements ItemDao {
 	//상품 목록
 	@Override
 	public List<ItemDto> selectList() {
-		String sql = "select * from item order by item_no desc";
+		String sql = "select * from ("
+						+ "select tmp.*, rownum rn from("
+							+ "select * from ("
+								+ "select * from buy_list_view where image_main=1"
+							+ ") order by item_date desc"
+						+ ") tmp"
+					+ ") where rn between 1 and 9";
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
