@@ -66,32 +66,32 @@
 				        </select>
 					</td>
 				</tr>
-				<tr>
-					<td>색상</td>
-					<td>
-						<select name="itemColor">
-							<option value="">선택</option>
-				            <option disabled>------</option>
-							<option>Black</option>
-							<option>White</option>
-							<option>Blue</option>
-							<option>Red</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>사이즈</td>
-					<td>
-						<select name="itemSize">
-							<option value="">선택</option>
-				            <option disabled>------</option>
-							<option>S</option>
-							<option>M</option>
-							<option>L</option>
-							<option>XL</option>
-						</select>
-					</td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td>색상</td> -->
+<!-- 					<td> -->
+<!-- 						<select name="itemColor"> -->
+<!-- 							<option value="">선택</option> -->
+<!-- 				            <option disabled>------</option> -->
+<!-- 							<option>Black</option> -->
+<!-- 							<option>White</option> -->
+<!-- 							<option>Blue</option> -->
+<!-- 							<option>Red</option> -->
+<!-- 						</select> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td>사이즈</td> -->
+<!-- 					<td> -->
+<!-- 						<select name="itemSize"> -->
+<!-- 							<option value="">선택</option> -->
+<!-- 				            <option disabled>------</option> -->
+<!-- 							<option>S</option> -->
+<!-- 							<option>M</option> -->
+<!-- 							<option>L</option> -->
+<!-- 							<option>XL</option> -->
+<!-- 						</select> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 				<tr>
 					<td>상품명</td>
 					<td>
