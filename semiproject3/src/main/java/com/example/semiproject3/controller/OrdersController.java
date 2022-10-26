@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerDto;
-import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CustomerDao;
@@ -52,6 +51,7 @@ public class OrdersController {
 			CustomerDto customerDto = customerDao.selectOne(loginId);
 			AddressDto addressDto = addressDao.selectOne(loginId);
 		
+			//attr.addAttribute("ordersDto", ordersDto);
 			ordersDao.insert(ordersDto);
 			
 			
