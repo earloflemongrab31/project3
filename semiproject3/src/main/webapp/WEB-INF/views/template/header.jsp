@@ -626,7 +626,7 @@
 			slidesPerView: 3,
 			spaceBetween: 30,
 			pagination: {
-				el: ".swiper-pagination",
+				el: ".mySwiper .swiper-pagination",
 				clickable: true
 			},
 

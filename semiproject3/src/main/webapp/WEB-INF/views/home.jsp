@@ -62,15 +62,17 @@
    	<c:forEach var="itemDto" items="${itemList}">
     	<div class="swiper-slide">
     		<div class="row">
-	    		<a href="item/detail?itemNo=${itemDto.itemNo}">
-					<img src="image/download/${itemDto.itemNo}" class="w-100">
-	    		</a>
-    		</div>
-    		<div class="row">
-    			${itemDto.itemMemo}
-    		</div>
-    		<div class="row">
-    			${itemDto.itemPrice}
+	    		<div>
+		    		<a href="item/buydetail?itemNo=${itemDto.itemNo}">
+						<img src="image/download/${itemDto.itemNo}" class="w-100">
+		    		</a>
+	    		</div>
+	    		<div class="row">
+	    			${itemDto.itemMemo}
+	    		</div>
+	    		<div class="row">
+	    			${itemDto.itemPrice}
+	    		</div>
     		</div>
 	    </div>
 	</c:forEach>
