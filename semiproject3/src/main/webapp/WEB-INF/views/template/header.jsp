@@ -592,6 +592,19 @@
         });
     });
     
+    $(function(){
+    	var time = $("#timer").text();
+    	
+    	var timer = setInterval(function(){
+    		time--;
+    		
+    	if(time == 1){
+    		clearInterval(timer);
+    	}
+    		$("#timer").html(time);
+    	}, 1000);
+    });
+    
 </script>
 
 </head>
