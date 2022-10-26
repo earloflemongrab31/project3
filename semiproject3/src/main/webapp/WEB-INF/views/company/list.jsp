@@ -1,51 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="고객사 목록" name="title"/>
+    <jsp:param value="협력사 리스트" name="title"/>
 </jsp:include>
 
-<div class="container-800 mt-50 mb-50">
-	<div class="row center">
-		<h1>고객사 목록</h1>
+<style>
+td, th {
+  text-align : center;
+  vertical-align : middle;
+}
+</style>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div class ="container-900 mt-40">
+
+	<div class = "row center mb-30">
+		<h1>협력사 전체 리스트</h1>
 		<hr>
 	</div>
 	
 	<div class="row">
-		<table class="table table=border">
-		<thead>
-			<tr>
-				<th>회사 이름</th>
-				<th>회사 전화번호</th>
-				<th>회사 주소</th>
-				<th>관리자 이름</th>
-				<th>관리자 직급</th>
-				<th>관리자 전화번호</th>
-				<th>특이사항</th>
-				<th>수정/삭제</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="list"  items="${list}">
+		<table class="table table-hover table-border">
+			<thead>
 				<tr>
-					<td>${list.companyName}</td>
-					<td>${list.companyNumber}</td>
-					<td>${list.companyAddress}</td>
-					<td>${list.customerName}</td>
-					<td>${list.customerRank}</td>
-					<td>${list.customerNumber}</td>
-					<td>${list.companyExplan}</td>
-					<td>
-						<a href="update?companyNo=${list.companyNo}"><button>수정</button></a><br>
-						<a href="delete?companyNo=${list.companyNo}"><button>삭제</button></a><br>
-					</td>
+					<th>회사 이름</th>
+					<th>회사 전화번호</th>
+					<th>회사 주소</th>
+					<th>관리자 이름</th>
+					<th>관리자 직급</th>
+					<th>관리자 전화번호</th>
+					<th>특이사항</th>
+					<th>수정/삭제</th>
 				</tr>
-					</c:forEach>
-				</table>
-				
-				<!-- 페이지 네비게이터 -->
-<div class="row center">
+			</thead>
+			<tbody align="center">	
+				<c:forEach var="list"  items="${list}">
+					<tr>
+						<td>
+							<a href="detail?companyNo=${list.companyNo}">
+							${list.companyName}
+						</td>
+						<td>${list.companyNumber}</td>
+						<td>${list.companyAddress}</td>
+						<td>${list.customerName}</td>
+						<td>${list.customerRank}</td>
+						<td>${list.customerNumber}</td>
+						<td>${list.companyExplan}</td>
+						<td>
+							<a href="update?companyNo=${list.companyNo}">수정</a>
+							<a href="delete?companyNo=${list.companyNo}">삭제</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="row right">
+			<a href="cardList"><button  class="btn btn-positive" type="submit">명함목록</button></a>
+		</div>
+</div>
+
+    
 
 <ul class="pagination">
 <li>
@@ -110,4 +130,4 @@
 </div>
 
 </div>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include> 
