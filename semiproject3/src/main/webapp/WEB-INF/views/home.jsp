@@ -26,7 +26,7 @@
    	<c:forEach var="mainImageDto" items="${mainImageList}">
     	<div class="swiper-slide">
     		<a href="${mainImageDto.imagePath}">
-				<img src="/image/download/${mainImageDto.imageNo}" class="w-100">
+				<img src="/download/${mainImageDto.imageNo}" class="w-100">
     		</a>
 	    </div>
 	</c:forEach>
