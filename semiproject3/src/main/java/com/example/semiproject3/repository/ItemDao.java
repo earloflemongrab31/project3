@@ -72,7 +72,7 @@ public interface ItemDao {
 	BuyListVO selectBuyOne(int itemNo);
 	
 	List<ItemListVO> selectItemList(int itemNo);
-	ItemListVO selectItemOne(ItemListVO itemListVO);
+	ItemListVO selectItemOne(int itemNo);
 	
 	
 }

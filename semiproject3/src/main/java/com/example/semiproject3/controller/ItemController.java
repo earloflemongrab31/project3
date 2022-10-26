@@ -33,7 +33,6 @@ import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.repository.ReviewLikeDao;
 import com.example.semiproject3.vo.ItemListSearchVO;
-import com.example.semiproject3.vo.ItemListVO;
 
 @Controller
 @RequestMapping("/item")
@@ -246,13 +245,12 @@ public class ItemController {
 	
 	//상품 구매(회원)
 	@GetMapping("/buydetail")
-	public String buy(Model model, int itemNo,
-			@ModelAttribute ItemListVO itemListVO, HttpSession session) {
+	public String buy(Model model, 
+			@RequestParam int itemNo, HttpSession session) {
 		
-		//이미지 불러오기
+		model.addAttribute("itemDto", itemDao.selectItemOne(itemNo));
+		
 		model.addAttribute("buylist", itemDao.selectItemList(itemNo));
-		
-		model.addAttribute("itemDto", itemDao.selectItemOne(itemListVO));
 		
 		//장바구니 기록있는 조회하여 첨부 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);

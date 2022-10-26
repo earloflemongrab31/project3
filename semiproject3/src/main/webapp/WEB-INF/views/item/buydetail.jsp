@@ -3,14 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
 
 <form action="/orders/insert" method="post">
-<h3>${buylist}</h3>
 	<div class="container-600 mt-40 mb-40">
 
 		<div class="row center">
@@ -22,7 +19,7 @@
 				<tbody>
 				<tr>
 						<th colspan="2">
-							<img src="/image/download/${buylist.imageNo}" width="200" >
+							<img src="/image/download/${itemDto.imageNo}" width="200" >
 						</th>
 				</tr>
 				<tr>
@@ -52,7 +49,7 @@
 						<select class="input" name="itemColor">
 							<option value="">선택</option>
 							<c:forEach var="itemDto" items="${buylist}">
-									<option>${itemDto.itemColor}</option>
+								<option>${itemDto.itemColor}</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -66,7 +63,6 @@
 								<option>${itemDto.itemSize}</option>
 							</c:forEach>
 						</select>
-<%-- 						${itemDto.itemSize} --%>
 					</td>
 				</tr>
 				<tr>
