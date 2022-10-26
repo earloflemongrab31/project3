@@ -7,6 +7,8 @@
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
 
+<form action="/orders/insert" method="post">
+
 <div class="container-1000 mt-40 mb-40">
 
 <div class="row center">
@@ -76,7 +78,6 @@
 			<th>찜하기</th>
 			<td>
 			${itemDto.itemLikeCnt}
-		
 		<c:if test="${isLike == null}">
 		♥
 		</c:if>
@@ -140,5 +141,9 @@
 </div>
 
 </div>
+
+</form>
+
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
