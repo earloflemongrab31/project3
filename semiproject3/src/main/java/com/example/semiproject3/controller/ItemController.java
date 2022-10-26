@@ -68,9 +68,9 @@ public class ItemController {
 //	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
 //	화니꼬
-//	private final File directory = new File("C:/study/itemImage");
+	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-	private final File directory = new File("D:/study/itemImage");
+//	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -253,6 +253,9 @@ public class ItemController {
 		
 		//상품 정보 불러오는 값
 		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
+		
+		//상품 이미지 불러오는 list
+		model.addAttribute("buyImageList", itemDao.selectBuyList(itemNo));
 		
 		//상품 옵션 불러오는 list
 		model.addAttribute("buylist", itemDao.selectItemList(itemNo));

@@ -6,8 +6,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
-<h5>${itemDto}</h5>
-<h5>${buylist}</h5>
+<h5>상품정보 ${itemDto}</h5>
+<h5>상품이미지 ${buyImageList}</h5>
+<h5>상품옵션 ${buylist}</h5>
 
 <style>
 td, th {
@@ -28,18 +29,22 @@ td, th {
 			<table class="table table-border">
 				<tbody>
 				<tr>
-						<th colspan="2">
-							<img src="/image/download/${itemDto.imageNo}" width="200" >
-						</th>
+	 				<td class="center" colspan="2">
+						<c:forEach var="buylistView" items="${buyImageList}">
+							<c:if test="${buylistView.imageMain == 1}">
+								<img src="/image/download/${buylistView.imageNo}" width="200" >
+							</c:if>
+						</c:forEach>
+					</td>
 				</tr>
 				<tr>
-					<c:forEach var="itemDto" items="${buylist}">
-						<c:if test="${itemDto.imageMain == 0}">
-							<th colspan="2">
-								<img src="/image/download/${itemDto.imageNo}" width="100" >
-							</th>
-						</c:if>
-					</c:forEach>
+					<td class="center" colspan="2">
+						<c:forEach var="buylistView" items="${buyImageList}">
+							<c:if test="${buylistView.imageMain == 0}">
+								<img src="/image/download/${buylistView.imageNo}" width="100" >
+							</c:if>
+						</c:forEach>
+					</td>
 				</tr>
 				<tr>
 					<th colspan="2">${itemDto.itemMemo}</th>
