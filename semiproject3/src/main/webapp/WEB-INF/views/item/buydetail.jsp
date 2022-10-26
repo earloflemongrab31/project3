@@ -133,7 +133,7 @@
 						<td>${list.reviewPackaging}</td>
 						<td>${list.reviewShipping}</td>
 						<td>${list.reviewContent}</td>
-						<td>사진(들어갈예정)</td>
+						<td>${list.imageNo}</td>
 					</tr>
 				</c:forEach>
 				

@@ -102,4 +102,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		jdbcTemplate.update(sql,param); 
 		
 	}
+	//이미지번호+리뷰번호 
+	@Override
+	public List<ReviewDto> selectList2(int itemNo) {
+		String sql="select * from review_real where item_no=?";
+		Object[] param= {itemNo};
+		return jdbcTemplate.query(sql, mapper,param);
+	}
 }

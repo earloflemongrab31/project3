@@ -19,4 +19,7 @@ public interface ReviewDao {
 	
 	//리뷰이미지 연결
 	void connectAttachment(int reviewNo, int imageNo);
+	
+	//아이템하나에 관한리뷰목록
+	List<ReviewDto> selectList2(int itemNo);
 }
