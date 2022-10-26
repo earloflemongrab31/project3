@@ -3,13 +3,12 @@ package com.example.semiproject3.repository;
 import java.util.List;
 
 import com.example.semiproject3.entity.OrdersDto;
-import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.vo.OrdersListSearchVO;
 
 public interface OrdersDao {
 
 	//시퀀스 발행
-	int sequnece();
+	int sequence();
 	
 	//목록
 	List<OrdersDto> selectList();
@@ -29,6 +28,9 @@ public interface OrdersDao {
 	//회원이 선택한 총 주문수 
 	int selectOrders(String loginId);
 
+	OrdersDto selectOne(int ordersNo);
+	OrdersDto selectOne2(int itemCnt);
+	
 	List<OrdersDto> selectList(String loginId);
 	
 	

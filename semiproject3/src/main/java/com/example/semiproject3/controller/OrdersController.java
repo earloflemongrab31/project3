@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AddressDto;
@@ -16,7 +18,6 @@ import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.repository.AddressDao;
-import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
@@ -38,24 +39,25 @@ public class OrdersController {
 	@Autowired
 	private ItemDao itemDao;
 	
-	@Autowired
-	private CartDao cartDao;
-		
 	//등록
-	@GetMapping("/insert")
+	@PostMapping("/insert")
 	public String insert(
 			HttpSession session,
-			@RequestParam int itemNo
+			@ModelAttribute OrdersDto ordersDto,
+			RedirectAttributes attr
 			){
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
-						
-			ItemDto itemDto = itemDao.selectOne(itemNo);
+					
+			int ordersNo = ordersDao.sequence();			
 			CustomerDto customerDto = customerDao.selectOne(loginId);
 			AddressDto addressDto = addressDao.selectOne(loginId);
-
+		
+			ordersDao.insert(ordersDto);
+			
 			
 		return "orders/insert";
 	}
+	
 	
 //	//목록
 //	@GetMapping("/list")

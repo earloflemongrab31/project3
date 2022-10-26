@@ -111,7 +111,7 @@ public class OrdersDaoImpl implements OrdersDao {
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
-	public int sequnece() {
+	public int sequence() {
 		String sql = "select orders_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
@@ -212,5 +212,19 @@ public class OrdersDaoImpl implements OrdersDao {
 	public int listCount(OrdersListSearchVO vo) {
 		String sql = "select count(*) from orders";
 		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+
+	@Override
+	public OrdersDto selectOne(int ordersNo) {
+		String sql = "select * from orders where orders_no=?";
+		Object[] param = {ordersNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+
+	@Override
+	public OrdersDto selectOne2(int itemCnt) {
+		String sql = "select * from orders where item_cnt=?";
+		Object[] param = {itemCnt};
+		return jdbcTemplate.query(sql, extractor, param);
 	}
 }
