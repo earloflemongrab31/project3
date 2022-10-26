@@ -51,6 +51,7 @@ td, th {
 		
 	</div>
 	
+	
 <ul class="pagination">
 <li>
 	<c:choose>
