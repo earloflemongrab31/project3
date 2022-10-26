@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class BuyListVO {
 	private int imageNo;
 	private int itemNo;
-	private String cateCode;
+	private String itemCate;
 	private String itemName;
 	private String itemMemo;
 	private String itemContent;

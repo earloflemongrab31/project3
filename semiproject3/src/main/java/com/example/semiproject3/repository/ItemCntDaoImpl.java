@@ -12,10 +12,35 @@ import com.example.semiproject3.entity.InvenDto;
 import com.example.semiproject3.entity.ItemCntDto;
 
 @Repository
-public class ItemCntDaoImpl implements ItemCntDao{
+public class ItemCntDaoImpl implements ItemCntDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	//RowMapper
+	private RowMapper<ItemCntDto> mapper = (rs,idx)->{
+		return	ItemCntDto.builder()
+					.itemNo(rs.getInt("item_no"))
+					.itemSize(rs.getString("item_size"))
+					.itemColor(rs.getString("item_color"))
+					.itemTotalCnt(rs.getInt("item_total_cnt"))
+				.build();
+	};
+	
+	//ResultSetExtractor
+	private ResultSetExtractor<ItemCntDto> extractor = (rs)->{
+		if(rs.next()) {
+			return ItemCntDto.builder()
+						.itemNo(rs.getInt("item_no"))
+						.itemSize(rs.getString("item_size"))
+						.itemColor(rs.getString("item_color"))
+						.itemTotalCnt(rs.getInt("item_total_cnt"))
+					.build();
+		}
+		else {
+			return null;
+		}
+	};
 
 	@Override
 	public void insert(InvenDto invenDto) {
@@ -30,38 +55,24 @@ public class ItemCntDaoImpl implements ItemCntDao{
 	}
 
 	@Override
-	public void plus(int quantity, int itemNo) {
-		String sql= "update item_cnt set item_total_cnt=item_total_cnt + ? where item_no=?";
+	public void plus(InvenDto invenDto) {
+		String sql= "update item_cnt set item_total_cnt=item_total_cnt + ? where item_no = ? and item_size = ? and item_color = ?";
 		Object[] param= {
-				quantity,
-				itemNo
+				invenDto.getInvenQuantity(), invenDto.getItemNo(), invenDto.getItemSize(), invenDto.getItemColor()
 		};
 		jdbcTemplate.update(sql,param);
 	}
 	@Override
-	public void minus(int quantity, int itemNo) {
-		String sql= "update item_cnt set item_total_cnt=item_total_cnt - ? where item_no=?";
+	public void minus(InvenDto invenDto) {
+		String sql= "update item_cnt set item_total_cnt=item_total_cnt - ? where item_no = ? and item_size = ? and item_color = ?";
 		Object[] param= {
-				quantity,
-				itemNo
+				invenDto.getInvenQuantity(), invenDto.getItemNo(), invenDto.getItemSize(), invenDto.getItemColor()
 		};
 		jdbcTemplate.update(sql,param);
 	}
 
 	
-	private ResultSetExtractor<ItemCntDto> extractor = (rs)->{
-		if(rs.next()) {
-			return ItemCntDto.builder()
-						.itemNo(rs.getInt("item_no"))
-						.itemSize(rs.getString("item_size"))
-						.itemColor(rs.getString("item_color"))
-						.itemTotalCnt(rs.getInt("item_total_cnt"))
-					.build();
-		}
-		else {
-			return null;
-		}
-	};
+	
 	
 	@Override
 	public ItemCntDto selectOne(InvenDto invenDto) {
@@ -70,14 +81,7 @@ public class ItemCntDaoImpl implements ItemCntDao{
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 
-	private RowMapper<ItemCntDto> mapper = (rs,idx)->{
-		return	ItemCntDto.builder()
-					.itemNo(rs.getInt("item_no"))
-					.itemSize(rs.getString("item_size"))
-					.itemColor(rs.getString("item_color"))
-					.itemTotalCnt(rs.getInt("item_total_cnt"))
-				.build();
-	};
+	
 	
 	@Override
 	public List<ItemCntDto> selectList(int itemNo) {
@@ -85,6 +89,6 @@ public class ItemCntDaoImpl implements ItemCntDao{
 		Object[] param = {itemNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-	
+
 	
 }
