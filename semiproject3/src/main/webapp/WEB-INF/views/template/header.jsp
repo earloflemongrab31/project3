@@ -94,6 +94,18 @@
 	    background-repeat: no-repeat;
 	}
 	
+	/* 아이템 디테일 상세보기, 리뷰 토글 디자인*/
+		.item{
+		padding: 0.75em;
+		border: 1px solid #D5D5D5;
+	
+		cursor: pointer;
+	}
+	.item.unchecked{
+			color: white;
+		background-color: lightgray;
+	}
+	
 	/* 로그인 토글 디자인 */
 	.user{
 		padding: 0.75em;
@@ -263,6 +275,20 @@
 			$(".login-form").attr("action", "login");
 			$(".login-form").find(".id").attr("name", "customerId");
 			$(".login-form").find(".pw").attr("name", "customerPw");
+		});
+	});
+	
+	/* 아이템 디테일 상세보기, 리뷰 토글 */
+	$(function(){
+		$(".item-detail").click(function(){
+			$(this).removeClass("unchecked");
+			$(this).prev("div").addClass("unchecked");
+			$(".review").addClass("hide");
+		});
+		$(".item-review").click(function(){
+			$(this).removeClass("unchecked");
+			$(this).next("div").addClass("unchecked");
+			$(".review").removeClass("hide");
 		});
 	});
 	
