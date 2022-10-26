@@ -19,7 +19,7 @@ public class ItemDaoImpl implements ItemDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	//RowMapper
 	private RowMapper<ItemDto> mapper = (rs, idx) -> {
 		return ItemDto.builder()

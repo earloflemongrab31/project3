@@ -107,6 +107,7 @@ public class ReviewController {
 		model.addAttribute("review",reviewDao.selectOne(reviewNo));
 		return "review/report";
 	}
+	
 	@PostMapping("/report")
 	public String report(
 			@ModelAttribute ReportDto reportDto,
@@ -124,6 +125,7 @@ public class ReviewController {
 		
 		return "redirect:/";
 	}
+	
 	//리뷰좋아요
 	@GetMapping("/like")
 	public String reviewLike(
@@ -144,6 +146,20 @@ public class ReviewController {
 		}
 		model.addAttribute("isReview",reviewLikeDao.check(dto));
 		return "redirect:/item/buydetail?itemNo="+itemNo;
+	}
+	
+	@GetMapping("/reportList")
+	public String list(Model model, 
+					@RequestParam(required = false) String type,
+					@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) { // 검색
+			model.addAttribute("list", reportDao.selectList(type, keyword));
+		}
+		else { //목록
+			model.addAttribute("list", reportDao.selectList());
+		}
+		return "customer/list";
 	}
 
 }
