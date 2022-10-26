@@ -169,6 +169,33 @@
         width: 100%;
         z-index: 0;
     }
+    
+    .mySwiper .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -586,9 +613,9 @@
 	    
     });
     
-    /* 스와이퍼 */
+    /* 메인이미지 스와이퍼 */
     $(function(){
-        var swiper = new Swiper('.swiper', {
+        var swiper = new Swiper('.swiper.main', {
             // 화면 넘기기 옵션
             direction: 'horizontal',
             loop: true,
@@ -601,10 +628,10 @@
             },
 
             // 좌우 버튼 옵션
-            /* navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            }, */
+//             navigation: {
+//                 nextEl: '.swiper-button-next',
+//                 prevEl: '.swiper-button-prev',
+//             },
             
             // 자동재생 옵션
             autoplay: {
@@ -616,6 +643,56 @@
             effect: "fade",//페이드 인-아웃 효과
 
         });
+    });
+
+    /* 새상품이미지 스와이퍼 */
+    $(function(){
+        var swiper = new Swiper('.swiper.mySwiper', {
+            // 화면 넘기기 옵션
+			slidesPerView: 3,
+			spaceBetween: 30,
+			pagination: {
+				el: ".mySwiper .swiper-pagination",
+				clickable: true
+			},
+
+            // 페이징 옵션
+//             pagination: {
+//                 el: '.swiper-pagination',// 페이징 적용 대상
+//                 type: 'bullets',// 페이징 도구 모양
+//                 clickable: true
+//             },
+
+            // 좌우 버튼 옵션
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            
+            // 자동재생 옵션
+            autoplay: {
+                delay: 5000
+            }, 
+
+            //페이지 전환 효과
+            effect: "slide",//기본 방식
+//             effect: "fade",//페이드 인-아웃 효과
+
+        });
+    });
+    
+    //설문조사 완료창 타이머
+    $(function(){
+    	var time = $("#timer").text();
+    	
+    	var timer = setInterval(function(){
+    		time--;
+    		
+    	if(time == 1){
+    		clearInterval(timer);
+    	}
+    		$("#timer").html(time);
+    	}, 1000);
     });
     
 </script>

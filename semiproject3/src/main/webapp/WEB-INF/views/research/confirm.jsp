@@ -5,6 +5,7 @@
     <jsp:param value="설문조사" name="title"/>
 </jsp:include>
 
+<meta http-equiv="refresh" content="5; url=http:/">
 
 <div class="container-300 mt-50 mb-50">
 	<div class="row center mb-50">
@@ -13,9 +14,14 @@
 	<div class="row center">
 		<h3>이미 설문조사에 참여하셨습니다.</h3>
 	</div>
-	<div class="row center mb-50">
+	<div class="row center">
 		<h3>감사합니다.</h3>
 	</div>
+	
+	<div class="row center mb-50">
+		<span id="timer">5</span>초 후 메인페이지로 이동합니다.
+	</div>
+	
 	<div class="row">
 		<a href="/" class="btn btn-positive w-100">쇼핑하러 가기</a>
 	</div>

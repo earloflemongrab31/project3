@@ -21,6 +21,7 @@ import com.example.semiproject3.entity.CardDto;
 import com.example.semiproject3.entity.CompanyDto;
 import com.example.semiproject3.repository.CardDao;
 import com.example.semiproject3.repository.CompanyDao;
+import com.example.semiproject3.vo.CardListSearchVO;
 import com.example.semiproject3.vo.CompanyListSearchVO;
 
 @Controller
@@ -114,12 +115,45 @@ public class CompanyController {
 		attr.addAttribute("companyNo",companyDto.getCompanyNo());
 		return "redirect:detail";
 	}
+	
 	// 명함 이미지 
-	@GetMapping("/cardList")
-	public String cardlist(Model model) {
-		model.addAttribute("list", cardDao.selectList());
-		return "company/cardList";
-	}
+		@GetMapping("/cardList")
+		public String cardlist(Model model,
+				@ModelAttribute(name="vo") CardListSearchVO vo){
+			
+			int count = cardDao.count(vo);
+			vo.setCount(count);
+			model.addAttribute("list", cardDao.selectList());
+			
+			return "company/cardList";
+		}
+	
+//명함 이미지 
+//	@GetMapping("/cardList")
+//	public String cardList(Model model,
+//			@ModelAttribute(name="vo") CardListSearchVO vo) {
+//		
+//	//페이지 네비게이터를 위한 게시글 수를 전달
+//	int	 count = cardDao.count(vo);
+//	vo.setCount(count);
+//	
+//	model.addAttribute("cardList", cardDao.selectList(vo));
+//		return "company/cardList";
+//	}	
+	
+//	@GetMapping("/cardList")
+//	public String cardList(Model model, 
+//			@ModelAttribute(name="vo") CompanyListSearchVO vo) {
+//
+//		//페이지 네비게이터를 위한 게시글 수를 전달
+//		int count = companyDao.count(vo);
+//		vo.setCount(count);
+//		
+//		model.addAttribute("cardList", companyDao.selectList(vo));
+//		
+//		return "company/cardList";
+//	}
+	
 	@GetMapping("/download")
 	public ResponseEntity<ByteArrayResource> download(
 			@RequestParam int cardNo) throws IOException{

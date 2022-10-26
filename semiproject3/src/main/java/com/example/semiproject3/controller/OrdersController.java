@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
-import com.example.semiproject3.entity.AddressDto;
-import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CustomerDao;
@@ -39,22 +37,30 @@ public class OrdersController {
 	private ItemDao itemDao;
 	
 	//등록
+	
+	@GetMapping("/insert")
+	public String insert() {
+		return "orders/insert()";
+	}
+	
 	@PostMapping("/insert")
 	public String insert(
 			HttpSession session,
 			@ModelAttribute OrdersDto ordersDto,
+			//@RequestParam itemCnt,
 			RedirectAttributes attr
 			){
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
-					
-			int ordersNo = ordersDao.sequence();			
-			CustomerDto customerDto = customerDao.selectOne(loginId);
-			AddressDto addressDto = addressDao.selectOne(loginId);
-		
+			
+			//DB저장
+			int ordersNo = ordersDao.sequence();	
+			//CustomerDto customerDto = customerDao.selectOne(loginId);
+			//AddressDto addressDto = addressDao.selectOne(loginId);
+			ordersDto.setOrdersNo(ordersNo);
 			ordersDao.insert(ordersDto);
+			attr.addAttribute("ordersDto", ordersDto.getOrdersNo());
 			
-			
-		return "orders/insert";
+		return "redirect:orders/detail";
 	}
 	
 	
@@ -94,17 +100,17 @@ public class OrdersController {
 	ordersDao.delete(ordersDto);
 		return "redirect:orders/list";
 	}
+
 	
 	
-	@GetMapping("/address")
-	public String address(@ModelAttribute AddressDto addressDto,
-			Model model, HttpSession session) {
-	String loginId = (String) session.getAttribute(SessionConstant.ID);
-	OrdersDto ordersDto = new OrdersDto();
-	ordersDto.setCustomerId(loginId);
-	ordersDto.setAddressNo(0);
-	model.addAttribute("addressList",addressDao.selectList(loginId));
-		return "orders/address";
-	}
+//	@GetMapping("/address")
+//	public String address(@ModelAttribute AddressDto addressDto, HttpSession session) {
+//	String loginId = (String) session.getAttribute(SessionConstant.ID);
+//	OrdersDto ordersDto = new OrdersDto();
+//	ordersDto.setCustomerId(loginId);
+//	ordersDto.setAddressNo(0);
+//	
+//		return "orders/address";
+
 	
 }
