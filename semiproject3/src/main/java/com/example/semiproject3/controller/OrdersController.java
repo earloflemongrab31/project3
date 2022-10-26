@@ -50,7 +50,7 @@ public class OrdersController {
 			CustomerDto customerDto = customerDao.selectOne(loginId);
 			AddressDto addressDto = addressDao.selectOne(loginId);
 
-			//model.addAttribute("orders",ordersDao.selectList(loginId));
+			//model.addAttribute("ordersList",ordersDao.selectList(loginId));
 			
 		int ordersNo = ordersDao.sequnece();
 		ordersDao.insert(OrdersDto.builder()
@@ -65,7 +65,7 @@ public class OrdersController {
 				.itemName(itemDto.getItemName())
 				.itemColor(itemDto.getItemColor())
 				.itemSize(itemDto.getItemSize())
-				//.itemCnt(1)
+				.itemCnt(1)
 				.itemFee(3000)
 				.addressName(addressDto.getAddressName())
 				.customerPost(addressDto.getAddressPost())
