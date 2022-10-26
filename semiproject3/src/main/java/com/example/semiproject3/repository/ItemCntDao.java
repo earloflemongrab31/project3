@@ -1,5 +1,7 @@
 package com.example.semiproject3.repository;
 
+import java.util.List;
+
 import com.example.semiproject3.entity.InvenDto;
 import com.example.semiproject3.entity.ItemCntDto;
 
@@ -12,4 +14,6 @@ public interface ItemCntDao {
 	void minus(int quantity, int itemNo);
 	
 	ItemCntDto selectOne(InvenDto invenDto);
+
+	List<ItemCntDto> selectList(int itemNo);
 }

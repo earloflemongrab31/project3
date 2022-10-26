@@ -36,28 +36,44 @@
         <tbody>
                 <tr>
                     <td><input class="input w-100 input-none center" name="itemCate" 
-                    	value="${itemList.cateCode}" readonly></td>
+                    	value="${itemDto.cateCode}" readonly></td>
                     <td><input class="input w-100 input-none center" name="itemName" 
-                     	value="${itemList.itemName}" readonly></td>
+                     	value="${itemDto.itemName}" readonly></td>
                     <td>
-                   		<select name="itemSize">
-							<option value="">선택</option>
-				            <option disabled>------</option>
-							<option>S</option>
-							<option>M</option>
-							<option>L</option>
-							<option>XL</option>
-						</select>
+                    	<c:choose>
+                    	<c:when test="${itemCntDto.itemSize != null}">
+                    		<input class="input input-none w-100" type="text" name="itemSize" value="${itemCntDto.itemColor}" readonly>
+                   		</c:when>
+                    	<c:otherwise>
+	                   		<select class="input w-100" name="itemSize">
+								<option value="">선택</option>
+					            <option disabled>------</option>
+								<option>XS</option>
+								<option>S</option>
+								<option>M</option>
+								<option>L</option>
+								<option>XL</option>
+							</select>
+                    	</c:otherwise>
+						</c:choose>
                     </td>
                     <td>
-                    	<select name="itemColor">
-							<option value="">선택</option>
-				            <option disabled>------</option>
-							<option>Black</option>
-							<option>White</option>
-							<option>Blue</option>
-							<option>Red</option>
-						</select>
+                    	<c:choose>
+                    	<c:when test="${itemCntDto.itemColor != null}">
+                    		<input class="input input-none w-100" type="text" name="itemColor" value="${itemCntDto.itemColor}" readonly>
+                    	</c:when>
+                    	<c:otherwise>
+	                    	<select class="input w-100" name="itemColor">
+								<option value="">선택</option>
+					            <option disabled>------</option>
+								<option>Black</option>
+								<option>White</option>
+								<option>Blue</option>
+								<option>Red</option>
+								<option>Beige</option>
+							</select>
+                    	</c:otherwise>
+                    	</c:choose>
 					</td>
                 </tr>
             </tbody>

@@ -49,8 +49,7 @@
 			<td>${inven.invenInout}</td>
 			<td>${inven.invenQuantity}</td>
 			<td>
-				<a href="insert?itemNo=${inven.itemNo}">
-				<button class="btn btn-positive">입고/출고</button></a>
+				<a class="btn btn-nuetral btn-border" href="insert?itemNo=${inven.itemNo}">입고/출고</a>
 			</td>
 		</tr> 	
 		</c:forEach>

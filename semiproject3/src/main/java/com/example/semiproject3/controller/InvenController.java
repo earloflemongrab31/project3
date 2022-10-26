@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.entity.InvenDto;
+import com.example.semiproject3.entity.ItemCntDto;
 import com.example.semiproject3.repository.CompanyDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemCntDao;
@@ -80,11 +82,25 @@ public class InvenController {
 	@GetMapping("/insert")
 	public String insert(
 			@RequestParam int itemNo,
+			@RequestParam(required = false) String itemSize,
+			@RequestParam(required = false) String itemColor,
 			Model model) {
+		//사이즈, 색상을 처음 등록할 때 값이 없음
+		boolean repeat = itemSize != null && itemColor != null;
+		
+		InvenDto invenDto = InvenDto.builder()
+										.itemNo(itemNo)
+										.itemSize(itemSize)
+										.itemColor(itemColor)
+									.build();
+		if(repeat) {
+			model.addAttribute("itemCntDto", itemCntDao.selectOne(invenDto));
+		}
+
 		//하나의 아이템정보를 가지고와서 화면에 뿌려준다. 
-			model.addAttribute("itemList", itemDao.selectOne(itemNo));
+		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		//회사 정보를 가지고와서 화면에 뿌려준다. 
-			model.addAttribute("companyList",companyDao.selectList());
+		model.addAttribute("companyList",companyDao.selectList());
 		return "warehouse/insert";
 	}
 	@PostMapping("/insert")
@@ -94,13 +110,9 @@ public class InvenController {
 
 		if(itemCntDao.selectOne(invenDto) == null) {
 			itemCntDao.insert(invenDto);
-			if((invenDto.getInvenStatus()).equals("입고완료")){
-				invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
-				itemCntDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
-				return "redirect:invenList";
-			}else {
-				return "redirect:invenList";
-			}
+			invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
+			itemCntDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+			return "redirect:invenList";
 		}
 		else {
 			if((invenDto.getInvenStatus()).equals("입고완료")){
@@ -115,9 +127,18 @@ public class InvenController {
 				return "redirect:invenList";
 			}
 		}
-		
-		
 	}
 	
-	
+	@GetMapping("/detail")
+	public String detail(
+			RedirectAttributes attr,
+			Model model,
+			@RequestParam int itemNo) {
+		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
+		
+		model.addAttribute("itemCntList", itemCntDao.selectList(itemNo));
+		
+		attr.addAttribute(itemNo);
+		return "warehouse/detail";
+	}
 }
