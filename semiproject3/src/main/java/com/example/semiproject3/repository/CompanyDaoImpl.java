@@ -12,8 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CompanyDto;
-import com.example.semiproject3.entity.CustomerDto;
-import com.example.semiproject3.entity.ImageDto;
+import com.example.semiproject3.vo.CompanyListSearchVO;
 
 @Repository
 public class CompanyDaoImpl implements CompanyDao{
@@ -129,4 +128,69 @@ public class CompanyDaoImpl implements CompanyDao{
 	Object[] param= {companyNo};
 	return jdbcTemplate.update(sql,param)>0;
 }
+
+	
+	@Override
+	public List<CompanyDto> selectList(CompanyListSearchVO vo) {
+		if(vo.isSearch()) { //검색
+		return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+
+
+	@Override
+	public List<CompanyDto> list(CompanyListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from company order by company_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+
+	@Override
+	public List<CompanyDto> search(CompanyListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from company where instr(#1,?) > 0 "
+					+ "order by company_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+
+	@Override
+	public int count(CompanyListSearchVO vo) {
+		if(vo.isSearch()) {//검색
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+
+	@Override
+	public int searchCount(CompanyListSearchVO vo) {
+		String sql = "select count(*) from company where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+
+	@Override
+	public int listCount(CompanyListSearchVO vo) {
+		String sql = "select count(*) from company";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
 }

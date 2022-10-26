@@ -55,6 +55,16 @@ public class ReviewController {
 			@ModelAttribute ReviewDto reviewDto,
 			HttpSession session,
 			@RequestParam List<MultipartFile> attachment) throws IllegalStateException, IOException{
+			
+			//리뷰저장
+			String loginId = (String)session.getAttribute(SessionConstant.ID);
+			int itemNo=(int)session.getAttribute("itemNo");
+			int reviewNo=reviewDao.sequence();
+			reviewDto.setReviewNo(reviewNo);
+			reviewDto.setCustomerId(loginId);
+			reviewDto.setItemNo(itemNo);
+			reviewDao.insert(reviewDto);
+		
 		
 			for(MultipartFile file:attachment) {
 				if(!file.isEmpty()) {
@@ -73,17 +83,13 @@ public class ReviewController {
 					file.transferTo(target);
 					
 					
-					//+a
+					//review_image 연결테이블에 연결정보저장(리뷰번호 / 첨부파일번호)
+						reviewDao.connectAttachment(reviewNo, imageNo);
+					
 					
 				}
 				
 			}
-		
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		int itemNo=(int)session.getAttribute("itemNo");
-		reviewDto.setCustomerId(loginId);
-		reviewDto.setItemNo(itemNo);
-		reviewDao.insert(reviewDto);
 		
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	}
