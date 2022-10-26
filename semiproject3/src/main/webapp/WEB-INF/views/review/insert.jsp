@@ -5,41 +5,6 @@
 	<jsp:param value="상품리뷰" name="title" />
 </jsp:include>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
-	<script type = "text/javascript">
-    
-    $(function(){
-        $(".star-score").score({
-            starColor : "red", // 별색상 (기본 : 금색)
-            integerOnly:false, // 소수점 포함 별점
-            display:{
-                showNumber : true, // 숫자표시
-                textColor : "red",
-                placeLimit : 1, // 소수점 자리수
-            }
-        });
-
-
-        $(".star-score-edit").score({
-            editable:true, // 사용자가 클릭하여 수정가능하도록 설정
-            integerOnly:true, // 정수만 가능
-            display: {
-                showNumber:true,
-                textColor : "black",
-            },
-            send:{
-                sendable : true, // 전송 가능 설정
-                name : "reviewScore" // 전송 파라미터 명 설정
-            }
-
-        })
-    })
-    
-    </script>
-
-
 <form action="insert" method="post" enctype="multipart/form-data">
 
 	<div class="container-500 mt-50">
