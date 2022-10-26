@@ -640,7 +640,7 @@ aside.flexbox> div{
   display: flex;
   flex-direction: row-reverse;
   font-size: 1.5em;
-  line-height: 0.7rem;
+  line-height: 0.5rem;
   justify-content: space-around;
   padding: 0.4em;
   text-align: center;
@@ -652,8 +652,8 @@ aside.flexbox> div{
 }
 
 .star-rating label {
-  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 2.0px;
+  -webkit-text-fill-color: transparent; 
+  -webkit-text-stroke-width: 1.5px;
   -webkit-text-stroke-color: #2b2a29;
   cursor: pointer;
 }
