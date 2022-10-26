@@ -24,6 +24,7 @@ import com.example.semiproject3.entity.CustomerLikeDto;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.error.TargetNotFoundException;
+import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
@@ -60,6 +61,8 @@ public class ItemController {
 	private ReviewDao reviewDao;
 	@Autowired
 	private ReviewLikeDao reviewLikeDao;
+	@Autowired
+	private AddressDao addressDao;
 	
 
 //	맥북용
