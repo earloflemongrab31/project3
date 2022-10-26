@@ -13,6 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CardDto;
 import com.example.semiproject3.entity.CartDto;
+import com.example.semiproject3.entity.CompanyDto;
+import com.example.semiproject3.vo.CardListSearchVO;
+import com.example.semiproject3.vo.CompanyListSearchVO;
 
 @Repository
 public class CardDaoImpl implements CardDao{
@@ -88,6 +91,72 @@ public class CardDaoImpl implements CardDao{
 		Object[] param= {cardNo};
 		return jdbcTemplate.query(sql, extracter,param);
 	}
-	
+
+
+	@Override
+	public List<CardDto> selectList(CardListSearchVO vo) {
+		if(vo.isSearch()) { //검색
+			return search(vo);
+			}
+			else {
+				return list(vo);
+			}
+		}
+
+
+	@Override
+	public List<CardDto> list(CardListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from card order by card_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+
+
+	@Override
+	public List<CardDto> search(CardListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from card where instr(#1,?) > 0 "
+					+ "order by card_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+
+	@Override
+	public int count(CardListSearchVO vo) {
+		if(vo.isSearch()) {//검색
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+
+
+	@Override
+	public int searchCount(CardListSearchVO vo) {
+		String sql = "select count(*) from card where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+
+	@Override
+	public int listCount(CardListSearchVO vo) {
+		String sql = "select count(*) from card";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
 
 }

@@ -7,7 +7,7 @@
    <jsp:param value="신고 목록 페이지" name="title"/>
 </jsp:include>
 
-<div class ="container-900 mt-50 mb-50">
+<div class ="container-1200">
         
 <div class="row center">
 	<h1>신고 목록</h1>
