@@ -128,7 +128,6 @@
 	    <div class="row">
 	        <h2>협력사 리스트</h2>
 	    </div>
-	</div>
     <div class="row">
     <table class="table table-border">
             <thead>
@@ -162,6 +161,7 @@
             </tbody>
         </table>
         </div>
+	</div>
     </div>  
 </form>
 </body>

@@ -28,7 +28,7 @@
 	<table class="table table-border table-hover"  >
 	<thead>
 		<tr>
-			<th>입/출고번호</th>
+			<th>카테고리</th>
 			<th>상품번호</th>
 			<th>상품이름</th>
 			<th>상품사이즈</th>
@@ -41,7 +41,7 @@
 	<tbody>
 		<c:forEach var="inven" items="${invenList}">
 		<tr>
-			<td>${inven.invenNo}</td>
+			<td>${inven.itemCate}</td>
 			<td>${inven.itemNo}</td>
 			<td>${inven.itemName}</td>
 			<td>${inven.itemSize}</td>
