@@ -181,7 +181,7 @@
     .swiper-slide img {
       display: block;
       width: 100%;
-      height: 100%;
+      height: 480px;
       object-fit: cover;
     }
 </style>

@@ -111,7 +111,7 @@ public class CartDaoImpl implements CartDao{
 	//장바구니 이미지 추가 리스트
 	@Override
 	public List<CartListVO> selectCartList(String loginId) {
-		String sql = "select * from cart_list_view where customer_id = ?";
+		String sql = "select * from cart_list_view where customer_id = ? and image_main = 1";
 		Object[] param = {loginId};
 		return jdbcTemplate.query(sql, cartListMapper, param);
 	}

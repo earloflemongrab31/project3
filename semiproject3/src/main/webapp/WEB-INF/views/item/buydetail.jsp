@@ -16,7 +16,7 @@
 		</div>
 
 		<div class="row">
-			<table class="table">
+			<table class="table table-border">
 				<tbody>
 				<tr>
 						<th colspan="2">
@@ -47,7 +47,7 @@
 				<tr>
 					<th>Color</th>
 					<td>
-						<select class="input" name="itemColor">
+						<select class="input w-100" name="itemColor">
 							<option value="">선택</option>
 							<c:forEach var="itemDto" items="${buylist}">
 								<option>${itemDto.itemColor}</option>
@@ -58,7 +58,7 @@
 				<tr>
 					<th>Size</th>
 					<td>
-						<select class="input" name="itemSize">
+						<select class="input w-100" name="itemSize">
 							<option value="">선택</option>
 							<c:forEach var="itemDto" items="${buylist}">
 								<option>${itemDto.itemSize}</option>
@@ -69,7 +69,7 @@
 				<tr>
 					<th>Qnty</th>
 					<td>
-						<input class="w-20" type="number" name="itemCnt" min="0" max="${itemDto.itemTotalCnt}">
+						<input class="input w-100" type="number" name="itemCnt" min="0" max="${itemDto.itemTotalCnt}">
 					</td>
 				</tr>
 				<tr>

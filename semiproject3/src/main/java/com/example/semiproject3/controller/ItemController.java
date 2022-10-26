@@ -248,8 +248,10 @@ public class ItemController {
 	public String buy(Model model, 
 			@RequestParam int itemNo, HttpSession session) {
 		
-		model.addAttribute("itemDto", itemDao.selectItemOne(itemNo));
+		//상품 정보 불러오는 값
+		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
 		
+		//상품 옵션 불러오는 list
 		model.addAttribute("buylist", itemDao.selectItemList(itemNo));
 		
 		//장바구니 기록있는 조회하여 첨부 
