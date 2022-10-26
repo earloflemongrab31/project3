@@ -326,9 +326,9 @@ public class ItemDaoImpl implements ItemDao {
 	}
 
 	@Override
-	public ItemListVO selectItemOne(int itemNo) {
-		String sql = "select * from item_list_view where item_no = ?";
-		Object[] param = {itemNo};
+	public ItemListVO selectItemOne(ItemListVO itemListVO) {
+		String sql = "select * from item_list_view where item_no = ? and item_Color = ?";
+		Object[] param = {itemListVO.getImageNo(), itemListVO.getItemColor()};
 		return jdbcTemplate.query(sql, itemExtractor, param);
 	}
 

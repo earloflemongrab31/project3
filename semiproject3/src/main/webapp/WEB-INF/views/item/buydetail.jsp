@@ -3,12 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
+
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
 
 <form action="/orders/insert" method="post">
-
+<h3>${buylist}</h3>
 	<div class="container-600 mt-40 mb-40">
 
 		<div class="row center">
@@ -20,7 +22,7 @@
 				<tbody>
 				<tr>
 						<th colspan="2">
-							<img src="/image/download/${itemDto.imageNo}" width="200" >
+							<img src="/image/download/${buylist.imageNo}" width="200" >
 						</th>
 				</tr>
 				<tr>
@@ -47,25 +49,22 @@
 				<tr>
 					<th>Color</th>
 					<td>
-						<select name="itemColor">
+						<select class="input" name="itemColor">
 							<option value="">선택</option>
-							<option>Black</option>
-							<option>White</option>
-							<option>Blue</option>
-							<option>Red</option>
+							<c:forEach var="itemDto" items="${buylist}">
+									<option>${itemDto.itemColor}</option>
+							</c:forEach>
 						</select>
-<%-- 						${itemDto.itemColor} --%>
 					</td>
 				</tr>
 				<tr>
 					<th>Size</th>
 					<td>
-						<select name="itemSize">
+						<select class="input" name="itemSize">
 							<option value="">선택</option>
-							<option>S</option>
-							<option>M</option>
-							<option>L</option>
-							<option>XL</option>
+							<c:forEach var="itemDto" items="${buylist}">
+								<option>${itemDto.itemSize}</option>
+							</c:forEach>
 						</select>
 <%-- 						${itemDto.itemSize} --%>
 					</td>
