@@ -63,11 +63,11 @@ public class ItemController {
 	
 
 //	맥북용
-	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
+//	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
 //	화니꼬
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-//	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -238,7 +238,7 @@ public class ItemController {
 		int count = itemDao.count(vo);
 		vo.setCount(count);
 		
-		model.addAttribute("buyList", itemDao.selectBuyList(vo));
+		model.addAttribute("buylist", itemDao.selectBuyList(vo));
 		
 		return "item/buylist";
 	}
