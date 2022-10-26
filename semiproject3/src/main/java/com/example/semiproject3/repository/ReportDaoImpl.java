@@ -23,7 +23,6 @@ public class ReportDaoImpl implements ReportDao{
 				reportDto.getCustomerId(),
 				reportDto.getReviewContent(),
 				reportDto.getReportRadio(),
-				reportDto.getReportContent()
 		};
 		jdbcTemplate.update(sql,param);
 		
@@ -36,7 +35,6 @@ public class ReportDaoImpl implements ReportDao{
 				.customerId(rs.getString("customer_id"))
 				.reviewContent(rs.getString("review_content"))
 				.reportRadio(rs.getString("report_radio"))
-				.reportContent(rs.getString("report_content"))
 				.reportDate(rs.getDate("report_date"))
 				.build();
 	};

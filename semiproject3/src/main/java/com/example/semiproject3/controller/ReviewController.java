@@ -120,7 +120,6 @@ public class ReviewController {
 				.customerId(reviewDto.getCustomerId())
 				.reviewContent(reviewDto.getReviewContent())
 				.reportRadio(reportDto.getReportRadio())
-				.reportContent(reportDto.getReportContent())
 				.build());
 		
 		return "redirect:/";
@@ -150,17 +149,17 @@ public class ReviewController {
 	
 	//신고목록
 	@GetMapping("/reportList")
-	public String list(Model model, 
+	public String reportList(Model model, 
 					@RequestParam(required = false) String type,
 					@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if(isSearch) { // 검색
-			model.addAttribute("list", reportDao.selectList(type, keyword));
+			model.addAttribute("reportList", reportDao.selectList(type, keyword));
 		}
 		else { //목록
-			model.addAttribute("list", reportDao.selectList());
+			model.addAttribute("reportList", reportDao.selectList());
 		}
-		return "customer/list";
+		return "review/reportList";
 	}
 
 }
