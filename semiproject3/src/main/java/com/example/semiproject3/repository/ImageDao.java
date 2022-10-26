@@ -22,4 +22,8 @@ public interface ImageDao {
 	
 	//아이템 이미지 관련(item_image_view 조회)
 	List<ImageDto> selectItemImageList(int itemNo);
+	
+	//리뷰 이미지 관련(review_image_view 조회)
+	List<ImageDto> selectReviewImageList(int reviewNo);
+	
 }

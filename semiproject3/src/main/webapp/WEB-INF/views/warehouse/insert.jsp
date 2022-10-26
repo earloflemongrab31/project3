@@ -36,7 +36,7 @@
         <tbody>
                 <tr>
                     <td><input class="input w-100 input-none center" name="itemCate" 
-                    	value="${itemDto.cateCode}" readonly></td>
+                    	value="${itemDto.itemCate}" readonly></td>
                     <td><input class="input w-100 input-none center" name="itemName" 
                      	value="${itemDto.itemName}" readonly></td>
                     <td>

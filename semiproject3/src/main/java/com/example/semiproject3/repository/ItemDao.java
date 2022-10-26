@@ -6,6 +6,7 @@ import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListVO;
 import com.example.semiproject3.vo.InvenListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
+import com.example.semiproject3.vo.ItemListVO;
 
 public interface ItemDao {
 	//번호 생성
@@ -24,10 +25,13 @@ public interface ItemDao {
 	List<ItemDto> list(ItemListSearchVO vo);
 	List<ItemDto> search(ItemListSearchVO vo);
 	
+	List<ItemListVO> selectItemList(ItemListSearchVO vo);
+	List<ItemListVO> Itemlist(ItemListSearchVO vo);
+	List<ItemListVO> Itemsearch(ItemListSearchVO vo);
+	
 	List<ItemDto> selectList(InvenListSearchVO vo);
 	List<ItemDto> list(InvenListSearchVO vo);
 	List<ItemDto> search(InvenListSearchVO vo);
-
 		
 	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
 	int count(ItemListSearchVO vo);
