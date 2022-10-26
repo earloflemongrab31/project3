@@ -135,15 +135,26 @@
 						<td>${list.reviewShipping}</td>
 						<td>${list.reviewContent}</td>
 						<td>사진(들어갈예정)</td>
-						<td>좋아요</td>
+						<td>
+							${isReview}
 						
-		
+							
+						<c:if test="${isReview == null}">
+							♥
+						</c:if>
+						<c:if test="${isReview == true}">
+							<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥</a>
+						</c:if>
+						<c:if test="${isReview == false}">
+							<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♡</a>
+						</c:if>
+						</td>
 					</tr>
 				</c:forEach>
+				
 			</tbody>
 		</table>
 		</div>
-
 
 
 

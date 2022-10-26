@@ -57,7 +57,7 @@
 	<h3>사진 첨부</h3>
 	</div>
 	<div class="row">
-	<input type="file" name="attachment">
+	<input type="file" name="attachment" multiple>
 	</div>
 	
 	<div class="row center">
