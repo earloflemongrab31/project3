@@ -39,6 +39,12 @@ public class OrdersController {
 	private ItemDao itemDao;
 	
 	//등록
+	
+	@GetMapping("/insert")
+	public String insert() {
+		return "orders/insert()";
+	}
+	
 	@PostMapping("/insert")
 	public String insert(
 			HttpSession session,
@@ -50,7 +56,7 @@ public class OrdersController {
 			int ordersNo = ordersDao.sequence();			
 			CustomerDto customerDto = customerDao.selectOne(loginId);
 			AddressDto addressDto = addressDao.selectOne(loginId);
-		
+		 
 			//attr.addAttribute("ordersDto", ordersDto);
 			ordersDao.insert(ordersDto);
 			
