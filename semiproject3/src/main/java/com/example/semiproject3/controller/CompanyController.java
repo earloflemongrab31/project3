@@ -116,18 +116,30 @@ public class CompanyController {
 		return "redirect:detail";
 	}
 	
-//명함 이미지 
-	@GetMapping("/cardList")
-	public String cardlist(Model model,
-			@ModelAttribute(name="vo") CardListSearchVO vo) {
-		
-	//페이지 네비게이터를 위한 게시글 수를 전달
-	int	 count = cardDao.count(vo);
-	vo.setCount(count);
+	// 명함 이미지 
+		@GetMapping("/cardList")
+		public String cardlist(Model model,
+				@ModelAttribute(name="vo") CardListSearchVO vo){
+			
+			int count = cardDao.count(vo);
+			vo.setCount(count);
+			model.addAttribute("list", cardDao.selectList());
+			
+			return "company/cardList";
+		}
 	
-	model.addAttribute("cardList", cardDao.selectList(vo));
-		return "company/cardList";
-	}	
+//명함 이미지 
+//	@GetMapping("/cardList")
+//	public String cardList(Model model,
+//			@ModelAttribute(name="vo") CardListSearchVO vo) {
+//		
+//	//페이지 네비게이터를 위한 게시글 수를 전달
+//	int	 count = cardDao.count(vo);
+//	vo.setCount(count);
+//	
+//	model.addAttribute("cardList", cardDao.selectList(vo));
+//		return "company/cardList";
+//	}	
 	
 //	@GetMapping("/cardList")
 //	public String cardList(Model model, 

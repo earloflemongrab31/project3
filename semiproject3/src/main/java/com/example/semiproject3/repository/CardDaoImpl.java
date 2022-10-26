@@ -146,7 +146,7 @@ public class CardDaoImpl implements CardDao{
 
 	@Override
 	public int searchCount(CardListSearchVO vo) {
-		String sql = "select count(*) from company where instr(#1, ?) > 0";
+		String sql = "select count(*) from card where instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
@@ -155,7 +155,7 @@ public class CardDaoImpl implements CardDao{
 
 	@Override
 	public int listCount(CardListSearchVO vo) {
-		String sql = "select count(*) from company";
+		String sql = "select count(*) from card";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
