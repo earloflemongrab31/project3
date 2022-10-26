@@ -20,45 +20,45 @@
 			<table class="table table-border">
 				<tbody>
 					<tr>
-						<td>회사명 : </td>
+						<th>회사명</th>
 						<td>
-							<input type="text" required class="input w-100" name="companyName" value="${companyDto.companyName}" autocomplete="off">
+							${companyDto.companyName}
 						</td>
 					</tr>
 					<tr>
-						<td>회사전화번호 : </td>
+						<th>회사전화번호</th>
 						<td>
-							<input type="text" required class="input w-100" name="companyNumber" value="${companyDto.companyNumber}" autocomplete="off">
+							${companyDto.companyNumber}
 						</td>
 					</tr>
 					<tr>
-						<td>회사주소 : </td>
+						<th>회사주소</th>
 						<td>
-							<input type="text" required class="input w-100" name="companyAddress" value="${companyDto.companyAddress}" autocomplete="off">
+							${companyDto.companyAddress}
 						</td>
 					</tr>
 					<tr>
-						<td>관리자명 : </td>
+						<th>관리자명</th>
 						<td>
-							<input type="text" required class="input w-100" name="customerName" value="${companyDto.customerName}" autocomplete="off">
+							${companyDto.customerName}
 						</td>
 					</tr>
 					<tr>
-						<td>관리자 직급 : </td>
+						<th>관리자 직급</th>
 						<td>
-							<input type="text" required class="input w-100" name="customerRank" value="${companyDto.customerRank}" autocomplete="off">
+							${companyDto.customerRank}
 						</td>
 					</tr>
 					<tr>
-						<td>관리자 전화번호 : </td>
+						<th>관리자 전화번호</th>
 						<td>
-							<input type="text" required class="input w-100" name="customerNumber" value="${companyDto.customerNumber}" autocomplete="off">
+							${companyDto.customerNumber}
 						</td>
 					</tr>
 					<tr>
-						<td>특이사항 : </td>
+						<th>특이사항</th>
 						<td>
-							<input type="text" required class="input w-100" name="companyExplan" value="${companyDto.companyExplan}" autocomplete="off">
+							${companyDto.companyExplan}
 						</td>
 					</tr>
 				</tbody>

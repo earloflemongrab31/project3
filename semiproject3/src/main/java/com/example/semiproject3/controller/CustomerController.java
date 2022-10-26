@@ -18,6 +18,7 @@ import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CenterDao;
 import com.example.semiproject3.repository.CustomerDao;
+import com.example.semiproject3.vo.CustomerListSearchVO;
 
 @Controller
 @RequestMapping("/customer")
@@ -105,17 +106,31 @@ public class CustomerController {
 		return "customer/detail";
 	}
 	
+//	@GetMapping("/list")
+//	public String list(Model model, 
+//					@RequestParam(required = false) String type,
+//					@RequestParam(required = false) String keyword) {
+//		boolean isSearch = type != null && keyword != null;
+//		if(isSearch) { // 검색
+//			model.addAttribute("list", customerDao.selectList(type, keyword));
+//		}
+//		else { //목록
+//			model.addAttribute("list", customerDao.selectList());
+//		}
+//		return "customer/list";
+//	}
+//	
+	
 	@GetMapping("/list")
 	public String list(Model model, 
-					@RequestParam(required = false) String type,
-					@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) { // 검색
-			model.addAttribute("list", customerDao.selectList(type, keyword));
-		}
-		else { //목록
-			model.addAttribute("list", customerDao.selectList());
-		}
+			@ModelAttribute(name="vo") CustomerListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = customerDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", customerDao.selectList(vo));
+		
 		return "customer/list";
 	}
 	

@@ -21,6 +21,7 @@ import com.example.semiproject3.entity.CardDto;
 import com.example.semiproject3.entity.CompanyDto;
 import com.example.semiproject3.repository.CardDao;
 import com.example.semiproject3.repository.CompanyDao;
+import com.example.semiproject3.vo.CompanyListSearchVO;
 
 @Controller
 @RequestMapping("/company")
@@ -70,11 +71,28 @@ public class CompanyController {
 		model.addAttribute("companyDto",companyDao.selectOne(companyNo));
 		return "company/detail";
 	}
+	
+//	@GetMapping("/list")
+//	public String list(Model model){
+//		model.addAttribute("list",companyDao.selectList());
+//		return "company/list";
+//	}
+
+	//목록(페이징처리)
 	@GetMapping("/list")
-	public String list(Model model){
-		model.addAttribute("list",companyDao.selectList());
+	public String list(Model model, 
+			@ModelAttribute(name="vo") CompanyListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = companyDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", companyDao.selectList(vo));
+		
 		return "company/list";
 	}
+	
+	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int companyNo) {
 		companyDao.delete(companyNo);
