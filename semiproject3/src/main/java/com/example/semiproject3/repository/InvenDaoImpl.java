@@ -104,7 +104,7 @@ public class InvenDaoImpl implements InvenDao{
 	
 	@Override
 	public List<InvenDto> selectList(String type, String keyword) {
-		String sql="select * from inven where instr(#1,?) > 0";
+		String sql= "select * from inven where instr(#1,?) > 0 ";
 		sql=sql.replace("#1", type);
 		Object[] param= {keyword};
 		return jdbcTemplate.query(sql, mapper,param);

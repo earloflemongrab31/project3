@@ -4,10 +4,10 @@
 	<jsp:param value="관리자 페이지" name="title"/>
 </jsp:include>
 
-<!-- 차트 내용 넣고 지우기 -->
-<div class="center" style="background-color:gray; min-height:400px">
-	<h1 style="margin:0;"></h1>
+<div class="container-800 mt-50 mb-50">
+	<div class="row center">
+		<h1>관리자 메인페이지</h1>
+	</div>
 </div>
-
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

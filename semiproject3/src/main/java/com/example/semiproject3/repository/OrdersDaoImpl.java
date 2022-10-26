@@ -115,13 +115,6 @@ public class OrdersDaoImpl implements OrdersDao {
 	}
 
 	@Override
-	public List<OrdersDto> selectList(String customerId) {
-		String sql = "select * from orders where customer_id=?";
-		Object[] param = {customerId};
-		return jdbcTemplate.query(sql, mapper, param);
-	}
-
-	@Override
 	public int selectOrders(String customerId) {
 		String sql = "select count(*) from orders where customer_id=?";
 		Object[] param = {customerId};
@@ -144,6 +137,13 @@ public class OrdersDaoImpl implements OrdersDao {
 		String sql = "select * from orders where instr(#1, ?) > 0 order by #1 asc";
 		sql = sql.replace("#1", type);
 		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public List<OrdersDto> selectList(String customerId) {
+		String sql = "select * from orders where customer_id=?";
+		Object[] param = {customerId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 
