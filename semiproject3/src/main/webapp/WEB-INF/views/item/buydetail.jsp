@@ -6,7 +6,8 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
-
+<h5>${itemDto}</h5>
+<h5>${buylist}</h5>
 <form action="/orders/insert" method="post">
 	<div class="container-600 mt-40 mb-40">
 
