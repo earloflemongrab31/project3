@@ -37,7 +37,6 @@ public class OrdersController {
 	private ItemDao itemDao;
 	
 	//등록
-	
 	@GetMapping("/insert")
 	public String insert() {
 		return "orders/insert()";
@@ -47,7 +46,7 @@ public class OrdersController {
 	public String insert(
 			HttpSession session,
 			@ModelAttribute OrdersDto ordersDto,
-			//@RequestParam itemCnt,
+			@RequestParam int itemCnt,
 			RedirectAttributes attr
 			){
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
@@ -60,7 +59,9 @@ public class OrdersController {
 			ordersDao.insert(ordersDto);
 			attr.addAttribute("ordersDto", ordersDto.getOrdersNo());
 			
-		return "redirect:orders/detail";
+			
+			
+		return "orders/insert";
 	}
 	
 	
