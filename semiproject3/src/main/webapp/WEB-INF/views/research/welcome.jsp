@@ -22,5 +22,5 @@
 	</div>
 </div>
 
-
+<meta http-equiv="refresh" content="4; url=http:/">
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

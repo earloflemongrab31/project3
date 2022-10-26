@@ -193,4 +193,13 @@ public class CompanyDaoImpl implements CompanyDao{
 		String sql = "select count(*) from company";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+	
+	@Override
+	public void connectAttachment(int companyNo, int imageNo) {
+		String sql="insert into company_image values(?,?) ";
+		Object[] param= {companyNo,imageNo};
+		jdbcTemplate.update(sql,param);
+		
+		
+	}
 }

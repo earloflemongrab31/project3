@@ -136,10 +136,8 @@
 						<td>${list.reviewShipping}</td>
 						<td>${list.reviewContent}</td>
 						<td><img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
-						
 					</tr>
 				</c:forEach>
-				
 			</tbody>
 		</table>
 		</div>

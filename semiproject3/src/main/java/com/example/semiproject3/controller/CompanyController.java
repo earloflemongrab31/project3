@@ -2,6 +2,7 @@ package com.example.semiproject3.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.entity.CardDto;
 import com.example.semiproject3.entity.CompanyDto;
+import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.repository.CardDao;
 import com.example.semiproject3.repository.CompanyDao;
+import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.vo.CompanyListSearchVO;
 
 @Controller
@@ -31,6 +34,8 @@ public class CompanyController {
 	private CompanyDao companyDao;
 	@Autowired
 	private CardDao cardDao;
+	@Autowired
+	private ImageDao imageDao;
 	
 	@GetMapping("/insert")
 	public String insert() {
@@ -40,27 +45,41 @@ public class CompanyController {
 	public String insert(
 			@ModelAttribute CompanyDto companyDto,
 			RedirectAttributes attr,
-			@RequestParam MultipartFile card) throws IllegalStateException, IOException {
-		//Db저장
-		int cardNo=cardDao.sequence();
-		cardDao.insert(
-				CardDto.builder()
-				.cardNo(cardNo)
-				.cardName(card.getOriginalFilename())
-				.cardType(card.getContentType())
-				.cardSize(card.getSize())
-				.build());
-		//파일저장
-		File dir=new File("D:/upload");
-		dir.mkdirs();
-		File target=new File(dir, String.valueOf(cardNo));
-		card.transferTo(target);
+			@RequestParam List<MultipartFile> attachment) throws IllegalStateException, IOException {
 		
-		int no=companyDao.sequence();
-		companyDto.setCompanyNo(no);
-		companyDao.insert(companyDto);
-		attr.addAttribute("companyNo",companyDto.getCompanyNo());
-		return "redirect:detail";
+			int companyNo=companyDao.sequence();
+			companyDto.setCompanyNo(companyNo);
+			companyDao.insert(companyDto);
+			attr.addAttribute("companyNo",companyDto.getCompanyNo());
+			
+		
+			
+			for(MultipartFile file:attachment) {
+				if(!file.isEmpty()) {
+					
+					//DB등록
+					int imageNo=imageDao.sequence();
+					imageDao.insert(ImageDto.builder()
+							.imageNo(imageNo)
+							.imageName(file.getOriginalFilename())
+							.imageType(file.getContentType())
+							.imageSize(file.getSize())
+							.build());
+					
+					//파일저장
+					File dir=new File("D:/upload/card");
+					dir.mkdirs();
+					File target = new File(dir,String.valueOf(imageNo));
+					file.transferTo(target);
+					
+					
+					// 연결테이블에 연결정보저장(컴퍼니번호  / 첨부파일번호)
+						companyDao.connectAttachment(companyNo, imageNo);
+				}
+				
+			}
+			return "redirect:detail";
+		
 	}
 	
 	@GetMapping("/detail")
