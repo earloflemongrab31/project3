@@ -1,9 +1,18 @@
 package com.example.semiproject3.repository;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerLikeDto;
 
 @Repository
@@ -11,6 +20,36 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	
+	private RowMapper <CustomerLikeDto> mapper = new RowMapper<CustomerLikeDto>() {
+
+		@Override
+		public CustomerLikeDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			CustomerLikeDto customerLikeDto = new CustomerLikeDto();
+			customerLikeDto.setCustomerId(rs.getString("customer_id"));
+			customerLikeDto.setItemNo(rs.getInt("item_no"));
+			customerLikeDto.setLikeTime(rs.getDate("like_time"));
+			return customerLikeDto;
+		}
+	};
+	
+	private ResultSetExtractor <CustomerLikeDto> extractor = new ResultSetExtractor<CustomerLikeDto>() {
+
+		@Override
+		public CustomerLikeDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				CustomerLikeDto customerLikeDto = new CustomerLikeDto();
+				customerLikeDto.setCustomerId(rs.getString("customer_id"));
+				customerLikeDto.setItemNo(rs.getInt("item_no"));
+				customerLikeDto.setLikeTime(rs.getDate("like_time"));
+				return customerLikeDto;
+			}
+			else {
+				return null;	
+			}
+		}
+	};
 	
 	//찜 등록
 	@Override
@@ -73,4 +112,13 @@ public class CustomerLikeDaoimpl implements CustomerLikeDao {
 		jdbcTemplate.update(sql, param);
 		
 	}
-}
+
+	   @Override
+	   public List<CustomerLikeDto>selectList(String loginId) {
+	      String sql = "select * from customer_like where customer_id=?";
+	      Object[] param = {loginId};
+		return jdbcTemplate.query(sql, mapper, param);
+	   }
+	}
+
+

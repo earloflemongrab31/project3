@@ -6,7 +6,7 @@
 	<jsp:param value="상품 입/출고 목록" name="title"/>
 </jsp:include>
 
-    <div class ="container-900 mt-40 mb-40">
+<div class ="container-900 mt-40 mb-40">
         
         <div class="row">
             <h1>상품 입/출고 목록</h1>
@@ -60,11 +60,14 @@
         
         <div class="row center">
 
+<!-- 페이지 네비게이터 -->
+<div class="row center">
+
 <ul class="pagination">
 <li>
 	<c:choose>
 		<c:when test="${not vo.isFirst()}">
-			<a href="list?p=${vo.firstBlock()}&${vo.parameter()}">
+			<a href="itemList?p=${vo.firstBlock()}&${vo.parameter()}">
 				<i class="fa-solid fa-angles-left"></i>
 			</a>
 		</c:when>
@@ -78,7 +81,7 @@
 <li>
 	<c:choose>
 		<c:when test="${vo.hasPrev()}">
-			<a href="list?p=${vo.prevBlock()}&${vo.parameter()}">
+			<a href="itemList?p=${vo.prevBlock()}&${vo.parameter()}">
 				<i class="fa-solid fa-chevron-left"></i>
 			</a>
 		</c:when>
@@ -89,14 +92,14 @@
 </li>
  
 <c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<li><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
+	<li><a href="itemList?p=${i}&${vo.parameter()}">${i}</a></li>
 </c:forEach>
 
 <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 <li>
 	<c:choose>
 		<c:when test="${vo.hasNext()}">
-			<a href="list?p=${vo.nextBlock()}&${vo.parameter()}">
+			<a href="itemList?p=${vo.nextBlock()}&${vo.parameter()}">
 				<i class="fa-solid fa-chevron-right"></i>
 			</a>
 		</c:when>
@@ -109,7 +112,7 @@
 <li>
 	<c:choose>
 		<c:when test="${not vo.isLast()}">
-			<a href="list?p=${vo.lastBlock()}&${vo.parameter()}">
+			<a href="itemList?p=${vo.lastBlock()}&${vo.parameter()}">
 				<i class="fa-solid fa-angles-right"></i>
 			</a>
 		</c:when>
@@ -119,6 +122,8 @@
 	</c:choose>
 </li>
 </ul>
+
+</div>	
 
 </div>	
         

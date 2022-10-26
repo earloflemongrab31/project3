@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/customerHeader.jsp">
     <jsp:param value="주소 등록 페이지" name="title"/>
 </jsp:include>
  
@@ -99,7 +99,4 @@ $(function(){
 </div>
 </form>
  
-
-
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 
-    
+<jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

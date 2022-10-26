@@ -137,12 +137,25 @@
     }
     .NNNNN-message{
         display:none;
+    } 
+
+    .input.NNNNN ~ .NNNNN-message,
+    .input.NNNNY ~ .NNNNY-message,
+    .input.fail ~ .fail-message,
+    .input.admin ~ .admin-message{
+        display: inline-block;
+    }
+    .NNNNN-message,
+    .NNNNY-message,
+    .fail-message,
+    .admin-message{
+        display: none;
     }
 
 	/* swiper */
     .swiper{
         width: 100%;
-        z-index: -1;
+        z-index: 0;
     }
 </style>
 <script type="text/javascript">
@@ -496,12 +509,47 @@
                 }
             });
         });
-    });
-    
-    $(function(){
+        
+        $(".input[name=customerPw").blur(function(){
+            var inputPw = $(this).val();
+            if(!inputPw){
+	            $("#customer-pwcheck").removeClass("fail NNNNY");
+            }
+            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
+            var judge = regex.test(inputPw);
+
+            $(this).removeClass("fail NNNNY");
+            if(judge){
+                $(this).addClass("NNNNY");
+            }
+            else{
+                $(this).addClass("fail");
+            }
+            $("#customer-pwcheck").blur();
+        });
+
+        $("#customer-pwcheck").blur(function(){
+            var pwCheck = $(this).val();
+            if(!pwCheck){
+                $(this).removeClass("fail NNNNY");
+                return;
+            };
+            if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
+
+            var pw = $(".input[name=customerPw").val();
+            var judge = pw == pwCheck;
+            
+            $(this).removeClass("fail NNNNY");
+            if(judge){
+                $(this).addClass("NNNNY");
+            }
+            else{
+                $(this).addClass("fail");
+            }
+        });
     	
-	    $("form.change-pw").submit(function(){
-	        $(".input[name=customerPw").blur();
+	    $(".change-pw").submit(function(){
+	        $(".input[name=customerPw]").blur();
 	        $("#customer-pwcheck").blur();
 	
 	        if($(".input.NNNNY").length == 2){
@@ -527,11 +575,11 @@
             },
 
             // 좌우 버튼 옵션
-            navigation: {
+            /* navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
-            },
-
+            }, */
+            
             // 자동재생 옵션
             autoplay: {
                 delay: 5000
@@ -543,6 +591,7 @@
 
         });
     });
+    
 </script>
 
 </head>
@@ -764,7 +813,7 @@
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
 	<li class="float-right cart"><a href="/cart/cartList"><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
-	<form action="/item/buylist" method="get">
+	<form action="/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
 		<input class="float-right input input-underline find" name="keyword" id="search" placeholder="가을 신상">
