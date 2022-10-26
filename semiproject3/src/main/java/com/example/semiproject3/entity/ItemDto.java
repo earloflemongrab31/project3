@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ItemDto {
 	private int itemNo;
-	private String cateCode;
+	private String itemCate;
 	private String itemName;
 	private String itemMemo;
 	private String itemContent;

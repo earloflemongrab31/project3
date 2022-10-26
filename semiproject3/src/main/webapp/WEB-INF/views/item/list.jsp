@@ -42,7 +42,7 @@
 			
 				<tr>
 					<td>${itemDto.itemNo}</td>
-					<td>${itemDto.cateCode}</td>
+					<td>${itemDto.itemCate}</td>
 					<td>${itemDto.itemMemo}</td>
 					<td>
 						<a href="detail?itemNo=${itemDto.itemNo}">

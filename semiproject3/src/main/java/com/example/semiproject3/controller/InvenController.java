@@ -16,6 +16,7 @@ import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemCntDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.vo.InvenListSearchVO;
+import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Controller
 @RequestMapping("/warehouse")
@@ -54,12 +55,12 @@ public class InvenController {
 	@GetMapping("/itemList")
 	public String itemList(
 			Model model, 
-			@ModelAttribute(name="vo") InvenListSearchVO vo) {
+			@ModelAttribute(name="vo") ItemListSearchVO vo) {
 			//페이지 네비게이터를 위한 게시글 수를 전달
-			int count = invenDao.count(vo);
+			int count = itemDao.count(vo);
 			vo.setCount(count);
 			
-			model.addAttribute("invenList", invenDao.selectList(vo));
+			model.addAttribute("invenList", itemDao.selectItemList(vo));
 			
 			return "warehouse/itemList";
 	}
@@ -108,23 +109,25 @@ public class InvenController {
 			@ModelAttribute InvenDto invenDto, 
 			RedirectAttributes attr) {
 		
+		boolean search = itemCntDao.selectOne(invenDto) == null;
+
 		invenDao.insert(invenDto);
 
 		attr.addAttribute("itemNo", invenDto.getItemNo());
 		
-		if(itemCntDao.selectOne(invenDto) == null) {
+		if(search) {
 			itemCntDao.insert(invenDto);
 			invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
-			itemCntDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+			itemCntDao.plus(invenDto);
 			return "redirect:detail";
 		}
 		else {
 			if((invenDto.getInvenStatus()).equals("입고완료")){
-				itemCntDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+				itemCntDao.plus(invenDto);
 				invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
 				return "redirect:detail";
 			}else if((invenDto.getInvenStatus()).equals("출고완료")) {
-				itemCntDao.minus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+				itemCntDao.minus(invenDto);
 				invenDao.invenOut(invenDto.getInvenQuantity(), invenDto.getItemNo());
 				return "redirect:detail";
 			}else {
