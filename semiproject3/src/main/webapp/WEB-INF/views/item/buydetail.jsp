@@ -52,6 +52,7 @@
 							<option>Blue</option>
 							<option>Red</option>
 						</select>
+<%-- 						${itemDto.itemColor} --%>
 					</td>
 				</tr>
 				<tr>
@@ -64,12 +65,13 @@
 							<option>L</option>
 							<option>XL</option>
 						</select>
+<%-- 						${itemDto.itemSize} --%>
 					</td>
 				</tr>
 				<tr>
 					<th>Qnty</th>
 					<td>
-						<input class="w-20" type="number" name="itemCnt" min="0">
+						<input class="w-20" type="number" name="itemCnt" min="0" max="${itemDto.itemTotalCnt}">
 					</td>
 				</tr>
 				<tr>
