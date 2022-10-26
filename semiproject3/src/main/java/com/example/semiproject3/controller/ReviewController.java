@@ -148,6 +148,7 @@ public class ReviewController {
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	}
 	
+	//신고목록
 	@GetMapping("/reportList")
 	public String list(Model model, 
 					@RequestParam(required = false) String type,

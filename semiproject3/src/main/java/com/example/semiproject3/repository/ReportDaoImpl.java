@@ -48,6 +48,7 @@ public class ReportDaoImpl implements ReportDao{
 		return jdbcTemplate.query(sql, mapper);
 	}
 
+	//검색 키워드 목록
 	@Override
 	public List<ReportDto> selectList(String type, String keyword) {
 		String sql = "select * from report where instr(#1, ?) > 0 order by #1 desc";
