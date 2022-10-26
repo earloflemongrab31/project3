@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListVO;
+import com.example.semiproject3.vo.InvenListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
-import com.example.semiproject3.vo.ItemListVO;
 
 public interface ItemDao {
 	//번호 생성
