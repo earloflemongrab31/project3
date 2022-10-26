@@ -28,8 +28,6 @@
  					<tr>
  						<th>상품카테고리</th>
  						<th>상품이름</th>
-				 		<th>상품사이즈</th>
-				 		<th>상품컬러</th>
 				 		<th>총입고</th>
 				 		<th>총출고</th>
 				 		<th>현재재고</th>
@@ -40,10 +38,8 @@
            		<tbody>
 				 	<c:forEach var="item" items="${itemList}">
 				 		<tr>
-							<td>${item.cateCode}</td>
+							<td>${item.itemCate}</td>
 							<td>${item.itemName }</td>
-							<td>${item.itemSize}</td>
-							<td>${item.itemColor}</td>
 							<td>${item.invenIn}</td>
 							<td>${item.invenOut}</td>
 							<td>${item.itemTotalCnt}</td>

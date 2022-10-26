@@ -6,6 +6,7 @@ import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListVO;
 import com.example.semiproject3.vo.InvenListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
+import com.example.semiproject3.vo.ItemListVO;
 
 public interface ItemDao {
 	//번호 생성
@@ -23,6 +24,10 @@ public interface ItemDao {
 	List<ItemDto> selectList(ItemListSearchVO vo);
 	List<ItemDto> list(ItemListSearchVO vo);
 	List<ItemDto> search(ItemListSearchVO vo);
+	
+	List<ItemListVO> selectItemList(ItemListSearchVO vo);
+	List<ItemListVO> Itemlist(ItemListSearchVO vo);
+	List<ItemListVO> Itemsearch(ItemListSearchVO vo);
 	
 	List<ItemDto> selectList(InvenListSearchVO vo);
 	List<ItemDto> list(InvenListSearchVO vo);

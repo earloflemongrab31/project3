@@ -34,7 +34,7 @@
 				            <option data-main="dress">DRESS</option>
 				            <option data-main="acc">ACC</option>
 				        </select>
-				        <select name="cateCode">
+				        <select name="itemCate">
 				            <option>소분류</option>
 				            <option disabled>------</option>
 				

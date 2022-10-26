@@ -28,6 +28,7 @@ import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
+import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.vo.ItemListSearchVO;
@@ -41,6 +42,9 @@ public class ItemController {
 	
 	@Autowired
 	private ImageDao imageDao;
+	
+	@Autowired
+	private InvenDao invenDao;
 	
 	@Autowired
 	private CustomerLikeDao customerLikeDao;
@@ -146,7 +150,7 @@ public class ItemController {
 		int count = itemDao.count(vo);
 		vo.setCount(count);
 		
-		model.addAttribute("list", itemDao.selectList(vo));
+		model.addAttribute("list", itemDao.selectItemList(vo));
 		
 		return "item/list";
 	}

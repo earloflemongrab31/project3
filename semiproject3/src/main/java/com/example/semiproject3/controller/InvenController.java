@@ -1,7 +1,6 @@
 package com.example.semiproject3.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.web.server.ConditionalOnManagementPort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.semiproject3.entity.InvenDto;
 import com.example.semiproject3.repository.CompanyDao;
 import com.example.semiproject3.repository.InvenDao;
+import com.example.semiproject3.repository.ItemCntDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.vo.InvenListSearchVO;
 
@@ -26,6 +26,9 @@ public class InvenController {
 	@Autowired
 	
 	InvenDao invenDao;
+	
+	@Autowired
+	private ItemCntDao itemCntDao;
 	
 	@Autowired
 	
@@ -86,18 +89,28 @@ public class InvenController {
 	}
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute InvenDto invenDto) {
+		boolean search = itemCntDao.selectOne(invenDto) == null;
+		
 		invenDao.insert(invenDto);
-		if((invenDto.getInvenStatus()).equals("입고완료")){
-			invenDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
-			invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
-			return "redirect:invenList";
-		}else if((invenDto.getInvenStatus()).equals("출고완료")) {
-			invenDao.minus(invenDto.getInvenQuantity(),invenDto.getItemNo());
-			invenDao.invenOut(invenDto.getInvenQuantity(), invenDto.getItemNo());
-			return "redirect:invenList";
-		}else {
-			return "redirect:invenList";
+		if(search) {
+			itemCntDao.insert(invenDto);
 		}
+		else {
+			if((invenDto.getInvenStatus()).equals("입고완료")){
+				invenDao.plus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+				invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
+				itemCntDao.update(invenDto);
+				return "redirect:invenList";
+			}else if((invenDto.getInvenStatus()).equals("출고완료")) {
+				invenDao.minus(invenDto.getInvenQuantity(),invenDto.getItemNo());
+				invenDao.invenOut(invenDto.getInvenQuantity(), invenDto.getItemNo());
+				itemCntDao.update(invenDto);
+				return "redirect:invenList";
+			}else {
+				return "redirect:invenList";
+			}
+		}
+		return "redirect:invenList";
 		
 	}
 	
