@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
@@ -201,12 +202,19 @@ td, th {
 					<c:forEach var="list" items="${reviewList}">
 						<tr>
 							<td>
-								${list.reviewStar}/5
+								<c:if test="${list.reviewStar==1}">★</c:if>
+								<c:if test="${list.reviewStar==2}">★★</c:if>
+								<c:if test="${list.reviewStar==3}">★★★</c:if>
+								<c:if test="${list.reviewStar==4}">★★★★</c:if>
+								<c:if test="${list.reviewStar==5}">★★★★★</c:if>
+					
 								<c:set var="total" value="${total+list.reviewStar}"/>
 							</td>
 							<td>${list.reviewPackaging}</td>
 							<td>${list.reviewShipping}</td>
-							<td>${list.customerId}</td>
+							<td>
+								<c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
+							</td>
 							<td>${list.reviewDate}</td>
 							<td>주문상품(구매테이블구현시)</td>
 							<td>${list.reviewContent}</td>
