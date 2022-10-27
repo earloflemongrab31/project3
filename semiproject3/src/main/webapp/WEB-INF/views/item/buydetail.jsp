@@ -117,49 +117,15 @@ td, th {
 					</tr>
 				</tfoot>
 			</table>
-			
-
-			<!--리뷰테이블 구현중 -->
-			<table width="1000">
-			<thead>
-				<tr>
-					<th>회원아이디</th>
-					<th>작성시간</th>
-					<th>주문한상품명</th>
-					<th>별점</th>
-					<th>포장상태</th>
-					<th>배송상태</th>
-					<th>내용</th>
-					<th>사진</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="list" items="${reviewList}">
-					<tr>
-						<td>
-						${list.customerId}/
-						<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
-						</td>
-						<td>${list.reviewDate}</td>
-						<td>주문상품(구매테이블구현시)</td>
-						<td>${list.reviewStar}/5</td>
-						<td>${list.reviewPackaging}</td>
-						<td>${list.reviewShipping}</td>
-						<td>${list.reviewContent}</td>
-						<td><img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		
 
 			<div class="flexbox">
-				<div class=" w-50 center item item-detail unchecked">
+				<div class=" w-50 center item item-detail">
 					<span>상세보기</span>
 				</div>
-				<div class="w-50 center item item-review">
+				<div class="w-50 center item item-review unchecked">
 					<span>리뷰보기</span>
-			</div>
-
+				</div>
 		</div>
 		
 		
@@ -168,9 +134,9 @@ td, th {
 				<h4>아이템 상세보기 테스트</h4>
 				<hr>
 			</div>
-	</div>
+		</div>
 	
-		<div class = "row center mb-30 review hide"	>
+		<div class = "row center mb-30 review hide">
 			<div class = "row center mb-30">
 				<h4>리뷰</h4>
 				<hr>
@@ -238,6 +204,7 @@ td, th {
 	</c:choose>
 </div>
 </div>
+
 </form>
 
 

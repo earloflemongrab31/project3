@@ -311,11 +311,10 @@
 			$(this).prev("div").addClass("unchecked");
 			$(".review").removeClass("hide");
 			$(".detail").addClass("hide");
-			
 		});
 		$(".item-detail").click(function(){
 			$(this).removeClass("unchecked");
-			$(this).next("div").addCla0ss("unchecked");
+			$(this).next("div").addClass("unchecked");
 			$(".detail").removeClass("hide");
 			$(".review").addClass("hide");
 		});

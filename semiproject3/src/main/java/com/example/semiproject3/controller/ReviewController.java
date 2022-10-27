@@ -120,6 +120,7 @@ public class ReviewController {
 				.customerId(reviewDto.getCustomerId())
 				.reviewContent(reviewDto.getReviewContent())
 				.reportRadio(reportDto.getReportRadio())
+				.reportContent(reportDto.getReportContent())
 				.build());
 		
 		return "redirect:/";
