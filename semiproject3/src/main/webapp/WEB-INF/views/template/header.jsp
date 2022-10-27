@@ -320,15 +320,6 @@
 		});
 	});
 	
-	/* 구매, 장바구니 폼 변경 ? */
-	$(function(){
-		$(".item-buy").click(function(){
-			$(".item-detail").attr("action", "/cart/insert");
-		});
-		$(".item-cart").click(function(){
-			$(".item-detail").attr("action", "/orders/insert");
-		});
-	});
 	
 	/* 사이드메뉴 토글 */
 	$(function(){
