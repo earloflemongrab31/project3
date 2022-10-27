@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
@@ -107,14 +108,49 @@ td, th {
 						<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 
 						<button class="btn btn-positive" type="submit">구매하기</button>
-
-						<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>	 
+						<form>
+						<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>
+						</form>	 
 						<a href="buylist">목록으로</a>
 					</td>
 					</tr>
 				</tfoot>
 			</table>
 			
+
+			<!--리뷰테이블 구현중 -->
+			<table width="1000">
+			<thead>
+				<tr>
+					<th>회원아이디</th>
+					<th>작성시간</th>
+					<th>주문한상품명</th>
+					<th>별점</th>
+					<th>포장상태</th>
+					<th>배송상태</th>
+					<th>내용</th>
+					<th>사진</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="list" items="${reviewList}">
+					<tr>
+						<td>
+						${list.customerId}/
+						<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
+						</td>
+						<td>${list.reviewDate}</td>
+						<td>주문상품(구매테이블구현시)</td>
+						<td>${list.reviewStar}/5</td>
+						<td>${list.reviewPackaging}</td>
+						<td>${list.reviewShipping}</td>
+						<td>${list.reviewContent}</td>
+						<td><img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+
 			<div class="flexbox">
 				<div class=" w-50 center item item-detail unchecked">
 					<span>상세보기</span>
@@ -122,6 +158,7 @@ td, th {
 				<div class="w-50 center item item-review">
 					<span>리뷰보기</span>
 			</div>
+
 		</div>
 		
 		
@@ -163,7 +200,10 @@ td, th {
 				<tbody align="center" >	
 					<c:forEach var="list" items="${reviewList}">
 						<tr>
-							<td>${list.reviewStar}/5</td>
+							<td>
+								${list.reviewStar}/5
+								<c:set var="total" value="${total+list.reviewStar}"/>
+							</td>
 							<td>${list.reviewPackaging}</td>
 							<td>${list.reviewShipping}</td>
 							<td>${list.customerId}</td>
@@ -181,6 +221,11 @@ td, th {
 					</c:forEach>
 				</tbody>
 			</table>
+			<h5>리뷰수${fn:length(reviewList)}</h5>
+			<h5>
+			사용자 총 평점
+			<fmt:formatNumber value=" ${total/fn:length(reviewList)}" pattern="#,##0.00"></fmt:formatNumber>
+			</h5>
 		</c:otherwise>
 	</c:choose>
 </div>

@@ -17,6 +17,7 @@ public class CartDto {
 	private int cartItemPrice;
 	private String cartItemColor;
 	private String cartItemSize;
+	private int cartItemQnty;
 	private Date cartDate;
 }
 

@@ -16,4 +16,6 @@ public class CompanyDto {
 	private String customerRank;
 	private String customerNumber;
 	private String companyExplan;
+	private int imageNo;
 }
+
