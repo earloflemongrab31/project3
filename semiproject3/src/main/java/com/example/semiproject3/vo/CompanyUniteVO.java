@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CompanyListSearchVO {
+public class CompanyUniteVO {
 
 private String type, keyword;
 	

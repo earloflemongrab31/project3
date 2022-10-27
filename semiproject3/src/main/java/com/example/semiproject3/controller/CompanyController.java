@@ -23,12 +23,8 @@ import com.example.semiproject3.entity.CompanyDto;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.repository.CardDao;
 import com.example.semiproject3.repository.CompanyDao;
-
 import com.example.semiproject3.repository.ImageDao;
-
-import com.example.semiproject3.vo.CardListSearchVO;
-
-import com.example.semiproject3.vo.CompanyListSearchVO;
+import com.example.semiproject3.vo.CompanyUniteVO;
 
 @Controller
 @RequestMapping("/company")
@@ -104,7 +100,7 @@ public class CompanyController {
    //목록(페이징처리)
    @GetMapping("/list")
    public String list(Model model, 
-         @ModelAttribute(name="vo") CompanyListSearchVO vo) {
+         @ModelAttribute(name="vo") CompanyUniteVO vo) {
 
       //페이지 네비게이터를 위한 게시글 수를 전달
       int count = companyDao.count(vo);
@@ -119,7 +115,7 @@ public class CompanyController {
    // 명함 이미지 
    @GetMapping("/cardList")
    public String cardlist(Model model,
-         @ModelAttribute(name="vo") CardListSearchVO vo){
+         @ModelAttribute(name="vo") CompanyUniteVO vo){
       
       int count = cardDao.count(vo);
       vo.setCount(count);
