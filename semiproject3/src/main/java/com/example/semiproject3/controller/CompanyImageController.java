@@ -19,7 +19,7 @@ import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.ImageDao;
 
 @RestController//@Controller+@ResponseBody
-@RequestMapping("/image")
+@RequestMapping("/companyImage")
 public class CompanyImageController {
 	
 	@Autowired

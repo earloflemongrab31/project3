@@ -107,8 +107,9 @@ td, th {
 						<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 
 						<button class="btn btn-positive" type="submit">구매하기</button>
-
-						<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>	 
+						<form>
+						<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>
+						</form>	 
 						<a href="buylist">목록으로</a>
 					</td>
 					</tr>

@@ -51,7 +51,11 @@ td, th {
 						<td>${list.customerRank}</td>
 						<td>${list.customerNumber}</td>
 						<td>${list.companyExplan}</td>
-						<td>${list.imageNo}</td>
+						
+							<td>	
+								<img src="/companyImage/download/${list.imageNo}" width="100" >
+							</td>
+						
 						
 						<!--<td><img src="/reviewImage/download/${list.imageNo}" width="100" ></td>  -->
 						
