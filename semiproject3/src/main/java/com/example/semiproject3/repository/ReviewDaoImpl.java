@@ -62,7 +62,7 @@ public class ReviewDaoImpl implements ReviewDao {
    
    @Override
    public void insert(ReviewDto reviewDto) {
-      String sql="insert into review values(?,?,?,?,?,?,?,sysdate)";
+      String sql="insert into review values(?,?,?,?,?,?,?,sysdate,null)";
       Object[] param= {
             reviewDto.getReviewNo(),
             reviewDto.getCustomerId(),
@@ -70,7 +70,8 @@ public class ReviewDaoImpl implements ReviewDao {
             reviewDto.getReviewContent(),
             reviewDto.getReviewStar(),
             reviewDto.getReviewShipping(),
-            reviewDto.getReviewPackaging()
+            reviewDto.getReviewPackaging(),
+           //
       };
       jdbcTemplate.update(sql,param);
    }

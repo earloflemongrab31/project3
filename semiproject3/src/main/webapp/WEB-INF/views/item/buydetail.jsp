@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
@@ -241,7 +241,6 @@ td, th {
 								<c:if test="${list.reviewStar==3}">★★★</c:if>
 								<c:if test="${list.reviewStar==4}">★★★★</c:if>
 								<c:if test="${list.reviewStar==5}">★★★★★</c:if>
-					
 								<c:set var="total" value="${total+list.reviewStar}"/>
 							</td>
 							<td>${list.reviewPackaging}</td>
@@ -275,7 +274,6 @@ td, th {
 	</c:choose>
 </div>
 </div>
-
 </form>
 
 
