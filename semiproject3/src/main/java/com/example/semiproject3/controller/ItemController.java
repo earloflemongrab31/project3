@@ -31,6 +31,7 @@ import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.repository.OrdersDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.repository.ReviewLikeDao;
 import com.example.semiproject3.vo.ItemListSearchVO;
@@ -38,6 +39,9 @@ import com.example.semiproject3.vo.ItemListSearchVO;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
+	
+	@Autowired
+	private OrdersDao ordersDao;
 	
 	@Autowired
 	private ItemDao itemDao;
@@ -244,6 +248,7 @@ public class ItemController {
 	@GetMapping("/buydetail")
 	public String buy(Model model, 
 			@RequestParam int itemNo, HttpSession session) {
+		
 		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
 		
 		//이미지 불러오기
@@ -271,7 +276,7 @@ public class ItemController {
 		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
 		//model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 
-		return "item/buydetail";
+		return "item/buydetail-my";
 	}
 	
 	//찜
