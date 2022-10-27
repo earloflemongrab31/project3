@@ -153,7 +153,7 @@ td, th {
 		</table>
 
 			<div class="flexbox">
-				<div class=" w-50 center item item-detail">
+				<div class=" w-50 center item item-detail unchecked">
 					<span>상세보기</span>
 				</div>
 				<div class="w-50 center item item-review">
@@ -161,8 +161,16 @@ td, th {
 			</div>
 
 		</div>
+		
+		
+		<div class = "row center mb-30 detail"	>
+			<div class = "row center mb-30">
+				<h4>아이템 상세보기 테스트</h4>
+				<hr>
+			</div>
+	</div>
 	
-		<div class = "row center mb-30 review"	>
+		<div class = "row center mb-30 review hide"	>
 			<div class = "row center mb-30">
 				<h4>리뷰</h4>
 				<hr>
