@@ -46,7 +46,6 @@
             <th>Price</th>
             <td>
                <fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0원"></fmt:formatNumber>
-               <input type="hidden" name="itemPrice" value="${itemDto.itemPrice}" readonly>
             </td>
          <tr>
             <th>Option</th>

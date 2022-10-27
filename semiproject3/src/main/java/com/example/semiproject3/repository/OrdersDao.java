@@ -9,14 +9,11 @@ import com.example.semiproject3.vo.OrdersListSearchVO;
 
 public interface OrdersDao {
 
-	//시퀀스 발행
-	int sequence();
-	
 	//목록
 	List<OrdersDto> selectList();
 	
 	//주문 입력
-	void insert(int ordersNo, String customerId);
+	void insert(OrdersDto ordersDto);
 	
 	//주문 삭제
 	void delete(OrdersDto ordersDto);
@@ -30,7 +27,7 @@ public interface OrdersDao {
 	//회원이 선택한 총 주문수 
 	int selectOrders(int ordersNo);
 
-	OrdersDto selectOne(int ordersNo);
+	OrdersDto selectOne(String customerId);
 	OrdersDto selectOne2(int itemCnt);
 	
 	List<OrdersDto> selectList(String loginId);
