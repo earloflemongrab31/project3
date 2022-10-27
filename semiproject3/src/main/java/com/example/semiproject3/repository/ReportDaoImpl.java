@@ -18,12 +18,13 @@ public class ReportDaoImpl implements ReportDao{
 	//입력
 	@Override
 	public void insert(ReportDto reportDto) {
-		String sql="insert into report values(report_seq.nextval,?,?,?,?,sysdate)";
+		String sql="insert into report values(report_seq.nextval,?,?,?,?,sysdate,?)";
 		Object[] param= {
 				reportDto.getCustomerId(),
 				reportDto.getReviewContent(),
 				reportDto.getReportRadio(),
-				reportDto.getReportContent()
+				reportDto.getReportContent(),
+				reportDto.getWho()
 		};
 		jdbcTemplate.update(sql,param);
 		
@@ -38,6 +39,7 @@ public class ReportDaoImpl implements ReportDao{
 				.reportRadio(rs.getString("report_radio"))
 				.reportDate(rs.getDate("report_date"))
 				.reportContent(rs.getString("report_content"))
+				.who(rs.getString("who"))
 				.build();
 	};
 	
