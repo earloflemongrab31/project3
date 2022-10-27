@@ -9,6 +9,7 @@
 <!-- 테이블 폰트 변경해야함 -->
 <form class="join-form" action="insert" method="post" autocomplete="off">
 
+        
 
 
     <div class="container-800 mt-50 mb-50">
