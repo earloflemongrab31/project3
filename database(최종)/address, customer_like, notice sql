@@ -1,12 +1,14 @@
+
 create sequence address_seq;
 create table address(
-
+customer_id references customer(customer_id) on delete cascade not null,
 address_no number,
 address_name varchar2(30),
 address_post varchar2(6),
 address_host varchar2(150),
 address_detail_host varchar2(150),
-address_basic char(1)
+address_basic char(1),
+address_tel VARCHAR2(11 BYTE) CHECK (regexp_like(address_tel,'^01[016789][1-9]\d{6,7}$')) NOT NULL
 );
 
 drop table customer_like;
