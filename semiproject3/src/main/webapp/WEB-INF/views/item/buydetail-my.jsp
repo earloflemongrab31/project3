@@ -24,11 +24,15 @@
 		<tbody>
 			<tr>
 				<th class="w-50" style="height:480px;" rowspan="4">
-					<img src="/image/download/${itemDto.imageNo}" width="200" >
-					<c:forEach var="itemDto" items="${buylist}">
-					<c:if test="${itemDto.imageMain == 0}">
-						<img src="/image/download/${itemDto.imageNo}" width="100" >
-					</c:if>
+					<c:forEach var="buylistView" items="${buyImageList}">
+						<c:if test="${buylistView.imageMain == 1}">
+							<img src="/image/download/${buylistView.imageNo}" width="200" >
+						</c:if>
+					</c:forEach>
+					<c:forEach var="buylistView" items="${buyImageList}">
+						<c:if test="${buylistView.imageMain == 0}">
+							<img src="/image/download/${buylistView.imageNo}" width="100" >
+						</c:if>
 					</c:forEach>
 				</th>
 				<th colspan="2">
@@ -44,28 +48,25 @@
 					<input type="hidden" name="itemPrice" value="${itemDto.itemPrice}" readonly>
 				</td>
 			<tr>
-				<th>Color / Size</th>
+				<th>Option</th>
 				<td>
 					<select class="input w-100" name="itemColor">
 						<option value="">선택</option>
-						<option>Black</option>
-						<option>White</option>
-						<option>Blue</option>
-						<option>Red</option>
+						<c:forEach var="itemDto" items="${buylist}">
+							<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+								${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+							</option>
+						</c:forEach>
 					</select>
-					<select class="input w-100" name="itemSize">
-						<option value="">선택</option>
-						<option>S</option>
-						<option>M</option>
-						<option>L</option>
-						<option>XL</option>
-					</select>
+					<input class="input w-100" type="hidden" name="itemSize" value="" >
 				</td>
 			</tr>
 			<tr>
 				<th>Qnty</th>
 				<td>
-					<input class="input w-100" type="number" name="itemCnt">
+<!-- 					<button class="minus-btn" type="button">-</button> -->
+					<input class="input" type="number" name="itemTotalCnt" min="0" max="" >
+<!-- 					<button class="plus-btn" type="button">+</button> -->
 				</td>
 			</tr>
 			<tr>
@@ -166,3 +167,57 @@
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+<style>
+td, th {
+  text-align : center;
+  vertical-align : middle;
+}
+</style>
+
+<script type="text/javascript"> 
+        $(function(){
+            $("select[name=itemColor]").change(function(){
+            	
+	            var cnt = 0;
+	            $("input[name=itemTotalCnt]").text(cnt);
+	
+	            $(".minus-btn").click(function(){
+	                if(cnt <= 0) return;
+	
+	                size--;
+	
+	                if(cnt == 0){
+	                //- 버튼 잠금
+	                $(".minus-btn").attr("disabled", true);
+	            }
+	            else{
+	                //- , + 버튼 해제
+	                $(".minus-btn").attr("disabled", false);
+	
+	                $(".plus-btn").attr("disabled", false);
+	            }
+	                $("input[name=itemTotalCnt]").text(totalcnt);
+	            });
+	
+	           
+	            $(".plus-btn").click(function(){
+	                if(cnt >= totalcnt) return;
+	                
+	                size++;
+	
+	                if(cnt == totalcnt){
+	                //+ 버튼 잠금
+	                $(".plus-btn").attr("disabled", true);
+	            }
+	            else{
+	                //- , + 버튼 해제
+	                $(".minus-btn").attr("disabled", false);
+	
+	                $(".plus-btn").attr("disabled", false);
+	            }
+	                $("input[name=itemTotalCnt]").text(totalcnt);
+	            });
+            });
+        });
+</script>

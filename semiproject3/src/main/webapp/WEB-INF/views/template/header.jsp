@@ -708,20 +708,20 @@
     	}, 1000);
     });
     
- /*    $(function(){
-    	$("#cart-in").click(function(){
-    		$.ajax({
-    			url: "http://localhost:8888/rest/customer/nick",
-                method: "post",
-                data: {
-                    
-                },
-                success: function(resp){
-                	
-                }
-    		});
-    	});
-    }); */
+	//구매 옵션 불러오기
+	$(function(){
+		$("select[name=itemColor]").change(function(){
+            	
+			var color = $(this).val();
+			var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
+			var totalcnt = $(this).find("option:selected").attr("data-cnt");
+					
+			$("input[name=itemSize]").attr("value", size);
+			$("input[name=itemTotalCnt]").attr("max", totalcnt);
+			$("input[name=itemTotalCnt]").val(0);
+		});
+	});
+    
     
 </script>
 
