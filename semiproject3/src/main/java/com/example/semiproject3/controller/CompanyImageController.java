@@ -1,77 +1,42 @@
+
+
 package com.example.semiproject3.controller;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.error.TargetNotFoundException;
-import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.ImageDao;
-import com.example.semiproject3.repository.ItemDao;
-import com.example.semiproject3.repository.MainEditDao;
-import com.example.semiproject3.repository.MainImageDao;
 
-@Controller
-public class HomeController {
-	
-//	맥북용
-//	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
-//	화니꼬
-//	private final File directory = new File("C:/study/main");
-//	D드라이브용
-	private final File directory = new File("D:/study/main");
-	
-	@Autowired
-	private CartDao cartDao;
-	
-	@Autowired
-	private MainImageDao mainImageDao;
-	
-	@Autowired
-	private MainEditDao mainEditDao;
+@RestController//@Controller+@ResponseBody
+@RequestMapping("/companyImage")
+public class CompanyImageController {
 	
 	@Autowired
 	private ImageDao imageDao;
 	
-	@Autowired
-	private ItemDao itemDao;
-	
-	@GetMapping("/")
-	public String home(
-			Model model,
-			HttpSession session
-			){
-		//장바구니
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		//session.setAttribute("countCart", cartDao.selectCart(loginId));
-		
-		//메인이미지
-		model.addAttribute("mainImageList", mainImageDao.selectAll());
-		
-		//메인내용
-		model.addAttribute("mainEditDto", mainEditDao.select());
-		
-		//새상품 리스트-이미지 등록된 상품 시간 역순
-		model.addAttribute("itemList", itemDao.selectList());
-		
-		return "home";
 
-	}
+//	맥북용
+//	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
+//	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
+//	화니꼬
+//	private final File directory = new File("C:/study/itemImage");
+//	D드라이브용
+	private final File directory = new File("D:/upload/card");
 	
+	//이미지 불러오기
 	@GetMapping("/download/{imageNo}")
 	public ResponseEntity<ByteArrayResource> download(@PathVariable int imageNo) throws IOException {
 		
@@ -108,7 +73,6 @@ public class HomeController {
 //				return ResponseEntity.notFound().build();
 		}
 	}
-		
 }
-	
+
 
