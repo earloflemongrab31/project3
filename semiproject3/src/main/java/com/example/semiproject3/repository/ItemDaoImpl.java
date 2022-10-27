@@ -326,15 +326,17 @@ public class ItemDaoImpl implements ItemDao {
 	
 	@Override
 	public List<ItemListVO> selectItemList(int itemNo) {
-		String sql = "select * from item_list_view where item_no = ? and image_main = 1";
+		String sql = "select * from item_list_view where item_no = ?";
 		Object[] param = {itemNo};
 		return jdbcTemplate.query(sql, itemMapper, param);
 	}
 
 	@Override
-	public ItemListVO selectItemOne(int itemNo) {
-		String sql = "select * from item_list_view where item_no = ? and image_main = 1";
-		Object[] param = {itemNo};
+	public ItemListVO selectItemOne(ItemListVO itemListVO) {
+		String sql = "select * from item_list_view where item_no = ? and item_color = ? and item_size = ?";
+		Object[] param = {
+				itemListVO.getItemNo(), itemListVO.getItemColor(), itemListVO.getItemSize()
+		};
 		return jdbcTemplate.query(sql, itemExtractor, param);
 	}
 	

@@ -6,9 +6,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
-<%-- <h5>상품정보 ${itemDto}</h5> --%>
-<%-- <h5>상품이미지 ${buyImageList}</h5> --%>
-<h5>상품옵션 ${buylist}</h5>
+<h5>상품정보 ${itemDto}</h5>
+<h5>상품이미지 ${buyImageList}</h5>
+<h4>상품옵션 ${buylist}</h4>
 
 <style>
 td, th {
@@ -20,16 +20,57 @@ td, th {
 <script type="text/javascript"> 
         $(function(){
             $("select[name=itemColor]").change(function(){
+            	
                 var color = $(this).val();
                 var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
-				console.log(color);
-                console.log(size);
-                if(color & size){
-	                $("select[name=itemSize]").change(function(){
-	                	
-	                });
-                }
-
+                var totalcnt = $(this).find("option:selected").attr("data-cnt");
+// 				console.log(color);
+//              console.log(size);
+//              console.log(totalcnt);
+				
+                $("input[name=itemSize]").attr("value", size);
+                $("input[name=itemTotalCnt]").attr("max", totalcnt);
+                $("input[name=itemTotalCnt]").val(0);
+                
+	            var cnt = 0;
+	            $("input[name=itemTotalCnt]").text(cnt);
+	
+	            $(".minus-btn").click(function(){
+	                if(cnt <= 0) return;
+	
+	                size--;
+	
+	                if(cnt == 0){
+	                //- 버튼 잠금
+	                $(".minus-btn").attr("disabled", true);
+	            }
+	            else{
+	                //- , + 버튼 해제
+	                $(".minus-btn").attr("disabled", false);
+	
+	                $(".plus-btn").attr("disabled", false);
+	            }
+	                $("input[name=itemTotalCnt]").text(totalcnt);
+	            });
+	
+	           
+	            $(".plus-btn").click(function(){
+	                if(cnt >= totalcnt) return;
+	                
+	                size++;
+	
+	                if(cnt == totalcnt){
+	                //+ 버튼 잠금
+	                $(".plus-btn").attr("disabled", true);
+	            }
+	            else{
+	                //- , + 버튼 해제
+	                $(".minus-btn").attr("disabled", false);
+	
+	                $(".plus-btn").attr("disabled", false);
+	            }
+	                $("input[name=itemTotalCnt]").text(totalcnt);
+	            });
             });
         });
 </script>
@@ -76,31 +117,37 @@ td, th {
 					</td>
 				</tr>
 				<tr>
-					<th>Color</th>
+<!-- 					<th>Color</th> -->
+					<th>option</th>
 					<td>
 						<select class="input w-100" name="itemColor">
 							<option value="">선택</option>
 							<c:forEach var="itemDto" items="${buylist}">
-								<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}">${itemDto.itemColor}</option>
+								<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+									${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+								</option>
 							</c:forEach>
 						</select>
+						<input class="input w-100" type="hidden" name="itemSize" value="" >
 					</td>
 				</tr>
-				<tr>
-					<th>Size</th>
-					<td>
-						<select class="input w-100" name="itemSize">
-							<option value="">선택</option>
-								<c:forEach var="itemDto" items="${buylist}">
-									<option>${itemDto.itemSize}</option>
-								</c:forEach>
-						</select>
-					</td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<th>Size</th> -->
+<!-- 					<td> -->
+<!-- 						<select class="input w-100" name="itemSize"> -->
+<!-- 							<option value="">선택</option> -->
+<%-- 								<c:forEach var="itemDto" items="${buylist}"> --%>
+<%-- 									<option>${itemDto.itemSize}</option> --%>
+<%-- 								</c:forEach> --%>
+<!-- 						</select> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 				<tr>
 					<th>Qnty</th>
 					<td>
-						<input class="input w-100" type="number" name="itemCnt" min="0" max="${itemDto.itemTotalCnt}">
+						<button class="minus-btn" type="button">-</button>
+						<input class="input" type="text" name="itemTotalCnt" min="0" max="" >
+						<button class="plus-btn" type="button">+</button>
 					</td>
 				</tr>
 				<tr>

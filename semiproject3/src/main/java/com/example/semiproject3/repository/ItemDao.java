@@ -71,8 +71,9 @@ public interface ItemDao {
 	List<BuyListVO> selectBuyList(int itemNo);
 	BuyListVO selectBuyOne(int itemNo);
 	
+	//상품 옵션
 	List<ItemListVO> selectItemList(int itemNo);
-	ItemListVO selectItemOne(int itemNo);
+	ItemListVO selectItemOne(ItemListVO itemLitsVO);
 	
 	
 }
