@@ -312,13 +312,22 @@
 			$(".review").removeClass("hide");
 			$(".detail").addClass("hide");
 			
-			
 		});
 		$(".item-detail").click(function(){
 			$(this).removeClass("unchecked");
 			$(this).next("div").addClass("unchecked");
 			$(".detail").removeClass("hide");
 			$(".review").addClass("hide");
+		});
+	});
+	
+	/* 구매, 장바구니 폼 변경 ? */
+	$(function(){
+		$(".item-buy").click(function(){
+			$(".item-detail").attr("action", "/cart/insert");
+		});
+		$(".item-cart").click(function(){
+			$(".item-detail").attr("action", "/orders/insert");
 		});
 	});
 	
