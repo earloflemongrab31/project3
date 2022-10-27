@@ -16,5 +16,6 @@ public class ReportDto {
 	private String reportRadio;
 	private Date reportDate;
 	private String reportContent;
+	private String who;
 	
 }

@@ -18,4 +18,6 @@ public class ReviewDto {
 	private String reviewPackaging;
 	private Date reviewDate;
 	private int imageNo;
-}
+	private boolean reviewBlind;
+	}
+
