@@ -4,15 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!-- 회원정보에 없는 이메일을 입력할 시에 출력되는 경고창 -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <script>
-    $(function(){
-        var responseMessage = "<c:out value="${message}" />";
-        if (responseMessage != ""){
-            alert(responseMessage)
-        }
-    })
+
+   
+    <input type="text" value="${loginId}">
+    
+   function checkId(){
+	   alert('테스트');   }
+    
+    
+   	${session}
+    
 </script>
 
 
@@ -78,11 +81,9 @@
             <th>Qnty</th>
             <td>
 <!--                <button class="minus-btn" type="button">-</button> -->
-<<<<<<< HEAD
-               <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
-=======
+
                <input class="input" type="number" name="itemCnt" min="0" max="" >
->>>>>>> refs/remotes/origin/main
+
 <!--                <button class="plus-btn" type="button">+</button> -->
             </td>
          </tr>
@@ -117,6 +118,7 @@
    </table>
 </div>
 </form>
+
 
 <div class="flexbox">
    <div class=" w-50 center item item-detail">
@@ -195,7 +197,8 @@
                      <td>
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
                      <td>
-                        <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
+                        <a  href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
+                        <!-- 버튼 // get방식이니까 input으로 파라미터값 받음..?  -->
                      </td>
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
