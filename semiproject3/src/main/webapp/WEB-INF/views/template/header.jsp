@@ -708,8 +708,8 @@
 			var totalcnt = $(this).find("option:selected").attr("data-cnt");
 					
 			$("input[name=itemSize]").attr("value", size);
-			$("input[name=itemTotalCnt]").attr("max", totalcnt);
-			$("input[name=itemTotalCnt]").val(0);
+			$("input[name=itemCnt]").attr("max", totalcnt);
+			$("input[name=itemCnt]").val(0);
 		});
 	});
     

@@ -8,7 +8,6 @@
    <jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
 
-
 <div class="container-1000 mt-40 mb-40">
 
 <!-- <div class="row"> -->
@@ -66,7 +65,11 @@
             <th>Qnty</th>
             <td>
 <!--                <button class="minus-btn" type="button">-</button> -->
+<<<<<<< HEAD
+               <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
+=======
                <input class="input" type="number" name="itemCnt" min="0" max="" >
+>>>>>>> refs/remotes/origin/main
 <!--                <button class="plus-btn" type="button">+</button> -->
             </td>
          </tr>

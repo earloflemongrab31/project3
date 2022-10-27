@@ -259,11 +259,12 @@ public class ItemDaoImpl implements ItemDao {
 		}
 	}
 	
+	//main = 1 만 띄우는 상품 list
 	@Override
 	public List<BuyListVO> buyList(ItemListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy_list_view order by item_no desc "
+					+ "select * from buy_list_view where image_main = 1 order by item_no desc "
 				+ ")TMP"
 			+") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -274,7 +275,7 @@ public class ItemDaoImpl implements ItemDao {
 	public List<BuyListVO> buySearch(ItemListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy_list_view where instr(#1,?) > 0 "
+					+ "select * from buy_list_view where instr(#1,?) > 0 and image_main = 1 "
 					+ "order by item_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";

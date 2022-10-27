@@ -4,7 +4,9 @@ import com.example.semiproject3.entity.MainEditDto;
 
 public interface MainEditDao {
 
-	void update (String mainEditor, String mainContent);
+	void insert(String loginId);
+	
+	void update(String mainEditor, String mainContent);
 
 	MainEditDto select();
 }
