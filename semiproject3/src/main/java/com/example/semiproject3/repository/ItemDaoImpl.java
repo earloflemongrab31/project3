@@ -175,7 +175,7 @@ public class ItemDaoImpl implements ItemDao {
 
 	//상품 목록
 	@Override
-	public List<ItemDto> selectList() {
+	public List<BuyListVO> selectList() {
 		String sql = "select * from ("
 						+ "select tmp.*, rownum rn from("
 							+ "select * from ("
@@ -183,7 +183,7 @@ public class ItemDaoImpl implements ItemDao {
 							+ ") order by item_date desc"
 						+ ") tmp"
 					+ ") where rn between 1 and 9";
-		return jdbcTemplate.query(sql, mapper);
+		return jdbcTemplate.query(sql, buyListMapper);
 	}
 	
 	
@@ -319,11 +319,27 @@ public class ItemDaoImpl implements ItemDao {
 	
 	@Override
 	public BuyListVO selectBuyOne(int itemNo) {
-		String sql = "select * from buy_list_view where item_no = ?";
+		String sql = "select * from buy_list_view where item_no = ? and image_main = 1";
 		Object[] param = {itemNo};
 		return jdbcTemplate.query(sql, buyExtractor, param);
 	}
+	
+	@Override
+	public List<ItemListVO> selectItemList(int itemNo) {
+		String sql = "select * from item_list_view where item_no = ?";
+		Object[] param = {itemNo};
+		return jdbcTemplate.query(sql, itemMapper, param);
+	}
 
+	@Override
+	public ItemListVO selectItemOne(ItemListVO itemListVO) {
+		String sql = "select * from item_list_view where item_no = ? and item_color = ? and item_size = ?";
+		Object[] param = {
+				itemListVO.getItemNo(), itemListVO.getItemColor(), itemListVO.getItemSize()
+		};
+		return jdbcTemplate.query(sql, itemExtractor, param);
+	}
+	
 	
 	//통합목록(관리자)
 	@Override
@@ -462,7 +478,7 @@ public class ItemDaoImpl implements ItemDao {
 	public List<ItemListVO> Itemlist(ItemListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from item_list_view order by item_no desc "
+					+ "select * from item_list_view where image_main = 1 order by item_no desc "
 				+ ")TMP"
 			+") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -473,7 +489,7 @@ public class ItemDaoImpl implements ItemDao {
 	public List<ItemListVO> Itemsearch(ItemListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from item_list_view where instr(#1,?) > 0 "
+					+ "select * from item_list_view where instr(#1,?) > 0 and image_main = 1 "
 					+ "order by item_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
@@ -483,5 +499,5 @@ public class ItemDaoImpl implements ItemDao {
 		};
 		return jdbcTemplate.query(sql, itemMapper, param);
 	}
-		
+
 }
