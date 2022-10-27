@@ -125,7 +125,7 @@
 					<td>대표 이미지</td>
 					<td>
 						<input class="input w-100"
-							name="mainImage" type="file" accept=".png, .jpg" >
+							name="mainImage" type="file" accept=".png, .jpg" required>
 					</td>
 				</tr>
 				<tr>

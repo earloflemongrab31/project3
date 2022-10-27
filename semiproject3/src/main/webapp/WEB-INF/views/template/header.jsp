@@ -98,7 +98,6 @@
 		.item{
 		padding: 0.75em;
 		border: 1px solid #D5D5D5;
-	
 		cursor: pointer;
 	}
 	.item.unchecked{
@@ -193,7 +192,7 @@
     .swiper-slide img {
       display: block;
       width: 100%;
-      height: 100%;
+      height: 480px;
       object-fit: cover;
     }
 </style>
@@ -306,18 +305,21 @@
 	});
 	
 	/* 아이템 디테일 상세보기, 리뷰 토글 */
-	$(function(){
-		$(".item-detail").click(function(){
-			$(this).removeClass("unchecked");
-			$(this).prev("div").addClass("unchecked");
-			$(".review").addClass("hide");
-		});
-		$(".item-review").click(function(){
-			$(this).removeClass("unchecked");
-			$(this).next("div").addClass("unchecked");
-			$(".review").removeClass("hide");
-		});
-	});
+   $(function(){
+      $(".item-review").click(function(){
+         $(this).removeClass("unchecked");
+         $(this).prev("div").addClass("unchecked");
+         $(".review").removeClass("hide");
+         $(".detail").addClass("hide");
+      });
+      $(".item-detail").click(function(){
+         $(this).removeClass("unchecked");
+         $(this).next("div").addClass("unchecked");
+         $(".detail").removeClass("hide");
+         $(".review").addClass("hide");
+      });
+   });
+	
 	
 	/* 사이드메뉴 토글 */
 	$(function(){
@@ -649,6 +651,8 @@
     $(function(){
         var swiper = new Swiper('.swiper.mySwiper', {
             // 화면 넘기기 옵션
+            direction: 'horizontal',
+            loop: true,
 			slidesPerView: 3,
 			spaceBetween: 30,
 			pagination: {
@@ -694,6 +698,21 @@
     		$("#timer").html(time);
     	}, 1000);
     });
+    
+	//구매 옵션 불러오기
+	$(function(){
+		$("select[name=itemColor]").change(function(){
+            	
+			var color = $(this).val();
+			var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
+			var totalcnt = $(this).find("option:selected").attr("data-cnt");
+					
+			$("input[name=itemSize]").attr("value", size);
+			$("input[name=itemCnt]").attr("max", totalcnt);
+			$("input[name=itemCnt]").val(0);
+		});
+	});
+    
     
 </script>
 
@@ -915,7 +934,7 @@
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right cart"><a href="/cart/cartList"><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
+	<li class="float-right cart"><a href="/cart/cartList"><span id="cart-count">0</span><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
 	<form action="/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
@@ -934,5 +953,4 @@
 </ul>
 </div>
 </nav>
-
 <main>

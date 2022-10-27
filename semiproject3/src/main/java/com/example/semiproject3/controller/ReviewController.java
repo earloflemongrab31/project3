@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.ImageDto;
@@ -98,31 +99,51 @@ public class ReviewController {
 	@GetMapping("/report")
 	public String report(
 			@RequestParam int reviewNo,
+			@RequestParam int itemNo,
 			Model model,
 			HttpSession session
 			) {
+		//지금 접속해있는 사용자의 아이디값을 가지고온다. 
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		//세션을 이융해 리뷰번호를 담는다. 
 		session.setAttribute("reviewNo", reviewNo);
+		//세션을 이용해 아이템정보값을 담는다.
+		session.setAttribute("itemNo", itemNo);
 		//하나 리뷰 정보를 불러와 화면에 뿌려준다. 
 		model.addAttribute("review",reviewDao.selectOne(reviewNo));
+		//하나의 리뷰정보를 가지고 온다. 
+		ReviewDto reviewDto=reviewDao.selectOne(reviewNo);
+		//만약 자기자신의 글에 신고를 했다면 화면을 튕긴다. 
+		if(reviewDto.getCustomerId().equals(loginId)) {
+			return "redirect:/item/buydetail?itemNo="+itemNo;
+		}else {
 		return "review/report";
+		}
 	}
 	
 	@PostMapping("/report")
 	public String report(
 			@ModelAttribute ReportDto reportDto,
-			HttpSession session
+			HttpSession session,
+			RedirectAttributes attr
 			) {
 		int reviewNo=(int)session.getAttribute("reviewNo");
+		//세션값에서 아이템 정보를 불러온다.
+		int itemNo=(int)session.getAttribute("itemNo");
 		//하나의 리뷰정보를 불러온다.
 		ReviewDto reviewDto=reviewDao.selectOne(reviewNo);
+		//회원아이디값을 불러온다.
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		reportDao.insert(reportDto.builder()
 				.customerId(reviewDto.getCustomerId())
 				.reviewContent(reviewDto.getReviewContent())
 				.reportRadio(reportDto.getReportRadio())
+				.reportContent(reportDto.getReportContent())
+				.who(loginId)
 				.build());
-		
-		return "redirect:/";
+		//
+		attr.addAttribute("itemNo",itemNo);
+		return "redirect:/item/buydetail";
 	}
 	
 	//리뷰좋아요

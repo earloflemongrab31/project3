@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="신고페이지" name="title" />
 </jsp:include>
@@ -42,7 +44,9 @@
 			<h3>신고대상 ID 및 내용</h3>
 		</div>
 		<div class="row">
-		 <input style="border-bottom:0px;" class="input w-100 w-100 " name="reviewShipping" type="text" value="${review.customerId}" readonly>
+		 <input style="border-bottom:0px;" class="input w-100 w-100 " name="customerId" type="text" value="<c:out value="${fn:substring(review.customerId, 0, fn:length(review.customerId) - 4)}" /> ****" readonly>
+		  <%--${review.customerId}  --%>
+		  
 		
 		 <textarea style="border-top:0px;"  class="input w-100 fix-size" rows="10" name="reviewShipping" readonly>${review.reviewContent}</textarea>
 		</div>

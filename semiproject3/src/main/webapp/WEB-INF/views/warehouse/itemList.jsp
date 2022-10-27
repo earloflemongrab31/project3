@@ -15,7 +15,7 @@
 </div>
           
 <div class="row center">
-	<form action="invenList" method="get">
+	<form action="itemList" method="get">
 	<select class="input" name="type" required>
 		<option value="cate_code">카테고리</option>
 		<option value="inven_name">상품명</option>

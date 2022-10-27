@@ -15,5 +15,5 @@ public class AddressDto {
 	private String addressHost;
 	private String addressDetailHost;
 	private String addressBasic;
-	
+	private String addressTel;
 }

@@ -31,6 +31,7 @@ import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.repository.OrdersDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.repository.ReviewLikeDao;
 import com.example.semiproject3.vo.ItemListSearchVO;
@@ -38,6 +39,9 @@ import com.example.semiproject3.vo.ItemListSearchVO;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
+	
+	@Autowired
+	private OrdersDao ordersDao;
 	
 	@Autowired
 	private ItemDao itemDao;
@@ -68,9 +72,9 @@ public class ItemController {
 //	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
 //	화니꼬
-	private final File directory = new File("C:/study/itemImage");
+//	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-//	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/upload");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -169,6 +173,8 @@ public class ItemController {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		//상품 정보에 이미지 불러오기
 		model.addAttribute("itemImageList", imageDao.selectItemImageList(itemNo));
+		//신고리스트로 부터 불러온 아이템 session 값을 빼았는다.
+		session.removeAttribute("itemNo");
 		return "item/detail";
 	}
 	
@@ -244,10 +250,15 @@ public class ItemController {
 	@GetMapping("/buydetail")
 	public String buy(Model model, 
 			@RequestParam int itemNo, HttpSession session) {
+		
+		//상품 정보 불러오는 값
 		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
 		
-		//이미지 불러오기
-		model.addAttribute("buylist", itemDao.selectBuyList(itemNo));
+		//상품 이미지 불러오는 list
+		model.addAttribute("buyImageList", itemDao.selectBuyList(itemNo));
+		
+		//상품 옵션 불러오는 list
+		model.addAttribute("buylist", itemDao.selectItemList(itemNo));
 		
 		//장바구니 기록있는 조회하여 첨부 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
@@ -271,7 +282,7 @@ public class ItemController {
 		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
 		//model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 
-		return "item/buydetail";
+		return "item/buydetail-my";
 	}
 	
 	//찜

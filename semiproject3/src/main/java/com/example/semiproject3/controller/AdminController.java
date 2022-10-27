@@ -123,6 +123,11 @@ public class AdminController {
 		//로그인 된 아이디 수정한 사람으로 저장
 		String editor = (String)session.getAttribute(SessionConstant.ID);
 
+		if(mainEditDao.select() == null) {
+			mainEditDao.insert(editor);
+		}
+		
+
 		mainEditDao.update(editor, mainContent);
 		
 		/* html로부터 imagePath을 getParmeterValues로 배열로 전달 받아서 배열로 저장한다 */

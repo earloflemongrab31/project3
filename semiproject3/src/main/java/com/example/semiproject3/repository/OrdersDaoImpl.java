@@ -11,6 +11,8 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.semiproject3.entity.AddressDto;
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.vo.OrdersListSearchVO;
 
@@ -26,24 +28,9 @@ public class OrdersDaoImpl implements OrdersDao {
 		@Override
 		public OrdersDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			OrdersDto ordersDto = new OrdersDto();
-			ordersDto.setOrdersNo(rs.getInt("orders_no"));
-			ordersDto.setCustomerId(rs.getString("customer_id"));
-			ordersDto.setItemNo(rs.getInt("item_no"));
-			ordersDto.setAddressNo(rs.getInt("address_no"));
-			ordersDto.setAddressName(rs.getString("customer_name"));
-			ordersDto.setCustomerNick(rs.getString("customer_nick"));
-			ordersDto.setCustomerPhone(rs.getString("customer_phone"));
-			ordersDto.setCustomerPoint(rs.getInt("customer_point"));
-			ordersDto.setItemName(rs.getString("item_name"));
-			ordersDto.setItemColor(rs.getString("item_color"));
-			ordersDto.setItemSize(rs.getString("item_size"));
-			ordersDto.setItemCnt(rs.getInt("item_cnt"));
-			ordersDto.setItemFee(rs.getInt("item_fee"));
-			ordersDto.setAddressName(rs.getString("address_name"));
-			ordersDto.setCustomerPost(rs.getString("customer_post"));
-			ordersDto.setCustomerHost(rs.getString("customer_host"));
-			ordersDto.setCustomerDetailHost(rs.getString("customer_detail_host"));
-			ordersDto.setCustomerMoney(rs.getInt("customer_money"));
+				ordersDto.setOrdersNo(rs.getInt("orders_no"));
+				ordersDto.setCustomerId(rs.getString("customer_id"));
+				ordersDto.setItemFee(rs.getInt("item_fee"));
 			return ordersDto;
 		}
 	};
@@ -56,22 +43,7 @@ public class OrdersDaoImpl implements OrdersDao {
 				OrdersDto ordersDto = new OrdersDto();
 				ordersDto.setOrdersNo(rs.getInt("orders_no"));
 				ordersDto.setCustomerId(rs.getString("customer_id"));
-				ordersDto.setItemNo(rs.getInt("item_no"));
-				ordersDto.setAddressNo(rs.getInt("address_no"));
-				ordersDto.setAddressName(rs.getString("customer_name"));
-				ordersDto.setCustomerNick(rs.getString("customer_nick"));
-				ordersDto.setCustomerPhone(rs.getString("customer_phone"));
-				ordersDto.setCustomerPoint(rs.getInt("customer_point"));
-				ordersDto.setItemName(rs.getString("item_name"));
-				ordersDto.setItemColor(rs.getString("item_color"));
-				ordersDto.setItemSize(rs.getString("item_size"));
-				ordersDto.setItemCnt(rs.getInt("item_cnt"));
 				ordersDto.setItemFee(rs.getInt("item_fee"));
-				ordersDto.setAddressName(rs.getString("address_name"));
-				ordersDto.setCustomerPost(rs.getString("customer_post"));
-				ordersDto.setCustomerHost(rs.getString("customer_host"));
-				ordersDto.setCustomerDetailHost(rs.getString("customer_detail_host"));
-				ordersDto.setCustomerMoney(rs.getInt("customer_money"));
 				return ordersDto;	
 			}
 			else {
@@ -80,14 +52,12 @@ public class OrdersDaoImpl implements OrdersDao {
 			
 		}
 	};
-	
-	
 
 	@Override
 	public void delete(OrdersDto ordersDto) {
-		String sql = "delete orders where item_no=? and customer_id=?";
+		String sql = "delete orders where orders_no=? and customer_id=?";
 		Object[] param = {
-				ordersDto.getItemNo(),
+				ordersDto.getOrdersNo(),
 				ordersDto.getCustomerId()
 		};
 		jdbcTemplate.update(sql,param);
@@ -95,19 +65,19 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public boolean check(OrdersDto ordersDto) {
-		String sql = "select count(*) from orders where customer_id=? and item_no=?";
+		String sql = "select count(*) from orders where customer_id=? and orders_no=?";
 		Object[] param = {
 				ordersDto.getCustomerId(),
-				ordersDto.getItemNo()
+				ordersDto.getOrdersNo()
 		};
 		int count = jdbcTemplate.queryForObject(sql, int.class, param);
 		return count == 1;
 	}
 
 	@Override
-	public int selectOrders(String customerId) {
-		String sql = "select count(*) from orders where customer_id=?";
-		Object[] param = {customerId};
+	public int selectOrders(int ordersNo) {
+		String sql = "select count(*) from orders where orders_no=?";
+		Object[] param = {ordersNo};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
@@ -138,38 +108,16 @@ public class OrdersDaoImpl implements OrdersDao {
 	}
 
 	@Override
-	public void insert(OrdersDto ordersDto) {
+	public void insert(int ordersNo, String customerId) {
 		String sql = "insert into orders("
 						+ "orders_no,"
-						+ "customer_id,"
-						+ "item_no,"
-						+ "address_no,"
-						+ "customer_name,"
-						+ "customer_nick,"
-						+ "customer_phone,"
-						+ "item_name,"
-						+ "item_color,"
-						+ "item_size,"
-						+ "addressName,"
-						+ "customer_post,"
-						+ "customer_host,"
-						+ "customer_detail_host,"
-						+ "customer_point,"
-						+ "item_cnt,"
-						+ "item_fee,"
-						+ "customer_money) "
-						+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+						+ "customer_id) "
+						+ "values(?, ?)";
 		Object[] param = { 
-			ordersDto.getOrdersNo(), ordersDto.getCustomerId(), 
-			ordersDto.getItemNo(), ordersDto.getAddressNo(),
-			ordersDto.getCustomerName(), ordersDto.getCustomerNick(),
-			ordersDto.getCustomerPhone(), ordersDto.getItemName(),
-			ordersDto.getItemColor(), ordersDto.getItemSize(),
-			ordersDto.getAddressName(), ordersDto.getCustomerPost(),
-			ordersDto.getCustomerHost(), ordersDto.getCustomerDetailHost(),
-			ordersDto.getCustomerPoint(), ordersDto.getItemCnt(),
-			ordersDto.getItemFee(), ordersDto.getCustomerMoney()
+						ordersNo, 
+						customerId
 		};
+		
 		jdbcTemplate.update(sql, param);
 	}
 
