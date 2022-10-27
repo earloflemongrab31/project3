@@ -34,6 +34,7 @@ td, th {
 					<th>관리자 직급</th>
 					<th>관리자 전화번호</th>
 					<th>특이사항</th>
+					<th>명함사진</th>
 					<th>수정/삭제</th>
 				</tr>
 			</thead>
@@ -50,6 +51,10 @@ td, th {
 						<td>${list.customerRank}</td>
 						<td>${list.customerNumber}</td>
 						<td>${list.companyExplan}</td>
+						<td>${list.imageNo}</td>
+						
+						<!--<td><img src="/reviewImage/download/${list.imageNo}" width="100" ></td>  -->
+						
 						<td>
 							<a href="update?companyNo=${list.companyNo}">수정</a>
 							<a href="delete?companyNo=${list.companyNo}">삭제</a>

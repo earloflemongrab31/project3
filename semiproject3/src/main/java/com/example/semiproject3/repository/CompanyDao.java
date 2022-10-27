@@ -33,6 +33,8 @@ public interface CompanyDao {
 	// 회사 
 	void connectAttachment(int companyNo, int imageNo);
 	
+	//통합메소드2 +아이템번호추가
+	List<CompanyDto> selectList2();
 	
 	
 	

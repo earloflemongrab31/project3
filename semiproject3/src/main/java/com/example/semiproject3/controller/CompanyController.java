@@ -106,7 +106,8 @@ public class CompanyController {
 		int count = companyDao.count(vo);
 		vo.setCount(count);
 		
-		model.addAttribute("list", companyDao.selectList(vo));
+		//model.addAttribute("list", companyDao.selectList(vo));
+		model.addAttribute("list",companyDao.selectList2());
 		
 		return "company/list";
 	}

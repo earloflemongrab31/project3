@@ -36,6 +36,26 @@ public class CompanyDaoImpl implements CompanyDao{
 				.build();
 		}
 	};
+	
+	
+	//RowMapper2+이미지추가 
+		private RowMapper<CompanyDto> mapper2=new RowMapper<CompanyDto>() {
+			@Override
+			public CompanyDto mapRow(ResultSet rs, int idx) throws SQLException {
+				return CompanyDto.builder()
+						.companyNo(rs.getInt("company_no"))
+						.companyName(rs.getString("company_name"))
+						.companyNumber(rs.getString("company_number"))
+						.companyAddress(rs.getString("company_address"))
+						.customerName(rs.getString("customer_name"))
+						.customerRank(rs.getString("customer_rank"))
+						.customerNumber(rs.getString("customer_number"))
+						.companyExplan(rs.getString("company_explan"))
+						.imageNo(rs.getInt("image_no"))
+					.build();
+			}
+		};
+		
 	//ResultSetExtractor
 	private ResultSetExtractor<CompanyDto> extractor= new ResultSetExtractor<CompanyDto>() {
 		@Override
@@ -199,7 +219,11 @@ public class CompanyDaoImpl implements CompanyDao{
 		String sql="insert into company_image values(?,?) ";
 		Object[] param= {companyNo,imageNo};
 		jdbcTemplate.update(sql,param);
-		
-		
+	}
+	
+	@Override
+	public List<CompanyDto> selectList2() {
+		String sql="select * from company_image_view";
+		return jdbcTemplate.query(sql, mapper2);
 	}
 }
