@@ -8,4 +8,6 @@ public interface OrdersItemDao {
 	void insert(OrdersItemDto ordersItemDto);
 
 	List<OrdersItemDto> selectOrdersItemList(String customerId);
+
+	boolean delete(String loginId);
 }
