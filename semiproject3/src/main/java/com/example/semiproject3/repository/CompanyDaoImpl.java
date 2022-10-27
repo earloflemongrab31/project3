@@ -117,6 +117,7 @@ public class CompanyDaoImpl implements CompanyDao{
 		String sql="select * from company order by company_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
+	
 	//수정
 	@Override
 	public boolean update(CompanyDto companyDto) {

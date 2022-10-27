@@ -74,7 +74,7 @@ public class ItemController {
 //	화니꼬
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/upload");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -280,7 +280,7 @@ public class ItemController {
 		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
 		//model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 
-		return "item/buydetail";
+		return "item/buydetail-my";
 	}
 	
 	//찜

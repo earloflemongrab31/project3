@@ -36,7 +36,7 @@ public class ImageController {
 //	private final File directory = new File("C:/study/itemImage");
 
 //	D드라이브용
-	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/upload");
 	
 	//이미지 불러오기
 	@GetMapping("/download/{imageNo}")
