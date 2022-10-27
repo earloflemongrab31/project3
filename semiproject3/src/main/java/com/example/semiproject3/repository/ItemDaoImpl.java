@@ -249,7 +249,7 @@ public class ItemDaoImpl implements ItemDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
-	//상품 검색+목록(회원용)
+	//상품 리스트 검색+목록(회원용)
 	@Override
 	public List<BuyListVO> selectBuyList(BuyListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면
@@ -382,7 +382,7 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 
-	//카운트
+	//상품 등록 카운트
 	@Override
 	public int count(ItemListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면
@@ -393,7 +393,7 @@ public class ItemDaoImpl implements ItemDao {
 		}
 	}
 
-	//검색 카운트
+	//상품 등록 검색 카운트
 	@Override
 	public int searchCount(ItemListSearchVO vo) {
 		String sql = "select count(*) from item where instr(#1, ?) > 0";
@@ -402,7 +402,7 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
-	//목록 카운트
+	//상품 등록 목록 카운트
 	@Override
 	public int listCount(ItemListSearchVO vo) {
 		String sql = "select count(*) from item";
@@ -415,6 +415,7 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 
+	//어디에 쓰는??
 	@Override
 	public List<ItemDto> list(InvenListSearchVO vo) {
 		String sql = "select * from ("
@@ -465,7 +466,7 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
-	
+	//전체 상품 현황 리스트
 	@Override
 	public List<ItemListVO> selectItemList(ItemListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면
@@ -502,4 +503,28 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.query(sql, itemMapper, param);
 	}
 
+	@Override
+	public int itemCount(ItemListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return itemSearchCount(vo);
+		}
+		else { //목록이라면
+			return itemListCount(vo);
+		}
+	}
+
+	@Override
+	public int itemSearchCount(ItemListSearchVO vo) {
+		String sql = "select count(*) from item_list_view where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	@Override
+	public int itemListCount(ItemListSearchVO vo) {
+		String sql = "select count(*) from item_list_view";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
 }

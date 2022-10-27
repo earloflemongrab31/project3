@@ -20,12 +20,12 @@ public interface ItemDao {
 	List<BuyListVO> selectList();
 	List<ItemDto> selectList(String type, String keyword);
 	
-	//통합 메소드(검색+목록)
-
+	//상품 등록 목록 및 검색
 	List<ItemDto> selectList(ItemListSearchVO vo);
 	List<ItemDto> list(ItemListSearchVO vo);
 	List<ItemDto> search(ItemListSearchVO vo);
 	
+	//전체 상품 현황 리스트
 	List<ItemListVO> selectItemList(ItemListSearchVO vo);
 	List<ItemListVO> Itemlist(ItemListSearchVO vo);
 	List<ItemListVO> Itemsearch(ItemListSearchVO vo);
@@ -35,9 +35,15 @@ public interface ItemDao {
 	List<ItemDto> search(InvenListSearchVO vo);
 		
 	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
+	//상품 등록 데이터 개수
 	int count(ItemListSearchVO vo);
 	int searchCount(ItemListSearchVO vo);
 	int listCount(ItemListSearchVO vo);
+	
+	//전체 상품 현황 데이터개수
+	int itemCount(ItemListSearchVO vo);
+	int itemSearchCount(ItemListSearchVO vo);
+	int itemListCount(ItemListSearchVO vo);
 	
 	int count(InvenListSearchVO vo);
 	int searchCount(InvenListSearchVO vo);
