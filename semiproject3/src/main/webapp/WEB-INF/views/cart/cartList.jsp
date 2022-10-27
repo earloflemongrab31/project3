@@ -7,16 +7,6 @@
 </jsp:include>
 
 
-let quantity = $(".quantity_input").val();
-	$(".plus_btn").on("click", function(){
-		$(".quantity_input").val(++quantity);
-	});
-	$(".minus_btn").on("click", function(){
-		if(quantity > 1){
-			$(".quantity_input").val(--quantity);	
-		}
-	});
-
 
 
 <div class="container-600 mt-50 mb-50">
@@ -43,15 +33,6 @@ let quantity = $(".quantity_input").val();
 			<input type="text" class="quantity input" value="1">
 			<span>
 			
-			let quantity = $(".quantity_input").val();
-	$(".plus_btn").on("click", function(){
-		$(".quantity_input").val(++quantity);
-	});
-	$(".minus_btn").on("click", function(){
-		if(quantity > 1){
-			$(".quantity_input").val(--quantity);	
-		}
-	});
 				<button class="plus btn">+</button>
 				<button class="minus btn">-</button>
 			<td>?</td>
