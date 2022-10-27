@@ -64,9 +64,9 @@
 			<tr>
 				<th>Qnty</th>
 				<td>
-<!-- 					<button class="minus-btn" type="button">-</button> -->
+					<button class="minus-btn" type="button">-</button>
 					<input class="input" type="number" name="itemTotalCnt" min="0" max="" >
-<!-- 					<button class="plus-btn" type="button">+</button> -->
+					<button class="plus-btn" type="button">+</button>
 				</td>
 			</tr>
 			<tr>
