@@ -63,7 +63,14 @@ $(function(){
 
 
  	<div class="row">
-		<label>배송지명 <input name="addressName" type="text" required
+		<label>배송지명 <input name="addressName" type="text" required placeholder="배송지명"
+			class="input mt-10 w-100" autocomplete="off">
+		</label>
+		
+	</div>
+	
+	<div class="row">
+		<label>전화번호 <input name="addressTel" type="text" required placeholder="010XXXXXXXXX"
 			class="input mt-10 w-100" autocomplete="off">
 		</label>
 		
