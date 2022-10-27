@@ -2,6 +2,8 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
+import com.example.semiproject3.entity.AddressDto;
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.vo.OrdersListSearchVO;
 
@@ -14,7 +16,7 @@ public interface OrdersDao {
 	List<OrdersDto> selectList();
 	
 	//주문 입력
-	void insert(OrdersDto ordersDto);
+	void insert(int ordersNo, String customerId);
 	
 	//주문 삭제
 	void delete(OrdersDto ordersDto);
@@ -26,7 +28,7 @@ public interface OrdersDao {
 	List<OrdersDto> selectList(String type, String keyword);
 	
 	//회원이 선택한 총 주문수 
-	int selectOrders(String loginId);
+	int selectOrders(int ordersNo);
 
 	OrdersDto selectOne(int ordersNo);
 	OrdersDto selectOne2(int itemCnt);
