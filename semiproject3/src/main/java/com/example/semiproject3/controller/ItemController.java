@@ -249,10 +249,14 @@ public class ItemController {
 	public String buy(Model model, 
 			@RequestParam int itemNo, HttpSession session) {
 		
+		//상품 정보 불러오는 값
 		model.addAttribute("itemDto", itemDao.selectBuyOne(itemNo));
 		
-		//이미지 불러오기
-		model.addAttribute("buylist", itemDao.selectBuyList(itemNo));
+		//상품 이미지 불러오는 list
+		model.addAttribute("buyImageList", itemDao.selectBuyList(itemNo));
+		
+		//상품 옵션 불러오는 list
+		model.addAttribute("buylist", itemDao.selectItemList(itemNo));
 		
 		//장바구니 기록있는 조회하여 첨부 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);

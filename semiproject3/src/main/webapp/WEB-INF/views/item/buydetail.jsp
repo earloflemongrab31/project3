@@ -8,7 +8,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
-
+<h5>상품정보 ${itemDto}</h5>
+<h5>상품이미지 ${buyImageList}</h5>
+<h4>상품옵션 ${buylist}</h4>
 
 <style>
 td, th {
@@ -16,6 +18,65 @@ td, th {
   vertical-align : middle;
 }
 </style>
+
+<script type="text/javascript"> 
+        $(function(){
+            $("select[name=itemColor]").change(function(){
+            	
+                var color = $(this).val();
+                var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
+                var totalcnt = $(this).find("option:selected").attr("data-cnt");
+// 				console.log(color);
+//              console.log(size);
+//              console.log(totalcnt);
+				
+                $("input[name=itemSize]").attr("value", size);
+                $("input[name=itemTotalCnt]").attr("max", totalcnt);
+                $("input[name=itemTotalCnt]").val(0);
+                
+	            var cnt = 0;
+	            $("input[name=itemTotalCnt]").text(cnt);
+	
+	            $(".minus-btn").click(function(){
+	                if(cnt <= 0) return;
+	
+	                size--;
+	
+	                if(cnt == 0){
+	                //- 버튼 잠금
+	                $(".minus-btn").attr("disabled", true);
+	            }
+	            else{
+	                //- , + 버튼 해제
+	                $(".minus-btn").attr("disabled", false);
+	
+	                $(".plus-btn").attr("disabled", false);
+	            }
+	                $("input[name=itemTotalCnt]").text(totalcnt);
+	            });
+	
+	           
+	            $(".plus-btn").click(function(){
+	                if(cnt >= totalcnt) return;
+	                
+	                size++;
+	
+	                if(cnt == totalcnt){
+	                //+ 버튼 잠금
+	                $(".plus-btn").attr("disabled", true);
+	            }
+	            else{
+	                //- , + 버튼 해제
+	                $(".minus-btn").attr("disabled", false);
+	
+	                $(".plus-btn").attr("disabled", false);
+	            }
+	                $("input[name=itemTotalCnt]").text(totalcnt);
+	            });
+            });
+        });
+</script>
+
 <form action="/orders/insert" method="post">
 
 	<div class="container-1000 mt-40 mb-40">
@@ -25,21 +86,25 @@ td, th {
 		</div>
 
 		<div class="row">
-			<table class="table">
+			<table class="table table-border">
 				<tbody>
 				<tr>
-						<th colspan="2">
-							<img src="/image/download/${itemDto.imageNo}" width="200" >
-						</th>
+	 				<td class="center" colspan="2">
+						<c:forEach var="buylistView" items="${buyImageList}">
+							<c:if test="${buylistView.imageMain == 1}">
+								<img src="/image/download/${buylistView.imageNo}" width="200" >
+							</c:if>
+						</c:forEach>
+					</td>
 				</tr>
 				<tr>
-					<c:forEach var="itemDto" items="${buylist}">
-						<c:if test="${itemDto.imageMain == 0}">
-							<th colspan="2">
-								<img src="/image/download/${itemDto.imageNo}" width="100" >
-							</th>
-						</c:if>
-					</c:forEach>
+					<td class="center" colspan="2">
+						<c:forEach var="buylistView" items="${buyImageList}">
+							<c:if test="${buylistView.imageMain == 0}">
+								<img src="/image/download/${buylistView.imageNo}" width="100" >
+							</c:if>
+						</c:forEach>
+					</td>
 				</tr>
 				<tr>
 					<th colspan="2">${itemDto.itemMemo}</th>
@@ -54,35 +119,37 @@ td, th {
 					</td>
 				</tr>
 				<tr>
-					<th>Color</th>
+<!-- 					<th>Color</th> -->
+					<th>option</th>
 					<td>
-						<select name="itemColor">
+						<select class="input w-100" name="itemColor">
 							<option value="">선택</option>
-							<option>Black</option>
-							<option>White</option>
-							<option>Blue</option>
-							<option>Red</option>
+							<c:forEach var="itemDto" items="${buylist}">
+								<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+									${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+								</option>
+							</c:forEach>
 						</select>
-<%-- 						${itemDto.itemColor} --%>
+						<input class="input w-100" type="hidden" name="itemSize" value="" >
 					</td>
 				</tr>
-				<tr>
-					<th>Size</th>
-					<td>
-						<select name="itemSize">
-							<option value="">선택</option>
-							<option>S</option>
-							<option>M</option>
-							<option>L</option>
-							<option>XL</option>
-						</select>
-<%-- 						${itemDto.itemSize} --%>
-					</td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<th>Size</th> -->
+<!-- 					<td> -->
+<!-- 						<select class="input w-100" name="itemSize"> -->
+<!-- 							<option value="">선택</option> -->
+<%-- 								<c:forEach var="itemDto" items="${buylist}"> --%>
+<%-- 									<option>${itemDto.itemSize}</option> --%>
+<%-- 								</c:forEach> --%>
+<!-- 						</select> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 				<tr>
 					<th>Qnty</th>
 					<td>
-						<input class="w-20" type="number" name="itemCnt" min="0" max="${itemDto.itemTotalCnt}">
+						<button class="minus-btn" type="button">-</button>
+						<input class="input" type="text" name="itemTotalCnt" min="0" max="" >
+						<button class="plus-btn" type="button">+</button>
 					</td>
 				</tr>
 				<tr>

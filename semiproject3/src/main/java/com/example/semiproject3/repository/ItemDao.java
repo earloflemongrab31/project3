@@ -16,7 +16,7 @@ public interface ItemDao {
 	void insert(ItemDto itemDto);
 	
 	//상품 목록 및 검색
-	List<ItemDto> selectList();
+	List<BuyListVO> selectList();
 	List<ItemDto> selectList(String type, String keyword);
 	
 	//통합 메소드(검색+목록)
@@ -70,6 +70,10 @@ public interface ItemDao {
 	//상품 구매(회원용)
 	List<BuyListVO> selectBuyList(int itemNo);
 	BuyListVO selectBuyOne(int itemNo);
+	
+	//상품 옵션
+	List<ItemListVO> selectItemList(int itemNo);
+	ItemListVO selectItemOne(ItemListVO itemLitsVO);
 	
 	
 }
