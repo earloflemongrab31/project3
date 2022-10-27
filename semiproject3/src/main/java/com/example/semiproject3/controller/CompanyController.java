@@ -108,7 +108,7 @@ public class CompanyController {
       
       //model.addAttribute("list", companyDao.selectList(vo));
       model.addAttribute("list",companyDao.selectList(vo));
-      
+      model.addAttribute("param",vo);
       return "company/list";
    }
    
@@ -118,8 +118,12 @@ public class CompanyController {
          @ModelAttribute(name="vo") CompanyUniteVO vo){
       
       int count = cardDao.count(vo);
+      
       vo.setCount(count);
-      model.addAttribute("list",cardDao.selectList(vo));
+      
+      
+      model.addAttribute("param",vo);
+      model.addAttribute("cardList",cardDao.selectList(vo));
       return "company/cardList";
    }
    

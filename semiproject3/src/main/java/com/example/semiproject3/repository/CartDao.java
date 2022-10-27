@@ -11,17 +11,4 @@ public interface CartDao {
 	void insert(CartDto cartDto);
 	//카트 삭제 
 	void delete(CartDto cartDto);
-<<<<<<< HEAD
-	
-	//카트 목록
-	List<CartDto> selectList();
-	
-	//디테일
-	CartDto selectOne(int cartNo);
-	
-
-	
 }
-=======
-}
->>>>>>> branch 'HwangMoonKyu' of https://github.com/earloflemongrab31/project3.git
