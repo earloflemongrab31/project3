@@ -182,7 +182,7 @@ td, th {
 								<c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
 							</td>
 							<td>${list.reviewDate}</td>
-							<td>주문상품(구매테이블구현시)</td>
+							<td>${itemDto.itemName}</td>
 							<td>${list.reviewContent}</td>
 							<td>
 								<img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
@@ -191,6 +191,9 @@ td, th {
 								<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
 							</button>
 							</td>
+							<c:if test="${loginId=='admin1'}">
+								<td>블라인드</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</tbody>
