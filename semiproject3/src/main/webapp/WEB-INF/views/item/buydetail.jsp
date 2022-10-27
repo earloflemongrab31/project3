@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
@@ -191,7 +192,10 @@ td, th {
 				<tbody align="center" >	
 					<c:forEach var="list" items="${reviewList}">
 						<tr>
-							<td>${list.reviewStar}/5</td>
+							<td>
+								${list.reviewStar}/5
+								<c:set var="total" value="${total+list.reviewStar}"/>
+							</td>
 							<td>${list.reviewPackaging}</td>
 							<td>${list.reviewShipping}</td>
 							<td>${list.customerId}</td>
@@ -209,6 +213,11 @@ td, th {
 					</c:forEach>
 				</tbody>
 			</table>
+			<h5>리뷰수${fn:length(reviewList)}</h5>
+			<h5>
+			사용자 총 평점
+			<fmt:formatNumber value=" ${total/fn:length(reviewList)}" pattern="#,##0.00"></fmt:formatNumber>
+			</h5>
 		</c:otherwise>
 	</c:choose>
 </div>
