@@ -173,6 +173,8 @@ public class ItemController {
 		model.addAttribute("itemDto", itemDao.selectOne(itemNo));
 		//상품 정보에 이미지 불러오기
 		model.addAttribute("itemImageList", imageDao.selectItemImageList(itemNo));
+		//신고리스트로 부터 불러온 아이템 session 값을 빼았는다.
+		session.removeAttribute("itemNo");
 		return "item/detail";
 	}
 	

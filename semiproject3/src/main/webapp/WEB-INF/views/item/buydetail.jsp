@@ -165,15 +165,14 @@
                         <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
                      </td>
                      <td>${list.reviewDate}</td>
-                     <td>주문상품(구매테이블구현시)</td>
+                     <td>${itemDto.itemName}</td>
                      <td>${list.reviewContent}</td>
                      <td>
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
                      <td>
-                     <button type="submit">
-                        <a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
-                     </button>
+                        <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
                      </td>
+                     <td>블라인드</td>
                   </tr>
                </c:forEach>
          </tbody>
