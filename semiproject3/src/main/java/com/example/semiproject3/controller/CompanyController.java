@@ -52,7 +52,7 @@ public class CompanyController {
 				.cardSize(card.getSize())
 				.build());
 		//파일저장
-		File dir=new File("D:/upload");
+		File dir=new File("C:/study/itemImage");
 		dir.mkdirs();
 		File target=new File(dir, String.valueOf(cardNo));
 		card.transferTo(target);
@@ -163,7 +163,7 @@ public class CompanyController {
 			return ResponseEntity.notFound().build();
 		}
 		//파일불러고오기 
-		File dir=new File("D:/upload");
+		File dir=new File("C:/study/itemImage");
 		File target=new File(dir,String.valueOf(cardNo));
 		byte[] data=FileUtils.readFileToByteArray(target);
 		ByteArrayResource resource=new ByteArrayResource(data);
