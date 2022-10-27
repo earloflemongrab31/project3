@@ -12,6 +12,10 @@
             color:red;
         }
  </style>
+<script>
+
+
+</script>
 
  <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
@@ -105,7 +109,7 @@
 	</div>
 
 	<div class="row center">
-	    <button type="submit" class="btn btn-positive">신고</button>
+	    <button type="submit" class="btn btn-positive" >신고</button>
 	</div>
 	
 	</form>
