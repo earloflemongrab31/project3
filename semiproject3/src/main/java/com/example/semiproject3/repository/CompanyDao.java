@@ -30,6 +30,7 @@ public interface CompanyDao {
 	int count(CompanyListSearchVO vo);
 	int searchCount(CompanyListSearchVO vo);
 	int listCount(CompanyListSearchVO vo);
+	
 	// 회사 
 	void connectAttachment(int companyNo, int imageNo);
 	
