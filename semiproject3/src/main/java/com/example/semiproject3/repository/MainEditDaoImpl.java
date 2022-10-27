@@ -39,6 +39,12 @@ public class MainEditDaoImpl implements MainEditDao{
 		String sql = "select * from main_edit";
 		return jdbcTemplate.query(sql, extractor);
 	}
+
+	@Override
+	public void insert(String loginId) {
+		String sql = "insert into main_edit(main_no, main_editor) values(1, ?)";
+		jdbcTemplate.update(sql, loginId);
+	}
 	
 	
 }

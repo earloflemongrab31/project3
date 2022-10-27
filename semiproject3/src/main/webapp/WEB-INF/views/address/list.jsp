@@ -46,7 +46,7 @@
 	         </thead>
 	            
 	         <tbody align="center">
-	            <c:forEach var="addressDto" items="${listBasic}">
+	            <c:forEach var="addressDto" items="${listBasic}" varStatus="status">
 	               <tr>
 <!-- 	               <th width="25%">상세주소</tr> -->
 <!-- 					</thead> -->
@@ -54,7 +54,7 @@
 <!-- 					<tbody align="center"> -->
 <%-- 						   <c:forEach var="addressDto" items="${listBaisc}"> --%>
 <!-- 							<tr> -->
-	                  <td>${addressDto.addressNo}</td>
+	                  <td>${status.count}</td>
 	                  <td>${addressDto.addressName}</td>
 	                  <td>${addressDto.addressPost}</td>
 	                  <td>${addressDto.addressHost}</td>
@@ -68,7 +68,7 @@
       </div>
       
    <div class="row right">
-     	 <input type="button" onclick="add()";  class="btn btn-positive"  value="기본배송지 변경하러 가기" />
+     	 <input type="button" onclick="add()";  class="btn btn-positive"  value="기본배송지설정" />
    		</div>
 
       
@@ -101,12 +101,12 @@
 					</thead>
 					
 					<tbody align="center">
-						   <c:forEach var="addressDto" items="${list}">
+						   <c:forEach var="addressDto" items="${list}" varStatus="status">
 							<tr>
 							<td>
 	                     <input type="checkbox" class="check-item" name="addressNo" value="${addressDto.addressNo}">
 	                  </td>
-	                  <td>${addressDto.addressNo}</td>
+	                  <td>${status.count}</td>
 	                  <td>${addressDto.addressName}</td>
 	                  <td>${addressDto.addressPost}</td>
 	                  <td>${addressDto.addressHost}</td>
@@ -121,6 +121,8 @@
       <input type="button" onclick="upGo()";  class="btn btn-positive"  value="수정하기" />
       <input type="button" onclick="delNo()"; class="btn btn-positive"  value="삭제하기" />
    </div>
+
+</div>
 
 </div>
 

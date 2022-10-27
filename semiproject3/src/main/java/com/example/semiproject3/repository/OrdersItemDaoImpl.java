@@ -55,6 +55,12 @@ public class OrdersItemDaoImpl implements OrdersItemDao{
 
 		return jdbcTemplate.query(sql, mapper, customerId);
 	}
+
+	@Override
+	public boolean delete(String loginId) {
+		String sql = "delete orders_item where customer_id=?";
+		return jdbcTemplate.update(sql, loginId) > 0;
+	}
 	
 	
 }
