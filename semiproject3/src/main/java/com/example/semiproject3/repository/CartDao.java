@@ -11,4 +11,13 @@ public interface CartDao {
 	void insert(CartDto cartDto);
 	//카트 삭제 
 	void delete(CartDto cartDto);
+	
+	//카트 목록
+	List<CartDto> selectList();
+	
+	//디테일
+	CartDto selectOne(int cartNo);
+	
+
+	
 }
