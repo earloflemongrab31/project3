@@ -34,6 +34,7 @@ public class ReviewDaoImpl implements ReviewDao {
                .reviewPackaging(rs.getString("review_packaging"))
                .reviewDate(rs.getDate("review_date"))
                .imageNo(rs.getInt("image_no"))
+               .reviewBlind(rs.getString("review_blind")!=null)
                .build();
       }
    }; 
@@ -62,14 +63,7 @@ public class ReviewDaoImpl implements ReviewDao {
    
    @Override
    public void insert(ReviewDto reviewDto) {
-      String sql="insert into review("
-      		+ "review_no,"
-      		+ "customer_id,"
-      		+ "item_no,"
-      		+ "review_content,"
-      		+ "review_star,"
-      		+ "review_shipping,"
-      		+ "review_packaging) values(?,?,?,?,?,?,?)";
+      String sql="insert into review values(?,?,?,?,?,?,?,sysdate,null)";
       Object[] param= {
             reviewDto.getReviewNo(),
             reviewDto.getCustomerId(),
@@ -115,7 +109,7 @@ public class ReviewDaoImpl implements ReviewDao {
    //아이템 번호 첨부 뷰 (review_real)
    @Override
    public List<ReviewDto> selectList2(int itemNo) {
-      String sql="select * from  review_real where item_no=?";
+      String sql="select * from review_real where item_no=?";
       Object[] param= {itemNo};
       return jdbcTemplate.query(sql, mapper,param);
    }
