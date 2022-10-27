@@ -7,20 +7,18 @@
     <jsp:param value="상품 목록" name="title"/>
 </jsp:include>
 
-
-
-<div class ="container-800 mt-40 mb-40">
+<div class ="container-1100 mt-40 mb-40">
 
 	<div class = "row center">
 		<h1>상품 리스트</h1>
 	</div>
-	<div class = "row">
+	<div class = "row float-container center">
 	
 		<c:forEach var="itemDto" items="${buylist}">
 			<c:if test="${itemDto.imageMain == 1}">
-				<div class="row w-33">
+				<div class="row float-left w-33">
 					<a href="buydetail?itemNo=${itemDto.itemNo}">
-						<img src="/image/download/${itemDto.imageNo}" width="200" height="200" >
+						<img src="/image/download/${itemDto.imageNo}" class="w-75">
 					</a>
 					<br>
 					${itemDto.itemNo}<br>
@@ -31,7 +29,6 @@
 			</c:if>
 		</c:forEach>
 	</div>
-	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
