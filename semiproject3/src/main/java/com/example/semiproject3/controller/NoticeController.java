@@ -65,11 +65,11 @@ public class NoticeController {
 	public String detail(Model model, @RequestParam int noticeNo,
 			HttpSession session) {
 		
-//		NoticeDto Dto = noticeDao.selectOne(noticeNo);
-//		model.addAttribute("Dto",Dto);
+		NoticeDto noticeDto = noticeDao.selectOne(noticeNo);
+		model.addAttribute("noticeDto",noticeDto);
 		
 		//조회수 증가
-//		model.addAttribute("noticeDto", noticeDao.read(noticeNo));
+		model.addAttribute("noticeDto", noticeDao.read(noticeNo));
 		
 		//(조회수 중복 방지 처리)
 		Set<Integer> history = (Set<Integer>) session.getAttribute("history"); 
