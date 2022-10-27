@@ -36,13 +36,15 @@ public class AddressDaoImpl implements AddressDao{
 				+ "address_post,"
 				+ "address_host,"
 				+ "address_detail_host,"
+				+ "address_tel,"
 				+ "address_basic)"
-				+ "values(?, ?, ?, ?, ?, ?,'Y')";
+				+ "values(?, ?, ?, ?, ?, ?, ?, 'Y')";
 		Object[] param = {
 				addressDto.getAddressNo(),
 				addressDto.getCustomerId(),
 				addressDto.getAddressName(), addressDto.getAddressPost(),
-				addressDto.getAddressHost(), addressDto.getAddressDetailHost()
+				addressDto.getAddressHost(), addressDto.getAddressDetailHost(),
+				addressDto.getAddressTel()
 				
 				
 		};
@@ -64,6 +66,7 @@ public class AddressDaoImpl implements AddressDao{
 			addressDto.setAddressHost(rs.getString("address_host"));
 			addressDto.setAddressDetailHost(rs.getString("address_detail_host"));
 			addressDto.setAddressBasic(rs.getString("address_basic"));
+			addressDto.setAddressTel(rs.getString("address_tel"));
 			return addressDto;
 		}
 	};
@@ -83,6 +86,7 @@ public class AddressDaoImpl implements AddressDao{
 				addressDto.setAddressHost(rs.getString("address_host"));
 				addressDto.setAddressDetailHost(rs.getString("address_detail_host"));
 				addressDto.setAddressBasic(rs.getString("address_basic"));
+				addressDto.setAddressTel(rs.getString("address_tel"));
 				return addressDto;
 			}
 			else {
@@ -122,12 +126,13 @@ public class AddressDaoImpl implements AddressDao{
 				+ "address_name=?,"
 				+ "address_post=?,"
 				+ "address_host=?,"
-				+ "address_detail_host=?"
+				+ "address_detail_host=?,"
+				+ "address_tel=?"
 				+ "where address_no = ?";
 		Object[] param = {
 				addressDto.getAddressName(),
 				addressDto.getAddressPost(), addressDto.getAddressHost(),
-				addressDto.getAddressDetailHost(), 
+				addressDto.getAddressDetailHost(), addressDto.getAddressTel(),
 				addressDto.getAddressNo()
 		};
 		return jdbcTemplate.update(sql, param) > 0;
@@ -170,7 +175,7 @@ public class AddressDaoImpl implements AddressDao{
 		//처음 주소 등록할때 
 	@Override
 	public boolean basicUpdate(int addressNo) {
-//		System.out.println("이값이 뭐죠? :" +addressNo);
+//		System.out.println("addressNo :" +addressNo);
 		String sql = "update address set "
 				+ "address_basic='N'"
 				+ "where address_no != ?";

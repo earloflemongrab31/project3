@@ -68,6 +68,12 @@ $(function(){
 		</label>
 		
 	</div>
+	
+	<div class="row">
+		<label>전화번호 <input name="addressTel" type="text" required value="${addressDto.addressTel}"
+			class="input mt-10 w-100" autocomplete="off">
+		</label>
+	</div>
 		
 
 
