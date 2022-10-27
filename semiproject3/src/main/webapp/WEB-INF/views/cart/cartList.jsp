@@ -6,6 +6,9 @@
 	<jsp:param value="장바구니" name="title"/>
 </jsp:include>
 
+
+
+
 <div class="container-600 mt-50 mb-50">
 <div class="row center mb-50">
 	 <h1>CART</h1>
@@ -27,6 +30,11 @@
  		</c:if>
 		<tr>
 			<td>수량</td>
+			<input type="text" class="quantity input" value="1">
+			<span>
+			
+				<button class="plus btn">+</button>
+				<button class="minus btn">-</button>
 			<td>?</td>
 	 		<td class="right" rowspan="2">
 	 			<fmt:formatNumber value="${cartDto.cartItemPrice}" pattern="#,##0"/>원

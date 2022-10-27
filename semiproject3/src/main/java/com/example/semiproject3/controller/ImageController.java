@@ -30,7 +30,7 @@ public class ImageController {
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
 //	화니꼬
-//	private final File directory = new File("C:/study/itemImage");
+	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
 	private final File directory = new File("D:/study/itemImage");
 	
