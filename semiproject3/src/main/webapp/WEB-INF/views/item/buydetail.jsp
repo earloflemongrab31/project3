@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
@@ -152,7 +153,7 @@ td, th {
 		</table>
 
 			<div class="flexbox">
-				<div class=" w-50 center item item-detail">
+				<div class=" w-50 center item item-detail unchecked">
 					<span>상세보기</span>
 				</div>
 				<div class="w-50 center item item-review">
@@ -160,8 +161,16 @@ td, th {
 			</div>
 
 		</div>
+		
+		
+		<div class = "row center mb-30 detail"	>
+			<div class = "row center mb-30">
+				<h4>아이템 상세보기 테스트</h4>
+				<hr>
+			</div>
+	</div>
 	
-		<div class = "row center mb-30 review"	>
+		<div class = "row center mb-30 review hide"	>
 			<div class = "row center mb-30">
 				<h4>리뷰</h4>
 				<hr>
@@ -193,12 +202,19 @@ td, th {
 					<c:forEach var="list" items="${reviewList}">
 						<tr>
 							<td>
-								${list.reviewStar}/5
+								<c:if test="${list.reviewStar==1}">★</c:if>
+								<c:if test="${list.reviewStar==2}">★★</c:if>
+								<c:if test="${list.reviewStar==3}">★★★</c:if>
+								<c:if test="${list.reviewStar==4}">★★★★</c:if>
+								<c:if test="${list.reviewStar==5}">★★★★★</c:if>
+					
 								<c:set var="total" value="${total+list.reviewStar}"/>
 							</td>
 							<td>${list.reviewPackaging}</td>
 							<td>${list.reviewShipping}</td>
-							<td>${list.customerId}</td>
+							<td>
+								<c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
+							</td>
 							<td>${list.reviewDate}</td>
 							<td>주문상품(구매테이블구현시)</td>
 							<td>${list.reviewContent}</td>
