@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,17 +50,16 @@ public class OrdersController {
 			@RequestParam int itemCnt,
 			RedirectAttributes attr
 			){
+			
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 			
 			//DB저장
-			int ordersNo = ordersDao.sequence();	
+			int ordersNo = ordersDao.sequence();
 			//CustomerDto customerDto = customerDao.selectOne(loginId);
 			//AddressDto addressDto = addressDao.selectOne(loginId);
 			ordersDto.setOrdersNo(ordersNo);
 			ordersDao.insert(ordersDto);
 			attr.addAttribute("ordersDto", ordersDto.getOrdersNo());
-			
-			
 			
 		return "orders/insert";
 	}
