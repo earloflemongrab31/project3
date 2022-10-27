@@ -65,7 +65,11 @@
             <th>Qnty</th>
             <td>
 <!--                <button class="minus-btn" type="button">-</button> -->
+<<<<<<< HEAD
                <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
+=======
+               <input class="input" type="number" name="itemCnt" min="0" max="" >
+>>>>>>> refs/remotes/origin/main
 <!--                <button class="plus-btn" type="button">+</button> -->
             </td>
          </tr>
@@ -164,15 +168,14 @@
                         <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
                      </td>
                      <td>${list.reviewDate}</td>
-                     <td>주문상품(구매테이블구현시)</td>
+                     <td>${itemDto.itemName}</td>
                      <td>${list.reviewContent}</td>
                      <td>
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
                      <td>
-                     <button type="submit">
-                        <a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
-                     </button>
+                        <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
                      </td>
+                     <td>블라인드</td>
                   </tr>
                </c:forEach>
          </tbody>
