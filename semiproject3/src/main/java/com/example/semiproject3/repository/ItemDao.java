@@ -3,6 +3,7 @@ package com.example.semiproject3.repository;
 import java.util.List;
 
 import com.example.semiproject3.entity.ItemDto;
+import com.example.semiproject3.vo.BuyListSearchVO;
 import com.example.semiproject3.vo.BuyListVO;
 import com.example.semiproject3.vo.InvenListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
@@ -58,14 +59,14 @@ public interface ItemDao {
 	void connectImage(int itemNo, int imageNo);
 	
 	//상품 검색+목록(회원용)
-	List<BuyListVO> selectBuyList(ItemListSearchVO vo);
-	List<BuyListVO> buyList(ItemListSearchVO vo);
-	List<BuyListVO> buySearch(ItemListSearchVO vo);
+	List<BuyListVO> selectBuyList(BuyListSearchVO vo);
+	List<BuyListVO> buyList(BuyListSearchVO vo);
+	List<BuyListVO> buySearch(BuyListSearchVO vo);
 	
 	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
-	int buyCount(ItemListSearchVO vo);
-	int buyListCount(ItemListSearchVO vo);
-	int buySearchCount(ItemListSearchVO vo);
+	int buyCount(BuyListSearchVO vo);
+	int buyListCount(BuyListSearchVO vo);
+	int buySearchCount(BuyListSearchVO vo);
 		
 	//상품 구매(회원용)
 	List<BuyListVO> selectBuyList(int itemNo);

@@ -34,6 +34,7 @@ import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.repository.ReviewLikeDao;
+import com.example.semiproject3.vo.BuyListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Controller
@@ -72,9 +73,9 @@ public class ItemController {
 //	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
 //	화니꼬
-//	private final File directory = new File("C:/study/itemImage");
+	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-	private final File directory = new File("D:/study/itemImage");
+//	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -236,9 +237,9 @@ public class ItemController {
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
 	public String buylist(Model model, 
-			@ModelAttribute(name="vo") ItemListSearchVO vo) {
+			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 		
-		int count = itemDao.count(vo);
+		int count = itemDao.buyCount(vo);
 		vo.setCount(count);
 		
 		model.addAttribute("buylist", itemDao.selectBuyList(vo));

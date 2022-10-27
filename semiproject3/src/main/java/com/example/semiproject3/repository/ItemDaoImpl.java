@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.ItemDto;
+import com.example.semiproject3.vo.BuyListSearchVO;
 import com.example.semiproject3.vo.BuyListVO;
 import com.example.semiproject3.vo.InvenListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
@@ -250,7 +251,7 @@ public class ItemDaoImpl implements ItemDao {
 	
 	//상품 검색+목록(회원용)
 	@Override
-	public List<BuyListVO> selectBuyList(ItemListSearchVO vo) {
+	public List<BuyListVO> selectBuyList(BuyListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면
 			return buySearch(vo);
 		}
@@ -261,7 +262,7 @@ public class ItemDaoImpl implements ItemDao {
 	
 	//main = 1 만 띄우는 상품 list
 	@Override
-	public List<BuyListVO> buyList(ItemListSearchVO vo) {
+	public List<BuyListVO> buyList(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
 					+ "select * from buy_list_view where image_main = 1 order by item_no desc "
@@ -272,7 +273,7 @@ public class ItemDaoImpl implements ItemDao {
 	}
 	
 	@Override
-	public List<BuyListVO> buySearch(ItemListSearchVO vo) {
+	public List<BuyListVO> buySearch(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
 					+ "select * from buy_list_view where instr(#1,?) > 0 and image_main = 1 "
@@ -287,7 +288,7 @@ public class ItemDaoImpl implements ItemDao {
 	}
 	
 	@Override
-	public int buyCount(ItemListSearchVO vo) {
+	public int buyCount(BuyListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면
 			return buySearchCount(vo);
 		}
@@ -297,14 +298,14 @@ public class ItemDaoImpl implements ItemDao {
 	}
 	
 	@Override
-	public int buyListCount(ItemListSearchVO vo) {
-		String sql = "select count(*) from buy_list_view";
+	public int buyListCount(BuyListSearchVO vo) {
+		String sql = "select count(*) from buy_list_view where image_main = 1";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 	@Override
-	public int buySearchCount(ItemListSearchVO vo) {
-		String sql = "select count(*) from buy_list_view where instr(#1, ?) > 0 ";
+	public int buySearchCount(BuyListSearchVO vo) {
+		String sql = "select count(*) from buy_list_view where instr(#1, ?) > 0 and image_main = 1";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
