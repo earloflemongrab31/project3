@@ -4,6 +4,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<!-- 회원정보에 없는 이메일을 입력할 시에 출력되는 경고창 -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(function(){
+        var responseMessage = "<c:out value="${message}" />";
+        if (responseMessage != ""){
+            alert(responseMessage)
+        }
+    })
+</script>
+
+
+
 <jsp:include page="/WEB-INF/views/template/header.jsp">
    <jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
@@ -169,13 +182,30 @@
                      </td>
                      <td>${list.reviewDate}</td>
                      <td>${itemDto.itemName}</td>
-                     <td>${list.reviewContent}</td>
+                     
+                     <!--블라인드여부에따라 다르게 표시 -->
+                     <c:choose>
+                     	<c:when test="${list.reviewBlind}">
+                     		블라인드처리된 게시물입니다. 
+                     	</c:when>
+                     	<c:otherwise>
+                     		<td>${list.reviewContent}</td>
+                     	</c:otherwise>
+                     </c:choose>            
                      <td>
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
                      <td>
                         <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
                      </td>
-                     <td>블라인드</td>
+                     <c:choose>
+                     	<c:when test="${list.reviewBlind}">
+                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>해제</a></td>
+                     	</c:when>
+                     	<c:otherwise>
+                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>설정</a></td>
+                     	</c:otherwise>
+                     </c:choose>
+                     
                   </tr>
                </c:forEach>
          </tbody>
