@@ -98,7 +98,6 @@
 		.item{
 		padding: 0.75em;
 		border: 1px solid #D5D5D5;
-	
 		cursor: pointer;
 	}
 	.item.unchecked{
@@ -307,15 +306,19 @@
 	
 	/* 아이템 디테일 상세보기, 리뷰 토글 */
 	$(function(){
-		$(".item-detail").click(function(){
-			$(this).removeClass("unchecked");
-			$(this).prev("div").addClass("unchecked");
-			$(".review").addClass("hide");
-		});
 		$(".item-review").click(function(){
 			$(this).removeClass("unchecked");
-			$(this).next("div").addClass("unchecked");
+			$(this).prev("div").addClass("unchecked");
 			$(".review").removeClass("hide");
+			$(".detail").addClass("hide");
+			
+			
+		});
+		$(".item-detail").click(function(){
+			$(this).removeClass("unchecked");
+			$(this).next("div").addClass("unchecked");
+			$(".detail").removeClass("hide");
+			$(".review").addClass("hide");
 		});
 	});
 	
