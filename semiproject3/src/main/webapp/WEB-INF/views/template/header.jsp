@@ -315,7 +315,7 @@
 		});
 		$(".item-detail").click(function(){
 			$(this).removeClass("unchecked");
-			$(this).next("div").addClass("unchecked");
+			$(this).next("div").addCla0ss("unchecked");
 			$(".detail").removeClass("hide");
 			$(".review").addClass("hide");
 		});
