@@ -183,7 +183,11 @@ public class ReviewController {
 		return "review/reportList";
 	}
 	@GetMapping("/blind")
-	public String blind() {
+	public String blind(
+			@RequestParam int reviewNo,
+			@RequestParam int itemNo,
+			RedirectAttributes attr) {
+		
 		return "";
 	};
 
