@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
@@ -99,17 +101,25 @@
 		</tbody>
 	</table>
 </div>
-			
+
 		<div class="flexbox">
-			<div class=" w-50 center item item-detail">
-				<span>상세보기</span>
-			</div>
-			<div class="w-50 center item item-review">
-				<span>리뷰보기</span>
-			</div>
+				<div class=" w-50 center item item-detail">
+					<span>상세보기</span>
+				</div>
+				<div class="w-50 center item item-review unchecked">
+					<span>리뷰보기</span>
+				</div>
 		</div>
 		
-		<div class = "row center mb-30 review">
+		<div class = "row center mb-30 detail">
+			<div class = "row center mb-30">
+				<h4>아이템 상세보기 테스트</h4>
+				<hr>
+			</div>
+		</div>
+
+	
+		<div class = "row center mb-30 review hide">
 			<div class = "row center mb-30">
 				<h4>리뷰</h4>
 				<hr>
@@ -117,52 +127,67 @@
 			
 			<div class="row center">
 				<c:choose>
-					<c:when test="${reviewList.isEmpty()}">
+				<c:when test="${reviewList.isEmpty()}">
 					<h4 style="padding-left:20px">
-					 		<span>해당 상품의 리뷰가 없습니다</span>
+				  		<span>해당 상품의 리뷰가 없습니다</span>
 					</h4>
-					</c:when>
-					<c:otherwise>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>별점</th>
-								<th>포장상태</th>
-								<th>배송상태</th>
-								<th>회원아이디</th>
-								<th>작성시간</th>
-								<th>주문한상품명</th>
-								<th>내용</th>
-								<th>사진</th>
-								<th>신고</th>
-							</tr>
-						</thead>
-					<tbody align="center" >	
-						<c:forEach var="list" items="${reviewList}">
-					<tr>
-						<td>${list.reviewStar}/5</td>
-					<td>${list.reviewPackaging}</td>
-					<td>${list.reviewShipping}</td>
-					<td>${list.customerId}</td>
-					<td>${list.reviewDate}</td>
-					<td>주문상품(구매테이블구현시)</td>
-					<td>${list.reviewContent}</td>
-					<td>
-						<img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
-					<td>
-					<button type="submit">
-						<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
-						</button>
-						</td>
-					</tr>
+				</c:when>
+				<c:otherwise>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>별점</th>
+							<th>포장상태</th>
+							<th>배송상태</th>
+							<th>회원아이디</th>
+							<th>작성시간</th>
+							<th>주문한상품명</th>
+							<th>내용</th>
+							<th>사진</th>
+							<th>신고</th>
+						</tr>
+					</thead>
+				<tbody align="center" >	
+					<c:forEach var="list" items="${reviewList}">
+						<tr>
+							<td>
+								<c:if test="${list.reviewStar==1}">★</c:if>
+								<c:if test="${list.reviewStar==2}">★★</c:if>
+								<c:if test="${list.reviewStar==3}">★★★</c:if>
+								<c:if test="${list.reviewStar==4}">★★★★</c:if>
+								<c:if test="${list.reviewStar==5}">★★★★★</c:if>
+					
+								<c:set var="total" value="${total+list.reviewStar}"/>
+							</td>
+							<td>${list.reviewPackaging}</td>
+							<td>${list.reviewShipping}</td>
+							<td>
+								<c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
+							</td>
+							<td>${list.reviewDate}</td>
+							<td>주문상품(구매테이블구현시)</td>
+							<td>${list.reviewContent}</td>
+							<td>
+								<img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
+							<td>
+							<button type="submit">
+								<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
+							</button>
+							</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			</c:otherwise>
-			</c:choose>
-		</div>
-	</div>
+			<h5>리뷰수${fn:length(reviewList)}</h5>
+			<h5>
+			사용자 총 평점
+			<fmt:formatNumber value=" ${total/fn:length(reviewList)}" pattern="#,##0.00"></fmt:formatNumber>
+			</h5>
+		</c:otherwise>
+	</c:choose>
 </div>
+</div>
+
 </form>
 
 
