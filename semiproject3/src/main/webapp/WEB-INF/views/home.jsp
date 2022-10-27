@@ -64,7 +64,7 @@
     		<div class="row">
 	    		<div>
 		    		<a href="item/buydetail?itemNo=${itemDto.itemNo}">
-						<img src="image/download/${itemDto.itemNo}" class="w-100">
+						<img src="/image/download/${itemDto.imageNo}" class="w-100">
 		    		</a>
 	    		</div>
 	    		<div class="row">
