@@ -108,7 +108,7 @@ td, th {
 
 						<button class="btn btn-positive" type="submit">구매하기</button>
 
-						<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>	 
+						<a id="cart-in" href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>	 
 						<a href="buylist">목록으로</a>
 					</td>
 					</tr>

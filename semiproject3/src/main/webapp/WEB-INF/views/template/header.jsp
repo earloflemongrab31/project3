@@ -649,6 +649,8 @@
     $(function(){
         var swiper = new Swiper('.swiper.mySwiper', {
             // 화면 넘기기 옵션
+            direction: 'horizontal',
+            loop: true,
 			slidesPerView: 3,
 			spaceBetween: 30,
 			pagination: {
@@ -694,6 +696,21 @@
     		$("#timer").html(time);
     	}, 1000);
     });
+    
+ /*    $(function(){
+    	$("#cart-in").click(function(){
+    		$.ajax({
+    			url: "http://localhost:8888/rest/customer/nick",
+                method: "post",
+                data: {
+                    
+                },
+                success: function(resp){
+                	
+                }
+    		});
+    	});
+    }); */
     
 </script>
 
@@ -915,7 +932,7 @@
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right cart"><a href="/cart/cartList"><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
+	<li class="float-right cart"><a href="/cart/cartList"><span id="cart-count">0</span><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
 	<form action="/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
