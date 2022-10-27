@@ -178,6 +178,7 @@ td, th {
 						<button class="btn btn-positive" type="submit">구매하기</button>
 						<form>
 						<a href="cart?itemNo=${itemDto.itemNo}">장바구니${isCart}</a>
+						
 						</form>	 
 						<a href="buylist">목록으로</a>
 					</td>
@@ -196,7 +197,7 @@ td, th {
 		</div>
 		
 		
-		<div class = "row center mb-30 detail"	>
+		<div class = "row center mb-30 detail">
 			<div class = "row center mb-30">
 				<h4>아이템 상세보기 테스트</h4>
 				<hr>
