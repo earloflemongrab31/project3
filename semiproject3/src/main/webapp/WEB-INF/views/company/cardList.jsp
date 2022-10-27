@@ -45,7 +45,7 @@ td, th {
 		</table>
 		
 		<div class="row right">
-		<a href="cardList"><button  class="btn btn-positive" type="submit">협력사목록</button></a>
+		<a href="list"><button  class="btn btn-positive" type="submit">협력사목록</button></a>
 		</div>
 		
 	</div>
