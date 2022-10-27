@@ -18,3 +18,4 @@ public class CompanyDto {
 	private String companyExplan;
 	private int imageNo;
 }
+

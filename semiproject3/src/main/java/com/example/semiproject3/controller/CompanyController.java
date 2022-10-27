@@ -49,25 +49,7 @@ public class CompanyController {
 	public String insert(
 			@ModelAttribute CompanyDto companyDto,
 			RedirectAttributes attr,
-
 			@RequestParam List<MultipartFile> attachment) throws IllegalStateException, IOException {
-
-			@RequestParam MultipartFile card) throws IllegalStateException, IOException {
-		//Db저장
-		int cardNo=cardDao.sequence();
-		cardDao.insert(
-				CardDto.builder()
-				.cardNo(cardNo)
-				.cardName(card.getOriginalFilename())
-				.cardType(card.getContentType())
-				.cardSize(card.getSize())
-				.build());
-		//파일저장
-		File dir=new File("C:/study/itemImage");
-		dir.mkdirs();
-		File target=new File(dir, String.valueOf(cardNo));
-		card.transferTo(target);
->>>>>>> refs/remotes/origin/main
 		
 			int companyNo=companyDao.sequence();
 			companyDto.setCompanyNo(companyNo);
@@ -203,7 +185,7 @@ public class CompanyController {
 			return ResponseEntity.notFound().build();
 		}
 		//파일불러고오기 
-		File dir=new File("C:/study/itemImage");
+		File dir=new File("D:/upload");
 		File target=new File(dir,String.valueOf(cardNo));
 		byte[] data=FileUtils.readFileToByteArray(target);
 		ByteArrayResource resource=new ByteArrayResource(data);
