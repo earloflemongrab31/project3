@@ -58,7 +58,7 @@
 				</tr>
 				<tr>
 					<th>연락처</th>
-					<td>?<%-- ${addressDto.addressTel} --%></td>
+					<td>${addressDto.addressTel}</td>
 				</tr>
 			</c:if>
 			</c:forEach>

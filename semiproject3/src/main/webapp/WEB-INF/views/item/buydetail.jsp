@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품 상세 페이지" name="title" />
@@ -145,29 +147,43 @@
 					</tr>
 				</thead>
 			<tbody align="center" >	
-				<c:forEach var="list" items="${reviewList}">
-			<tr>
-				<td>${list.reviewStar}/5</td>
-				<td>${list.reviewPackaging}</td>
-				<td>${list.reviewShipping}</td>
-				<td>${list.customerId}</td>
-				<td>${list.reviewDate}</td>
-				<td>주문상품(구매테이블구현시)</td>
-				<td>${list.reviewContent}</td>
-				<td>
-					<img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
-				<td>
-			<button type="submit">
-				<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
-				</button>
-				</td>
-			</tr>
-			</c:forEach>
+					<c:forEach var="list" items="${reviewList}">
+						<tr>
+							<td>
+								<c:if test="${list.reviewStar==1}">★</c:if>
+								<c:if test="${list.reviewStar==2}">★★</c:if>
+								<c:if test="${list.reviewStar==3}">★★★</c:if>
+								<c:if test="${list.reviewStar==4}">★★★★</c:if>
+								<c:if test="${list.reviewStar==5}">★★★★★</c:if>
+					
+								<c:set var="total" value="${total+list.reviewStar}"/>
+							</td>
+							<td>${list.reviewPackaging}</td>
+							<td>${list.reviewShipping}</td>
+							<td>
+								<c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
+							</td>
+							<td>${list.reviewDate}</td>
+							<td>주문상품(구매테이블구현시)</td>
+							<td>${list.reviewContent}</td>
+							<td>
+								<img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
+							<td>
+							<button type="submit">
+								<a href="/review/report?reviewNo=${list.reviewNo}">신고</a>
+							</button>
+							</td>
+						</tr>
+					</c:forEach>
 		</tbody>
-	</table>
-	</c:otherwise>
+		</table>
+			<h5>리뷰수${fn:length(reviewList)}</h5>
+			<h5>
+			사용자 총 평점
+			<fmt:formatNumber value=" ${total/fn:length(reviewList)}" pattern="#,##0.00"></fmt:formatNumber>
+			</h5>
+		</c:otherwise>
 	</c:choose>
-</div>
 </div>
 </div>
 </form>
