@@ -825,6 +825,7 @@
 					<button class="btn btn-neutral menu" type="submit">니트</button>
 					<input type="hidden" name="type" value="cate_code">
 					<input type="hidden" name="keyword" value="204">
+					<input type="hidden" name="size" value="6">
 				</form>
 			</li>
 			<li>
