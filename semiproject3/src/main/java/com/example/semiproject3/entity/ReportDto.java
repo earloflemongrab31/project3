@@ -14,7 +14,6 @@ public class ReportDto {
 	private String customerId;
 	private String reviewContent;
 	private String reportRadio;
-	private String reportContent;
 	private Date reportDate;
 	
 }

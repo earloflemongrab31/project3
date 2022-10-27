@@ -19,7 +19,7 @@
 </div>
 
 <!-- Slider main container -->
-<div class="swiper">
+<div class="swiper main">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
     <!-- Slides -->
@@ -41,7 +41,6 @@
   
 </div>
 
-
 <div class="container-1200 mt-50 mb-50">
 
 <c:if test="${mainEditDto.mainContent != null}">
@@ -49,6 +48,41 @@
 		${mainEditDto.mainContent}
 	</div>
 </c:if>
+<div class="row mt-50">
+	<hr>
+</div>
+
+<div class="row center mt-50">
+	<h1>New :</h1>
+</div>
+
+<div class="swiper mySwiper">
+	<div class="swiper-wrapper">
+
+   	<c:forEach var="itemDto" items="${itemList}">
+    	<div class="swiper-slide">
+    		<div class="row">
+	    		<div>
+		    		<a href="item/buydetail?itemNo=${itemDto.itemNo}">
+						<img src="image/download/${itemDto.itemNo}" class="w-100">
+		    		</a>
+	    		</div>
+	    		<div class="row">
+	    			${itemDto.itemMemo}
+	    		</div>
+	    		<div class="row">
+	    			${itemDto.itemPrice}
+	    		</div>
+    		</div>
+	    </div>
+	</c:forEach>
+
+    </div>
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  
+</div>
 
 </div>
 

@@ -1,7 +1,10 @@
 package com.example.semiproject3.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.ReportDto;
@@ -20,10 +23,36 @@ public class ReportDaoImpl implements ReportDao{
 				reportDto.getCustomerId(),
 				reportDto.getReviewContent(),
 				reportDto.getReportRadio(),
-				reportDto.getReportContent()
 		};
 		jdbcTemplate.update(sql,param);
 		
+	}
+
+	//RowMapper
+	private RowMapper <ReportDto> mapper = (rs, idx) -> {
+		return ReportDto.builder()
+				.reportNo(rs.getInt("report_no"))
+				.customerId(rs.getString("customer_id"))
+				.reviewContent(rs.getString("review_content"))
+				.reportRadio(rs.getString("report_radio"))
+				.reportDate(rs.getDate("report_date"))
+				.build();
+	};
+	
+	//목록
+	@Override
+	public List<ReportDto> selectList() {
+		String sql = "select * from report order by report_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+
+	//검색 키워드 목록
+	@Override
+	public List<ReportDto> selectList(String type, String keyword) {
+		String sql = "select * from report where instr(#1, ?) > 0 order by #1 desc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 }

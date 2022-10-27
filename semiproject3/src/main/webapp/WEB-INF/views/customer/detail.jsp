@@ -7,7 +7,7 @@
 		<jsp:param value="마이페이지" name="title"/>
 </jsp:include>
 
-<section class="mb-50">
+<!-- <section class="mb-50"> -->
 	<div class="container-550">
 	<div class="row center mb-50">
 		<h1>${customerDto.customerId} 회원 정보</h1>
@@ -66,18 +66,18 @@
 		
 	
 	
-	<div class="flexbox">
-		<div class="flex-left w-33 center">
-			<a class="btn btn-neutral" href="changePw">비밀번호 변경</a>
-		</div>
-		<div class="flex-left w-34 center">
-			<a class="btn btn-neutral" href="information">개인정보 변경</a>
-		</div>
-		<div class="flex-left w-33 center">
-			<a class="btn btn-neutral" href="goodbye">회원 탈퇴</a>
-		</div>
+<!-- 	<div class="flexbox"> -->
+<!-- 		<div class="flex-left w-33 center"> -->
+<!-- 			<a class="btn btn-neutral" href="changePw">비밀번호 변경</a> -->
+<!-- 		</div> -->
+<!-- 		<div class="flex-left w-34 center"> -->
+<!-- 			<a class="btn btn-neutral" href="information">개인정보 변경</a> -->
+<!-- 		</div> -->
+<!-- 		<div class="flex-left w-33 center"> -->
+<!-- 			<a class="btn btn-neutral" href="goodbye">회원 탈퇴</a> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	</div>
-	</div>
-</section>
+<!-- </section> -->
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
 
