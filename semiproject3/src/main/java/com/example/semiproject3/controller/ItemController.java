@@ -70,11 +70,11 @@ public class ItemController {
 	
 
 //	맥북용
-	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
+//	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
 //	화니꼬
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-//	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -225,14 +225,8 @@ public class ItemController {
 		cartDto.setCartItemPrice(itemDto.getItemPrice());
 		cartDto.setCartItemColor(itemDto.getItemColor());
 		cartDto.setCartItemSize(itemDto.getItemSize());
+		
 		//db에 있으면 지움 없으면 추가
-		if(cartDao.check(cartDto)) {
-			cartDao.delete(cartDto);
-			//+ 삭제 될 때마다 customer table countcount- totalmoney -; 
-		}else {
-			cartDao.insert(cartDto);
-			//+ 추가 될 때마다 customer table countcount- totalmoney -;
-		}
 		return "redirect:buydetail?itemNo="+itemNo;
 	};
 	
@@ -266,7 +260,7 @@ public class ItemController {
 		CartDto cartDto = new CartDto();
 		cartDto.setCustomerId(loginId);
 		cartDto.setItemNo(itemNo);
-		model.addAttribute("isCart", cartDao.check(cartDto));
+		//model.addAttribute("isCart", cartDao.check(cartDto));
 		}
 
 		//(+추가) 찜 기록이 있는지 조회하여 첨부

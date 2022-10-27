@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-    <jsp:param value="명함 목록" name="title"/>
+    <jsp:param value="협력사 명함 목록" name="title"/>
 </jsp:include>
 
 <style>
@@ -35,10 +35,9 @@ td, th {
 			<tbody align="center" >	
 				<c:forEach var="cardDto" items="${list}">
 					<tr>
-						<td>${cardDto.cardName}</td>
+						<td>${cardDto.companyName}</td>
 						<td>
-							<a href="download?cardNo=${cardDto.cardNo}">
-							<img src="download?cardNo=${cardDto.cardNo}" width="100" height="100">
+							<img src="/companyImage/download/${cardDto.imageNo}" width="100" >
 						</td>
 					</tr>
 				</c:forEach>
