@@ -18,7 +18,7 @@ public class ReportDaoImpl implements ReportDao{
 	//입력
 	@Override
 	public void insert(ReportDto reportDto) {
-		String sql="insert into report values(report_seq.nextval,?,?,?,sysdate)";
+		String sql="insert into report values(report_seq.nextval,?,?,?,?,sysdate)";
 		Object[] param= {
 				reportDto.getCustomerId(),
 				reportDto.getReviewContent(),
