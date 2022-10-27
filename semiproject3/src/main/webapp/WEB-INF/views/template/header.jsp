@@ -98,7 +98,6 @@
 		.item{
 		padding: 0.75em;
 		border: 1px solid #D5D5D5;
-	
 		cursor: pointer;
 	}
 	.item.unchecked{
@@ -307,15 +306,27 @@
 	
 	/* 아이템 디테일 상세보기, 리뷰 토글 */
 	$(function(){
-		$(".item-detail").click(function(){
-			$(this).removeClass("unchecked");
-			$(this).prev("div").addClass("unchecked");
-			$(".review").addClass("hide");
-		});
 		$(".item-review").click(function(){
 			$(this).removeClass("unchecked");
-			$(this).next("div").addClass("unchecked");
+			$(this).prev("div").addClass("unchecked");
 			$(".review").removeClass("hide");
+			$(".detail").addClass("hide");
+		});
+		$(".item-detail").click(function(){
+			$(this).removeClass("unchecked");
+			$(this).next("div").addClass("unchecked");
+			$(".detail").removeClass("hide");
+			$(".review").addClass("hide");
+		});
+	});
+	
+	/* 구매, 장바구니 폼 변경 ? */
+	$(function(){
+		$(".item-buy").click(function(){
+			$(".item-detail").attr("action", "/cart/insert");
+		});
+		$(".item-cart").click(function(){
+			$(".item-detail").attr("action", "/orders/insert");
 		});
 	});
 	
@@ -649,6 +660,8 @@
     $(function(){
         var swiper = new Swiper('.swiper.mySwiper', {
             // 화면 넘기기 옵션
+            direction: 'horizontal',
+            loop: true,
 			slidesPerView: 3,
 			spaceBetween: 30,
 			pagination: {
@@ -694,6 +707,21 @@
     		$("#timer").html(time);
     	}, 1000);
     });
+    
+ /*    $(function(){
+    	$("#cart-in").click(function(){
+    		$.ajax({
+    			url: "http://localhost:8888/rest/customer/nick",
+                method: "post",
+                data: {
+                    
+                },
+                success: function(resp){
+                	
+                }
+    		});
+    	});
+    }); */
     
 </script>
 
@@ -915,7 +943,7 @@
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right cart"><a href="/cart/cartList"><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
+	<li class="float-right cart"><a href="/cart/cartList"><span id="cart-count">0</span><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
 	<form action="/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
@@ -934,5 +962,4 @@
 </ul>
 </div>
 </nav>
-
 <main>

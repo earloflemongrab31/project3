@@ -15,5 +15,6 @@ public class ReportDto {
 	private String reviewContent;
 	private String reportRadio;
 	private Date reportDate;
+	private String reportContent;
 	
 }

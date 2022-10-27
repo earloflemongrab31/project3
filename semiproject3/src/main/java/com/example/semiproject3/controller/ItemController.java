@@ -31,6 +31,7 @@ import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.repository.OrdersDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.repository.ReviewLikeDao;
 import com.example.semiproject3.vo.ItemListSearchVO;
@@ -38,6 +39,9 @@ import com.example.semiproject3.vo.ItemListSearchVO;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
+	
+	@Autowired
+	private OrdersDao ordersDao;
 	
 	@Autowired
 	private ItemDao itemDao;
@@ -221,14 +225,8 @@ public class ItemController {
 		cartDto.setCartItemPrice(itemDto.getItemPrice());
 		cartDto.setCartItemColor(itemDto.getItemColor());
 		cartDto.setCartItemSize(itemDto.getItemSize());
+		
 		//db에 있으면 지움 없으면 추가
-		if(cartDao.check(cartDto)) {
-			cartDao.delete(cartDto);
-			//+ 삭제 될 때마다 customer table countcount- totalmoney -; 
-		}else {
-			cartDao.insert(cartDto);
-			//+ 추가 될 때마다 customer table countcount- totalmoney -;
-		}
 		return "redirect:buydetail?itemNo="+itemNo;
 	};
 	
@@ -266,7 +264,7 @@ public class ItemController {
 		CartDto cartDto = new CartDto();
 		cartDto.setCustomerId(loginId);
 		cartDto.setItemNo(itemNo);
-		model.addAttribute("isCart", cartDao.check(cartDto));
+		//model.addAttribute("isCart", cartDao.check(cartDto));
 		}
 
 		//(+추가) 찜 기록이 있는지 조회하여 첨부
@@ -282,7 +280,7 @@ public class ItemController {
 		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
 		//model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 
-		return "item/buydetail";
+		return "item/buydetail-my";
 	}
 	
 	//찜
