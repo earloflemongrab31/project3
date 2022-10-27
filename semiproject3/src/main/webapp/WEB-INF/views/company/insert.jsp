@@ -64,7 +64,7 @@
 					<tr>
 						<td>명함사진 : </td>
 						<td>
-							<input type="file" required class="input w-100" name="card" placeholder="명함사진" autocomplete="off">
+							<input type="file" required class="input w-100" name="attachment" placeholder="명함사진" autocomplete="off">
 						</td>
 					</tr>
 				</tbody>
