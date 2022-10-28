@@ -2,7 +2,6 @@ package com.example.semiproject3.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +9,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CartDto;
-import com.example.semiproject3.vo.CartListVO;
 
 @Repository
 public class CartDaoImpl implements CartDao{
@@ -54,7 +52,9 @@ public class CartDaoImpl implements CartDao{
 	}
 	@Override
 	public void delete(CartDto cartDto) {
-		// TODO Auto-generated method stub
+		String sql = "delete cart where cart_no=?";
+		Object[] param = {cartDto};
+		jdbcTemplate.update(sql, param);
 	}
 }
 		
