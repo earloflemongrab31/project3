@@ -169,38 +169,63 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public List<OrdersDto> selectList(OrdersListSearchVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+		
 	}
 
 	@Override
 	public List<OrdersDto> list(OrdersListSearchVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from orders order by orders_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	@Override
 	public List<OrdersDto> search(OrdersListSearchVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from orders where instr(#1,?) > 0 "
+					+ "order by orders_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	@Override
 	public int count(OrdersListSearchVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(vo.isSearch()) {
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
 	}
 
 	@Override
 	public int searchCount(OrdersListSearchVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "select count(*) from orders where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
 	@Override
 	public int listCount(OrdersListSearchVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "select count(*) from orders";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
 //	//로우맵퍼
