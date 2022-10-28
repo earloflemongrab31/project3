@@ -110,6 +110,7 @@ function fail(){
                </c:if>
             </td>
             <td colspan="2" align="right">
+            	<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
                <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
                <button class="btn btn-positive" type="submit">구매하기</button>
                <button class="btn btn-positive" type="submit">장바구니${isCart}</button>    
