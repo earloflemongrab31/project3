@@ -78,11 +78,7 @@
             <th>Qnty</th>
             <td>
 <!--                <button class="minus-btn" type="button">-</button> -->
-<<<<<<< HEAD
                <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
-=======
-               <input class="input" type="number" name="itemCnt" min="0" max="" >
->>>>>>> refs/remotes/origin/main
 <!--                <button class="plus-btn" type="button">+</button> -->
             </td>
          </tr>

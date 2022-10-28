@@ -51,13 +51,13 @@ public class InvenController {
 //	}
 	
 	
-	//아이템리스트
+	//전체 상품 현황 리스트
 	@GetMapping("/itemList")
 	public String itemList(
 			Model model, 
 			@ModelAttribute(name="vo") ItemListSearchVO vo) {
 			//페이지 네비게이터를 위한 게시글 수를 전달
-			int count = itemDao.count(vo);
+			int count = itemDao.itemCount(vo);
 			vo.setCount(count);
 			
 			model.addAttribute("invenList", itemDao.selectItemList(vo));
