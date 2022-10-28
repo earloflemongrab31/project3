@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class CardDto {
 	private int cardNo;
+	private int imageNo;
+	private String companyName;
 	private String cardName,cardType;
 	private long cardSize;
 	private Date cardTime;

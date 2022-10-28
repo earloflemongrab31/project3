@@ -12,10 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CardDto;
-import com.example.semiproject3.entity.CartDto;
-import com.example.semiproject3.entity.CompanyDto;
-import com.example.semiproject3.vo.CardListSearchVO;
-import com.example.semiproject3.vo.CompanyListSearchVO;
+import com.example.semiproject3.vo.CompanyUniteVO;
 
 @Repository
 public class CardDaoImpl implements CardDao{
@@ -32,6 +29,7 @@ public class CardDaoImpl implements CardDao{
 					.cardType(rs.getString("card_type"))
 					.cardSize(rs.getInt("card_size"))
 					.cardTime(rs.getDate("card_time"))
+					.companyName(rs.getString("company_name"))
 					.build();
 		}
 	};
@@ -47,8 +45,10 @@ public class CardDaoImpl implements CardDao{
 						.cardType(rs.getString("card_type"))
 						.cardSize(rs.getInt("card_size"))
 						.cardTime(rs.getDate("card_time"))
+						.companyName(rs.getString("company_name"))
 						.build();
-			}else {
+			}
+			else {
 				return null;
 			}
 		}
@@ -63,12 +63,14 @@ public class CardDaoImpl implements CardDao{
 	
 	@Override
 	public void insert(CardDto cardDto) {
-		String sql="insert into card values(?,?,?,?,sysdate)";
+		String sql="insert into card values(?,?,?,?,sysdate,?)";
 		Object[] param= {
 				cardDto.getCardNo(),
 				cardDto.getCardName(),
 				cardDto.getCardType(),
-				cardDto.getCardSize()
+				cardDto.getCardSize(),
+				cardDto.getCompanyName()
+				
 		};
 		jdbcTemplate.update(sql,param);
 	}
@@ -94,7 +96,7 @@ public class CardDaoImpl implements CardDao{
 
 
 	@Override
-	public List<CardDto> selectList(CardListSearchVO vo) {
+	public List<CardDto> selectList(CompanyUniteVO vo) {
 		if(vo.isSearch()) { //검색
 			return search(vo);
 			}
@@ -105,7 +107,7 @@ public class CardDaoImpl implements CardDao{
 
 
 	@Override
-	public List<CardDto> list(CardListSearchVO vo) {
+	public List<CardDto> list(CompanyUniteVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
 					+ "select * from card order by card_no desc"
@@ -118,7 +120,7 @@ public class CardDaoImpl implements CardDao{
 
 
 	@Override
-	public List<CardDto> search(CardListSearchVO vo) {
+	public List<CardDto> search(CompanyUniteVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
 					+ "select * from card where instr(#1,?) > 0 "
@@ -134,7 +136,7 @@ public class CardDaoImpl implements CardDao{
 
 
 	@Override
-	public int count(CardListSearchVO vo) {
+	public int count(CompanyUniteVO vo) {
 		if(vo.isSearch()) {//검색
 			return searchCount(vo);
 		}
@@ -145,7 +147,7 @@ public class CardDaoImpl implements CardDao{
 
 
 	@Override
-	public int searchCount(CardListSearchVO vo) {
+	public int searchCount(CompanyUniteVO vo) {
 		String sql = "select count(*) from card where instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
@@ -154,7 +156,7 @@ public class CardDaoImpl implements CardDao{
 
 
 	@Override
-	public int listCount(CardListSearchVO vo) {
+	public int listCount(CompanyUniteVO vo) {
 		String sql = "select count(*) from card";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
