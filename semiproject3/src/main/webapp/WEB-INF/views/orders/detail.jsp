@@ -9,6 +9,7 @@
 <form action="/buy/insert" method="post">
 
 <div class="container-1000 mt-50 mb-50">
+<input type="hidden" name="ordersNo" value="${ordersDto.ordersNo}">
 
 <div class="row center">
 	<h1>ORDER</h1>
