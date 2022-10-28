@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,16 +36,15 @@ public class CartController {
 	@ResponseBody
 	@GetMapping("/cartInsert")
 	public String cartInsert(
-			@RequestParam int itemNo,
+			@ModelAttribute CartDto param ,
 			HttpSession session	) {
 
 		String result = "00";
 		
-		System.out.println("/cartInsert ================"+ itemNo);		
+		System.out.println("/cartInsert ================"+ param);		
 		
 		//Cart db insert
-		
-		
+			
 		
 		//result =="00" 성공 result =="01" 동일아이템 중복
 		return result;

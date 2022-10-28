@@ -28,18 +28,27 @@ function fail(){
     }
 }
 function goCart(itemNo){
+
+	//정규식 , itemCnt  , id="itemColor"
+	if($("#itemColor option:selected").val()=="")
+	{
+		alert("옵션을 선택해주세요.");
+		$("#itemColor").focus();
+	}
+	
+	if($("#itemCnt option:selected").val()=="")
+	{
+		alert("수량을 입력해주세요.");
+		$("#itemColor").focus();
+	}	
 	
 	if(confirm("장바구니에 추가하시겠습니까?")){
 		//ajax로 장바구니 추가
 		
-		//정규식 , itemCnt  , id="itemColor"
-		
-		
-		
 		$.ajax({  
 			type: "GET",
 			url: "/cart/cartInsert?",
-			data: "itemNo="+itemNo+"&itemCnt="+$("#itemCnt").val()+"&itemColor="+itemColor,
+			data: "itemNo="+itemNo+"&cartItemQnty="+$("#itemCnt").val()+"&cartItemColor="+$("#itemColor option:selected").val(),
 			dataType: 'text', 
 			success: function( result ) {
 					console.log(result);
@@ -104,7 +113,7 @@ function goCart(itemNo){
 							name="itemColor">
 								<option value="">선택</option>
 								<c:if test="${empty buylist}">
-									<option>상품준비중</option>
+									<option value="test">상품준비중</option>
 								</c:if>
 								<c:forEach var="itemDto" items="${buylist}">
 									<option value="${itemDto.itemColor}"
@@ -152,7 +161,6 @@ function goCart(itemNo){
 			</table>
 		</div>
 	</form>
-
 
 
 	<div class="flexbox">
@@ -220,95 +228,7 @@ function goCart(itemNo){
 									<c:choose>
 										<c:when test="${list.reviewBlind}">
                      		블라인드처리된 게시물입니다. 
-								</c:when>
-<div class="flexbox">
-   <div class=" w-50 center item item-detail">
-      <span>상세보기</span>
-   </div>
-   <c:if test="${fn:length(reviewList)>0}">
-   	<div class="w-50 center item item-review unchecked">
-   	   <span>리뷰${fn:length(reviewList)}</span>
-   	</div>
-   </c:if>
-   
-   <c:if test="${fn:length(reviewList)==0}">
-   	<div class="w-50 center item item-review unchecked">
-   	   <span>리뷰보기</span>
-   	</div>
-   </c:if>
-</div>
-      
-<div class = "row center mb-30 detail">
-   <div class = "row center mb-30">
-      <h4>아이템 상세보기 테스트</h4>
-      <hr>
-   </div>
-</div>
-      
-<div class = "row center mb-30 review hide">
-   <div class = "row center mb-30">
-      <h4>리뷰</h4>
-      <hr>
-   </div>
-   
-   <div class="row center">
-      <c:choose>
-         <c:when test="${reviewList.isEmpty()}">
-         <h4 style="padding-left:20px">
-                <span>해당 상품의 리뷰가 없습니다</span>
-         </h4>
-         </c:when>
-         <c:otherwise>
-         <table class="table">
-            <thead>
-               <tr>
-                  <th>별점</th>
-                  <th>포장상태</th>
-                  <th>배송상태</th>
-                  <th>회원아이디</th>
-                  <th>작성시간</th>
-                  <th>주문한상품명</th>
-                  <th>내용</th>
-                  <th>사진</th>
-                  <th>신고</th>
-                  <th>좋아요</th>
-               </tr>
-            </thead>
-         <tbody align="center" >   
-               <c:forEach var="list" items="${reviewList}">
-                  <tr>
-                     <td>
-                        <c:if test="${list.reviewStar==1}">★</c:if>
-                        <c:if test="${list.reviewStar==2}">★★</c:if>
-                        <c:if test="${list.reviewStar==3}">★★★</c:if>
-                        <c:if test="${list.reviewStar==4}">★★★★</c:if>
-                        <c:if test="${list.reviewStar==5}">★★★★★</c:if>
-               
-                        <c:set var="total" value="${total+list.reviewStar}"/>
-                     </td>
-                     <td>${list.reviewPackaging}</td>
-                     <td>${list.reviewShipping}</td>
-                     <td>
-                        <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
-                     </td>
-                     <td>${list.reviewDate}</td>
-                     <td>${itemDto.itemName}</td>
-                     
-                     <!--블라인드여부에따라 다르게 표시 -->
-                     <c:choose>
-                     	<c:when test="${list.reviewBlind}">
-
-                     		<td>블라인드처리된 게시물입니다.</td> 
-
-
-                     		<td>
-                     			블라인드 처리된 게시물입니다.<br>
-                     			<a href="/center/list">(사용자문의하기)</a>
-                     		</td> 
-                     	
-
                      	</c:when>
-
 										<c:otherwise>
 											<td>${list.reviewContent}</td>
 										</c:otherwise>
@@ -354,73 +274,6 @@ function goCart(itemNo){
 			</c:choose>
 		</div>
 	</div>
-
-                     	<c:otherwise>
-                     		<td>${list.reviewContent}</td>
-                     	</c:otherwise>
-                     </c:choose>            
-                     <td>
-                        <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
-                        
-                         <!-- 내글은 신고버튼 다르게 -->
-					
-                     <td>
-                     <c:choose>
-                     <c:when test="${loginId != list.customerId}"> 
-							<a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
-						</c:when>
-						<c:otherwise>
-								<a href="#" onclick="fail();">신고</a>
-						</c:otherwise>
-                     </c:choose>
-                     </td>   
-                           
-                     <!--좋아요  -->
-                     <c:if test="${list.reviewCnt==0}">
-                     	<td>
-                     		<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                     			♡
-                     		</a>
-                     	</td>
-                     </c:if>
-                     
-                    <c:if test="${list.reviewCnt>0}">
-                     	<td>
-                     		<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                     			♥${list.reviewCnt}
-                     		</a>
-                     	</td>
-                     </c:if>
-                     
-                     
-                     <c:choose>
-                     	<c:when test="${list.reviewBlind}">
-                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                     			<button type="button">블라인드<br>해제</button>
-                     		</a></td>
-                     	</c:when>
-                     	<c:otherwise>
-                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                     			<button type="button">블라인드<br>설정</button>
-                     		</a></td>
-                     	</c:otherwise>
-                     </c:choose>
-  
-                     
-                  </tr>
-               </c:forEach>
-         </tbody>
-            </table>
-            <h5>리뷰수${fn:length(reviewList)}</h5>
-            <h5>
-            사용자 총 평점
-            <fmt:formatNumber value=" ${total/fn:length(reviewList)}" pattern="#,##0.00"></fmt:formatNumber>
-            </h5>
-         </c:otherwise>
-      </c:choose>
-   </div>
-</div>
-
 
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
