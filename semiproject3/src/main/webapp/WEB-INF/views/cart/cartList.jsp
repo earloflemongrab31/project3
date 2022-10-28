@@ -14,13 +14,16 @@
 <div class="row center">
 		장바구니 상품(${cartCount})
 </div>
+<!-- <form action="/orders/detail" method="post"> -->
 <table class="table table-border" >
  	<tbody>
  	<c:forEach var="cartDto" items="${cartList}">
  		<c:if test="${cartDto.imageMain == 1}">
 	 		<tr>
 		 		<td class="center" rowspan="3" style="vertical-align: bottom;">
-		 			<img src="/image/download/${cartDto.imageNo}" width="100">
+		 			<a href="/item/buydetail?itemNo=${cartDto.itemNo}">
+		 				<img src="/image/download/${cartDto.imageNo}" width="100">
+		 			</a>
 		 		</td>
 		 		<td colspan="2">${cartDto.itemName}</td>
 		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
@@ -64,10 +67,10 @@
 		</tr>
  		<tr>
  			<td class="center" colspan="6">
-				<button class="btn btn-positive" type="button">주문하기</button>
+				<button class="btn btn-positive" type="submit">주문하기</button>
 			</td>
 		</tr>
  </table>
-
+<!-- </form> -->
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
