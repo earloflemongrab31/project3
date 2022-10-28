@@ -19,7 +19,7 @@ public interface OrdersDao {
 //	boolean update(OrdersDto ordersDto);
 	
 	//주문 삭제
-	void delete(OrdersDto ordersDto);
+	boolean delete(int ordersNo);
 	
 	//주문 체크
 	boolean check(OrdersDto ordersDto);

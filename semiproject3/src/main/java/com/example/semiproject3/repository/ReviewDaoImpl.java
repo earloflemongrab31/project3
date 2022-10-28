@@ -47,20 +47,43 @@ public class ReviewDaoImpl implements ReviewDao {
       public ReviewDto extractData(ResultSet rs) throws SQLException, DataAccessException {
          if(rs.next()) {
             return ReviewDto.builder()
-                  .reviewNo(rs.getInt("review_no"))
-                  .customerId(rs.getString("customer_id"))
-                  .itemNo(rs.getInt("item_no"))
-                  .reviewContent(rs.getString("review_content"))
-                  .reviewStar(rs.getInt("review_star"))
-                  .reviewShipping(rs.getString("review_shipping"))
-                  .reviewPackaging(rs.getString("review_packaging"))
-                  .reviewDate(rs.getDate("review_date"))
-                  .build();
+            		  .reviewNo(rs.getInt("review_no"))
+                      .customerId(rs.getString("customer_id"))
+                      .itemNo(rs.getInt("item_no"))
+                      .reviewContent(rs.getString("review_content"))
+                      .reviewStar(rs.getInt("review_star"))
+                      .reviewShipping(rs.getString("review_shipping"))
+                      .reviewPackaging(rs.getString("review_packaging"))
+                      .reviewDate(rs.getDate("review_date"))
+                      .imageNo(rs.getInt("image_no"))
+                      .reviewBlind(rs.getString("review_blind")!=null)
+                      .build();
          }
          return null;
       }
    };
    
+   
+   private ResultSetExtractor<ReviewDto> extractor2= new ResultSetExtractor<ReviewDto>() {
+	      
+	      @Override
+	      public ReviewDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+	         if(rs.next()) {
+	            return ReviewDto.builder()
+	            		  .reviewNo(rs.getInt("review_no"))
+	                      .customerId(rs.getString("customer_id"))
+	                      .itemNo(rs.getInt("item_no"))
+	                      .reviewContent(rs.getString("review_content"))
+	                      .reviewStar(rs.getInt("review_star"))
+	                      .reviewShipping(rs.getString("review_shipping"))
+	                      .reviewPackaging(rs.getString("review_packaging"))
+	                      .reviewDate(rs.getDate("review_date"))
+	                      .reviewBlind(rs.getString("review_blind")!=null)
+	                      .build();
+	         }
+	         return null;
+	      }
+	   };
    
    @Override
    public void insert(ReviewDto reviewDto) {
@@ -84,12 +107,21 @@ public class ReviewDaoImpl implements ReviewDao {
       Object[] param= {itemNo};
       return jdbcTemplate.query(sql, mapper,param);
    }
-   //하나의리뷰정보 
+   //하나의리뷰정보+이미지 
    @Override
    public ReviewDto selectOne(int reviewNo) {
-      String sql="select * from review where review_no=?";
+      //String sql="select * from review where review_no=?";
+	  String sql="select * from review_real where item_no=?";
       Object[] param= {reviewNo};
       return jdbcTemplate.query(sql,extractor,param);
+   }
+   //하나의리뷰정보
+   @Override
+   public ReviewDto selectOne2(int reviewNo) {
+      String sql="select * from review where review_no=?";
+	  //String sql="select * from review_real where item_no=?";
+      Object[] param= {reviewNo};
+      return jdbcTemplate.query(sql,extractor2,param);
    }
    //시퀀스번호 생성
    @Override
@@ -174,5 +206,14 @@ public int searchCount(ReviewListSearchVO vo) {
 public int listCount(ReviewListSearchVO vo) {
 	String sql = "select count(*) from review";
 	return jdbcTemplate.queryForObject(sql, int.class);
+	}
+
+//블라인드처리 
+@Override
+	public boolean updateBlind(int reviewNo, boolean b) {
+		String sql=" update review set review_blind=? where review_no=?";
+		String reviewBlind= b?"Y":null;
+		Object[] param= {reviewBlind,reviewNo};
+		return jdbcTemplate.update(sql,param)>0;
 	}
 }

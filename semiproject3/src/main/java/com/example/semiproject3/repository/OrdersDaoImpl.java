@@ -80,12 +80,13 @@ public class OrdersDaoImpl implements OrdersDao {
 				+ "orders_no, "
 				+ "customer_id, "
 				+ "item_no, "
+				+ "delivery_fee, "
 				+ "item_name, "
 				+ "item_price, "
 				+ "item_size, "
 				+ "item_color, "
 				+ "item_cnt) "
-				+ "values(orders_seq.nextval,?,?,?,?,?,?,?)";
+				+ "values(orders_seq.nextval,?,?,3000,?,?,?,?,?)";
 		
 		Object[] param = {
 				ordersDto.getCustomerId(), 
@@ -103,6 +104,12 @@ public class OrdersDaoImpl implements OrdersDao {
 	public OrdersDto selectOne(String customerId) {
 		String sql = "select * from orders where customer_id=?";
 		return jdbcTemplate.query(sql, extractor, customerId);
+	}
+	
+	@Override
+	public boolean delete(int ordersNo) {
+		String sql = "delete orders where orders_no=?";
+		return jdbcTemplate.update(sql, ordersNo) > 0;
 	}
 
 //	@Override
@@ -129,12 +136,6 @@ public class OrdersDaoImpl implements OrdersDao {
 //				
 //		return jdbcTemplate.update(sql, param) > 0;
 //	}
-	
-	@Override
-	public void delete(OrdersDto ordersDto) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean check(OrdersDto ordersDto) {
