@@ -187,8 +187,10 @@ public class ReviewController {
 			@RequestParam int reviewNo,
 			@RequestParam int itemNo,
 			RedirectAttributes attr) {
-		
-		return "";
+		ReviewDto reviewDto=reviewDao.selectOne(reviewNo);
+		//reviewDao.updateBlind(reviewNo,!reviewDto.isReviewBlind());
+		attr.addAttribute("itemNo",itemNo);
+		return "redirect:/item/buydetail";
 	};
 
 }

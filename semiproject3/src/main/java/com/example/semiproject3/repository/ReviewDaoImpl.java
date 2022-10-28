@@ -46,15 +46,17 @@ public class ReviewDaoImpl implements ReviewDao {
       public ReviewDto extractData(ResultSet rs) throws SQLException, DataAccessException {
          if(rs.next()) {
             return ReviewDto.builder()
-                  .reviewNo(rs.getInt("review_no"))
-                  .customerId(rs.getString("customer_id"))
-                  .itemNo(rs.getInt("item_no"))
-                  .reviewContent(rs.getString("review_content"))
-                  .reviewStar(rs.getInt("review_star"))
-                  .reviewShipping(rs.getString("review_shipping"))
-                  .reviewPackaging(rs.getString("review_packaging"))
-                  .reviewDate(rs.getDate("review_date"))
-                  .build();
+            		  .reviewNo(rs.getInt("review_no"))
+                      .customerId(rs.getString("customer_id"))
+                      .itemNo(rs.getInt("item_no"))
+                      .reviewContent(rs.getString("review_content"))
+                      .reviewStar(rs.getInt("review_star"))
+                      .reviewShipping(rs.getString("review_shipping"))
+                      .reviewPackaging(rs.getString("review_packaging"))
+                      .reviewDate(rs.getDate("review_date"))
+                      .imageNo(rs.getInt("image_no"))
+                      .reviewBlind(rs.getString("review_blind")!=null)
+                      .build();
          }
          return null;
       }
@@ -86,7 +88,8 @@ public class ReviewDaoImpl implements ReviewDao {
    //하나의리뷰정보 
    @Override
    public ReviewDto selectOne(int reviewNo) {
-      String sql="select * from review where review_no=?";
+      //String sql="select * from review where review_no=?";
+	  String sql="select * from review_real where item_no=?";
       Object[] param= {reviewNo};
       return jdbcTemplate.query(sql,extractor,param);
    }
