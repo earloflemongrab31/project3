@@ -19,7 +19,7 @@ public interface CartDao {
 	void delete(int cartNo);
 	
 	//장바구니 count
-	void cartCount(CartDto cartDto);
+	int cartCount(String loginId);
 	
 	//장바구니에 있는 상품 수량 변경(중복인경우)
 	void plus(CartDto cartDto);

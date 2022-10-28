@@ -143,9 +143,10 @@ public class CartDaoImpl implements CartDao{
 	
 	//장바구니 개수
 	@Override
-	public void cartCount(CartDto cartDto) {
-		// TODO Auto-generated method stub
-		
+	public int cartCount(String loginId) {
+		String sql = "select count(*) from cart_list_view where customer_id = ?";
+		Object[] param = {loginId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
 	//장바구니에 있는 상품 수량 변경(중복인경우)

@@ -213,13 +213,17 @@ public class ItemController {
 	
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
-	public String buylist(Model model, 
+	public String buylist(Model model, HttpSession session,
 			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 		
 		int count = itemDao.buyCount(vo);
 		vo.setCount(count);
 		
 		model.addAttribute("buylist", itemDao.selectBuyList(vo));
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		return "item/buylist";
 	}
@@ -238,14 +242,9 @@ public class ItemController {
 		//상품 옵션 불러오는 list
 		model.addAttribute("buylist", itemDao.selectItemList(itemNo));
 		
-		//장바구니 기록있는 조회하여 첨부 
+		//장바구니 개수
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		if(loginId !=null) {
-		CartDto cartDto = new CartDto();
-		cartDto.setCustomerId(loginId);
-		cartDto.setItemNo(itemNo);
-		//model.addAttribute("isCart", cartDao.check(cartDto));
-		}
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 
 		//(+추가) 찜 기록이 있는지 조회하여 첨부
 

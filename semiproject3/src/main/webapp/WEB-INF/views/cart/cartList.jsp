@@ -12,15 +12,15 @@
 	 <h1>CART</h1>
 </div>
 <div class="row center">
-		장바구니 상품
+		장바구니 상품(${cartCount})
 </div>
-<table class="table table-border">
+<table class="table table-border" >
  	<tbody>
  	<c:forEach var="cartDto" items="${cartList}">
  		<c:if test="${cartDto.imageMain == 1}">
 	 		<tr>
-		 		<td rowspan="3">
-		 			<img src="/image/download/${cartDto.imageNo}" width="200">
+		 		<td class="center" rowspan="3" style="vertical-align: bottom;">
+		 			<img src="/image/download/${cartDto.imageNo}" width="100">
 		 		</td>
 		 		<td colspan="2">${cartDto.itemName}</td>
 		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>

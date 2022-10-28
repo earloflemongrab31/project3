@@ -55,9 +55,9 @@ public class HomeController {
 			Model model,
 			HttpSession session
 			){
-		//장바구니
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		//session.setAttribute("countCart", cartDao.selectCart(loginId));
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		//메인이미지
 		model.addAttribute("mainImageList", mainImageDao.selectAll());

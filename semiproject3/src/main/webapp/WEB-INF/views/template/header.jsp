@@ -936,7 +936,7 @@
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right cart"><a href="/cart/cartList"><span id="cart-count">0</span><i class="fa-solid fa-cart-shopping">${countCart}</i></a></li>
+	<li class="float-right cart"><a href="/cart/cartList"><span id="cart-count"></span><i class="fa-solid fa-cart-shopping"><c:if test="${cartCount != 0}">${cartCount}</c:if></i></a></li>
 	<form action="/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">

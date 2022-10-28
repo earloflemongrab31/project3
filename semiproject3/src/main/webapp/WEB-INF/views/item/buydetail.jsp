@@ -112,7 +112,7 @@ function fail(){
             <td colspan="2" align="right">
                <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
                <button class="btn btn-positive" type="submit">구매하기</button>
-               <button class="btn btn-positive" type="submit">장바구니${isCart}</button>    
+               <button class="btn btn-positive" type="submit">장바구니</button>    
                <a href="buylist">목록으로</a>
             </td>
          </tr>
