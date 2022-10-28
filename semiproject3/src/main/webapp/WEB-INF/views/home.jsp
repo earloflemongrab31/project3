@@ -68,10 +68,12 @@
 		    		</a>
 	    		</div>
 	    		<div class="row">
-	    			${itemDto.itemMemo}
+	    			${itemDto.itemName}
+	    			<br>
+	    			${itemDto.itemPrice}원
 	    		</div>
 	    		<div class="row">
-	    			${itemDto.itemPrice}
+	    			${itemDto.itemMemo}
 	    		</div>
     		</div>
 	    </div>
