@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.ReviewDto;
+import com.example.semiproject3.vo.ReviewListSearchVO;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
@@ -116,4 +117,65 @@ public class ReviewDaoImpl implements ReviewDao {
       Object[] param= {itemNo};
       return jdbcTemplate.query(sql, mapper,param);
    }
+   
+ //페이징처리
+@Override
+public List<ReviewDto> selectList(ReviewListSearchVO vo) {
+	if(vo.isSearch()) {
+		return search(vo);
+	}
+	else {
+		return list(vo);
+	}
+}
+
+@Override
+public List<ReviewDto> list(ReviewListSearchVO vo) {
+	String sql = "select * from ("
+			+ "select rownum rn, TMP.* from("
+				+ "select * from review order by review_no desc"
+			+ ")TMP"
+		+ ") where rn between ? and ?";
+	Object[] param = {vo.startRow(), vo.endRow()};
+	return jdbcTemplate.query(sql, mapper, param);
+}
+
+@Override
+public List<ReviewDto> search(ReviewListSearchVO vo) {
+	String sql = "select * from ("
+			+ "select rownum rn, TMP.* from ("
+				+ "select * from review where instr(#1,?) > 0 "
+				+ "order by review_no desc"
+			+ ")TMP"
+		+ ") where rn between ? and ?";
+	sql = sql.replace("#1", vo.getType());
+	Object[] param = {
+			vo.getKeyword(), vo.startRow(), vo.endRow()
+	};
+	return jdbcTemplate.query(sql, mapper, param);
+}
+
+@Override
+public int count(ReviewListSearchVO vo) {
+	if(vo.isSearch()) {
+		return searchCount(vo);
+	}
+	else {
+		return listCount(vo);
+	}
+}
+
+@Override
+public int searchCount(ReviewListSearchVO vo) {
+	String sql = "select count(*) from review where instr(#1, ?) > 0";
+	sql = sql.replace("#1", vo.getType());
+	Object[] param = {vo.getKeyword()};
+	return jdbcTemplate.queryForObject(sql, int.class, param);
+}
+
+@Override
+public int listCount(ReviewListSearchVO vo) {
+	String sql = "select count(*) from review";
+	return jdbcTemplate.queryForObject(sql, int.class);
+	}
 }

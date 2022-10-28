@@ -164,7 +164,7 @@
 	<li class="float-left">
 		<a href="#">주문관리</a>
 		<ul>
-			<li><a href="#">주문목록</a></li>
+			<li><a href="/orders/list">주문목록</a></li>
 		</ul>
 	</li>
 	<li class="float-left">
