@@ -19,13 +19,6 @@ public class BuyDaoImpl implements BuyDao {
 	//RowMapper
 	private RowMapper<BuyDto> mapper = (rs, idx) -> {
 		return BuyDto.builder()
-							.buyNo(rs.getInt("buy_no"))
-							.orderNo(rs.getInt("order_no"))
-							.CustomerId(rs.getString("customer_id"))
-							.itemNo(rs.getInt("item_no"))
-							.addressNo(rs.getInt("address_no"))
-							.buyCnt(rs.getInt("buy_cnt"))
-							.buyDate(rs.getDate("buy_date"))
 						.build();
 	};
 	
@@ -33,13 +26,6 @@ public class BuyDaoImpl implements BuyDao {
 	private ResultSetExtractor<BuyDto> extractor = (rs)->{
 		if(rs.next()) {
 			return BuyDto.builder()
-					.buyNo(rs.getInt("buy_no"))
-					.orderNo(rs.getInt("order_no"))
-					.CustomerId(rs.getString("customer_id"))
-					.itemNo(rs.getInt("item_no"))
-					.addressNo(rs.getInt("address_no"))
-					.buyCnt(rs.getInt("buy_cnt"))
-					.buyDate(rs.getDate("buy_date"))
 				.build();
 		}
 		else {
@@ -47,30 +33,39 @@ public class BuyDaoImpl implements BuyDao {
 		}
 	};
 	
-	//번호 생성
-	@Override
-	public int sequence() {
-		String sql = "select buy_seq.nextval from dual";
-		return jdbcTemplate.queryForObject(sql, int.class);
-	}
-	
 	//구매
 	@Override
 	public void insert(BuyDto buyDto) {
 		String sql = "insert into buy("
-				+ "buy_no, "
-				+ "order_no, "
-				+ "customer_id, "
-				+ "item_no, "
-				+ "address_no, "
-				+ "buy_cnt, "
-				+ "buy_date) "
-				+ "values(?, ?, ? ,? ,? ,?, ?)";
+				+ "orders_no,"
+				+ "customer_id,"
+				+ "item_no,"
+				+ "delivery_fee,"
+				+ "item_name,"
+				+ "item_size,"
+				+ "item_color,"
+				+ "item_cnt,"
+				+ "item_total_price,"
+				+ "delivery_name,"
+				+ "delivery_phone,"
+				+ "delivery_post,"
+				+ "delivery_host,"
+				+ "delivery_detail_host) "
+				+ "values(?,?,3000,?,?,?,?,?,?,?,?,?,?)";
 		Object[] param = {
-				buyDto.getBuyNo(), buyDto.getOrderNo(),
-				buyDto.getCustomerId(), buyDto.getItemNo(),
-				buyDto.getAddressNo(), buyDto.getBuyCnt(),
-				buyDto.getBuyDate()
+				buyDto.getOrdersNo(),
+				buyDto.getCustomerId(),
+				buyDto.getItemNo(),
+				buyDto.getItemName(),
+				buyDto.getItemSize(),
+				buyDto.getItemColor(),
+				buyDto.getItemCnt(),
+				buyDto.getItemTotalPrice(),
+				buyDto.getDeliveryName(),
+				buyDto.getDeliveryPhone(),
+				buyDto.getDeliveryPost(),
+				buyDto.getDeliveryHost(),
+				buyDto.getDeliveryDetailHost()
 		};
 		jdbcTemplate.update(sql, param);
 	}
