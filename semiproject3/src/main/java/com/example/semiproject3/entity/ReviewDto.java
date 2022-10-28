@@ -19,5 +19,6 @@ public class ReviewDto {
 	private Date reviewDate;
 	private int imageNo;
 	private boolean reviewBlind;
+	private int reviewCnt;
 	}
 
