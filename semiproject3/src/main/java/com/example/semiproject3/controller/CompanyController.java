@@ -112,7 +112,7 @@ public class CompanyController {
       return "company/list";
    }
    
-   // 명함 이미지 
+   // 명함 이미지(페이징처리)
    @GetMapping("/cardList")
    public String cardlist(Model model,
          @ModelAttribute(name="vo") CompanyUniteVO vo){

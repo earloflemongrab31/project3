@@ -19,6 +19,7 @@ import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CustomerDao;
+import com.example.semiproject3.vo.AddressUniteVO;
 
 @Controller
 @RequestMapping("/address")
@@ -51,27 +52,46 @@ public class AddressController {
       return "redirect:list";
    }
    
-   //목록
+//   //목록
+//   @GetMapping("/list")
+//   public String list(Model model, HttpSession session,
+//               @RequestParam(required = false) String type,
+//               @RequestParam(required = false) String keyword) {
+//
+//		  String loginId = (String) session.getAttribute(SessionConstant.ID);
+//
+//	      boolean isSearch = type != null && keyword != null;
+//	      if(isSearch) { // 검색
+//	         model.addAttribute("list", addressDao.selectList(type, keyword));
+//	      }
+//	      else { //목록
+//	         model.addAttribute("list", addressDao.selectList(loginId));
+//	      }
+//      
+//	      List<AddressDto>listBasic=addressDao.selectOneBasic(loginId);
+//	      model.addAttribute("listBasic", listBasic);
+//  	
+//	      return "address/list";
+//   }
+  
+   //목록 페이징 처리
    @GetMapping("/list")
-   public String list(Model model, HttpSession session,
-               @RequestParam(required = false) String type,
-               @RequestParam(required = false) String keyword) {
-
-		  String loginId = (String) session.getAttribute(SessionConstant.ID);
-
-	      boolean isSearch = type != null && keyword != null;
-	      if(isSearch) { // 검색
-	         model.addAttribute("list", addressDao.selectList(type, keyword));
-	      }
-	      else { //목록
-	         model.addAttribute("list", addressDao.selectList(loginId));
-	      }
-      
-	      List<AddressDto>listBasic=addressDao.selectOneBasic(loginId);
-	      model.addAttribute("listBasic", listBasic);
-  	
-	      return "address/list";
+   public String list(Model model,HttpSession session,
+		   @ModelAttribute(name="vo") AddressUniteVO vo) {
+   
+   int count = addressDao.count(vo);
+   vo.setCount(count);
+		   
+		   
+   String loginId = (String) session.getAttribute(SessionConstant.ID);
+   List<AddressDto>listBasic = addressDao.selectOneBasic(loginId);
+   model.addAttribute("listBasic",addressDao.selectOneBasic(loginId));
+   model.addAttribute("list",addressDao.selectList(vo));
+   model.addAttribute("param",vo);
+   return "address/list";
    }
+   
+   
    
    //수정
    @GetMapping("/edit")
