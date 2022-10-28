@@ -57,6 +57,10 @@
 </table>
 
 </div>
+
+<div class="row right">
+ 	<a class="btn btn-positive" href="invenList">전체 상품 현황</a>
+</div>
    
 <!-- 페이지 네비게이터 -->
 <div class="row center">

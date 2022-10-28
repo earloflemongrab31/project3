@@ -15,11 +15,19 @@
     })
 </script>
 
-
-
 <jsp:include page="/WEB-INF/views/template/header.jsp">
    <jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
+
+<script type="text/javascript">
+
+function fail(){
+    if(confirm("내가 작성한 글은 신고 할 수 없습니다")){
+        return false;
+    }
+}
+
+</script>
 
 <div class="container-1000 mt-40 mb-40">
 
@@ -63,14 +71,17 @@
          <tr>
             <th>Option</th>
             <td>
-               <select class="input w-100" name="itemColor">
-                  <option value="">선택</option>
-                  <c:forEach var="itemDto" items="${buylist}">
-                     <option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
-                        ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
-                     </option>
-                  </c:forEach>
-               </select>
+				<select class="input w-100" name="itemColor">
+					<option value="">선택</option>
+					<c:if test="${empty buylist}">
+						<option>상품준비중</option>
+					</c:if>
+					<c:forEach var="itemDto" items="${buylist}">
+						<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+						${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+						</option>
+					</c:forEach>
+				</select>
                <input class="input w-100" type="hidden" name="itemSize" value="" >
             </td>
          </tr>
@@ -78,7 +89,9 @@
             <th>Qnty</th>
             <td>
 <!--                <button class="minus-btn" type="button">-</button> -->
+
                <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
+
 <!--                <button class="plus-btn" type="button">+</button> -->
             </td>
          </tr>
@@ -114,6 +127,7 @@
 </div>
 </form>
 
+
 <div class="flexbox">
    <div class=" w-50 center item item-detail">
       <span>상세보기</span>
@@ -122,7 +136,6 @@
       <span>리뷰보기</span>
    </div>
 </div>
-      
       
 <div class = "row center mb-30 detail">
    <div class = "row center mb-30">
@@ -190,9 +203,20 @@
                      </c:choose>            
                      <td>
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
+                        
+                         <!-- 내글은 신고버튼 다르게 -->
                      <td>
-                        <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
+                    
+                     <c:choose>
+                     <c:when test="${loginId != list.customerId}"> 
+							<a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
+						</c:when>
+						<c:otherwise>
+								<a href="#" onclick="fail();">신고</a>
+						</c:otherwise>
+                     </c:choose>
                      </td>
+                     
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
                      		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>해제</a></td>

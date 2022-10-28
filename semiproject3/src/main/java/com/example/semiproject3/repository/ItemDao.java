@@ -2,6 +2,7 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
+import com.example.semiproject3.entity.InvenDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListSearchVO;
 import com.example.semiproject3.vo.BuyListVO;
@@ -82,8 +83,12 @@ public interface ItemDao {
 	List<ItemListVO> selectItemList(int itemNo);
 	ItemListVO selectItemOne(ItemListVO itemLitsVO);
 	
+	//상품 품절 상태 확인
+	void plus(InvenDto invenDto);
+	
+	void minus(InvenDto invenDto);
+
 	//한 개 상품 사진 하나 확인용
 	ItemListVO selectItemOne(int itemNo);
-	
 	
 }

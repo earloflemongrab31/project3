@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.semiproject3.entity.InvenDto;
 import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.vo.BuyListSearchVO;
 import com.example.semiproject3.vo.BuyListVO;
@@ -527,6 +528,25 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
+	//상품 품절 상태 확인
+	@Override
+	public void plus(InvenDto invenDto) {
+		String sql= "update item set item_total_cnt = item_total_cnt + ? where item_no = ?";
+		Object[] param= {
+				invenDto.getInvenQuantity(), invenDto.getItemNo()
+		};
+		jdbcTemplate.update(sql,param);
+	}
+
+	@Override
+	public void minus(InvenDto invenDto) {
+		String sql= "update item set item_total_cnt = item_total_cnt - ? where item_no = ?";
+		Object[] param= {
+				invenDto.getInvenQuantity(), invenDto.getItemNo()
+		};
+		jdbcTemplate.update(sql,param);
+	}
+		
 	@Override
 	public ItemListVO selectItemOne(int itemNo) {
 		String sql = "select * from ("
