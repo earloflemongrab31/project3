@@ -37,7 +37,7 @@ public class BuyDaoImpl implements BuyDao {
 	@Override
 	public void insert(BuyDto buyDto) {
 		String sql = "insert into buy("
-				+ "orders_no,"
+				+ "buy_no,"
 				+ "customer_id,"
 				+ "item_no,"
 				+ "delivery_fee,"
@@ -51,9 +51,8 @@ public class BuyDaoImpl implements BuyDao {
 				+ "delivery_post,"
 				+ "delivery_host,"
 				+ "delivery_detail_host) "
-				+ "values(?,?,3000,?,?,?,?,?,?,?,?,?,?)";
+				+ "values(buy_seq.nextval,?,?,3000,?,?,?,?,?,?,?,?,?,?)";
 		Object[] param = {
-				buyDto.getOrdersNo(),
 				buyDto.getCustomerId(),
 				buyDto.getItemNo(),
 				buyDto.getItemName(),
@@ -72,27 +71,29 @@ public class BuyDaoImpl implements BuyDao {
 
 	//구매 목록
 	@Override
-	public List<BuyDto> selectList() {
-		String sql = "select * from buy order by buy_no desc";
-		return jdbcTemplate.query(sql, mapper);
+	public List<BuyDto> selectList(String loginId) {
+		String sql = "select * from buy where customer_id=? "
+				+ "order by buy_no desc";
+		return jdbcTemplate.query(sql, mapper, loginId);
 	}
 
 	//구매 목록 검색
 	@Override
-	public List<BuyDto> selectList(String type, String keyword) {
+	public List<BuyDto> selectList(String loginId, String type, String keyword) {
 		String sql = "select * from buy "
-				+ "where instr(#1, ?) > 0 order by buy_no desc";
+				+ "where instr(#1, ?) > 0 and customer_id=? "
+				+ "order by buy_no desc";
 		sql = sql.replace("#1", type);
-		Object[] param = {keyword};
+		Object[] param = {keyword, loginId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-
-	//구매 정보
-	@Override
-	public BuyDto selectOne(int buyNo) {
-		String sql = "select * from buy where buy_no = ?";
-		Object[] param = {buyNo};
-		return jdbcTemplate.query(sql, extractor, param);
-	}
+//
+//	//구매 정보
+//	@Override
+//	public BuyDto selectOne(int buyNo) {
+//		String sql = "select * from buy where buy_no = ?";
+//		Object[] param = {buyNo};
+//		return jdbcTemplate.query(sql, extractor, param);
+//	}
 
 }
