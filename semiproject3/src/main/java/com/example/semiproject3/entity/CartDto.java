@@ -17,5 +17,8 @@ public class CartDto {
 	private String itemSize;
 	private int itemCnt;
 	private Date cartDate;
+	private int itemPrice;
+	private int deliveryFee;
+	private int cartPrice;
 	
 }

@@ -211,29 +211,6 @@ public class ItemController {
 		
 	}
 	
-	//카트
-	@GetMapping("/cart")
-	public String cart(
-			@RequestParam int itemNo,
-			HttpSession session
-			) {
-		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		//하나의아이템 정보가지고오기 
-		ItemDto itemDto=itemDao.selectOne(itemNo);
-		//cartDto에 정보 삽입
-		CartDto cartDto=new CartDto();
-		cartDto.setCustomerId(loginId);
-		cartDto.setItemNo(itemNo);
-		cartDto.setCartItemName(itemDto.getItemName());
-		cartDto.setCartItemPrice(itemDto.getItemPrice());
-		cartDto.setCartItemColor(itemDto.getItemColor());
-		cartDto.setCartItemSize(itemDto.getItemSize());
-		
-		//db에 있으면 지움 없으면 추가
-		return "redirect:buydetail?itemNo="+itemNo;
-	};
-	
-	
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
 	public String buylist(Model model, 

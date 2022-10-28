@@ -9,6 +9,10 @@ public interface CartDao {
 
 	//카트 입력
 	void insert(CartDto cartDto);
+	
+	//카트 목록
+	List<CartDto> selectList();
+	
 	//카트 삭제 
 	void delete(CartDto cartDto);
 }

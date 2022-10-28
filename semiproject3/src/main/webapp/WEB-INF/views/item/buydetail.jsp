@@ -38,8 +38,8 @@ function fail(){
 <%-- ${loginId} --%>
 <!-- </div> -->
 
-<form action="/orders/insert" method="post">
-<!-- <form action="/cart/insert" method="post"> -->
+<!-- <form action="/orders/insert" method="post"> -->
+<form action="/cart/insert" method="post">
 <div class="row">
    <table class="table">
       <tbody>
