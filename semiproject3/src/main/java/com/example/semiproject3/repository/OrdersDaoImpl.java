@@ -19,22 +19,23 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	private RowMapper<OrdersDto> mapper = (rs, idx)->{
 		return OrdersDto.builder()
-						.ordersNo(rs.getInt("orders_no"))
-						.customerId(rs.getString("customer_id"))
-						.itemNo(rs.getInt("item_no"))
-						.customerName(rs.getString("customer_name"))
-						.customerPhone(rs.getString("customer_phone"))
-						.customerPost(rs.getString("customer_post"))
-						.customerHost(rs.getString("customer_host"))
-						.customerDetailHost(rs.getString("customer_detail_host"))
-						.payMoney(rs.getInt("pay_money"))
-						.deliveryFee(rs.getInt("delivery_fee"))
-						.itemName(rs.getString("item_name"))
-						.itemPrice(rs.getInt("item_price"))
-						.itemSize(rs.getString("item_size"))
-						.itemColor(rs.getString("item_color"))
-						.itemCnt(rs.getInt("item_cnt"))
-						.ordersTime(rs.getDate("orders_time"))
+					.ordersNo(rs.getInt("orders_no"))
+					.customerId(rs.getString("customer_id"))
+					.itemNo(rs.getInt("item_no"))
+	//				.addressName(rs.getString("address_name"))
+	//				.addressPhone(rs.getString("address_phone"))
+	//				.addressPost(rs.getString("address_post"))
+	//				.addressHost(rs.getString("address_host"))
+	//				.addressDetailHost(rs.getString("address_detail_host"))
+	//				.payMoney(rs.getInt("pay_money"))
+					.deliveryFee(rs.getInt("delivery_fee"))
+	//				.imageNo(rs.getInt("image_no"))
+					.itemName(rs.getString("item_name"))
+					.itemPrice(rs.getInt("item_price"))
+					.itemSize(rs.getString("item_size"))
+					.itemColor(rs.getString("item_color"))
+					.itemCnt(rs.getInt("item_cnt"))
+	//				.ordersTime(rs.getDate("orders_time"))
 				.build();
 	};
 	
@@ -44,22 +45,21 @@ public class OrdersDaoImpl implements OrdersDao {
 					.ordersNo(rs.getInt("orders_no"))
 					.customerId(rs.getString("customer_id"))
 					.itemNo(rs.getInt("item_no"))
-					.customerName(rs.getString("customer_name"))
-					.customerPhone(rs.getString("customer_phone"))
-					.addressName(rs.getString("address_name"))
-					.addressPhone(rs.getString("address_phone"))
-					.customerPost(rs.getString("customer_post"))
-					.customerHost(rs.getString("customer_host"))
-					.customerDetailHost(rs.getString("customer_detail_host"))
-					.payMoney(rs.getInt("pay_money"))
+//					.addressName(rs.getString("address_name"))
+//					.addressPhone(rs.getString("address_phone"))
+//					.addressPost(rs.getString("address_post"))
+//					.addressHost(rs.getString("address_host"))
+//					.addressDetailHost(rs.getString("address_detail_host"))
+//					.payMoney(rs.getInt("pay_money"))
 					.deliveryFee(rs.getInt("delivery_fee"))
+//					.imageNo(rs.getInt("image_no"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
 					.itemSize(rs.getString("item_size"))
 					.itemColor(rs.getString("item_color"))
 					.itemCnt(rs.getInt("item_cnt"))
-					.ordersTime(rs.getDate("orders_time"))
-					.build();
+//					.ordersTime(rs.getDate("orders_time"))
+				.build();
 		}
 		else {
 			return null;
@@ -105,6 +105,31 @@ public class OrdersDaoImpl implements OrdersDao {
 		return jdbcTemplate.query(sql, extractor, customerId);
 	}
 
+//	@Override
+//	public boolean update(OrdersDto ordersDto) {
+//		String sql = "update orders set "
+//						+ "address_name,"
+//						+ "address_phone,"
+//						+ "address_post,"
+//						+ "address_host,"
+//						+ "address_detail_host,"
+//						+ "pay_money,"
+//						+ "delivery_fee,"
+//						+ "image_no,"
+//					+ "orders_time) values(?,?,?,?,?,?,3000,?,sysdate)";
+//		Object[] param = {
+//				ordersDto.getAddressName(),
+//				ordersDto.getAddressPhone(),
+//				ordersDto.getAddressPost(),
+//				ordersDto.getAddressHost(),
+//				ordersDto.getAddressDetailHost(),
+//				ordersDto.getPayMoney(),
+//				ordersDto.getImageNo()
+//		};
+//				
+//		return jdbcTemplate.update(sql, param) > 0;
+//	}
+	
 	@Override
 	public void delete(OrdersDto ordersDto) {
 		// TODO Auto-generated method stub
@@ -176,7 +201,7 @@ public class OrdersDaoImpl implements OrdersDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 //	//로우맵퍼
 //	private RowMapper<OrdersDto> mapper = new RowMapper<OrdersDto>() {
 //

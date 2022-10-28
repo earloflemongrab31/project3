@@ -6,9 +6,6 @@ import com.example.semiproject3.entity.BuyDto;
 
 public interface BuyDao {
 	
-	//구매내역 번호 생성
-	int sequence();
-	
 	//구매내역 삽입
 	void insert(BuyDto buyDto);
 	
@@ -18,6 +15,5 @@ public interface BuyDao {
 	
 	//구매 정보
 	BuyDto selectOne(int buyNo);
-	
 	
 }
