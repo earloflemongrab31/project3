@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.entity.InvenDto;
+import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.repository.CompanyDao;
 import com.example.semiproject3.repository.InvenDao;
 import com.example.semiproject3.repository.ItemCntDao;
@@ -106,7 +107,7 @@ public class InvenController {
 	
 	@PostMapping("/insert")
 	public String insert(
-			@ModelAttribute InvenDto invenDto, 
+			@ModelAttribute InvenDto invenDto,
 			RedirectAttributes attr) {
 		
 		boolean search = itemCntDao.selectOne(invenDto) == null;
@@ -119,16 +120,19 @@ public class InvenController {
 			itemCntDao.insert(invenDto);
 			invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
 			itemCntDao.plus(invenDto);
+			itemDao.plus(invenDto);
 			return "redirect:detail";
 		}
 		else {
 			if((invenDto.getInvenStatus()).equals("입고완료")){
 				itemCntDao.plus(invenDto);
 				invenDao.invenIn(invenDto.getInvenQuantity(), invenDto.getItemNo());
+				itemDao.plus(invenDto);
 				return "redirect:detail";
 			}else if((invenDto.getInvenStatus()).equals("출고완료")) {
 				itemCntDao.minus(invenDto);
 				invenDao.invenOut(invenDto.getInvenQuantity(), invenDto.getItemNo());
+				itemDao.minus(invenDto);
 				return "redirect:detail";
 			}else {
 				return "redirect:detail";
