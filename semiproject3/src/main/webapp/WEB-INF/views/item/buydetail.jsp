@@ -129,9 +129,16 @@ function fail(){
    <div class=" w-50 center item item-detail">
       <span>상세보기</span>
    </div>
-   <div class="w-50 center item item-review unchecked">
-      <span>리뷰보기</span>
-   </div>
+   <c:if test="${fn:length(reviewList)>0}">
+  	 <div class="w-50 center item item-review unchecked">
+   	   <span>리뷰${fn:length(reviewList)}</span>
+   	</div>
+   </c:if>
+   <c:if test="${fn:length(reviewList)==0}">
+  	 <div class="w-50 center item item-review unchecked">
+   	   <span>리뷰</span>
+   	</div>
+   </c:if>
 </div>
       
 <div class = "row center mb-30 detail">
@@ -167,19 +174,21 @@ function fail(){
                   <th>내용</th>
                   <th>사진</th>
                   <th>신고</th>
+                  <th>좋아요</th>
                </tr>
             </thead>
          <tbody align="center" >   
                <c:forEach var="list" items="${reviewList}">
                   <tr>
                      <td>
-                        <c:if test="${list.reviewStar==1}">★</c:if>
-                        <c:if test="${list.reviewStar==2}">★★</c:if>
-                        <c:if test="${list.reviewStar==3}">★★★</c:if>
-                        <c:if test="${list.reviewStar==4}">★★★★</c:if>
-                        <c:if test="${list.reviewStar==5}">★★★★★</c:if>
+                        <c:if test="${list.reviewStar==1}">★(${list.reviewStar})</c:if>
+                        <c:if test="${list.reviewStar==2}">★★(${list.reviewStar})</c:if>
+                        <c:if test="${list.reviewStar==3}">★★★(${list.reviewStar})</c:if>
+                        <c:if test="${list.reviewStar==4}">★★★★(${list.reviewStar})</c:if>
+                        <c:if test="${list.reviewStar==5}">★★★★★(${list.reviewStar})</c:if>
                
                         <c:set var="total" value="${total+list.reviewStar}"/>
+                       
                      </td>
                      <td>${list.reviewPackaging}</td>
                      <td>${list.reviewShipping}</td>
@@ -192,12 +201,14 @@ function fail(){
                      <!--블라인드여부에따라 다르게 표시 -->
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
-                     		블라인드처리된 게시물입니다. 
+                     		<td>블라인드처리된 게시물입니다.</td> 
                      	</c:when>
                      	<c:otherwise>
                      		<td>${list.reviewContent}</td>
                      	</c:otherwise>
                      </c:choose>            
+                     
+                     <!--  -->
                      <td>
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
                         
@@ -213,6 +224,23 @@ function fail(){
 						</c:otherwise>
                      </c:choose>
                      </td>
+                     
+                     <!--좋아요  -->
+                     <c:if test="${list.reviewCnt==0}">
+                     	<td>
+                     		<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                     			♡
+                     		</a>
+                     	</td>
+                     </c:if>
+
+                    <c:if test="${list.reviewCnt>0}">
+                     	<td>
+                     		<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                     			♥${list.reviewCnt}
+                     		</a>
+                     	</td>
+                     </c:if>
                      
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
