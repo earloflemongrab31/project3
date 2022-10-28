@@ -15,6 +15,9 @@ public interface OrdersDao {
 	//주문 입력
 	void insert(OrdersDto ordersDto);
 	
+	//주문하기
+//	boolean update(OrdersDto ordersDto);
+	
 	//주문 삭제
 	void delete(OrdersDto ordersDto);
 	
