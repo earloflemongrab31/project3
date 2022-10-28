@@ -128,7 +128,7 @@
 			
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>
 			<button class="btn btn-positive">검색</button><br><br>
-			<button class="btn btn-postive">결제하기</button><br><br>	
+			<button class="btn btn-postsive">결제하기</button><br><br>	
 			<button class="btn btn-positive">돌아가기</button><br><br>
 	</div>
 </form>

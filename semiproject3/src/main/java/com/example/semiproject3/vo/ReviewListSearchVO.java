@@ -10,19 +10,26 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CustomerListSearchVO {
+public class ReviewListSearchVO {
 
 private String type, keyword;
+	
+	//현재 페이지 번호(없을 경우 1로 설정)
+	private int p = 1;
+	private int size = 10;
+
+	//총 게시글 수
+	private int count;
+
+	//화면에 표시할 블럭 개수
+	private int blockSize = 5;
+	
 	
 	@ToString.Include
 	public boolean isSearch() {
 		return type != null && keyword != null;
 	}
 	
-	//현재 페이지 번호(없을 경우 1로 설정)
-	private int p = 1;
-	private int size = 5;
-
 	@ToString.Include
 	public int startRow() {
 		return endRow() - (size - 1);
@@ -31,12 +38,6 @@ private String type, keyword;
 	public int endRow() {
 		return p * size;
 	}
-	
-	//총 게시글 수
-	private int count;
-
-	//화면에 표시할 블럭 개수
-	private int blockSize = 5;
 	
 	@ToString.Include
 	public int pageCount() {

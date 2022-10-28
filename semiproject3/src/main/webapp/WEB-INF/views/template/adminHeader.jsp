@@ -164,13 +164,14 @@
 	<li class="float-left">
 		<a href="#">주문관리</a>
 		<ul>
-			<li><a href="#">주문목록</a></li>
+			<li><a href="/orders/list">주문목록</a></li>
 		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">회원관리</a>
 		<ul>
 			<li><a href="/customer/list">회원목록</a></li>
+			<li><a href="/review/reportList">리뷰신고목록</a></li>
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->

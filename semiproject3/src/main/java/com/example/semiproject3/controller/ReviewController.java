@@ -26,6 +26,7 @@ import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ReportDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.repository.ReviewLikeDao;
+import com.example.semiproject3.vo.ReviewListSearchVO;
 
 @Controller
 @RequestMapping("/review")
@@ -168,19 +169,33 @@ public class ReviewController {
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	}
 	
-	//신고목록
+//	//신고목록
+//	@GetMapping("/reportList")
+//	public String reportList(Model model, 
+//					@RequestParam(required = false) String type,
+//					@RequestParam(required = false) String keyword) {
+//		boolean isSearch = type != null && keyword != null;
+//		if(isSearch) { // 검색
+//			model.addAttribute("reportList", reportDao.selectList(type, keyword));
+//		}
+//		else { //목록
+//			model.addAttribute("reportList", reportDao.selectList());
+//		}
+//		return "review/reportList";
+//		
+		
+	//신고목록 페이징 처리
 	@GetMapping("/reportList")
-	public String reportList(Model model, 
-					@RequestParam(required = false) String type,
-					@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) { // 검색
-			model.addAttribute("reportList", reportDao.selectList(type, keyword));
-		}
-		else { //목록
-			model.addAttribute("reportList", reportDao.selectList());
-		}
-		return "review/reportList";
+	public String reportList(Model model,
+			@ModelAttribute(name="vo") ReviewListSearchVO vo) {
+	
+	int count = reportDao.count(vo);
+	vo.setCount(count);
+	
+	model.addAttribute("reportList",reportDao.selectList(vo));
+	model.addAttribute("param",vo);
+	return "review/reportList";
+	
 	}
 	@GetMapping("/blind")
 	public String blind() {

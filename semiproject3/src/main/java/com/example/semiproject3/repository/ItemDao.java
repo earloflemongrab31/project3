@@ -87,5 +87,8 @@ public interface ItemDao {
 	void plus(InvenDto invenDto);
 	
 	void minus(InvenDto invenDto);
+
+	//한 개 상품 사진 하나 확인용
+	ItemListVO selectItemOne(int itemNo);
 	
 }

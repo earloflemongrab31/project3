@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.AddressDto;
+import com.example.semiproject3.vo.AddressUniteVO;
 
 @Repository
 public class AddressDaoImpl implements AddressDao{
@@ -215,5 +216,66 @@ return jdbcTemplate.query(sql, mapper, param);
 		String sql = "select * from address where customer_id=?";
 		Object[] param = {loginId};
 		return jdbcTemplate.query(sql, extractor, param);
+	}
+
+	@Override
+	public List<AddressDto> selectList(AddressUniteVO vo) {
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+
+	@Override
+	public List<AddressDto> list(AddressUniteVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from address order by address_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public List<AddressDto> search(AddressUniteVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from address where instr(#1,?) > 0 "
+					+ "order by address_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public int count(AddressUniteVO vo) {
+		if(vo.isSearch()) {
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
+}
+	
+
+	@Override
+	public int searchCount(AddressUniteVO vo) {
+		String sql = "select count(*) from address where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	@Override
+	public int listCount(AddressUniteVO vo) {
+		String sql = "select count(*) from address";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 }

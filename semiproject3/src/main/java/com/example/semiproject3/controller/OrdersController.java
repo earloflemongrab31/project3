@@ -9,15 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
-import com.example.semiproject3.entity.OrdersItemDto;
+import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
-import com.example.semiproject3.repository.OrdersItemDao;
 
 @Controller
 @RequestMapping("/orders")
@@ -35,62 +33,49 @@ public class OrdersController {
 	@Autowired
 	private ItemDao itemDao;
 	
-	@Autowired
-	private OrdersItemDao ordersItemDao;
 	
 	//등록
 	@PostMapping("/insert")
 	public String insert(
-			@ModelAttribute OrdersItemDto ordersItemDto,
-			HttpSession session
-			){
-		
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		
-		//원래 있는 내용 삭제
-		if(ordersItemDao.selectOrdersItemList(loginId).size() > 0){
-			ordersItemDao.delete(loginId);
-		};
-		
-		//구매할 상품 저장
-		ordersItemDao.insert(ordersItemDto);
+			@ModelAttribute OrdersDto ordersDto){
 			
+		ordersDao.insert(ordersDto);
+		
 		return "redirect:detail";
 	}
 	
 	@GetMapping("/detail")
 	public String list(
 			Model model, 
-			HttpSession session,
-			RedirectAttributes attr) {
-
-		//주문번호
-		int ordersNo = ordersDao.sequence();
+			HttpSession session) {
 		
 		//회원 정보 불러오기
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		ordersDao.insert(ordersNo, loginId);
-
 		model.addAttribute("customerDto", customerDao.selectOne(loginId));
 
 		//주소 정보 불러오기
 		model.addAttribute("addressList", addressDao.selectList(loginId));
 		
-		model.addAttribute("ordersItemList", ordersItemDao.selectOrdersItemList(loginId));
-			
+		//장바구니 상품 불러오기
+//		model.addAttribute("cartList", cartDao.selectList(loginId));
+		
+		//주문 내역 불러오기
+		OrdersDto ordersDto = ordersDao.selectOne(loginId);
+		model.addAttribute("ordersDto", ordersDto);
+		
+		model.addAttribute("imageDto", itemDao.selectItemOne(ordersDto.getItemNo()));
+		
 		return "orders/detail";
 	}
 	
-//	//목록
-//	@GetMapping("/list")
-//	public String list(Model model, HttpSession session) {
-//		
-//		String loginId = (String)session.getAttribute(SessionConstant.ID);
-//		model.addAttribute("orders",ordersDao.selectList(loginId));
-//		model.addAttribute("oredresCount",ordersDao.selectOrders(loginId));
-//		return "orders/list";
-//	}
-//	
+	//목록
+	@GetMapping("/list")
+	public String list(Model model) {
+		
+		model.addAttribute("ordersList",ordersDao.selectList());
+		return "orders/list";
+	}
+	
 	
 	//목록(페이징)
 //	@GetMapping("/list")
