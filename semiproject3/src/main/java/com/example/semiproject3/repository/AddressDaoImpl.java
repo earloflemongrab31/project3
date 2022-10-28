@@ -219,37 +219,37 @@ return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	@Override
-	public List<AddressDto> selectList(AddressUniteVO vo) {
+	public List<AddressDto> selectList(String loginId, AddressUniteVO vo) {
 		if(vo.isSearch()) {
-			return search(vo);
+			return search(loginId, vo);
 		}
 		else {
-			return list(vo);
+			return list(loginId, vo);
 		}
 	}
 
 	@Override
-	public List<AddressDto> list(AddressUniteVO vo) {
+	public List<AddressDto> list(String loginId, AddressUniteVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
-					+ "select * from address order by address_no desc"
+					+ "select * from address where customer_id=? order by address_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
-		Object[] param = {vo.startRow(), vo.endRow()};
+		Object[] param = {loginId, vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	@Override
-	public List<AddressDto> search(AddressUniteVO vo) {
+	public List<AddressDto> search(String loginId, AddressUniteVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from address where instr(#1,?) > 0 "
+					+ "select * from address where instr(#1,?) > 0 and customer_id=?"
 					+ "order by address_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
-				vo.getKeyword(), vo.startRow(), vo.endRow()
+				vo.getKeyword(), loginId, vo.startRow(), vo.endRow()
 		};
 		return jdbcTemplate.query(sql, mapper, param);
 	}

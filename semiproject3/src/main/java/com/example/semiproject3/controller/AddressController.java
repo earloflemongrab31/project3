@@ -86,7 +86,7 @@ public class AddressController {
    String loginId = (String) session.getAttribute(SessionConstant.ID);
    List<AddressDto>listBasic = addressDao.selectOneBasic(loginId);
    model.addAttribute("listBasic",addressDao.selectOneBasic(loginId));
-   model.addAttribute("list",addressDao.selectList(vo));
+   model.addAttribute("list",addressDao.selectList(loginId, vo));
    model.addAttribute("param",vo);
    return "address/list";
    }
