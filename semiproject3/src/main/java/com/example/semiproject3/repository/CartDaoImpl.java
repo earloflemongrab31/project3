@@ -23,7 +23,7 @@ public class CartDaoImpl implements CartDao{
 							.cartNo(rs.getInt("cart_no"))
 							.customerId(rs.getString("customer_id"))
 							.itemNo(rs.getInt("item_no"))
-							.cartCount(rs.getInt("cart_count"))
+							.itemTotalCnt(rs.getInt("item_total_cnt"))
 							.itemName(rs.getString("item_name"))
 							.itemColor(rs.getString("item_color"))
 							.itemSize(rs.getString("item_size"))
@@ -42,7 +42,7 @@ public class CartDaoImpl implements CartDao{
 							.cartNo(rs.getInt("cart_no"))
 							.customerId(rs.getString("customer_id"))
 							.itemNo(rs.getInt("item_no"))
-							.cartCount(rs.getInt("cart_count"))
+							.itemTotalCnt(rs.getInt("item_total_cnt"))
 							.itemName(rs.getString("item_name"))
 							.itemColor(rs.getString("item_color"))
 							.itemSize(rs.getString("item_size"))
@@ -62,7 +62,7 @@ public class CartDaoImpl implements CartDao{
 							.cartNo(rs.getInt("cart_no"))
 							.customerId(rs.getString("customer_id"))
 							.itemNo(rs.getInt("item_no"))
-							.cartCount(rs.getInt("cart_count"))
+							.itemTotalCnt(rs.getInt("item_total_cnt"))
 							.itemName(rs.getString("item_name"))
 							.itemColor(rs.getString("item_color"))
 							.itemSize(rs.getString("item_size"))
@@ -86,7 +86,7 @@ public class CartDaoImpl implements CartDao{
 								.cartNo(rs.getInt("cart_no"))
 								.customerId(rs.getString("customer_id"))
 								.itemNo(rs.getInt("item_no"))
-								.cartCount(rs.getInt("cart_count"))
+								.itemTotalCnt(rs.getInt("item_total_cnt"))
 								.itemName(rs.getString("item_name"))
 								.itemColor(rs.getString("item_color"))
 								.itemSize(rs.getString("item_size"))
@@ -110,18 +110,20 @@ public class CartDaoImpl implements CartDao{
 				+ "cart_no, "
 				+ "customer_id, "
 				+ "item_no, "
+				+ "item_total_cnt, "
 				+ "item_name, "
 				+ "item_color, "
 				+ "item_size, "
 				+ "item_cnt, "
 				+ "item_price, "
 				+ "cart_price) "
-				+ "values(cart_seq.nextval,?,?,?,?,?,?,?,?)";
+				+ "values(cart_seq.nextval,?,?,?,?,?,?,?,?,?)";
 		Object[] param= {
 				cartDto.getCustomerId(), cartDto.getItemNo(),
-				cartDto.getItemName(), cartDto.getItemColor(),
-				cartDto.getItemSize(), cartDto.getItemCnt(),
-				cartDto.getItemPrice(), cartDto.getCartPrice()
+				cartDto.getItemTotalCnt(), cartDto.getItemName(), 
+				cartDto.getItemColor(), cartDto.getItemSize(), 
+				cartDto.getItemCnt(), cartDto.getItemPrice(), 
+				cartDto.getCartPrice()
 		};
 		jdbcTemplate.update(sql,param);	
 	}

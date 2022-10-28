@@ -710,6 +710,7 @@
 			console.log(size);
 			console.log(totalcnt);
 			$("input[name=itemSize]").attr("value", size);
+			$("input[name=itemTotalCnt]").attr("value", totalcnt);
 			$("input[name=itemCnt]").attr("max", totalcnt);
 			$("input[name=itemCnt]").val(0);
 		});

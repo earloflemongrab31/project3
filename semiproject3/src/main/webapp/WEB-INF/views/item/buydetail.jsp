@@ -83,6 +83,7 @@ function fail(){
 					</c:forEach>
 				</select>
                <input class="input w-100" type="hidden" name="itemSize" value="" >
+               <input class="input w-100" type="hidden" name="itemTotalCnt" value="">
             </td>
          </tr>
          <tr>

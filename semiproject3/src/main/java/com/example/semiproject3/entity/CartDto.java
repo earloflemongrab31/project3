@@ -12,7 +12,7 @@ public class CartDto {
 	private int cartNo;
 	private String customerId;
 	private int itemNo;
-	private int cartCount;
+	private int itemTotalCnt;
 	private String itemName;
 	private String itemColor;
 	private String itemSize;

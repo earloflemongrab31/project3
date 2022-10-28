@@ -32,11 +32,11 @@
 		<tr>
 			<td>수량</td>
 			<td>
-				<input type="text" class="quantity input" value="${cartDto.itemCnt}">
-				<span>
-				<button class="plus btn">+</button>
-				<button class="minus btn">-</button>
-				</span>
+				<input type="number" class="itemCnt input w-100" value="${cartDto.itemCnt}" min="0" max="${cartDto.itemTotalCnt}">
+<!-- 				<span> -->
+<!-- 				<button class="plus btn">+</button> -->
+<!-- 				<button class="minus btn">-</button> -->
+<!-- 				</span> -->
 			</td>
 	 		<td class="right" rowspan="2">
 	 			<c:set var="cntPrice" value="${cartDto.itemCnt*cartDto.itemPrice}"/>
