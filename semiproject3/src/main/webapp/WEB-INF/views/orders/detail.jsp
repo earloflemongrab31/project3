@@ -6,11 +6,17 @@
 	<jsp:param value="주문페이지" name="title"/>
 </jsp:include>
 
+<!-- <script> -->
+<!-- 	$(window).on("beforeunload", function(){ -->
+<!-- 	    return false; -->
+<!-- 	}); -->
+<!-- </script> -->
+
 <form action="/buy/insert" method="post">
 
 <div class="container-1000 mt-50 mb-50">
 <input type="hidden" name="ordersNo" value="${ordersDto.ordersNo}">
-
+<input type="hidden" name="itemNo" value="${ordersDto.itemNo}">
 <div class="row center">
 	<h1>ORDER</h1>
 </div>
@@ -25,15 +31,13 @@
 			<tr>
 				<th class="w-25">이름</th>
 				<td>
-					<input class="input input-none w-100" type="text" name="customerName" 
-							value="${customerDto.customerName}" readonly>
+					${customerDto.customerName}
 				</td>
 			</tr>
 			<tr>
 				<th>휴대폰 번호</th>
 				<td>
-					<input class="input input-none w-100" type="text" name="customerPhone" 
-							value="${customerDto.customerPhone}" readonly>
+					${customerDto.customerPhone}
 				</td>
 		</tbody>
 	</table>
@@ -50,33 +54,33 @@
 				<tr>
 					<th class="w-25">이름</th>
 					<td>
-						<input class="input input-none w-100" type="text" name="addressName" 
+						<input class="input input-none w-100" type="text" name="deliveryName" 
 								value="${addressDto.addressName}" readonly>
 					</td>
 				</tr>
 				<tr>
 					<th rowspan="3">배송지</th>
 					<td>
-						<input class="input input-none w-100" type="text" name="customerPost" 
+						<input class="input input-none w-100" type="text" name="deliveryPost" 
 								value="${addressDto.addressPost}" readonly>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input class="input input-none w-100" type="text" name="customerHost" 
+						<input class="input input-none w-100" type="text" name="deliveryHost" 
 								value="${addressDto.addressHost}" readonly>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input class="input input-none w-100" type="text" name="customerDetailHost" 
+						<input class="input input-none w-100" type="text" name="deliveryDetailHost" 
 								value="${addressDto.addressDetailHost}" readonly>
 					</td>
 				</tr>
 				<tr>
 					<th>연락처</th>
 					<td>
-						<input class="input input-none w-100" type="text" name="addressPhone" 
+						<input class="input input-none w-100" type="text" name="deliveryPhone" 
 								value="${addressDto.addressTel}" readonly>
 					</td>
 				</tr>
@@ -118,7 +122,7 @@
 			<tr>
 				<td>컬러</td>
 				<td>
-					<input type="text" class="input input-none w-100" name="itemSize"
+					<input type="text" class="input input-none w-100" name="itemColor"
 						value="${ordersDto.itemColor}" readonly>
 				</td>
 			</tr>

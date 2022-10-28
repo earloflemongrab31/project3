@@ -13,19 +13,19 @@ public class OrdersDto {
 	private int ordersNo;
 	private String customerId;
 	private int itemNo;
-	private String customerName;
-	private String customerPhone;
-	private String addressName;
-	private String addressPhone;
-	private String customerPost;
-	private String customerHost;
-	private String customerDetailHost;
-	private int payMoney;
 	private int deliveryFee;
 	private String itemName;
 	private int itemPrice;
 	private String itemSize;
 	private String itemColor;
 	private int itemCnt;
-	private Date ordersTime;
+
+//	private int payMoney;
+//	private int imageNo;
+//	private Date ordersTime;
+//	private String addressName;
+//	private String addressPhone;
+//	private String addressPost;
+//	private String addressHost;
+//	private String addressDetailHost;
 }

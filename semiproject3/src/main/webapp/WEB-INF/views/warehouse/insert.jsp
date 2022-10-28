@@ -114,7 +114,7 @@
                                 <input class="input w-100" name="invenName" type="text">
                             </td>
                             <td>
-                                <input class="input w-100" name="invenPhone"type="text">
+                                <input class="input w-100" name="invenPhone"type="text" maxlength="11">
                             </td>
                             <td>
                                 <select class="input w-100" name="invenStatus">

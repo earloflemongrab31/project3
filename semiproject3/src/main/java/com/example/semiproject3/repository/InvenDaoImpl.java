@@ -65,7 +65,7 @@ public class InvenDaoImpl implements InvenDao{
 	
 	@Override
 	public void plus(int quantity, int itemNo) {
-		String sql= "update item set item_total_cnt=item_total_cnt + ? where item_no=?";
+		String sql= "update item set item_total_cnt = item_total_cnt + ? where item_no=?";
 		Object[] param= {
 				quantity,
 				itemNo
@@ -74,7 +74,7 @@ public class InvenDaoImpl implements InvenDao{
 	}
 	@Override
 	public void minus(int quantity, int itemNo) {
-		String sql= "update item set item_total_cnt=item_total_cnt - ? where item_no=?";
+		String sql= "update item set item_total_cnt = item_total_cnt - ? where item_no=?";
 		Object[] param= {
 				quantity,
 				itemNo

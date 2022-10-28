@@ -143,7 +143,7 @@
 				<tr>
 					<td>상품명</td>
 					<td>
-						<input name="itemName" type="text" required value="${itemDto.itemName})"
+						<input name="itemName" type="text" required value="${itemDto.itemName}"
 							class="input w-100" autocomplete="off">
 					</td>
 				</tr>
