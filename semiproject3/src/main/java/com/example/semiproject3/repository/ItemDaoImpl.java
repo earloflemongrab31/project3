@@ -526,5 +526,16 @@ public class ItemDaoImpl implements ItemDao {
 		String sql = "select count(*) from item_list_view";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+
+	@Override
+	public ItemListVO selectItemOne(int itemNo) {
+		String sql = "select * from ("
+						+ "	select tmp.*, rownum rn from ("
+							+ "	select * from item_list_view where item_no=?"
+						+ ") tmp"
+					+ ") where rn = 1";
+		
+		return jdbcTemplate.query(sql, itemExtractor, itemNo);
+	}
 	
 }
