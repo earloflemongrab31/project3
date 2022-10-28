@@ -11,16 +11,6 @@
 <div class="container-1000 mt-50 mb-50">
 
 <div class="row center">
-	<h3>${customerDto}</h3>
-</div>
-<div class="row center">
-	<h3>${addressList}</h3>
-</div>
-<div class="row center">
-	<h3>${ordersDto}</h3>
-</div>
-
-<div class="row center">
 	<h1>ORDER</h1>
 </div>
 
@@ -102,20 +92,41 @@
 	<table class="table table-slit">
 		<tbody>
 			<tr>
-				<th class="w-25" rowspan="3">
-					<img src="/image/download/${ordersDto.itemNo}">
+				<th class="w-25" rowspan="4">
+					<img class="w-100" src="/image/download/${imageDto.imageNo}">
+					<input type="hidden" name="imageNo" value="${imageDto.imageNo}">
 				</th>
-				<td>상품명 : ${ordersDto.itemName }</td>
-				<td rowspan="3">
+				<td>상품명</td>
+				<td>
+					<input type="text" class="input input-none w-100" name="itemName" 
+						value="${ordersDto.itemName}" readonly>
+				</td>
+				<td rowspan="4">
 					금액 : 
-					${ordersDto.itemPrice} * ${ordersDto.itemCnt}
+					<fmt:formatNumber value="${ordersDto.itemPrice * ordersDto.itemCnt}" pattern="#,##0원"/>
+					<input type="hidden" name="itemPrice" value="${ordersDto.itemPrice}">
 				</td>
 			</tr>
 			<tr>
-				<td>옵션 : ${ordersDto.itemSize} / ${ordersDto.itemColor}</td>
+				<td>사이즈</td>
+				<td>
+					<input type="text" class="input input-none w-100" name="itemSize"
+						value="${ordersDto.itemSize}" readonly>
+				</td>
 			</tr>
 			<tr>
-				<td>수량 : ${ordersDto.itemCnt}</td>
+				<td>컬러</td>
+				<td>
+					<input type="text" class="input input-none w-100" name="itemSize"
+						value="${ordersDto.itemColor}" readonly>
+				</td>
+			</tr>
+			<tr>
+				<td>수량</td>
+				<td>
+					<input type="number" class="input input-none w-100" name="itemCnt" 
+							value="${ordersDto.itemCnt}" readonly>
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -130,7 +141,7 @@
 			<tr>
 				<th class="w-25">결제 금액</th>
 				<td>
-					상품 가격 * ${ordersDto.itemCnt}
+					<fmt:formatNumber value="${ordersDto.itemPrice * ordersDto.itemCnt}" pattern="#,##0원"/>
 				</td>
 			</tr>
 		</tbody>

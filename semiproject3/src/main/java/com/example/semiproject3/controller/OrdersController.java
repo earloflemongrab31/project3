@@ -60,8 +60,11 @@ public class OrdersController {
 //		model.addAttribute("cartList", cartDao.selectList(loginId));
 		
 		//주문 내역 불러오기
-		model.addAttribute("ordersDto", ordersDao.selectOne(loginId));
-			
+		OrdersDto ordersDto = ordersDao.selectOne(loginId);
+		model.addAttribute("ordersDto", ordersDto);
+		
+		model.addAttribute("imageDto", itemDao.selectItemOne(ordersDto.getItemNo()));
+		
 		return "orders/detail";
 	}
 	

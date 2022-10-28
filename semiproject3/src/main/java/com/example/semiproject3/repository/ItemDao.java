@@ -82,5 +82,8 @@ public interface ItemDao {
 	List<ItemListVO> selectItemList(int itemNo);
 	ItemListVO selectItemOne(ItemListVO itemLitsVO);
 	
+	//한 개 상품 사진 하나 확인용
+	ItemListVO selectItemOne(int itemNo);
+	
 	
 }
