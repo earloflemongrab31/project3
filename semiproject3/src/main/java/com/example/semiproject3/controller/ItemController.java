@@ -34,6 +34,7 @@ import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
 import com.example.semiproject3.repository.ReviewDao;
 import com.example.semiproject3.repository.ReviewLikeDao;
+import com.example.semiproject3.vo.BuyListSearchVO;
 import com.example.semiproject3.vo.ItemListSearchVO;
 
 @Controller
@@ -236,9 +237,9 @@ public class ItemController {
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
 	public String buylist(Model model, 
-			@ModelAttribute(name="vo") ItemListSearchVO vo) {
+			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 		
-		int count = itemDao.count(vo);
+		int count = itemDao.buyCount(vo);
 		vo.setCount(count);
 		
 		model.addAttribute("buylist", itemDao.selectBuyList(vo));

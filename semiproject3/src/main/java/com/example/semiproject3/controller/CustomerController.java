@@ -130,6 +130,7 @@ public class CustomerController {
 		int count = customerDao.count(vo);
 		vo.setCount(count);
 		
+		model.addAttribute("param",vo);
 		model.addAttribute("list", customerDao.selectList(vo));
 		
 		return "customer/list";

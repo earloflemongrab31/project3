@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.NonFinal;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CustomerListSearchVO {
-
-private String type, keyword;
+public class BuyListSearchVO {
+	
+	private String type, keyword;
 	
 	@ToString.Include
 	public boolean isSearch() {
@@ -21,7 +22,7 @@ private String type, keyword;
 	
 	//현재 페이지 번호(없을 경우 1로 설정)
 	private int p = 1;
-	private int size = 5;
+	private int size = 6;
 
 	@ToString.Include
 	public int startRow() {

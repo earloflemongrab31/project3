@@ -56,7 +56,7 @@ function fail(){
             <th>Price</th>
             <td>
                <fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0원"></fmt:formatNumber>
-               <input type="hidden" name="itemPrice" value="${itemDto.itemPrice}" readonly>
+               <input type="hidden" name="itemPrice" value="${itemDto.itemPrice}">
             </td>
          <tr>
             <th>Option</th>
@@ -77,7 +77,7 @@ function fail(){
             <td>
 <!--                <button class="minus-btn" type="button">-</button> -->
 
-               <input class="input" type="number" name="itemCnt" min="0" max="" >
+               <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
 
 <!--                <button class="plus-btn" type="button">+</button> -->
             </td>

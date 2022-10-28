@@ -33,14 +33,14 @@ td, th {
 				</tr>
 			</thead>
 			<tbody align="center" >	
-				<c:forEach var="cardDto" items="${list}">
+				<c:forEach var="cardDto" items="${cardList}">
 					<tr>
 						<td>${cardDto.companyName}</td>
 						<td>
 							<img src="/companyImage/download/${cardDto.imageNo}" width="100" >
 						</td>
 					</tr>
-				</c:forEach>
+			</c:forEach>
 			</tbody>
 		</table>
 		
@@ -80,7 +80,7 @@ td, th {
 </li>
  
 <c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<li ${p }<c:if="${i== p}">class="on"</c:if>><a href="cardList?p=${i}&${vo.parameter()}">${i}</a></li>
+	<li<c:if test="${i==param.p}">class="on"</c:if>><a href="cardList?p=${i}&${vo.parameter()}">${i}</a></li>
 </c:forEach>
 
 <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
