@@ -146,6 +146,10 @@
 	    <div class="row">
 	        <h2>협력사 리스트</h2>
 	    </div>
+	    
+	     <div class="row right">
+	       <a href="/company/insert">등록</a>
+	    </div>
     <div class="row">
     <table class="table table-border">
             <thead>

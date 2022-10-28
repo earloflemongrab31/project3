@@ -182,5 +182,9 @@ public class ReviewController {
 		}
 		return "review/reportList";
 	}
+	@GetMapping("/blind")
+	public String blind() {
+		return "";
+	};
 
 }
