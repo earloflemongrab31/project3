@@ -45,7 +45,7 @@ public class BuyController {
 		return "buy/success";
 	}
 	
-	//구매 목록 및 검색
+	//구매 목록 및 검색 회원용
 	@GetMapping("/list")
 	public String list(Model model, 
 			@RequestParam(required = false) String type,
@@ -64,5 +64,21 @@ public class BuyController {
 		return "/customer/buyHistory";
 	}
 	
-	
+	//구매 목록 관리자용
+	@GetMapping("/admin-buylist")
+	public String adminBuylist(Model model) {
+		model.addAttribute("buyList", buyDao.selectListAll());
+		
+		return "/admin/buyList";
+	}
+
+	//구매 목록 관리자용
+	@GetMapping("/admin-buydetail")
+	public String adminBuydetail(
+			@RequestParam int buyNo,
+			Model model) {
+		model.addAttribute("buyDto", buyDao.selectOne(buyNo));
+		
+		return "/admin/buyDetail";
+	}
 }
