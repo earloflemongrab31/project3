@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CartDto;
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.repository.CartDao;
 
 @Controller
@@ -33,22 +33,21 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-	@ResponseBody
-	@GetMapping("/cartInsert")
-	public String cartInsert(
-			@ModelAttribute CartDto param ,
-			HttpSession session	) {
-
-		String result = "00";
-		
-		System.out.println("/cartInsert ================"+ param);		
-		
-		//Cart db insert
-			
-		
-		//result =="00" 성공 result =="01" 동일아이템 중복
-		return result;
-	}
+//	@ResponseBody
+//	@GetMapping("/cartInsert")
+//	public String cartInsert(
+//			@RequestParam int itemNo,
+//			HttpSession session	) {
+//
+//		String result = "00";
+//		
+//		System.out.println("/cartInsert ================"+ itemNo);		
+//		//Card db insert
+//		
+//		//
+//		
+//		return result;
+//	}
 	
 	@GetMapping("/delete")
 	public String delete(
