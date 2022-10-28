@@ -148,4 +148,5 @@ public class InvenController {
 		attr.addAttribute(itemNo);
 		return "warehouse/detail";
 	}
+
 }
