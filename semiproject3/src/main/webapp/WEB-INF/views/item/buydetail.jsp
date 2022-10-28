@@ -202,7 +202,10 @@ function fail(){
                      <!--블라인드여부에따라 다르게 표시 -->
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
-                     		<td>블라인드처리된 게시물입니다.</td> 
+                     		<td>
+                     			블라인드처리된 게시물입니다.<br>
+                     			<a href="/center/list"><문의하기></a>
+                     		</td> 
                      	</c:when>
                      	<c:otherwise>
                      		<td>${list.reviewContent}</td>
