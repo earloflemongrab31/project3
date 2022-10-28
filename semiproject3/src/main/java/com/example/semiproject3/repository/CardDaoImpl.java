@@ -29,6 +29,7 @@ public class CardDaoImpl implements CardDao{
 					.cardType(rs.getString("card_type"))
 					.cardSize(rs.getInt("card_size"))
 					.cardTime(rs.getDate("card_time"))
+					.companyName(rs.getString("company_name"))
 					.build();
 		}
 	};
@@ -44,8 +45,10 @@ public class CardDaoImpl implements CardDao{
 						.cardType(rs.getString("card_type"))
 						.cardSize(rs.getInt("card_size"))
 						.cardTime(rs.getDate("card_time"))
+						.companyName(rs.getString("company_name"))
 						.build();
-			}else {
+			}
+			else {
 				return null;
 			}
 		}
@@ -60,12 +63,14 @@ public class CardDaoImpl implements CardDao{
 	
 	@Override
 	public void insert(CardDto cardDto) {
-		String sql="insert into card values(?,?,?,?,sysdate)";
+		String sql="insert into card values(?,?,?,?,sysdate,?)";
 		Object[] param= {
 				cardDto.getCardNo(),
 				cardDto.getCardName(),
 				cardDto.getCardType(),
-				cardDto.getCardSize()
+				cardDto.getCardSize(),
+				cardDto.getCompanyName()
+				
 		};
 		jdbcTemplate.update(sql,param);
 	}
