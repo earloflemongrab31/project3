@@ -7,10 +7,10 @@
    <jsp:param value="신고 목록 페이지" name="title"/>
 </jsp:include>
 
-<div class ="container-1200">
+<div class ="container-1000">
         
 <div class="row center">
-	<h1>신고 목록</h1>
+	<h1>리뷰 신고 목록</h1>
 	<hr>
 </div>
 
@@ -46,10 +46,6 @@
 </table>
 </div>
 			
-	</div>
-
-	<div class="row center">
-	    <a href="/">홈으로 이동</a>
 	</div>
 	
     
