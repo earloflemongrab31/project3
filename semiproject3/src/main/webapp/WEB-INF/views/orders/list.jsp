@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="주문 목록" name="title"/>
+	<jsp:param value="관리자페이지" name="title"/>
 </jsp:include>
 
 
@@ -57,9 +57,6 @@
 		</table>
 	</div>
 	
-	<div class="row right">
-		<a class="btn btn-positive" href="insert">상품등록</a>
-	</div>
 	
 </div>
 	
@@ -140,7 +137,6 @@
 			
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>
 			<button class="btn btn-positive">검색</button><br><br>
-			<button class="btn btn-postsive">결제하기</button><br><br>	
 			<button class="btn btn-positive">돌아가기</button><br><br>
 	</div>
 </form>
