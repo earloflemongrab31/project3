@@ -20,11 +20,13 @@
 					<a href="buydetail?itemNo=${itemDto.itemNo}">
 						<img src="/image/download/${itemDto.imageNo}" class="w-75">
 					</a>
-					<br>
+					<br><br>
 					${itemDto.itemNo}<br>
 					${itemDto.itemName}<br>
 					${itemDto.itemPrice}원<br>
-					${itemDto.itemColor}<br><br>
+					<c:if test="${itemDto.itemTotalCnt == 0}">
+						<h4>품절</h4><br><br>
+					</c:if>
 				</div>
 			</c:if>
 		</c:forEach>
