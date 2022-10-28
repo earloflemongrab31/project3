@@ -110,6 +110,7 @@ function fail(){
                </c:if>
             </td>
             <td colspan="2" align="right">
+            	<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
                <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
                <button class="btn btn-positive" type="submit">구매하기</button>
                <button class="btn btn-positive" type="submit">장바구니${isCart}</button>    
@@ -201,7 +202,10 @@ function fail(){
                      <!--블라인드여부에따라 다르게 표시 -->
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
-                     		<td>블라인드처리된 게시물입니다.</td> 
+                     		<td>
+                     			블라인드처리된 게시물입니다.<br>
+                     			<a href="/center/list"><문의하기></a>
+                     		</td> 
                      	</c:when>
                      	<c:otherwise>
                      		<td>${list.reviewContent}</td>
