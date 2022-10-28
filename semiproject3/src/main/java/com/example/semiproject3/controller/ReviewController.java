@@ -65,6 +65,10 @@ public class ReviewController {
 			reviewDto.setReviewNo(reviewNo);
 			reviewDto.setCustomerId(loginId);
 			reviewDto.setItemNo(itemNo);
+			reviewDto.setReviewContent(reviewDto.getReviewContent());
+			reviewDto.setReviewStar(reviewDto.getReviewStar());
+			reviewDto.setReviewShipping(reviewDto.getReviewShipping());
+			reviewDto.setReviewPackaging(reviewDto.getReviewPackaging());
 			reviewDao.insert(reviewDto);
 		
 		
@@ -111,14 +115,14 @@ public class ReviewController {
 		//세션을 이용해 아이템정보값을 담는다.
 		session.setAttribute("itemNo", itemNo);
 		//하나 리뷰 정보를 불러와 화면에 뿌려준다. 
-		model.addAttribute("review",reviewDao.selectOne(reviewNo));
+		model.addAttribute("review",reviewDao.selectOne2(reviewNo));
 		//하나의 리뷰정보를 가지고 온다. 
-		ReviewDto reviewDto=reviewDao.selectOne(reviewNo);
+		ReviewDto reviewDto=reviewDao.selectOne2(reviewNo);
 		//만약 자기자신의 글에 신고를 했다면 화면을 튕긴다. 
 		if(reviewDto.getCustomerId().equals(loginId)) {
 			return "redirect:/item/buydetail?itemNo="+itemNo;
 		}else {
-		return "review/report";
+		return "redirect:/item/buydetail?itemNo="+itemNo;
 		}
 	}
 	
