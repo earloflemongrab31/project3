@@ -10,7 +10,6 @@
 
 <script type="text/javascript">
 
-
 function fail(){
     if(confirm("내가 작성한 글은 신고 할 수 없습니다")){
         return false;
@@ -123,7 +122,6 @@ function fail(){
       <span>리뷰보기</span>
    </div>
 </div>
-      
       
 <div class = "row center mb-30 detail">
    <div class = "row center mb-30">
