@@ -106,7 +106,8 @@ public class ReviewController {
 			@RequestParam int reviewNo,
 			@RequestParam int itemNo,
 			Model model,
-			HttpSession session
+			HttpSession session,
+			RedirectAttributes attr
 			) {
 		//지금 접속해있는 사용자의 아이디값을 가지고온다. 
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
@@ -119,16 +120,14 @@ public class ReviewController {
 		//하나의 리뷰정보를 가지고 온다. 
 		ReviewDto reviewDto=reviewDao.selectOne2(reviewNo);
 		//만약 자기자신의 글에 신고를 했다면 화면을 튕긴다. 
-		if(reviewDto.getCustomerId().equals(loginId)) {
-			return "redirect:/item/buydetail?itemNo="+itemNo;
-		}else {
-		return "redirect:/item/buydetail?itemNo="+itemNo;
+		attr.addAttribute("reviewNo",reviewNo);
+		attr.addAttribute("itemNo",itemNo);
+		return "/review/report";
 		}
-	}
 	
 	@PostMapping("/report")
 	public String report(
-			@ModelAttribute ReportDto reportDto,
+			@ModelAttribute ReportDto reportDto1,
 			HttpSession session,
 			RedirectAttributes attr
 			) {
@@ -136,17 +135,17 @@ public class ReviewController {
 		//세션값에서 아이템 정보를 불러온다.
 		int itemNo=(int)session.getAttribute("itemNo");
 		//하나의 리뷰정보를 불러온다.
-		ReviewDto reviewDto=reviewDao.selectOne(reviewNo);
-		//회원아이디값을 불러온다.
+		ReviewDto reviewDto=reviewDao.selectOne2(reviewNo);
+//		//회원아이디값을 불러온다.
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		reportDao.insert(reportDto.builder()
+		reportDao.insert(ReportDto.builder()
 				.customerId(reviewDto.getCustomerId())
 				.reviewContent(reviewDto.getReviewContent())
-				.reportRadio(reportDto.getReportRadio())
-				.reportContent(reportDto.getReportContent())
+				.reportRadio(reportDto1.getReportRadio())
+				.reportContent(reportDto1.getReportContent())
 				.who(loginId)
 				.build());
-		//
+		
 		attr.addAttribute("itemNo",itemNo);
 		return "redirect:/item/buydetail";
 	}
