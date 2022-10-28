@@ -154,7 +154,7 @@ function goCart(itemNo){
 	</form>
 
 
-<<<<<<< HEAD
+
 	<div class="flexbox">
 		<div class=" w-50 center item item-detail">
 			<span>상세보기</span>
@@ -225,9 +225,17 @@ function goCart(itemNo){
    <div class=" w-50 center item item-detail">
       <span>상세보기</span>
    </div>
-   <div class="w-50 center item item-review unchecked">
-      <span>리뷰보기</span>
-   </div>
+   <c:if test="${fn:length(reviewList)>0}">
+   	<div class="w-50 center item item-review unchecked">
+   	   <span>리뷰${fn:length(reviewList)}</span>
+   	</div>
+   </c:if>
+   
+   <c:if test="${fn:length(reviewList)==0}">
+   	<div class="w-50 center item item-review unchecked">
+   	   <span>리뷰보기</span>
+   	</div>
+   </c:if>
 </div>
       
 <div class = "row center mb-30 detail">
@@ -263,6 +271,7 @@ function goCart(itemNo){
                   <th>내용</th>
                   <th>사진</th>
                   <th>신고</th>
+                  <th>좋아요</th>
                </tr>
             </thead>
          <tbody align="center" >   
@@ -288,10 +297,18 @@ function goCart(itemNo){
                      <!--블라인드여부에따라 다르게 표시 -->
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
+
                      		<td>블라인드처리된 게시물입니다.</td> 
->>>>>>> refs/remotes/origin/main
+
+
+                     		<td>
+                     			블라인드 처리된 게시물입니다.<br>
+                     			<a href="/center/list">(사용자문의하기)</a>
+                     		</td> 
+                     	
+
                      	</c:when>
-<<<<<<< HEAD
+
 										<c:otherwise>
 											<td>${list.reviewContent}</td>
 										</c:otherwise>
@@ -337,7 +354,7 @@ function goCart(itemNo){
 			</c:choose>
 		</div>
 	</div>
-=======
+
                      	<c:otherwise>
                      		<td>${list.reviewContent}</td>
                      	</c:otherwise>
@@ -346,8 +363,8 @@ function goCart(itemNo){
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
                         
                          <!-- 내글은 신고버튼 다르게 -->
+					
                      <td>
-                    
                      <c:choose>
                      <c:when test="${loginId != list.customerId}"> 
 							<a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
@@ -356,16 +373,39 @@ function goCart(itemNo){
 								<a href="#" onclick="fail();">신고</a>
 						</c:otherwise>
                      </c:choose>
-                     </td>
+                     </td>   
+                           
+                     <!--좋아요  -->
+                     <c:if test="${list.reviewCnt==0}">
+                     	<td>
+                     		<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                     			♡
+                     		</a>
+                     	</td>
+                     </c:if>
+                     
+                    <c:if test="${list.reviewCnt>0}">
+                     	<td>
+                     		<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                     			♥${list.reviewCnt}
+                     		</a>
+                     	</td>
+                     </c:if>
+                     
                      
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
-                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>해제${list.reviewBlind}</a></td>
+                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                     			<button type="button">블라인드<br>해제</button>
+                     		</a></td>
                      	</c:when>
                      	<c:otherwise>
-                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>설정${list.reviewBlind}</a></td>
+                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                     			<button type="button">블라인드<br>설정</button>
+                     		</a></td>
                      	</c:otherwise>
                      </c:choose>
+  
                      
                   </tr>
                </c:forEach>
@@ -380,7 +420,7 @@ function goCart(itemNo){
       </c:choose>
    </div>
 </div>
->>>>>>> refs/remotes/origin/main
+
 
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
