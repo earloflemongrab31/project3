@@ -129,9 +129,16 @@ function fail(){
    <div class=" w-50 center item item-detail">
       <span>상세보기</span>
    </div>
-   <div class="w-50 center item item-review unchecked">
-      <span>리뷰보기</span>
-   </div>
+   <c:if test="${fn:length(reviewList)>0}">
+  	 <div class="w-50 center item item-review unchecked">
+   	   <span>리뷰${fn:length(reviewList)}</span>
+   	</div>
+   </c:if>
+   <c:if test="${fn:length(reviewList)==0}">
+  	 <div class="w-50 center item item-review unchecked">
+   	   <span>리뷰</span>
+   	</div>
+   </c:if>
 </div>
       
 <div class = "row center mb-30 detail">
@@ -181,6 +188,7 @@ function fail(){
                         <c:if test="${list.reviewStar==5}">★★★★★(${list.reviewStar})</c:if>
                
                         <c:set var="total" value="${total+list.reviewStar}"/>
+                       
                      </td>
                      <td>${list.reviewPackaging}</td>
                      <td>${list.reviewShipping}</td>
