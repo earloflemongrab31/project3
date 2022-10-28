@@ -9,15 +9,14 @@
 </jsp:include>
 
 <script type="text/javascript">
-// function delchk(){
-// 	if(${longinId} = )
-//     if(confirm("삭제하시겠습니까?")){
-//         location.href = "/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}"
-//         return true;
-//     } else {
-//         return false;
-//     }
+
+
+function fail(){
+    if(confirm("내가 작성한 글은 신고 할 수 없습니다")){
+        return false;
+    }
 }
+
 </script>
 
 <div class="container-1000 mt-40 mb-40">
@@ -192,12 +191,20 @@
                      </c:choose>            
                      <td>
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
+                        
+                         <!-- 내글은 신고버튼 다르게 -->
                      <td>
-                     <!-- 내글은 신고버튼 안보이게 -->
-              			 <c:if test="${loginId != list.customerId}"> 
+                    
+                     <c:choose>
+                     <c:when test="${loginId != list.customerId}"> 
 							<a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
-						</c:if> 
+						</c:when>
+						<c:otherwise>
+								<a href="#" onclick="fail();">신고</a>
+						</c:otherwise>
+                     </c:choose>
                      </td>
+                     
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
                      		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>해제</a></td>
