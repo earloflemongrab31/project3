@@ -119,9 +119,6 @@ function fail(){
          <tr>
             <th colspan="3">${itemDto.itemMemo}</th>
          </tr>
-         <tr>
-            <th colspan="3">${itemDto.itemContent}</th>
-         </tr>
       </tbody>
    </table>
 </div>
@@ -139,7 +136,7 @@ function fail(){
       
 <div class = "row center mb-30 detail">
    <div class = "row center mb-30">
-      <h4>아이템 상세보기 테스트</h4>
+      <h4>${itemDto.itemContent}</h4>
       <hr>
    </div>
 </div>
