@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CompanyDto;
-import com.example.semiproject3.vo.CompanyListSearchVO;
+import com.example.semiproject3.vo.CompanyUniteVO;
 
 @Repository
 public class CompanyDaoImpl implements CompanyDao{
@@ -117,6 +117,7 @@ public class CompanyDaoImpl implements CompanyDao{
 		String sql="select * from company order by company_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
+	
 	//수정
 	@Override
 	public boolean update(CompanyDto companyDto) {
@@ -151,7 +152,7 @@ public class CompanyDaoImpl implements CompanyDao{
 
 	
 	@Override
-	public List<CompanyDto> selectList(CompanyListSearchVO vo) {
+	public List<CompanyDto> selectList(CompanyUniteVO vo) {
 		if(vo.isSearch()) { //검색
 		return search(vo);
 		}
@@ -162,7 +163,7 @@ public class CompanyDaoImpl implements CompanyDao{
 
 
 	@Override
-	public List<CompanyDto> list(CompanyListSearchVO vo) {
+	public List<CompanyDto> list(CompanyUniteVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
 					+ "select * from company order by company_no desc"
@@ -174,7 +175,7 @@ public class CompanyDaoImpl implements CompanyDao{
 
 
 	@Override
-	public List<CompanyDto> search(CompanyListSearchVO vo) {
+	public List<CompanyDto> search(CompanyUniteVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
 					+ "select * from company where instr(#1,?) > 0 "
@@ -190,7 +191,7 @@ public class CompanyDaoImpl implements CompanyDao{
 
 
 	@Override
-	public int count(CompanyListSearchVO vo) {
+	public int count(CompanyUniteVO vo) {
 		if(vo.isSearch()) {//검색
 			return searchCount(vo);
 		}
@@ -200,7 +201,7 @@ public class CompanyDaoImpl implements CompanyDao{
 	}
 
 	@Override
-	public int searchCount(CompanyListSearchVO vo) {
+	public int searchCount(CompanyUniteVO vo) {
 		String sql = "select count(*) from company where instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
@@ -209,7 +210,7 @@ public class CompanyDaoImpl implements CompanyDao{
 
 
 	@Override
-	public int listCount(CompanyListSearchVO vo) {
+	public int listCount(CompanyUniteVO vo) {
 		String sql = "select count(*) from company";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}

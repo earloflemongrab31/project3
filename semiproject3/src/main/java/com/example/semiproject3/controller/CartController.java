@@ -41,8 +41,8 @@ public class CartController {
 		CartDto cartDto=new CartDto();
 		cartDto.setCustomerId(loginId);
 		cartDto.setItemNo(itemNo);
-		cartDao.delete(cartDto);
 		return "redirect:cartList";
 		
 	}
+
 }

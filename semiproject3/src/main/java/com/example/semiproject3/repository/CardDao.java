@@ -3,9 +3,7 @@ package com.example.semiproject3.repository;
 import java.util.List;
 
 import com.example.semiproject3.entity.CardDto;
-import com.example.semiproject3.entity.CartDto;
-import com.example.semiproject3.entity.CardDto;
-import com.example.semiproject3.vo.CardListSearchVO;
+import com.example.semiproject3.vo.CompanyUniteVO;
 
 public interface CardDao {
 		
@@ -21,14 +19,14 @@ public interface CardDao {
 		boolean delete(int cardNo);
 		
 		//통합 메소드(검색+목록)
-		List<CardDto> selectList(CardListSearchVO vo);
-		List<CardDto> list(CardListSearchVO vo);
-		List<CardDto> search(CardListSearchVO vo);
+		List<CardDto> selectList(CompanyUniteVO vo);
+		List<CardDto> list(CompanyUniteVO vo);
+		List<CardDto> search(CompanyUniteVO vo);
 			
 		//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
-		int count(CardListSearchVO vo);
-		int searchCount(CardListSearchVO vo);
-		int listCount(CardListSearchVO vo);
+		int count(CompanyUniteVO vo);
+		int searchCount(CompanyUniteVO vo);
+		int listCount(CompanyUniteVO vo);
 		
 		
 		
