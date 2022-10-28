@@ -16,11 +16,11 @@ import com.example.semiproject3.vo.CustomerListSearchVO;
 
 @Repository
 public class CustomerLikeDaoImpl implements CustomerLikeDao {
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-	
+
+
 	private RowMapper <CustomerLikeDto> mapper = new RowMapper<CustomerLikeDto>() {
 
 		@Override
@@ -32,7 +32,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 			return customerLikeDto;
 		}
 	};
-	
+
 	private ResultSetExtractor <CustomerLikeDto> extractor = new ResultSetExtractor<CustomerLikeDto>() {
 
 		@Override
@@ -49,7 +49,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 			}
 		}
 	};
-	
+
 	//찜 등록
 	@Override
 	public void insert(CustomerLikeDto customerLikeDto) {
@@ -57,7 +57,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 		Object[] param = {customerLikeDto.getCustomerId(), customerLikeDto.getItemNo()};
 		jdbcTemplate.update(sql, param);
 	}
-	
+
 	//찜 삭제
 	@Override
 	public void delete(CustomerLikeDto customerLikeDto) {
@@ -65,7 +65,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 		Object[] param = {customerLikeDto.getCustomerId(), customerLikeDto.getItemNo()};
 		jdbcTemplate.update(sql, param);
 	}
-	
+
 	//찜 기록
 	@Override
 	public boolean check(CustomerLikeDto customerLikeDto) {
@@ -74,7 +74,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 		int count = jdbcTemplate.queryForObject(sql, int.class, param);
 		return count == 1; //좋아요 상태면 1 아니면 0
 	}
-	
+
 	//찜 개수
 	@Override
 	public int count(int itemNo) {
@@ -82,7 +82,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 		Object[] param = {itemNo};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
-	
+
 	@Override
 	public int likeCount(String loginId) {
 		String sql = "select count(*) from customer_like where customer_id = ?";
@@ -100,7 +100,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 		Object[] param = {itemNo, itemNo};
 		jdbcTemplate.update(sql, param);
 	}
-	
+
 	@Override
 	public void likeRefresh(String loginId) {
 		String sql = "update customer set customer_like = ("
@@ -109,7 +109,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 				+ "where customer_id = ?";
 		Object[] param = {loginId, loginId};
 		jdbcTemplate.update(sql, param);
-		
+
 	}
 
 	   @Override
@@ -119,7 +119,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 		return jdbcTemplate.query(sql, mapper, param);
 	   }
 
-	   
+
 	 //페이징처리
 	@Override
 	public List<CustomerLikeDto> selectList(CustomerListSearchVO vo) {
