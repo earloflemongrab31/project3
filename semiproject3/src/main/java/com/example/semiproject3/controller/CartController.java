@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CartDto;
-import com.example.semiproject3.entity.ItemDto;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
@@ -53,9 +52,14 @@ public class CartController {
 	@PostMapping("/insert")
 	public String insert(@RequestParam int itemNo,
 			@ModelAttribute CartDto cartDto) {
+		boolean search = cartDao.selectOne(cartDto) == null;
 		
-		cartDao.insert(cartDto);
-		
+		if(search) {
+			cartDao.insert(cartDto);
+		}
+		else {
+			cartDao.plus(cartDto);
+		}
 		//cartDto에 정보 삽입
 //			CartDto cartDto=new CartDto();
 //			cartDto.setCustomerId(loginId);
@@ -66,32 +70,29 @@ public class CartController {
 //			cartDto.setItemSize(itemSize);
 //			cartDto.setItemCnt(itemCnt);
 		
-		//db에 있으면 지움 없으면 추가
-		
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	};
 	
 	//카트 리스트
 	@GetMapping("/cartList")
-	public String cartList(Model model,
-			HttpSession session) {
+	public String cartList(Model model, HttpSession session) {
 		//아이디가지고오기 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		model.addAttribute("cart",cartDao.selectList(loginId));
+		model.addAttribute("cartList",cartDao.selectList(loginId));
 	
 		return "cart/cartList";
 	}
 	
 	@GetMapping("/delete")
-	public String delete(
-			@RequestParam int itemNo,
+	public String delete(Model model,
+			@RequestParam int cartNo,
 			HttpSession session	) {
 		//아이디 가지고 오기 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartList",cartDao.selectList(loginId));
 		
-		CartDto cartDto=new CartDto();
-		cartDto.setCustomerId(loginId);
-		cartDto.setItemNo(itemNo);
+		cartDao.delete(cartNo);
+		
 		return "redirect:cartList";
 		
 	}

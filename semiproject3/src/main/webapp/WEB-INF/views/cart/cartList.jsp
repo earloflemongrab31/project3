@@ -7,44 +7,45 @@
 </jsp:include>
 
 
-
-
 <div class="container-600 mt-50 mb-50">
 <div class="row center mb-50">
 	 <h1>CART</h1>
 </div>
 <div class="row center">
-		장바구니 상품(${cartCount})
+		장바구니 상품
 </div>
 <table class="table table-border">
  	<tbody>
- 	<c:forEach var="cartDto" items="${cart}">
+ 	<c:forEach var="cartDto" items="${cartList}">
  		<c:if test="${cartDto.imageMain == 1}">
 	 		<tr>
 		 		<td rowspan="3">
 		 			<img src="/image/download/${cartDto.imageNo}" width="200">
 		 		</td>
-		 		<td colspan="2">${cartDto.cartItemName}</td>
-		 		<td class="right"><a href="delete?itemNo=${cartDto.itemNo}">삭제</a></td>
+		 		<td colspan="2">${cartDto.itemName}</td>
+		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
 			</tr>
  		</c:if>
 		<tr>
 			<td>수량</td>
-			<input type="text" class="quantity input" value="1">
-			<span>
-			
+			<td>
+				<input type="text" class="quantity input" value="${cartDto.itemCnt}">
+				<span>
 				<button class="plus btn">+</button>
 				<button class="minus btn">-</button>
-			<td>?</td>
+				</span>
+			</td>
 	 		<td class="right" rowspan="2">
-	 			<fmt:formatNumber value="${cartDto.cartItemPrice}" pattern="#,##0"/>원
+	 			<c:set var="cntPrice" value="${cartDto.itemCnt*cartDto.itemPrice}"/>
+	 			<fmt:formatNumber value="${cntPrice}" pattern="#,##0"/>원
 	 		</td>
 	 	</tr>
 	 	<tr>	
 	 		<td>옵션</td>
-	 		<td>${cartDto.cartItemColor} / ${cartDto.cartItemSize}</td>
+	 		<td>${cartDto.itemColor} / ${cartDto.itemSize}</td>
 		</tr>
-	 		<c:set var="total" value="${total+cartDto.cartItemPrice}"/>
+	 		<c:set var="total" value="${total+cntPrice}"/>
+	 		<c:set var="deliveryFee" value="${cartDto.deliveryFee}"/>
  	</c:forEach>
  	</tbody>
  	<tfoot>
@@ -57,8 +58,8 @@
  			<td class="center" colspan="6">
 				상품 총금액 : 
 				<fmt:formatNumber value="${total}" pattern="#,##0"/>원
-				 + 2,500원(배송비) = 
-				<fmt:formatNumber value="${total+2500}" pattern="#,##0"/>원
+				 + ${deliveryFee}원(배송비) = 
+				<fmt:formatNumber value="${total+deliveryFee}" pattern="#,##0"/>원
 			</td>
 		</tr>
  		<tr>
