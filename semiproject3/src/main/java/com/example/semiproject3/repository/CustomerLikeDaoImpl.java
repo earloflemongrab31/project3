@@ -1,6 +1,5 @@
 package com.example.semiproject3.repository;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,7 +11,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerLikeDto;
 import com.example.semiproject3.vo.CustomerListSearchVO;
 
