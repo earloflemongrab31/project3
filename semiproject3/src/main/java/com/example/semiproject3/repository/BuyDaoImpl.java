@@ -19,13 +19,47 @@ public class BuyDaoImpl implements BuyDao {
 	//RowMapper
 	private RowMapper<BuyDto> mapper = (rs, idx) -> {
 		return BuyDto.builder()
-						.build();
+				.buyNo(rs.getInt("buy_no"))
+				.customerId(rs.getString("customer_id"))
+				.itemNo(rs.getInt("item_no"))
+				.buyDate(rs.getDate("buy_date"))
+				.deliveryFee(rs.getInt("delivery_fee"))
+				.itemName(rs.getString("item_name"))
+				.itemSize(rs.getString("item_size"))
+				.itemColor(rs.getString("item_color"))
+				.itemCnt(rs.getInt("item_cnt"))
+				.deliveryStatus(rs.getString("delivery_status"))
+				.itemTotalPrice(rs.getInt("item_total_price"))
+				.deliveryName(rs.getString("delivery_name"))
+				.deliveryPhone(rs.getString("delivery_phone"))
+				.deliveryPost(rs.getString("delivery_post"))
+				.deliveryHost(rs.getString("delivery_host"))
+				.deliveryDetailHost(rs.getString("delivery_detail_host"))
+				.imageNo(rs.getInt("image_no"))
+			.build();
 	};
 	
 	//ResultSetExtractor
 	private ResultSetExtractor<BuyDto> extractor = (rs)->{
 		if(rs.next()) {
 			return BuyDto.builder()
+					.buyNo(rs.getInt("buy_no"))
+					.customerId(rs.getString("customer_id"))
+					.itemNo(rs.getInt("item_no"))
+					.buyDate(rs.getDate("buy_date"))
+					.deliveryFee(rs.getInt("delivery_fee"))
+					.itemName(rs.getString("item_name"))
+					.itemSize(rs.getString("item_size"))
+					.itemColor(rs.getString("item_color"))
+					.itemCnt(rs.getInt("item_cnt"))
+					.deliveryStatus(rs.getString("delivery_status"))
+					.itemTotalPrice(rs.getInt("item_total_price"))
+					.deliveryName(rs.getString("delivery_name"))
+					.deliveryPhone(rs.getString("delivery_phone"))
+					.deliveryPost(rs.getString("delivery_post"))
+					.deliveryHost(rs.getString("delivery_host"))
+					.deliveryDetailHost(rs.getString("delivery_detail_host"))
+					.imageNo(rs.getInt("image_no"))
 				.build();
 		}
 		else {
@@ -50,8 +84,9 @@ public class BuyDaoImpl implements BuyDao {
 				+ "delivery_phone,"
 				+ "delivery_post,"
 				+ "delivery_host,"
-				+ "delivery_detail_host) "
-				+ "values(buy_seq.nextval,?,?,3000,?,?,?,?,?,?,?,?,?,?)";
+				+ "delivery_detail_host,"
+				+ "image_no) "
+				+ "values(buy_seq.nextval,?,?,3000,?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] param = {
 				buyDto.getCustomerId(),
 				buyDto.getItemNo(),
@@ -64,7 +99,8 @@ public class BuyDaoImpl implements BuyDao {
 				buyDto.getDeliveryPhone(),
 				buyDto.getDeliveryPost(),
 				buyDto.getDeliveryHost(),
-				buyDto.getDeliveryDetailHost()
+				buyDto.getDeliveryDetailHost(),
+				buyDto.getImageNo()
 		};
 		jdbcTemplate.update(sql, param);
 	}

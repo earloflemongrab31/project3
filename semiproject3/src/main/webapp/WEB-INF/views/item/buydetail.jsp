@@ -119,9 +119,6 @@ function fail(){
          <tr>
             <th colspan="3">${itemDto.itemMemo}</th>
          </tr>
-         <tr>
-            <th colspan="3">${itemDto.itemContent}</th>
-         </tr>
       </tbody>
    </table>
 </div>
@@ -139,7 +136,7 @@ function fail(){
       
 <div class = "row center mb-30 detail">
    <div class = "row center mb-30">
-      <h4>아이템 상세보기 테스트</h4>
+      <h4>${itemDto.itemContent}</h4>
       <hr>
    </div>
 </div>
@@ -195,7 +192,7 @@ function fail(){
                      <!--블라인드여부에따라 다르게 표시 -->
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
-                     		<td>블라인드처리된 게시물입니다.</td> 
+                     		블라인드처리된 게시물입니다. 
                      	</c:when>
                      	<c:otherwise>
                      		<td>${list.reviewContent}</td>
@@ -219,10 +216,10 @@ function fail(){
                      
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
-                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>해제${list.reviewBlind}</a></td>
+                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>해제</a></td>
                      	</c:when>
                      	<c:otherwise>
-                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>설정${list.reviewBlind}</a></td>
+                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>설정</a></td>
                      	</c:otherwise>
                      </c:choose>
                      

@@ -16,6 +16,7 @@ import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
+import com.example.semiproject3.vo.OrdersListSearchVO;
 
 @Controller
 @RequestMapping("/orders")
@@ -68,28 +69,28 @@ public class OrdersController {
 		return "orders/detail";
 	}
 	
-	//목록
-	@GetMapping("/list")
-	public String list(Model model) {
-		
-		model.addAttribute("ordersList",ordersDao.selectList());
-		return "orders/list";
-	}
-	
-	
-	//목록(페이징)
+//	//목록
 //	@GetMapping("/list")
-//	public String list(Model model, 
-//			@ModelAttribute(name="vo") OrdersListSearchVO vo) {
-//
-//		//페이지 네비게이터를 위한 게시글 수를 전달
-//		int count = ordersDao.count(vo);
-//		vo.setCount(count);
+//	public String list(Model model) {
 //		
-//		model.addAttribute("list", ordersDao.selectList(vo));
-//		
+//		model.addAttribute("ordersList",ordersDao.selectList());
 //		return "orders/list";
 //	}
+	
+	
+	//페이징처리
+	@GetMapping("/list")
+	public String list(Model model, 
+			@ModelAttribute(name="vo") OrdersListSearchVO vo) {
+
+		//페이지 네비게이터를 위한 게시글 수를 전달
+		int count = ordersDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", ordersDao.selectList(vo));
+		
+		return "orders/list";
+	}
 	
 	//삭제
 //	@GetMapping("/delete")

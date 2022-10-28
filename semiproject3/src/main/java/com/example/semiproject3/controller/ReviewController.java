@@ -160,9 +160,11 @@ public class ReviewController {
 		dto.setCustomerId(loginId);
 		dto.setReviewNo(reviewNo);
 		
-		if(reviewLikeDao.check(dto)) { // 좋아요한 상태라면  지우고 
+		if(reviewLikeDao.check(dto)) { // 좋아요한 상태라면  지우고
+			reviewDao.minus(reviewNo);
 			reviewLikeDao.delete(dto);
 		}else {
+			reviewDao.plus(reviewNo);
 			reviewLikeDao.insert(dto); //좋아요값이없는 상태라면 넣어라
 		}
 		model.addAttribute("isReview",reviewLikeDao.check(dto));

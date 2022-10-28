@@ -52,7 +52,6 @@
 <!-- 검색창 -->
 <form action = "reportList" method="get" >
 	<div class="row center">
-	    <a href="/">홈으로 이동</a>
 		<input type="hidden" name="size" value="${vo.size}">
 		<select class="input" name="type" required>
 		<option value="report_no" selected <c:if test="${vo.type == 'report_no'}"></c:if>>번호</option>
