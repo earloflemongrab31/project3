@@ -38,18 +38,16 @@
 	                 	 ${customerLikeDto.itemNo}
 	                  </td>
 	                  <td>${customerLikeDto.likeTime}</td>
-	                  
-	                   <td>
-	                   <a href="http://localhost:8888/item/buydetail?itemNo=${customerLikeDto.itemNo}">확인</a>
-	                   </td>
-						</tr>
-						
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:otherwise>
-		</c:choose>
-      </div>
+	                  <td>
+	                   	<a href="http://localhost:8888/item/buydetail?itemNo=${customerLikeDto.itemNo}">확인</a>
+	                  </td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</c:otherwise>
+	</c:choose>
+	</div>
 
 
 </div>
