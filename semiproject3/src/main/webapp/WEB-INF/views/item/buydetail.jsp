@@ -4,25 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
-<script>
-
-   
-    <input type="text" value="${loginId}">
-    
-   function checkId(){
-	   alert('테스트');   }
-    
-    
-   	${session}
-    
-</script>
-
-
-
 <jsp:include page="/WEB-INF/views/template/header.jsp">
    <jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
+
+<script type="text/javascript">
+// function delchk(){
+// 	if(${longinId} = )
+//     if(confirm("삭제하시겠습니까?")){
+//         location.href = "/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}"
+//         return true;
+//     } else {
+//         return false;
+//     }
+}
+</script>
 
 <div class="container-1000 mt-40 mb-40">
 
@@ -197,8 +193,10 @@
                      <td>
                         <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
                      <td>
-                        <a  href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
-                        <!-- 버튼 // get방식이니까 input으로 파라미터값 받음..?  -->
+                     <!-- 내글은 신고버튼 안보이게 -->
+              			 <c:if test="${loginId != list.customerId}"> 
+							<a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
+						</c:if> 
                      </td>
                      <c:choose>
                      	<c:when test="${list.reviewBlind}">
