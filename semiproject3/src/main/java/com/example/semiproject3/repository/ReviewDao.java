@@ -39,4 +39,9 @@ public interface ReviewDao {
 	int listCount(ReviewListSearchVO vo);
 	//블라인드 처리 
 	boolean updateBlind(int reviewNo, boolean b);
+	
+	//좋아요 클릭했을때 하나 플러스 
+	void plus(int reviewNo);
+	//좋아요를 취소 했을해 하나 마이너스 
+	void minus(int reviewNo);
 }
