@@ -198,8 +198,14 @@ public class ReviewController {
 	
 	}
 	@GetMapping("/blind")
-	public String blind() {
-		return "";
+	public String blind(
+			@RequestParam int reviewNo,
+			@RequestParam int itemNo,
+			RedirectAttributes attr) {
+		ReviewDto reviewDto=reviewDao.selectOne2(reviewNo);
+		reviewDao.updateBlind(reviewNo,!reviewDto.isReviewBlind());
+		attr.addAttribute("itemNo",itemNo);
+		return "redirect:/item/buydetail";
 	};
 
 }
