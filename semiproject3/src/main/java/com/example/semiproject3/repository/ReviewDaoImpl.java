@@ -36,6 +36,7 @@ public class ReviewDaoImpl implements ReviewDao {
                .reviewDate(rs.getDate("review_date"))
                .imageNo(rs.getInt("image_no"))
                .reviewBlind(rs.getString("review_blind")!=null)
+               .reviewCnt(rs.getInt("review_cnt"))
                .build();
       }
    }; 
@@ -57,6 +58,7 @@ public class ReviewDaoImpl implements ReviewDao {
                       .reviewDate(rs.getDate("review_date"))
                       .imageNo(rs.getInt("image_no"))
                       .reviewBlind(rs.getString("review_blind")!=null)
+                      .reviewCnt(rs.getInt("review_cnt"))
                       .build();
          }
          return null;
@@ -79,6 +81,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	                      .reviewPackaging(rs.getString("review_packaging"))
 	                      .reviewDate(rs.getDate("review_date"))
 	                      .reviewBlind(rs.getString("review_blind")!=null)
+	                      .reviewCnt(rs.getInt("review_cnt"))
 	                      .build();
 	         }
 	         return null;
@@ -87,7 +90,7 @@ public class ReviewDaoImpl implements ReviewDao {
    
    @Override
    public void insert(ReviewDto reviewDto) {
-      String sql="insert into review values(?,?,?,?,?,?,?,sysdate,null)";
+      String sql="insert into review values(?,?,?,?,?,?,?,sysdate,null,0)";
       Object[] param= {
             reviewDto.getReviewNo(),
             reviewDto.getCustomerId(),
@@ -215,5 +218,20 @@ public int listCount(ReviewListSearchVO vo) {
 		String reviewBlind= b?"Y":null;
 		Object[] param= {reviewBlind,reviewNo};
 		return jdbcTemplate.update(sql,param)>0;
+	}
+//리뷰 눌렀을떄 하나 플러스 
+@Override
+	public void plus(int reviewNo) {
+		String sql="update review set review_cnt=review_cnt+1 where review_no=?";
+		Object[] param= {reviewNo};
+		jdbcTemplate.update(sql,param);
+	}
+
+@Override
+	public void minus(int reviewNo) {
+	String sql="update review set review_cnt=review_cnt-1 where review_no=?";
+	Object[] param= {reviewNo};
+	jdbcTemplate.update(sql,param);
+		
 	}
 }
