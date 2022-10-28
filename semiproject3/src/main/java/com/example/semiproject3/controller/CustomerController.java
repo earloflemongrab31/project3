@@ -18,6 +18,7 @@ import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CenterDao;
 import com.example.semiproject3.repository.CustomerDao;
+import com.example.semiproject3.repository.OrdersDao;
 import com.example.semiproject3.vo.CustomerListSearchVO;
 
 @Controller
@@ -35,7 +36,6 @@ public class CustomerController {
 	
 	@Autowired
 	private AddressDao addressDao;
-	
 	
 	@GetMapping("/insert")
 	public String insert() {
@@ -102,6 +102,7 @@ public class CustomerController {
 		model.addAttribute("customerDto", customerDto);
 		
 		model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
+	
 		
 		return "customer/detail";
 	}
