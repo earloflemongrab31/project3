@@ -83,7 +83,7 @@ public interface ItemDao {
 	List<ItemListVO> selectItemList(int itemNo);
 	ItemListVO selectItemOne(ItemListVO itemLitsVO);
 	
-	//상품 품절 상태 확인
+	//상품 품절 상태 확인 (총수량)
 	void plus(InvenDto invenDto);
 	
 	void minus(InvenDto invenDto);
