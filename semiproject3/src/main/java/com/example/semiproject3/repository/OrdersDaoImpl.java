@@ -29,6 +29,8 @@ public class OrdersDaoImpl implements OrdersDao {
 						.customerDetailHost(rs.getString("customer_detail_host"))
 						.payMoney(rs.getInt("pay_money"))
 						.deliveryFee(rs.getInt("delivery_fee"))
+						.itemName(rs.getString("item_name"))
+						.itemPrice(rs.getInt("item_price"))
 						.itemSize(rs.getString("item_size"))
 						.itemColor(rs.getString("item_color"))
 						.itemCnt(rs.getInt("item_cnt"))
@@ -51,6 +53,8 @@ public class OrdersDaoImpl implements OrdersDao {
 					.customerDetailHost(rs.getString("customer_detail_host"))
 					.payMoney(rs.getInt("pay_money"))
 					.deliveryFee(rs.getInt("delivery_fee"))
+					.itemName(rs.getString("item_name"))
+					.itemPrice(rs.getInt("item_price"))
 					.itemSize(rs.getString("item_size"))
 					.itemColor(rs.getString("item_color"))
 					.itemCnt(rs.getInt("item_cnt"))
@@ -76,14 +80,18 @@ public class OrdersDaoImpl implements OrdersDao {
 				+ "orders_no, "
 				+ "customer_id, "
 				+ "item_no, "
+				+ "item_name, "
+				+ "item_price, "
 				+ "item_size, "
 				+ "item_color, "
 				+ "item_cnt) "
-				+ "values(orders_seq.nextval,?,?,?,?,?)";
+				+ "values(orders_seq.nextval,?,?,?,?,?,?,?)";
 		
 		Object[] param = {
 				ordersDto.getCustomerId(), 
 				ordersDto.getItemNo(),
+				ordersDto.getItemName(),
+				ordersDto.getItemPrice(),
 				ordersDto.getItemSize(), 
 				ordersDto.getItemColor(),
 				ordersDto.getItemCnt()};

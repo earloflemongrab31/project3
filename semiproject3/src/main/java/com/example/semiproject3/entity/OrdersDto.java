@@ -22,6 +22,8 @@ public class OrdersDto {
 	private String customerDetailHost;
 	private int payMoney;
 	private int deliveryFee;
+	private String itemName;
+	private int itemPrice;
 	private String itemSize;
 	private String itemColor;
 	private int itemCnt;
