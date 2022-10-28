@@ -20,5 +20,6 @@ public class ReviewDto {
 	private int imageNo;
 	private boolean reviewBlind;
 	private int reviewCnt;
-	}
+
+}
 
