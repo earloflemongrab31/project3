@@ -32,23 +32,23 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-	@ResponseBody
-	@GetMapping("/cartInsert")
-	public String cartInsert(
-			@RequestParam int itemNo,
-			HttpSession session	) {
-
-		String result = "00";
-		
-		System.out.println("/cartInsert ================"+ itemNo);		
-		
-		//Cart db insert
-		
-		
-		
-		//result =="00" 성공 result =="01" 동일아이템 중복
-		return result;
-	}
+//	@ResponseBody
+//	@GetMapping("/cartInsert")
+//	public String cartInsert(
+//			@RequestParam int itemNo,
+//			HttpSession session	) {
+//
+//		String result = "00";
+//		
+//		System.out.println("/cartInsert ================"+ itemNo);		
+//		
+//		//Cart db insert
+//		
+//		
+//		
+//		//result =="00" 성공 result =="01" 동일아이템 중복
+//		return result;
+//	}
 	
 	@GetMapping("/delete")
 	public String delete(
