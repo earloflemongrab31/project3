@@ -10,10 +10,10 @@ public interface BuyDao {
 	void insert(BuyDto buyDto);
 	
 	//구매 목록
-	List<BuyDto> selectList();
-	List<BuyDto> selectList(String type, String keyword);
+	List<BuyDto> selectList(String loginId);
+	List<BuyDto> selectList(String loginId, String type, String keyword);
 	
 	//구매 정보
-	BuyDto selectOne(int buyNo);
+//	BuyDto selectOne(int buyNo);
 	
 }

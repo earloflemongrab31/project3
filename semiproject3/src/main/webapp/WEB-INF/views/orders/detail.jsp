@@ -17,6 +17,7 @@
 <div class="container-1000 mt-50 mb-50">
 <input type="hidden" name="ordersNo" value="${ordersDto.ordersNo}">
 <input type="hidden" name="itemNo" value="${ordersDto.itemNo}">
+<input type="hidden" name="customerId" value="${customerDto.customerId}">
 <div class="row center">
 	<h1>ORDER</h1>
 </div>
@@ -108,8 +109,9 @@
 				</td>
 				<td rowspan="4">
 					금액 : 
-					<fmt:formatNumber value="${ordersDto.itemPrice * ordersDto.itemCnt}" pattern="#,##0원"/>
-					<input type="hidden" name="itemPrice" value="${ordersDto.itemPrice}">
+					<c:set var="itemTotal" value="${ordersDto.itemPrice * ordersDto.itemCnt}"></c:set>
+					<fmt:formatNumber value="${itemTotal}" pattern="#,##0원"/>
+					<input type="hidden" name="itemTotalPrice" value="${itemTotal}">
 				</td>
 			</tr>
 			<tr>
