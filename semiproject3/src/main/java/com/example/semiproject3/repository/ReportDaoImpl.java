@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.ReportDto;
+import com.example.semiproject3.entity.ReviewDto;
+import com.example.semiproject3.vo.ReviewListSearchVO;
 
 @Repository
 public class ReportDaoImpl implements ReportDao{
@@ -59,4 +61,63 @@ public class ReportDaoImpl implements ReportDao{
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 
+	//페이징 처리
+	@Override
+	public List<ReportDto> selectList(ReviewListSearchVO vo) {
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+
+	@Override
+	public List<ReportDto> list(ReviewListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from report order by report_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public List<ReportDto> search(ReviewListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from report where instr(#1,?) > 0 "
+					+ "order by report_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+	};
+	return jdbcTemplate.query(sql, mapper, param);
+}
+	@Override
+	public int count(ReviewListSearchVO vo) {
+			if(vo.isSearch()) {
+				return searchCount(vo);
+			}
+			else {
+				return listCount(vo);
+			}
+	}
+
+	@Override
+	public int searchCount(ReviewListSearchVO vo) {
+		String sql = "select count(*) from report where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	@Override
+	public int listCount(ReviewListSearchVO vo) {
+		String sql = "select count(*) from report";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
 }
