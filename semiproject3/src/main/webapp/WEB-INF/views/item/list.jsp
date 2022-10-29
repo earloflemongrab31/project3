@@ -128,11 +128,6 @@
 </li>
 </ul>
 
-</div>	
-
-	
-	
-	
 <!-- 검색창 -->
 <form action = "list" method="get" >
 	<div class="row center">
@@ -146,5 +141,8 @@
 			<button class="btn btn-positive">검색</button>
 	</div>
 </form>
+
+</div>	
+
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
