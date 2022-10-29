@@ -103,6 +103,8 @@ public class CustomerController {
 		
 		model.addAttribute("selectAddressList", addressDao.selectAddressList(loginId, 1, 10));
 	
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		return "customer/detail";
 	}
@@ -137,9 +139,14 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/edit")
-	public String edit(Model model,@RequestParam String customerId) {
+	public String edit(Model model,@RequestParam String customerId, HttpSession session) {
 		CustomerDto customerDto = customerDao.selectOne(customerId);
 		model.addAttribute("customerDto", customerDto);
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+		
 		return "customer/edit";
 	}
 
@@ -169,8 +176,10 @@ public class CustomerController {
 	
 	
 	@GetMapping("/checkPassword")
-	public String checkPassword() {
-		
+	public String checkPassword(Model model, HttpSession session) {
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return"customer/checkPassword";
 	}
 	
@@ -189,7 +198,10 @@ public class CustomerController {
 		}
 	}
 	@GetMapping("/changePassword")
-	public String changePassword() {
+	public String changePassword(Model model, HttpSession session) {
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "customer/changePassword";
 	}
 	@PostMapping("/changePassword")
@@ -213,7 +225,10 @@ public class CustomerController {
 	
 	// 마이페이지 비밀번호 변경
 	@GetMapping("/changePw")
-	public String changePw() {
+	public String changePw(Model model, HttpSession session) {
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "customer/changePw";
 	}
 	@PostMapping("/changePw")
@@ -235,6 +250,10 @@ public class CustomerController {
 		String customerId = (String) session.getAttribute(SessionConstant.ID);
 		CustomerDto customerDto = customerDao.selectOne(customerId);
 		model.addAttribute("customerDto", customerDto);
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "customer/information";
 	}
 	
@@ -264,7 +283,10 @@ public class CustomerController {
 	
 	//회원 탈퇴 기능
 	@GetMapping("/goodbye")
-	public String goodbye() {
+	public String goodbye(Model model, HttpSession session) {
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "customer/goodbye";
 	}
 	

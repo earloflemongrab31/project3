@@ -38,8 +38,8 @@ function fail(){
 <%-- ${loginId} --%>
 <!-- </div> -->
 
-<form action="/orders/insert" method="post">
-<!-- <form action="/cart/insert" method="post"> -->
+<!-- <form action="/orders/insert" method="post"> -->
+<form action="/cart/insert" method="post">
 <div class="row">
    <table class="table">
       <tbody>
@@ -83,6 +83,7 @@ function fail(){
 					</c:forEach>
 				</select>
                <input class="input w-100" type="hidden" name="itemSize" value="" >
+               <input class="input w-100" type="hidden" name="itemTotalCnt" value="">
             </td>
          </tr>
          <tr>
@@ -113,7 +114,8 @@ function fail(){
             	<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
                <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
                <button class="btn btn-positive" type="submit">구매하기</button>
-               <button class="btn btn-positive" type="submit">장바구니${isCart}</button>    
+</form>
+               <button class="btn btn-positive" type="submit">장바구니</button>    
                <a href="buylist">목록으로</a>
             </td>
          </tr>
@@ -123,7 +125,6 @@ function fail(){
       </tbody>
    </table>
 </div>
-</form>
 
 
 <div class="flexbox">
