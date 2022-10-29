@@ -9,7 +9,8 @@
 		<li>
 			<span>MY 정보</span>
 			<ul>
-				<li><a href="/customer/information">개인정보 조회/수정</a></li>
+				<li><a href="/customer/mypage">개인정보 조회</a>
+				<li><a href="/customer/information">개인정보 수정</a></li>
 				<li><a href="/customer/changePw">비밀번호 변경</a></li>
 				<li><a href="/address/list">배송지 관리</a></li>
 				<li><a href="/customer/goodbye">회원 탈퇴</a></li>

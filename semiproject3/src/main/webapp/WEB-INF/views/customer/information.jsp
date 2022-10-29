@@ -8,7 +8,7 @@
 
 <form action="information" method="post" autocomplete="off">
 
-<div class="container-400 mt-40 mb-40">
+<div class="container-400 mt-50 mb-50">
 
 	<div class="row center mb-30">
 		<h1>회원 정보 변경</h1>
