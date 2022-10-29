@@ -15,7 +15,7 @@
 	<table class="table table-border">
 		<thead>
 			<tr>
-				<th colspan="3">주문번호 : ${buyDto.buyNo}</th>
+				<th class="left" colspan="3">주문번호 : ${buyDto.buyNo}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,7 +29,7 @@
 				<td rowspan="3">
 					<form action="update" method="post">
 						<input type="hidden" name="buyNo" value="${buyDto.buyNo}">
-						<select name="deliveryStatus">
+						<select class="input name="deliveryStatus">
 						<c:choose>
 							<c:when test="${buyDto.deliveryStatus == '결제완료'}">
 								<option selected>결제완료</option>
@@ -70,6 +70,10 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+
+<div class="row center">
+	<a class="btn btn-neutral" href="admin-buylist">이전으로</a>
 </div>
 
 </div>
