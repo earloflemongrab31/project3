@@ -73,9 +73,9 @@ public class ItemController {
 //	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
 //	화니꼬
-//	private final File directory = new File("C:/study/itemImage");
+	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-	private final File directory = new File("D:/study/itemImage");
+//	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -211,38 +211,19 @@ public class ItemController {
 		
 	}
 	
-	//카트
-	@GetMapping("/cart")
-	public String cart(
-			@RequestParam int itemNo,
-			HttpSession session
-			) {
-		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		//하나의아이템 정보가지고오기 
-		ItemDto itemDto=itemDao.selectOne(itemNo);
-		//cartDto에 정보 삽입
-		CartDto cartDto=new CartDto();
-		cartDto.setCustomerId(loginId);
-		cartDto.setItemNo(itemNo);
-		cartDto.setCartItemName(itemDto.getItemName());
-		cartDto.setCartItemPrice(itemDto.getItemPrice());
-		cartDto.setCartItemColor(itemDto.getItemColor());
-		cartDto.setCartItemSize(itemDto.getItemSize());
-		
-		//db에 있으면 지움 없으면 추가
-		return "redirect:buydetail?itemNo="+itemNo;
-	};
-	
-	
 	//상품 리스트(회원)
 	@GetMapping("/buylist")
-	public String buylist(Model model, 
+	public String buylist(Model model, HttpSession session,
 			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 		
 		int count = itemDao.buyCount(vo);
 		vo.setCount(count);
 		
 		model.addAttribute("buylist", itemDao.selectBuyList(vo));
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		return "item/buylist";
 	}
@@ -261,14 +242,9 @@ public class ItemController {
 		//상품 옵션 불러오는 list
 		model.addAttribute("buylist", itemDao.selectItemList(itemNo));
 		
-		//장바구니 기록있는 조회하여 첨부 
+		//장바구니 개수
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
-		if(loginId !=null) {
-		CartDto cartDto = new CartDto();
-		cartDto.setCustomerId(loginId);
-		cartDto.setItemNo(itemNo);
-		//model.addAttribute("isCart", cartDao.check(cartDto));
-		}
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 
 		//(+추가) 찜 기록이 있는지 조회하여 첨부
 
