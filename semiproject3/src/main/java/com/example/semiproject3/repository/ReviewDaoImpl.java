@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.tomcat.util.net.TLSClientHelloExtractor.ExtractorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +11,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.ReviewDto;
 import com.example.semiproject3.vo.ReviewListSearchVO;
 
@@ -40,7 +40,24 @@ public class ReviewDaoImpl implements ReviewDao {
                .build();
       }
    }; 
-   
+   private RowMapper<ReviewDto> mapper1=new RowMapper<ReviewDto>() {
+	      
+	      @Override
+	      public ReviewDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+	         return ReviewDto.builder()
+	               .reviewNo(rs.getInt("review_no"))
+	               .customerId(rs.getString("customer_id"))
+	               .itemNo(rs.getInt("item_no"))
+	               .reviewContent(rs.getString("review_content"))
+	               .reviewStar(rs.getInt("review_star"))
+	               .reviewShipping(rs.getString("review_shipping"))
+	               .reviewPackaging(rs.getString("review_packaging"))
+	               .reviewDate(rs.getDate("review_date"))
+	               .reviewBlind(rs.getString("review_blind")!=null)
+	               .reviewCnt(rs.getInt("review_cnt"))
+	               .build();
+	      }
+	   }; 
    
    private ResultSetExtractor<ReviewDto> extractor= new ResultSetExtractor<ReviewDto>() {
       
@@ -234,4 +251,12 @@ public int listCount(ReviewListSearchVO vo) {
 	jdbcTemplate.update(sql,param);
 		
 	}
+
+@Override
+public List<ReviewDto> customerSelectList(String loginId) {
+	String sql = "select * from review where customer_id=? order by review_no asc";
+	Object[] param = {loginId};
+	return jdbcTemplate.query(sql, mapper1, loginId);
+}
+
 }
