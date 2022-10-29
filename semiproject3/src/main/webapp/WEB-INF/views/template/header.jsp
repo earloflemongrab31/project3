@@ -760,7 +760,7 @@
 		</h2>
 	</div>
 	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
-		<div class="float-right	">
+		<div class="row float-right" style="margin-right:10px;">
 			${loginId}님, 안녕하세요.
 		</div>
 	</c:if>
@@ -778,7 +778,7 @@
 <ul class="dropdown-menu">
 	<!-- 좌측 드롭다운 메뉴 -->
 	<li class="float-left">
-		<a href="#">BEST</a>
+		<a href="/item/buylist">BEST</a>
 	</li>
 	<li class="float-left">
 		<a href="#">New</a>
@@ -824,7 +824,7 @@
 		<a href="#">pants</a>
 		<ul>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=301">청바</a>
+				<a href="/item/buylist?type=cate_code&keyword=301">청바지</a>
 			</li>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=302">면바지</a>
