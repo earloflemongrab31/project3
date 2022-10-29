@@ -16,9 +16,9 @@ public class OrdersDto {
 	private String itemSize;
 	private String itemColor;
 	private int itemCnt;
+	private int imageNo;
 
 //	private int payMoney;
-//	private int imageNo;
 //	private Date ordersTime;
 //	private String addressName;
 //	private String addressPhone;

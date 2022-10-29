@@ -27,6 +27,7 @@ public class OrdersDaoImpl implements OrdersDao {
 					.itemSize(rs.getString("item_size"))
 					.itemColor(rs.getString("item_color"))
 					.itemCnt(rs.getInt("item_cnt"))
+					.imageNo(rs.getInt("image_no"))
 				.build();
 	};
 	
@@ -49,6 +50,7 @@ public class OrdersDaoImpl implements OrdersDao {
 					.itemColor(rs.getString("item_color"))
 					.itemCnt(rs.getInt("item_cnt"))
 //					.ordersTime(rs.getDate("orders_time"))
+					.imageNo(rs.getInt("image_no"))
 				.build();
 		}
 		else {
@@ -74,8 +76,9 @@ public class OrdersDaoImpl implements OrdersDao {
 				+ "item_price, "
 				+ "item_size, "
 				+ "item_color, "
-				+ "item_cnt) "
-				+ "values(orders_seq.nextval,?,?,?,?,?,?,?)";
+				+ "item_cnt,"
+				+ "image_no) "
+				+ "values(orders_seq.nextval,?,?,?,?,?,?,?,?)";
 		
 		Object[] param = {
 				ordersDto.getCustomerId(), 
@@ -84,7 +87,8 @@ public class OrdersDaoImpl implements OrdersDao {
 				ordersDto.getItemPrice(),
 				ordersDto.getItemSize(), 
 				ordersDto.getItemColor(),
-				ordersDto.getItemCnt()};
+				ordersDto.getItemCnt(),
+				ordersDto.getImageNo()};
 		
 		jdbcTemplate.update(sql, param);
 	}
@@ -152,8 +156,8 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public List<OrdersDto> selectList(String loginId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from orders where customer_id=?";
+		return jdbcTemplate.query(sql, mapper, loginId);
 	}
 
 	@Override

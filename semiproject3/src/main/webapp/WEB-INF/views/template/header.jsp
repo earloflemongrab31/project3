@@ -716,7 +716,7 @@
 	        
 	        var colorOption = $("<input>").addClass("w-25 input input-none").val(color).attr("type", "text").attr("name", "itemColor").prop("readonly", true);
 	        var sizeOption = $("<input>").addClass("w-25 input input-none").val(size).attr("type", "text").attr("name", "itemSize").prop("readonly", true);
-	        var cnt = $("<input>").addClass("w-25 input").attr("type", "number").attr("name", "itemCnt").attr("min", 0).attr("max", totalcnt);
+	        var cnt = $("<input>").addClass("w-25 input").attr("type", "number").attr("name", "itemCnt").attr("min", 1).attr("max", totalcnt).val(1);
 	        
 	        colorOption.appendTo(plusLine);
 	        sizeOption.appendTo(plusLine);

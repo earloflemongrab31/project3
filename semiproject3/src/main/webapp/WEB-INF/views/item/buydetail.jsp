@@ -31,6 +31,7 @@ function fail(){
 
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
+<form action="/orders/detail" method="get">
 <div class="float-left w-50">
 	<table class="table">
 		<tr>
@@ -38,6 +39,7 @@ function fail(){
                <c:forEach var="buylistView" items="${buyImageList}">
                   <c:if test="${buylistView.imageMain == 1}">
                      <img src="/image/download/${buylistView.imageNo}" width="200" >
+                     <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
                   </c:if>
                </c:forEach>
                <c:forEach var="buylistView" items="${buyImageList}">
@@ -66,7 +68,6 @@ function fail(){
 </div>
 
 <div class="float-left w-50">
-<form action="/orders/detail" method="get">
 <!-- <form action="/cart/insert" method="post"> -->
 <div class="row">
    <table class="table">

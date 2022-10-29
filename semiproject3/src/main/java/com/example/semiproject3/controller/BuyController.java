@@ -38,10 +38,20 @@ public class BuyController {
 	@PostMapping("/insert")
 	public String insert(
 			@ModelAttribute BuyDto buyDto,
+			@RequestParam String[] itemSize,
+			@RequestParam String[] itemColor,
+			@RequestParam int[] itemCnt,
+			@RequestParam int[] imageNo,
 			@RequestParam int ordersNo,
 			HttpSession session) {
 		//주문 완료 시 구매 테이블 삽입
-		buyDao.insert(buyDto);
+		for(int i=0; i<itemSize.length; i++) {
+			buyDto.setItemSize(itemSize[i]);
+			buyDto.setItemColor(itemColor[i]);
+			buyDto.setItemCnt(itemCnt[i]);
+			buyDto.setImageNo(imageNo[i]);
+			buyDao.insert(buyDto);
+		}
 		
 		//주문 내역 삭제
 		ordersDao.delete(ordersNo);

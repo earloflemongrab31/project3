@@ -97,43 +97,46 @@
 <div class="row mb-30">
 	<table class="table table-slit">
 		<tbody>
-			<tr>
-				<th class="w-25" rowspan="4">
-					<img class="w-100" src="/image/download/${imageDto.imageNo}">
-					<input type="hidden" name="imageNo" value="${imageDto.imageNo}">
-				</th>
-				<td>상품명</td>
-				<td>
-					<input type="text" class="input input-none w-100" name="itemName" 
-						value="${ordersDto.itemName}" readonly>
-				</td>
-				<td rowspan="4">
-					금액 : 
-					<c:set var="itemTotal" value="${ordersDto.itemPrice * ordersDto.itemCnt}"></c:set>
-					<fmt:formatNumber value="${itemTotal}" pattern="#,##0원"/>
-				</td>
-			</tr>
-			<tr>
-				<td>사이즈</td>
-				<td>
-					<input type="text" class="input input-none w-100" name="itemSize"
-						value="${ordersDto.itemSize}" readonly>
-				</td>
-			</tr>
-			<tr>
-				<td>컬러</td>
-				<td>
-					<input type="text" class="input input-none w-100" name="itemColor"
-						value="${ordersDto.itemColor}" readonly>
-				</td>
-			</tr>
-			<tr>
-				<td>수량</td>
-				<td>
-					<input type="number" class="input input-none w-100" name="itemCnt" 
-							value="${ordersDto.itemCnt}" readonly>
-				</td>
-			</tr>
+			<c:forEach var="ordersDto" items="${ordersList}">
+				<tr>
+					<th class="w-25" rowspan="4">
+						<img class="w-100" src="/image/download/${ordersDto.imageNo}">
+						<input type="hidden" name="imageNo" value="${ordersDto.imageNo}">
+					</th>
+					<td>상품명</td>
+					<td>
+						<input type="text" class="input input-none w-100" name="itemName" 
+							value="${ordersDto.itemName}" readonly>
+					</td>
+					<td rowspan="4">
+						금액 : 
+						<c:set var="itemTotal" value="${ordersDto.itemPrice * ordersDto.itemCnt}"></c:set>
+						<fmt:formatNumber value="${itemTotal}" pattern="#,##0원"/>
+						<input type="hidden" name="itemTotalPrice" value="${itemTotal}">
+					</td>
+				</tr>
+				<tr>
+					<td>사이즈</td>
+					<td>
+						<input type="text" class="input input-none w-100" name="itemSize"
+							value="${ordersDto.itemSize}" readonly>
+					</td>
+				</tr>
+				<tr>
+					<td>컬러</td>
+					<td>
+						<input type="text" class="input input-none w-100" name="itemColor"
+							value="${ordersDto.itemColor}" readonly>
+					</td>
+				</tr>
+				<tr>
+					<td>수량</td>
+					<td>
+						<input type="number" class="input input-none w-100" name="itemCnt" 
+								value="${ordersDto.itemCnt}" readonly>
+					</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>
@@ -153,9 +156,10 @@
 			</tr>
 			<tr>
 				<td>
-					<c:set var="itemTotalPrice" value="${ordersDto.itemPrice * ordersDto.itemCnt + 3000}"/>
-					<fmt:formatNumber value="${itemTotalPrice}" pattern="#,##0원"/>
-					<input type="hidden" name="itemTotalPrice" value="${itemTotalPrice}">
+					<c:forEach var="ordersDto" items="${ordersList}">
+						<c:set var="itemTotalPrice" value="${itemTotalPrice + ordersDto.itemPrice * ordersDto.itemCnt}"/>
+					</c:forEach>
+						<fmt:formatNumber value="${itemTotalPrice + 3000}" pattern="#,##0원"/>
 				</td>
 			</tr>
 		</tbody>

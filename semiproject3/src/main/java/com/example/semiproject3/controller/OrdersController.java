@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.OrdersDto;
@@ -40,11 +42,20 @@ public class OrdersController {
 	
 	@GetMapping("/detail")
 	public String list(
+			@RequestParam String[] itemSize,
+			@RequestParam String[] itemColor,
+			@RequestParam int[] itemCnt,
 			@ModelAttribute OrdersDto ordersDto,
 			Model model, 
 			HttpSession session) {
 		//주문 테이블 값 넣기
-		ordersDao.insert(ordersDto);
+		for(int i=0; i<itemSize.length; i++) {
+			ordersDto.setItemSize(itemSize[i]);
+			ordersDto.setItemColor(itemColor[i]);
+			ordersDto.setItemCnt(itemCnt[i]);
+			ordersDao.insert(ordersDto);
+		}
+		
 		
 		//회원 정보 불러오기
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
@@ -54,9 +65,10 @@ public class OrdersController {
 		model.addAttribute("addressList", addressDao.selectList(loginId));
 		
 		//주문 내역 불러오기
-		model.addAttribute("ordersDto", ordersDao.selectOne(loginId));
+		model.addAttribute("ordersList", ordersDao.selectList(loginId));
 		
-		model.addAttribute("imageDto", itemDao.selectItemOne(ordersDto.getItemNo()));
+		//이미지 불러오기인데... 아직 구현을 못 한.............
+		model.addAttribute("imageList", itemDao.selectItemList(ordersDto.getItemNo()));
 		
 		return "orders/detail";
 	}
