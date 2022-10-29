@@ -138,8 +138,8 @@
 	<div class="row center">
 		
 		<select class="input" name="type" required>
-		<option value="item_name" <c:if test="${type == 'item_name'}"></c:if>>상품명</option>
-		<option value="cate_code" <c:if test="${type == 'cate_code'}"></c:if>>카테고리</option>
+			<option value="item_name" <c:if test="${type == 'item_name'}"></c:if>>상품명</option>
+			<option value="cate_code" <c:if test="${type == 'cate_code'}"></c:if>>카테고리</option>
 		</select>
 			
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>
