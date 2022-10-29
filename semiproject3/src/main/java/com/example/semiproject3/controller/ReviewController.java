@@ -100,6 +100,8 @@ public class ReviewController {
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	}
 	
+	
+	
 	//신고
 	@GetMapping("/report")
 	public String report(
@@ -212,5 +214,17 @@ public class ReviewController {
 		attr.addAttribute("itemNo",itemNo);
 		return "redirect:/item/buydetail";
 	};
+	
+	
+  @GetMapping("/list")
+  public String list(Model model, HttpSession session) {
+
+	  String loginId = (String)session.getAttribute(SessionConstant.ID);
+	  System.out.println(loginId);
+	  
+	      model.addAttribute("list",reviewDao.customerSelectList(loginId));
+	      return "review/list";
+  }
+	
 
 }

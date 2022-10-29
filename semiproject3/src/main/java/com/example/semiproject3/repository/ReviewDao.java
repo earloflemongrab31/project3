@@ -2,6 +2,8 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
+import com.example.semiproject3.entity.AddressDto;
+import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.NoticeDto;
 import com.example.semiproject3.entity.ReviewDto;
 import com.example.semiproject3.vo.ReviewListSearchVO;
@@ -44,4 +46,7 @@ public interface ReviewDao {
 	void plus(int reviewNo);
 	//좋아요를 취소 했을해 하나 마이너스 
 	void minus(int reviewNo);
+
+	List<ReviewDto> customerSelectList(String loginId);
+	
 }

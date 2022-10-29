@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.tomcat.util.net.TLSClientHelloExtractor.ExtractorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -234,4 +233,12 @@ public int listCount(ReviewListSearchVO vo) {
 	jdbcTemplate.update(sql,param);
 		
 	}
+
+@Override
+public List<ReviewDto> customerSelectList(String loginId) {
+	String sql = "select * from review where customer_id=?";
+	Object[] param = {loginId};
+	return jdbcTemplate.query(sql, mapper, param);
+}
+
 }
