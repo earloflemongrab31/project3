@@ -18,6 +18,7 @@ import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AddressDao;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.vo.AddressUniteVO;
 
@@ -29,14 +30,19 @@ public class AddressController {
 	@Autowired
 	private AddressDao addressDao;
    
-   
 	@Autowired
 	private CustomerDao customerDao;
+	
+	@Autowired
+	private CartDao cartDao;
    
    //등록
    @GetMapping("/insert")
-   public String insert() {
-      return "address/insert";
+   public String insert(Model model, HttpSession session) {
+	   //장바구니 개수
+	   String loginId = (String) session.getAttribute(SessionConstant.ID);
+	   model.addAttribute("cartCount",cartDao.cartCount(loginId));
+	   return "address/insert";
    }
    
    @PostMapping("/insert")
@@ -88,6 +94,9 @@ public class AddressController {
    model.addAttribute("listBasic",addressDao.selectOneBasic(loginId));
    model.addAttribute("list",addressDao.selectList(loginId, vo));
    model.addAttribute("param",vo);
+   
+   //장바구니 개수
+   model.addAttribute("cartCount",cartDao.cartCount(loginId));
    return "address/list";
    }
    
@@ -95,8 +104,11 @@ public class AddressController {
    
    //수정
    @GetMapping("/edit")
-   public String edit(Model model, @RequestParam int addressNo) {
+   public String edit(Model model, @RequestParam int addressNo, HttpSession session) {
       model.addAttribute("addressDto", addressDao.selectOne(addressNo));
+      //장바구니 개수
+      String loginId = (String) session.getAttribute(SessionConstant.ID);
+      model.addAttribute("cartCount",cartDao.cartCount(loginId));
       return "address/edit";
       
    }

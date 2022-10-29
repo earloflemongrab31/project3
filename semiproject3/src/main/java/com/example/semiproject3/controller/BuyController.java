@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.repository.BuyDao;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.OrdersDao;
 
 @Controller
@@ -25,6 +26,9 @@ public class BuyController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
+	
+	@Autowired
+	private CartDao cartDao;
 	
 	@PostMapping("/insert")
 	public String insert(
@@ -41,7 +45,10 @@ public class BuyController {
 	}
 	
 	@GetMapping("/success")
-	public String success() {
+	public String success(Model model, HttpSession session) {
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "buy/success";
 	}
 	
@@ -60,6 +67,9 @@ public class BuyController {
 		else {
 			model.addAttribute("buyList", buyDao.selectList(loginId));
 		}
+		
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		return "/customer/buyHistory";
 	}
