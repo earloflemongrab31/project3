@@ -10,7 +10,7 @@
 <script src="/confirm-link.js"></script> 
 <script src="/checkbox.js"></script> 
 
-<div class ="container-800 mt-40 mb-40">
+<div class ="container-800 mt-50 mb-50">
    <div class = "row center">
       <h1>내 주소 목록</h1>
       <hr>

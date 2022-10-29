@@ -88,7 +88,7 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-<<<<<<< HEAD
+	
 //	@ResponseBody
 //	@GetMapping("/cartInsert")
 //	public String cartInsert(
@@ -105,8 +105,7 @@ public class CartController {
 //		return result;
 //	}
 	
-=======
->>>>>>> refs/remotes/origin/main
+
 	@GetMapping("/delete")
 	public String delete(Model model,
 			@RequestParam int cartNo,
