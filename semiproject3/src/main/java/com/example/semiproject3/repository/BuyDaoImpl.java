@@ -145,4 +145,11 @@ public class BuyDaoImpl implements BuyDao {
 		return jdbcTemplate.query(sql, extractor, buyNo);
 	}
 
+	@Override
+	public boolean update(int buyNo, String deliveryStatus) {
+		String sql = "update buy set delivery_status=? where buy_no=?";
+		Object[] param = {deliveryStatus, buyNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+
 }

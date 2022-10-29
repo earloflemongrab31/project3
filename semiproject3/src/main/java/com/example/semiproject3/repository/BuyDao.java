@@ -16,4 +16,6 @@ public interface BuyDao {
 	//구매 목록 관리자용
 	List<BuyDto> selectListAll();
 	BuyDto selectOne(int buyNo);
+	
+	boolean update(int buyNo, String deliveryStatus);
 }
