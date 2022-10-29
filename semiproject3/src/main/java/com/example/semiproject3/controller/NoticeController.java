@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.NoticeDto;
 import com.example.semiproject3.error.TargetNotFoundException;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.NoticeDao;
 import com.example.semiproject3.vo.NoticeListSearchVO;
 
@@ -28,8 +29,14 @@ public class NoticeController {
 	@Autowired
 	private NoticeDao noticeDao;
 	
+	@Autowired
+	private CartDao cartDao;
+	
 	@GetMapping("/insert")
-	public String insert() {
+	public String insert(Model model, HttpSession session) {
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "notice/insert";
 	}
 	
@@ -48,7 +55,7 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model, 
+	public String list(Model model, HttpSession session,
 			@ModelAttribute(name="vo") NoticeListSearchVO vo) {
 
 		//페이지 네비게이터를 위한 게시글 수를 전달
@@ -56,6 +63,10 @@ public class NoticeController {
 		vo.setCount(count);
 		
 		model.addAttribute("list", noticeDao.selectList(vo));
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		return "notice/list";
 	}
@@ -85,14 +96,22 @@ public class NoticeController {
 			model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
 		}
 		session.setAttribute("history", history);
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 	
 		return "notice/detail";
 	}
 	
 	@GetMapping("/edit")
-	public String edit(Model model, @RequestParam int noticeNo) {
+	public String edit(Model model, @RequestParam int noticeNo, HttpSession session) {
 		
 		model.addAttribute("noticeDto",noticeDao.selectOne(noticeNo));
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "notice/edit";
 	}
 	

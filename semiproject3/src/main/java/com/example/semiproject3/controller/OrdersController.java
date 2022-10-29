@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.repository.AddressDao;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
@@ -33,6 +34,9 @@ public class OrdersController {
 	
 	@Autowired
 	private ItemDao itemDao;
+	
+	@Autowired
+	private CartDao cartDao;
 	
 	
 	//등록
@@ -58,7 +62,7 @@ public class OrdersController {
 		model.addAttribute("addressList", addressDao.selectList(loginId));
 		
 		//장바구니 상품 불러오기
-//		model.addAttribute("cartList", cartDao.selectList(loginId));
+		model.addAttribute("cartList", cartDao.selectList(loginId));
 		
 		//주문 내역 불러오기
 		OrdersDto ordersDto = ordersDao.selectOne(loginId);

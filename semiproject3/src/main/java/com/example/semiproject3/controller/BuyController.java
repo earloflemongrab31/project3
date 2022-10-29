@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.repository.BuyDao;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.OrdersDao;
 
 @Controller
@@ -25,6 +27,9 @@ public class BuyController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
+	
+	@Autowired
+	private CartDao cartDao;
 	
 	@PostMapping("/insert")
 	public String insert(
@@ -41,11 +46,14 @@ public class BuyController {
 	}
 	
 	@GetMapping("/success")
-	public String success() {
+	public String success(Model model, HttpSession session) {
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "buy/success";
 	}
 	
-	//구매 목록 및 검색
+	//구매 목록 및 검색 회원용
 	@GetMapping("/list")
 	public String list(Model model, 
 			@RequestParam(required = false) String type,
@@ -61,8 +69,40 @@ public class BuyController {
 			model.addAttribute("buyList", buyDao.selectList(loginId));
 		}
 		
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+		
 		return "/customer/buyHistory";
 	}
 	
+	//구매 목록 관리자용
+	@GetMapping("/admin-buylist")
+	public String adminBuylist(Model model) {
+		model.addAttribute("buyList", buyDao.selectListAll());
+		
+		return "/admin/buyList";
+	}
+
+	//구매 목록 관리자용
+	@GetMapping("/admin-buydetail")
+	public String adminBuydetail(
+			@RequestParam int buyNo,
+			Model model) {
+		model.addAttribute("buyDto", buyDao.selectOne(buyNo));
+		
+		return "/admin/buyDetail";
+	}
 	
+	@PostMapping("/update")
+	public String update(
+			@RequestParam int buyNo,
+			@RequestParam String deliveryStatus,
+			RedirectAttributes attr) {
+		
+		buyDao.update(buyNo, deliveryStatus);
+		
+		attr.addAttribute("buyNo", buyNo);
+		
+		return "redirect:admin-buydetail";
+	}
 }
