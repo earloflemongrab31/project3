@@ -3,6 +3,8 @@ package com.example.semiproject3.repository;
 import java.util.List;
 
 import com.example.semiproject3.entity.BuyDto;
+import com.example.semiproject3.vo.AddressUniteVO;
+import com.example.semiproject3.vo.BuyListSearchVO;
 
 public interface BuyDao {
 	
@@ -18,4 +20,13 @@ public interface BuyDao {
 	BuyDto selectOne(int buyNo);
 	
 	boolean update(int buyNo, String deliveryStatus);
+	
+	List<BuyDto> selectListAll(BuyListSearchVO vo);
+	List<BuyDto> list(BuyListSearchVO vo);
+	List<BuyDto> search(BuyListSearchVO vo);
+			
+	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
+	int count(BuyListSearchVO vo);
+	int searchCount(BuyListSearchVO vo);
+	int listCount(BuyListSearchVO vo);
 }

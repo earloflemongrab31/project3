@@ -17,6 +17,7 @@ import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.repository.BuyDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.OrdersDao;
+import com.example.semiproject3.vo.BuyListSearchVO;
 
 @Controller
 @RequestMapping("/buy")
@@ -75,13 +76,28 @@ public class BuyController {
 		return "/customer/buyHistory";
 	}
 	
-	//구매 목록 관리자용
+//	//구매 목록 관리자용
+//	@GetMapping("/admin-buylist")
+//	public String adminBuylist(Model model) {
+//		model.addAttribute("buyList", buyDao.selectListAll());
+//		
+//		return "/admin/buyList";
+//	}
+	
+
+	//구매 목록 관리자용 페이징 처리
 	@GetMapping("/admin-buylist")
-	public String adminBuylist(Model model) {
-		model.addAttribute("buyList", buyDao.selectListAll());
+	public String adminBuylist(Model model,
+			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 		
-		return "/admin/buyList";
+	int count = buyDao.count(vo);
+	vo.setCount(count);
+	
+	model.addAttribute("buyList",buyDao.selectListAll(vo));
+	return "/admin/buyList";
+	
 	}
+	
 
 	//구매 목록 관리자용
 	@GetMapping("/admin-buydetail")

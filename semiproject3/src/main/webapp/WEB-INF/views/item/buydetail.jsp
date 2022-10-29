@@ -114,36 +114,7 @@ function fail(){
             </td>
          </tr>
          <tr>
-
-            <td class="right">
-               ${itemDto.itemLikeCnt}
-            
-               <c:if test="${isLike == null}">
-                  ♥
-               </c:if>
-               <c:if test="${isLike == true}">
-                  <a href="like?itemNo=${itemDto.itemNo}">♥</a>
-               </c:if>
-               <c:if test="${isLike == false}">
-                  <a href="like?itemNo=${itemDto.itemNo}">♡</a>
-               </c:if>
-            </td>
-            <td colspan="2" align="right">
-            	<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
-               <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
-               <button class="btn btn-positive" type="submit">구매하기</button>
-	</form>
-               <button class="btn btn-positive" type="submit">장바구니</button>    
-               <a href="buylist">목록으로</a>
-            </td>
-         </tr>
-         <tr>
-            <th colspan="3">${itemDto.itemMemo}</th>
-         </tr>
-         <tr>
-            <th colspan="3">${itemDto.itemContent}</th>
-         </tr>
-	<td colspan="2" align="right">
+			<td colspan="2" align="right">
 				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
 				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 				<button class="btn btn-positive" type="submit">구매하기</button>
@@ -151,7 +122,6 @@ function fail(){
 				<a href="buylist">목록으로</a>
 			</td>
 		</tr>
-
       </tbody>
    </table>
 </div>
@@ -178,7 +148,7 @@ function fail(){
       
 <div class = "row center mb-30 detail">
    <div class = "row center mb-30">
-      <h4>아이템 상세보기 테스트</h4>
+      <h4>${itemDto.itemContent}</h4>
       <hr>
    </div>
 </div>
