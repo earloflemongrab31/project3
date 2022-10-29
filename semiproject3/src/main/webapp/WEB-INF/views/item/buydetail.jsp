@@ -79,7 +79,7 @@ function fail(){
             </th>
 		</tr>
 		<tr>
-		   <th colspan="2">${itemDto.itemMemo}</th>
+		   <th class="left" colspan="2">${itemDto.itemMemo}</th>
 		</tr>
          <tr>
             <th>Price</th>

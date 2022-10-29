@@ -8,7 +8,7 @@
     <jsp:param value="내가 찜한 상품" name="title"/>
 </jsp:include>
 
-<div class ="container-900 mt-50 mb-50">
+<div class ="container-600 mt-50 mb-50">
    <div class = "row center">
       <h1>찜한 상품 목록</h1>
       <hr>
