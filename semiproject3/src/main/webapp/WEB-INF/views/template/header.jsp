@@ -736,7 +736,7 @@
 		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
 			<img src="/image/googleplay.png">
 		</a>
-		<span class="float-right delete" style="font-family:sans-serif;">X</span>
+		<span class="float-right delete" style="font-family:sans-serif;"><i class="fa-solid fa-xmark"></i></span>
 	</div>
 </c:if>
 

@@ -8,7 +8,7 @@
 
 
 <div class="container-600 mt-50 mb-50">
-<div class="row center mb-50">
+<div class="row center mb-30">
 	 <h1>CART</h1>
 </div>
 <div class="row center">
@@ -26,7 +26,7 @@
 		 			</a>
 		 		</td>
 		 		<td colspan="2">${cartDto.itemName}</td>
-		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
+		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}"><i class="fa-solid fa-xmark"></i></a></td>
 			</tr>
  		</c:if>
 		<tr>
