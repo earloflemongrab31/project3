@@ -47,6 +47,7 @@ public interface ReviewDao {
 	//좋아요를 취소 했을해 하나 마이너스 
 	void minus(int reviewNo);
 
+	// 마이페이지 내 리뷰 목록
 	List<ReviewDto> customerSelectList(String loginId);
 	
 }

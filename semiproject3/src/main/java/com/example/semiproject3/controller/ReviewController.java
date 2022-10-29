@@ -216,7 +216,7 @@ public class ReviewController {
 	};
 	
 	
-  @GetMapping("/list")
+	@GetMapping("/list")
   public String list(Model model, HttpSession session) {
 
 	  String loginId = (String)session.getAttribute(SessionConstant.ID);
