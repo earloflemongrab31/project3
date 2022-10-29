@@ -1,7 +1,5 @@
 package com.example.semiproject3.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,7 @@ public class OrdersController {
 	
 	@Autowired
 	private CartDao cartDao;
+	
 	
 	@GetMapping("/detail")
 	public String list(
