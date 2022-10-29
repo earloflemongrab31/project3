@@ -14,8 +14,8 @@
 <div class="row center">
 		장바구니 상품(${cartCount})
 </div>
-<!-- <form action="/orders/detail" method="post"> -->
-<table class="table table-border" >
+<form action="/orders/insert" method="get">
+<table class="table table-border">
  	<tbody>
  	<c:forEach var="cartDto" items="${cartList}">
  		<c:if test="${cartDto.imageMain == 1}">
@@ -71,6 +71,6 @@
 			</td>
 		</tr>
  </table>
-<!-- </form> -->
+</form>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

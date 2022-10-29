@@ -38,21 +38,13 @@ public class OrdersController {
 	@Autowired
 	private CartDao cartDao;
 	
-	
-	//등록
-	@PostMapping("/insert")
-	public String insert(
-			@ModelAttribute OrdersDto ordersDto){
-			
-		ordersDao.insert(ordersDto);
-		
-		return "redirect:detail";
-	}
-	
 	@GetMapping("/detail")
 	public String list(
+			@ModelAttribute OrdersDto ordersDto,
 			Model model, 
 			HttpSession session) {
+		//주문 테이블 값 넣기
+		ordersDao.insert(ordersDto);
 		
 		//회원 정보 불러오기
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
@@ -61,12 +53,8 @@ public class OrdersController {
 		//주소 정보 불러오기
 		model.addAttribute("addressList", addressDao.selectList(loginId));
 		
-		//장바구니 상품 불러오기
-		model.addAttribute("cartList", cartDao.selectList(loginId));
-		
 		//주문 내역 불러오기
-		OrdersDto ordersDto = ordersDao.selectOne(loginId);
-		model.addAttribute("ordersDto", ordersDto);
+		model.addAttribute("ordersDto", ordersDao.selectOne(loginId));
 		
 		model.addAttribute("imageDto", itemDao.selectItemOne(ordersDto.getItemNo()));
 		

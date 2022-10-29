@@ -66,8 +66,8 @@ function fail(){
 </div>
 
 <div class="float-left w-50">
-<!-- <form action="/orders/insert" method="post"> -->
-<form action="/cart/insert" method="post">
+<form action="/orders/detail" method="get">
+<!-- <form action="/cart/insert" method="post"> -->
 <div class="row">
    <table class="table">
       <tbody>

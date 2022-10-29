@@ -22,20 +22,12 @@ public class OrdersDaoImpl implements OrdersDao {
 					.ordersNo(rs.getInt("orders_no"))
 					.customerId(rs.getString("customer_id"))
 					.itemNo(rs.getInt("item_no"))
-	//				.addressName(rs.getString("address_name"))
-	//				.addressPhone(rs.getString("address_phone"))
-	//				.addressPost(rs.getString("address_post"))
-	//				.addressHost(rs.getString("address_host"))
-	//				.addressDetailHost(rs.getString("address_detail_host"))
-	//				.payMoney(rs.getInt("pay_money"))
 					.deliveryFee(rs.getInt("delivery_fee"))
-	//				.imageNo(rs.getInt("image_no"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
 					.itemSize(rs.getString("item_size"))
 					.itemColor(rs.getString("item_color"))
 					.itemCnt(rs.getInt("item_cnt"))
-	//				.ordersTime(rs.getDate("orders_time"))
 				.build();
 	};
 	
@@ -227,6 +219,7 @@ public class OrdersDaoImpl implements OrdersDao {
 		String sql = "select count(*) from orders";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+
 
 //	//로우맵퍼
 //	private RowMapper<OrdersDto> mapper = new RowMapper<OrdersDto>() {
