@@ -87,7 +87,7 @@ function fail(){
                <fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0원"></fmt:formatNumber>
                <input type="hidden" name="itemPrice" value="${itemDto.itemPrice}">
             </td>
-         <tr class="option">
+         <tr>
             <th>Option</th>
             <td>
 				<select class="input w-100 input-option">
@@ -105,9 +105,16 @@ function fail(){
          </tr>
       </tbody>
    </table>
-   <table>
+   
+	<div class="row" style="min-height:280px;">
+		<ul class="option-area" style="list-style: none;">
+			
+		</ul>
+	</div>
+   
+   <table class="table">
 		<tr>
-			<td>
+			<td class="right">
 				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
 				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 				<button class="btn btn-positive" type="submit">구매하기</button>

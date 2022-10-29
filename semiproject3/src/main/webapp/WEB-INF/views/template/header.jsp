@@ -707,29 +707,25 @@
 	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
 	        if(!color) return;//값 없으면 리턴
 	        
-	        var plusLine = $("<tr>").addClass("option");//option 클래스를 가지는 한칸 만들기
+	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
 	            
-	        var icon = $("<i>").addClass("fa-solid fa-xmark");//i 태그 엑스 표시 추가
+	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark");//i 태그 엑스 표시 추가
 	        icon.click(function(){//누르면 가장 상위 option class를 가지는 tr 삭제
-	            $(this).parents(".option").remove();
+	            $(this).parent(".option").remove();
 	        });
 	        
-	        var colorOption = $("<input>").addClass("input input-none").val(color).attr("type", "text").attr("name", "itemColor").prop("readonly", true);
-	        var sizeOption = $("<input>").addClass("input input-none").val(size).attr("type", "text").attr("name", "itemSize").prop("readonly", true);
-	        var cnt = $("<input>").addClass("input").attr("type", "number").attr("name", "itemCnt").attr("min", 0).attr("max", totalcnt);
+	        var colorOption = $("<input>").addClass("w-25 input input-none").val(color).attr("type", "text").attr("name", "itemColor").prop("readonly", true);
+	        var sizeOption = $("<input>").addClass("w-25 input input-none").val(size).attr("type", "text").attr("name", "itemSize").prop("readonly", true);
+	        var cnt = $("<input>").addClass("w-25 input").attr("type", "number").attr("name", "itemCnt").attr("min", 0).attr("max", totalcnt);
 	        
-	        var td = $("<td>").addClass("w-100").attr("colspan", 2);
+	        colorOption.appendTo(plusLine);
+	        sizeOption.appendTo(plusLine);
+	        cnt.appendTo(plusLine);
+	        icon.appendTo(plusLine);
 	
-	        colorOption.appendTo(td);
-	        sizeOption.appendTo(td);
-	        cnt.appendTo(td);
-	        icon.appendTo(td);
+	        plusLine.appendTo($(".option-area"));
 	
-	        td.appendTo(plusLine)
-	
-	        plusLine.appendTo($(".option").parent());
-	
-	        $("select[name=itemColor]").val("");
+	        $(".input-option").val("");
 	    });
 	});
     
