@@ -10,15 +10,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AdminDto;
+import com.example.semiproject3.entity.CenterDto;
 import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.MainImageDto;
 import com.example.semiproject3.error.TargetNotFoundException;
@@ -57,20 +60,45 @@ public class AdminController {
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute AdminDto adminDto) {
 		adminDao.insert(adminDto);
-		return "redirect:/";
+		return "redirect:list";
 	}
 	
+	@GetMapping("/list")
+	  public String list(Model model) {
+		List<AdminDto>list=adminDao.selectList();
+		      model.addAttribute("list",adminDao.selectList());
+		      return "admin/list";
+	  }
 	@GetMapping("/delete")
 	public String delete(@RequestParam String adminId) {
 		boolean result = adminDao.delete(adminId);
 		if(result) {
-			return "redirect:/";
+			return "redirect:list";
 		}
 		else {
 			throw new TargetNotFoundException("존재하지 않는 아이디입니다");
 		}
 		
 	}
+	
+	
+	@GetMapping("/edit")
+	public String edit(Model model, @RequestParam String adminId) {
+		model.addAttribute("adminDto", adminDao.selectOne(adminId));
+		return "admin/edit";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute AdminDto adminDto, RedirectAttributes attr) {
+		boolean result = adminDao.update(adminDto);
+		if(result) {
+			attr.addAttribute("adminId",adminDto.getAdminId());
+			return "redirect:list";
+		}
+		else {
+			throw new TargetNotFoundException("변경실패");
+		}
+	}		
 	
 	@PostMapping("/login")
 	public String login(HttpSession session,
