@@ -67,9 +67,6 @@ public class OrdersController {
 		//주문 내역 불러오기
 		model.addAttribute("ordersList", ordersDao.selectList(loginId));
 		
-		//이미지 불러오기인데... 아직 구현을 못 한.............
-		model.addAttribute("imageList", itemDao.selectItemList(ordersDto.getItemNo()));
-		
 		return "orders/detail";
 	}
 	

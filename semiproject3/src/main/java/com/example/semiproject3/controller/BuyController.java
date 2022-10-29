@@ -40,21 +40,23 @@ public class BuyController {
 			@ModelAttribute BuyDto buyDto,
 			@RequestParam String[] itemSize,
 			@RequestParam String[] itemColor,
+			@RequestParam String[] itemName,
 			@RequestParam int[] itemCnt,
 			@RequestParam int[] imageNo,
-			@RequestParam int ordersNo,
+			@RequestParam int[] itemNo,
+			@RequestParam int[] ordersNo,
 			HttpSession session) {
 		//주문 완료 시 구매 테이블 삽입
 		for(int i=0; i<itemSize.length; i++) {
 			buyDto.setItemSize(itemSize[i]);
 			buyDto.setItemColor(itemColor[i]);
+			buyDto.setItemName(itemName[i]);
 			buyDto.setItemCnt(itemCnt[i]);
 			buyDto.setImageNo(imageNo[i]);
+			buyDto.setItemNo(itemNo[i]);
 			buyDao.insert(buyDto);
+			ordersDao.delete(ordersNo[i]);
 		}
-		
-		//주문 내역 삭제
-		ordersDao.delete(ordersNo);
 		
 		//회원 돈 차감
 		customerDao.cash(buyDto);
