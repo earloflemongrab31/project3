@@ -29,22 +29,12 @@ function fail(){
 
 </script>
 
-<div class="container-1000 mt-40 mb-40">
-
-<!-- <div class="row"> -->
-<%-- ${itemDto} --%>
-<!-- </div> -->
-<!-- <div class="row"> -->
-<%-- ${loginId} --%>
-<!-- </div> -->
-
-<!-- <form action="/orders/insert" method="post"> -->
-<form action="/cart/insert" method="post">
-<div class="row">
-   <table class="table">
-      <tbody>
-         <tr>
-            <th class="w-50" style="height:480px;" rowspan="4">
+<div class="container-1000 mt-50 mb-50">
+<div class="float-container">
+<div class="float-left w-50">
+	<table class="table">
+		<tr>
+            <th class="w-50" style="height:480px;">
                <c:forEach var="buylistView" items="${buyImageList}">
                   <c:if test="${buylistView.imageMain == 1}">
                      <img src="/image/download/${buylistView.imageNo}" width="200" >
@@ -56,12 +46,41 @@ function fail(){
                   </c:if>
                </c:forEach>
             </th>
-            <th colspan="2">
+		</tr>
+		<tr>
+		   <td class="right">
+		      ${itemDto.itemLikeCnt}
+		   
+		      <c:if test="${isLike == null}">
+		         ♥
+		      </c:if>
+		      <c:if test="${isLike == true}">
+		         <a href="like?itemNo=${itemDto.itemNo}">♥</a>
+		      </c:if>
+		      <c:if test="${isLike == false}">
+		         <a href="like?itemNo=${itemDto.itemNo}">♡</a>
+		      </c:if>
+		   </td>
+		</tr>
+	</table>
+</div>
+
+<div class="float-left w-50">
+<!-- <form action="/orders/insert" method="post"> -->
+<form action="/cart/insert" method="post">
+<div class="row">
+   <table class="table">
+      <tbody>
+         <tr>
+            <th class="left" colspan="2">
                <input type="hidden" name="customerId" value="${loginId}">
                <input type="hidden" name="itemNo" value="${itemDto.itemNo}">
                <input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none">
             </th>
-         </tr>
+		</tr>
+		<tr>
+		   <th colspan="2">${itemDto.itemMemo}</th>
+		</tr>
          <tr>
             <th>Price</th>
             <td>
@@ -90,42 +109,26 @@ function fail(){
             <th>Qnty</th>
             <td>
 <!--                <button class="minus-btn" type="button">-</button> -->
-
                <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
-
 <!--                <button class="plus-btn" type="button">+</button> -->
             </td>
          </tr>
          <tr>
-            <td class="right">
-               ${itemDto.itemLikeCnt}
-            
-               <c:if test="${isLike == null}">
-                  ♥
-               </c:if>
-               <c:if test="${isLike == true}">
-                  <a href="like?itemNo=${itemDto.itemNo}">♥</a>
-               </c:if>
-               <c:if test="${isLike == false}">
-                  <a href="like?itemNo=${itemDto.itemNo}">♡</a>
-               </c:if>
-            </td>
-            <td colspan="2" align="right">
-            	<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
-               <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
-               <button class="btn btn-positive" type="submit">구매하기</button>
-</form>
-               <button class="btn btn-positive" type="submit">장바구니</button>    
-               <a href="buylist">목록으로</a>
-            </td>
-         </tr>
-         <tr>
-            <th colspan="3">${itemDto.itemMemo}</th>
-         </tr>
+			<td colspan="2" align="right">
+				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
+				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
+				<button class="btn btn-positive" type="submit">구매하기</button>
+				<button class="btn btn-positive" type="submit">장바구니</button>    
+				<a href="buylist">목록으로</a>
+			</td>
+		</tr>
       </tbody>
    </table>
 </div>
+</form>
+</div>
 
+</div>
 
 <div class="flexbox">
    <div class=" w-50 center item item-detail">

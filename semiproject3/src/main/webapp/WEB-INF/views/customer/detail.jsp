@@ -8,8 +8,8 @@
 </jsp:include>
 
 <!-- <section class="mb-50"> -->
-	<div class="container-550">
-	<div class="row center mb-50">
+	<div class="container-550 mt-50 mb-50">
+	<div class="row center mb-30">
 		<h1>${customerDto.customerId} 회원 정보</h1>
 		<hr>
 	</div>
