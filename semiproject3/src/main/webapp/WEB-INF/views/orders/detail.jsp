@@ -111,7 +111,6 @@
 					금액 : 
 					<c:set var="itemTotal" value="${ordersDto.itemPrice * ordersDto.itemCnt}"></c:set>
 					<fmt:formatNumber value="${itemTotal}" pattern="#,##0원"/>
-					<input type="hidden" name="itemTotalPrice" value="${itemTotal}">
 				</td>
 			</tr>
 			<tr>
@@ -146,9 +145,17 @@
 	<table class="table table-slit">
 		<tbody>
 			<tr>
-				<th class="w-25">결제 금액</th>
+				<th rowspan="2" class="w-25">최종 결제 금액</th>
 				<td>
 					<fmt:formatNumber value="${ordersDto.itemPrice * ordersDto.itemCnt}" pattern="#,##0원"/>
+					+ 3,000원(배송비) 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<c:set var="itemTotalPrice" value="${ordersDto.itemPrice * ordersDto.itemCnt + 3000}"/>
+					<fmt:formatNumber value="${itemTotalPrice}" pattern="#,##0원"/>
+					<input type="hidden" name="itemTotalPrice" value="${itemTotalPrice}">
 				</td>
 			</tr>
 		</tbody>

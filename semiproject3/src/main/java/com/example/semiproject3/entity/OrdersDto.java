@@ -11,7 +11,6 @@ public class OrdersDto {
 	private int ordersNo;
 	private String customerId;
 	private int itemNo;
-	private int deliveryFee;
 	private String itemName;
 	private int itemPrice;
 	private String itemSize;

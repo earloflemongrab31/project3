@@ -22,7 +22,6 @@ public class OrdersDaoImpl implements OrdersDao {
 					.ordersNo(rs.getInt("orders_no"))
 					.customerId(rs.getString("customer_id"))
 					.itemNo(rs.getInt("item_no"))
-					.deliveryFee(rs.getInt("delivery_fee"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
 					.itemSize(rs.getString("item_size"))
@@ -43,7 +42,6 @@ public class OrdersDaoImpl implements OrdersDao {
 //					.addressHost(rs.getString("address_host"))
 //					.addressDetailHost(rs.getString("address_detail_host"))
 //					.payMoney(rs.getInt("pay_money"))
-					.deliveryFee(rs.getInt("delivery_fee"))
 //					.imageNo(rs.getInt("image_no"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
@@ -72,13 +70,12 @@ public class OrdersDaoImpl implements OrdersDao {
 				+ "orders_no, "
 				+ "customer_id, "
 				+ "item_no, "
-				+ "delivery_fee, "
 				+ "item_name, "
 				+ "item_price, "
 				+ "item_size, "
 				+ "item_color, "
 				+ "item_cnt) "
-				+ "values(orders_seq.nextval,?,?,3000,?,?,?,?,?)";
+				+ "values(orders_seq.nextval,?,?,?,?,?,?,?)";
 		
 		Object[] param = {
 				ordersDto.getCustomerId(), 

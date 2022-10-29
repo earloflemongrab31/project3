@@ -701,19 +701,36 @@
     
 	//구매 옵션 불러오기
 	$(function(){
-		$("select[name=itemColor]").change(function(){
-            	
-			var color = $(this).val();
-			var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
-			var totalcnt = $(this).find("option:selected").attr("data-cnt");
-			console.log(color);		
-			console.log(size);
-			console.log(totalcnt);
-			$("input[name=itemSize]").attr("value", size);
-			$("input[name=itemTotalCnt]").attr("value", totalcnt);
-			$("input[name=itemCnt]").attr("max", totalcnt);
-			$("input[name=itemCnt]").val(0);
-		});
+	    $(".input-option").on("input",function(){
+	        var color = $(this).find("option:selected").data("color");//선택한 색
+	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
+	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
+	        if(!color) return;//값 없으면 리턴
+	        
+	        var plusLine = $("<tr>").addClass("option");//option 클래스를 가지는 한칸 만들기
+	            
+	        var icon = $("<i>").addClass("fa-solid fa-xmark");//i 태그 엑스 표시 추가
+	        icon.click(function(){//누르면 가장 상위 option class를 가지는 tr 삭제
+	            $(this).parents(".option").remove();
+	        });
+	        
+	        var colorOption = $("<input>").addClass("input input-none").val(color).attr("type", "text").attr("name", "itemColor").prop("readonly", true);
+	        var sizeOption = $("<input>").addClass("input input-none").val(size).attr("type", "text").attr("name", "itemSize").prop("readonly", true);
+	        var cnt = $("<input>").addClass("input").attr("type", "number").attr("name", "itemCnt").attr("min", 0).attr("max", totalcnt);
+	        
+	        var td = $("<td>").addClass("w-100").attr("colspan", 2);
+	
+	        colorOption.appendTo(td);
+	        sizeOption.appendTo(td);
+	        cnt.appendTo(td);
+	        icon.appendTo(td);
+	
+	        td.appendTo(plusLine)
+	
+	        plusLine.appendTo($(".option").parent());
+	
+	        $("select[name=itemColor]").val("");
+	    });
 	});
     
     

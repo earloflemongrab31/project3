@@ -16,6 +16,7 @@ import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.repository.BuyDao;
 import com.example.semiproject3.repository.CartDao;
+import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.OrdersDao;
 
 @Controller
@@ -31,6 +32,9 @@ public class BuyController {
 	@Autowired
 	private CartDao cartDao;
 	
+	@Autowired
+	private CustomerDao customerDao;
+	
 	@PostMapping("/insert")
 	public String insert(
 			@ModelAttribute BuyDto buyDto,
@@ -41,6 +45,9 @@ public class BuyController {
 		
 		//주문 내역 삭제
 		ordersDao.delete(ordersNo);
+		
+		//회원 돈 차감
+		customerDao.cash(buyDto);
 		
 		return "redirect:success";
 	}
