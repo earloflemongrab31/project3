@@ -705,6 +705,9 @@
 	        var color = $(this).find("option:selected").data("color");//선택한 색
 	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
 	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
+	        console.log(color);
+	        console.log(size);
+	        console.log(totalcnt);
 	        if(!color) return;//값 없으면 리턴
 	        
 	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
@@ -726,7 +729,21 @@
 	        plusLine.appendTo($(".option-area"));
 	
 	        $(".input-option").val("");
+	        $("input[name=itemTotalCnt]").attr("value", totalcnt);
 	    });
+// 	    $("select[name=itemColor]").change(function(){
+        	
+// 			var color = $(this).val();
+// 			var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
+// 			var totalcnt = $(this).find("option:selected").attr("data-cnt");
+// 			console.log(color);		
+// 			console.log(size);
+// 			console.log(totalcnt);
+// 			$("input[name=itemSize]").attr("value", size);
+// 			$("input[name=itemTotalCnt]").attr("value", totalcnt);
+// 			$("input[name=itemCnt]").attr("max", totalcnt);
+// 			$("input[name=itemCnt]").val(0);
+// 		});
 	});
     
     
