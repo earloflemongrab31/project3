@@ -62,7 +62,7 @@
 	    background-size: 1em;
 	    background-repeat: no-repeat;
 	    background-position-x: 0.5em;
-	    background-position-y: center;
+	    background-position-y: 0.6em;
 	}
 	
 	li.cart{
@@ -195,6 +195,7 @@
       height: 480px;
       object-fit: cover;
     }
+    
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -861,11 +862,19 @@
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right cart"><a href="/cart/cartList"><span id="cart-count"></span><i class="fa-solid fa-cart-shopping"><c:if test="${cartCount != 0}">${cartCount}</c:if></i></a></li>
+	<li class="float-right cart">
+		<a href="/cart/cartList"><span id="cart-count"></span>
+			<i class="fa-solid fa-cart-shopping"><c:if test="${cartCount != 0}">${cartCount}</c:if></i>
+		</a>
+	</li>
 	<form action="/item/buylist" method="get" autocomplete="off">
-		<button class="float-right btn btn-neutral" type="submit">search</button>
+		<li class="float-right">
+			<button class="float-right btn btn-neutral" type="submit">search</button>
+		</li>
 		<input type="hidden" name="type" value="item_name">
-		<input class="float-right input input-underline find" name="keyword" id="search" placeholder="가을 신상">
+		<li class="float-right">
+			<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
+		</li>
 	</form>
 		<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
 	<c:choose>

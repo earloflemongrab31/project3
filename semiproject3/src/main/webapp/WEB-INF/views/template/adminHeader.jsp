@@ -123,6 +123,19 @@
         });
     });
 	
+    //게시글 삭제 시 즉시 삭제 방지
+	$(function(){
+		$(".delete").click(function(e){
+            var choice = confirm("정말 삭제하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
+
 </script>
 
 </head>

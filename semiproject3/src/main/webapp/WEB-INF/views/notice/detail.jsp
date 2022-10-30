@@ -7,28 +7,6 @@
     <jsp:param value="공지사항" name="title"/>
 </jsp:include>
 
-<style>
-	.table-border tr > th{
-		background-color: #f6f3f1;
-	}
-</style>
-
-
-<script>
-	$(function(){
-		$(".delete").click(function(e){
-            var choice = confirm("정말 삭제하시겠습니까?");
-            if(choice){
-                return true;
-            }
-            else{
-                return false;
-            }
-		});
-	});
-</script>
-
-
 <div class ="container-800 mt-50 mb-50">
 
 	<div class = "row center mb-30">
