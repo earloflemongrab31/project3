@@ -906,7 +906,7 @@
 		</a>
 	</li>
 	<form action="/item/buylist" method="get" autocomplete="off">
-		<button class="float-right btn btn-neutral" type="submit">search</button>
+		<button class="float-right btn btn-neutral" style="background-color:white;" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
 		<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
 	</form>
