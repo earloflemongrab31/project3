@@ -16,6 +16,7 @@ import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.repository.BuyDao;
 import com.example.semiproject3.repository.CartDao;
+import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.OrdersDao;
 import com.example.semiproject3.vo.BuyListSearchVO;
 
@@ -32,16 +33,34 @@ public class BuyController {
 	@Autowired
 	private CartDao cartDao;
 	
+	@Autowired
+	private CustomerDao customerDao;
+	
 	@PostMapping("/insert")
 	public String insert(
 			@ModelAttribute BuyDto buyDto,
-			@RequestParam int ordersNo,
+			@RequestParam String[] itemSize,
+			@RequestParam String[] itemColor,
+			@RequestParam String[] itemName,
+			@RequestParam int[] itemCnt,
+			@RequestParam int[] imageNo,
+			@RequestParam int[] itemNo,
+			@RequestParam int[] ordersNo,
 			HttpSession session) {
 		//주문 완료 시 구매 테이블 삽입
-		buyDao.insert(buyDto);
+		for(int i=0; i<itemSize.length; i++) {
+			buyDto.setItemSize(itemSize[i]);
+			buyDto.setItemColor(itemColor[i]);
+			buyDto.setItemName(itemName[i]);
+			buyDto.setItemCnt(itemCnt[i]);
+			buyDto.setImageNo(imageNo[i]);
+			buyDto.setItemNo(itemNo[i]);
+			buyDao.insert(buyDto);
+			ordersDao.delete(ordersNo[i]);
+		}
 		
-		//주문 내역 삭제
-		ordersDao.delete(ordersNo);
+		//회원 돈 차감
+		customerDao.cash(buyDto);
 		
 		return "redirect:success";
 	}

@@ -30,7 +30,6 @@ public class CartController {
 	
 	@Autowired
 	private CustomerDao customerDao;
-		
 	
 	//카트담기
 	@PostMapping("/insert")
@@ -44,15 +43,6 @@ public class CartController {
 		else {
 			cartDao.plus(cartDto);
 		}
-		//cartDto에 정보 삽입
-//			CartDto cartDto=new CartDto();
-//			cartDto.setCustomerId(loginId);
-//			cartDto.setItemNo(itemNo);
-//			cartDto.setItemName(itemDto.getItemName());
-//			cartDto.setItemPrice(itemDto.getItemPrice());
-//			cartDto.setItemColor();
-//			cartDto.setItemSize(itemSize);
-//			cartDto.setItemCnt(itemCnt);
 		
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	};

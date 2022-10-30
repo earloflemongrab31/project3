@@ -13,6 +13,7 @@
 				<li><a href="/customer/information">개인정보 수정</a></li>
 				<li><a href="/customer/changePw">비밀번호 변경</a></li>
 				<li><a href="/address/list">배송지 관리</a></li>
+				<li><a href="/review/list">리뷰 관리</a></li>
 				<li><a href="/customer/goodbye">회원 탈퇴</a></li>
 			</ul>
 		</li>
