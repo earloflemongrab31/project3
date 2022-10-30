@@ -2,9 +2,9 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
+import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.vo.CustomerListSearchVO;
-import com.example.semiproject3.vo.NoticeListSearchVO;
 
 public interface CustomerDao {
 	
@@ -58,5 +58,5 @@ public interface CustomerDao {
 	int searchCount(CustomerListSearchVO vo);
 	int listCount(CustomerListSearchVO vo);
 	
-	
+	boolean cash(BuyDto buyDto);
 }
