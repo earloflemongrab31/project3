@@ -806,7 +806,7 @@
 		<a href="#">New</a>
 	</li>
 	<li class="float-left">
-		<a href="#">outer</a>
+		<a href="/item/buylist?keyword=100">outer</a>
 		<ul>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=101">자켓</a>
@@ -823,7 +823,7 @@
 		</ul>
 	</li>
 	<li class="float-left">
-		<a href="#">top</a>
+		<a href="/item/buylist?keyword=200">top</a>
 		<ul>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=201">민소매</a>
@@ -843,7 +843,7 @@
 		</ul>
 	</li>
 	<li class="float-left">
-		<a href="#">pants</a>
+		<a href="/item/buylist?keyword=300">pants</a>
 		<ul>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=301">청바지</a>
@@ -863,7 +863,7 @@
 		<a href="/item/buylist?type=cate_code&keyword=501">dress</a>
 	</li>
 	<li class="float-left">
-		<a href="#">acc</a>
+		<a href="/item/buylist?keyword=600">acc</a>
 		<ul>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=601">쥬얼리</a>

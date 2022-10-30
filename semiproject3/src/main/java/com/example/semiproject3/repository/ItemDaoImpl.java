@@ -63,20 +63,20 @@ public class ItemDaoImpl implements ItemDao {
 	//RowMapper buyList 전용
 	private RowMapper<BuyListVO> buyListMapper = (rs, idx) -> {
 		return BuyListVO.builder()
-							.imageNo(rs.getInt("image_no"))
-							.itemNo(rs.getInt("item_no"))
-							.itemCate(rs.getString("cate_code"))
-							.itemName(rs.getString("item_name"))
-							.itemMemo(rs.getString("item_memo"))
-							.itemContent(rs.getString("item_content"))
-							.itemPrice(rs.getInt("item_price"))
-							.itemColor(rs.getString("item_color"))
-							.itemSize(rs.getString("item_size"))
-							.itemTotalCnt(rs.getInt("item_total_cnt"))
-							.itemLikeCnt(rs.getInt("item_like_cnt"))
-							.itemDate(rs.getDate("item_date"))
-							.imageMain(rs.getString("image_main"))
-				.build();
+					.itemNo(rs.getInt("item_no"))
+					.itemCate(rs.getString("cate_code"))
+					.itemName(rs.getString("item_name"))
+					.itemMemo(rs.getString("item_memo"))
+					.itemContent(rs.getString("item_content"))
+					.itemPrice(rs.getInt("item_price"))
+					.itemColor(rs.getString("item_color"))
+					.itemSize(rs.getString("item_size"))
+					.itemLikeCnt(rs.getInt("item_like_cnt"))
+					.itemDate(rs.getDate("item_date"))
+					.itemTotalCnt(rs.getInt("item_total_cnt"))
+					.imageNo(rs.getInt("image_no"))
+					.imageMain(rs.getString("image_main"))
+			.build();
 	};
 	
 	//ResultSetExtractor
@@ -276,12 +276,54 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List<BuyListVO> buySearch(BuyListSearchVO vo) {
 		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy_list_view where instr(#1,?) > 0 and image_main = 1 "
-					+ "order by item_no desc"
-				+ ")TMP"
-			+ ") where rn between ? and ?";
+						+ "select rownum rn, TMP.* from ("
+							+ "select * from buy_list_view where instr(#1,?) > 0 and image_main = 1 "
+							+ "order by item_no desc"
+						+ ")TMP"
+					+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, buyListMapper, param);
+	}
+	
+	@Override
+	public int buySearchCount2(BuyListSearchVO vo) {
+		String sql = "select count(*) from ("
+					+ "select * from BUY_LIST_VIEW B left outer join cate C on B.cate_code=C.cate_code"
+				+ ") where instr(cate_parent, ?) > 0 and image_main = 1";
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	@Override
+	public List<BuyListVO> buySearch2(BuyListSearchVO vo) {
+		String sql = "SELECT "
+						+ "item_no, "
+						+ "cate_code, "
+						+ "item_name, "
+						+ "item_memo, "
+						+ "item_content, "
+						+ "item_price, "
+						+ "item_color, "
+						+ "item_size, "
+						+ "item_like_cnt, "
+						+ "item_date, "
+						+ "inven_in, "
+						+ "inven_out, "
+						+ "item_total_cnt, "
+						+ "image_no, "
+						+ "image_main "
+					+ "FROM ("
+						+ "SELECT tmp.*, rownum rn from("
+							+ "SELECT * FROM ("
+								+ "select "
+									+ "B.*, C.cate_parent "
+								+ "from BUY_LIST_VIEW B left outer join cate C on B.cate_code=C.cate_code"
+							+ ") WHERE instr(cate_parent,?) > 0 and image_main = 1 ORDER BY item_date desc"
+						+ ") TMP "
+					+ ") WHERE rn BETWEEN ? AND ?";
 		Object[] param = {
 				vo.getKeyword(), vo.startRow(), vo.endRow()
 		};
