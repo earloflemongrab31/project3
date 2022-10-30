@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AdminDto;
 import com.example.semiproject3.entity.ImageDto;
+import com.example.semiproject3.entity.MainEditDto;
 import com.example.semiproject3.entity.MainImageDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AdminDao;
@@ -110,7 +111,7 @@ public class AdminController {
 	public String main(
 			HttpSession session,
 			@RequestParam List<MultipartFile> mainImage,
-			@RequestParam String mainContent, 
+			@ModelAttribute MainEditDto mainEditDto, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws IllegalStateException, IOException {
 		
@@ -127,8 +128,9 @@ public class AdminController {
 			mainEditDao.insert(editor);
 		}
 		
+		mainEditDto.setMainEditor(editor);
 
-		mainEditDao.update(editor, mainContent);
+		mainEditDao.update(mainEditDto);
 		
 		/* html로부터 imagePath을 getParmeterValues로 배열로 전달 받아서 배열로 저장한다 */
 		response.setCharacterEncoding("UTF-8");

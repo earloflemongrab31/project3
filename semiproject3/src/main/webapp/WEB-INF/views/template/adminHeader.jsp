@@ -68,6 +68,9 @@
     	background-color: #ede8e4;
     	color: #25201d;
     }
+    .right-word{
+    	 margin-right:10px;
+    }
 </style>
 <script type="text/javascript">
 
@@ -125,8 +128,21 @@
 	
     //게시글 삭제 시 즉시 삭제 방지
 	$(function(){
-		$(".delete").click(function(e){
-            var choice = confirm("정말 삭제하시겠습니까?");
+		$("a.delete").click(function(e){
+            var choice = confirm("삭제하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
+
+    //로그아웃 시 즉시 로그아웃 방지
+	$(function(){
+		$("a.logout").click(function(e){
+            var choice = confirm("로그아웃 하시겠습니까?");
             if(choice){
                 return true;
             }
@@ -151,7 +167,7 @@
 			<a href="/admin/">Logo</a>
 		</h2>
 	</div>
-	<div class="float-right">
+	<div class="right-word row float-right">
 		<a href="/">회원페이지</a>
 	</div>
 </div>
@@ -195,9 +211,9 @@
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right"><a href="/customer/logout">LOGOUT</a></li>
+	<li class="float-right"><a class="logout" href="/customer/logout">LOGOUT</a></li>
 	<li class="float-right">
-		${loginId}님
+		<a href="#">${loginId}님</a>
 	</li>
 </ul>
 </div>

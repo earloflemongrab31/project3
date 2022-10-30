@@ -6,7 +6,7 @@ public interface MainEditDao {
 
 	void insert(String loginId);
 	
-	void update(String mainEditor, String mainContent);
+	void update(MainEditDto mainEditDto);
 
 	MainEditDto select();
 }

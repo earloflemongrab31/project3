@@ -7,10 +7,11 @@
     <jsp:param value="상품 목록" name="title"/>
 </jsp:include>
 
-<div class ="container-1100 mt-40 mb-40">
+<div class ="container-1100 mt-50 mb-50">
 
-	<div class = "row center">
+	<div class = "row center mb-50">
 		<h1>상품 리스트</h1>
+		<hr>
 	</div>
 	<div class = "row float-container center">
 	

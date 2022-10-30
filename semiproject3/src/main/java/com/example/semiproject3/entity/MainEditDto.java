@@ -16,4 +16,5 @@ public class MainEditDto {
 	private String mainEditor;
 	private String mainContent;
 	private Date mainTime;
+	private String searchHolder;
 }

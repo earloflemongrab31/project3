@@ -58,11 +58,13 @@
 <style>
 	.input.find{
 	    padding-left: 2em;
+	    padding-top: 0.25em;
 		background-image: url("/image/search.webp");
 	    background-size: 1em;
 	    background-repeat: no-repeat;
 	    background-position-x: 0.5em;
-	    background-position-y: 0.6em;
+	    background-position-y: center;
+	    font-size: 14px;
 	}
 	
 	li.cart{
@@ -199,6 +201,10 @@
     
     .footer{
     	padding: 0 3em;
+    }
+    
+    .right-word{
+    	 margin-right:10px;
     }
     
 </style>
@@ -720,6 +726,31 @@
 	    });
 	});
     
+    //게시글 삭제 시 즉시 삭제 방지
+	$(function(){
+		$("a.delete").click(function(e){
+            var choice = confirm("삭제하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
+
+    //로그아웃 시 즉시 로그아웃 방지
+	$(function(){
+		$("a.logout").click(function(e){
+            var choice = confirm("로그아웃 하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
     
 </script>
 
@@ -751,12 +782,12 @@
 		</h2>
 	</div>
 	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
-		<div class="row float-right" style="margin-right:10px;">
+		<div class="right-word row float-right">
 			${loginId}님, 안녕하세요.
 		</div>
 	</c:if>
-	<c:if test="${loginGrade == '관리자' }">
-		<div class="float-right	">
+	<c:if test="${loginGrade == '관리자'}">
+		<div class="right-word row float-right">
 			<a href="/admin/">관리자페이지</a>
 		</div>
 	</c:if>
@@ -858,13 +889,9 @@
 		</a>
 	</li>
 	<form action="/item/buylist" method="get" autocomplete="off">
-		<li class="float-right">
-			<button class="float-right btn btn-neutral" type="submit">search</button>
-		</li>
+		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
-		<li class="float-right">
-			<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
-		</li>
+		<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
 	</form>
 		<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
 	<c:choose>
@@ -873,7 +900,7 @@
 			<li class="float-right"><a href="/customer/insert">JOIN US</a></li>
 		</c:when>
 		<c:otherwise>
-			<li class="float-right"><a href="/customer/logout">LOGOUT</a></li>
+			<li class="float-right"><a class="logout" href="/customer/logout">LOGOUT</a></li>
 		</c:otherwise>
 	</c:choose>
 </ul>
