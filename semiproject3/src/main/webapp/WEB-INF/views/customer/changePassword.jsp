@@ -7,7 +7,7 @@
 
 <form action="changePassword" method="post" autocomplete="off">
 
-	<div class="container-600 mt-40 mb-40">
+	<div class="container-600 mt-50 mb-50">
 
 		<div class="row center">
 			<h1>비밀번호 변경</h1>

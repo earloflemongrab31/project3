@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AdminDto;
 import com.example.semiproject3.entity.ImageDto;
+import com.example.semiproject3.entity.MainEditDto;
 import com.example.semiproject3.entity.MainImageDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AdminDao;

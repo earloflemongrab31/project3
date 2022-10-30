@@ -18,6 +18,7 @@
 		<hr>
 	</div>
 	
+	<div class="row">
 	<table class="table">
 		<tbody>
 			<tr>
@@ -38,17 +39,15 @@
 				</td>
 			</tr>
 		</tbody>
-		<tfoot>
-			<tr>
-				<td class="right">
-					<a class="btn btn-neutral" href="list">목록</a>
-					<button class="btn btn-positive" type="submit">등록</button>
-				</td>
-			</tr>
-		</tfoot>				
 	</table>
-	
 	</div>
+	
+	<div class="row right">
+		<a class="btn btn-neutral btn-border" href="list">목록</a>
+		<button class="btn btn-positive" type="submit">등록</button>
+	</div>
+	
+</div>
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 

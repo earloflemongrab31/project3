@@ -23,7 +23,7 @@
 		<tr>
 			<td class="w-25">말머리</td>
 			<td>
-				<select name="noticeHead">
+				<select class="input" name="noticeHead">
 					<option value="">선택</option>
 					<option disabled>------</option>
 					<option value="">공지</option>
@@ -39,7 +39,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">내용</td>
+			<td>내용</td>
+			<td>
+				<input class="input input-none" type="hidden" value="-">
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
