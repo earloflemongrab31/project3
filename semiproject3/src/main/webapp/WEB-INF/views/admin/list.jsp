@@ -12,6 +12,10 @@
 		<hr>
 	</div>
 	
+	<div class="row right">
+		<a href="insert" class="btn btn-border">등록</a>
+	</div>
+	
 	<div class="row">
 		<table class="table table-border">
 			<thead>
@@ -30,7 +34,7 @@
 					<td>${adminDto.adminName}</td>
 					<td>${adminDto.adminNick}</td>
 					<td>${adminDto.adminGrade}</td>
-						<c:set var="main" value="${adminDto.adminGrade == '메인관리자'}"></c:set>
+						<c:set var="main" value="${loginGrade == '메인관리자'}"></c:set>
 						<c:if test="${main}">
 							<td>
 								<a class="btn btn-border" href="edit?adminId=${adminDto.adminId}">수정</a>

@@ -17,8 +17,17 @@
 	</div>
 
 	<div class="row left">
-		등급
-		<input class="input w-100" name="adminGrade"  value="${adminDto.adminGrade}">
+		현재등급
+		<input class="input w-100"  value="${adminDto.adminGrade}" readonly>
+	</div>
+	
+	<div class="row left">
+		등급변경
+		<select class="input w-100" name="adminGrade">
+			<option value="">선택</option>
+			<option value="일반관리자">일반관리자</option>
+		     <option value="메인관리자">메인관리자</option>
+		</select>
 	</div>
 	
 	
