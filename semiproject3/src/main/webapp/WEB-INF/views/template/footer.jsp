@@ -5,7 +5,7 @@
 
 <footer class="float-container">
 
-<div class="float-left w-50">
+<div class="footer float-left w-50">
 	<div class="row">
 		<h3>쇼핑몰명</h3>
 	</div>
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 </div>
-<div class="float-left w-50">
+<div class="footer float-left w-50">
 	<div class="row">
 		<h3>고객센터</h3>
 	</div>

@@ -1,16 +1,12 @@
 package com.example.semiproject3.repository;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.vo.CartListVO;
-
 @Repository
 public class CartDaoImpl implements CartDao{
 	
@@ -183,4 +179,3 @@ public class CartDaoImpl implements CartDao{
 	
 }
 		
-	

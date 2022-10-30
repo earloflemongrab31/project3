@@ -121,6 +121,11 @@ h2.logo{
     text-align: center;
     text-decoration: none;
 }
+a.btn{
+	font-size: 14px;
+    padding: 0.7em 0.5em;
+    border: none;
+}
 .btn.btn-border{
 	border: 1px solid #D5D5D5;
 }
@@ -161,7 +166,7 @@ h2.logo{
 */
 .input{
     outline: none;
-    font-size: 14px;
+    font-size: 16px;
     padding: 0.5em;
     border: 1px solid #D5D5D5;
 }
@@ -205,6 +210,7 @@ h2.logo{
 textarea.input{/*textarea 중 input class인 것만*/
     height: 100px;
     resize: vertical;
+	font-family: "Noto Serif KR";
 }
 textarea.input.fix-size{/*textarea는 class가 아니니까*/
     resize: none;
@@ -252,6 +258,11 @@ font-size: 14px;
 .table.table-border{
     border: 1px solid gray;
 }
+
+.table-border tr > th{
+	background-color: #f6f3f1;
+}
+
 .table.table-border > thead > tr > th, 
 .table.table-border > thead > tr > td, 
 .table.table-border > tbody > tr > th, 

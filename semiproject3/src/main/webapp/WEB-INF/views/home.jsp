@@ -9,7 +9,7 @@
 <!-- 풀스크린 수정 필요할 듯... -->
 <div class="fullscreen">
 	<div class="modal screen-center survey">
-		<div class="row right delete" style="font-family:sans-serif; margin:3px 5px 0 0;"><i class="fa-solid fa-xmark"></i></div>
+		<div class="row right delete" style="margin:3px 5px 0 0;"><i class="fa-solid fa-xmark"></i></div>
 		<div class="row" style="min-height:285px; opacity:0;">
 			<span>-</span>
 		</div>
@@ -36,10 +36,6 @@
     <!-- If we need pagination -->
     <div class="swiper-pagination"></div>
   
-    <!-- If we need navigation buttons -->
-<!--     <div class="swiper-button-prev"></div> -->
-<!--     <div class="swiper-button-next"></div> -->
-  
 </div>
 
 <div class="container-1200 mt-50 mb-50">
@@ -65,7 +61,7 @@
     		<div class="row">
 	    		<div>
 		    		<a href="item/buydetail?itemNo=${itemDto.itemNo}">
-						<img src="/image/download/${itemDto.imageNo}" class="w-100">
+						<img src="/image/download/${itemDto.imageNo}">
 		    		</a>
 	    		</div>
 	    		<div class="row">

@@ -91,4 +91,7 @@ public interface ItemDao {
 	//한 개 상품 사진 하나 확인용
 	List<ItemListVO> selectItemOne(int itemNo);
 	
+	//대분류 드롭메뉴 선택용
+	List<BuyListVO> buySearch2(BuyListSearchVO vo);
+	int buySearchCount2(BuyListSearchVO vo);
 }
