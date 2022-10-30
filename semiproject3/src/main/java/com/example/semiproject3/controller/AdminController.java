@@ -111,7 +111,7 @@ public class AdminController {
 	public String main(
 			HttpSession session,
 			@RequestParam List<MultipartFile> mainImage,
-			@ModelAttribute MainEditDto mainEditDto, 
+			@RequestParam String mainContent, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws IllegalStateException, IOException {
 		
@@ -128,9 +128,8 @@ public class AdminController {
 			mainEditDao.insert(editor);
 		}
 		
-		mainEditDto.setMainEditor(editor);
 
-		mainEditDao.update(mainEditDto);
+		mainEditDao.update(editor, mainContent);
 		
 		/* html로부터 imagePath을 getParmeterValues로 배열로 전달 받아서 배열로 저장한다 */
 		response.setCharacterEncoding("UTF-8");

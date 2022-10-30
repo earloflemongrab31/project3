@@ -14,15 +14,9 @@ public class MainEditDaoImpl implements MainEditDao{
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void update(MainEditDto mainEditDto) {
-		String sql = "update main_edit "
-						+ "set main_editor=?, main_content=?, search_holder=? "
-					+ "where main_no=1";
-		Object[] param = {
-				mainEditDto.getMainEditor(), 
-				mainEditDto.getMainContent(), 
-				mainEditDto.getSearchHolder()
-				};
+	public void update(String mainEditor, String mainContent) {
+		String sql = "update main_edit set main_editor=?, main_content=? where main_no=1";
+		Object[] param = {mainEditor, mainContent};
 		jdbcTemplate.update(sql, param);
 	}
 
@@ -33,7 +27,6 @@ public class MainEditDaoImpl implements MainEditDao{
 						.mainEditor(rs.getString("main_editor"))
 						.mainContent(rs.getString("main_content"))
 						.mainTime(rs.getDate("main_time"))
-						.searchHolder(rs.getString("search_holder"))
 					.build();
 		}
 		else {
