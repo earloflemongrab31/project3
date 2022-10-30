@@ -7,12 +7,26 @@
     <jsp:param value="공지사항" name="title"/>
 </jsp:include>
 
+<script>
+	$(function(){
+		$(".delete").click(function(e){
+            var choice = confirm("정말 삭제하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
+</script>
 
-<div class ="container-600 mt-50 mb-50">
+
+<div class ="container-800 mt-50 mb-50">
 
 	<div class = "row center mb-30">
-		<h1>공지사항 상세내용</h1>
-			<hr>
+		<h1>NOTICE</h1>
+		<hr>
 	</div>
 	
 	<div class ="row">
@@ -72,16 +86,14 @@
 	 			<tr>
 	 				<td class="right" colspan="2">
 						<a class="btn btn-neutral" href="list">목록</a>
-						<c:if test="${loginGrade == '관리자'}">
+						<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
 							<a class="btn btn-positive" href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>
-							<a class="btn btn-negative" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
+							<a class="btn btn-negative delete" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
 						</c:if>
 					</td>
 				</tr>
 			</tfoot>
 	 	</table>
-	 	
-		
 	</div>
 </div>
 

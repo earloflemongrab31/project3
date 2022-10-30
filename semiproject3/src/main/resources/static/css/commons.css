@@ -205,6 +205,7 @@ h2.logo{
 textarea.input{/*textarea 중 input class인 것만*/
     height: 100px;
     resize: vertical;
+	font-family: "Noto Serif KR";
 }
 textarea.input.fix-size{/*textarea는 class가 아니니까*/
     resize: none;

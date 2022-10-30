@@ -174,6 +174,13 @@
 			<li><a href="/review/reportList">리뷰신고목록</a></li>
 		</ul>
 	</li>
+	<li class="float-left">
+		<a href="#">고객센터</a>
+		<ul>
+			<li><a href="/notice/list">공지사항</a></li>
+			<li><a href="/center/list">Q&A</a></li>
+		</ul>
+	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
 	<li class="float-right"><a href="/customer/logout">LOGOUT</a></li>
 	<li class="float-right">

@@ -856,7 +856,7 @@
 				<a href="/item/buylist?type=cate_code&keyword=604">신발</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=605">양</a>
+				<a href="/item/buylist?type=cate_code&keyword=605">양말</a>
 			</li>
 		</ul>
 	</li>
