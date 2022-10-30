@@ -696,7 +696,7 @@
     	}, 1000);
     });
     
-/* 	//구매 옵션 불러오기
+ 	//구매 옵션 불러오기
 	$(function(){
 	    $(".input-option").on("input",function(){
 	        var color = $(this).find("option:selected").data("color");//선택한 색
