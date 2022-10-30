@@ -90,5 +90,12 @@ public class AdminDaoImpl implements AdminDao {
 		Object[]param = {adminDto.getAdminGrade(), adminDto.getAdminId()};
 		return jdbcTemplate.update(sql,param)>0;
 		}
+
+	@Override
+	public boolean update2(AdminDto adminDto) {
+	String sql = "update admin set admin_grade = '일반관리자' where admin_id != ?";
+	Object[]param = {adminDto.getAdminId()};
+	return jdbcTemplate.update(sql, param) > 0;
+	}
 	
 }

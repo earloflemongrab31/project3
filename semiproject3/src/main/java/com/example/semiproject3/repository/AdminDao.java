@@ -17,4 +17,6 @@ public interface AdminDao {
 	List<AdminDto> selectList();
 	
 	boolean update(AdminDto adminDto);
+
+	boolean update2(AdminDto adminDto);
 }

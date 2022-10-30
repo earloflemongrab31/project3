@@ -90,14 +90,24 @@ public class AdminController {
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute AdminDto adminDto, RedirectAttributes attr) {
+
 		boolean result = adminDao.update(adminDto);
+		
+		// 1. 이런식으로 아이디값을 가져온다.
+		adminDto.getAdminId();
+		
+		// 2. 가져온 아이디 값을 dao에 넘긴다.
+		 adminDao.update2(adminDto);
+		
+		
 		if(result) {
 			attr.addAttribute("adminId",adminDto.getAdminId());
-			return "redirect:list";
+					return "redirect:list";
 		}
 		else {
 			throw new TargetNotFoundException("변경실패");
 		}
+
 	}		
 	
 	@PostMapping("/login")

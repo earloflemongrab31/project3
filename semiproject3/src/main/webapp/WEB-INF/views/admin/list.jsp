@@ -12,9 +12,11 @@
 		<hr>
 	</div>
 	
+	<c:if test="${loginGrade == '메인관리자'}">
 	<div class="row right">
-		<a href="insert" class="btn btn-border">등록</a>
+	<a href="insert" class="btn btn-border">등록</a>
 	</div>
+	</c:if>
 	
 	<div class="row">
 		<table class="table table-border">
@@ -24,20 +26,23 @@
 					<th>이름</th>
 					<th>닉네임</th>
 					<th>등급</th>
+					<c:set var="main" value="${loginGrade == '메인관리자'}"></c:set>
+						<c:if test="${main}">
 					<th>비고</th>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody align="center">
 				<c:forEach var="adminDto" items="${list}">
 				<tr>
-					<td>${adminDto.adminId}</td>
+					<td >${adminDto.adminId}</td>
 					<td>${adminDto.adminName}</td>
 					<td>${adminDto.adminNick}</td>
 					<td>${adminDto.adminGrade}</td>
 						<c:set var="main" value="${loginGrade == '메인관리자'}"></c:set>
 						<c:if test="${main}">
 							<td>
-								<a class="btn btn-border" href="edit?adminId=${adminDto.adminId}">수정</a>
+								<a class="btn btn-border" href="edit?adminId=${adminDto.adminId}"  >수정</a>
 								<a class="btn btn-border" href="delete?adminId=${adminDto.adminId}">삭제</a>
 							</td>
 						</c:if>
@@ -46,6 +51,5 @@
 			</tbody>
 		</table>
 	</div>
-
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
 
