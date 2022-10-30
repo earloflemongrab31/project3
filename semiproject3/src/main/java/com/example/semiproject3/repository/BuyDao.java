@@ -21,7 +21,7 @@ public interface BuyDao {
 	
 	boolean update(int buyNo, String deliveryStatus);
 	
-	List<BuyDto> selectListAll(BuyListSearchVO vo);
+	List<BuyDto> selectListAll(BuyListSearchVO vo);//관리자용 
 	List<BuyDto> list(BuyListSearchVO vo);
 	List<BuyDto> search(BuyListSearchVO vo);
 			

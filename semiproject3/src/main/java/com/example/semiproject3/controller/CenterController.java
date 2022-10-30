@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CenterDto;
 import com.example.semiproject3.error.TargetNotFoundException;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CenterDao;
 import com.example.semiproject3.vo.CenterListSearchVO;
 
@@ -21,6 +25,9 @@ public class CenterController {
 
 	@Autowired
 	private CenterDao centerDao;
+	
+	@Autowired
+	private CartDao cartDao;
 	
 	//등록
 	@GetMapping("/insert")
@@ -34,6 +41,8 @@ public class CenterController {
 		int centerNo = centerDao.sequence();
 		centerDto.setCenterNo(centerNo);
 		centerDao.insert(centerDto);
+		
+		
 		return "redirect:list";
 	}
 	
@@ -41,13 +50,19 @@ public class CenterController {
 	@GetMapping("/list")
 	public String list(
 			Model model, 
-			@ModelAttribute(name="vo") CenterListSearchVO vo) {
+			@ModelAttribute(name="vo") CenterListSearchVO vo,HttpSession session) {
 
 		//페이지 네비게이터를 위한 게시글 수를 전달
 		int count = centerDao.count(vo);
 		vo.setCount(count);
 		
 		model.addAttribute("list", centerDao.selectList(vo));
+		
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+		
 		
 		return "center/list";
 	}
@@ -87,7 +102,7 @@ public class CenterController {
 			return "redirect:list";
 		}
 		else {
-			throw new TargetNotFoundException("공지사항 번호없음");
+			throw new TargetNotFoundException("고객센터 번호없음");
 		}
 	}
 }

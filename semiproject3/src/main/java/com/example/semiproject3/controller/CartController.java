@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CartDto;
-import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
@@ -31,6 +31,7 @@ public class CartController {
 	@Autowired
 	private CustomerDao customerDao;
 	
+
 //	@ResponseBody
 //	@GetMapping("/cartInsert")
 //	public String cartInsert(
@@ -40,14 +41,13 @@ public class CartController {
 //		String result = "00";
 //		
 //		System.out.println("/cartInsert ================"+ itemNo);		
+//		//Card db insert
 //		
-//		//Cart db insert
-//			
+//		//
 //		
-//		
-//		//result =="00" 성공 result =="01" 동일아이템 중복
 //		return result;
 //	}
+	
 	
 	//카트담기
 	@PostMapping("/insert")
@@ -89,21 +89,7 @@ public class CartController {
 	}
 	
 	
-//	@ResponseBody
-//	@GetMapping("/cartInsert")
-//	public String cartInsert(
-//			@RequestParam int itemNo,
-//			HttpSession session	) {
-//
-//		String result = "00";
-//		
-//		System.out.println("/cartInsert ================"+ itemNo);		
-//		//Card db insert
-//		
-//		//
-//		
-//		return result;
-//	}
+
 	
 
 	@GetMapping("/delete")

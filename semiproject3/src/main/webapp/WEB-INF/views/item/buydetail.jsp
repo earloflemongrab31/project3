@@ -27,7 +27,10 @@ function fail(){
     }
 }
 
+
 </script>
+
+
 
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
