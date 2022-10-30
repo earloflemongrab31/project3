@@ -8,7 +8,7 @@
 <meta http-equiv="refresh" content="5; url=http:/">
 
 <div class="container-300 mt-50 mb-50">
-	<div class="row center mb-50">
+	<div class="row center mb-30">
 		<h1>고객만족 설문조사</h1>
 	</div>
 	<div class="row center">

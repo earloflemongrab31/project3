@@ -12,8 +12,8 @@
 <form action="insert" method="post" autocomplete="off">
 
     <div class="container-800 mt-50 mb-50">
-        <div class="row center mb-50">
-            <h1>관리자 등록</h1>
+        <div class="row center mb-30">
+            <h1>ADMIN</h1>
             <hr>
         </div>
 

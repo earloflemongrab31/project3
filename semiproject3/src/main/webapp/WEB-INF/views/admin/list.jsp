@@ -7,8 +7,8 @@
 </jsp:include>
 
 <div class="container-800 mt-50 mb-50">
-	<div class="row center">
-		<h1>관리자 목록</h1>
+	<div class="row center mb-30">
+		<h1>ADMIN</h1>
 		<hr>
 	</div>
 	

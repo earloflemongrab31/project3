@@ -29,6 +29,7 @@ function fail(){
 		border-top: 1px solid #D5D5D5;
 	}
 </style>
+
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
 <form action="/orders/detail" method="get">

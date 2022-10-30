@@ -12,7 +12,7 @@
 	<div class ="container-900 mt-50 mb-50">
 
 		<div class = "row center mb-30">
-			<h1>협력사 관리</h1>
+			<h1>COMPANY</h1>
 			<hr>
 		</div>
 	

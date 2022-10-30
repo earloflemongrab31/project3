@@ -14,7 +14,7 @@ td, th {
 }
 </style>
 <div class="container-900 mt-50 mb-50">
-	<div class="row center">
+	<div class="row center mb-30">
 		<h1>내 리뷰목록</h1>
 		<hr>
 	</div>

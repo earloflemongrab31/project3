@@ -4,14 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="관리자페이지" name="title"/>
+	<jsp:param value="관리자 상품목록" name="title"/>
 </jsp:include>
 
 
-<div class ="container-800 mt-40 mb-40">
+<div class ="container-800 mt-50 mb-50">
 
-	<div class = "row center">
+	<div class = "row center mb-30">
 		<h1>상품 목록</h1>
+		<hr>
 	</div>
 	
 	<div class = "row">

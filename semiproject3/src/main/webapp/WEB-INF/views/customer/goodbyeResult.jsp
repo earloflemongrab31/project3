@@ -5,7 +5,7 @@
 </jsp:include>
 
 <div class="container-600 mt-50 mb-50">
-	<div class="row center">
+	<div class="row center mb-30">
 		<h1>이용해주셔서 감사합니다</h1>
 	</div>
 	

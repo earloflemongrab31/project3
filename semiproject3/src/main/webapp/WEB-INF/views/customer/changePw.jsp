@@ -8,6 +8,7 @@
     
     <div class="row center mb-30">
         <h1>비밀번호 변경</h1>
+        <hr>
     </div>
     
     <input type="hidden" name="loginId" value="${loginId}">

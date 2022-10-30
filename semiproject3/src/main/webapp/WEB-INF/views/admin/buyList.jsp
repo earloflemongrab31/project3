@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="관리자페이지" name="title"/>
+	<jsp:param value="주문내역페이지" name="title"/>
 </jsp:include>
 
 <div class="container-600 mt-50 mb-50">
 
 <div class="row center mb-30">
-	<h1>주문 내역</h1>
+	<h1>BUY</h1>
+	<hr>
 </div>
 <div class="row center mb-30">
 	<table class="table table-border table-hover">

@@ -7,7 +7,7 @@
 </jsp:include>
 
 <div class="container-800 mt-50 mb-50">
-	<div class="row center">
+	<div class="row center mb-30">
 		<h1>회원 목록</h1>
 		<hr>
 	</div>

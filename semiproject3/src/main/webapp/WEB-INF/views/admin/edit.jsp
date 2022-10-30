@@ -12,8 +12,9 @@
 <input name="adminId"  type="hidden"  value="${adminDto.adminId}">
 
 <div class="container-300 mt-50 mb-50">
-	<div class="row center">
-		<h1>메인 관리자 변경</h1>
+	<div class="row center mb-30">
+		<h1>ADMIN</h1>
+		<hr>
 	</div>
 
 	<div class="row left ">
