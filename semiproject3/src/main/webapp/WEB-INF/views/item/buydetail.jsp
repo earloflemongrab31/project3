@@ -27,7 +27,6 @@ function fail(){
     }
 }
 
-
 </script>
 
 

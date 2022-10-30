@@ -30,24 +30,7 @@ public class CartController {
 	
 	@Autowired
 	private CustomerDao customerDao;
-	
-
-//	@ResponseBody
-//	@GetMapping("/cartInsert")
-//	public String cartInsert(
-//			@RequestParam int itemNo,
-//			HttpSession session	) {
-//
-//		String result = "00";
-//		
-//		System.out.println("/cartInsert ================"+ itemNo);		
-//		//Card db insert
-//		
-//		//
-//		
-//		return result;
-//	}
-	
+		
 	
 	//카트담기
 	@PostMapping("/insert")
