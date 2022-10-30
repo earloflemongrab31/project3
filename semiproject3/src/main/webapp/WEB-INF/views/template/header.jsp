@@ -173,6 +173,7 @@
       text-align: center;
       font-size: 18px;
       background: #fff;
+      margin-right: 100px;
 
       /* Center slide text vertically */
       display: -webkit-box;
@@ -194,6 +195,10 @@
       width: 100%;
       height: 480px;
       object-fit: cover;
+    }
+    
+    .footer{
+    	padding: 0 3em;
     }
     
 </style>
@@ -630,19 +635,12 @@
                 clickable: true
             },
 
-            // 좌우 버튼 옵션
-//             navigation: {
-//                 nextEl: '.swiper-button-next',
-//                 prevEl: '.swiper-button-prev',
-//             },
-            
             // 자동재생 옵션
             autoplay: {
                 delay: 5000
             }, 
 
             //페이지 전환 효과
-//             effect: "slide",//기본 방식
             effect: "fade",//페이드 인-아웃 효과
 
         });
@@ -661,13 +659,6 @@
 				clickable: true
 			},
 
-            // 페이징 옵션
-//             pagination: {
-//                 el: '.swiper-pagination',// 페이징 적용 대상
-//                 type: 'bullets',// 페이징 도구 모양
-//                 clickable: true
-//             },
-
             // 좌우 버튼 옵션
             navigation: {
                 nextEl: '.swiper-button-next',
@@ -681,7 +672,6 @@
 
             //페이지 전환 효과
             effect: "slide",//기본 방식
-//             effect: "fade",//페이드 인-아웃 효과
 
         });
     });

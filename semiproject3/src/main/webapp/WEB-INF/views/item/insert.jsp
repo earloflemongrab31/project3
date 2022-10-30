@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="관리자 상품 등록" name="title"/>
+	<jsp:param value="관리자페이지" name="title"/>
 </jsp:include>
 
 
@@ -23,7 +23,7 @@
 				<tr>
 					<td class="w-25">카테고리</td>
 					<td>
-				        <select name="main">
+				        <select class="input input-border" name="main">
 				            <option>대분류</option>
 				            <option disabled>------</option>
 
@@ -34,7 +34,7 @@
 				            <option data-main="dress">DRESS</option>
 				            <option data-main="acc">ACC</option>
 				        </select>
-				        <select name="itemCate">
+				        <select class="input input-border" name="itemCate">
 				            <option>소분류</option>
 				            <option disabled>------</option>
 				
@@ -138,7 +138,7 @@
 			<tfoot>
 				<tr class="right">
 					<td colspan="2">
-						<a class="btn btn-neutral" href="list">목록</a>
+						<a class="btn btn-neutral btn-border" href="list">목록</a>
 						<button class="btn btn-positive" type="submit">등록</button>
 					</td>
 				</tr>
