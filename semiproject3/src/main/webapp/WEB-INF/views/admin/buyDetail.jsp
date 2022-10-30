@@ -29,7 +29,7 @@
 				<td rowspan="3">
 					<form action="update" method="post">
 						<input type="hidden" name="buyNo" value="${buyDto.buyNo}">
-						<select class="input name="deliveryStatus">
+						<select class="input" name="deliveryStatus">
 						<c:choose>
 							<c:when test="${buyDto.deliveryStatus == '결제완료'}">
 								<option selected>결제완료</option>

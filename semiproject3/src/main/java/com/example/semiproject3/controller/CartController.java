@@ -30,24 +30,6 @@ public class CartController {
 	@Autowired
 	private CustomerDao customerDao;
 	
-//	@ResponseBody
-//	@GetMapping("/cartInsert")
-//	public String cartInsert(
-//			@RequestParam int itemNo,
-//			HttpSession session	) {
-//
-//		String result = "00";
-//		
-//		System.out.println("/cartInsert ================"+ itemNo);		
-//		
-//		//Cart db insert
-//			
-//		
-//		
-//		//result =="00" 성공 result =="01" 동일아이템 중복
-//		return result;
-//	}
-	
 	//카트담기
 	@PostMapping("/insert")
 	public String insert(@RequestParam int itemNo,
@@ -60,15 +42,6 @@ public class CartController {
 		else {
 			cartDao.plus(cartDto);
 		}
-		//cartDto에 정보 삽입
-//			CartDto cartDto=new CartDto();
-//			cartDto.setCustomerId(loginId);
-//			cartDto.setItemNo(itemNo);
-//			cartDto.setItemName(itemDto.getItemName());
-//			cartDto.setItemPrice(itemDto.getItemPrice());
-//			cartDto.setItemColor();
-//			cartDto.setItemSize(itemSize);
-//			cartDto.setItemCnt(itemCnt);
 		
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	};

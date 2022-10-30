@@ -1,7 +1,5 @@
 package com.example.semiproject3.entity;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,15 +11,14 @@ public class OrdersDto {
 	private int ordersNo;
 	private String customerId;
 	private int itemNo;
-	private int deliveryFee;
 	private String itemName;
 	private int itemPrice;
 	private String itemSize;
 	private String itemColor;
 	private int itemCnt;
+	private int imageNo;
 
 //	private int payMoney;
-//	private int imageNo;
 //	private Date ordersTime;
 //	private String addressName;
 //	private String addressPhone;

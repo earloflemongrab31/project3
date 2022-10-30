@@ -53,8 +53,7 @@
 				            <option class="option-hide pants" value="302">면바지</option>
 				            <option class="option-hide pants" value="303">슬랙스</option>
 				
-				            <option class="option-hide skirt" value="401">숏기장</option>
-				            <option class="option-hide skirt" value="402">롱기장</option>
+				            <option class="option-hide skirt" value="401">치마</option>
 				
 				            <option class="option-hide dress" value="501">원피스</option>
 				

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.OrdersDto;
@@ -39,20 +39,22 @@ public class OrdersController {
 	private CartDao cartDao;
 	
 	
-	//등록
-	@PostMapping("/insert")
-	public String insert(
-			@ModelAttribute OrdersDto ordersDto){
-			
-		ordersDao.insert(ordersDto);
-		
-		return "redirect:detail";
-	}
-	
 	@GetMapping("/detail")
 	public String list(
+			@RequestParam String[] itemSize,
+			@RequestParam String[] itemColor,
+			@RequestParam int[] itemCnt,
+			@ModelAttribute OrdersDto ordersDto,
 			Model model, 
 			HttpSession session) {
+		//주문 테이블 값 넣기
+		for(int i=0; i<itemSize.length; i++) {
+			ordersDto.setItemSize(itemSize[i]);
+			ordersDto.setItemColor(itemColor[i]);
+			ordersDto.setItemCnt(itemCnt[i]);
+			ordersDao.insert(ordersDto);
+		}
+		
 		
 		//회원 정보 불러오기
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
@@ -61,14 +63,8 @@ public class OrdersController {
 		//주소 정보 불러오기
 		model.addAttribute("addressList", addressDao.selectList(loginId));
 		
-		//장바구니 상품 불러오기
-		model.addAttribute("cartList", cartDao.selectList(loginId));
-		
 		//주문 내역 불러오기
-		OrdersDto ordersDto = ordersDao.selectOne(loginId);
-		model.addAttribute("ordersDto", ordersDto);
-		
-		model.addAttribute("imageDto", itemDao.selectItemOne(ordersDto.getItemNo()));
+		model.addAttribute("ordersList", ordersDao.selectList(loginId));
 		
 		return "orders/detail";
 	}
