@@ -92,13 +92,11 @@ public class AdminController {
 	public String edit(@ModelAttribute AdminDto adminDto, RedirectAttributes attr) {
 
 		boolean result = adminDao.update(adminDto);
-		
-		// 1. 이런식으로 아이디값을 가져온다.
+	
 		adminDto.getAdminId();
 		
-		// 2. 가져온 아이디 값을 dao에 넘긴다.
-		 adminDao.update2(adminDto);
-		
+		// 메인관리자 변경시 나머지 일반 관리자로 업데이트
+		adminDao.update2(adminDto);
 		
 		if(result) {
 			attr.addAttribute("adminId",adminDto.getAdminId());

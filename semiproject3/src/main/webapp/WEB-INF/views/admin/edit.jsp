@@ -11,12 +11,12 @@
 
 <input name="adminId"  type="hidden"  value="${adminDto.adminId}">
 
-<div class="container-300 mt-40">
+<div class="container-300 mt-50 mb-50">
 	<div class="row center">
 		<h1>메인 관리자 변경</h1>
 	</div>
 
-	<div class="row left">
+	<div class="row left ">
 		현재등급
 		<input class="input w-100"  value="${adminDto.adminGrade}" readonly>
 	</div>
