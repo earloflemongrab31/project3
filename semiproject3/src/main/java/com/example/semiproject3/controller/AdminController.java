@@ -100,7 +100,7 @@ public class AdminController {
 		
 		if(result) {
 			attr.addAttribute("adminId",adminDto.getAdminId());
-					return "redirect:list";
+					return "redirect:/customer/login";
 		}
 		else {
 			throw new TargetNotFoundException("변경실패");
