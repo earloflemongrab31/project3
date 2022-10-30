@@ -32,8 +32,8 @@
 					<td>${customerDto.customerPhone}</td>
 					<td>${customerDto.customerEmail}</td>
 					<td>
-						<a href="edit?customerId=${customerDto.customerId}">수정</a>
-						<a href="delete?customerId=${customerDto.customerId}">삭제</a>
+						<a class="btn btn-border"  href="edit?customerId=${customerDto.customerId}">수정</a>
+						<a class="btn btn-border"  href="delete?customerId=${customerDto.customerId}">삭제</a>
 					</td>
 				</tr>
 				</c:forEach>

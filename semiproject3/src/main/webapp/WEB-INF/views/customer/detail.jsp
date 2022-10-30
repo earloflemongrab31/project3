@@ -7,16 +7,23 @@
 		<jsp:param value="마이페이지" name="title"/>
 </jsp:include>
 
+<style>
+td, th {
+  text-align : center;
+  vertical-align : middle;
+}
+</style>
+
 <!-- <section class="mb-50"> -->
 	<div class="container-550 mt-50 mb-50">
 	<div class="row center mb-30">
-		<h1>${customerDto.customerId} 회원 정보</h1>
+		<h1>${customerDto.customerId} 님</h1>
 		<hr>
 	</div>
 	
 	<div class="row mb-30 w-100">
 		
-		<table class="table table-border">
+		<table class="table table-slit">
 			<tr>
 				<th width="25%">아이디</th>
 				<td>${customerDto.customerId}</td>

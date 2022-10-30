@@ -157,7 +157,7 @@ function fail(){
 
    <div class="row center mt-40 mb-40 review hide">
       <div class="row center mb-30">
-         <h4>리뷰</h4>
+         <h4>REVIEW</h4>
          <hr>
       </div>
 
