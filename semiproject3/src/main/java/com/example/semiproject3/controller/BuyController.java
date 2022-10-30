@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,12 @@ public class BuyController {
 			buyDao.insert(buyDto);
 			ordersDao.delete(ordersNo[i]);
 		}
+//			@ModelAttribute List<BuyDto> BuyList,
+//			HttpSession session,
+//			@RequestParam int[] ordersNo) {
+//		for(BuyDto buyItem : BuyList) {
+//			buyDao.insert(buyItem);
+//		}
 		
 		//회원 돈 차감
 		customerDao.cash(buyDto);

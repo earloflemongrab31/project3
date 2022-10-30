@@ -3,6 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+   <jsp:param value="상품 상세 페이지" name="title" />
+</jsp:include>
+
+<style>
+	#box{
+		padding: 5px;
+		border-top: 1px solid #D5D5D5;
+	}
+</style>
+
 <!-- 회원정보에 없는 이메일을 입력할 시에 출력되는 경고창 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
@@ -12,124 +23,123 @@
             alert(responseMessage)
         }
     })
-</script>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-   <jsp:param value="상품 상세 페이지" name="title" />
-</jsp:include>
-<script type="text/javascript">
-function fail(){
-    if(confirm("내가 작성한 글은 신고 할 수 없습니다")){
-        return false;
-    }
-}
-</script>
-<style>
-	#box{
-		padding: 5px;
-		border-top: 1px solid #D5D5D5;
-	}
-</style>
-<div class="container-1000 mt-50 mb-50">
-<div class="float-container">
-<form action="/orders/detail" method="get">
-<div class="float-left w-50">
-	<table class="table">
-		<tr>
-            <th class="w-50" style="height:480px;">
-               <c:forEach var="buylistView" items="${buyImageList}">
-                  <c:if test="${buylistView.imageMain == 1}">
-                     <img src="/image/download/${buylistView.imageNo}" width="200" >
-                     <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
-                  </c:if>
-               </c:forEach>
-               <c:forEach var="buylistView" items="${buyImageList}">
-                  <c:if test="${buylistView.imageMain == 0}">
-                     <img src="/image/download/${buylistView.imageNo}" width="100" >
-                  </c:if>
-               </c:forEach>
-            </th>
-		</tr>
-		<tr>
-		   <td class="right">
-		      ${itemDto.itemLikeCnt}
-
-		      <c:if test="${isLike == null}">
-		         ♥
-		      </c:if>
-		      <c:if test="${isLike == true}">
-		         <a href="like?itemNo=${itemDto.itemNo}">♥</a>
-		      </c:if>
-		      <c:if test="${isLike == false}">
-		         <a href="like?itemNo=${itemDto.itemNo}">♡</a>
-		      </c:if>
-		   </td>
-		</tr>
-	</table>
-</div>
-
-<div class="float-left w-50">
-<!-- <form action="/cart/insert" method="post"> -->
-<div class="row">
-   <table class="table">
-      <tbody>
-         <tr>
-            <th class="left" colspan="2">
-               <input type="hidden" name="customerId" value="${loginId}">
-               <input type="hidden" name="itemNo" value="${itemDto.itemNo}">
-               <input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none">
-            </th>
     
-		</tr>
-		<tr>
-		   <th class="left" colspan="2">${itemDto.itemMemo}</th>
-		</tr>
-         <tr>
-            <th>Price</th>
-            <td>
-               <fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0원"></fmt:formatNumber>
-               <input type="hidden" name="itemPrice" value="${itemDto.itemPrice}">
-            </td>
-         <tr>
-            <th>Option</th>
-            <td>
-				<select class="input w-100 input-option">
-					<option value="">선택</option>
-					<c:if test="${empty buylist}">
-						<option disabled>상품준비중</option>
-					</c:if>
-					<c:forEach var="itemDto" items="${buylist}">
-						<option data-color="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
-						${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
-						</option>
-					</c:forEach>
-				</select>
-            </td>
-         </tr>
-      </tbody>
-   </table>
-   
-	<div class="row" style="min-height:280px;">
-		<ul class="option-area" style="list-style: none;">
-			
-		</ul>
+   	$(function(){
+		$(".cart-in").click(function(){
+			$(".item-form").attr("action", "/cart/insert");
+			$(".item-form").attr("method", "post");
+		});
+		$(".buy").click(function(){
+			$(".item-form").attr("action", "/orders/detail");
+			$(".item-form").attr("method", "get");
+		});
+	});
+</script>
+<script type="text/javascript">
+	function fail(){
+	    if(confirm("내가 작성한 글은 신고 할 수 없습니다")){
+	        return false;
+	    }
+	}
+</script>
+
+<div class="container-1000 mt-50 mb-50">
+<form class="item-form" action="/orders/detail" method="get">
+<div class="float-container">
+	<div class="float-left w-50">
+		<table class="table">
+			<tr>
+	            <th class="w-50" style="height:480px;">
+	               <c:forEach var="buylistView" items="${buyImageList}">
+	                  <c:if test="${buylistView.imageMain == 1}">
+	                     <img src="/image/download/${buylistView.imageNo}" width="200" >
+	                     <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
+	                  </c:if>
+	               </c:forEach>
+	               <c:forEach var="buylistView" items="${buyImageList}">
+	                  <c:if test="${buylistView.imageMain == 0}">
+	                     <img src="/image/download/${buylistView.imageNo}" width="100" >
+	                  </c:if>
+	               </c:forEach>
+	            </th>
+			</tr>
+			<tr>
+			   <td class="right">
+			      ${itemDto.itemLikeCnt}
+	
+			      <c:if test="${isLike == null}">
+			         ♥
+			      </c:if>
+			      <c:if test="${isLike == true}">
+			         <a href="like?itemNo=${itemDto.itemNo}">♥</a>
+			      </c:if>
+			      <c:if test="${isLike == false}">
+			         <a href="like?itemNo=${itemDto.itemNo}">♡</a>
+			      </c:if>
+			   </td>
+			</tr>
+		</table>
 	</div>
-   
-   <table class="table">
-		<tr>
-			<td class="right">
-				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
-				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
-				<button class="btn btn-positive" type="submit">구매하기</button>
-				<button class="btn btn-positive" type="submit">장바구니</button>    
-				<a href="buylist">목록으로</a>
-			</td>
-		</tr>
-   </table>
+
+	<div class="float-left w-50">
+	<div class="row">
+		<input type="hidden" name="customerId" value="${loginId}">
+		<input type="hidden" name="itemNo" value="${itemDto.itemNo}">
+		<input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none">
+		<hr>
+	</div>
+	<div class="row">
+	   <table class="table">
+	      <tbody>
+			<tr>
+			   <th class="left" colspan="2">${itemDto.itemMemo}</th>
+			</tr>
+	         <tr>
+	            <th>Price</th>
+	            <td>
+	               <fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0원"></fmt:formatNumber>
+	               <input type="hidden" name="itemPrice" value="${itemDto.itemPrice}">
+	            </td>
+	         <tr>
+	            <th>Option</th>
+	            <td>
+					<select class="input w-100 input-option">
+						<option value="">선택</option>
+						<c:if test="${empty buylist}">
+							<option disabled>상품준비중</option>
+						</c:if>
+						<c:forEach var="itemDto" items="${buylist}">
+							<option data-color="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+							${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+							</option>
+						</c:forEach>
+					</select>
+	            </td>
+	         </tr>
+	      </tbody>
+	   </table>
+	   
+		<div class="row" style="min-height:280px;">
+			<ul class="option-area" style="list-style: none;">
+				
+			</ul>
+		</div>
+	   
+	   <table class="table">
+			<tr>
+				<td class="right">
+					<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
+					<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
+					<button class="btn btn-positive buy" type="submit">구매하기</button>
+					<button class="btn btn-positive cart-in" type="submit">장바구니</button>    
+					<a href="buylist">목록으로</a>
+				</td>
+			</tr>
+	   </table>
+	</div>
+	</div>
 </div>
 </form>
-</div>
-
-</div>
 
 <div class="flexbox">
    <div class=" w-50 center item item-detail">
@@ -150,22 +160,14 @@ function fail(){
 <div class = "row center mb-30 detail">
    <div class = "row center mb-30">
       <h4>${itemDto.itemContent}</h4>
-      <hr>
    </div>
 </div>
 
    <div class="row center mt-40 mb-40 review hide">
-      <div class="row center mb-30">
-         <h4>리뷰</h4>
-         <hr>
-      </div>
-
       <div class="row">
          <c:choose>
             <c:when test="${reviewList.isEmpty()}">
-               <h4 style="padding-left: 20px">
-                  <span>해당 상품의 리뷰가 없습니다</span>
-               </h4>
+               <h4>해당 상품의 리뷰가 없습니다</h4>
             </c:when>
 
             <c:otherwise>
