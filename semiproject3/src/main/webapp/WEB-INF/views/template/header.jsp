@@ -696,7 +696,7 @@
     	}, 1000);
     });
     
-	//구매 옵션 불러오기
+/* 	//구매 옵션 불러오기
 	$(function(){
 	    $(".input-option").on("input",function(){
 	        var color = $(this).find("option:selected").data("color");//선택한 색
@@ -724,6 +724,23 @@
 	
 	        $(".input-option").val("");
 	    });
+	}); */
+	
+	//구매 옵션 불러오기
+	$(function(){
+		$("select[name=itemColor]").change(function(){
+            	
+			var color = $(this).val();
+			var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
+			var totalcnt = $(this).find("option:selected").attr("data-cnt");
+			console.log(color);		
+			console.log(size);
+			console.log(totalcnt);
+			$("input[name=itemSize]").attr("value", size);
+			$("input[name=itemTotalCnt]").attr("value", totalcnt);
+			$("input[name=itemCnt]").attr("max", totalcnt);
+			$("input[name=itemCnt]").val(0);
+		});
 	});
     
     //게시글 삭제 시 즉시 삭제 방지
