@@ -7,7 +7,7 @@
 
 <form action="checkPassword" method="post" autocomplete="off">
 
-	<div class="container-600 mt-50 mb-50">
+	<div class="container-400 mt-50 mb-50">
 
 		<div class="row center mb-30">
 			<h1>비밀번호 찾기</h1>
@@ -19,11 +19,9 @@
 		</div>
 
 		<div class="row">
-			<label>아이디</label>
-		</div>
-
-		<div class="row">
-			<input name="customerId" type="text" required class="input">
+			<label>ID
+				<input name="customerId" type="text" required class="input w-100">
+			</label>
 		</div>
 
 		<div class="row">
@@ -32,19 +30,17 @@
 		</div>
 
 		<div class="row">
-			<label>나의 보물 1호는?</label>
+			<label>나의 보물 1호는?
+				<input name="customerPwsearch" type="text" required class="input w-100">
+			</label>
 		</div>
 
-		<div class="row">
-			<input name="customerPwsearch" type="text" required class="input">
-		</div>
-
-		<div class="row center">
+		<div class="row center mt-30">
 			<button class="btn btn-positive w-25 btn-join" type="submit">확인</button>
 		</div>
 
 		<c:if test="${param.error != null}">
-			<div class="row center mt-20">
+			<div class="row center mt-30">
 				<span style="color: darkred;">아이디 또는 질문의 답변을 다시 확인해주세요.</span>
 			</div>
 		</c:if>

@@ -17,7 +17,7 @@
 <div class ="container-800 mt-50 mb-50">
 
 	<div class = "row center mb-30">
-		<h1>공지사항</h1>
+		<h1>NOTICE</h1>
 		<hr>
 	</div>
 	
@@ -35,7 +35,7 @@
 				</tr>
 			</thead>
 				
-			<tbody align="center">
+			<tbody class="center">
 			<c:forEach var="noticeDto" items="${list}">
 			
 				<tr>
@@ -79,9 +79,11 @@
 		</table>
 	</div>
 	
-	<div class="row right">
-		<a class="btn btn-positive" href="insert">공지사항 등록</a>
-	</div>
+	<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
+		<div class="row right">
+			<a class="btn btn-positive" href="insert">공지사항 등록</a>
+		</div>
+	</c:if>
 
 
 <!-- 페이지 네비게이터 -->

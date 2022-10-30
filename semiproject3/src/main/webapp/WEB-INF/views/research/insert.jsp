@@ -6,7 +6,7 @@
 
 <form action="insert" method="post" class="research-form">
 
-	<div class="container-700 mt-50">
+	<div class="container-800 mt-50">
 	
 	<div class="row center mb-30">
 	    <h1>고객만족 설문조사</h1>
@@ -31,7 +31,7 @@
 	            <input type="radio" name="researchSex" value="여자">여자
 	        </label>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -57,7 +57,7 @@
 	            <input type="radio" name="researchAge" value="50대">50대
 	        </label>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -83,7 +83,7 @@
 	            <input type="radio" name="researchPath" value="페이스북,인스타그램광고">페이스북, 인스타그램 광고
 	        </label>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -109,7 +109,7 @@
 	            <input type="radio" name="researchInterest" value="원피스">원피스 
 	        </label>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -135,7 +135,7 @@
 	            <input type="radio" name="researchBest" value="편의성">편의성
 	        </label>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -161,7 +161,7 @@
 	            <input type="radio" name="researchSatisfaction" value="매우 불만족">매우 불만족
 	        </label>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -187,7 +187,7 @@
 	            <input type="radio" name="researchPayment" value="기타">기타 
 	        </label>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -197,7 +197,7 @@
 	        <h2>8. 고객님의 구매목적은 무엇입니까?</h2>
 	           <textarea class="input w-100 fix-size" name="researchPurpose" placeholder="10자 이상 작성"></textarea>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -207,7 +207,7 @@
 	        <h2>9. 쇼핑몰 이용시 불편사항을 적어주세요.</h2>
 	        <textarea class="input w-100 fix-size" name="researchComplain" placeholder="10자 이상 작성"></textarea>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
@@ -217,7 +217,7 @@
 	        <h2>10. 온라인몰 관련 개선사항 등 여러 아이디어를 기술해주세요.</h2>
 	        <textarea class="input w-100 fix-size last-answer" name="researchIdea" placeholder="10자 이상 작성"></textarea>
 	    </div>
-	    <div class="row float-container">
+	    <div class="row float-container mt-30">
 	        <button type="button" class="prev btn btn-neutral btn-border float-left">이전</button>
 	        <button type="button" class="next btn btn-neutral btn-border float-right" disabled>다음</button>
 	    </div>
