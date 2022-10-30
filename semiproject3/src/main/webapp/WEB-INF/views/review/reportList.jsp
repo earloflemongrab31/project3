@@ -67,11 +67,6 @@
 	</div>
 	
 </form>
-
-<div class="row center">
-	    <a href="/">홈으로 이동</a>
-</div>
-	
 	
 <!-- 페이징 처리 -->
 <ul class="pagination">
