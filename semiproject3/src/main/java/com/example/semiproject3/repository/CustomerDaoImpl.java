@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.vo.CustomerListSearchVO;
 
@@ -296,6 +297,13 @@ public class CustomerDaoImpl implements CustomerDao{
 		public int listCount(CustomerListSearchVO vo) {
 			String sql = "select count(*) from customer";
 			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+
+		@Override
+		public boolean cash(BuyDto buyDto) {
+			String sql = "update customer set customer_money = customer_money - ? where customer_id=?";
+			Object[] param = {buyDto.getItemTotalPrice(), buyDto.getCustomerId()};
+			return jdbcTemplate.update(sql, param) > 0;
 		}
 		
 }

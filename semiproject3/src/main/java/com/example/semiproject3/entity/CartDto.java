@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class CartDto {
+	private int imageNo;
 	private int cartNo;
 	private String customerId;
 	private int itemNo;

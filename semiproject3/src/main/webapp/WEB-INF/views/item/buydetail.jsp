@@ -31,6 +31,7 @@ function fail(){
 </style>
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
+<form action="/orders/detail" method="get">
 <div class="float-left w-50">
 	<table class="table">
 		<tr>
@@ -38,6 +39,7 @@ function fail(){
                <c:forEach var="buylistView" items="${buyImageList}">
                   <c:if test="${buylistView.imageMain == 1}">
                      <img src="/image/download/${buylistView.imageNo}" width="200" >
+                     <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
                   </c:if>
                </c:forEach>
                <c:forEach var="buylistView" items="${buyImageList}">
@@ -66,8 +68,7 @@ function fail(){
 </div>
 
 <div class="float-left w-50">
-<!-- <form action="/orders/insert" method="post"> -->
-<form action="/cart/insert" method="post">
+<!-- <form action="/cart/insert" method="post"> -->
 <div class="row">
    <table class="table">
       <tbody>
@@ -80,7 +81,7 @@ function fail(){
     
 		</tr>
 		<tr>
-		   <th colspan="2">${itemDto.itemMemo}</th>
+		   <th class="left" colspan="2">${itemDto.itemMemo}</th>
 		</tr>
          <tr>
             <th>Price</th>
@@ -91,31 +92,31 @@ function fail(){
          <tr>
             <th>Option</th>
             <td>
-				<select class="input w-100" name="itemColor">
+				<select class="input w-100 input-option">
 					<option value="">선택</option>
 					<c:if test="${empty buylist}">
-						<option>상품준비중</option>
+						<option disabled>상품준비중</option>
 					</c:if>
 					<c:forEach var="itemDto" items="${buylist}">
-						<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+						<option data-color="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
 						${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
 						</option>
 					</c:forEach>
 				</select>
-               <input class="input w-100" type="hidden" name="itemSize" value="" >
-               <input class="input w-100" type="hidden" name="itemTotalCnt" value="">
             </td>
          </tr>
-         <tr>
-            <th>Qnty</th>
-            <td>
-<!--                <button class="minus-btn" type="button">-</button> -->
-               <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
-<!--                <button class="plus-btn" type="button">+</button> -->
-            </td>
-         </tr>
-         <tr>
-			<td colspan="2" align="right">
+      </tbody>
+   </table>
+   
+	<div class="row" style="min-height:280px;">
+		<ul class="option-area" style="list-style: none;">
+			
+		</ul>
+	</div>
+   
+   <table class="table">
+		<tr>
+			<td class="right">
 				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
 				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 				<button class="btn btn-positive" type="submit">구매하기</button>
@@ -123,7 +124,6 @@ function fail(){
 				<a href="buylist">목록으로</a>
 			</td>
 		</tr>
-      </tbody>
    </table>
 </div>
 </form>

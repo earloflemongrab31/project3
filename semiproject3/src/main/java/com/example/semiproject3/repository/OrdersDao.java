@@ -2,8 +2,6 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
-import com.example.semiproject3.entity.AddressDto;
-import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.vo.OrdersListSearchVO;
 
@@ -45,5 +43,6 @@ public interface OrdersDao {
 	int count(OrdersListSearchVO vo);
 	int searchCount(OrdersListSearchVO vo);
 	int listCount(OrdersListSearchVO vo);
+
 	
 }

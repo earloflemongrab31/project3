@@ -30,8 +30,8 @@ public class CartDaoImpl implements CartDao{
 							.itemCnt(rs.getInt("item_cnt"))
 							.cartDate(rs.getDate("cart_date"))
 							.itemPrice(rs.getInt("item_price"))
-							.deliveryFee(rs.getInt("delivery_fee"))
 							.cartPrice(rs.getInt("cart_price"))
+							.imageNo(rs.getInt("image_no"))
 				.build();
 	};
 	
@@ -49,7 +49,6 @@ public class CartDaoImpl implements CartDao{
 							.itemCnt(rs.getInt("item_cnt"))
 							.cartDate(rs.getDate("cart_date"))
 							.itemPrice(rs.getInt("item_price"))
-							.deliveryFee(rs.getInt("delivery_fee"))
 							.cartPrice(rs.getInt("cart_price"))
 							.imageMain(rs.getString("image_main"))
 				.build();
@@ -69,8 +68,8 @@ public class CartDaoImpl implements CartDao{
 							.itemCnt(rs.getInt("item_cnt"))
 							.cartDate(rs.getDate("cart_date"))
 							.itemPrice(rs.getInt("item_price"))
-							.deliveryFee(rs.getInt("delivery_fee"))
 							.cartPrice(rs.getInt("cart_price"))
+							.imageNo(rs.getInt("image_no"))
 				.build();
 		}
 		else {

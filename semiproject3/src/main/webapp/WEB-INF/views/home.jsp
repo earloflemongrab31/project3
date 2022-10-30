@@ -9,7 +9,7 @@
 <!-- 풀스크린 수정 필요할 듯... -->
 <div class="fullscreen">
 	<div class="modal screen-center survey">
-		<div class="row right delete" style="font-family:sans-serif; margin:5px;">X</div>
+		<div class="row right delete" style="font-family:sans-serif; margin:3px 5px 0 0;"><i class="fa-solid fa-xmark"></i></div>
 		<div class="row" style="min-height:285px; opacity:0;">
 			<span>-</span>
 		</div>
