@@ -162,7 +162,7 @@ public class ReviewDaoImpl implements ReviewDao {
    //아이템 번호 첨부 뷰 (review_real)
    @Override
    public List<ReviewDto> selectList2(int itemNo) {
-      String sql="select * from review_real where item_no=?";
+      String sql="select * from review_real where item_no=? order by review_no desc";
       Object[] param= {itemNo};
       return jdbcTemplate.query(sql, mapper,param);
    }

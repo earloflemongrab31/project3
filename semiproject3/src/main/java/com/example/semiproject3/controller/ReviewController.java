@@ -88,7 +88,7 @@ public class ReviewController {
 							.imageSize(file.getSize())
 							.build());
 					//파일저장
-					File dir=new File("D:/upload");
+					File dir=new File("D:/upload/reviewImage");
 					dir.mkdirs();
 					File target = new File(dir,String.valueOf(imageNo));
 					file.transferTo(target);
