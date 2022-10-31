@@ -30,17 +30,17 @@
         <table class="table table-border" >
           <thead>
       <tr>
-      	<th>입/출고번호</th>
-         <th>카테고리</th>
-         <th>상품명</th>
-         <th>상품사이즈</th>
-         <th>상품색상</th>
-         <th>입고/출고</th>
-         <th>날짜</th>
-         <th>회사명</th>
-         <th>전화번호</th>
-         <th>상품상태</th>
-         <th>수량</th>
+		<th width="10%">입/출고번호</th>
+		<th width="8%">카테고리</th>
+		<th width="10%">상품명</th>
+		<th width="10%">상품사이즈</th>
+		<th width="8%">상품색상</th>
+		<th width="10%">입고/출고</th>
+		<th width="10%">날짜</th>
+		<th width="10%">회사명</th>
+		<th>전화번호</th>
+		<th>상품상태</th>
+		<th>수량</th>
       </tr>
    </thead>
    <tbody>
@@ -56,7 +56,7 @@
             <td>${invenList.invenName}</td>
             <td>${invenList.invenPhone}</td>
             <td>${invenList.invenStatus}</td>
-            <td>${invenList.invenQuantity}</td>
+            <td>${invenList.invenQuantity}개</td>
          </tr>
       </c:forEach>
    </tbody>

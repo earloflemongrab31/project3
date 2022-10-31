@@ -4,9 +4,10 @@
 	<jsp:param value="비밀번호변경" name="title"/>
 </jsp:include>
 
-    <div class="container-300 mt-50 mb-50">
+<section>
+    <div class="container-300">
     
-    <div class="row center mb-30">
+    <div class="row center">
         <h1>비밀번호 변경</h1>
         <hr>
     </div>
@@ -49,7 +50,7 @@
         </div>
     </div>
 </form>
-        
+       
     </div>
-    
+</section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

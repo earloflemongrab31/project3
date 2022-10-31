@@ -23,11 +23,11 @@
         <table class="table table-border" >
           <thead>
       <tr>
-      	<th>번호</th>
-         <th>신고자아이디</th>
-         <th>신고이유</th>
-       	<th>신고내용</th>
-       	<th>리뷰자아이디</th>
+      	<th width="7%">번호</th>
+        <th width="10%">신고자</th>
+        <th width="20%">신고사유</th>
+       	<th width="30%">신고내용</th>
+       	<th width="10%">리뷰작성자</th>
        	<th>리뷰내용</th>
       </tr>
    </thead>
@@ -36,12 +36,14 @@
          <tr>
          	<td>${reportList.reportNo}</td>
             <td>
-            	<a href="/customer/mypage?customerId=${reportList.who}">${reportList.who}</a>
+            ${reportList.who}
+<%--             	<a href="/customer/mypage?customerId=${reportList.who}">${reportList.who}</a> --%>
             </td>
             <td>${reportList.reportRadio}</td>
             <td>${reportList.reportContent}</td>
             <td>
-            	<a href="/customer/mypage?customerId=${reportList.customerId}">${reportList.customerId}</a>
+            ${reportList.customerId}
+<%--             	<a href="/customer/mypage?customerId=${reportList.customerId}">${reportList.customerId}</a> --%>
             </td>
             <td>${reportList.reviewContent}</td>
          </tr>
