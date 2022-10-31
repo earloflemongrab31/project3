@@ -134,69 +134,6 @@ public class BuyDaoImpl implements BuyDao {
 //	}
 
 	@Override
-<<<<<<< HEAD
-	public List<BuyDto> selectList(BuyListSearchVO vo) {
-		if(vo.isSearch()) {
-			return search(vo);
-		}
-		else {
-			return list(vo);
-		}
-	}
-
-	@Override
-	public List<BuyDto> list(BuyListSearchVO vo) {
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from("
-					+ "select * from buy order by buy_no desc"
-				+ ")TMP"
-			+ ") where rn between ? and ?";
-		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, mapper, param);
-	}
-
-	@Override
-	public List<BuyDto> search(BuyListSearchVO vo) {
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy where instr(#1,?) > 0 "
-					+ "order by buy_no desc"
-				+ ")TMP"
-			+ ") where rn between ? and ?";
-		sql = sql.replace("#1", vo.getType());
-		Object[] param = {
-				vo.getKeyword(), vo.startRow(), vo.endRow()
-	};
-	return jdbcTemplate.query(sql, mapper, param);
-}
-
-	@Override
-	public int count(BuyListSearchVO vo) {
-		if(vo.isSearch()) {
-			return searchCount(vo);
-		}
-		else {
-			return listCount(vo);
-		}
-	}
-
-	@Override
-	public int searchCount(BuyListSearchVO vo) {
-		String sql = "select count(*) from buy where instr(#1, ?) > 0";
-		sql = sql.replace("#1", vo.getType());
-		Object[] param = {vo.getKeyword()};
-		return jdbcTemplate.queryForObject(sql, int.class, param);
-	}
-
-	@Override
-	public int listCount(BuyListSearchVO vo) {
-		String sql = "select count(*) from buy";
-		return jdbcTemplate.queryForObject(sql, int.class);
-	}
-
-	
-	
-=======
 	public List<BuyDto> selectListAll() {
 		String sql = "select * from buy order by buy_date desc";
 		
@@ -215,24 +152,24 @@ public class BuyDaoImpl implements BuyDao {
 		Object[] param = {deliveryStatus, buyNo};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
-
-	//여기서부터 페이징
+	
+	//여기서부터 페이징 구현
+	
 	@Override
-	public List<BuyDto> selectListAll(BuyListSearchVO vo) {
+	public List<BuyDto> selectList(BuyListSearchVO vo) {
 		if(vo.isSearch()) {
 			return search(vo);
 		}
 		else {
 			return list(vo);
 		}
-		
 	}
 
 	@Override
 	public List<BuyDto> list(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
-					+ "select * from buy order by buy_no desc"
+					+ "select * from buy where customer_id=? order by buy_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -243,7 +180,7 @@ public class BuyDaoImpl implements BuyDao {
 	public List<BuyDto> search(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy where instr(#1,?) > 0 "
+					+ "select * from buy where instr(#1,?) > 0 and customer_id=?"
 					+ "order by buy_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
@@ -266,10 +203,10 @@ public class BuyDaoImpl implements BuyDao {
 
 	@Override
 	public int searchCount(BuyListSearchVO vo) {
-		String sql = "select count(*) from buy where instr(#1, ?) > 0";
+		String sql = "select count(*) from buy where   instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
-		return jdbcTemplate.queryForObject(sql, int.class, param);
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
 	@Override
@@ -278,5 +215,4 @@ public class BuyDaoImpl implements BuyDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
->>>>>>> branch 'HwangMoonKyu' of https://github.com/earloflemongrab31/project3.git
 }

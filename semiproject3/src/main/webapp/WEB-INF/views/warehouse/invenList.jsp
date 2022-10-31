@@ -9,7 +9,7 @@
 
 <div class ="container-900 mt-50 mb-50">
         
-<div class="row center">
+<div class="row center mb-30">
 	<h1>상품 입/출고 기록</h1>
 	<hr>
 </div>

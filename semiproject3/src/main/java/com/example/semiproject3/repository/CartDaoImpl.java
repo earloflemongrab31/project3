@@ -1,16 +1,12 @@
 package com.example.semiproject3.repository;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.vo.CartListVO;
-
 @Repository
 public class CartDaoImpl implements CartDao{
 	
@@ -30,8 +26,8 @@ public class CartDaoImpl implements CartDao{
 							.itemCnt(rs.getInt("item_cnt"))
 							.cartDate(rs.getDate("cart_date"))
 							.itemPrice(rs.getInt("item_price"))
+							.deliveryFee(rs.getInt("delivery_fee"))
 							.cartPrice(rs.getInt("cart_price"))
-							.imageNo(rs.getInt("image_no"))
 				.build();
 	};
 	
@@ -49,6 +45,7 @@ public class CartDaoImpl implements CartDao{
 							.itemCnt(rs.getInt("item_cnt"))
 							.cartDate(rs.getDate("cart_date"))
 							.itemPrice(rs.getInt("item_price"))
+							.deliveryFee(rs.getInt("delivery_fee"))
 							.cartPrice(rs.getInt("cart_price"))
 							.imageMain(rs.getString("image_main"))
 				.build();
@@ -68,8 +65,8 @@ public class CartDaoImpl implements CartDao{
 							.itemCnt(rs.getInt("item_cnt"))
 							.cartDate(rs.getDate("cart_date"))
 							.itemPrice(rs.getInt("item_price"))
+							.deliveryFee(rs.getInt("delivery_fee"))
 							.cartPrice(rs.getInt("cart_price"))
-							.imageNo(rs.getInt("image_no"))
 				.build();
 		}
 		else {
@@ -182,4 +179,3 @@ public class CartDaoImpl implements CartDao{
 	
 }
 		
-	

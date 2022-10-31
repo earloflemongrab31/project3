@@ -61,11 +61,13 @@
 <style>
 	.input.find{
 	    padding-left: 2em;
+	    padding-top: 0.25em;
 		background-image: url("/image/search.webp");
 	    background-size: 1em;
 	    background-repeat: no-repeat;
 	    background-position-x: 0.5em;
 	    background-position-y: center;
+	    font-size: 14px;
 	}
 	
 	li.cart{
@@ -176,6 +178,7 @@
       text-align: center;
       font-size: 18px;
       background: #fff;
+      margin-right: 100px;
 
       /* Center slide text vertically */
       display: -webkit-box;
@@ -198,6 +201,15 @@
       height: 480px;
       object-fit: cover;
     }
+    
+    .footer{
+    	padding: 0 3em;
+    }
+    
+    .right-word{
+    	 margin-right:10px;
+    }
+    
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -632,19 +644,12 @@
                 clickable: true
             },
 
-            // 좌우 버튼 옵션
-//             navigation: {
-//                 nextEl: '.swiper-button-next',
-//                 prevEl: '.swiper-button-prev',
-//             },
-            
             // 자동재생 옵션
             autoplay: {
                 delay: 5000
             }, 
 
             //페이지 전환 효과
-//             effect: "slide",//기본 방식
             effect: "fade",//페이드 인-아웃 효과
 
         });
@@ -663,13 +668,6 @@
 				clickable: true
 			},
 
-            // 페이징 옵션
-//             pagination: {
-//                 el: '.swiper-pagination',// 페이징 적용 대상
-//                 type: 'bullets',// 페이징 도구 모양
-//                 clickable: true
-//             },
-
             // 좌우 버튼 옵션
             navigation: {
                 nextEl: '.swiper-button-next',
@@ -683,7 +681,6 @@
 
             //페이지 전환 효과
             effect: "slide",//기본 방식
-//             effect: "fade",//페이드 인-아웃 효과
 
         });
     });
@@ -702,12 +699,15 @@
     	}, 1000);
     });
     
-	//구매 옵션 불러오기
+ 	//구매 옵션 불러오기
 	$(function(){
 	    $(".input-option").on("input",function(){
 	        var color = $(this).find("option:selected").data("color");//선택한 색
 	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
 	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
+	        console.log(color);
+	        console.log(size);
+	        console.log(totalcnt);
 	        if(!color) return;//값 없으면 리턴
 	        
 	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
@@ -729,9 +729,48 @@
 	        plusLine.appendTo($(".option-area"));
 	
 	        $(".input-option").val("");
+	        $("input[name=itemTotalCnt]").attr("value", totalcnt);
 	    });
+// 	    $("select[name=itemColor]").change(function(){
+        	
+// 			var color = $(this).val();
+// 			var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
+// 			var totalcnt = $(this).find("option:selected").attr("data-cnt");
+// 			console.log(color);		
+// 			console.log(size);
+// 			console.log(totalcnt);
+// 			$("input[name=itemSize]").attr("value", size);
+// 			$("input[name=itemTotalCnt]").attr("value", totalcnt);
+// 			$("input[name=itemCnt]").attr("max", totalcnt);
+// 			$("input[name=itemCnt]").val(0);
+// 		});
 	});
     
+    //게시글 삭제 시 즉시 삭제 방지
+	$(function(){
+		$("a.delete").click(function(e){
+            var choice = confirm("삭제하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
+
+    //로그아웃 시 즉시 로그아웃 방지
+	$(function(){
+		$("a.logout").click(function(e){
+            var choice = confirm("로그아웃 하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
     
 </script>
 
@@ -763,12 +802,12 @@
 		</h2>
 	</div>
 	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
-		<div class="row float-right" style="margin-right:10px;">
+		<div class="right-word row float-right">
 			${loginId}님, 안녕하세요.
 		</div>
 	</c:if>
-	<c:if test="${loginGrade == '관리자' }">
-		<div class="float-right	">
+	<c:if test="${loginGrade == '관리자'}">
+		<div class="right-word row float-right">
 			<a href="/admin/">관리자페이지</a>
 		</div>
 	</c:if>
@@ -787,7 +826,7 @@
 		<a href="#">New</a>
 	</li>
 	<li class="float-left">
-		<a href="#">outer</a>
+		<a href="/item/buylist?keyword=100">outer</a>
 		<ul>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=101">자켓</a>
@@ -804,7 +843,7 @@
 		</ul>
 	</li>
 	<li class="float-left">
-		<a href="#">top</a>
+		<a href="/item/buylist?keyword=200">top</a>
 		<ul>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=201">민소매</a>
@@ -824,7 +863,7 @@
 		</ul>
 	</li>
 	<li class="float-left">
-		<a href="#">pants</a>
+		<a href="/item/buylist?keyword=300">pants</a>
 		<ul>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=301">청바지</a>
@@ -844,7 +883,7 @@
 		<a href="/item/buylist?type=cate_code&keyword=501">dress</a>
 	</li>
 	<li class="float-left">
-		<a href="#">acc</a>
+		<a href="/item/buylist?keyword=600">acc</a>
 		<ul>
 			<li>
 				<a href="/item/buylist?type=cate_code&keyword=601">쥬얼리</a>
@@ -859,16 +898,20 @@
 				<a href="/item/buylist?type=cate_code&keyword=604">신발</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=605">양</a>
+				<a href="/item/buylist?type=cate_code&keyword=605">양말</a>
 			</li>
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right cart"><a href="/cart/cartList"><span id="cart-count"></span><i class="fa-solid fa-cart-shopping"><c:if test="${cartCount != 0}">${cartCount}</c:if></i></a></li>
+	<li class="float-right cart">
+		<a href="/cart/cartList"><span id="cart-count"></span>
+			<i class="fa-solid fa-cart-shopping"><c:if test="${cartCount != 0}">${cartCount}</c:if></i>
+		</a>
+	</li>
 	<form action="/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
-		<input class="float-right input input-underline find" name="keyword" id="search" placeholder="가을 신상">
+		<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
 	</form>
 		<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
 	<c:choose>
@@ -877,7 +920,7 @@
 			<li class="float-right"><a href="/customer/insert">JOIN US</a></li>
 		</c:when>
 		<c:otherwise>
-			<li class="float-right"><a href="/customer/logout">LOGOUT</a></li>
+			<li class="float-right"><a class="logout" href="/customer/logout">LOGOUT</a></li>
 		</c:otherwise>
 	</c:choose>
 </ul>

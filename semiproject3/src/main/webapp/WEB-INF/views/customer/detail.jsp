@@ -7,10 +7,10 @@
 		<jsp:param value="마이페이지" name="title"/>
 </jsp:include>
 
-<!-- <section class="mb-50"> -->
-	<div class="container-550 mt-50 mb-50">
-	<div class="row center mb-30">
-		<h1>${customerDto.customerId} 회원 정보</h1>
+<section>
+	<div class="container-500">
+	<div class="row center">
+		<h1>${customerDto.customerId} 님</h1>
 		<hr>
 	</div>
 	
@@ -63,9 +63,7 @@
 			</tr>
 		</table>
 	</div>
-		
-	
-	
+
 <!-- 	<div class="flexbox"> -->
 <!-- 		<div class="flex-left w-33 center"> -->
 <!-- 			<a class="btn btn-neutral" href="changePw">비밀번호 변경</a> -->
@@ -78,6 +76,6 @@
 <!-- 		</div> -->
 <!-- 	</div> -->
 	</div>
-<!-- </section> -->
+</section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
 

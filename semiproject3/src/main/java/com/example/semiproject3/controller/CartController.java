@@ -61,24 +61,23 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-<<<<<<< HEAD
-	@ResponseBody
-	@GetMapping("/cartInsert")
-	public String cartInsert(
-			@RequestParam int itemNo,
-			HttpSession session	) {
 
-		String result = "00";
-		
-		System.out.println("/cartInsert ================"+ itemNo);		
-		//Card db insert
-		
-		//
-		
-		return result;
-	}
-=======
->>>>>>> branch 'HwangMoonKyu' of https://github.com/earloflemongrab31/project3.git
+//	@ResponseBody
+//	@GetMapping("/cartInsert")
+//	public String cartInsert(
+//			@RequestParam int itemNo,
+//			HttpSession session	) {
+//
+//		String result = "00";
+//		
+//		System.out.println("/cartInsert ================"+ itemNo);		
+//		//Card db insert
+//		
+//		//
+//		
+//		return result;
+//	}
+
 	
 
 	

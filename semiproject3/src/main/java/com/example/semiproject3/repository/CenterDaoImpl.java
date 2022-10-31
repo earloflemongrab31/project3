@@ -94,6 +94,7 @@ public class CenterDaoImpl implements CenterDao {
 	@Override
 	public List<CenterDto> selectList(String type, String keyword) {
 		String sql = "select * from center where instr(#1, ?) > 0 order by center_no desc";
+		//				"select * from center where DATE1 < 작성일  AND DATE2 > 작성일order by center_no desc";
 		sql = sql.replace("#1", type);
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapper, param);

@@ -13,6 +13,12 @@
         }
     })
 </script>
+<style>
+	#box{
+		padding: 5px;
+		border-top: 1px solid #D5D5D5;
+	}
+</style>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
    <jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
@@ -69,6 +75,7 @@ function goCart(itemNo){
 =======
 >>>>>>> branch 'HwangMoonKyu' of https://github.com/earloflemongrab31/project3.git
 </script>
+<<<<<<< HEAD
 
 
 <style>
@@ -79,9 +86,12 @@ function goCart(itemNo){
 </style>
 
 
+=======
+>>>>>>> refs/remotes/origin/main
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
-<form action="/orders/detail" method="get">
+<!-- <form action="/orders/detail" method="get"> -->
+<form action="/cart/insert" method="post">
 <div class="float-left w-50">
 	<table class="table">
 		<tr>
@@ -118,7 +128,6 @@ function goCart(itemNo){
 </div>
 
 <div class="float-left w-50">
-<!-- <form action="/cart/insert" method="post"> -->
 <div class="row">
    <table class="table">
       <tbody>
@@ -153,7 +162,9 @@ function goCart(itemNo){
 						</option>
 					</c:forEach>
 				</select>
+               	<input class="input w-100" type="hidden" name="itemTotalCnt" value="">
             </td>
+<<<<<<< HEAD
          </tr>
 <<<<<<< HEAD
          <tr>
@@ -195,6 +206,34 @@ function goCart(itemNo){
          </tr>
 =======
 >>>>>>> branch 'HwangMoonKyu' of https://github.com/earloflemongrab31/project3.git
+=======
+<!-- 			<td> -->
+<!-- 				<select class="input w-100" name="itemColor"> -->
+<!-- 					<option value="">선택</option> -->
+<%-- 					<c:if test="${empty buylist}"> --%>
+<!-- 						<option>상품준비중</option> -->
+<%-- 					</c:if> --%>
+<%-- 					<c:forEach var="itemDto" items="${buylist}"> --%>
+<%-- 						<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}"> --%>
+<%-- 						${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt}) --%>
+<!-- 						</option> -->
+<%-- 					</c:forEach> --%>
+<!-- 				</select> -->
+<!--                <input class="input w-100" type="hidden" name="itemSize" value="" > -->
+<!--                <input class="input w-100" type="hidden" name="itemTotalCnt" value=""> -->
+<!--             </td> -->
+<!--          </tr> -->
+<!--          <tr> -->
+<!--             <th>Qnty</th> -->
+<!--             <td> -->
+<!--                <button class="minus-btn" type="button">-</button> -->
+
+<!--                <input class="input w-100" type="number" name="itemCnt" min="0" max="" > -->
+
+<!--                <button class="plus-btn" type="button">+</button> -->
+<!--             </td> -->
+<!--          </tr> -->
+>>>>>>> refs/remotes/origin/main
       </tbody>
    </table>
    
@@ -350,7 +389,7 @@ function goCart(itemNo){
 
    <div class="row center mt-40 mb-40 review hide">
       <div class="row center mb-30">
-         <h4>리뷰</h4>
+         <h4>REVIEW</h4>
          <hr>
       </div>
 
@@ -451,6 +490,5 @@ function goCart(itemNo){
             </c:otherwise>
          </c:choose>
       </div>
-   </div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

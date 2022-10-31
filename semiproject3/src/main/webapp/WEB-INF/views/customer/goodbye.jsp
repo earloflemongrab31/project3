@@ -7,8 +7,9 @@
 <form action="goodbye" method="post">
 
 <div class="container-400 mt-50 mb-50">
-	<div class="row center">
+	<div class="row center mb-30">
 		<h1>비밀번호 확인</h1>
+		<hr>
 	</div>
 	
 	<div class="row left mt-30">
