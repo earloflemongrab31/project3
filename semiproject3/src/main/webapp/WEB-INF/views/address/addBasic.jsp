@@ -10,10 +10,10 @@
 <script src="/confirm-link.js"></script> 
 <script src="/checkbox.js"></script> 
 
-<div class ="container-800 mt-40 mb-40">
+<div class ="container-800 mt-50 mb-50">
 
-   <div class = "row center">
-      <h1>기본 배송지 등록	</h1>
+   <div class = "row center mb-30">
+      <h1>ADDRESS</h1>
       <hr>
    </div>
    

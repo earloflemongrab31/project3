@@ -10,7 +10,7 @@
 <section>
 	<div class="container-500">
 	<div class="row center">
-		<h1>${customerDto.customerId} 회원 정보</h1>
+		<h1>${customerDto.customerId} 님</h1>
 		<hr>
 	</div>
 	
@@ -63,7 +63,7 @@
 			</tr>
 		</table>
 	</div>
-		
+
 <!-- 	<div class="flexbox"> -->
 <!-- 		<div class="flex-left w-33 center"> -->
 <!-- 			<a class="btn btn-neutral" href="changePw">비밀번호 변경</a> -->

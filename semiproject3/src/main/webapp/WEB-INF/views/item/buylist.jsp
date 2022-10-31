@@ -9,7 +9,7 @@
 
 <div class ="container-1100 mt-50 mb-50">
 
-	<div class = "row center mb-50">
+	<div class = "row center mb-30">
 		<h1>상품 리스트</h1>
 		<hr>
 	</div>

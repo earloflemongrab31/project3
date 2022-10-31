@@ -7,9 +7,9 @@
 
 <form action="insert" method="post" enctype="multipart/form-data">
 
-	<div class="container-500 mt-50">
+	<div class="container-500 mt-50 mb-50">
 	
-	<div class="row center mb-50">
+	<div class="row center mb-30">
 	    <h1>Review</h1>
 	     <hr>
 	</div>

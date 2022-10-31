@@ -7,7 +7,7 @@
 </jsp:include>
 
 <div class="container-300 mt-50 mb-50">
-	<div class="row center mb-50">
+	<div class="row center mb-30">
 		<h1>WELCOME</h1>
 	</div>
 	<div class="row center">

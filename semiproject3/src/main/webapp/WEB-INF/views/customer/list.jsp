@@ -7,7 +7,7 @@
 </jsp:include>
 
 <div class="container-800 mt-50 mb-50">
-	<div class="row center">
+	<div class="row center mb-30">
 		<h1>회원 목록</h1>
 		<hr>
 	</div>
@@ -32,8 +32,8 @@
 					<td>${customerDto.customerPhone}</td>
 					<td>${customerDto.customerEmail}</td>
 					<td>
-						<a href="edit?customerId=${customerDto.customerId}">수정</a>
-						<a href="delete?customerId=${customerDto.customerId}">삭제</a>
+						<a class="btn btn-border"  href="edit?customerId=${customerDto.customerId}">수정</a>
+						<a class="btn btn-border"  href="delete?customerId=${customerDto.customerId}">삭제</a>
 					</td>
 				</tr>
 				</c:forEach>
@@ -109,6 +109,6 @@
 </div>
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
 
 

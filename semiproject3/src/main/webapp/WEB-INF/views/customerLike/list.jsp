@@ -9,8 +9,8 @@
 </jsp:include>
 
 <div class ="container-600 mt-50 mb-50">
-   <div class = "row center">
-      <h1>찜한 상품 목록</h1>
+   <div class = "row center mb-30">
+      <h1>찜한 상품</h1>
       <hr>
    </div>
    

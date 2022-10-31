@@ -18,6 +18,7 @@
 
 	<div class = "row center mb-30">
 		<h1>NOTICE</h1>
+		<hr>
 	</div>
 	
 	<div class = "row">

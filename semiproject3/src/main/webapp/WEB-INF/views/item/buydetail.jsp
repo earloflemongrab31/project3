@@ -13,6 +13,12 @@
         }
     })
 </script>
+<style>
+	#box{
+		padding: 5px;
+		border-top: 1px solid #D5D5D5;
+	}
+</style>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
    <jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
@@ -23,12 +29,6 @@ function fail(){
     }
 }
 </script>
-<style>
-	#box{
-		padding: 5px;
-		border-top: 1px solid #D5D5D5;
-	}
-</style>
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
 <!-- <form action="/orders/detail" method="get"> -->
@@ -182,7 +182,7 @@ function fail(){
 
    <div class="row center mt-40 mb-40 review hide">
       <div class="row center mb-30">
-         <h4>리뷰</h4>
+         <h4>REVIEW</h4>
          <hr>
       </div>
 
@@ -283,6 +283,5 @@ function fail(){
             </c:otherwise>
          </c:choose>
       </div>
-   </div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -17,10 +17,10 @@ td, th {
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class ="container-900 mt-40">
+<div class ="container-900 mt-50 mb-50">
 
 	<div class = "row center mb-30">
-		<h1>협력사 명함 목록</h1>
+		<h1>COMPANY</h1>
 		<hr>
 	</div>
 	

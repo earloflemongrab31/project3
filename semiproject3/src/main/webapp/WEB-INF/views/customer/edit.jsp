@@ -16,9 +16,10 @@
 
 <input name="customerId"  type="hidden"  value="${customerDto.customerId}">
 
-<div class="container-300 mt-40">
-	<div class="row center">
+<div class="container-300 mt-50 mb-50">
+	<div class="row center mb-30">
 		<h1>회원 정보 수정</h1>
+		<hr>
 	</div>
 
 	<div class="row left">
