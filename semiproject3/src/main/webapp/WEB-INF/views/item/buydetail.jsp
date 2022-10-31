@@ -43,9 +43,9 @@
 				var width=$(this).css("width");
 				
 				$(this).animate({
-					width:"+=100"
+					width:"+=50"
 				});
-			if(parseInt(width) >=200){
+			if(parseInt(width) >=150){
 				$(this).animate({
 					width :100
 				})	;
@@ -252,12 +252,6 @@ function fail(){
 
             <c:otherwise>
                <h5>리뷰수${fn:length(reviewList)}</h5>
-               <h5>
-                  사용자 총 평점
-                     <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
-                     pattern="#,##0.00"></fmt:formatNumber>
-               </h5>
-
                <table class="table left table-review-list">
                   <tbody>
                      <c:forEach var="list" items="${reviewList}">
@@ -269,21 +263,8 @@ function fail(){
                               <c:if test="${list.reviewStar==4}">★★★★(${list.reviewStar})</c:if>
                               <c:if test="${list.reviewStar==5}">★★★★★(${list.reviewStar})</c:if>
                               <c:set var="total" value="${total+list.reviewStar}" />
+                         
                            </td>
-                          <%--  <td class="right">
-                           <c:choose>
-                                 <c:when test="${list.reviewBlind}">
-                                    <td>
-                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드[해제]</a>
-                                    </td>
-                                 </c:when>
-                                 <c:otherwise>
-                                    <td>
-                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드[설정]</a>
-                                    </td>
-                                 </c:otherwise>
-                              </c:choose>
-                           </td> --%>
                         </tr>
 
                         <tr rowspan="6">
@@ -344,12 +325,46 @@ function fail(){
                                  </c:if>
                               </td>
                            </c:if>
+                          	<tr>
+                          		<td>
+                          		<c:if test="${loginId == list.customerId}">
+                          			(
+                          			<a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                          				<i class="fa-solid fa-trash"></i>
+                          			</a> <!--리뷰 삭제-->
+                          			/
+                          			<a href="#"><i class="fa-solid fa-pen-nib"></i></a> <!--리뷰 수정-->
+                          			)
+                          		</c:if>
+                       	<!--관리자로 접근 했을 때만 블라인드 처리가능  -->
+               	
+                           <c:choose>
+                                 <c:when test="${list.reviewBlind}">
+                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                      		<i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[해제]
+                                      	</a>
+                                 </c:when>
+                                 <c:otherwise>
+                                    
+                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                       <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]
+                                       </a>
+                                    
+                                 </c:otherwise>
+                              </c:choose>
+                           		</td>
+                          	</tr>
                         </tr>
 
                      </c:forEach>
                   </tbody>
             </c:otherwise>
          </c:choose>
+         	   <h5>
+                  	사용자 총 평점
+                     <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
+                     pattern="#,##0.00"></fmt:formatNumber>
+               </h5>
       </table>
 
       </div>
