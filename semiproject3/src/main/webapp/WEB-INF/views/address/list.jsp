@@ -6,12 +6,12 @@
 <jsp:include page="/WEB-INF/views/template/customerHeader.jsp">
     <jsp:param value="주소목록" name="title"/>
 </jsp:include>
-<<<<<<< HEAD
-=======
+
 
 <script src="/confirm-link.js"></script> 
 <script src="/checkbox.js"></script> 
 
+<section>
 <div class ="container-800 mt-50 mb-50">
    <div class = "row center mb-30">
       <h1>ADDRESS</h1>
@@ -188,12 +188,11 @@
 	</c:choose>
 </li>
 </ul>	
-
+</section>
 
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
 
 
->>>>>>> refs/remotes/origin/main
 <script>
 function upGo(){
 	var checkboxValues = [];
