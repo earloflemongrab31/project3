@@ -106,8 +106,6 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-	
-	
 
 //	@ResponseBody
 //	@GetMapping("/cartInsert")
