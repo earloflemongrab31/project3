@@ -1,48 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="/WEB-INF/views/template/customerHeader.jsp">
-	<jsp:param value="주문/배송조회" name="title"/>
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
+	<jsp:param value="관리자페이지" name="title"/>
 </jsp:include>
 
-<div class="container-550 mt-50 mb-50">
+<div class="container-600 mt-50 mb-50">
 
 <div class="row center mb-30">
-	<h1>주문/배송 조회</h1>
-	<hr>
+	<h1>주문 내역</h1>
 </div>
-	<c:forEach var="buyItem" items="${buyList}">
-	<table class="table table-border">
+<div class="row center mb-30">
+	<table class="table table-border table-hover">
 		<thead>
 			<tr>
-				<th>주문번호 : ${buyItem.buyNo}</th>
-				<th>${buyItem.deliveryStatus}</th> 
+				<th>선택</th>
+				<th>주문번호</th>
+				<th>아이디</th>
+				<th>주문일</th>
+				<th>배송현황</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td class="w-25" rowspan="3">
-					<a href="/item/buydetail?itemNo=${buyItem.itemNo}">
-						<img class="w-100" src="/image/download/${buyItem.imageNo}">
-					</a>
-				</td>
-				<td>${buyItem.itemName}</td>
-			</tr>
-			<tr>
-				<td> 옵션 : ${buyItem.itemSize} / ${buyItem.itemColor}</td>
-			</tr>
-			<tr>
-				<td> 
-					<fmt:formatNumber value="${buyItem.itemTotalPrice}" pattern="#,##0원"/>
-					 / ${buyItem.itemCnt}개
-				</td>
-			</tr>
+			<c:forEach var="buyDto" items="${buyList}">
+				<tr>
+					<td><input type="checkbox"></td>
+					<td>
+						<a href="admin-buydetail?buyNo=${buyDto.buyNo}">
+							${buyDto.buyNo}
+						</a>
+					</td>
+					<td>${buyDto.customerId}</td>
+					<td>${buyDto.buyDate}</td>
+					<td>${buyDto.deliveryStatus}</td>
+				</tr>
+			</c:forEach>
+
 		</tbody>
 	</table>
-	</c:forEach>
 </div>
 
+<div class="row center">
+	<form action="list" method="get">
+		<select class="input" name="type" required>
+			<option value="customer_id">아이디</option>
+			<option value="delivery_status">카테고리</option>
+		</select>
+		<input type="search" name="keword" class="input" required>
+		<button type="submit" class="btn btn-positive">검색</button>
+	</form>
+</div>
+
+</div>
 
 <!-- 페이징 처리 -->
 <ul class="pagination">
@@ -74,7 +83,7 @@
 </li>
  
 <c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<li <c:if test="${i==param.p}">class="on"</c:if>><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
+	<li<c:if test="${i==param.p}">class="on"</c:if>><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
 </c:forEach>
 
 <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
@@ -105,4 +114,7 @@
 </li>
 </ul>	
 
-<jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
+
+
+
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

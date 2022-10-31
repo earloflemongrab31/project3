@@ -266,7 +266,7 @@ public class ItemDaoImpl implements ItemDao {
 	public List<BuyListVO> buyList(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy_list_view where image_main = 1 order by item_no desc "
+					+ "select * from buy_list_view where image_main = 1 order by item_date desc "
 				+ ")TMP"
 			+") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -548,14 +548,14 @@ public class ItemDaoImpl implements ItemDao {
 	}
 		
 	@Override
-	public ItemListVO selectItemOne(int itemNo) {
+	public List<ItemListVO> selectItemOne(int itemNo) {
 		String sql = "select * from ("
 						+ "	select tmp.*, rownum rn from ("
 							+ "	select * from item_list_view where item_no=?"
 						+ ") tmp"
 					+ ") where rn = 1";
 		
-		return jdbcTemplate.query(sql, itemExtractor, itemNo);
+		return jdbcTemplate.query(sql, itemMapper, itemNo);
 	}
 	
 }

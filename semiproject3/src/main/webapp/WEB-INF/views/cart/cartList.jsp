@@ -7,44 +7,48 @@
 </jsp:include>
 
 
-
-
 <div class="container-600 mt-50 mb-50">
-<div class="row center mb-50">
+<div class="row center mb-30">
 	 <h1>CART</h1>
 </div>
 <div class="row center">
-		장바구니 상품(${cartCount})
+	장바구니 상품(${cartCount})
 </div>
+<form action="/orders/insert" method="get">
 <table class="table table-border">
  	<tbody>
- 	<c:forEach var="cartDto" items="${cart}">
+ 	<c:forEach var="cartDto" items="${cartList}">
  		<c:if test="${cartDto.imageMain == 1}">
 	 		<tr>
-		 		<td rowspan="3">
-		 			<img src="/image/download/${cartDto.imageNo}" width="200">
+		 		<td class="center" rowspan="3" style="vertical-align: bottom;">
+		 			<a href="/item/buydetail?itemNo=${cartDto.itemNo}">
+		 				<img src="/image/download/${cartDto.imageNo}" width="100">
+		 				<input type="hidden" name="imageNo" value="${cartDto.itemNo}">
+		 			</a>
 		 		</td>
-		 		<td colspan="2">${cartDto.cartItemName}</td>
-		 		<td class="right"><a href="delete?itemNo=${cartDto.itemNo}">삭제</a></td>
+		 		<td colspan="2">${cartDto.itemName}</td>
+		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}"><i class="fa-solid fa-xmark"></i></a></td>
 			</tr>
  		</c:if>
 		<tr>
 			<td>수량</td>
-			<input type="text" class="quantity input" value="1">
-			<span>
-			
-				<button class="plus btn">+</button>
-				<button class="minus btn">-</button>
-			<td>?</td>
+			<td>
+				<input type="number" class="itemCnt input w-100" value="${cartDto.itemCnt}" min="0" max="${cartDto.itemTotalCnt}">
+<!-- 				<span> -->
+<!-- 				<button class="plus btn">+</button> -->
+<!-- 				<button class="minus btn">-</button> -->
+<!-- 				</span> -->
+			</td>
 	 		<td class="right" rowspan="2">
-	 			<fmt:formatNumber value="${cartDto.cartItemPrice}" pattern="#,##0"/>원
+	 			<c:set var="cntPrice" value="${cartDto.itemCnt*cartDto.itemPrice}"/>
+	 			<fmt:formatNumber value="${cntPrice}" pattern="#,##0"/>원
 	 		</td>
 	 	</tr>
 	 	<tr>	
 	 		<td>옵션</td>
-	 		<td>${cartDto.cartItemColor} / ${cartDto.cartItemSize}</td>
+	 		<td>${cartDto.itemColor} / ${cartDto.itemSize}</td>
 		</tr>
-	 		<c:set var="total" value="${total+cartDto.cartItemPrice}"/>
+	 		<c:set var="total" value="${total+cntPrice}"/>
  	</c:forEach>
  	</tbody>
  	<tfoot>
@@ -57,16 +61,16 @@
  			<td class="center" colspan="6">
 				상품 총금액 : 
 				<fmt:formatNumber value="${total}" pattern="#,##0"/>원
-				 + 2,500원(배송비) = 
-				<fmt:formatNumber value="${total+2500}" pattern="#,##0"/>원
+				 + 3,000원(배송비) = 
+				<fmt:formatNumber value="${total+3000}" pattern="#,##0"/>원
 			</td>
 		</tr>
  		<tr>
  			<td class="center" colspan="6">
-				<button class="btn btn-positive" type="button">주문하기</button>
+				<button class="btn btn-positive" type="submit">주문하기</button>
 			</td>
 		</tr>
  </table>
-
+</form>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

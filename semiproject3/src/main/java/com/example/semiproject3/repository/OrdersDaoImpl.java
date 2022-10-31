@@ -22,20 +22,12 @@ public class OrdersDaoImpl implements OrdersDao {
 					.ordersNo(rs.getInt("orders_no"))
 					.customerId(rs.getString("customer_id"))
 					.itemNo(rs.getInt("item_no"))
-	//				.addressName(rs.getString("address_name"))
-	//				.addressPhone(rs.getString("address_phone"))
-	//				.addressPost(rs.getString("address_post"))
-	//				.addressHost(rs.getString("address_host"))
-	//				.addressDetailHost(rs.getString("address_detail_host"))
-	//				.payMoney(rs.getInt("pay_money"))
-					.deliveryFee(rs.getInt("delivery_fee"))
-	//				.imageNo(rs.getInt("image_no"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
 					.itemSize(rs.getString("item_size"))
 					.itemColor(rs.getString("item_color"))
 					.itemCnt(rs.getInt("item_cnt"))
-	//				.ordersTime(rs.getDate("orders_time"))
+					.imageNo(rs.getInt("image_no"))
 				.build();
 	};
 	
@@ -51,7 +43,6 @@ public class OrdersDaoImpl implements OrdersDao {
 //					.addressHost(rs.getString("address_host"))
 //					.addressDetailHost(rs.getString("address_detail_host"))
 //					.payMoney(rs.getInt("pay_money"))
-					.deliveryFee(rs.getInt("delivery_fee"))
 //					.imageNo(rs.getInt("image_no"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
@@ -59,6 +50,7 @@ public class OrdersDaoImpl implements OrdersDao {
 					.itemColor(rs.getString("item_color"))
 					.itemCnt(rs.getInt("item_cnt"))
 //					.ordersTime(rs.getDate("orders_time"))
+					.imageNo(rs.getInt("image_no"))
 				.build();
 		}
 		else {
@@ -80,13 +72,13 @@ public class OrdersDaoImpl implements OrdersDao {
 				+ "orders_no, "
 				+ "customer_id, "
 				+ "item_no, "
-				+ "delivery_fee, "
 				+ "item_name, "
 				+ "item_price, "
 				+ "item_size, "
 				+ "item_color, "
-				+ "item_cnt) "
-				+ "values(orders_seq.nextval,?,?,3000,?,?,?,?,?)";
+				+ "item_cnt,"
+				+ "image_no) "
+				+ "values(orders_seq.nextval,?,?,?,?,?,?,?,?)";
 		
 		Object[] param = {
 				ordersDto.getCustomerId(), 
@@ -95,7 +87,8 @@ public class OrdersDaoImpl implements OrdersDao {
 				ordersDto.getItemPrice(),
 				ordersDto.getItemSize(), 
 				ordersDto.getItemColor(),
-				ordersDto.getItemCnt()};
+				ordersDto.getItemCnt(),
+				ordersDto.getImageNo()};
 		
 		jdbcTemplate.update(sql, param);
 	}
@@ -163,8 +156,8 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public List<OrdersDto> selectList(String loginId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from orders where customer_id=?";
+		return jdbcTemplate.query(sql, mapper, loginId);
 	}
 
 	@Override
@@ -227,6 +220,7 @@ public class OrdersDaoImpl implements OrdersDao {
 		String sql = "select count(*) from orders";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+
 
 //	//로우맵퍼
 //	private RowMapper<OrdersDto> mapper = new RowMapper<OrdersDto>() {

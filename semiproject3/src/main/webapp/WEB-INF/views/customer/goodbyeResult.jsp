@@ -4,7 +4,7 @@
 	<jsp:param value="회원 탈퇴 완료" name="title"/>
 </jsp:include>
 
-<div class="container-60 mt-40 mb-40">
+<div class="container-600 mt-50 mb-50">
 	<div class="row center">
 		<h1>이용해주셔서 감사합니다</h1>
 	</div>

@@ -28,12 +28,12 @@ import com.example.semiproject3.repository.MainImageDao;
 @Controller
 public class HomeController {
 	
-//	맥북용
+////	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
 //	화니꼬
-//	private final File directory = new File("C:/study/main");
+	private final File directory = new File("C:/study/main");
 //	D드라이브용
-	private final File directory = new File("D:/study/main");
+//	private final File directory = new File("D:/study/main");
 	
 	@Autowired
 	private CartDao cartDao;
@@ -55,9 +55,9 @@ public class HomeController {
 			Model model,
 			HttpSession session
 			){
-		//장바구니
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		//session.setAttribute("countCart", cartDao.selectCart(loginId));
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		//메인이미지
 		model.addAttribute("mainImageList", mainImageDao.selectAll());

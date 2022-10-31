@@ -17,6 +17,7 @@ import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AddressDao;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.vo.AddressUniteVO;
 
 @Controller
@@ -26,6 +27,9 @@ public class AddBasicController {
    
    @Autowired
    private AddressDao addressDao;
+   
+   @Autowired
+   private CartDao cartDao;
    
 //   @GetMapping("/addBasic")
 //   // 기본주소 리스트 출력
@@ -60,6 +64,9 @@ public class AddBasicController {
 	model.addAttribute("listBasic",addressDao.selectOneBasic(loginId));
 	model.addAttribute("list",addressDao.selectList(loginId, vo));
 	model.addAttribute("param",vo);
+	
+	//장바구니 개수
+	model.addAttribute("cartCount",cartDao.cartCount(loginId));
 	  return "address/addBasic"; 
    }
    

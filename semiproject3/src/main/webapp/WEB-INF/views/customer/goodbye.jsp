@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/customerHeader.jsp">
 	<jsp:param value="비밀번호 확인" name="title"/>
 </jsp:include>
 
 <form action="goodbye" method="post">
 
-<div class="container-400 mt-40">
+<div class="container-400 mt-50 mb-50">
 	<div class="row center">
 		<h1>비밀번호 확인</h1>
 	</div>
@@ -24,4 +24,4 @@
 	
 </form>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

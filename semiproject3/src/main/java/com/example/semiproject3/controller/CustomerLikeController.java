@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.semiproject3.constant.SessionConstant;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerLikeDao;
 import com.example.semiproject3.vo.CustomerListSearchVO;
 
@@ -20,6 +21,9 @@ public class CustomerLikeController {
 	
 	@Autowired
 	private CustomerLikeDao customerLikeDao;
+	
+	@Autowired
+	private CartDao cartDao;
 	
 //	@GetMapping("/list")
 //	public String list(Model model,HttpSession session) {
@@ -46,10 +50,12 @@ public class CustomerLikeController {
 		model.addAttribute("list",customerLikeDao.selectList(vo));
 		model.addAttribute("param",vo);
 		
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+		
 		return "customerLike/list";
 		
 	}
-	
 	
 	
 	
