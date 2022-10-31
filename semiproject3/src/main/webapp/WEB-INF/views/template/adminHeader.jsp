@@ -74,6 +74,11 @@
     
     .footer{
     	padding: 0 3em;
+    	background: #303134;
+    	color: #E6E8EB;
+    }
+    .footer a{
+    	color: #E6E8EB;
     }
 </style>
 <script type="text/javascript">

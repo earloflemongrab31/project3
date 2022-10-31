@@ -759,13 +759,14 @@
 	2. 새로고침 할 때마다 나옴
 	3. 관리자 페이지 들어가면 없애야 할 듯
  -->
-<c:if test="${loginGrade != '관리자'}">
+<c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자' && blockAd != 'Y'}">
 	<div class="float-container ad">
 		"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
 		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
 			<img src="/image/googleplay.png">
 		</a>
-		<span class="float-right delete" style="font-family:sans-serif;"><i class="fa-solid fa-xmark"></i></span>
+		<span class="float-right delete" style="font-family:sans-serif; margin-left:5px;">
+			<a href="/block-ad" style="color:white;">다신 보지 않기 <i class="fa-solid fa-xmark"></i></a></span>
 	</div>
 </c:if>
 

@@ -6,18 +6,26 @@
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
-<!-- 풀스크린 수정 필요할 듯... -->
-<div class="fullscreen">
-	<div class="modal screen-center survey">
-		<div class="row right delete" style="margin:3px 5px 0 0;"><i class="fa-solid fa-xmark"></i></div>
-		<div class="row" style="min-height:285px; opacity:0;">
-			<span>-</span>
-		</div>
-		<div class="row center">
-			<h3><a href="research/insert">설문조사 페이지 이동</a></h3>
+
+<c:if test="${blockSurvey != 'Y'}">
+	<!-- 풀스크린 수정 필요할 듯... -->
+	<div class="fullscreen">
+		<div class="modal screen-center survey">
+			<div class="row right delete" style="margin:3px 5px 0 0;"><i class="fa-solid fa-xmark"></i></div>
+			<div class="row" style="min-height:285px; opacity:0;">
+				<span>-</span>
+			</div>
+			<div class="row center">
+				<h3><a href="research/insert">설문조사 페이지 이동</a></h3>
+			</div>
+			<div class="row right mt-50">
+				<a href="/block-survey">
+					다신 보지 않기 <i class="fa-solid fa-xmark"></i>
+				</a>
+			</div>
 		</div>
 	</div>
-</div>
+</c:if>
 
 <!-- Slider main container -->
 <div class="swiper main">
