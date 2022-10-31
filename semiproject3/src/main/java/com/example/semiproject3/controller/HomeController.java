@@ -33,7 +33,8 @@ public class HomeController {
 //	화니꼬
 //	private final File directory = new File("C:/study/main");
 //	D드라이브용
-	private final File directory = new File("D:/study/main");
+//	private final File directory = new File("D:/upload");
+	private final File directory = new File("D:/study/itemImage");
 	
 	@Autowired
 	private CartDao cartDao;

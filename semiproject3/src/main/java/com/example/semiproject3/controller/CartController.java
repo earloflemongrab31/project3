@@ -1,7 +1,5 @@
 package com.example.semiproject3.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CartDto;
@@ -107,10 +104,6 @@ public class CartController {
 	}
 	
 
-	
-	
-	
-
 //	@ResponseBody
 //	@GetMapping("/cartInsert")
 //	public String cartInsert(
@@ -126,8 +119,6 @@ public class CartController {
 //		
 //		return result;
 //	}
-
-	
 
 	
 
