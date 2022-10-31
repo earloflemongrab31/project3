@@ -13,6 +13,45 @@
         }
     });
     
+  	//리뷰 좋아요 ajax
+  	$(function(){
+  		$(".review-like-btn").click(function(e){
+  			e.preventDefault();
+  			var that=this;
+  			
+  			$.ajax({
+  				url:"/rest/review/like",
+        		method:"post",
+        		data:{
+        			reviewNo:$(this).data("review-no"),
+        			itemNo:$(this).data("item-no")
+        		},
+        		success:function(resp){
+        			
+        				$(that).next(".like-span").text(resp.reviewCnt);
+        				$(that).next("span").remove(".like-span-remove");
+        		}
+  			})
+  		});
+  	});
+	
+	//사진크게
+	$(function(){
+		$(".image-big").click(function(){
+			
+			var width=$(this).css("width");
+			
+			$(this).animate({
+				width:"+=50"
+			});
+		if(parseInt(width) >=150){
+			$(this).animate({
+				width :100
+			})	;
+		}
+		});
+	});
+    
    	$(function(){
 		$(".cart-in").click(function(){
 			$(".item-form").attr("action", "/cart/insert");
@@ -24,15 +63,18 @@
 		});
 	});
 </script>
+
 <style>
 	#box{
 		padding: 5px;
 		border-top: 1px solid #D5D5D5;
 	}
 </style>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp">
    <jsp:param value="상품 상세 페이지" name="title" />
 </jsp:include>
+
 <script type="text/javascript">
 function fail(){
     if(confirm("내가 작성한 글은 신고 할 수 없습니다")){
@@ -40,6 +82,7 @@ function fail(){
     }
 }
 </script>
+
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
 <!-- <form action="/orders/detail" method="get"> -->
@@ -80,20 +123,18 @@ function fail(){
 </div>
 
 <div class="float-left w-50">
+	<div class="row">
+		<input type="hidden" name="customerId" value="${loginId}">
+		<input type="hidden" name="itemNo" value="${itemDto.itemNo}">
+		<input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none">
+	</div>
+	<div class="row">
+		${itemDto.itemMemo}
+	</div>
+	<hr>
 <div class="row">
    <table class="table">
       <tbody>
-         <tr>
-            <th class="left" colspan="2">
-               <input type="hidden" name="customerId" value="${loginId}">
-               <input type="hidden" name="itemNo" value="${itemDto.itemNo}">
-               <input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none">
-            </th>
-    
-		</tr>
-		<tr>
-		   <th class="left" colspan="2">${itemDto.itemMemo}</th>
-		</tr>
          <tr>
             <th>Price</th>
             <td>
@@ -187,7 +228,6 @@ function fail(){
 <div class = "row center mb-30 detail">
    <div class = "row center mb-30">
       <h4>${itemDto.itemContent}</h4>
-      <hr>
    </div>
 </div>
 

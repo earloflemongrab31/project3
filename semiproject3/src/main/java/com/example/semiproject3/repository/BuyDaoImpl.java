@@ -124,7 +124,17 @@ public class BuyDaoImpl implements BuyDao {
 		Object[] param = {keyword, loginId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-//
+	
+	@Override
+	public void minus(BuyDto buyDto) {
+		String sql= "update item_cnt set item_total_cnt = item_total_cnt - ? where item_no = ? and item_size = ? and item_color = ?";
+		Object[] param= {
+				buyDto.getItemCnt(), buyDto.getItemNo(), buyDto.getItemSize(), buyDto.getItemColor()
+		};
+		jdbcTemplate.update(sql,param);
+		
+	}
+
 //	//구매 정보
 //	@Override
 //	public BuyDto selectOne(int buyNo) {
@@ -148,37 +158,37 @@ public class BuyDaoImpl implements BuyDao {
 	}
 
 	@Override
-	public List<BuyDto> selectList(String loginId, BuyListSearchVO vo) {
+	public List<BuyDto> selectAdminList(BuyListSearchVO vo) {
 		if(vo.isSearch()) {
-			return search(loginId, vo);
+			return adminSearch(vo);
 		}
 		else {
-			return list(loginId, vo);
+			return adminList(vo);
 		}
 	}
 
 	@Override
-	public List<BuyDto> list(String loginId, BuyListSearchVO vo) {
+	public List<BuyDto> adminList(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
-					+ "select * from buy where customer_id=? order by buy_no desc"
+					+ "select * from buy order by buy_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
-		Object[] param = {loginId, vo.startRow(), vo.endRow()};
+		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	@Override
-	public List<BuyDto> search(String loginId, BuyListSearchVO vo) {
+	public List<BuyDto> adminSearch(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy where instr(#1,?) > 0 and customer_id=?"
+					+ "select * from buy where instr(#1,?) > 0"
 					+ "order by buy_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
-				vo.getKeyword(), loginId, vo.startRow(), vo.endRow()
+				vo.getKeyword(), vo.startRow(), vo.endRow()
 		};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
