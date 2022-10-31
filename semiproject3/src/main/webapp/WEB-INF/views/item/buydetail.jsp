@@ -28,12 +28,11 @@
             			itemNo:$(this).data("item-no")
             		},
             		success:function(resp){
-            			console.log(resp);
-            			$(that).next(".like-span").text(resp.reviewCnt);
-      
+            			
+            				$(that).next(".like-span").text(resp.reviewCnt);
+            				$(that).next("span").remove(".like-span-remove");
             		}
       			})
-      			
       		});
       	});
       	
@@ -314,22 +313,26 @@ function fail(){
                            <c:if test="${list.reviewCnt>=0}">
                               <td style="text-align: center; vertical-align: middle;">
                              <%--  <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>  --%>
-                                 <c:if test="${loginId==null}">
+                                 <c:if test="${loginId==null && list.reviewCnt>0}">
                                  	♥${list.reviewCnt}
+                                 </c:if>
+                                 <c:if test="${loginId==null && list.reviewCnt==0}">
+                                 	♡
                                  </c:if>
                                  <c:if test="${loginId!=null}">
                                  	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
+                                 	<span class="like-span-remove">${list.reviewCnt}</span>
                                  	<span class="like-span"></span>
-                                 	<span class="like-remove">${list.reviewCnt}</span>
                                  </c:if>
                               </td>
                            </c:if>
                         </tr>
+
                      </c:forEach>
                   </tbody>
             </c:otherwise>
          </c:choose>
       </table>
-      </div>
+	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

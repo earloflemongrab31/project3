@@ -8,8 +8,9 @@
 	<jsp:param value="내가 찜한 상품" name="title" />
 </jsp:include>
 
-<div class ="container-600 mt-50 mb-50">
-   <div class = "row center mb-30">
+<section>
+<div class ="container-600">
+   <div class = "row center">
       <h1>찜한 상품</h1>
       <hr>
    </div>
@@ -20,7 +21,7 @@
 				<h4 style="padding-left: 20px">찜한 상품이 없습니다.</h4>
 			</c:when>
 			<c:otherwise>
-					<table class="table table-hover table-slit ">
+					<table class="table table-hover table-border ">
 					<thead>
 						<tr>
 							<th width="10%">상품 번호</th>
@@ -103,7 +104,7 @@
 	</ul>
 
 </div>
-
+</section>
 
 
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

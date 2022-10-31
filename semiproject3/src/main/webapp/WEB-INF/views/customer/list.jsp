@@ -16,11 +16,11 @@
 		<table class="table table-border">
 			<thead>
 				<tr>
-					<th>아이디</th>
-					<th>닉네임</th>
-					<th>핸드폰번호</th>
-					<th>이메일</th>
-					<th>회원관리</th>
+					<th width="15%">아이디</th>
+					<th width="15%">닉네임</th>
+					<th width="20%">핸드폰번호</th>
+					<th width="30%">이메일</th>
+					<th width="20%">회원관리</th>
 				</tr>
 			</thead>
 			<tbody align="center">
