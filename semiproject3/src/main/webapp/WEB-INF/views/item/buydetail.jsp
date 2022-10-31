@@ -11,38 +11,33 @@
         if (responseMessage != ""){
             alert(responseMessage)
         }
+    });
 
         
 
-        
-        //좋아요 버튼 누르면 좋아요 갱신
-        $(".review-like-btn").click(function(e){
-        	//기본이벤트를 차단한다. 
-        	e.preventDefault();
-        	
-        	var that=this;
-        	
-     
-        	$.ajax({
-        		url:"/rest/review/like",
-        		method:"post",
-        		data:{
-        			reviewNo:$(this).data("review-no"),
-        			itemNo:$(this).data("item-no")
-        		},
-        		success:function(resp){
-        			console.log(resp);
-        			$(that).next(".like-span").text(resp.reviewCnt);
+      	$(function(){
+      		$(".review-like-btn").click(function(e){
+      			e.preventDefault();
+      			var that=this;
+      			
+      			$.ajax({
+      				url:"/rest/review/like",
+            		method:"post",
+            		data:{
+            			reviewNo:$(this).data("review-no"),
+            			itemNo:$(this).data("item-no")
+            		},
+            		success:function(resp){
+            			console.log(resp);
+            			$(that).next(".like-span").text(resp.reviewCnt);
+      
+            		}
+      			})
+      			
+      		});
+      	});
+      	
   
-        		}
-        
-        	});
-       		 	
-        });
-        
-    });
-
-    });
     
    	$(function(){
 		$(".cart-in").click(function(){
@@ -53,14 +48,10 @@
 			$(".item-form").attr("action", "/orders/detail");
 			$(".item-form").attr("method", "get");
 		});
-	});
->>>>>>> refs/remotes/origin/main
+   	});
 </script>
-<!--자바 스크립트 템플릿 생성 -->
-<script type="text/template" id="review-list-body">
-		
-                       
-</script>
+
+
 
 <style>
 	#box{
@@ -322,7 +313,7 @@ function fail(){
                            
                            <c:if test="${list.reviewCnt>=0}">
                               <td style="text-align: center; vertical-align: middle;">
-                                 <!--<a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>  -->
+                             <%--  <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>  --%>
                                  <c:if test="${loginId==null}">
                                  	♥${list.reviewCnt}
                                  </c:if>
