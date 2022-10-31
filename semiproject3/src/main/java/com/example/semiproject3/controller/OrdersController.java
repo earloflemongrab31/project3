@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,6 +48,7 @@ public class OrdersController {
 			@ModelAttribute OrdersDto ordersDto,
 			Model model, 
 			HttpSession session) {
+		
 		//주문 테이블 값 넣기
 		for(int i=0; i<itemSize.length; i++) {
 			ordersDto.setItemSize(itemSize[i]);

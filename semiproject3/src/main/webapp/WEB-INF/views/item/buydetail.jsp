@@ -12,9 +12,11 @@
             alert(responseMessage)
         }
     });
-
         
+<<<<<<< HEAD
 		//리뷰 좋아요 ajax
+=======
+>>>>>>> refs/remotes/origin/main
       	$(function(){
       		$(".review-like-btn").click(function(e){
       			e.preventDefault();
@@ -355,6 +357,7 @@ function fail(){
                            		</td>
                           	</tr>
                         </tr>
+<<<<<<< HEAD
 
                      </c:forEach>
                   </tbody>
@@ -368,6 +371,7 @@ function fail(){
       </table>
 
       </div>
+
 	</div>
 
 
