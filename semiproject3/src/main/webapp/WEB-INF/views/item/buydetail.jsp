@@ -12,7 +12,7 @@
             alert(responseMessage)
         }
     });
-<<<<<<< HEAD
+
         
 		//리뷰 좋아요 ajax
 
@@ -55,8 +55,7 @@
 		});
 		
       	
-=======
->>>>>>> refs/remotes/origin/main
+
     
    	$(function(){
 		$(".cart-in").click(function(){
@@ -332,7 +331,7 @@ function fail(){
                                  <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>
                               </td>
                            </c:if>
-<<<<<<< HEAD
+
                           	<tr>
                           		<td>
                           		<c:if test="${loginId == list.customerId}">
