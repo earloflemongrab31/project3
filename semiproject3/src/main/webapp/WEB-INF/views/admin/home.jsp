@@ -124,28 +124,37 @@
 					<thead>
 						<tr>
 							<th>공지번호</th>
-							<th>말머리</th>
 							<th class="w-50">제목</th>
 							<th>조회수</th>
+							<th>작성일</th>
 						</tr>
 					</thead>
 					<tbody align="center">
 						<c:forEach var="noticeDto" items="${noticeList}">
-						<tr>
-							
+							<tr>
 								<td>${noticeDto.noticeNo}</td>
-								<td>
-									<c:if test="${noticeDto.noticeHead != null}">
-										${noticeDto.noticeHead}
-									</c:if>
-								</td>
 								<td>
 									<a href="http://localhost:8888/notice/detail?noticeNo=${noticeDto.noticeNo}">
 										${noticeDto.noticeTitle}
 									</a>
-								</td>			
-								<td>${noticeDto.noticeRead}</td>			
-						</tr>
+								</td>		
+								<td>${noticeDto.noticeRead}</td>		
+								<td>
+									<c:set var="current">
+										<fmt:formatDate value="${noticeDto.noticeDate}" pattern="yyyy-MM-dd"/>
+									</c:set>
+									<c:choose>
+										<c:when test="${today == current}">
+											<fmt:formatDate value="${noticeDto.noticeDate}" 
+																	pattern="HH:mm"/>
+										</c:when>
+										<c:otherwise>
+											<fmt:formatDate value="${noticeDto.noticeDate}" 
+																	pattern="yyyy-MM-dd"/>
+										</c:otherwise>
+									</c:choose>
+								</td>	
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
