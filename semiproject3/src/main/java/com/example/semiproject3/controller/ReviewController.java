@@ -225,9 +225,13 @@ public class ReviewController {
 	public String list(Model model, HttpSession session,
 		@ModelAttribute(name="vo") ReviewListSearchVO vo) {
 
+	//페이지 네비게이터를 위한 게시글 수를 전달
+	int count = reviewDao.count(vo);
+	vo.setCount(count);
+		
 	String loginId = (String)session.getAttribute(SessionConstant.ID);
-	  
-      model.addAttribute("list",reviewDao.selectList(vo));
+	  model.addAttribute("cartCount",cartDao.cartCount(loginId));
+	  model.addAttribute("list",reviewDao.list(vo));
       model.addAttribute("param",vo);
       return "review/list"; 
   }

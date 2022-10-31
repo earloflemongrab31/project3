@@ -31,14 +31,15 @@ public interface ReviewDao {
 	List<ReviewDto> selectList2(int itemNo);
 	
 	//통합 메소드(검색+목록)
-	List<ReviewDto> selectList(ReviewListSearchVO vo);
+	List<ReviewDto> selectList(ReviewListSearchVO vo, String loginId);
 	List<ReviewDto> list(ReviewListSearchVO vo);
-	List<ReviewDto> search(ReviewListSearchVO vo);
+	List<ReviewDto> search(ReviewListSearchVO vo, String loginId);
 		
 	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
 	int count(ReviewListSearchVO vo);
 	int searchCount(ReviewListSearchVO vo);
 	int listCount(ReviewListSearchVO vo);
+	
 	//블라인드 처리 
 	boolean updateBlind(int reviewNo, boolean b);
 	
@@ -48,7 +49,7 @@ public interface ReviewDao {
 	void minus(int reviewNo);
 
 	// 마이페이지 내 리뷰 목록
-	List<ReviewDto> customerSelectList(String customerId);
+	List<ReviewDto> customerSelectList(String loginId, ReviewListSearchVO vo);
 	
 	//삭제
 	boolean delete(int reviewNo);
