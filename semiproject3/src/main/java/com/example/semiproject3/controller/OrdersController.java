@@ -41,20 +41,8 @@ public class OrdersController {
 	
 	@GetMapping("/detail")
 	public String list(
-			@RequestParam String[] itemSize,
-			@RequestParam String[] itemColor,
-			@RequestParam int[] itemCnt,
-			@ModelAttribute OrdersDto ordersDto,
 			Model model, 
 			HttpSession session) {
-		//주문 테이블 값 넣기
-		for(int i=0; i<itemSize.length; i++) {
-			ordersDto.setItemSize(itemSize[i]);
-			ordersDto.setItemColor(itemColor[i]);
-			ordersDto.setItemCnt(itemCnt[i]);
-			ordersDao.insert(ordersDto);
-		}
-		
 		
 		//회원 정보 불러오기
 		String loginId = (String)session.getAttribute(SessionConstant.ID);

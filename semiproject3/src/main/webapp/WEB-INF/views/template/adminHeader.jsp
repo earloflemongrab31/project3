@@ -68,6 +68,9 @@
     	background-color: #ede8e4;
     	color: #25201d;
     }
+    .footer{
+    	padding: 0 3em;
+    }
     .right-word{
     	 margin-right:10px;
     }
