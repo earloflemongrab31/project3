@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +101,9 @@ public class OrdersController {
 						.build());
 			}
 			
-			if(!cartSearch) {
+			if(!cartSearch && cartNo != null) {
+				System.out.println(cartDao);
+				System.out.println(Arrays.toString(cartNo));
 				cartDao.delete(cartNo[i]);
 			}
 		}
