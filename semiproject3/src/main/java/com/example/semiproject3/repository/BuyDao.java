@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.vo.BuyListSearchVO;
+import com.example.semiproject3.vo.BuyListVO;
 
 public interface BuyDao {
 	
@@ -12,8 +13,9 @@ public interface BuyDao {
 	void insert(BuyDto buyDto);
 	
 	//구매 목록 회원
-	List<BuyDto> selectList(String loginId);
-	List<BuyDto> selectList(String loginId, String type, String keyword);
+	List<BuyDto> selectBuyList(BuyListSearchVO vo, String loginId);
+	List<BuyDto> buyList(BuyListSearchVO vo, String loginId);
+	List<BuyDto> buySearch(BuyListSearchVO vo, String loginId);
 	
 	//구매 목록 관리자용 페이징
 	List<BuyDto> selectAdminList(BuyListSearchVO vo);
@@ -23,6 +25,10 @@ public interface BuyDao {
 	int count(BuyListSearchVO vo);
 	int searchCount(BuyListSearchVO vo);
 	int listCount(BuyListSearchVO vod);
+	
+	int buyCount(BuyListSearchVO vo, String loginId);
+	int buySearchCount(BuyListSearchVO vo, String loginId);
+	int buyListCount(BuyListSearchVO vo, String loginId);
 	
 	
 	BuyDto selectOne(int buyNo);

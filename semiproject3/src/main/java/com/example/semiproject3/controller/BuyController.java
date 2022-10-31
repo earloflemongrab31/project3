@@ -114,13 +114,14 @@ public class BuyController {
 	public String list(Model model, HttpSession session,
 			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 	
-	int count = buyDao.count(vo);
+	String loginId =(String)session.getAttribute(SessionConstant.ID);
+
+	int count = buyDao.buyCount(vo, loginId);
 	vo.setCount(count);
 	
-	String loginId =(String)session.getAttribute(SessionConstant.ID);
-	model.addAttribute("buyList",buyDao.selectList(loginId));
-	model.addAttribute("param",vo);
+	model.addAttribute("buyList",buyDao.selectBuyList(vo, loginId));
 	
+	//장바구니 개수
 	model.addAttribute("cartCount",cartDao.cartCount(loginId));
 	return "/customer/buyHistory";
 	}

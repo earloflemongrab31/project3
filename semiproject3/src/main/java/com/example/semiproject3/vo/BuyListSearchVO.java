@@ -92,6 +92,9 @@ public class BuyListSearchVO {
 		if(isSearch()) {
 			return "size="+size+"&type="+type+"&keyword="+keyword;
 		}
+		else if(keyword != null) {
+			return "size="+size+"&keyword="+keyword;
+		}
 		else {
 			return "size="+size;
 		}
