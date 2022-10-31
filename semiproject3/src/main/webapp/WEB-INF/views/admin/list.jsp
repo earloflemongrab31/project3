@@ -12,12 +12,6 @@
 		<hr>
 	</div>
 	
-	<c:if test="${loginGrade == '메인관리자'}">
-	<div class="row right">
-	<a href="insert" class="btn btn-border">등록</a>
-	</div>
-	</c:if>
-	
 	<div class="row">
 		<table class="table table-border">
 			<thead>
@@ -50,6 +44,13 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<c:if test="${loginGrade == '메인관리자'}">
+			<div class="row right">
+				<a href="insert" class="btn btn-border">관리자 추가 등록</a>
+			</div>
+		</c:if>
 	</div>
+</div>
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
 

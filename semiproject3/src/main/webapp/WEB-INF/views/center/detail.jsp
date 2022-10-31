@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    
-<jsp:include page="/WEB-INF/views/template/customerHeader.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
     <jsp:param value="Q&A게시판" name="title"/>
 </jsp:include>
 
@@ -69,12 +69,6 @@
 		
 	 	<table class="table table-border">
 	 		<tbody>
-	 		
-				
-		 		<tr>
-					<th>답변자</th>
-					<td>${centerDto.adminId}</td>
-				</tr>
 
 		 		<tr height="200" valign="top">
 				<th>답변내용</th>
@@ -99,7 +93,7 @@
 	 
 	 	<div class="row right">
 		<a class="btn btn-neutral" href="list">목록</a>
-		<c:if test="${loginGrade == '관리자'}">
+		<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
 			<a class="btn btn-positive" href="edit?centerNo=${centerDto.centerNo}">답변등록</a>
 			<a class="btn btn-negative" href="delete?centerNo=${centerDto.centerNo}">삭제하기</a>
 		</c:if>
@@ -107,4 +101,4 @@
 		
 	</div>
 
-<jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 
