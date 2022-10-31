@@ -12,6 +12,7 @@
 			var cnt = $(this).val();
 			var price = $(this).find("itemPrice");
 			$(".input[name=itemCnt]").attr("value", cnt);
+			$(".cntPrice").attr("value", cnt*price);
 		});
 		
 	});
