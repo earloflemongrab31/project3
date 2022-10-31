@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="관리자 페이지" name="title" />
 </jsp:include>
@@ -28,8 +31,8 @@
 				// labels 와 values 를 사용해서 차트를 생성
 				const ctx = document.querySelector('#myChart');
 				const myChart = new Chart(ctx, {
-					type : 'bar',
-					//         	'doughnut', // 차트 모양
+					type : 'bar', 
+					//         	'doughnut'(도넛모양) 차트 모양
 					data : { // 차트에 들어갈 내용 
 						labels : labels, // 우측 labels 은 배열을 임의로 지정한 이름
 						datasets : [ {
@@ -63,19 +66,130 @@
 	})
 </script>
 
-<div class="container-800 mt-50 mb-50">
+<section>
+
 	<div class="row center mb-30">
 		<h1>관리자 메인페이지</h1>
 		<hr>
 	</div>
 
-	<div class="container-600">
-		<div class="row center">
-			<h3>상품 별 판매 현황</h3>
-			<canvas id="myChart"></canvas>
+	<div class="row float-container">
+		<div class="float-left w-45 ms-40 p-20">
+			<div class="row center">
+				<h3>상품 별 판매 현황</h3>
+				<canvas id="myChart"></canvas>
+			</div>
+		</div>
+		
+		<div class="float-left w-30 ms-40">
+			<div class="row center">
+			<h3>NOTICE</h3>
+				<hr>
+				<small><a class="btn"  href="http://localhost:8888/notice/list">[더보기]</a></small>
+			</div>
+			<div class="row">
+				<table class="table table-border">
+					<thead>
+						<tr>
+							<th>공지번호</th>
+							<th>말머리</th>
+							<th class="w-50">제목</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody align="center">
+						<c:forEach var="noticeDto" items="${noticeList}">
+						<tr>
+							
+								<td>${noticeDto.noticeNo}</td>
+								<td>
+									<c:if test="${noticeDto.noticeHead != null}">
+										${noticeDto.noticeHead}
+									</c:if>
+								</td>
+								<td>
+									<a href="http://localhost:8888/notice/detail?noticeNo=${noticeDto.noticeNo}">
+										${noticeDto.noticeTitle}
+									</a>
+								</td>			
+								<td>${noticeDto.noticeRead}</td>			
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="float-left w-30 ms-40">
+			<div class="row center">
+			<h3>Q&A</h3>
+				<hr>
+				<small><a class="btn"  href="http://localhost:8888/center/list">[더보기]</a></small>
+			</div>
+			<div class="row">
+				<table class="table table-border">
+					<thead>
+						<tr>
+							<th>글번호</th>
+							<th width="50%">제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<tbody align="center">
+						<c:forEach var="centerDto" items="${centerList}">
+						<tr>
+							
+								<td>${centerDto.centerNo}</td>
+					
+				<td>
+					<a href="detail?centerNo=${centerDto.centerNo}">
+						${centerDto.centerTitle}
+						<c:if test="${centerDto.adminContent != null}">
+							[답변완료]
+						</c:if>
+					</a>
+					
+				</td>
+					
+				<td>${centerDto.customerId}</td>
+				
+				<td>
+					<c:set var="current">
+						<fmt:formatDate value="${centerDto.customerDate}" pattern="yyyy-MM-dd"/>
+					</c:set>
+					<c:choose>
+						<c:when test="${today == current}">
+							<fmt:formatDate value="${centerDto.customerDate}" 
+													pattern="HH:mm"/>
+						</c:when>
+						<c:otherwise>
+							<fmt:formatDate value="${centerDto.customerDate}" 
+													pattern="yyyy-MM-dd"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 		</div>
 	</div>
-
-</div>
-
+</section>
+<aside>
+	<div class="row">
+		<table class="table">
+			<tbody>
+				<tr>
+					<th class="w-34 center" style="vertical-align:middle;" rowspan="2"><i class="fa-solid fa-user fa-3x"></i></th>
+					<td>${loginId}[${loginGrade}]</td>
+				</tr>
+				<tr>
+					<td>안녕하세요, ${adminDto.adminName}님</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</aside>
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

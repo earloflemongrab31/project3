@@ -231,4 +231,4 @@
 </nav>
 </div>
 
-<main>
+<main class="float-container">

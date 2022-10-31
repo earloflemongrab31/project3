@@ -25,9 +25,11 @@ import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.MainImageDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AdminDao;
+import com.example.semiproject3.repository.CenterDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.MainEditDao;
 import com.example.semiproject3.repository.MainImageDao;
+import com.example.semiproject3.repository.NoticeDao;
 import com.example.semiproject3.vo.BuyListSearchVO;
 
 @Controller
@@ -47,8 +49,17 @@ public class AdminController {
 	@Autowired
 	private MainImageDao mainImageDao;
 	
+	@Autowired
+	private  NoticeDao noticeDao;
+	
+	@Autowired
+	private  CenterDao centerDao;
+
+	
 	@GetMapping("/")
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("noticeList", noticeDao.selectListForMain());
+		model.addAttribute("centerList", centerDao.selectListForMain());
 		return "admin/home";
 	}
 	
@@ -219,5 +230,7 @@ public class AdminController {
 		
 		return "redirect:/";
 	}
+	
+	
 	
 }
