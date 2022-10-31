@@ -204,6 +204,12 @@
 		</ul>
 	</li>
 	<li class="float-left">
+		<a href="#">관리자관리</a>
+		<ul>
+			<li><a href="/admin/list">관리자목록</a></li>
+		</ul>
+		</li>
+	<li class="float-left">
 		<a href="#">고객센터</a>
 		<ul>
 			<li><a href="/notice/list">공지사항</a></li>

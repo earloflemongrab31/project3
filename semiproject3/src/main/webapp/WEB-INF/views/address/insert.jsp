@@ -54,10 +54,10 @@ $(function(){
 
 <input name="customerId" type="hidden" value="${loginId}" >
 	
-	<div class="container-600 mt-40 mb-40">
+	<div class="container-600 mt-50 mb-50">
  
-	<div class="row center">
-		<h1>주소등록</h1>
+	<div class="row center mb-30">
+		<h1>ADDRESS</h1>
 		<hr>
 	</div>
 

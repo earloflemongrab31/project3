@@ -9,6 +9,7 @@
 
 <div class="row center mb-30">
 	<h1>No.${param.itemNo} 상품 옵션별 재고</h1>
+	<hr>
 </div>
 <div class="row right">
  	<a class="btn btn-positive" href="itemList">전체 상품 현황</a>

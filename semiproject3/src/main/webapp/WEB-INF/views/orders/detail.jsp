@@ -16,8 +16,9 @@
 
 <div class="container-1000 mt-50 mb-50">
 <input type="hidden" name="customerId" value="${customerDto.customerId}">
-<div class="row center">
+<div class="row center mb-30">
 	<h1>ORDER</h1>
+	<hr>
 </div>
 
 <div class="row">

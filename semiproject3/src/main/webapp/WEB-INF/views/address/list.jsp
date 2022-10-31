@@ -11,8 +11,8 @@
 <script src="/checkbox.js"></script> 
 
 <div class ="container-800 mt-50 mb-50">
-   <div class = "row center">
-      <h1>내 주소 목록</h1>
+   <div class = "row center mb-30">
+      <h1>ADDRESS</h1>
       <hr>
    </div>
 

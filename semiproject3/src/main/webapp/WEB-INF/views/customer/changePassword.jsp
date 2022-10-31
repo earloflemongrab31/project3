@@ -9,13 +9,13 @@
 
 	<div class="container-600 mt-50 mb-50">
 
-		<div class="row center">
+		<div class="row center mb-30">
 			<h1>비밀번호 변경</h1>
+			<hr>
 		</div>
 
 		<div class="row">
 			<h3>비밀번호 입력</h3>
-			<hr>
 		</div>
 
 		<div class="row">

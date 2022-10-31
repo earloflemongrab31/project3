@@ -54,10 +54,10 @@ $(function(){
 
 <input name="addressNo" type="hidden" value="${addressDto.addressNo}">
 	
-	<div class="container-600 mt-40 mb-40">
+	<div class="container-600 mt-50 mb-50">
  
-	<div class="row center">
-		<h1>주소 수정</h1>
+	<div class="row center mb-30">
+		<h1>ADDRESS</h1>
 		<hr>
 	</div>
 

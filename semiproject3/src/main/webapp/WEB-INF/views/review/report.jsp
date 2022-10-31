@@ -38,8 +38,8 @@
     
 <form action="report" method="post">
 
-	<div class="container-500 mt-50">
-		<div class="row center mb-50">
+	<div class="container-500 mt-50 mb-50">
+		<div class="row center mb-30">
 			<h1>작성 글 신고하기 </h1>
 	   		  <hr>
 		</div>
