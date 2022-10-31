@@ -320,8 +320,7 @@ function fail(){
                                  </c:if>
                                  <c:if test="${loginId!=null}">
                                  	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
-                                 	<span class="like-span-remove">${list.reviewCnt}</span>
-                                 	<span class="like-span"></span>
+                                 	<span class="like-span">${list.reviewCnt}</span>
                                  </c:if>
                               </td>
                            </c:if>
