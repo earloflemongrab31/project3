@@ -64,6 +64,7 @@ td, th {
 			</c:otherwise>
 		</c:choose>
 	</div>
+
 <!-- 페이지 네비게이터 -->
 <div class="row center">
 

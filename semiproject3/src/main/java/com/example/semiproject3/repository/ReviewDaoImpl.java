@@ -191,13 +191,6 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 	}
 
-@Override
-public List<ReviewDto> customerSelectList(String customerId, ReviewListSearchVO vo) {
-	String sql = "select * from review where customer_id=? order by review_no asc";
-	Object[] param = {customerId};	
-	return jdbcTemplate.query(sql, mapper1, param);
-}
-
 //삭제
 @Override
 	public boolean delete(int reviewNo) {
@@ -207,9 +200,9 @@ public List<ReviewDto> customerSelectList(String customerId, ReviewListSearchVO 
 	}
 
 @Override
-public List<ReviewDto> selectList(ReviewListSearchVO vo) {
+public List<ReviewDto> selectList(ReviewListSearchVO vo, String loginId) {
 	if(vo.isSearch()) {
-		return search(vo);
+		return search(vo,loginId);
 	}
 	else {
 		return list(vo);
@@ -218,17 +211,13 @@ public List<ReviewDto> selectList(ReviewListSearchVO vo) {
 
 @Override
 public List<ReviewDto> list(ReviewListSearchVO vo) {
-	String sql = "select * from ("
-			+ "select rownum rn, TMP.* from("
-				+ "select * from review order by review_no desc"
-			+ ")TMP"
-		+ ") where rn between ? and ?";
+	String sql = "select * from (select rownum rn, TMP.* from(select * from review order by review_no desc)TMP) where rn between ? and ?";
 	Object[] param = {vo.startRow(), vo.endRow()};
-	return jdbcTemplate.query(sql, mapper, param);
+	return jdbcTemplate.query(sql, mapper1, param);
 }
 
 @Override
-public List<ReviewDto> search(ReviewListSearchVO vo) {
+public List<ReviewDto> search(ReviewListSearchVO vo, String loginId) {
 	String sql = "select * from ("
 			+ "select rownum rn, TMP.* from ("
 				+ "select * from review where instr(#1,?) > 0 "
@@ -237,7 +226,7 @@ public List<ReviewDto> search(ReviewListSearchVO vo) {
 		+ ") where rn between ? and ?";
 	sql = sql.replace("#1", vo.getType());
 	Object[] param = {
-			vo.getKeyword(), vo.startRow(), vo.endRow()
+			vo.getKeyword(), loginId, vo.startRow(), vo.endRow()
 };
 return jdbcTemplate.query(sql, mapper, param);
 }
@@ -264,6 +253,17 @@ public int searchCount(ReviewListSearchVO vo) {
 public int listCount(ReviewListSearchVO vo) {
 	String sql = "select count(*) from review";
 	return jdbcTemplate.queryForObject(sql, int.class);
+	}
+
+@Override
+public List<ReviewDto> customerSelectList(String loginId, ReviewListSearchVO vo) {
+	if(vo.isSearch()) {
+		return search(vo,loginId);
+	}
+	else {
+		return list(vo);
+	}
+	
 	}
 }
 
