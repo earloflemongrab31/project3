@@ -33,21 +33,21 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-//	@ResponseBody
-//	@GetMapping("/cartInsert")
-//	public String cartInsert(
-//			@RequestParam int itemNo,
-//			HttpSession session	) {
-//
-//		String result = "00";
-//		
-//		System.out.println("/cartInsert ================"+ itemNo);		
-//		//Card db insert
-//		
-//		//
-//		
-//		return result;
-//	}
+	@ResponseBody
+	@GetMapping("/cartInsert")
+	public String cartInsert(
+			@RequestParam int itemNo,
+			HttpSession session	) {
+
+		String result = "00";
+		
+		System.out.println("/cartInsert ================"+ itemNo);		
+		//Card db insert
+		
+		//
+		
+		return result;
+	}
 	
 	@GetMapping("/delete")
 	public String delete(

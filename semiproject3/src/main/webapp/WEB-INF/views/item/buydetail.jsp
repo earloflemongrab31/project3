@@ -27,6 +27,48 @@ function fail(){
     }
 }
 
+function goCart(itemNo){
+
+	//정규식 , itemCnt  , id="itemColor"
+	if($("#itemColor option:selected").val()=="")
+	{
+		alert("옵션을 선택해주세요.");
+		$("#itemColor").focus();
+	}
+	
+	if($("#itemCnt option:selected").val()=="")
+	{
+		alert("수량을 입력해주세요.");
+		$("#itemColor").focus();
+	}	
+	
+	if(confirm("장바구니에 추가하시겠습니까?")){
+		//ajax로 장바구니 추가
+		
+		$.ajax({  
+			type: "GET",
+			url: "/cart/cartInsert?",
+			data: "itemNo="+itemNo+"&cartItemQnty="+$("#itemCnt").val()+"&cartItemColor="+$("#itemColor option:selected").val(),
+			dataType: 'text', 
+			success: function( result ) {
+					console.log(result);
+					if(result =="00"){
+						$("#cart-count").text(parseInt($("#cart-count").text())+1);
+						alert("추가되었습니다.");
+					}
+					else 
+						alert("동일한 상품이 장바구니에 존재합니다.");
+					
+			},
+			error:function(result){
+				console.log("error:"+result);
+			}	
+		});
+		
+		
+	}	
+	
+}
 </script>
 
 <div class="container-1000 mt-40 mb-40">
@@ -111,8 +153,8 @@ function fail(){
             </td>
             <td colspan="2" align="right">
                <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
-               <button class="btn btn-positive" type="submit">구매하기</button>
-               <button class="btn btn-positive" type="submit">장바구니${isCart}</button>    
+               <button type="button" class="btn btn-positive">구매하기</button>
+               <button type="button" class="btn btn-positive" onclick="goCart(${itemDto.itemNo})">장바구니${isCart}</button>    
                <a href="buylist">목록으로</a>
             </td>
          </tr>
@@ -152,9 +194,12 @@ function fail(){
    
    <div class="row center">
       <c:choose>
+      
+      
          <c:when test="${reviewList.isEmpty()}">
          <h4 style="padding-left:20px">
                 <span>해당 상품의 리뷰가 없습니다</span>
+                       
          </h4>
          </c:when>
          <c:otherwise>
@@ -176,6 +221,8 @@ function fail(){
                <c:forEach var="list" items="${reviewList}">
                   <tr>
                      <td>
+                     
+                     
                         <c:if test="${list.reviewStar==1}">★</c:if>
                         <c:if test="${list.reviewStar==2}">★★</c:if>
                         <c:if test="${list.reviewStar==3}">★★★</c:if>

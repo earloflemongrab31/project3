@@ -15,6 +15,7 @@ import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.repository.BuyDao;
 import com.example.semiproject3.repository.OrdersDao;
+import com.example.semiproject3.vo.BuyListSearchVO;
 
 @Controller
 @RequestMapping("/buy")
@@ -64,5 +65,18 @@ public class BuyController {
 		return "/customer/buyHistory";
 	}
 	
+//	//페이지 구현
+//	@GetMapping("/list")
+//	public String list(Model model, HttpSession session,
+//			@ModelAttribute(name="vo") BuyListSearchVO vo) {
+//	
+//	int count = buyDao.count(vo);
+//	vo.setCount(count);
+//	
+//	String loginId = (String) session.getAttribute(SessionConstant.ID);
+//	model.addAttribute("buyList",buyDao.selectList(vo));
+//	model.addAttribute("param",vo);
+//	return " /customer/buyHistory";
+//	}
 	
 }
