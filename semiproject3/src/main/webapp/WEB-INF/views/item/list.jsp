@@ -19,15 +19,12 @@
 		<table class="table table-hover table-border">
 			<thead>
 				<tr>
-					<th>상품번호</th>
-					<th>카테고리번호</th>
-					<th>상품명</th>
-					<th>상품메모</th>
-					<th>상품금액</th>
-<!-- 					<th>상품수량</th> -->
-<!-- 					<th>상품색상</th> -->
-<!-- 					<th>상품사이즈</th> -->
-					
+					<th width="10%" >상품번호</th>
+					<th width="10%">카테고리</th>
+					<th width="20%">상품명</th>
+					<th width="25%">상품메모</th>
+					<th width="20%">상품금액</th>
+					<th>비고</th>
 				</tr>
 			</thead>
 				
@@ -44,16 +41,14 @@
 				<tr>
 					<td>${itemDto.itemNo}</td>
 					<td>${itemDto.itemCate}</td>
-					<td>
-						<a href="detail?itemNo=${itemDto.itemNo}">
-							${itemDto.itemName}
-						</a>
-					</td>
+					<td>${itemDto.itemName}</td>
 					<td>${itemDto.itemMemo}</td>
 					<td>${itemDto.itemPrice}원</td>
-<%-- 					<td>${itemDto.itemTotalCnt}</td> --%>
-<%-- 					<td>${itemDto.itemColor}</td> --%>
-<%-- 					<td>${itemDto.itemSize}</td> --%>
+					<td>
+						<a class="btn btn-border"  href="detail?itemNo=${itemDto.itemNo}">
+						확인
+						</a>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -135,7 +130,6 @@
 		
 		<select class="input" name="type" required>
 			<option value="item_name" <c:if test="${type == 'item_name'}"></c:if>>상품명</option>
-			<option value="cate_code" <c:if test="${type == 'cate_code'}"></c:if>>카테고리</option>
 		</select>
 			
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>

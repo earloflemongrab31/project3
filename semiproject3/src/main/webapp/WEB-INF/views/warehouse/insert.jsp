@@ -26,8 +26,8 @@
         <table class="table table-border">
 	        <thead>
 	            <tr>
-                    <th>카테고리</th>
-                    <th>상품명</th>
+                    <th width="20%">카테고리</th>
+                    <th width="40%">상품명</th>
                     <th>상품사이즈</th>
                     <th>상품색상</th>
                 </tr>
@@ -90,12 +90,12 @@
             <table class="table table-border">
                 <thead>
                 <tr>
-                    <th>입고/출고</th>
-                    <th>날짜</th>
+                    <th width="10%">입고/출고</th>
+                    <th width="15%">날짜</th>
                     <th>회사명(이름)</th>
                     <th>전화번호</th>
-                    <th>상품상태</th>
-                    <th>수량</th>
+                    <th width="15%">상품상태</th>
+                    <th width="15%">수량</th>
                 </tr>
                 </thead>
 
@@ -143,13 +143,8 @@
 
 <!--고객 관리 테이블   -->
     <div class="row corp-list">
-	    <div class="row">
-	        <h2>협력사 리스트</h2>
-	    </div>
 	    
-	     <div class="row right">
-	       <a href="/company/insert">등록</a>
-	    </div>
+	     
     <div class="row">
     <table class="table table-border">
             <thead>
@@ -183,6 +178,9 @@
             </tbody>
         </table>
         </div>
+        <div class="row right">
+	       <a class="btn btn-positive" href="/company/insert">등록</a>
+	    </div>
 	</div>
     </div>  
 </form>

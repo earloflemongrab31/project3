@@ -5,9 +5,9 @@
 </jsp:include>
 
 <form action="goodbye" method="post">
-
-<div class="container-400 mt-50 mb-50">
-	<div class="row center mb-30">
+<section>
+<div class="container-400">
+	<div class="row center">
 		<h1>비밀번호 확인</h1>
 		<hr>
 	</div>
@@ -24,5 +24,5 @@
 
 	
 </form>
-
+</section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
