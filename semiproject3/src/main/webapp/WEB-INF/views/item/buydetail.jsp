@@ -13,10 +13,8 @@
         }
     });
         
-<<<<<<< HEAD
 		//리뷰 좋아요 ajax
-=======
->>>>>>> refs/remotes/origin/main
+
       	$(function(){
       		$(".review-like-btn").click(function(e){
       			e.preventDefault();
@@ -30,7 +28,7 @@
             			itemNo:$(this).data("item-no")
             		},
             		success:function(resp){
-            			
+            				console.log(resp);
             				$(that).next(".like-span").text(resp.reviewCnt);
             				$(that).next("span").remove(".like-span-remove");
             		}
@@ -349,7 +347,7 @@ function fail(){
                                  <c:otherwise>
                                     
                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                                       <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]
+                                      	 <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]
                                        </a>
                                     
                                  </c:otherwise>
@@ -357,7 +355,7 @@ function fail(){
                            		</td>
                           	</tr>
                         </tr>
-<<<<<<< HEAD
+
 
                      </c:forEach>
                   </tbody>
