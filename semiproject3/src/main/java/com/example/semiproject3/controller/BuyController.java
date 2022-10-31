@@ -111,7 +111,7 @@ public class BuyController {
 	vo.setCount(count);
 	
 	String loginId =(String)session.getAttribute(SessionConstant.ID);
-	model.addAttribute("buyList",buyDao.selectListAll(vo));
+	model.addAttribute("buyList",buyDao.selectList(loginId, vo));
 	model.addAttribute("param",vo);
 	
 	model.addAttribute("cartCount",cartDao.cartCount(loginId));
@@ -136,7 +136,7 @@ public class BuyController {
 		vo.setCount(count);
 		
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("buyList",buyDao.selectListAll(vo));
+		model.addAttribute("buyList",buyDao.selectList(loginId, vo));
 		
 		return "/admin/buyList";
 	}

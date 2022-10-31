@@ -70,7 +70,8 @@ public class AdminController {
 //		      return "admin/list";
 //	  }
 //	
-
+	
+	//페이징
 	@GetMapping("/list")
 	public String list(Model model,HttpSession session,
 			@ModelAttribute(name="vo") BuyListSearchVO vo) { 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.vo.AddressUniteVO;
-import com.example.semiproject3.vo.CompanyUniteVO;
 
 public interface AddressDao {
 

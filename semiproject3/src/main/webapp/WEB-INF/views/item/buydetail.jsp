@@ -12,9 +12,9 @@
             alert(responseMessage)
         }
     });
-
         
 		//리뷰 좋아요 ajax
+
       	$(function(){
       		$(".review-like-btn").click(function(e){
       			e.preventDefault();
@@ -356,6 +356,7 @@ function fail(){
                           	</tr>
                         </tr>
 
+
                      </c:forEach>
                   </tbody>
             </c:otherwise>
@@ -368,6 +369,13 @@ function fail(){
       </table>
 
       </div>
+
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:otherwise>
+		</c:choose>
+
 	</div>
 
 
