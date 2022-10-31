@@ -169,10 +169,10 @@
 <header>
 
 <div class="float-container">
-	<div class="float-left">
-		<h2 class="logo">
-			<a href="/admin/">Logo</a>
-		</h2>
+	<div class="logo float-left">
+		<a class="w-100" href="/admin/">
+			<img class="w-100" src="/image/logo.png">
+		</a>
 	</div>
 	<div class="right-word row float-right">
 		<a href="/">회원페이지</a>
