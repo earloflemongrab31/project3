@@ -28,12 +28,9 @@ function upGo(){
 	   window.location = "http://localhost:8888/address/edit?addressNo=" + checkboxValues;
 	   }
 	}
-
 	function add(){
 	   window.location = "http://localhost:8888/address/addBasic"
 	   }
-
-
 	function delNo(){
 	  
 	    // name이 같은 체크박스의 값들을 배열에 담는다.
