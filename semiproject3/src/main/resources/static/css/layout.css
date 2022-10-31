@@ -19,6 +19,7 @@ aside{
     min-height: 400px;
 }
 section{
+	position: relative;
     margin: 0 auto;
     padding: 20px;
     float: left;

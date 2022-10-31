@@ -901,4 +901,4 @@
 </ul>
 </div>
 </nav>
-<main>
+<main class="float-container">
