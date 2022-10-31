@@ -351,20 +351,11 @@ function fail(){
             </c:otherwise>
          </c:choose>
       </table>
-<<<<<<< HEAD
-=======
+
       </div>
-
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:otherwise>
-		</c:choose>
->>>>>>> branch 'jungnael' of https://github.com/earloflemongrab31/project3.git
 	</div>
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'jungnael' of https://github.com/earloflemongrab31/project3.git
+
+
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
