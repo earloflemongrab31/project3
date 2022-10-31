@@ -18,6 +18,9 @@
 	</c:choose>
 </title>
 
+<!-- 부트스트랩 cdn -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <!-- 글꼴 cdn -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

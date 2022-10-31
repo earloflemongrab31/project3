@@ -71,6 +71,10 @@
     .right-word{
     	 margin-right:10px;
     }
+    
+        .footer{
+    	padding: 0 3em;
+    }
 </style>
 <script type="text/javascript">
 

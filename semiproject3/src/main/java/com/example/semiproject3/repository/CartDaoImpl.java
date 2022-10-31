@@ -1,10 +1,12 @@
 package com.example.semiproject3.repository;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
 import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.vo.CartListVO;
 @Repository
@@ -99,6 +101,13 @@ public class CartDaoImpl implements CartDao{
 		}
 	};
 	
+	//번호 생성
+//	@Override
+//	public int sequence() {
+//		String sql = "select cart_seq.nextval from dual";
+//		return jdbcTemplate.queryForObject(sql, int.class);
+//	}
+	
 	//카트 담기
 	@Override
 	public void insert(CartDto cartDto) {
@@ -115,11 +124,11 @@ public class CartDaoImpl implements CartDao{
 				+ "cart_price) "
 				+ "values(cart_seq.nextval,?,?,?,?,?,?,?,?,?)";
 		Object[] param= {
-				cartDto.getCustomerId(), cartDto.getItemNo(),
-				cartDto.getItemTotalCnt(), cartDto.getItemName(), 
-				cartDto.getItemColor(), cartDto.getItemSize(), 
-				cartDto.getItemCnt(), cartDto.getItemPrice(), 
-				cartDto.getCartPrice()
+				cartDto.getCustomerId(), 
+				cartDto.getItemNo(), cartDto.getItemTotalCnt(), 
+				cartDto.getItemName(), cartDto.getItemColor(), 
+				cartDto.getItemSize(), cartDto.getItemCnt(), 
+				cartDto.getItemPrice(), cartDto.getCartPrice()
 		};
 		jdbcTemplate.update(sql,param);	
 	}

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.BuyDto;
+import com.example.semiproject3.vo.BuyListSearchVO;
 
 @Repository
 public class BuyDaoImpl implements BuyDao {
@@ -133,7 +134,7 @@ public class BuyDaoImpl implements BuyDao {
 //	}
 
 	@Override
-	public List<BuyDto> selectListAll() {
+	public List<BuyDto> selectListAll(BuyListSearchVO vo) {
 		String sql = "select * from buy order by buy_date desc";
 		
 		return jdbcTemplate.query(sql, mapper);
@@ -152,4 +153,53 @@ public class BuyDaoImpl implements BuyDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 
+	//페이징
+	@Override
+	public List<BuyDto> list(BuyListSearchVO vo) {
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+
+	@Override
+	public List<BuyDto> search(BuyListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from buy where instr(#1,?) > 0 "
+					+ "order by buy_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public int count(BuyListSearchVO vo) {
+		if(vo.isSearch()) {
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+
+	@Override
+	public int searchCount(BuyListSearchVO vo) {
+		String sql = "select count(*) from buy where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);	}
+
+	@Override
+	public int listCount(BuyListSearchVO vo) {
+		String sql = "select count(*) from buy";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
 }
