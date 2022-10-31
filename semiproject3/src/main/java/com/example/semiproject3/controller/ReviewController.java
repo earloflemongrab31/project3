@@ -22,6 +22,7 @@ import com.example.semiproject3.entity.ImageDto;
 import com.example.semiproject3.entity.ReportDto;
 import com.example.semiproject3.entity.ReviewDto;
 import com.example.semiproject3.entity.ReviewLikeDto;
+import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ReportDao;
 import com.example.semiproject3.repository.ReviewDao;
@@ -217,7 +218,7 @@ public class ReviewController {
 	
 	
 	@GetMapping("/list")
-  public String list(Model model, HttpSession session) {
+	public String list(Model model, HttpSession session) {
 
 	  String loginId = (String)session.getAttribute(SessionConstant.ID);
 	  System.out.println(loginId);
@@ -225,6 +226,22 @@ public class ReviewController {
 	      model.addAttribute("list",reviewDao.customerSelectList(loginId));
 	      return "review/list";
   }
+	@GetMapping("/delete")
+	public String delete(
+			@RequestParam int reviewNo,
+			@RequestParam int itemNo,
+			RedirectAttributes attr) {
+		
+		boolean result = reviewDao.delete(reviewNo);
+		if(result) {
+			attr.addAttribute("itemNo",itemNo);
+			return "redirect:/item/buydetail";
+		}
+		else {
+			throw new TargetNotFoundException("아이템 번호없음");
+		}
+		
+	}
 	
 
 }
