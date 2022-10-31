@@ -115,9 +115,5 @@ public class HomeController {
 		session.setAttribute("blockSurvey", "Y");
 		return "redirect:/";
 	}
-	@GetMapping("/block-ad")
-	public String blockAd(HttpSession session) {
-		session.setAttribute("blockAd", "Y");
-		return "redirect:/";
-	}
+
 }

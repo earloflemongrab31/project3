@@ -87,6 +87,8 @@ public class CustomerController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		session.removeAttribute(SessionConstant.GRADE);
+		session.removeAttribute("blockAd");
+		session.removeAttribute("blockSurvey");
 		session.removeAttribute("countCart");
 		return "redirect:login";
 	}
