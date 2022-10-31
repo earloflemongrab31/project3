@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.ReviewDto;
 import com.example.semiproject3.vo.ReviewListSearchVO;
 
@@ -253,10 +252,10 @@ public int listCount(ReviewListSearchVO vo) {
 	}
 
 @Override
-public List<ReviewDto> customerSelectList(String loginId) {
+public List<ReviewDto> customerSelectList(String customerId) {
 	String sql = "select * from review where customer_id=? order by review_no asc";
-	Object[] param = {loginId};
-	return jdbcTemplate.query(sql, mapper1, loginId);
+	Object[] param = {customerId};	
+	return jdbcTemplate.query(sql, mapper1, param);
 }
 //삭제
 @Override

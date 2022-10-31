@@ -222,12 +222,14 @@ public class ReviewController {
 	
 	
 	@GetMapping("/list")
-	public String list(Model model, HttpSession session) {
+	public String list(Model model, HttpSession session,
+			@ModelAttribute(name="vo") ReviewListSearchVO vo) {
 
 	  String loginId = (String)session.getAttribute(SessionConstant.ID);
 	  
 	      model.addAttribute("list",reviewDao.customerSelectList(loginId));
-	      return "review/list";
+	      model.addAttribute("param",vo);
+	      return "review/list"; 
   }
 	
 	

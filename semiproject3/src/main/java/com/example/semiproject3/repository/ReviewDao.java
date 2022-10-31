@@ -48,7 +48,7 @@ public interface ReviewDao {
 	void minus(int reviewNo);
 
 	// 마이페이지 내 리뷰 목록
-	List<ReviewDto> customerSelectList(String loginId);
+	List<ReviewDto> customerSelectList(String customerId);
 	
 	//삭제
 	boolean delete(int reviewNo);
