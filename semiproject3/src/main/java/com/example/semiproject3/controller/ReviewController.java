@@ -23,6 +23,7 @@ import com.example.semiproject3.entity.ReportDto;
 import com.example.semiproject3.entity.ReviewDto;
 import com.example.semiproject3.entity.ReviewLikeDto;
 import com.example.semiproject3.error.TargetNotFoundException;
+import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ReportDao;
 import com.example.semiproject3.repository.ReviewDao;
@@ -33,6 +34,9 @@ import com.example.semiproject3.vo.ReviewListSearchVO;
 @RequestMapping("/review")
 public class ReviewController {
 
+	@Autowired
+	private CartDao cartDao;
+	
 	@Autowired
 	private ReviewDao reviewDao;
 	
@@ -221,11 +225,27 @@ public class ReviewController {
 	public String list(Model model, HttpSession session) {
 
 	  String loginId = (String)session.getAttribute(SessionConstant.ID);
-	  System.out.println(loginId);
 	  
 	      model.addAttribute("list",reviewDao.customerSelectList(loginId));
 	      return "review/list";
   }
+	
+	
+	
+//	@GetMapping("/list")
+//	public String list(Model model, HttpSession session,
+//			@ModelAttribute(name="vo") ReviewListSearchVO vo) {
+//		
+//		String loginId = (String) session.getAttribute(SessionConstant.ID);
+//		
+//		model.addAttribute("list",reviewDao.customerSelectList(loginId,vo));
+//		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+//		model.addAttribute("param",vo);
+//		return "review/list";
+//	}
+	
+
+	
 	@GetMapping("/delete")
 	public String delete(
 			@RequestParam int reviewNo,

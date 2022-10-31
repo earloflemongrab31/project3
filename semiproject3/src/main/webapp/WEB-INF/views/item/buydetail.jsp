@@ -13,8 +13,6 @@
         }
     });
         
-		//리뷰 좋아요 ajax
-
       	$(function(){
       		$(".review-like-btn").click(function(e){
       			e.preventDefault();
@@ -28,32 +26,16 @@
             			itemNo:$(this).data("item-no")
             		},
             		success:function(resp){
-            			
-            				$(that).next(".like-span").text(resp.reviewCnt);
-            				$(that).next("span").remove(".like-span-remove");
+            			console.log(resp);
+            			$(that).next(".like-span").text(resp.reviewCnt);
+      
             		}
       			})
+      			
       		});
       	});
-		
-		//사진크게
-		$(function(){
-			$(".image-big").click(function(){
-				
-				var width=$(this).css("width");
-				
-				$(this).animate({
-					width:"+=50"
-				});
-			if(parseInt(width) >=150){
-				$(this).animate({
-					width :100
-				})	;
-			}
-			});
-		});
-		
       	
+  
     
    	$(function(){
 		$(".cart-in").click(function(){
@@ -199,7 +181,7 @@ function fail(){
    <table class="table">
 		<tr>
 			<td class="right">
-				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->				
+				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
 				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 				<button class="btn btn-positive buy" type="submit">구매하기</button>
 				<button class="btn btn-positive cart-in" type="submit">장바구니</button>    
@@ -252,6 +234,12 @@ function fail(){
 
             <c:otherwise>
                <h5>리뷰수${fn:length(reviewList)}</h5>
+               <h5>
+                  사용자 총 평점
+                     <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
+                     pattern="#,##0.00"></fmt:formatNumber>
+               </h5>
+
                <table class="table left table-review-list">
                   <tbody>
                      <c:forEach var="list" items="${reviewList}">
@@ -263,7 +251,19 @@ function fail(){
                               <c:if test="${list.reviewStar==4}">★★★★(${list.reviewStar})</c:if>
                               <c:if test="${list.reviewStar==5}">★★★★★(${list.reviewStar})</c:if>
                               <c:set var="total" value="${total+list.reviewStar}" />
-                         
+                           </td>
+                           <td class="right"><c:choose>
+                                 <c:when test="${list.reviewBlind}">
+                                    <td>
+                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드[해제]</a>
+                                    </td>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <td>
+                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드[설정]</a>
+                                    </td>
+                                 </c:otherwise>
+                              </c:choose>
                            </td>
                         </tr>
 
@@ -299,7 +299,7 @@ function fail(){
                               </c:otherwise>
                            </c:choose>
                               <td  style="text-align: center; vertical-align: middle;">
-                                 <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100">
+                                 <img src="/reviewImage/download/${list.imageNo}" width="100">
                               </td>
 
                            <!--좋아요  -->                
@@ -312,73 +312,23 @@ function fail(){
                            <c:if test="${list.reviewCnt>=0}">
                               <td style="text-align: center; vertical-align: middle;">
                              <%--  <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>  --%>
-                                 <c:if test="${loginId==null && list.reviewCnt>0}">
+                                 <c:if test="${loginId==null}">
                                  	♥${list.reviewCnt}
-                                 </c:if>
-                                 <c:if test="${loginId==null && list.reviewCnt==0}">
-                                 	♡
                                  </c:if>
                                  <c:if test="${loginId!=null}">
                                  	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
-                                 	<span class="like-span-remove">${list.reviewCnt}</span>
                                  	<span class="like-span"></span>
+                                 	<span class="like-remove">${list.reviewCnt}</span>
                                  </c:if>
                               </td>
                            </c:if>
-                          	<tr>
-                          		<td>
-                          		<c:if test="${loginId == list.customerId}">
-                          			(
-                          			<a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                          				<i class="fa-solid fa-trash"></i>
-                          			</a> <!--리뷰 삭제-->
-                          			/
-                          			<a href="#"><i class="fa-solid fa-pen-nib"></i></a> <!--리뷰 수정-->
-                          			)
-                          		</c:if>
-                       	<!--관리자로 접근 했을 때만 블라인드 처리가능  -->
-               	
-                           <c:choose>
-                                 <c:when test="${list.reviewBlind}">
-                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                                      		<i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[해제]
-                                      	</a>
-                                 </c:when>
-                                 <c:otherwise>
-                                    
-                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                                       <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]
-                                       </a>
-                                    
-                                 </c:otherwise>
-                              </c:choose>
-                           		</td>
-                          	</tr>
                         </tr>
-
-
-                     </c:forEach>
-                  </tbody>
-            </c:otherwise>
-         </c:choose>
-         	   <h5>
-                  	사용자 총 평점
-                     <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
-                     pattern="#,##0.00"></fmt:formatNumber>
-               </h5>
-      </table>
-
-      </div>
-
 						</c:forEach>
 					</tbody>
 				</table>
 			</c:otherwise>
 		</c:choose>
-
 	</div>
-
-
 
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
