@@ -50,4 +50,7 @@ public interface ReviewDao {
 	// 마이페이지 내 리뷰 목록
 	List<ReviewDto> customerSelectList(String loginId);
 	
+	//삭제
+	boolean delete(int reviewNo);
+	
 }

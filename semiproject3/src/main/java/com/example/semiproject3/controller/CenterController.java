@@ -57,7 +57,7 @@ public class CenterController {
 		vo.setCount(count);
 		
 		model.addAttribute("list", centerDao.selectList(vo));
-		
+		model.addAttribute("param",vo);
 		
 		//장바구니 개수
 		String loginId = (String) session.getAttribute(SessionConstant.ID);

@@ -258,5 +258,11 @@ public List<ReviewDto> customerSelectList(String loginId) {
 	Object[] param = {loginId};
 	return jdbcTemplate.query(sql, mapper1, loginId);
 }
-
+//삭제
+@Override
+	public boolean delete(int reviewNo) {
+		String sql="delete review where review_no=?";
+		Object[] param= {reviewNo};
+		return jdbcTemplate.update(sql,param)>0;
+	}
 }

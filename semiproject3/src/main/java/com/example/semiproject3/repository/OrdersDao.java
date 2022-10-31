@@ -2,7 +2,6 @@ package com.example.semiproject3.repository;
 
 import java.util.List;
 
-import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.vo.OrdersListSearchVO;
 
@@ -26,6 +25,9 @@ public interface OrdersDao {
 	//회원이 주문할 아이템
 	List<OrdersDto> selectList(String type, String keyword);
 	
+	//회원 중복 옵션 방지
+	OrdersDto selectOne2(OrdersDto ordersDto);
+
 	//회원이 선택한 총 주문수 
 	int selectOrders(int ordersNo);
 	

@@ -155,9 +155,10 @@ public class OrdersDaoImpl implements OrdersDao {
 	}
 
 	@Override
-	public OrdersDto selectOne2(int itemCnt) {
-		// TODO Auto-generated method stub
-		return null;
+	public OrdersDto selectOne2(OrdersDto ordersDto) {
+		String sql = "select * from orders where customer_id=? and item_size=? and item_color?";
+		Object[] param = {ordersDto.getCustomerId(), ordersDto.getItemSize(), ordersDto.getItemColor()};
+		return jdbcTemplate.query(sql, extractor, param);
 	}
 	
 	//주문 목록
@@ -245,6 +246,12 @@ public class OrdersDaoImpl implements OrdersDao {
 	public int listCount(OrdersListSearchVO vo) {
 		String sql = "select count(*) from orders";
 		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+
+	@Override
+	public OrdersDto selectOne2(int itemCnt) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -144,7 +144,6 @@
     .check-pw.NNNNY{
         display: none;
     }
-
     .input.NNNNN{
         border: 1px solid black;
     }
@@ -154,7 +153,6 @@
     .NNNNN-message{
         display:none;
     } 
-
     .input.NNNNN ~ .NNNNN-message,
     .input.NNNNY ~ .NNNNY-message,
     .input.fail ~ .fail-message,
@@ -167,7 +165,6 @@
     .admin-message{
         display: none;
     }
-
 	/* swiper */
     .swiper{
         width: 100%;
@@ -179,7 +176,6 @@
       font-size: 18px;
       background: #fff;
       margin-right: 100px;
-
       /* Center slide text vertically */
       display: -webkit-box;
       display: -ms-flexbox;
@@ -194,7 +190,6 @@
       -webkit-align-items: center;
       align-items: center;
     }
-
     .swiper-slide img {
       display: block;
       width: 100%;
@@ -238,16 +233,13 @@
         //1. 첫번째 이전버튼과 마지막 다음버튼을 삭제
         $(".prev").first().remove();
         $(".next").last().remove();
-
         //2. 1페이지만 남기고 다 숨김 처리
         $(".page").hide();
         $(".page").first().show();
-
         //3. 페이지당 늘어나야 할 % 계산
         var step = 100 / $(".page").length;
         var percent = step;
         $(".progressbar > .inner").css("width", percent+"%");
-
         //4. 남은 버튼에 클릭 이벤트를 설정
         //- 다음 버튼을 누르면 해당 페이지의 뒷 페이지 표시 및 나머지 숨김
         //- 이전 버튼을 누르면 해당 페이지의 앞 페이지 표시 및 나머지 숨김
@@ -255,11 +247,9 @@
             //this == 클릭한 다음 버튼
             //var target = $(this).parent().parent().parent().next();
             var target = $(this).parents(".page").next();
-
             //모든 페이지 숨기고 target만 표시
             $(".page").hide();
             target.show();
-
             //% 증가
             percent += step;
             $(".progressbar > .inner").css("width", percent+"%");
@@ -268,7 +258,6 @@
             var target = $(this).parents(".page").prev();
             $(".page").hide();
             target.show();
-
             //% 감소
             percent -= step;
             $(".progressbar > .inner").css("width", percent+"%");
@@ -288,7 +277,6 @@
                 $(this).parent().next().find(".next").attr("disabled", false);
             }
         });
-
         // 모든 항목 입려 시 제출 버튼 활성화
         $(".research-form").submit(function(){
             var successAnswer = $(".last-answer").val().length >= 10;
@@ -347,7 +335,6 @@
 	
 	/* 회원가입 */
     $(function(){
-
         var inputStatus = {
             memberIdValid:false,
             memberNickValid:false,
@@ -357,15 +344,12 @@
             memberNameValid:false,
             memberPhoneValid:false
         };
-
         $(".input[name=customerId]").blur(function(){
             var inputId = $(this).val();
             var regex = /^[a-z][a-z0-9_-]{4,19}$/;
             var judge = regex.test(inputId);
-
             $(this).removeClass("fail NNNNN NNNNY");
             if(judge){
-
                 var that = this;
                 $.ajax({
                     url: "http://localhost:8888/rest/customer/id",
@@ -390,12 +374,10 @@
                 inputStatus.memberIdValid = false;
             }
         });
-
         $(".input[name=customerPw").blur(function(){
             var inputPw = $(this).val();
             var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
             var judge = regex.test(inputPw);
-
             $(this).removeClass("fail NNNNY");
             if(judge){
                 $(this).addClass("NNNNY");
@@ -407,7 +389,6 @@
             }
             $("#customer-pwcheck").blur();
         });
-
         $("#customer-pwcheck").blur(function(){
             var pwCheck = $(this).val();
             if(!pwCheck){
@@ -429,12 +410,10 @@
                 inputStatus.memberPwcheckValid = false;
             }
         });
-
         $(".input[name=customerNick]").blur(function(){
             var inputNick = $(this).val();
             var regex = /^[가-힣][가-힣0-9]{0,9}$/;
             var judge = regex.test(inputNick);
-
             $(this).removeClass("fail NNNNN NNNNY admin");
             if(inputNick == '관리자'){
                 $(this).addClass("admin");
@@ -466,7 +445,6 @@
                 inputStatus.memberNickValid = false;
             }
         });
-
         $(".input[name=customerPwsearch").blur(function(){
             var pwsearch = $(this).val();
             $(this).removeClass("fail");
@@ -500,7 +478,6 @@
                 inputStatus.memberNameValid = true;
             }
         });
-
         $(".input[name=customerPhone").blur(function(){
             var phone = $(this).val();
             var regex = /^01[016789][1-9]\d{6,7}$/;
@@ -521,7 +498,6 @@
                 inputStatus.memberPhoneValid = true;
             }
         });
-
         var inputStatus = {
                 memberIdValid:false,
                 memberNickValid:false,
@@ -587,7 +563,6 @@
             }
             var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
             var judge = regex.test(inputPw);
-
             $(this).removeClass("fail NNNNY");
             if(judge){
                 $(this).addClass("NNNNY");
@@ -597,7 +572,6 @@
             }
             $("#customer-pwcheck").blur();
         });
-
         $("#customer-pwcheck").blur(function(){
             var pwCheck = $(this).val();
             if(!pwCheck){
@@ -605,7 +579,6 @@
                 return;
             };
             if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
-
             var pw = $(".input[name=customerPw").val();
             var judge = pw == pwCheck;
             
@@ -636,25 +609,20 @@
             // 화면 넘기기 옵션
             direction: 'horizontal',
             loop: true,
-
             // 페이징 옵션
             pagination: {
                 el: '.swiper-pagination',// 페이징 적용 대상
                 type: 'bullets',// 페이징 도구 모양
                 clickable: true
             },
-
             // 자동재생 옵션
             autoplay: {
                 delay: 5000
             }, 
-
             //페이지 전환 효과
             effect: "fade",//페이드 인-아웃 효과
-
         });
     });
-
     /* 새상품이미지 스와이퍼 */
     $(function(){
         var swiper = new Swiper('.swiper.mySwiper', {
@@ -667,7 +635,6 @@
 				el: ".mySwiper .swiper-pagination",
 				clickable: true
 			},
-
             // 좌우 버튼 옵션
             navigation: {
                 nextEl: '.swiper-button-next',
@@ -678,10 +645,8 @@
             autoplay: {
                 delay: 5000
             }, 
-
             //페이지 전환 효과
             effect: "slide",//기본 방식
-
         });
     });
     
@@ -717,7 +682,6 @@
  	 				return;
  	        	} 
  	        }
-	        
 	        
 	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
 	            
@@ -770,7 +734,6 @@
             }
 		});
 	});
-
     //로그아웃 시 즉시 로그아웃 방지
 	$(function(){
 		$("a.logout").click(function(e){
@@ -938,4 +901,4 @@
 </ul>
 </div>
 </nav>
-<main>
+<main class="float-container">
