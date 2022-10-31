@@ -66,7 +66,7 @@
 			</li>
 			 
 			<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-				<li><a href="buylist?p=${i}&${vo.parameter()}">${i}</a></li>
+				<li <c:if test="${i==param.p}">class="on"</c:if>><a href="buylist?p=${i}&${vo.parameter()}">${i}</a></li>
 			</c:forEach>
 			
 			<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->

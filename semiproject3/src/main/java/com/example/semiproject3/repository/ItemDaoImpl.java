@@ -600,4 +600,6 @@ public class ItemDaoImpl implements ItemDao {
 		return jdbcTemplate.query(sql, itemMapper, itemNo);
 	}
 
+	
+	
 }
