@@ -132,13 +132,7 @@ public class BuyDaoImpl implements BuyDao {
 //		Object[] param = {buyNo};
 //		return jdbcTemplate.query(sql, extractor, param);
 //	}
-
-	@Override
-	public List<BuyDto> selectListAll(BuyListSearchVO vo) {
-		String sql = "select * from buy order by buy_date desc";
-		
-		return jdbcTemplate.query(sql, mapper);
-	}
+	
 
 	@Override
 	public BuyDto selectOne(int buyNo) {
@@ -153,28 +147,38 @@ public class BuyDaoImpl implements BuyDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 
-	//페이징
 	@Override
-	public List<BuyDto> list(BuyListSearchVO vo) {
+	public List<BuyDto> selectList(String loginId, BuyListSearchVO vo) {
 		if(vo.isSearch()) {
-			return search(vo);
+			return search(loginId, vo);
 		}
 		else {
-			return list(vo);
+			return list(loginId, vo);
 		}
 	}
 
 	@Override
-	public List<BuyDto> search(BuyListSearchVO vo) {
+	public List<BuyDto> list(String loginId, BuyListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from buy where customer_id=? order by buy_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {loginId, vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public List<BuyDto> search(String loginId, BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy where instr(#1,?) > 0 "
+					+ "select * from buy where instr(#1,?) > 0 and customer_id=?"
 					+ "order by buy_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
-				vo.getKeyword(), vo.startRow(), vo.endRow()
+				vo.getKeyword(), loginId, vo.startRow(), vo.endRow()
 		};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
@@ -194,12 +198,15 @@ public class BuyDaoImpl implements BuyDao {
 		String sql = "select count(*) from buy where instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
-		return jdbcTemplate.queryForObject(sql, int.class, param);	}
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 
 	@Override
 	public int listCount(BuyListSearchVO vo) {
 		String sql = "select count(*) from buy";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
-	
+
+
+
 }

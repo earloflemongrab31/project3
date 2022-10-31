@@ -63,6 +63,7 @@ public class NoticeController {
 		vo.setCount(count);
 		
 		model.addAttribute("list", noticeDao.selectList(vo));
+		model.addAttribute("param",vo);
 		
 		//장바구니 개수
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
