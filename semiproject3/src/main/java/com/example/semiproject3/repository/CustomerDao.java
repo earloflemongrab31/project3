@@ -58,5 +58,6 @@ public interface CustomerDao {
 	int searchCount(CustomerListSearchVO vo);
 	int listCount(CustomerListSearchVO vo);
 	
+	//회원 캐시 차감
 	boolean cash(BuyDto buyDto);
 }

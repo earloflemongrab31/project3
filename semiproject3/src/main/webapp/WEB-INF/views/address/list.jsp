@@ -122,7 +122,6 @@ function upGo(){
       </c:choose>
       </div>
   
-</div>
    <div class="row right">
          <input type="button" onclick="add()";  class="btn btn-positive"  value="기본배송지설정" />
          </div>
@@ -233,6 +232,7 @@ function upGo(){
       </c:otherwise>
    </c:choose>
 </li>
-</ul>   
+</ul> 
+</div> 
 </section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

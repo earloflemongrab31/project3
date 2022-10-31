@@ -47,8 +47,12 @@ public class BuyController {
 			@RequestParam int[] itemNo,
 			@RequestParam int[] ordersNo,
 			HttpSession session) {
+		
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
 		//주문 완료 시 구매 테이블 삽입
 		for(int i=0; i<itemSize.length; i++) {
+			buyDto.setCustomerId(loginId);
 			buyDto.setItemSize(itemSize[i]);
 			buyDto.setItemColor(itemColor[i]);
 			buyDto.setItemName(itemName[i]);
@@ -67,6 +71,9 @@ public class BuyController {
 		
 		//회원 돈 차감
 		customerDao.cash(buyDto);
+		
+		//상품 수량 차감
+		buyDao.minus(buyDto);
 		
 		return "redirect:success";
 	}
@@ -111,7 +118,7 @@ public class BuyController {
 	vo.setCount(count);
 	
 	String loginId =(String)session.getAttribute(SessionConstant.ID);
-	model.addAttribute("buyList",buyDao.selectList(loginId, vo));
+	model.addAttribute("buyList",buyDao.selectList(loginId));
 	model.addAttribute("param",vo);
 	
 	model.addAttribute("cartCount",cartDao.cartCount(loginId));
@@ -129,14 +136,13 @@ public class BuyController {
 //	}
 
 	@GetMapping("/admin-buylist")
-	public String adminBuylist(Model model,HttpSession session,
+	public String adminBuylist(Model model,
 			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 
 		int count = buyDao.count(vo);
 		vo.setCount(count);
 		
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("buyList",buyDao.selectList(loginId, vo));
+		model.addAttribute("buyList",buyDao.selectAdminList(vo));
 		
 		return "/admin/buyList";
 	}

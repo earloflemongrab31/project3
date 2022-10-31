@@ -109,5 +109,15 @@ public class HomeController {
 //				return ResponseEntity.notFound().build();
 		}
 	}
-		
+	
+	@GetMapping("/block-survey")
+	public String blockSurvey(HttpSession session) {
+		session.setAttribute("blockSurvey", "Y");
+		return "redirect:/";
+	}
+	@GetMapping("/block-ad")
+	public String blockAd(HttpSession session) {
+		session.setAttribute("blockAd", "Y");
+		return "redirect:/";
+	}
 }

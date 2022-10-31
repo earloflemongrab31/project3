@@ -7,7 +7,7 @@
 </jsp:include>
 
 <form class="login-form" action="login" method="post" autocomplete="off">
-<div class="container-300 mt-50">
+<div class="container-300 mt-50 mb-50">
 	<!-- 정상/이상 모두 나오는 화면 -->
 	<div class="row center mb-30">
 		<h1>LOGIN</h1>
