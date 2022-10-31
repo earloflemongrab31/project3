@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.ResearchDto;
+import com.example.semiproject3.vo.BuyListCountVO;
+import com.example.semiproject3.vo.ResearchCountVO;
 
 @Repository
 public class ResearchDaoImpl implements ResearchDao{
@@ -85,5 +87,20 @@ public class ResearchDaoImpl implements ResearchDao{
 		public List<ResearchDto> selectList() {
 			String sql = "select * from research order by research_number desc";
 			return jdbcTemplate.query(sql, mapper);
+		}
+		
+		private RowMapper<ResearchCountVO> countMapper = new RowMapper<ResearchCountVO>() {
+			@Override
+			public ResearchCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ResearchCountVO vo = new ResearchCountVO();
+				vo.setResearchSex(rs.getString("research_sex"));
+				vo.setCnt(rs.getInt("cnt"));
+				return vo;
+			}
+		};
+		@Override
+		public List<ResearchCountVO> selectCountList() {
+			String sql = "select research_sex, count(*) cnt from research group by research_sex order by cnt desc";
+			return jdbcTemplate.query(sql, countMapper);
 		}
 }

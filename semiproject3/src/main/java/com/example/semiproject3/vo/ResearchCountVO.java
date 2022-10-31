@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data@NoArgsConstructor@AllArgsConstructor@Builder
-public class BuyListCountVO {
-private String itemName;
-private int cnt;
+public class ResearchCountVO {
+	private String researchSex;
+	private int cnt;
+	
 }
