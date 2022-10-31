@@ -226,8 +226,8 @@ public class ReviewController {
 		@ModelAttribute(name="vo") ReviewListSearchVO vo) {
 
 	String loginId = (String)session.getAttribute(SessionConstant.ID);
-	  
-      model.addAttribute("list",reviewDao.selectList(vo));
+	  model.addAttribute("cartCount",cartDao.cartCount(loginId));
+	  model.addAttribute("list",reviewDao.customerSelectList(loginId, vo));
       model.addAttribute("param",vo);
       return "review/list"; 
   }

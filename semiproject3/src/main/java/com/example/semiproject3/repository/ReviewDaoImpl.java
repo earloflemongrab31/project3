@@ -192,11 +192,12 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 @Override
-public List<ReviewDto> customerSelectList(String customerId) {
+public List<ReviewDto> customerSelectList(String customerId, ReviewListSearchVO vo) {
 	String sql = "select * from review where customer_id=? order by review_no asc";
 	Object[] param = {customerId};	
 	return jdbcTemplate.query(sql, mapper1, param);
 }
+
 //삭제
 @Override
 	public boolean delete(int reviewNo) {

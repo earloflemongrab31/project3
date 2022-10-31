@@ -39,6 +39,7 @@ public interface ReviewDao {
 	int count(ReviewListSearchVO vo);
 	int searchCount(ReviewListSearchVO vo);
 	int listCount(ReviewListSearchVO vo);
+	
 	//블라인드 처리 
 	boolean updateBlind(int reviewNo, boolean b);
 	
@@ -48,7 +49,7 @@ public interface ReviewDao {
 	void minus(int reviewNo);
 
 	// 마이페이지 내 리뷰 목록
-	List<ReviewDto> customerSelectList(String customerId);
+	List<ReviewDto> customerSelectList(String customerId, ReviewListSearchVO vo);
 	
 	//삭제
 	boolean delete(int reviewNo);

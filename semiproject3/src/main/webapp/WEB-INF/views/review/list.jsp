@@ -64,11 +64,9 @@ td, th {
 			</c:otherwise>
 		</c:choose>
 	</div>
+<!-- 페이지 네비게이터 -->
+<div class="row center">
 
-</div>
-
-
-<!-- 페이징 처리 -->
 <ul class="pagination">
 <li>
 	<c:choose>
@@ -127,7 +125,13 @@ td, th {
 		</c:otherwise>
 	</c:choose>
 </li>
-</ul>	
+</ul>
+
+</div>
+
+
+
+
 
 </section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
