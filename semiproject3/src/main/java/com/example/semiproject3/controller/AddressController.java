@@ -88,7 +88,6 @@ public class AddressController {
    int count = addressDao.count(vo);
    vo.setCount(count);
 		   
-		   
    String loginId = (String) session.getAttribute(SessionConstant.ID);
    List<AddressDto>listBasic = addressDao.selectOneBasic(loginId);
    model.addAttribute("listBasic",addressDao.selectOneBasic(loginId));
