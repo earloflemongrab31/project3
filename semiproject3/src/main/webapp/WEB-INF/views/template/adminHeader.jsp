@@ -68,15 +68,17 @@
     	background-color: #ede8e4;
     	color: #25201d;
     }
-    .footer{
-    	padding: 0 3em;
-    }
     .right-word{
     	 margin-right:10px;
     }
     
-        .footer{
+    .footer{
     	padding: 0 3em;
+    	background: #303134;
+    	color: #E6E8EB;
+    }
+    .footer a{
+    	color: #E6E8EB;
     }
 </style>
 <script type="text/javascript">
@@ -169,10 +171,10 @@
 <header>
 
 <div class="float-container">
-	<div class="float-left">
-		<h2 class="logo">
-			<a href="/admin/">Logo</a>
-		</h2>
+	<div class="logo float-left">
+		<a class="w-100" href="/admin/">
+			<img class="w-100" src="/image/logo.png">
+		</a>
 	</div>
 	<div class="right-word row float-right">
 		<a href="/">회원페이지</a>
@@ -226,12 +228,9 @@
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
 	<li class="float-right"><a class="logout" href="/customer/logout">LOGOUT</a></li>
-	<li class="float-right">
-		<a href="#">${loginId}님</a>
-	</li>
 </ul>
 </div>
 </nav>
 </div>
 
-<main>
+<main class="float-container">
