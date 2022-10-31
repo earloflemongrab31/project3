@@ -72,16 +72,16 @@ public class CartController {
 			}
 			else {
 				cartDao.plus(CartDto.builder()
-							.cartNo(cartDto.getCartNo())
+//							.cartNo(cartDto.getCartNo())
 							.customerId(loginId)
 							.itemNo(cartDto.getItemNo())
-							.itemTotalCnt(cartDto.getItemTotalCnt())
-							.itemName(cartDto.getItemName())
+//							.itemTotalCnt(cartDto.getItemTotalCnt())
+//							.itemName(cartDto.getItemName())
 							.itemColor(itemColor[i])
 							.itemSize(itemSize[i])
 							.itemCnt(itemCnt[i])
-							.itemPrice(cartDto.getItemPrice())
-							.cartPrice(cartDto.getCartPrice())
+//							.itemPrice(cartDto.getItemPrice())
+//							.cartPrice(cartDto.getCartPrice())
 						.build());
 			}
 		}

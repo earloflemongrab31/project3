@@ -275,7 +275,7 @@ return jdbcTemplate.query(sql, mapper, param);
 
 	@Override
 	public int listCount(AddressUniteVO vo, String loginId) {
-		String sql = "select count(*) from address and customer_id = ?";
+		String sql = "select count(*) from address where customer_id = ? ";
 		return jdbcTemplate.queryForObject(sql, int.class, loginId);
 	}
 }

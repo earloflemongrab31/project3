@@ -45,7 +45,4 @@ public interface AddressDao {
 	int searchCount(AddressUniteVO vo, String loginId);
 	int listCount(AddressUniteVO vo, String loginId);
 	
-	
-
-
 }

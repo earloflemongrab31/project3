@@ -124,7 +124,8 @@ public class BuyDaoImpl implements BuyDao {
 	public List<BuyDto> buySearch(BuyListSearchVO vo, String loginId) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy where instr(#1,?) > 0 and where customer_id = ?"
+					+ "select * from buy where instr(#1,?) > 0 and where customer_id = ? "
+					+ "order by buy_date desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
@@ -138,7 +139,7 @@ public class BuyDaoImpl implements BuyDao {
 	public List<BuyDto> buyList(BuyListSearchVO vo, String loginId) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy where customer_id = ?"
+					+ "select * from buy where customer_id = ? order by buy_date desc"
 				+ ")TMP"
 			+") where rn between ? and ?";
 		Object[] param = {loginId, vo.startRow(), vo.endRow()};

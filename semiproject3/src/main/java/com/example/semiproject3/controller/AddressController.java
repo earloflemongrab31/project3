@@ -90,7 +90,6 @@ public class AddressController {
    int count = addressDao.count(vo, loginId);
    vo.setCount(count);
 		   
-		   
    List<AddressDto>listBasic = addressDao.selectOneBasic(loginId);
    model.addAttribute("listBasic",addressDao.selectOneBasic(loginId));
    model.addAttribute("list",addressDao.selectList(loginId, vo));
