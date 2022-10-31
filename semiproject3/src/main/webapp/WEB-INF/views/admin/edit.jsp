@@ -26,6 +26,7 @@
 		등급변경
 		<select class="input w-100" name="adminGrade">
 			<option value="">선택</option>
+			<option disabled>------</option>
 			<option value="일반관리자">일반관리자</option>
 		     <option value="메인관리자">메인관리자</option>
 		</select>

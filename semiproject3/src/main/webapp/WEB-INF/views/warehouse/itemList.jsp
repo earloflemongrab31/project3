@@ -26,7 +26,7 @@
 </div>
 
 <div class ="row center">
-	<table class="table table-border table-hover"  >
+	<table class="table table-border table-hover" >
 	<thead>
 		<tr>
 			<th>상품번호</th>
@@ -36,6 +36,7 @@
 			<th>상품컬러</th>
 	 		<th>상품수량</th>
 	 		<th>상품찜수</th>
+	 		<th>입/출고</th>
 		</tr>	
 	</thead>
 	<tbody>
@@ -59,7 +60,7 @@
 </div>
 
 <div class="row right">
- 	<a class="btn btn-positive" href="invenList">전체 상품 현황</a>
+ 	<a class="btn btn-positive" href="invenList">상품 입출고 기록</a>
 </div>
    
 <!-- 페이지 네비게이터 -->
