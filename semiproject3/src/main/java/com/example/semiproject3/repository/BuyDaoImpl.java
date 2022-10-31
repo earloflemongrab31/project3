@@ -1,5 +1,7 @@
 package com.example.semiproject3.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.BuyDto;
+import com.example.semiproject3.vo.BuyListCountVO;
 import com.example.semiproject3.vo.BuyListSearchVO;
 
 @Repository
@@ -271,7 +274,20 @@ public class BuyDaoImpl implements BuyDao {
 		String sql = "select count(*) from buy";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+	
+			private RowMapper<BuyListCountVO> countMapper = new RowMapper<BuyListCountVO>() {
+				@Override
+				public BuyListCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+					BuyListCountVO vo = new BuyListCountVO();
+					vo.setItemName(rs.getString("item_name"));
+					vo.setCnt(rs.getInt("cnt"));
+					return vo;
+				}
+			};
 
-
-
+	@Override
+	public List<BuyListCountVO> selectCountList() {
+		String sql = "select item_name, count(*) cnt from buy group by item_name order by cnt desc";
+		return jdbcTemplate.query(sql, countMapper);
+}
 }

@@ -110,7 +110,7 @@ public class CustomerDaoImpl implements CustomerDao{
 	//회원 목록
 	@Override
 	public List<CustomerDto> selectList() {
-		String sql = "select * from customer order by customer_id asc";
+		String sql = "select * from customer order by customer_join asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
