@@ -260,7 +260,7 @@ font-size: 14px;
 }
 
 .table-border tr > th{
-	background-color: #f6f3f1;
+	background-color: #f4f4f5;
 }
 
 .table.table-border > thead > tr > th, 
@@ -438,6 +438,7 @@ ul.pagination > li > a{
     padding: 0;
     list-style: none;
     font-family: "Noto Serif KR";
+    z-index: 2;
 }
 
 .dropdown-menu{
