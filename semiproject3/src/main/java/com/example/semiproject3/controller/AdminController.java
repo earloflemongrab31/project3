@@ -48,7 +48,12 @@ public class AdminController {
 	private MainImageDao mainImageDao;
 	
 	@GetMapping("/")
-	public String home() {
+	public String home(
+			Model model, 
+			HttpSession session) {
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("adminDto", adminDao.selectOne(loginId));
+		
 		return "admin/home";
 	}
 	
