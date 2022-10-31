@@ -11,7 +11,7 @@
         if (responseMessage != ""){
             alert(responseMessage)
         }
-<<<<<<< HEAD
+
         
 
         
@@ -41,7 +41,7 @@
         });
         
     });
-=======
+
     });
     
    	$(function(){
