@@ -26,6 +26,7 @@ import com.example.semiproject3.entity.MainImageDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AdminDao;
 import com.example.semiproject3.repository.CenterDao;
+import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.MainEditDao;
 import com.example.semiproject3.repository.MainImageDao;
@@ -54,12 +55,16 @@ public class AdminController {
 	
 	@Autowired
 	private  CenterDao centerDao;
+	
+	@Autowired
+	private  CustomerDao customerDao;
 
 	
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("noticeList", noticeDao.selectListForMain());
 		model.addAttribute("centerList", centerDao.selectListForMain());
+		model.addAttribute("customerList", customerDao.selectList());
 		return "admin/home";
 	}
 	

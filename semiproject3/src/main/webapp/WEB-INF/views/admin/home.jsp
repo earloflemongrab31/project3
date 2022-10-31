@@ -74,14 +74,46 @@
 	</div>
 
 	<div class="row float-container">
-		<div class="float-left w-45 ms-40 p-20">
+		<div class="float-left w-100">
 			<div class="row center">
 				<h3>상품 별 판매 현황</h3>
 				<canvas id="myChart"></canvas>
 			</div>
 		</div>
+		</div>
 		
-		<div class="float-left w-30 ms-40">
+		<div class="row float-container">
+		<div class="float-left w-40 ms-10">
+			<div class="row center">
+			<h3>가입목록</h3>
+				<hr>
+				<small><a class="btn"  href="http://localhost:8888/customer/list">[더보기]</a></small>
+			</div>
+			<div class="row">
+				<table class="table table-border">
+					<thead>
+						<tr>
+							<th>아이디</th>
+							<th>이름</th>
+							<th>가입일</th>
+							<th>접속일</th>
+						</tr>
+					</thead>
+					<tbody align="center">
+						<c:forEach var="customerDto" items="${customerList}">
+						<tr>
+								<td>${customerDto.customerId}</td>
+								<td>${customerDto.customerName}</td>
+								<td>${customerDto.customerJoin}</td>
+								<td>${customerDto.customerLogin}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="float-left w-30 ms-10">
 			<div class="row center">
 			<h3>NOTICE</h3>
 				<hr>
@@ -120,7 +152,7 @@
 			</div>
 		</div>
 		
-		<div class="float-left w-30 ms-40">
+		<div class="float-left w-40 ms-10">
 			<div class="row center">
 			<h3>Q&A</h3>
 				<hr>
@@ -138,15 +170,13 @@
 					</thead>
 					<tbody align="center">
 						<c:forEach var="centerDto" items="${centerList}">
-						<tr>
-							
+							<tr>
 								<td>${centerDto.centerNo}</td>
-					
-				<td>
-					<a href="detail?centerNo=${centerDto.centerNo}">
-						${centerDto.centerTitle}
-						<c:if test="${centerDto.adminContent != null}">
-							[답변완료]
+								<td>
+									<a href="http://localhost:8888/center/detail?centerNo=${centerDto.centerNo}">
+									${centerDto.centerTitle}
+									<c:if test="${centerDto.adminContent != null}">
+										[답변완료]
 						</c:if>
 					</a>
 					
