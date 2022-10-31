@@ -54,9 +54,10 @@ $(function(){
 
 <input name="addressNo" type="hidden" value="${addressDto.addressNo}">
 	
-	<div class="container-600 mt-50 mb-50">
+<section>
+	<div class="container-600">
  
-	<div class="row center mb-30">
+	<div class="row center">
 		<h1>ADDRESS</h1>
 		<hr>
 	</div>
@@ -104,7 +105,7 @@ $(function(){
 
 </div>
     </form>
- 
+</section>
 
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
     

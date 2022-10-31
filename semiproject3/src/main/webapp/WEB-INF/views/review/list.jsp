@@ -13,8 +13,10 @@ td, th {
   vertical-align : middle;
 }
 </style>
-<div class="container-900 mt-50 mb-50">
-	<div class="row center mb-30">
+
+<section>
+<div class="container-900">
+	<div class="row center">
 		<h1>REVIEW</h1>
 		<hr>
 	</div>
@@ -26,7 +28,7 @@ td, th {
 				<h4 style="padding-left: 20px">작성한 리뷰가 없습니다.</h4>
 			</c:when>
 			<c:otherwise>
-				<table class="table table-hover table-slit ">
+				<table class="table table-hover table-border ">
 					<thead>
 						<tr>
 							<th width="5%">번호</th>
@@ -64,6 +66,6 @@ td, th {
 	</div>
 
 </div>
-
+</section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
 

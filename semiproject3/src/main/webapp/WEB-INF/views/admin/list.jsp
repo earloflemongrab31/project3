@@ -22,10 +22,10 @@
 		<table class="table table-border">
 			<thead>
 				<tr>
-					<th>아이디</th>
-					<th>이름</th>
-					<th>닉네임</th>
-					<th>등급</th>
+					<th width="20%">아이디</th>
+					<th width="20%">이름</th>
+					<th width="20%">닉네임</th>
+					<th width="20%">등급</th>
 					<c:set var="main" value="${loginGrade == '메인관리자'}"></c:set>
 						<c:if test="${main}">
 					<th>비고</th>

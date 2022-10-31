@@ -188,6 +188,7 @@
 			<li><a href="/item/list">상품목록</a></li>
 			<li><a href="/item/insert">상품등록</a></li>
 			<li><a href="/warehouse/invenList">재고관리</a></li>
+			<li><a href="/company/list">협력사관리</a></li>
 		</ul>
 	</li>
 	<li class="float-left">
