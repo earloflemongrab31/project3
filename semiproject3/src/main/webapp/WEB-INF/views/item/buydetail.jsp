@@ -12,9 +12,7 @@
             alert(responseMessage)
         }
     });
-
         
-
       	$(function(){
       		$(".review-like-btn").click(function(e){
       			e.preventDefault();
@@ -325,18 +323,11 @@ function fail(){
                               </td>
                            </c:if>
                         </tr>
-
-                     </c:forEach>
-                  </tbody>
-            </c:otherwise>
-         </c:choose>
-      </table>
-      </div>
-
-			
+						</c:forEach>
 					</tbody>
 				</table>
-		
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 </div>
