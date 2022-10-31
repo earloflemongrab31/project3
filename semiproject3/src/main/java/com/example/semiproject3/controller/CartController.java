@@ -92,19 +92,19 @@ public class CartController {
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	};
 	
-//	//카트 리스트
-//	@GetMapping("/cartList")
-//	public String cartList(Model model, HttpSession session) {
-//		//아이디가지고오기 
-//		String loginId = (String) session.getAttribute(SessionConstant.ID);
-//		
-//		//장바구니 리스트
-//		model.addAttribute("cartList",cartDao.selectList(loginId));
-//		
-//		//장바구니 개수
-//		model.addAttribute("cartCount",cartDao.cartCount(loginId));
-//		return "cart/cartList";
-//	}
+	//카트 리스트
+	@GetMapping("/cartList")
+	public String cartList(Model model, HttpSession session) {
+		//아이디가지고오기 
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
+		//장바구니 리스트
+		model.addAttribute("cartList",cartDao.selectList(loginId));
+		
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+		return "cart/cartList";
+	}
 	
 
 	
