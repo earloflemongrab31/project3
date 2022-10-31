@@ -116,10 +116,5 @@ public class OrdersController {
 //	
 //		return "orders/address";
 
-@GetMapping("/orders/{customerId}")
-public void orders(@PathVariable("customerId") String customerId, Model model) {
-	
-	System.out.println("customerId" + customerId);
-}
 	
 }
