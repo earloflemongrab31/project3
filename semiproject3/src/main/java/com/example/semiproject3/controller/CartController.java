@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +36,57 @@ public class CartController {
 	//카트담기
 	@PostMapping("/insert")
 	public String insert(@RequestParam int itemNo,
-			@ModelAttribute CartDto cartDto) {
-		boolean search = cartDao.selectOne(cartDto) == null;
+			@ModelAttribute CartDto cartDto,
+			@RequestParam String[] itemColor,
+			@RequestParam String[] itemSize,
+			@RequestParam int[] itemCnt,
+			HttpSession session) {
 		
-		if(search) {
-			cartDao.insert(cartDto);
-		}
-		else {
-			cartDao.plus(cartDto);
+		//아이디가지고오기 
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
+		
+		for(int i = 0; i < itemColor.length; i++) {
+
+			boolean search = cartDao.selectOne(CartDto.builder()
+											.itemNo(cartDto.getItemNo())
+											.itemSize(itemSize[i])
+											.itemColor(itemColor[i])
+											.customerId(loginId)
+					.build()) == null;
+			
+			//등록 아이템에 미리 번호 생성
+//			int cartNo = cartDao.sequence();
+//			cartDto.setCartNo(cartNo);
+			
+			if(search) {
+				cartDao.insert(CartDto.builder()
+							.cartNo(cartDto.getCartNo())
+							.customerId(loginId)
+							.itemNo(cartDto.getItemNo())
+							.itemTotalCnt(cartDto.getItemTotalCnt())
+							.itemName(cartDto.getItemName())
+							.itemColor(itemColor[i])
+							.itemSize(itemSize[i])
+							.itemCnt(itemCnt[i])
+							.itemPrice(cartDto.getItemPrice())
+							.cartPrice(cartDto.getCartPrice())
+						.build());
+			}
+			else {
+				cartDao.plus(CartDto.builder()
+							.cartNo(cartDto.getCartNo())
+							.customerId(loginId)
+							.itemNo(cartDto.getItemNo())
+							.itemTotalCnt(cartDto.getItemTotalCnt())
+							.itemName(cartDto.getItemName())
+							.itemColor(itemColor[i])
+							.itemSize(itemSize[i])
+							.itemCnt(itemCnt[i])
+							.itemPrice(cartDto.getItemPrice())
+							.cartPrice(cartDto.getCartPrice())
+						.build());
+			}
 		}
 		
 		return "redirect:/item/buydetail?itemNo="+itemNo;
@@ -60,6 +105,8 @@ public class CartController {
 		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "cart/cartList";
 	}
+	
+	
 	
 
 //	@ResponseBody
