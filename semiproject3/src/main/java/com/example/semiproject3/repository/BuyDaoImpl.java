@@ -134,7 +134,7 @@ public class BuyDaoImpl implements BuyDao {
 //	}
 
 	@Override
-	public List<BuyDto> selectListAll() {
+	public List<BuyDto> selectListAll(BuyListSearchVO vo) {
 		String sql = "select * from buy order by buy_date desc";
 		
 		return jdbcTemplate.query(sql, mapper);
@@ -152,11 +152,10 @@ public class BuyDaoImpl implements BuyDao {
 		Object[] param = {deliveryStatus, buyNo};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
-	
-	//여기서부터 페이징 구현
-	
+
+	//페이징
 	@Override
-	public List<BuyDto> selectList(BuyListSearchVO vo) {
+	public List<BuyDto> list(BuyListSearchVO vo) {
 		if(vo.isSearch()) {
 			return search(vo);
 		}
@@ -166,21 +165,10 @@ public class BuyDaoImpl implements BuyDao {
 	}
 
 	@Override
-	public List<BuyDto> list(BuyListSearchVO vo) {
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from("
-					+ "select * from buy where customer_id=? order by buy_no desc"
-				+ ")TMP"
-			+ ") where rn between ? and ?";
-		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, mapper, param);
-	}
-
-	@Override
 	public List<BuyDto> search(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy where instr(#1,?) > 0 and customer_id=?"
+					+ "select * from buy where instr(#1,?) > 0 "
 					+ "order by buy_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
@@ -203,16 +191,15 @@ public class BuyDaoImpl implements BuyDao {
 
 	@Override
 	public int searchCount(BuyListSearchVO vo) {
-		String sql = "select count(*) from buy where   instr(#1, ?) > 0";
+		String sql = "select count(*) from buy where instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
-		return jdbcTemplate.queryForObject(sql, int.class);
-	}
+		return jdbcTemplate.queryForObject(sql, int.class, param);	}
 
 	@Override
 	public int listCount(BuyListSearchVO vo) {
 		String sql = "select count(*) from buy";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
-
+	
 }

@@ -11,7 +11,18 @@
         if (responseMessage != ""){
             alert(responseMessage)
         }
-    })
+    });
+    
+   	$(function(){
+		$(".cart-in").click(function(){
+			$(".item-form").attr("action", "/cart/insert");
+			$(".item-form").attr("method", "post");
+		});
+		$(".buy").click(function(){
+			$(".item-form").attr("action", "/orders/detail");
+			$(".item-form").attr("method", "get");
+		});
+	});
 </script>
 <style>
 	#box{
@@ -28,70 +39,11 @@ function fail(){
         return false;
     }
 }
-<<<<<<< HEAD
-
-function goCart(itemNo){
-
-	//정규식 , itemCnt  , id="itemColor"
-	if($("#itemColor option:selected").val()=="")
-	{
-		alert("옵션을 선택해주세요.");
-		$("#itemColor").focus();
-	}
-	
-	if($("#itemCnt option:selected").val()=="")
-	{
-		alert("수량을 입력해주세요.");
-		$("#itemColor").focus();
-	}	
-	
-	if(confirm("장바구니에 추가하시겠습니까?")){
-		//ajax로 장바구니 추가
-		
-		$.ajax({  
-			type: "GET",
-			url: "/cart/cartInsert?",
-			data: "itemNo="+itemNo+"&cartItemQnty="+$("#itemCnt").val()+"&cartItemColor="+$("#itemColor option:selected").val(),
-			dataType: 'text', 
-			success: function( result ) {
-					console.log(result);
-					if(result =="00"){
-						$("#cart-count").text(parseInt($("#cart-count").text())+1);
-						alert("추가되었습니다.");
-					}
-					else 
-						alert("동일한 상품이 장바구니에 존재합니다.");
-					
-			},
-			error:function(result){
-				console.log("error:"+result);
-			}	
-		});
-		
-		
-	}	
-	
-}
-=======
->>>>>>> branch 'HwangMoonKyu' of https://github.com/earloflemongrab31/project3.git
 </script>
-<<<<<<< HEAD
-
-
-<style>
-	#box{
-		padding: 5px;
-		border-top: 1px solid #D5D5D5;
-	}
-</style>
-
-
-=======
->>>>>>> refs/remotes/origin/main
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
 <!-- <form action="/orders/detail" method="get"> -->
-<form action="/cart/insert" method="post">
+<form class="item-form" action="/cart/insert" method="post">
 <div class="float-left w-50">
 	<table class="table">
 		<tr>
@@ -164,49 +116,6 @@ function goCart(itemNo){
 				</select>
                	<input class="input w-100" type="hidden" name="itemTotalCnt" value="">
             </td>
-<<<<<<< HEAD
-         </tr>
-<<<<<<< HEAD
-         <tr>
-            <th>Qnty</th>
-            <td>
-<!--                <button class="minus-btn" type="button">-</button> -->
-
-               <input class="input w-100" type="number" name="itemCnt" min="0" max="" >
-
-<!--                <button class="plus-btn" type="button">+</button> -->
-            </td>
-         </tr>
-         <tr>
-            <td class="right">
-               ${itemDto.itemLikeCnt}
-            
-               <c:if test="${isLike == null}">
-                  ♥
-               </c:if>
-               <c:if test="${isLike == true}">
-                  <a href="like?itemNo=${itemDto.itemNo}">♥</a>
-               </c:if>
-               <c:if test="${isLike == false}">
-                  <a href="like?itemNo=${itemDto.itemNo}">♡</a>
-               </c:if>
-            </td>
-            <td colspan="2" align="right">
-               <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
-               <button type="button" class="btn btn-positive">구매하기</button>
-               <button type="button" class="btn btn-positive" onclick="goCart(${itemDto.itemNo})">장바구니${isCart}</button>    
-               <a href="buylist">목록으로</a>
-            </td>
-         </tr>
-         <tr>
-            <th colspan="3">${itemDto.itemMemo}</th>
-         </tr>
-         <tr>
-            <th colspan="3">${itemDto.itemContent}</th>
-         </tr>
-=======
->>>>>>> branch 'HwangMoonKyu' of https://github.com/earloflemongrab31/project3.git
-=======
 <!-- 			<td> -->
 <!-- 				<select class="input w-100" name="itemColor"> -->
 <!-- 					<option value="">선택</option> -->
@@ -233,7 +142,6 @@ function goCart(itemNo){
 <!--                <button class="plus-btn" type="button">+</button> -->
 <!--             </td> -->
 <!--          </tr> -->
->>>>>>> refs/remotes/origin/main
       </tbody>
    </table>
    
@@ -248,8 +156,8 @@ function goCart(itemNo){
 			<td class="right">
 				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
 				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
-				<button class="btn btn-positive" type="submit">구매하기</button>
-				<button class="btn btn-positive" type="submit">장바구니</button>    
+				<button class="btn btn-positive buy" type="submit">구매하기</button>
+				<button class="btn btn-positive cart-in" type="submit">장바구니</button>    
 				<a href="buylist">목록으로</a>
 			</td>
 		</tr>
@@ -282,110 +190,6 @@ function goCart(itemNo){
       <hr>
    </div>
 </div>
-<<<<<<< HEAD
-      
-<div class = "row center mb-30 review hide">
-   <div class = "row center mb-30">
-      <h4>리뷰</h4>
-      <hr>
-   </div>
-   
-   <div class="row center">
-      <c:choose>
-      
-      
-         <c:when test="${reviewList.isEmpty()}">
-         <h4 style="padding-left:20px">
-                <span>해당 상품의 리뷰가 없습니다</span>
-                       
-         </h4>
-         </c:when>
-         <c:otherwise>
-         <table class="table">
-            <thead>
-               <tr>
-                  <th>별점</th>
-                  <th>포장상태</th>
-                  <th>배송상태</th>
-                  <th>회원아이디</th>
-                  <th>작성시간</th>
-                  <th>주문한상품명</th>
-                  <th>내용</th>
-                  <th>사진</th>
-                  <th>신고</th>
-               </tr>
-            </thead>
-         <tbody align="center" >   
-               <c:forEach var="list" items="${reviewList}">
-                  <tr>
-                     <td>
-                     
-                     
-                        <c:if test="${list.reviewStar==1}">★</c:if>
-                        <c:if test="${list.reviewStar==2}">★★</c:if>
-                        <c:if test="${list.reviewStar==3}">★★★</c:if>
-                        <c:if test="${list.reviewStar==4}">★★★★</c:if>
-                        <c:if test="${list.reviewStar==5}">★★★★★</c:if>
-               
-                        <c:set var="total" value="${total+list.reviewStar}"/>
-                     </td>
-                     <td>${list.reviewPackaging}</td>
-                     <td>${list.reviewShipping}</td>
-                     <td>
-                        <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" /> ****
-                     </td>
-                     <td>${list.reviewDate}</td>
-                     <td>${itemDto.itemName}</td>
-                     
-                     <!--블라인드여부에따라 다르게 표시 -->
-                     <c:choose>
-                     	<c:when test="${list.reviewBlind}">
-                     		블라인드처리된 게시물입니다. 
-                     	</c:when>
-                     	<c:otherwise>
-                     		<td>${list.reviewContent}</td>
-                     	</c:otherwise>
-                     </c:choose>            
-                     <td>
-                        <img src="/reviewImage/download/${list.imageNo}" width="100" ></td>
-                        
-                         <!-- 내글은 신고버튼 다르게 -->
-                     <td>
-                    
-                     <c:choose>
-                     <c:when test="${loginId != list.customerId}"> 
-							<a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">신고</a>
-						</c:when>
-						<c:otherwise>
-								<a href="#" onclick="fail();">신고</a>
-						</c:otherwise>
-                     </c:choose>
-                     </td>
-                     
-                     <c:choose>
-                     	<c:when test="${list.reviewBlind}">
-                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>해제</a></td>
-                     	</c:when>
-                     	<c:otherwise>
-                     		<td><a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드<br>설정</a></td>
-                     	</c:otherwise>
-                     </c:choose>
-                     
-                  </tr>
-               </c:forEach>
-         </tbody>
-            </table>
-            <h5>리뷰수${fn:length(reviewList)}</h5>
-            <h5>
-            사용자 총 평점
-            <fmt:formatNumber value=" ${total/fn:length(reviewList)}" pattern="#,##0.00"></fmt:formatNumber>
-            </h5>
-         </c:otherwise>
-      </c:choose>
-   </div>
-</div>
-=======
->>>>>>> branch 'HwangMoonKyu' of https://github.com/earloflemongrab31/project3.git
 
    <div class="row center mt-40 mb-40 review hide">
       <div class="row center mb-30">

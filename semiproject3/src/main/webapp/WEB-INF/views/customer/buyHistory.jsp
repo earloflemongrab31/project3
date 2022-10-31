@@ -8,7 +8,7 @@
 
 <div class="container-550 mt-50 mb-50">
 
-<div class="row center mb-30">
+<div class="row center">
 	<h1>주문/배송 조회</h1>
 	<hr>
 </div>

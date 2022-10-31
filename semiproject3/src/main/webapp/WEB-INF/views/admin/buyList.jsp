@@ -5,9 +5,8 @@
 	<jsp:param value="주문내역페이지" name="title"/>
 </jsp:include>
 
-<div class="container-600 mt-50 mb-50">
-
-<div class="row center mb-30">
+<div class="container-800 mt-50 mb-50">
+	<div class="row center mb-30">
 	<h1>BUY</h1>
 	<hr>
 </div>
@@ -84,7 +83,7 @@
 </li>
  
 <c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<li<c:if test="${i==param.p}">class="on"</c:if>><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
+	<li <c:if test="${i==param.p}">class="on"</c:if>><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
 </c:forEach>
 
 <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->

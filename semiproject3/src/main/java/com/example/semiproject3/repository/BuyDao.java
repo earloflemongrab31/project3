@@ -14,25 +14,17 @@ public interface BuyDao {
 	List<BuyDto> selectList(String loginId);
 	List<BuyDto> selectList(String loginId, String type, String keyword);
 	
-	//구매 정보
-
-	//	BuyDto selectOne(int buyNo);
-	
-	//페이징 구현
-	//통합 메소드(검색+목록)
-	List<BuyDto> selectList(BuyListSearchVO vo);
+	//구매 목록 관리자용 페이징
+	List<BuyDto> selectListAll(BuyListSearchVO vo);
 	List<BuyDto> list(BuyListSearchVO vo);
 	List<BuyDto> search(BuyListSearchVO vo);
-				
-	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
+	
 	int count(BuyListSearchVO vo);
 	int searchCount(BuyListSearchVO vo);
 	int listCount(BuyListSearchVO vo);
-
-	//구매 목록 관리자용
-	List<BuyDto> selectListAll();
-	BuyDto selectOne(int buyNo);
 	
-	boolean update(int buyNo, String deliveryStatus);
+	
+	BuyDto selectOne(int buyNo);
+	boolean update(int buyNo, String deliveryStatus);	
 	
 }

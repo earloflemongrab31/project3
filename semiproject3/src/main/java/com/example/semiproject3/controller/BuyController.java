@@ -1,7 +1,5 @@
 package com.example.semiproject3.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import com.example.semiproject3.repository.BuyDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.OrdersDao;
+import com.example.semiproject3.vo.BuyListSearchVO;
 
 @Controller
 @RequestMapping("/buy")
@@ -80,36 +79,70 @@ public class BuyController {
 		return "buy/success";
 	}
 	
-	//구매 목록 및 검색 회원용
+//	//구매 목록 및 검색 회원용
+//	@GetMapping("/list")
+//	public String list(Model model, 
+//			@RequestParam(required = false) String type,
+//			@RequestParam(required = false) String keyword,
+//			HttpSession session) {
+//		String loginId =(String)session.getAttribute(SessionConstant.ID);
+//		
+//		boolean isSearch = type != null && keyword != null;
+//		if(isSearch) {
+//			model.addAttribute("buyList", buyDao.selectList(loginId, type, keyword));
+//		}
+//		else {
+//			model.addAttribute("buyList", buyDao.selectList(loginId));
+//		}
+//		
+//		//장바구니 개수
+//		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+//		
+//		return "/customer/buyHistory";
+//	}
+//	
+	
+	//구매 목록 및 검색 회원용 페이징처리
 	@GetMapping("/list")
-	public String list(Model model, 
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword,
-			HttpSession session) {
-		String loginId =(String)session.getAttribute(SessionConstant.ID);
-		
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("buyList", buyDao.selectList(loginId, type, keyword));
-		}
-		else {
-			model.addAttribute("buyList", buyDao.selectList(loginId));
-		}
-		
-		//장바구니 개수
-		model.addAttribute("cartCount",cartDao.cartCount(loginId));
-		
-		return "/customer/buyHistory";
+	public String list(Model model, HttpSession session,
+			@ModelAttribute(name="vo") BuyListSearchVO vo) {
+	
+	int count = buyDao.count(vo);
+	vo.setCount(count);
+	
+	String loginId =(String)session.getAttribute(SessionConstant.ID);
+	model.addAttribute("buyList",buyDao.selectListAll(vo));
+	model.addAttribute("param",vo);
+	
+	model.addAttribute("cartCount",cartDao.cartCount(loginId));
+	return "/customer/buyHistory";
 	}
 	
-	//구매 목록 관리자용
+	
+	
+//	//구매 목록 관리자용
+//	@GetMapping("/admin-buylist")
+//	public String adminBuylist(Model model) {
+//		model.addAttribute("buyList", buyDao.selectListAll());
+//		
+//		return "/admin/buyList";
+//	}
+
 	@GetMapping("/admin-buylist")
-	public String adminBuylist(Model model) {
-		model.addAttribute("buyList", buyDao.selectListAll());
+	public String adminBuylist(Model model,HttpSession session,
+			@ModelAttribute(name="vo") BuyListSearchVO vo) {
+
+		int count = buyDao.count(vo);
+		vo.setCount(count);
+		
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("buyList",buyDao.selectListAll(vo));
 		
 		return "/admin/buyList";
 	}
-
+	
+	
+	
 	//구매 목록 관리자용
 	@GetMapping("/admin-buydetail")
 	public String adminBuydetail(
@@ -119,6 +152,8 @@ public class BuyController {
 		
 		return "/admin/buyDetail";
 	}
+	
+	
 	
 	@PostMapping("/update")
 	public String update(
