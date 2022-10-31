@@ -255,27 +255,27 @@ return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	@Override
-	public int count(AddressUniteVO vo) {
+	public int count(AddressUniteVO vo, String loginId) {
 		if(vo.isSearch()) {
-			return searchCount(vo);
+			return searchCount(vo, loginId);
 		}
 		else {
-			return listCount(vo);
+			return listCount(vo, loginId);
 		}
 }
 	
 
 	@Override
-	public int searchCount(AddressUniteVO vo) {
-		String sql = "select count(*) from address where instr(#1, ?) > 0";
+	public int searchCount(AddressUniteVO vo, String loginId) {
+		String sql = "select count(*) from address where instr(#1, ?) > 0 and customer_id = ?";
 		sql = sql.replace("#1", vo.getType());
-		Object[] param = {vo.getKeyword()};
+		Object[] param = {vo.getKeyword(), loginId};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
 	@Override
-	public int listCount(AddressUniteVO vo) {
-		String sql = "select count(*) from address";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public int listCount(AddressUniteVO vo, String loginId) {
+		String sql = "select count(*) from address and customer_id = ?";
+		return jdbcTemplate.queryForObject(sql, int.class, loginId);
 	}
 }

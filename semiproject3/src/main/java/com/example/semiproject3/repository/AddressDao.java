@@ -41,9 +41,9 @@ public interface AddressDao {
 	List<AddressDto> search(String loginId, AddressUniteVO vo);
 			
 	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
-	int count(AddressUniteVO vo);
-	int searchCount(AddressUniteVO vo);
-	int listCount(AddressUniteVO vo);
+	int count(AddressUniteVO vo, String loginId);
+	int searchCount(AddressUniteVO vo, String loginId);
+	int listCount(AddressUniteVO vo, String loginId);
 	
 	
 
