@@ -150,13 +150,13 @@ function fail(){
 		      ${itemDto.itemLikeCnt}
 
 		      <c:if test="${isLike == null}">
-		         ♥
+		         <i class="fa-regular fa-heart"></i>
 		      </c:if>
 		      <c:if test="${isLike == true}">
-		         <a href="like?itemNo=${itemDto.itemNo}">♥</a>
+		         <a href="like?itemNo=${itemDto.itemNo}"><i class="fa-regular fa-heart"></i></a>
 		      </c:if>
 		      <c:if test="${isLike == false}">
-		         <a href="like?itemNo=${itemDto.itemNo}">♡</a>
+		         <a href="like?itemNo=${itemDto.itemNo}"><i class="fa-regular fa-heart"></i></a>
 		      </c:if>
 		   </td>
 		</tr>
