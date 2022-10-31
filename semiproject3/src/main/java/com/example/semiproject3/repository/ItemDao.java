@@ -74,6 +74,9 @@ public interface ItemDao {
 	int buyCount(BuyListSearchVO vo);
 	int buyListCount(BuyListSearchVO vo);
 	int buySearchCount(BuyListSearchVO vo);
+	
+	//베스트 상품 목록(회원용)
+	List<BuyListVO> bestList();
 		
 	//상품 구매(회원용)
 	List<BuyListVO> selectBuyList(int itemNo);

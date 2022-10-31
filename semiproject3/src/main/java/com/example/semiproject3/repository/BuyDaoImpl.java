@@ -108,21 +108,76 @@ public class BuyDaoImpl implements BuyDao {
 
 	//구매 목록
 	@Override
-	public List<BuyDto> selectList(String loginId) {
-		String sql = "select * from buy where customer_id=? "
-				+ "order by buy_no desc";
-		return jdbcTemplate.query(sql, mapper, loginId);
+	public List<BuyDto> selectBuyList(BuyListSearchVO vo, String loginId) {
+		if(vo.isSearch()) {
+			return buySearch(vo, loginId);
+		}
+		else {
+			return buyList(vo, loginId);
+		}
 	}
+	//구매 목록 조회 및 검색(회원용)
+	@Override
+	public List<BuyDto> buySearch(BuyListSearchVO vo, String loginId) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from buy where instr(#1,?) > 0 and where customer_id = ?"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), loginId, vo.startRow(), vo.endRow()
+		};
+	return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	@Override
+	public List<BuyDto> buyList(BuyListSearchVO vo, String loginId) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from buy where customer_id = ?"
+				+ ")TMP"
+			+") where rn between ? and ?";
+		Object[] param = {loginId, vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
 
 	//구매 목록 검색
+//	@Override
+//	public List<BuyDto> selectList(String loginId, String type, String keyword) {
+//		String sql = "select * from buy "
+//				+ "where instr(#1, ?) > 0 and customer_id=? "
+//				+ "order by buy_no desc";
+//		sql = sql.replace("#1", type);
+//		Object[] param = {keyword, loginId};
+//		return jdbcTemplate.query(sql, mapper, param);
+//	}
+	
+	//회원 구매 목록 페이징수
 	@Override
-	public List<BuyDto> selectList(String loginId, String type, String keyword) {
-		String sql = "select * from buy "
-				+ "where instr(#1, ?) > 0 and customer_id=? "
-				+ "order by buy_no desc";
-		sql = sql.replace("#1", type);
-		Object[] param = {keyword, loginId};
-		return jdbcTemplate.query(sql, mapper, param);
+	public int buyCount(BuyListSearchVO vo, String loginId) {
+		if(vo.isSearch()) {
+			return buySearchCount(vo, loginId);
+		}
+		else {
+			return buyListCount(vo, loginId);
+		}
+	}
+	
+	@Override
+	public int buyListCount(BuyListSearchVO vo, String loginId) {
+		String sql = "select count(*) from buy where customer_id = ?";
+		Object[] param = {loginId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	@Override
+	public int buySearchCount(BuyListSearchVO vo, String logindId) {
+		String sql = "select count(*) from buy where instr(#1, ?) > 0 and customer_id = ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword(), logindId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
 	@Override

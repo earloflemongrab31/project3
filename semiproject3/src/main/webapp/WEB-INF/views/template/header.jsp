@@ -818,10 +818,10 @@
 <ul class="dropdown-menu">
 	<!-- 좌측 드롭다운 메뉴 -->
 	<li class="float-left">
-		<a href="/item/buylist">BEST</a>
+		<a href="/item/bestlist">BEST</a>
 	</li>
 	<li class="float-left">
-		<a href="#">New</a>
+		<a href="/item/buylist">New</a>
 	</li>
 	<li class="float-left">
 		<a href="/item/buylist?keyword=100">outer</a>
