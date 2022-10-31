@@ -14,7 +14,7 @@
     });
 
         
-
+		//리뷰 좋아요 ajax
       	$(function(){
       		$(".review-like-btn").click(function(e){
       			e.preventDefault();
@@ -35,8 +35,25 @@
       			})
       		});
       	});
+		
+		//사진크게
+		$(function(){
+			$(".image-big").click(function(){
+				
+				var width=$(this).css("width");
+				
+				$(this).animate({
+					width:"+=100"
+				});
+			if(parseInt(width) >=200){
+				$(this).animate({
+					width :100
+				})	;
+			}
+			});
+		});
+		
       	
-  
     
    	$(function(){
 		$(".cart-in").click(function(){
@@ -182,7 +199,7 @@ function fail(){
    <table class="table">
 		<tr>
 			<td class="right">
-				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
+				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->				
 				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
 				<button class="btn btn-positive buy" type="submit">구매하기</button>
 				<button class="btn btn-positive cart-in" type="submit">장바구니</button>    
@@ -253,7 +270,8 @@ function fail(){
                               <c:if test="${list.reviewStar==5}">★★★★★(${list.reviewStar})</c:if>
                               <c:set var="total" value="${total+list.reviewStar}" />
                            </td>
-                           <td class="right"><c:choose>
+                          <%--  <td class="right">
+                           <c:choose>
                                  <c:when test="${list.reviewBlind}">
                                     <td>
                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">블라인드[해제]</a>
@@ -265,7 +283,7 @@ function fail(){
                                     </td>
                                  </c:otherwise>
                               </c:choose>
-                           </td>
+                           </td> --%>
                         </tr>
 
                         <tr rowspan="6">
@@ -300,7 +318,7 @@ function fail(){
                               </c:otherwise>
                            </c:choose>
                               <td  style="text-align: center; vertical-align: middle;">
-                                 <img src="/reviewImage/download/${list.imageNo}" width="100">
+                                 <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100">
                               </td>
 
                            <!--좋아요  -->                
