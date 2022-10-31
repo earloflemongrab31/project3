@@ -11,7 +11,18 @@
         if (responseMessage != ""){
             alert(responseMessage)
         }
-    })
+    });
+    
+   	$(function(){
+		$(".cart-in").click(function(){
+			$(".item-form").attr("action", "/cart/insert");
+			$(".item-form").attr("method", "post");
+		});
+		$(".buy").click(function(){
+			$(".item-form").attr("action", "/orders/detail");
+			$(".item-form").attr("method", "get");
+		});
+	});
 </script>
 <style>
 	#box{
@@ -32,7 +43,7 @@ function fail(){
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
 <!-- <form action="/orders/detail" method="get"> -->
-<form action="/cart/insert" method="post">
+<form class="item-form" action="/cart/insert" method="post">
 <div class="float-left w-50">
 	<table class="table">
 		<tr>
@@ -145,8 +156,8 @@ function fail(){
 			<td class="right">
 				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->
 				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
-				<button class="btn btn-positive" type="submit">구매하기</button>
-				<button class="btn btn-positive" type="submit">장바구니</button>    
+				<button class="btn btn-positive buy" type="submit">구매하기</button>
+				<button class="btn btn-positive cart-in" type="submit">장바구니</button>    
 				<a href="buylist">목록으로</a>
 			</td>
 		</tr>
