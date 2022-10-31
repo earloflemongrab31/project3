@@ -42,4 +42,6 @@ public interface NoticeDao {
 	//클리어
 	void clear();
 	
+	List<NoticeDto> selectListForMain();
+	
 }

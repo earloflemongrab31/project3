@@ -34,4 +34,6 @@ public interface CenterDao {
 	boolean update(CenterDto centerDto);
 	boolean delete(int centerNo);
 	
+	List<CenterDto> selectListForMain();
+	
 }
