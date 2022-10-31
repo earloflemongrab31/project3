@@ -15,13 +15,13 @@ public interface BuyDao {
 	List<BuyDto> selectList(String loginId, String type, String keyword);
 	
 	//구매 목록 관리자용 페이징
-	List<BuyDto> selectListAll(BuyListSearchVO vo);
-	List<BuyDto> list(BuyListSearchVO vo);
-	List<BuyDto> search(BuyListSearchVO vo);
+	List<BuyDto> selectList(String loginId, BuyListSearchVO vo);
+	List<BuyDto> list(String loginId, BuyListSearchVO vo);
+	List<BuyDto> search(String loginId, BuyListSearchVO vo);
 	
 	int count(BuyListSearchVO vo);
 	int searchCount(BuyListSearchVO vo);
-	int listCount(BuyListSearchVO vo);
+	int listCount(BuyListSearchVO vod);
 	
 	
 	BuyDto selectOne(int buyNo);
