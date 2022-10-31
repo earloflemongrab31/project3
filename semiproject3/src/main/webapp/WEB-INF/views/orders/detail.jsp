@@ -89,7 +89,6 @@
 		</tbody>
 	</table>
 </div>
-
 <div class="row">
 	<h2>상품 내역</h2>
 </div>
@@ -109,6 +108,11 @@
 						<input type="text" class="input input-none w-100" name="itemName" 
 							value="${ordersDto.itemName}" readonly>
 					</td>
+<!-- 					<td class="right"> -->
+<%-- 					<a href="delete?ordersNo=${ordersDto.orderNo}"> --%>
+<!-- 					삭제 -->
+<!-- 					</a> -->
+<!-- 					</td> -->
 					<td rowspan="4">
 						금액 : 
 						<c:set var="itemTotal" value="${ordersDto.itemPrice * ordersDto.itemCnt}"></c:set>

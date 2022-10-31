@@ -7,10 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
+import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CartDao;
@@ -39,25 +41,70 @@ public class OrdersController {
 	private CartDao cartDao;
 	
 	
-	@GetMapping("/detail")
+	@PostMapping("/detail")
 	public String list(
 			@RequestParam String[] itemSize,
 			@RequestParam String[] itemColor,
 			@RequestParam int[] itemCnt,
 			@ModelAttribute OrdersDto ordersDto,
+			@RequestParam(required=false)  int[] cartNo,
+			@ModelAttribute CartDto cartDto,
 			Model model, 
 			HttpSession session) {
+		
+		//아이디가지고오기
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		
 		//주문 테이블 값 넣기
-		for(int i=0; i<itemSize.length; i++) {
-			ordersDto.setItemSize(itemSize[i]);
-			ordersDto.setItemColor(itemColor[i]);
-			ordersDto.setItemCnt(itemCnt[i]);
-			ordersDao.insert(ordersDto);
+		for(int i=0; i<itemColor.length; i++) {
+			boolean search = ordersDao.selectOne(OrdersDto.builder()
+											.itemNo(ordersDto.getItemNo())
+											.itemColor(itemColor[i])
+											.itemSize(itemSize[i])
+											.customerId(loginId)
+						.build()) == null;
+			
+			boolean cartSearch = cartDao.selectOne(CartDto.builder()
+											.itemNo(cartDto.getItemNo())
+											.itemSize(itemSize[i])
+											.itemColor(itemColor[i])
+											.customerId(loginId)
+						.build()) == null;
+			
+			if(search) {
+				ordersDao.insert(OrdersDto.builder()
+								.ordersNo(ordersDto.getOrdersNo())
+								.customerId(loginId)
+								.itemNo(ordersDto.getItemNo())
+								.itemName(ordersDto.getItemName())
+								.itemPrice(ordersDto.getItemPrice())
+								.itemColor(itemColor[i])
+								.itemSize(itemSize[i])
+								.itemCnt(itemCnt[i])
+								.imageNo(ordersDto.getImageNo())
+						.build());
+				
+			}
+			else {
+				ordersDao.plus(OrdersDto.builder()
+								.ordersNo(ordersDto.getOrdersNo())
+								.customerId(loginId)
+								.itemNo(ordersDto.getItemNo())
+								.itemName(ordersDto.getItemName())
+								.itemPrice(ordersDto.getItemPrice())
+								.itemColor(itemColor[i])
+								.itemSize(itemSize[i])
+								.itemCnt(itemCnt[i])
+								.imageNo(ordersDto.getImageNo())
+						.build());
+			}
+			
+			if(!cartSearch) {
+				cartDao.delete(cartNo[i]);
+			}
 		}
 		
-		
 		//회원 정보 불러오기
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("customerDto", customerDao.selectOne(loginId));
 
 		//주소 정보 불러오기
@@ -65,6 +112,9 @@ public class OrdersController {
 		
 		//주문 내역 불러오기
 		model.addAttribute("ordersList", ordersDao.selectList(loginId));
+		
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		return "orders/detail";
 	}
@@ -93,15 +143,17 @@ public class OrdersController {
 	}
 	
 	//삭제
-//	@GetMapping("/delete")
-//	public String delete(@RequestParam int itemNo,HttpSession session) {
-//	
-//	String loginId = (String) session.getAttribute(SessionConstant.ID);
-//	OrdersDto ordersDto = new OrdersDto();
-//	ordersDto.setCustomerId(loginId);
-//	ordersDao.delete(ordersDto);
-//		return "redirect:orders/list";
-//	}
+	@GetMapping("/delete")
+	public String delete(Model model,
+			@RequestParam int ordersNo,HttpSession session) {
+		//주문 내역 불러오기
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("ordersList", ordersDao.selectList(loginId));
+		
+		ordersDao.delete(ordersNo);
+		
+		return "redirect:detail";
+	}
 
 	
 	

@@ -20,7 +20,7 @@
 		});
 		$(".buy").click(function(){
 			$(".item-form").attr("action", "/orders/detail");
-			$(".item-form").attr("method", "get");
+			$(".item-form").attr("method", "post");
 		});
 	});
 </script>

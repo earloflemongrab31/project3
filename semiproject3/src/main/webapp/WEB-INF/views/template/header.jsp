@@ -701,14 +701,23 @@
     
  	//구매 옵션 불러오기
 	$(function(){
-	    $(".input-option").on("input",function(){
+        var selectedOption = [];
+
+        $(".input-option").on("input",function(){
 	        var color = $(this).find("option:selected").data("color");//선택한 색
 	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
 	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
-	        console.log(color);
-	        console.log(size);
-	        console.log(totalcnt);
 	        if(!color) return;//값 없으면 리턴
+
+	        
+ 	        for(var i=0; i<selectedOption.length; i++){
+ 	        	if(selectedOption[i] === color + "-" + size){
+ 	 				alert("이미 선택된 옵션입니다.");
+ 	 		        	$(".input-option").val("");
+ 	 				return;
+ 	        	} 
+ 	        }
+	        
 	        
 	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
 	            
@@ -730,7 +739,10 @@
 	
 	        $(".input-option").val("");
 	        $("input[name=itemTotalCnt]").attr("value", totalcnt);
-	    });
+
+	        selectedOption.push(color+"-"+size);
+			console.log(selectedOption);
+        });
 // 	    $("select[name=itemColor]").change(function(){
         	
 // 			var color = $(this).val();

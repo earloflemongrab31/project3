@@ -24,8 +24,8 @@ public class OrdersDaoImpl implements OrdersDao {
 					.itemNo(rs.getInt("item_no"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
-					.itemSize(rs.getString("item_size"))
 					.itemColor(rs.getString("item_color"))
+					.itemSize(rs.getString("item_size"))
 					.itemCnt(rs.getInt("item_cnt"))
 					.imageNo(rs.getInt("image_no"))
 				.build();
@@ -46,8 +46,8 @@ public class OrdersDaoImpl implements OrdersDao {
 //					.imageNo(rs.getInt("image_no"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
-					.itemSize(rs.getString("item_size"))
 					.itemColor(rs.getString("item_color"))
+					.itemSize(rs.getString("item_size"))
 					.itemCnt(rs.getInt("item_cnt"))
 //					.ordersTime(rs.getDate("orders_time"))
 					.imageNo(rs.getInt("image_no"))
@@ -65,7 +65,8 @@ public class OrdersDaoImpl implements OrdersDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	//주문 목록에 담기
 	@Override
 	public void insert(OrdersDto ordersDto) {
 		String sql = "insert into orders("
@@ -93,16 +94,21 @@ public class OrdersDaoImpl implements OrdersDao {
 		jdbcTemplate.update(sql, param);
 	}
 
+	//주문 목록에 있는지 중복 조회
 	@Override
-	public OrdersDto selectOne(String customerId) {
-		String sql = "select * from orders where customer_id=?";
-		return jdbcTemplate.query(sql, extractor, customerId);
+	public OrdersDto selectOne(OrdersDto ordersDto) {
+		String sql = "select * from orders where item_no = ? and item_size = ? and item_color = ? and customer_id = ?";
+		Object[] param = {
+				ordersDto.getItemNo(), ordersDto.getItemSize(), ordersDto.getItemColor(), ordersDto.getCustomerId()
+		};
+		return jdbcTemplate.query(sql, extractor, param);
 	}
 	
 	@Override
-	public boolean delete(int ordersNo) {
+	public void delete(int ordersNo) {
 		String sql = "delete orders where orders_no=?";
-		return jdbcTemplate.update(sql, ordersNo) > 0;
+		Object[] param = {ordersNo};
+		jdbcTemplate.update(sql, param);
 	}
 
 //	@Override
@@ -153,11 +159,31 @@ public class OrdersDaoImpl implements OrdersDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	//주문 목록
 	@Override
 	public List<OrdersDto> selectList(String loginId) {
 		String sql = "select * from orders where customer_id=?";
 		return jdbcTemplate.query(sql, mapper, loginId);
+	}
+	
+	//주문 목록에 있는 상품 수량 변경(중복인경우)
+	@Override
+	public void plus(OrdersDto ordersDto) {
+		String sql= "update orders set item_cnt = item_cnt + ? where item_no = ? and item_size = ? and item_color = ? and customer_id = ?";
+		Object[] param= {
+				ordersDto.getItemCnt(), ordersDto.getItemNo(), ordersDto.getItemSize(), ordersDto.getItemColor(), ordersDto.getCustomerId()
+		};
+		jdbcTemplate.update(sql,param);
+	}
+	
+	@Override
+	public void minus(OrdersDto ordersDto) {
+		String sql= "update orders set item_cnt = item_cnt - ? where item_no = ? and item_size = ? and item_color = ? and customer_id = ?";
+		Object[] param= {
+				ordersDto.getItemCnt(), ordersDto.getItemNo(), ordersDto.getItemSize(), ordersDto.getItemColor(), ordersDto.getCustomerId()
+		};
+		jdbcTemplate.update(sql,param);
 	}
 
 	@Override

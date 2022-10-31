@@ -216,7 +216,7 @@ public class ItemController {
 	public String buylist(Model model, HttpSession session,
 			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 		
-		if(vo.getType() == null) {
+		if(vo.getType() == null && vo.getKeyword() != null) {
 			vo.setCount(itemDao.buySearchCount2(vo));
 			model.addAttribute("buylist", itemDao.buySearch2(vo));
 		}
