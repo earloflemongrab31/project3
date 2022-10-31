@@ -75,6 +75,7 @@ public class ItemController {
 //	화니꼬
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
+//	private final File directory = new File("D:/upload");
 	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
@@ -216,7 +217,7 @@ public class ItemController {
 	public String buylist(Model model, HttpSession session,
 			@ModelAttribute(name="vo") BuyListSearchVO vo) {
 		
-		if(vo.getType() == null) {
+		if(vo.getType() == null && vo.getKeyword() != null) {
 			vo.setCount(itemDao.buySearchCount2(vo));
 			model.addAttribute("buylist", itemDao.buySearch2(vo));
 		}

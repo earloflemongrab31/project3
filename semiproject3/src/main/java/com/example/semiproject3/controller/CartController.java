@@ -1,7 +1,5 @@
 package com.example.semiproject3.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.CartDto;
@@ -92,23 +89,19 @@ public class CartController {
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	};
 	
-//	//카트 리스트
-//	@GetMapping("/cartList")
-//	public String cartList(Model model, HttpSession session) {
-//		//아이디가지고오기 
-//		String loginId = (String) session.getAttribute(SessionConstant.ID);
-//		
-//		//장바구니 리스트
-//		model.addAttribute("cartList",cartDao.selectList(loginId));
-//		
-//		//장바구니 개수
-//		model.addAttribute("cartCount",cartDao.cartCount(loginId));
-//		return "cart/cartList";
-//	}
-	
-
-	
-	
+	//카트 리스트
+	@GetMapping("/cartList")
+	public String cartList(Model model, HttpSession session) {
+		//아이디가지고오기 
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
+		//장바구니 리스트
+		model.addAttribute("cartList",cartDao.selectList(loginId));
+		
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+		return "cart/cartList";
+	}
 	
 
 //	@ResponseBody
@@ -126,8 +119,6 @@ public class CartController {
 //		
 //		return result;
 //	}
-
-	
 
 	
 
