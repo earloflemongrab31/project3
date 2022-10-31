@@ -197,12 +197,11 @@
       object-fit: cover;
     }
     
-    .footer{
-    	padding: 0 3em;
-    }
-    
     .right-word{
     	 margin-right:10px;
+    }
+    .footer{
+    	padding: 1em 3em;
     }
     
 </style>
@@ -772,7 +771,7 @@
 
 <div class="float-container">
 	<div class="logo float-left">
-		<a class="w-100" href="/admin/">
+		<a class="w-100" href="/">
 			<img class="w-100" src="/image/logo.png">
 		</a>
 	</div>
@@ -781,7 +780,7 @@
 			${loginId}님, 안녕하세요.
 		</div>
 	</c:if>
-	<c:if test="${loginGrade == '관리자'}">
+	<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
 		<div class="right-word row float-right">
 			<a href="/admin/">관리자페이지</a>
 		</div>

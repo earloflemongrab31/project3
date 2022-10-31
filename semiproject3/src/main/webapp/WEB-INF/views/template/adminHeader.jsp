@@ -68,14 +68,11 @@
     	background-color: #ede8e4;
     	color: #25201d;
     }
-    .footer{
-    	padding: 0 3em;
-    }
     .right-word{
     	 margin-right:10px;
     }
     
-        .footer{
+    .footer{
     	padding: 0 3em;
     }
 </style>
@@ -226,12 +223,9 @@
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
 	<li class="float-right"><a class="logout" href="/customer/logout">LOGOUT</a></li>
-	<li class="float-right">
-		<a href="#">${loginId}님</a>
-	</li>
 </ul>
 </div>
 </nav>
 </div>
 
-<main>
+<main class="float-container">
