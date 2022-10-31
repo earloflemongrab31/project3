@@ -3,6 +3,7 @@ package com.example.semiproject3.repository;
 import java.util.List;
 
 import com.example.semiproject3.entity.BuyDto;
+import com.example.semiproject3.vo.BuyListCountVO;
 import com.example.semiproject3.vo.BuyListSearchVO;
 
 public interface BuyDao {
@@ -26,5 +27,7 @@ public interface BuyDao {
 	
 	BuyDto selectOne(int buyNo);
 	boolean update(int buyNo, String deliveryStatus);	
+	
+	List<BuyListCountVO> selectCountList();
 	
 }

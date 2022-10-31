@@ -19,7 +19,6 @@
       		$(".review-like-btn").click(function(e){
       			e.preventDefault();
       			var that=this;
-      			
       			$.ajax({
       				url:"/rest/review/like",
             		method:"post",
@@ -30,8 +29,8 @@
             		success:function(resp){
             			console.log(resp);
             			$(that).next(".like-span").text(resp.reviewCnt);
-      
             		}
+      
       			})
       			
       		});
@@ -325,14 +324,6 @@ function fail(){
                               </td>
                            </c:if>
                         </tr>
-
-                     </c:forEach>
-                  </tbody>
-            </c:otherwise>
-         </c:choose>
-      </table>
-      </div>
-
 						</c:forEach>
 					</tbody>
 				</table>
