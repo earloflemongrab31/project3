@@ -8,6 +8,9 @@ import com.example.semiproject3.entity.ItemCntDto;
 import com.example.semiproject3.vo.CartListVO;
 
 public interface CartDao {
+	
+	//번호 생성
+//	int sequence();
 
 	//카트 입력
 	void insert(CartDto cartDto);

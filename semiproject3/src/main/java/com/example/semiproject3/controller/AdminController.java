@@ -21,15 +21,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.AdminDto;
-import com.example.semiproject3.entity.CenterDto;
 import com.example.semiproject3.entity.ImageDto;
-import com.example.semiproject3.entity.MainEditDto;
 import com.example.semiproject3.entity.MainImageDto;
 import com.example.semiproject3.error.TargetNotFoundException;
 import com.example.semiproject3.repository.AdminDao;
 import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.MainEditDao;
 import com.example.semiproject3.repository.MainImageDao;
+import com.example.semiproject3.vo.BuyListSearchVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -64,12 +63,27 @@ public class AdminController {
 		return "redirect:list";
 	}
 	
+//	@GetMapping("/list")
+//	  public String list(Model model) {
+//		List<AdminDto>list=adminDao.selectList();
+//		      model.addAttribute("list",adminDao.selectList());
+//		      return "admin/list";
+//	  }
+//	
+
 	@GetMapping("/list")
-	  public String list(Model model) {
-		List<AdminDto>list=adminDao.selectList();
-		      model.addAttribute("list",adminDao.selectList());
-		      return "admin/list";
-	  }
+	public String list(Model model,HttpSession session,
+			@ModelAttribute(name="vo") BuyListSearchVO vo) { 
+	
+		int count = adminDao.count(vo);
+		vo.setCount(count);
+		
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("list",adminDao.selectList());
+		return "admin/list";
+	}
+	
+	
 	@GetMapping("/delete")
 	public String delete(@RequestParam String adminId) {
 		boolean result = adminDao.delete(adminId);

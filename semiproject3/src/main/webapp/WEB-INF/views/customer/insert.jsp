@@ -4,7 +4,10 @@
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
 
+
+
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script language="JavaScript" src="http://www.webmadang.net/javascript/js/calendarDateInput.js"></script>
 <script type="text/javascript"></script>
 <!-- 테이블 폰트 변경해야함 -->
 <form class="join-form" action="insert" method="post" autocomplete="off">
@@ -104,8 +107,9 @@
                 <!-- 달력 변경할 수 있으면 하기 cdn은 넣어놓음 -->
                 <tr>
                     <th class="w-25">생년월일</td>
-                    <td>
-                        <input class="input w-75" type="date" name="customerBirth">
+                    <td>					
+                    <input class="input w-75" type="date" name="customerBirth">
+ 
                     </td>
                 </tr>
                 <tr>
@@ -129,6 +133,5 @@
     </div>	
 </form>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
 
 

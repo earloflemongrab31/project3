@@ -21,6 +21,7 @@
             alert(responseMessage)
         }
     });
+    
    	$(function(){
 		$(".cart-in").click(function(){
 			$(".item-form").attr("action", "/cart/insert");
@@ -31,57 +32,6 @@
 			$(".item-form").attr("method", "get");
 		});
 	});
-   	
-   	$(function(){
-    	$(".input-option").on("input", function(){
-	        var itemNo = $("input[name=itemNo]").val();
-	        var itemName = $("input[name=itemName]").val();
-	        var itemPrice = $("input[name=itemPrice]").val();
-	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
-    		var color = $(this).find("option:selected").data("color");//선택한 색
-	        var imageNo = $("input[name=imageNo]").val();
-	        
-	        $.ajax({
-	        	url: "http://localhost:8888/rest/orders/insert",
-                method:"post",
-                data:{
-                    itemNo: itemNo,
-                    itemName: itemName,
-                    itemPrice: itemPrice,
-                    itemSize: size,
-                	itemColor: color,
-                    imageNo: imageNo
-                },
-                success: function(resp){
-                	if(resp == "NNNNY"){
-               	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
-               	            
-               	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark");//i 태그 엑스 표시 추가
-               	        icon.click(function(){//누르면 가장 상위 option class를 가지는 tr 삭제
-               	            $(this).parent(".option").remove();
-               	        });
-               	        
-               	        var colorOption = $("<input>").addClass("w-25 input input-none").val(color).attr("type", "text").attr("name", "itemColor").prop("readonly", true);
-               	        var sizeOption = $("<input>").addClass("w-25 input input-none").val(size).attr("type", "text").attr("name", "itemSize").prop("readonly", true);
-               	        var cnt = $("<input>").addClass("w-25 input").attr("type", "number").attr("name", "itemCnt").attr("min", 1).attr("max", totalcnt).val(1);
-               	        
-               	        colorOption.appendTo(plusLine);
-               	        sizeOption.appendTo(plusLine);
-               	        cnt.appendTo(plusLine);
-               	        icon.appendTo(plusLine);
-               	
-               	        plusLine.appendTo($(".option-area"));
-               	
-               	        $(".input-option").val("");
-               	        $("input[name=itemTotalCnt]").attr("value", totalcnt);
-                    }
-                    else{
-						alert("이미 선택된 옵션입니다.");
-              	        $(".input-option").val("");
-                    }
-                }
-	        });
-    	});
 </script>
 <script type="text/javascript">
 	function fail(){
