@@ -74,7 +74,7 @@
     
     .footer{
     	padding: 0 3em;
-    	background: #303134;
+    	background: #35363A;
     	color: #E6E8EB;
     }
     .footer a{

@@ -350,10 +350,10 @@ function fail(){
                               <td style="text-align: center; vertical-align: middle;">
                              <%--  <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>  --%>
                                  <c:if test="${loginId==null && list.reviewCnt>0}">
-                                 	♥${list.reviewCnt}
+                                 	<i class="fa-solid fa-heart"></i>${list.reviewCnt}
                                  </c:if>
                                  <c:if test="${loginId==null && list.reviewCnt==0}">
-                                 	♡
+                                 	<i class="fa-regular fa-heart"></i>
                                  </c:if>
                                  <c:if test="${loginId!=null}">
                                  	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>

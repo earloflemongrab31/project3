@@ -156,9 +156,9 @@
 <form action = "list" method="get" >
 	<div class="row center">
 		<input type="hidden" name="size" value="${vo.size}">
-		<select class="input" name="type" required>
-		<option value="notice_title" <c:if test="${vo.type == 'notice_title'}"></c:if>>제목</option>
-		<option value="notice_no" <c:if test="${vo.type == 'notice_no'}"></c:if>>공지번호</option>
+		<select class="input input-none" name="type" required>
+			<option value="notice_title" <c:if test="${vo.type == 'notice_title'}"></c:if>>제목</option>
+			<option value="notice_no" <c:if test="${vo.type == 'notice_no'}"></c:if>>공지번호</option>
 		</select>
 			
 		<input class="input" name="keyword" type="search" placeholder="검색어" required="required" value="${param.keyword}">
