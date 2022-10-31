@@ -114,6 +114,5 @@
 </li>
 </ul>	
 	
->>>>>>> refs/remotes/origin/main
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
 

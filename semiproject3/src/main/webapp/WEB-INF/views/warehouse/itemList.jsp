@@ -26,7 +26,7 @@
 </div>
 
 <div class ="row center">
-	<table class="table table-border table-hover" >
+	<table class="table table-border" >
 	<thead>
 		<tr>
 			<th>상품번호</th>

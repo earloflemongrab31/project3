@@ -12,7 +12,7 @@
 </div>
 
 <div class="row center mb-30">
-	<table class="table table-border table-hover">
+	<table class="table table-border">
 		<thead>
 			<tr>
 <!-- 				<th>선택</th> -->

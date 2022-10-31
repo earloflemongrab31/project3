@@ -1,11 +1,8 @@
 package com.example.semiproject3.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
@@ -232,6 +229,12 @@ public class NoticeDaoImpl implements NoticeDao {
 		String sql = "delete notice";
 		jdbcTemplate.update(sql);
 	}
+
+	@Override
+	public List<NoticeDto> selectListForMain() {
+		NoticeListSearchVO vo = new NoticeListSearchVO();
+		return list(vo);
+	}	
 
 }
 

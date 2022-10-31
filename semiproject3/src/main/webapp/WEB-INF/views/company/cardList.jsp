@@ -25,7 +25,7 @@ td, th {
 	</div>
 	
 	<div class="row">
-		<table class="table table-hover table-border">
+		<table class="table table-border">
 			<thead>
 				<tr>
 					<th>협력사</th>

@@ -7,9 +7,14 @@
     <jsp:param value="협력사 상세보기" name="title"/>
 </jsp:include>
 
-
-
-<div class ="container-900 mt-50 mb-50">
+<style>
+	td, th {
+ 	text-align : center;
+  	vertical-align : middle;
+	}
+</style>
+	
+<div class ="container-600 mt-50 mb-50">
 
 	<div class = "row center mb-30">
 		<h1><${companyDto.companyName}></h1>
@@ -20,7 +25,7 @@
 			<table class="table table-border">
 				<tbody>
 					<tr>
-						<th>회사명</th>
+						<th width="40%">회사명</th>
 						<td>
 							${companyDto.companyName}
 						</td>
