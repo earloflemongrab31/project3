@@ -665,6 +665,7 @@
     
  	//구매 옵션 불러오기
 	$(function(){
+
         var selectedOption = [];
 
         $(".input-option").on("input",function(){
@@ -686,6 +687,16 @@
 	            
 	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark");//i 태그 엑스 표시 추가
 	        icon.click(function(){//누르면 가장 상위 option class를 가지는 tr 삭제
+	        	var deleteColor = $(this).parent(".option").find("input[name=itemColor]").val();
+	        	var deleteSize = $(this).parent(".option").find("input[name=itemSize]").val();
+	        	var deleteOption = deleteColor+"-"+deleteSize;
+	        	
+	 	        for(var i=0; i<selectedOption.length; i++){
+	 	        	if(selectedOption[i] === deleteOption){
+	 	        		selectedOption.splice(i, 1);
+						return;
+	 	        	} 
+	 	        }
 	            $(this).parent(".option").remove();
 	        });
 	        
@@ -706,6 +717,7 @@
 	        selectedOption.push(color+"-"+size);
 			console.log(selectedOption);
         });
+
 // 	    $("select[name=itemColor]").change(function(){
         	
 // 			var color = $(this).val();
