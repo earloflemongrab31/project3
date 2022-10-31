@@ -32,6 +32,7 @@
 			$(".item-form").attr("method", "get");
 		});
 	});
+   	
 </script>
 <script type="text/javascript">
 	function fail(){
@@ -42,8 +43,7 @@
 </script>
 <div class="container-1000 mt-50 mb-50">
 <div class="float-container">
-<!-- <form action="/orders/detail" method="get"> -->
-<form class="item-form" action="/cart/insert" method="post">
+<form class="item-form" action="#" method="post">
 <div class="float-left w-50">
 	<table class="table">
 		<tr>
@@ -88,6 +88,7 @@
 <div class="row">
 	${itemDto.itemMemo}
 </div>
+<hr>
 <div class="row">
    <table class="table">
       <tbody>
