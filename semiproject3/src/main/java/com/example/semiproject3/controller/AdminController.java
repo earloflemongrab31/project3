@@ -61,7 +61,11 @@ public class AdminController {
 
 	
 	@GetMapping("/")
-	public String home(Model model) {
+	public String home(
+			Model model, 
+			HttpSession session) {
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("adminDto", adminDao.selectOne(loginId));
 		model.addAttribute("noticeList", noticeDao.selectListForMain());
 		model.addAttribute("centerList", centerDao.selectListForMain());
 		model.addAttribute("customerList", customerDao.selectList());
@@ -86,7 +90,8 @@ public class AdminController {
 //		      return "admin/list";
 //	  }
 //	
-
+	
+	//페이징
 	@GetMapping("/list")
 	public String list(Model model,HttpSession session,
 			@ModelAttribute(name="vo") BuyListSearchVO vo) { 

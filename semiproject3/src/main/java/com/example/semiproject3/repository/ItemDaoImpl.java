@@ -250,6 +250,17 @@ public class ItemDaoImpl implements ItemDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
+	//베스트 상품 목록(회원용)
+	@Override
+	public List<BuyListVO> bestList() {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from buy_list_view where image_main = 1 order by item_like_cnt desc "
+				+ ")TMP"
+			+") where rn between 1 and 6";
+		return jdbcTemplate.query(sql, buyListMapper);
+	}
+
 	//상품 리스트 검색+목록(회원용)
 	@Override
 	public List<BuyListVO> selectBuyList(BuyListSearchVO vo) {

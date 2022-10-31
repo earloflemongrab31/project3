@@ -12,21 +12,29 @@ public interface BuyDao {
 	void insert(BuyDto buyDto);
 	
 	//구매 목록 회원
-	List<BuyDto> selectList(String loginId);
-	List<BuyDto> selectList(String loginId, String type, String keyword);
+	List<BuyDto> selectBuyList(BuyListSearchVO vo, String loginId);
+	List<BuyDto> buyList(BuyListSearchVO vo, String loginId);
+	List<BuyDto> buySearch(BuyListSearchVO vo, String loginId);
 	
 	//구매 목록 관리자용 페이징
-	List<BuyDto> selectListAll(BuyListSearchVO vo);
-	List<BuyDto> list(BuyListSearchVO vo);
-	List<BuyDto> search(BuyListSearchVO vo);
+	List<BuyDto> selectAdminList(BuyListSearchVO vo);
+	List<BuyDto> adminList(BuyListSearchVO vo);
+	List<BuyDto> adminSearch(BuyListSearchVO vo);
 	
 	int count(BuyListSearchVO vo);
 	int searchCount(BuyListSearchVO vo);
-	int listCount(BuyListSearchVO vo);
+	int listCount(BuyListSearchVO vod);
+	
+	int buyCount(BuyListSearchVO vo, String loginId);
+	int buySearchCount(BuyListSearchVO vo, String loginId);
+	int buyListCount(BuyListSearchVO vo, String loginId);
 	
 	
 	BuyDto selectOne(int buyNo);
-	boolean update(int buyNo, String deliveryStatus);	
+	boolean update(int buyNo, String deliveryStatus);
+	
+	//구매후 상품 수량 감소
+	void minus(BuyDto buyDto);
 	
 	List<BuyListCountVO> selectCountList();
 	

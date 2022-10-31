@@ -111,23 +111,88 @@ public class BuyDaoImpl implements BuyDao {
 
 	//구매 목록
 	@Override
-	public List<BuyDto> selectList(String loginId) {
-		String sql = "select * from buy where customer_id=? "
-				+ "order by buy_no desc";
-		return jdbcTemplate.query(sql, mapper, loginId);
+	public List<BuyDto> selectBuyList(BuyListSearchVO vo, String loginId) {
+		if(vo.isSearch()) {
+			return buySearch(vo, loginId);
+		}
+		else {
+			return buyList(vo, loginId);
+		}
 	}
-
-	//구매 목록 검색
+	//구매 목록 조회 및 검색(회원용)
 	@Override
-	public List<BuyDto> selectList(String loginId, String type, String keyword) {
-		String sql = "select * from buy "
-				+ "where instr(#1, ?) > 0 and customer_id=? "
-				+ "order by buy_no desc";
-		sql = sql.replace("#1", type);
-		Object[] param = {keyword, loginId};
+	public List<BuyDto> buySearch(BuyListSearchVO vo, String loginId) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from buy where instr(#1,?) > 0 and where customer_id = ?"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(), loginId, vo.startRow(), vo.endRow()
+		};
+	return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	@Override
+	public List<BuyDto> buyList(BuyListSearchVO vo, String loginId) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from buy where customer_id = ?"
+				+ ")TMP"
+			+") where rn between ? and ?";
+		Object[] param = {loginId, vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-//
+	
+
+	//구매 목록 검색
+//	@Override
+//	public List<BuyDto> selectList(String loginId, String type, String keyword) {
+//		String sql = "select * from buy "
+//				+ "where instr(#1, ?) > 0 and customer_id=? "
+//				+ "order by buy_no desc";
+//		sql = sql.replace("#1", type);
+//		Object[] param = {keyword, loginId};
+//		return jdbcTemplate.query(sql, mapper, param);
+//	}
+	
+	//회원 구매 목록 페이징수
+	@Override
+	public int buyCount(BuyListSearchVO vo, String loginId) {
+		if(vo.isSearch()) {
+			return buySearchCount(vo, loginId);
+		}
+		else {
+			return buyListCount(vo, loginId);
+		}
+	}
+	
+	@Override
+	public int buyListCount(BuyListSearchVO vo, String loginId) {
+		String sql = "select count(*) from buy where customer_id = ?";
+		Object[] param = {loginId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	@Override
+	public int buySearchCount(BuyListSearchVO vo, String logindId) {
+		String sql = "select count(*) from buy where instr(#1, ?) > 0 and customer_id = ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword(), logindId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	@Override
+	public void minus(BuyDto buyDto) {
+		String sql= "update item_cnt set item_total_cnt = item_total_cnt - ? where item_no = ? and item_size = ? and item_color = ?";
+		Object[] param= {
+				buyDto.getItemCnt(), buyDto.getItemNo(), buyDto.getItemSize(), buyDto.getItemColor()
+		};
+		jdbcTemplate.update(sql,param);
+		
+	}
+
 //	//구매 정보
 //	@Override
 //	public BuyDto selectOne(int buyNo) {
@@ -135,13 +200,7 @@ public class BuyDaoImpl implements BuyDao {
 //		Object[] param = {buyNo};
 //		return jdbcTemplate.query(sql, extractor, param);
 //	}
-
-	@Override
-	public List<BuyDto> selectListAll(BuyListSearchVO vo) {
-		String sql = "select * from buy order by buy_date desc";
-		
-		return jdbcTemplate.query(sql, mapper);
-	}
+	
 
 	@Override
 	public BuyDto selectOne(int buyNo) {
@@ -156,22 +215,32 @@ public class BuyDaoImpl implements BuyDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 
-	//페이징
 	@Override
-	public List<BuyDto> list(BuyListSearchVO vo) {
+	public List<BuyDto> selectAdminList(BuyListSearchVO vo) {
 		if(vo.isSearch()) {
-			return search(vo);
+			return adminSearch(vo);
 		}
 		else {
-			return list(vo);
+			return adminList(vo);
 		}
 	}
 
 	@Override
-	public List<BuyDto> search(BuyListSearchVO vo) {
+	public List<BuyDto> adminList(BuyListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from buy order by buy_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public List<BuyDto> adminSearch(BuyListSearchVO vo) {
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-					+ "select * from buy where instr(#1,?) > 0 "
+					+ "select * from buy where instr(#1,?) > 0"
 					+ "order by buy_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
@@ -197,14 +266,14 @@ public class BuyDaoImpl implements BuyDao {
 		String sql = "select count(*) from buy where instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
-		return jdbcTemplate.queryForObject(sql, int.class, param);	}
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 
 	@Override
 	public int listCount(BuyListSearchVO vo) {
 		String sql = "select count(*) from buy";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
-	
 	
 			private RowMapper<BuyListCountVO> countMapper = new RowMapper<BuyListCountVO>() {
 				@Override
@@ -221,8 +290,4 @@ public class BuyDaoImpl implements BuyDao {
 		String sql = "select item_name, count(*) cnt from buy group by item_name order by cnt desc";
 		return jdbcTemplate.query(sql, countMapper);
 }
-
-
-	
-	
 }

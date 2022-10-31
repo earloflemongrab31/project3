@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.ReviewDto;
 import com.example.semiproject3.vo.ReviewListSearchVO;
 
@@ -127,6 +126,7 @@ public class ReviewDaoImpl implements ReviewDao {
       Object[] param= {itemNo};
       return jdbcTemplate.query(sql, mapper,param);
    }
+  
    //하나의리뷰정보+이미지 
    @Override
    public ReviewDto selectOne(int reviewNo) {
@@ -162,16 +162,47 @@ public class ReviewDaoImpl implements ReviewDao {
    //아이템 번호 첨부 뷰 (review_real)
    @Override
    public List<ReviewDto> selectList2(int itemNo) {
-      String sql="select * from review_real where item_no=?";
+      String sql="select * from review_real where item_no=? order by review_no desc";
       Object[] param= {itemNo};
       return jdbcTemplate.query(sql, mapper,param);
    }
    
- //페이징처리
+//블라인드처리 
 @Override
-public List<ReviewDto> selectList(ReviewListSearchVO vo) {
+	public boolean updateBlind(int reviewNo, boolean b) {
+		String sql=" update review set review_blind=? where review_no=?";
+		String reviewBlind= b?"Y":null;
+		Object[] param= {reviewBlind,reviewNo};
+		return jdbcTemplate.update(sql,param)>0;
+	}
+//리뷰 눌렀을떄 하나 플러스 
+@Override
+	public void plus(int reviewNo) {
+		String sql="update review set review_cnt=review_cnt+1 where review_no=?";
+		Object[] param= {reviewNo};
+		jdbcTemplate.update(sql,param);
+	}
+
+@Override
+	public void minus(int reviewNo) {
+	String sql="update review set review_cnt=review_cnt-1 where review_no=?";
+	Object[] param= {reviewNo};
+	jdbcTemplate.update(sql,param);
+		
+	}
+
+//삭제
+@Override
+	public boolean delete(int reviewNo) {
+		String sql="delete review where review_no=?";
+		Object[] param= {reviewNo};
+		return jdbcTemplate.update(sql,param)>0;
+	}
+
+@Override
+public List<ReviewDto> selectList(ReviewListSearchVO vo, String loginId) {
 	if(vo.isSearch()) {
-		return search(vo);
+		return search(vo,loginId);
 	}
 	else {
 		return list(vo);
@@ -180,17 +211,13 @@ public List<ReviewDto> selectList(ReviewListSearchVO vo) {
 
 @Override
 public List<ReviewDto> list(ReviewListSearchVO vo) {
-	String sql = "select * from ("
-			+ "select rownum rn, TMP.* from("
-				+ "select * from review order by review_no desc"
-			+ ")TMP"
-		+ ") where rn between ? and ?";
+	String sql = "select * from (select rownum rn, TMP.* from(select * from review order by review_no desc)TMP) where rn between ? and ?";
 	Object[] param = {vo.startRow(), vo.endRow()};
-	return jdbcTemplate.query(sql, mapper, param);
+	return jdbcTemplate.query(sql, mapper1, param);
 }
 
 @Override
-public List<ReviewDto> search(ReviewListSearchVO vo) {
+public List<ReviewDto> search(ReviewListSearchVO vo, String loginId) {
 	String sql = "select * from ("
 			+ "select rownum rn, TMP.* from ("
 				+ "select * from review where instr(#1,?) > 0 "
@@ -199,9 +226,9 @@ public List<ReviewDto> search(ReviewListSearchVO vo) {
 		+ ") where rn between ? and ?";
 	sql = sql.replace("#1", vo.getType());
 	Object[] param = {
-			vo.getKeyword(), vo.startRow(), vo.endRow()
-	};
-	return jdbcTemplate.query(sql, mapper, param);
+			vo.getKeyword(), loginId, vo.startRow(), vo.endRow()
+};
+return jdbcTemplate.query(sql, mapper, param);
 }
 
 @Override
@@ -228,35 +255,16 @@ public int listCount(ReviewListSearchVO vo) {
 	return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
-//블라인드처리 
 @Override
-	public boolean updateBlind(int reviewNo, boolean b) {
-		String sql=" update review set review_blind=? where review_no=?";
-		String reviewBlind= b?"Y":null;
-		Object[] param= {reviewBlind,reviewNo};
-		return jdbcTemplate.update(sql,param)>0;
+public List<ReviewDto> customerSelectList(String loginId, ReviewListSearchVO vo) {
+	if(vo.isSearch()) {
+		return search(vo,loginId);
 	}
-//리뷰 눌렀을떄 하나 플러스 
-@Override
-	public void plus(int reviewNo) {
-		String sql="update review set review_cnt=review_cnt+1 where review_no=?";
-		Object[] param= {reviewNo};
-		jdbcTemplate.update(sql,param);
+	else {
+		return list(vo);
 	}
-
-@Override
-	public void minus(int reviewNo) {
-	String sql="update review set review_cnt=review_cnt-1 where review_no=?";
-	Object[] param= {reviewNo};
-	jdbcTemplate.update(sql,param);
-		
+	
 	}
-
-@Override
-public List<ReviewDto> customerSelectList(String loginId) {
-	String sql = "select * from review where customer_id=? order by review_no asc";
-	Object[] param = {loginId};
-	return jdbcTemplate.query(sql, mapper1, loginId);
 }
 
-}
+

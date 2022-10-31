@@ -144,7 +144,6 @@
     .check-pw.NNNNY{
         display: none;
     }
-
     .input.NNNNN{
         border: 1px solid black;
     }
@@ -154,7 +153,6 @@
     .NNNNN-message{
         display:none;
     } 
-
     .input.NNNNN ~ .NNNNN-message,
     .input.NNNNY ~ .NNNNY-message,
     .input.fail ~ .fail-message,
@@ -167,7 +165,6 @@
     .admin-message{
         display: none;
     }
-
 	/* swiper */
     .swiper{
         width: 100%;
@@ -179,7 +176,6 @@
       font-size: 18px;
       background: #fff;
       margin-right: 100px;
-
       /* Center slide text vertically */
       display: -webkit-box;
       display: -ms-flexbox;
@@ -194,7 +190,6 @@
       -webkit-align-items: center;
       align-items: center;
     }
-
     .swiper-slide img {
       display: block;
       width: 100%;
@@ -202,12 +197,11 @@
       object-fit: cover;
     }
     
-    .footer{
-    	padding: 0 3em;
-    }
-    
     .right-word{
     	 margin-right:10px;
+    }
+    .footer{
+    	padding: 1em 3em;
     }
     
 </style>
@@ -238,16 +232,13 @@
         //1. 첫번째 이전버튼과 마지막 다음버튼을 삭제
         $(".prev").first().remove();
         $(".next").last().remove();
-
         //2. 1페이지만 남기고 다 숨김 처리
         $(".page").hide();
         $(".page").first().show();
-
         //3. 페이지당 늘어나야 할 % 계산
         var step = 100 / $(".page").length;
         var percent = step;
         $(".progressbar > .inner").css("width", percent+"%");
-
         //4. 남은 버튼에 클릭 이벤트를 설정
         //- 다음 버튼을 누르면 해당 페이지의 뒷 페이지 표시 및 나머지 숨김
         //- 이전 버튼을 누르면 해당 페이지의 앞 페이지 표시 및 나머지 숨김
@@ -255,11 +246,9 @@
             //this == 클릭한 다음 버튼
             //var target = $(this).parent().parent().parent().next();
             var target = $(this).parents(".page").next();
-
             //모든 페이지 숨기고 target만 표시
             $(".page").hide();
             target.show();
-
             //% 증가
             percent += step;
             $(".progressbar > .inner").css("width", percent+"%");
@@ -268,7 +257,6 @@
             var target = $(this).parents(".page").prev();
             $(".page").hide();
             target.show();
-
             //% 감소
             percent -= step;
             $(".progressbar > .inner").css("width", percent+"%");
@@ -288,7 +276,6 @@
                 $(this).parent().next().find(".next").attr("disabled", false);
             }
         });
-
         // 모든 항목 입려 시 제출 버튼 활성화
         $(".research-form").submit(function(){
             var successAnswer = $(".last-answer").val().length >= 10;
@@ -347,7 +334,6 @@
 	
 	/* 회원가입 */
     $(function(){
-
         var inputStatus = {
             memberIdValid:false,
             memberNickValid:false,
@@ -357,15 +343,12 @@
             memberNameValid:false,
             memberPhoneValid:false
         };
-
         $(".input[name=customerId]").blur(function(){
             var inputId = $(this).val();
             var regex = /^[a-z][a-z0-9_-]{4,19}$/;
             var judge = regex.test(inputId);
-
             $(this).removeClass("fail NNNNN NNNNY");
             if(judge){
-
                 var that = this;
                 $.ajax({
                     url: "http://localhost:8888/rest/customer/id",
@@ -390,12 +373,10 @@
                 inputStatus.memberIdValid = false;
             }
         });
-
         $(".input[name=customerPw").blur(function(){
             var inputPw = $(this).val();
             var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
             var judge = regex.test(inputPw);
-
             $(this).removeClass("fail NNNNY");
             if(judge){
                 $(this).addClass("NNNNY");
@@ -407,7 +388,6 @@
             }
             $("#customer-pwcheck").blur();
         });
-
         $("#customer-pwcheck").blur(function(){
             var pwCheck = $(this).val();
             if(!pwCheck){
@@ -429,12 +409,10 @@
                 inputStatus.memberPwcheckValid = false;
             }
         });
-
         $(".input[name=customerNick]").blur(function(){
             var inputNick = $(this).val();
             var regex = /^[가-힣][가-힣0-9]{0,9}$/;
             var judge = regex.test(inputNick);
-
             $(this).removeClass("fail NNNNN NNNNY admin");
             if(inputNick == '관리자'){
                 $(this).addClass("admin");
@@ -466,7 +444,6 @@
                 inputStatus.memberNickValid = false;
             }
         });
-
         $(".input[name=customerPwsearch").blur(function(){
             var pwsearch = $(this).val();
             $(this).removeClass("fail");
@@ -500,7 +477,6 @@
                 inputStatus.memberNameValid = true;
             }
         });
-
         $(".input[name=customerPhone").blur(function(){
             var phone = $(this).val();
             var regex = /^01[016789][1-9]\d{6,7}$/;
@@ -521,7 +497,6 @@
                 inputStatus.memberPhoneValid = true;
             }
         });
-
         var inputStatus = {
                 memberIdValid:false,
                 memberNickValid:false,
@@ -587,7 +562,6 @@
             }
             var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
             var judge = regex.test(inputPw);
-
             $(this).removeClass("fail NNNNY");
             if(judge){
                 $(this).addClass("NNNNY");
@@ -597,7 +571,6 @@
             }
             $("#customer-pwcheck").blur();
         });
-
         $("#customer-pwcheck").blur(function(){
             var pwCheck = $(this).val();
             if(!pwCheck){
@@ -605,7 +578,6 @@
                 return;
             };
             if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
-
             var pw = $(".input[name=customerPw").val();
             var judge = pw == pwCheck;
             
@@ -636,25 +608,20 @@
             // 화면 넘기기 옵션
             direction: 'horizontal',
             loop: true,
-
             // 페이징 옵션
             pagination: {
                 el: '.swiper-pagination',// 페이징 적용 대상
                 type: 'bullets',// 페이징 도구 모양
                 clickable: true
             },
-
             // 자동재생 옵션
             autoplay: {
                 delay: 5000
             }, 
-
             //페이지 전환 효과
             effect: "fade",//페이드 인-아웃 효과
-
         });
     });
-
     /* 새상품이미지 스와이퍼 */
     $(function(){
         var swiper = new Swiper('.swiper.mySwiper', {
@@ -667,7 +634,6 @@
 				el: ".mySwiper .swiper-pagination",
 				clickable: true
 			},
-
             // 좌우 버튼 옵션
             navigation: {
                 nextEl: '.swiper-button-next',
@@ -678,10 +644,8 @@
             autoplay: {
                 delay: 5000
             }, 
-
             //페이지 전환 효과
             effect: "slide",//기본 방식
-
         });
     });
     
@@ -701,19 +665,37 @@
     
  	//구매 옵션 불러오기
 	$(function(){
-	    $(".input-option").on("input",function(){
+
+        var selectedOption = [];
+        $(".input-option").on("input",function(){
 	        var color = $(this).find("option:selected").data("color");//선택한 색
 	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
 	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
-	        console.log(color);
-	        console.log(size);
-	        console.log(totalcnt);
 	        if(!color) return;//값 없으면 리턴
+	        
+ 	        for(var i=0; i<selectedOption.length; i++){
+ 	        	if(selectedOption[i] === color + "-" + size){
+ 	 				alert("이미 선택된 옵션입니다.");
+ 	 		        	$(".input-option").val("");
+ 	 				return;
+ 	        	} 
+ 	        }
+	        
 	        
 	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
 	            
 	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark");//i 태그 엑스 표시 추가
 	        icon.click(function(){//누르면 가장 상위 option class를 가지는 tr 삭제
+	        	var deleteColor = $(this).parent(".option").find("input[name=itemColor]").val();
+	        	var deleteSize = $(this).parent(".option").find("input[name=itemSize]").val();
+	        	var deleteOption = deleteColor+"-"+deleteSize;
+	        	
+	 	        for(var i=0; i<selectedOption.length; i++){
+	 	        	if(selectedOption[i] === deleteOption){
+	 	        		selectedOption.splice(i, 1);
+						return;
+	 	        	} 
+	 	        }
 	            $(this).parent(".option").remove();
 	        });
 	        
@@ -730,7 +712,10 @@
 	
 	        $(".input-option").val("");
 	        $("input[name=itemTotalCnt]").attr("value", totalcnt);
-	    });
+	        selectedOption.push(color+"-"+size);
+			console.log(selectedOption);
+        });
+
 // 	    $("select[name=itemColor]").change(function(){
         	
 // 			var color = $(this).val();
@@ -758,7 +743,6 @@
             }
 		});
 	});
-
     //로그아웃 시 즉시 로그아웃 방지
 	$(function(){
 		$("a.logout").click(function(e){
@@ -785,28 +769,29 @@
 	2. 새로고침 할 때마다 나옴
 	3. 관리자 페이지 들어가면 없애야 할 듯
  -->
-<c:if test="${loginGrade != '관리자'}">
+<c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자' && blockAd != 'Y'}">
 	<div class="float-container ad">
 		"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
 		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
 			<img src="/image/googleplay.png">
 		</a>
-		<span class="float-right delete" style="font-family:sans-serif;"><i class="fa-solid fa-xmark"></i></span>
+		<span class="float-right delete" style="font-family:sans-serif; margin-left:5px;">
+			<a href="/block-ad" style="color:white;">다신 보지 않기 <i class="fa-solid fa-xmark"></i></a></span>
 	</div>
 </c:if>
 
 <div class="float-container">
-	<div class="float-left">
-		<h2 class="logo">
-			<a href="/">Logo</a>
-		</h2>
+	<div class="logo float-left">
+		<a class="w-100" href="/">
+			<img class="w-100" src="/image/logo.png">
+		</a>
 	</div>
 	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
 		<div class="right-word row float-right">
 			${loginId}님, 안녕하세요.
 		</div>
 	</c:if>
-	<c:if test="${loginGrade == '관리자'}">
+	<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
 		<div class="right-word row float-right">
 			<a href="/admin/">관리자페이지</a>
 		</div>
@@ -820,10 +805,10 @@
 <ul class="dropdown-menu">
 	<!-- 좌측 드롭다운 메뉴 -->
 	<li class="float-left">
-		<a href="/item/buylist">BEST</a>
+		<a href="/item/bestlist">BEST</a>
 	</li>
 	<li class="float-left">
-		<a href="#">New</a>
+		<a href="/item/buylist">New</a>
 	</li>
 	<li class="float-left">
 		<a href="/item/buylist?keyword=100">outer</a>
@@ -926,4 +911,4 @@
 </ul>
 </div>
 </nav>
-<main>
+<main class="float-container">
