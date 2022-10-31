@@ -13,8 +13,8 @@ public class OrdersDto {
 	private int itemNo;
 	private String itemName;
 	private int itemPrice;
-	private String itemSize;
 	private String itemColor;
+	private String itemSize;
 	private int itemCnt;
 	private int imageNo;
 

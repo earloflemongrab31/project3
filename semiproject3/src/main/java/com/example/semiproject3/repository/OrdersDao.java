@@ -17,7 +17,7 @@ public interface OrdersDao {
 //	boolean update(OrdersDto ordersDto);
 	
 	//주문 삭제
-	boolean delete(int ordersNo);
+	void delete(int ordersNo);
 	
 	//주문 체크
 	boolean check(OrdersDto ordersDto);
@@ -30,9 +30,12 @@ public interface OrdersDao {
 
 	//회원이 선택한 총 주문수 
 	int selectOrders(int ordersNo);
-
-	OrdersDto selectOne(String customerId);
 	
+	//주문 목록에 있는지 중복 조회
+	OrdersDto selectOne(OrdersDto ordersDto);
+	OrdersDto selectOne2(int itemCnt);
+	
+	//주문 목록
 	List<OrdersDto> selectList(String loginId);
 	
 	
@@ -45,6 +48,10 @@ public interface OrdersDao {
 	int count(OrdersListSearchVO vo);
 	int searchCount(OrdersListSearchVO vo);
 	int listCount(OrdersListSearchVO vo);
-
+	
+	//주문 목록에 있는 상품 수량 변경(중복인경우)
+	void plus(OrdersDto ordersDto);
+	
+	void minus(OrdersDto ordersDto);
 	
 }
