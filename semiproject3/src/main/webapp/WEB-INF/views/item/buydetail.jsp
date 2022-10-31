@@ -333,11 +333,10 @@ function fail(){
       </table>
       </div>
 
-						</c:forEach>
+			
 					</tbody>
 				</table>
-			</c:otherwise>
-		</c:choose>
+		
 	</div>
 
 </div>
