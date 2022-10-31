@@ -197,5 +197,13 @@ public class CenterDaoImpl implements CenterDao {
 		
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+
+
+
+	@Override
+	public List<CenterDto> selectListForMain() {
+		CenterListSearchVO vo = new CenterListSearchVO();
+		return list(vo);
+	}
 }
 	

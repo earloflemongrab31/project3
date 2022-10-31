@@ -13,103 +13,103 @@
         }
     });
         
-		//리뷰 좋아요 ajax
-      	$(function(){
-      		$(".review-like-btn").click(function(e){
-      			e.preventDefault();
-      			var that=this;
-      			
-      			$.ajax({
-      				url:"/rest/review/like",
-            		method:"post",
-            		data:{
-            			reviewNo:$(this).data("review-no"),
-            			itemNo:$(this).data("item-no")
-            		},
-            		success:function(resp){
-            			
-            				$(that).next(".like-span").text(resp.reviewCnt);
-            				$(that).next("span").remove(".like-span-remove");
-            		}
-      			})
-      		});
-      	});
-		
-		//사진크게
-		$(function(){
-			$(".image-big").click(function(){
-				
-				var width=$(this).css("width");
-				
-				$(this).animate({
-					width:"+=50"
-				});
-			if(parseInt(width) >=150){
-				$(this).animate({
-					width :100
-				})	;
-			}
-			});
-		});
-		
-      	
+      //리뷰 좋아요 ajax
+         $(function(){
+            $(".review-like-btn").click(function(e){
+               e.preventDefault();
+               var that=this;
+               
+               $.ajax({
+                  url:"/rest/review/like",
+                  method:"post",
+                  data:{
+                     reviewNo:$(this).data("review-no"),
+                     itemNo:$(this).data("item-no")
+                  },
+                  success:function(resp){
+                     
+                        $(that).next(".like-span").text(resp.reviewCnt);
+                        $(that).next("span").remove(".like-span-remove");
+                  }
+               })
+            });
+         });
+      
+      //사진크게
+      $(function(){
+         $(".image-big").click(function(){
+            
+            var width=$(this).css("width");
+            
+            $(this).animate({
+               width:"+=50"
+            });
+         if(parseInt(width) >=150){
+            $(this).animate({
+               width :100
+            })   ;
+         }
+         });
+      });
+      
+         
     
-  	//리뷰 좋아요 ajax
-  	$(function(){
-  		$(".review-like-btn").click(function(e){
-  			e.preventDefault();
-  			var that=this;
-  			
-  			$.ajax({
-  				url:"/rest/review/like",
-        		method:"post",
-        		data:{
-        			reviewNo:$(this).data("review-no"),
-        			itemNo:$(this).data("item-no")
-        		},
-        		success:function(resp){
-        			
-        				$(that).next(".like-span").text(resp.reviewCnt);
-        				$(that).next("span").remove(".like-span-remove");
-        		}
-  			})
-  		});
-  	});
-	
-	//사진크게
-	$(function(){
-		$(".image-big").click(function(){
-			
-			var width=$(this).css("width");
-			
-			$(this).animate({
-				width:"+=50"
-			});
-		if(parseInt(width) >=150){
-			$(this).animate({
-				width :100
-			})	;
-		}
-		});
-	});
+     //리뷰 좋아요 ajax
+     $(function(){
+        $(".review-like-btn").click(function(e){
+           e.preventDefault();
+           var that=this;
+           
+           $.ajax({
+              url:"/rest/review/like",
+              method:"post",
+              data:{
+                 reviewNo:$(this).data("review-no"),
+                 itemNo:$(this).data("item-no")
+              },
+              success:function(resp){
+                 
+                    $(that).next(".like-span").text(resp.reviewCnt);
+                    $(that).next("span").remove(".like-span-remove");
+              }
+           })
+        });
+     });
+   
+   //사진크게
+   $(function(){
+      $(".image-big").click(function(){
+         
+         var width=$(this).css("width");
+         
+         $(this).animate({
+            width:"+=50"
+         });
+      if(parseInt(width) >=150){
+         $(this).animate({
+            width :100
+         })   ;
+      }
+      });
+   });
     
-   	$(function(){
-		$(".cart-in").click(function(){
-			$(".item-form").attr("action", "/cart/insert");
-			$(".item-form").attr("method", "post");
-		});
-		$(".buy").click(function(){
-			$(".item-form").attr("action", "/orders/detail");
-			$(".item-form").attr("method", "get");
-		});
-   	});
+      $(function(){
+      $(".cart-in").click(function(){
+         $(".item-form").attr("action", "/cart/insert");
+         $(".item-form").attr("method", "post");
+      });
+      $(".buy").click(function(){
+         $(".item-form").attr("action", "/orders/detail");
+         $(".item-form").attr("method", "get");
+      });
+      });
 </script>
 
 <style>
-	#box{
-		padding: 5px;
-		border-top: 1px solid #D5D5D5;
-	}
+   #box{
+      padding: 5px;
+      border-top: 1px solid #D5D5D5;
+   }
 </style>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
@@ -129,8 +129,8 @@ function fail(){
 <!-- <form action="/orders/detail" method="get"> -->
 <form class="item-form" action="/cart/insert" method="post">
 <div class="float-left w-50">
-	<table class="table">
-		<tr>
+   <table class="table">
+      <tr>
             <th class="w-50" style="height:480px;">
                <c:forEach var="buylistView" items="${buyImageList}">
                   <c:if test="${buylistView.imageMain == 1}">
@@ -144,35 +144,35 @@ function fail(){
                   </c:if>
                </c:forEach>
             </th>
-		</tr>
-		<tr>
-		   <td class="right">
-		      ${itemDto.itemLikeCnt}
+      </tr>
+      <tr>
+         <td class="right">
+            ${itemDto.itemLikeCnt}
 
-		      <c:if test="${isLike == null}">
-		         ♥
-		      </c:if>
-		      <c:if test="${isLike == true}">
-		         <a href="like?itemNo=${itemDto.itemNo}">♥</a>
-		      </c:if>
-		      <c:if test="${isLike == false}">
-		         <a href="like?itemNo=${itemDto.itemNo}">♡</a>
-		      </c:if>
-		   </td>
-		</tr>
-	</table>
+            <c:if test="${isLike == null}">
+               ♥
+            </c:if>
+            <c:if test="${isLike == true}">
+               <a href="like?itemNo=${itemDto.itemNo}">♥</a>
+            </c:if>
+            <c:if test="${isLike == false}">
+               <a href="like?itemNo=${itemDto.itemNo}">♡</a>
+            </c:if>
+         </td>
+      </tr>
+   </table>
 </div>
 
 <div class="float-left w-50">
-	<div class="row">
-		<input type="hidden" name="customerId" value="${loginId}">
-		<input type="hidden" name="itemNo" value="${itemDto.itemNo}">
-		<input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none">
-	</div>
-	<div class="row">
-		${itemDto.itemMemo}
-	</div>
-	<hr>
+   <div class="row">
+      <input type="hidden" name="customerId" value="${loginId}">
+      <input type="hidden" name="itemNo" value="${itemDto.itemNo}">
+      <input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none">
+   </div>
+   <div class="row">
+      ${itemDto.itemMemo}
+   </div>
+   <hr>
 <div class="row">
    <table class="table">
       <tbody>
@@ -185,31 +185,31 @@ function fail(){
          <tr>
             <th>Option</th>
             <td>
-				<select class="input w-100 input-option">
-					<option value="">선택</option>
-					<c:if test="${empty buylist}">
-						<option disabled>상품준비중</option>
-					</c:if>
-					<c:forEach var="itemDto" items="${buylist}">
-						<option data-color="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
-						${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
-						</option>
-					</c:forEach>
-				</select>
-               	<input class="input w-100" type="hidden" name="itemTotalCnt" value="">
+            <select class="input w-100 input-option">
+               <option value="">선택</option>
+               <c:if test="${empty buylist}">
+                  <option disabled>상품준비중</option>
+               </c:if>
+               <c:forEach var="itemDto" items="${buylist}">
+                  <option data-color="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+                  ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+                  </option>
+               </c:forEach>
+            </select>
+                  <input class="input w-100" type="hidden" name="itemTotalCnt" value="">
             </td>
-<!-- 			<td> -->
-<!-- 				<select class="input w-100" name="itemColor"> -->
-<!-- 					<option value="">선택</option> -->
-<%-- 					<c:if test="${empty buylist}"> --%>
-<!-- 						<option>상품준비중</option> -->
-<%-- 					</c:if> --%>
-<%-- 					<c:forEach var="itemDto" items="${buylist}"> --%>
-<%-- 						<option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}"> --%>
-<%-- 						${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt}) --%>
-<!-- 						</option> -->
-<%-- 					</c:forEach> --%>
-<!-- 				</select> -->
+<!--          <td> -->
+<!--             <select class="input w-100" name="itemColor"> -->
+<!--                <option value="">선택</option> -->
+<%--                <c:if test="${empty buylist}"> --%>
+<!--                   <option>상품준비중</option> -->
+<%--                </c:if> --%>
+<%--                <c:forEach var="itemDto" items="${buylist}"> --%>
+<%--                   <option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}"> --%>
+<%--                   ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt}) --%>
+<!--                   </option> -->
+<%--                </c:forEach> --%>
+<!--             </select> -->
 <!--                <input class="input w-100" type="hidden" name="itemSize" value="" > -->
 <!--                <input class="input w-100" type="hidden" name="itemTotalCnt" value=""> -->
 <!--             </td> -->
@@ -227,22 +227,22 @@ function fail(){
       </tbody>
    </table>
    
-	<div class="row" style="min-height:280px;">
-		<ul class="option-area" style="list-style: none;">
-			
-		</ul>
-	</div>
+   <div class="row" style="min-height:280px;">
+      <ul class="option-area" style="list-style: none;">
+         
+      </ul>
+   </div>
    
    <table class="table">
-		<tr>
-			<td class="right">
-				<!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->				
-				<a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
-				<button class="btn btn-positive buy" type="submit">구매하기</button>
-				<button class="btn btn-positive cart-in" type="submit">장바구니</button>    
-				<a href="buylist">목록으로</a>
-			</td>
-		</tr>
+      <tr>
+         <td class="right">
+            <!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->            
+            <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
+            <button class="btn btn-positive buy" type="submit">구매하기</button>
+            <button class="btn btn-positive cart-in" type="submit">장바구니</button>    
+            <a href="buylist">목록으로</a>
+         </td>
+      </tr>
    </table>
 </div>
 </form>
@@ -350,33 +350,33 @@ function fail(){
                               <td style="text-align: center; vertical-align: middle;">
                              <%--  <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>  --%>
                                  <c:if test="${loginId==null && list.reviewCnt>0}">
-                                 	♥${list.reviewCnt}
+                                    ♥${list.reviewCnt}
                                  </c:if>
                                  <c:if test="${loginId==null && list.reviewCnt==0}">
-                                 	♡
+                                    ♡
                                  </c:if>
                                  <c:if test="${loginId!=null}">
-                                 	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
-                                 	<span class="like-span">${list.reviewCnt}</span>
+                                    <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
+                                    <span class="like-span">${list.reviewCnt}</span>
                                  </c:if>
                               </td>
                            </c:if>
-                          	<tr>
-                          		<td>
-                          		<c:if test="${loginId == list.customerId}">
-                          			(
-                          			<a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                          				<i class="fa-solid fa-trash"></i>
-                          			</a> <!--리뷰 삭제-->
-                          			)
-                          		</c:if>
-                       	<!--관리자로 접근 했을 때만 블라인드 처리가능  -->
-               	
+                             <tr>
+                                <td>
+                                <c:if test="${loginId == list.customerId}">
+                                   (
+                                   <a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                      <i class="fa-solid fa-trash"></i>
+                                   </a> <!--리뷰 삭제-->
+                                   )
+                                </c:if>
+                          <!--관리자로 접근 했을 때만 블라인드 처리가능  -->
+                  
                            <c:choose>
                                  <c:when test="${list.reviewBlind}">
                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                                      		<i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[해제]
-                                      	</a>
+                                            <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[해제]
+                                         </a>
                                  </c:when>
                                  <c:otherwise>
                                     
@@ -386,23 +386,23 @@ function fail(){
                                     
                                  </c:otherwise>
                               </c:choose>
-                           		</td>
-                          	</tr>
+                                 </td>
+                             </tr>
                         </tr>
 
                      </c:forEach>
                   </tbody>
             </c:otherwise>
          </c:choose>
-         	   <h5>
-                  	사용자 총 평점
+               <h5>
+                     사용자 총 평점
                      <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
                      pattern="#,##0.00"></fmt:formatNumber>
                </h5>
       </table>
 
       </div>
-	</div>
+   </div>
 
 
 

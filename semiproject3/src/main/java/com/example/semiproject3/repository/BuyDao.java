@@ -3,9 +3,8 @@ package com.example.semiproject3.repository;
 import java.util.List;
 
 import com.example.semiproject3.entity.BuyDto;
-import com.example.semiproject3.entity.CartDto;
+import com.example.semiproject3.vo.BuyListCountVO;
 import com.example.semiproject3.vo.BuyListSearchVO;
-import com.example.semiproject3.vo.BuyListVO;
 
 public interface BuyDao {
 	
@@ -36,5 +35,7 @@ public interface BuyDao {
 	
 	//구매후 상품 수량 감소
 	void minus(BuyDto buyDto);
+	
+	List<BuyListCountVO> selectCountList();
 	
 }

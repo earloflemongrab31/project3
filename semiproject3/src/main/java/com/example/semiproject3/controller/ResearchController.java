@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,5 +64,9 @@ public class ResearchController {
 	public String confirm() {
 		return "research/confirm";
 	}
-
+	@GetMapping("/list")
+	public String list(Model model) {
+		model.addAttribute("researchList", researchDao.selectList());
+		return "research/list";
+	}
 }
