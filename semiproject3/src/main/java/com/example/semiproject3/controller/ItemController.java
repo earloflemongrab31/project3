@@ -234,6 +234,14 @@ public class ItemController {
 		return "item/buylist";
 	}
 	
+	//베스트 상품 목록(회원용)
+	@GetMapping("/bestlist")
+	public String bestlist(Model model) {
+		
+		model.addAttribute("buylist", itemDao.bestList());
+		return "item/bestlist";
+	}
+	
 	//상품 구매(회원)
 	@GetMapping("/buydetail")
 	public String buy(Model model, 
