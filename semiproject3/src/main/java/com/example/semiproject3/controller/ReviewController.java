@@ -223,13 +223,13 @@ public class ReviewController {
 	
 	@GetMapping("/list")
 	public String list(Model model, HttpSession session,
-			@ModelAttribute(name="vo") ReviewListSearchVO vo) {
+		@ModelAttribute(name="vo") ReviewListSearchVO vo) {
 
-	  String loginId = (String)session.getAttribute(SessionConstant.ID);
+	String loginId = (String)session.getAttribute(SessionConstant.ID);
 	  
-	      model.addAttribute("list",reviewDao.customerSelectList(loginId));
-	      model.addAttribute("param",vo);
-	      return "review/list"; 
+      model.addAttribute("list",reviewDao.selectList(vo));
+      model.addAttribute("param",vo);
+      return "review/list"; 
   }
 	
 	
