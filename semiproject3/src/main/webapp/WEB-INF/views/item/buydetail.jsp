@@ -325,15 +325,16 @@
                                  </td>
                              </tr>
                      </c:forEach>
+                      <h5>
+                     사용자 총 평점
+                     <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
+                     pattern="#,##0.00"></fmt:formatNumber>
+               	</h5>
                   </tbody>
             </c:otherwise>  
          </c:choose>
          
-               <h5>
-                     사용자 총 평점
-                     <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
-                     pattern="#,##0.00"></fmt:formatNumber>
-               </h5>
+              
       </table>
       </div>
    </div>
