@@ -75,6 +75,9 @@ public class BuyController {
 		//상품 수량 차감
 		buyDao.minus(buyDto);
 		
+		//상품 품절 확인을 위한 총수량 차감
+		buyDao.itemMinus(buyDto);
+		
 		return "redirect:success";
 	}
 	
