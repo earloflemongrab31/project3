@@ -67,7 +67,6 @@
          $(".item-form").attr("method", "get");
       });
       });
-=======
 	$(function(){
 		var responseMessage = "<c:out value="${message}" />";
 		if (responseMessage != ""){
@@ -369,9 +368,7 @@
 </c:choose>
 </td>
 </tr>
->>>>>>> refs/remotes/origin/main
 
-<<<<<<< HEAD
 						<!-- 신고 -->
                         <tr rowspan="6">
                            <td>
