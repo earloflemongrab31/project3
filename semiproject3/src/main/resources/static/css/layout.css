@@ -17,7 +17,7 @@ aside{
     float: left;
     width: 20%;
     min-height: 400px;
-	z-index:0;
+    z-index: 0;
 }
 section{
 	position: relative;
@@ -26,7 +26,7 @@ section{
     float: left;
     width: 80%;
     min-height: 400px;
-	z-index:0;
+    z-index: 0;
 }
 footer{
 	/* border-top: 1px solid gray; */

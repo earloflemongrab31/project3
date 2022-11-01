@@ -49,7 +49,7 @@ public class OrdersController {
 			@RequestParam String[] itemColor,
 			@RequestParam int[] itemCnt,
 			@ModelAttribute OrdersDto ordersDto,
-			@RequestParam(required=false)  int[] cartNo,
+			@RequestParam(required=false) int[] cartNo,
 			@ModelAttribute CartDto cartDto,
 			Model model, 
 			HttpSession session) {
@@ -61,6 +61,7 @@ public class OrdersController {
 		for(int i=0; i<itemColor.length; i++) {
 			boolean search = ordersDao.selectOne(OrdersDto.builder()
 											.itemNo(ordersDto.getItemNo())
+											.itemName(ordersDto.getItemName())
 											.itemColor(itemColor[i])
 											.itemSize(itemSize[i])
 											.customerId(loginId)
@@ -89,15 +90,15 @@ public class OrdersController {
 			}
 			else {
 				ordersDao.plus(OrdersDto.builder()
-								.ordersNo(ordersDto.getOrdersNo())
+//								.ordersNo(ordersDto.getOrdersNo())
 								.customerId(loginId)
 								.itemNo(ordersDto.getItemNo())
-								.itemName(ordersDto.getItemName())
-								.itemPrice(ordersDto.getItemPrice())
+//								.itemName(ordersDto.getItemName())
+//								.itemPrice(ordersDto.getItemPrice())
 								.itemColor(itemColor[i])
 								.itemSize(itemSize[i])
 								.itemCnt(itemCnt[i])
-								.imageNo(ordersDto.getImageNo())
+//								.imageNo(ordersDto.getImageNo())
 						.build());
 			}
 			
@@ -123,13 +124,6 @@ public class OrdersController {
 		return "orders/detail";
 	}
 	
-//	//목록
-//	@GetMapping("/list")
-//	public String list(Model model) {
-//		
-//		model.addAttribute("ordersList",ordersDao.selectList());
-//		return "orders/list";
-//	}
 	
 	
 	//페이징처리
@@ -160,15 +154,7 @@ public class OrdersController {
 	}
 
 	
-	
-//	@GetMapping("/address")
-//	public String address(@ModelAttribute AddressDto addressDto, HttpSession session) {
-//	String loginId = (String) session.getAttribute(SessionConstant.ID);
-//	OrdersDto ordersDto = new OrdersDto();
-//	ordersDto.setCustomerId(loginId);
-//	ordersDto.setAddressNo(0);
-//	
-//		return "orders/address";
+
 
 	
 }
