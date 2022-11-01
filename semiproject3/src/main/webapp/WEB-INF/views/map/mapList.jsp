@@ -138,7 +138,7 @@
 				<tr>
 					<td>
 						<h3>
-							<a class="move-link" href="#" data-lat="37.4765227" data-lng="126.6989232">당산센터(본사)</a>
+							<a class="move-link" href="#" data-lat="37.5339767" data-lng="126.8969462">당산센터(본사)</a>
 						</h3>
 							<br>
 							<div>위치 : 서울특별시 영등포구 선유동2로 57 이레빌딩 19층</div>
