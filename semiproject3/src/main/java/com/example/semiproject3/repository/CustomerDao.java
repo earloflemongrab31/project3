@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.CustomerDto;
+import com.example.semiproject3.vo.CustomerJoinCountVO;
 import com.example.semiproject3.vo.CustomerListSearchVO;
 
 public interface CustomerDao {
@@ -60,4 +61,6 @@ public interface CustomerDao {
 	
 	//회원 캐시 차감
 	boolean cash(BuyDto buyDto);
+
+	List<CustomerJoinCountVO> selectCountList();
 }

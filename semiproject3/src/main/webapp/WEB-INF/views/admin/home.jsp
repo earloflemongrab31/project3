@@ -35,7 +35,112 @@
 					data : { // 차트에 들어갈 내용 
 						labels : labels, // 우측 labels 은 배열을 임의로 지정한 이름
 						datasets : [ {
-							label : '상품별 판매현황',
+							label : '판매개수',
+							data : values,
+							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(255, 206, 86, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)',
+									'rgba(255, 159, 64, 0.2)' ],
+							borderColor : [ 'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)',
+									'rgba(255, 159, 64, 1)' ],
+							borderWidth : 1
+						} ]
+					},
+					options : {
+						scales : {
+							y : {
+								beginAtZero : true
+							}
+						}
+					}
+				});
+			},
+		})
+		
+			$.ajax({
+			url : "http://localhost:8888/rest/like/count",
+			method : "get",
+			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
+			success : function(resp) {
+				// console.log(resp);
+				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
+				var labels = [];
+				var values = [];
+
+				for (var i = 0; i < resp.length; i++) {
+					labels.push(resp[i].itemNo);
+					values.push(resp[i].cnt);
+
+				}
+				//             console.log(labels);
+				//             console.log(values);
+				// labels 와 values 를 사용해서 차트를 생성
+				const ctx = document.querySelector('#myChart1');
+				const myChart = new Chart(ctx, {
+					type : 'bar', 
+					//         	'doughnut'(도넛모양) 차트 모양
+					data : { // 차트에 들어갈 내용 
+						labels : labels, // 우측 labels 은 배열을 임의로 지정한 이름
+						datasets : [ {
+							label : '찜 개수',
+							data : values,
+							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(255, 206, 86, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)',
+									'rgba(255, 159, 64, 0.2)' ],
+							borderColor : [ 'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)',
+									'rgba(255, 159, 64, 1)' ],
+							borderWidth : 1
+						} ]
+					},
+					options : {
+						scales : {
+							y : {
+								beginAtZero : true
+							}
+						}
+					}
+				});
+			},
+		})
+		$.ajax({
+			url : "http://localhost:8888/rest/customer/count",
+			method : "get",
+			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
+			success : function(resp) {
+				// console.log(resp);
+				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
+				var labels = [];
+				var values = [];
+
+				for (var i = 0; i < resp.length; i++) {
+					labels.push(resp[i].customerJoin);
+					values.push(resp[i].cnt);
+
+				}
+				//             console.log(labels);
+				//             console.log(values);
+				// labels 와 values 를 사용해서 차트를 생성
+				const ctx = document.querySelector('#myChart2');
+				const myChart = new Chart(ctx, {
+					type : 'line', 
+					//         	'doughnut'(도넛모양) 차트 모양
+					data : { // 차트에 들어갈 내용 
+						labels : labels, // 우측 labels 은 배열을 임의로 지정한 이름
+						datasets : [ {
+							label : '가입자 수',
 							data : values,
 							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
 									'rgba(54, 162, 235, 0.2)',
@@ -79,10 +184,24 @@
 				<canvas id="myChart"></canvas>
 			</div>
 		</div>
+	<div class="row float-container">
+		<div class="float-left w-50 ">
+			<div class="row center">
+				<h3>찜한 상품 번호</h3>
+				<canvas id="myChart1"></canvas>
+			</div>
 		</div>
-		
+		<div class="float-left w-50 ">
+			<div class="row center">
+				<h3>신규 회원</h3>
+				<canvas id="myChart2"></canvas>
+			</div>
+		</div>
+	</div>
+	</div>
+	
 		<div class="row float-container">
-		<div class="float-left w-40 ms-10">
+		<div class="float-left w-30 ms-10">
 			<div class="row center">
 			<h3>가입목록</h3>
 				<hr>
@@ -171,7 +290,7 @@
 					<thead>
 						<tr>
 							<th>글번호</th>
-							<th width="50%">제목</th>
+							<th width="40%">제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 						</tr>

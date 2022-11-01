@@ -14,5 +14,11 @@ public interface ResearchDao {
 	int overlapId(String customerId);
 	
 	List<ResearchDto> selectList();
+	
 	List<ResearchCountVO> selectCountList();
+	List<ResearchCountVO> selectCountList1();
+	List<ResearchCountVO> selectCountList2();
+	List<ResearchCountVO> selectCountList3();
+	List<ResearchCountVO> selectCountList4();
+	List<ResearchCountVO> selectCountList5();
 }
