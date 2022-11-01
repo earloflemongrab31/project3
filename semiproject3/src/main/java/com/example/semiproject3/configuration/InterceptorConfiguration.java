@@ -29,7 +29,6 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//registry에 추가하여 인터셉터가 작동하도록 설정
 		//(참고) 등록 코드 작성 순으로 실행됨
 		
-		
 		//회원용 인터셉터
 		registry.addInterceptor(customerInterceptor)
 					.addPathPatterns(//인터셉터가 감시할 주소

@@ -5,7 +5,7 @@
 </jsp:include>
 
 <section>
-    <div class="container-300">
+    <div class="container-300 mt-50 mb-50">
     
     <div class="row center">
         <h1>비밀번호 변경</h1>
@@ -23,7 +23,7 @@
         </div>
         
         <div class="row mt-30">
-            <button class="btn btn-neutral w-100 btn-check-pw" type="button">비밀번호 확인</button>
+            <button class="btn btn-negative w-100 btn-check-pw" type="button">비밀번호 확인</button>
         </div>
     </div>
 

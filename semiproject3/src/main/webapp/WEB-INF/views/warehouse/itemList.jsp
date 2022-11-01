@@ -16,7 +16,7 @@
           
 <div class="row center">
 	<form action="itemList" method="get">
-	<select class="input" name="type" required>
+	<select class="input input-none" name="type" required>
 		<option value="cate_code">카테고리</option>
 		<option value="inven_name">상품명</option>
 	</select>
@@ -50,7 +50,7 @@
 			<td>${inven.itemTotalCnt}</td>
 			<td>${inven.itemLikeCnt}</td>
 			<td>
-				<a class="btn btn-nuetral btn-border" href="insert?itemNo=${inven.itemNo}&itemSize=${inven.itemSize}&itemColor=${inven.itemColor}">입고/출고</a>
+				<a class="btn btn-nuetral btn-border w-100" href="insert?itemNo=${inven.itemNo}&itemSize=${inven.itemSize}&itemColor=${inven.itemColor}">입고/출고</a>
 			</td>
 		</tr> 	
 		</c:forEach>

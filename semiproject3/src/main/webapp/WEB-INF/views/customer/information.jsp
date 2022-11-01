@@ -9,7 +9,7 @@
 <form action="information" method="post" autocomplete="off">
 
 <section>
-	<div class="container-400">
+	<div class="container-400 mt-50 mb-50">
 	
 		<div class="row center">
 			<h1>회원 정보 변경</h1>

@@ -160,10 +160,12 @@
 							class="input w-100" autocomplete="off">
 					</td>
 				</tr>
-				<tr valign="middle">
-					<td>상품 상세설명</td>
-					<td>
-						<textarea class="input w-100 fix-size"
+				<tr>
+					<td colspan="2">상품 상세설명</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea class="input w-100 content"
 							name="itemContent" rows="10" cols="75" required>${itemDto.itemContent}</textarea>
 					</td>
 				</tr>

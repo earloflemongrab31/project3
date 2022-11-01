@@ -70,11 +70,6 @@ function upGo(){
       <h1>ADDRESS</h1>
       <hr>
    </div>
-
-   <div class="row right">
-        <a class="btn btn-positive" href="insert">새주소 등록</a>
-   </div>
-   
  
   <div class = "row ">
        <h3>기본 배송지</h3>
@@ -170,6 +165,7 @@ function upGo(){
          </c:otherwise>
       </c:choose>
    <div class="row right">
+        <a class="btn btn-positive" href="insert">새주소 등록</a>
       <input type="button" onclick="upGo()";  class="btn btn-positive"  value="수정하기" />
       <input type="button" onclick="delNo()"; class="btn btn-positive"  value="삭제하기" />
    </div>

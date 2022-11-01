@@ -6,7 +6,7 @@
 
 <form action="goodbye" method="post">
 <section>
-<div class="container-400">
+<div class="container-400 mt-50 mb-50">
 	<div class="row center">
 		<h1>비밀번호 확인</h1>
 		<hr>

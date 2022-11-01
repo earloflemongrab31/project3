@@ -7,7 +7,7 @@
 <aside class="right">
 	<ul class="accordian">
 		<li>
-			<span>MY 정보</span>
+			MY 정보
 			<ul>
 				<li><a href="/customer/mypage">개인정보 조회</a>
 				<li><a href="/customer/information">개인정보 수정</a></li>
@@ -18,7 +18,7 @@
 			</ul>
 		</li>
 		<li>
-			<span>쇼핑 정보</span>
+			쇼핑 정보
 			<ul>
 				<li><a href="/buy/list">주문/배송 조회</a></li>
 				<li><a href="/customerLike/list">찜하기 내역</a></li>
