@@ -133,8 +133,8 @@
 			<h1>SeSam 본사위치/물류창고</h1>
 			<hr>
 		</div>
-		<div class="row">
-			<table style="float:left">
+		<div class="row float-container">
+			<table class="float-left w-50">
 				<tr>
 					<td>
 						<h3>
@@ -197,20 +197,20 @@
 					</td>
 				</tr>
 			</table>
-		</div>
 		
-		<table class="mt-70 ms-50" style="float:left">
-		
-			<tr>
-				<td width="70%">
-					<div class="center">
-						<h2><span class="span-eatting"></span></h2>
-					</div>
-					<div id="map">_______________________________________________________</div>
-				</td>
-			</tr>
+			<table class="float-left w-50">
+			
+				<tr>
+					<td width="70%">
+						<div class="center">
+							<h2><span class="span-eatting"></span></h2>
+						</div>
+						<div id="map"></div>
+					</td>
+				</tr>
 	
-		</table>
+			</table>
+		</div>
 		 
 	</div>
 </body>
