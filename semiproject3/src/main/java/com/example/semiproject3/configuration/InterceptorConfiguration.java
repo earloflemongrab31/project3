@@ -39,6 +39,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 					.excludePathPatterns(//위의 주소에서 제외할 주소
 							"/customer/insert*",//회원가입
 							"/customer/login",//로그인
+							"/customer/check_password",//비밀번호찾기
+							"/customer/change_pw",//비밀번호 변경
+							"/customer/buy_history",//주문/배송조회
 							"/customer/goodbye_result",//탈퇴완료
 							"/notice/list",//공지사항 목록
 							"/notice/detail"//공지사항 상세보기
@@ -47,12 +50,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//관리자용 인터셉터
 				registry.addInterceptor(adminInterceptor)
 							.addPathPatterns(//인터셉터가 감시할 주소
-								"/guestbook/edit*",//방명록 수정페이지
-								"/guestbook/delete",//방명록 삭제페이지
 								"/customer/list",//회원목록
 								"/customer/detail",//회원상세
 								"/customer/edit*",//회원수정
-								"/member/goodbye"//회원삭제
+								"/customer/goodbye"//회원삭제
 							)
 							.excludePathPatterns(//위의 주소에서 제외할 주소
 							);
