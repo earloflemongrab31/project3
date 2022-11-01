@@ -52,7 +52,6 @@
          });
       });
       
-         
     
      //리뷰 좋아요 ajax
      $(function(){
@@ -100,9 +99,9 @@
       });
       $(".buy").click(function(){
          $(".item-form").attr("action", "/orders/detail");
-         $(".item-form").attr("method", "get");
+         $(".item-form").attr("method", "post");
       });
-      });
+});
 </script>
 
 <style>
@@ -149,18 +148,18 @@ function fail(){
          <td class="right">
             ${itemDto.itemLikeCnt}
 
-		      <c:if test="${isLike == null}">
-		         <i class="fa-regular fa-heart"></i>
-		      </c:if>
-		      <c:if test="${isLike == true}">
-		         <a href="like?itemNo=${itemDto.itemNo}"><i class="fa-regular fa-heart"></i></a>
-		      </c:if>
-		      <c:if test="${isLike == false}">
-		         <a href="like?itemNo=${itemDto.itemNo}"><i class="fa-regular fa-heart"></i></a>
-		      </c:if>
-		   </td>
-		</tr>
-	</table>
+            <c:if test="${isLike == null}">
+               ♥
+            </c:if>
+            <c:if test="${isLike == true}">
+               <a href="like?itemNo=${itemDto.itemNo}">♥</a>
+            </c:if>
+            <c:if test="${isLike == false}">
+               <a href="like?itemNo=${itemDto.itemNo}">♡</a>
+            </c:if>
+         </td>
+      </tr>
+   </table>
 </div>
 
 <div class="float-left w-50">
@@ -350,10 +349,10 @@ function fail(){
                               <td style="text-align: center; vertical-align: middle;">
                              <%--  <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>  --%>
                                  <c:if test="${loginId==null && list.reviewCnt>0}">
-                                 	<i class="fa-solid fa-heart"></i>${list.reviewCnt}
+                                    ♥${list.reviewCnt}
                                  </c:if>
                                  <c:if test="${loginId==null && list.reviewCnt==0}">
-                                 	<i class="fa-regular fa-heart"></i>
+                                    ♡
                                  </c:if>
                                  <c:if test="${loginId!=null}">
                                     <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>

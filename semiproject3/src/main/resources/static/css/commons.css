@@ -52,6 +52,9 @@ div.logo{
 .w-75{
 	width: 75%;
 }
+.w-60{
+	width: 60%;
+}
 .w-50{
     width: 50%;
 }
@@ -63,6 +66,9 @@ div.logo{
 }
 .w-25{
     width: 25%;
+}
+.w-10{
+	width: 10%;
 }
 
 /* 
@@ -438,7 +444,6 @@ ul.pagination > li > a{
     padding: 0;
     list-style: none;
     font-family: "Noto Serif KR";
-    z-index: 2;
 }
 
 .dropdown-menu{

@@ -28,13 +28,13 @@ import com.example.semiproject3.repository.MainImageDao;
 @Controller
 public class HomeController {
 	
-
-//	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
+//	맥북용
+	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
 //	화니꼬
 //	private final File directory = new File("C:/study/main");
 //	D드라이브용
 //	private final File directory = new File("D:/upload");
-	private final File directory = new File("D:/study/itemImage");
+//	private final File directory = new File("D:/study/itemImage");
 	
 	@Autowired
 	private CartDao cartDao;
