@@ -174,7 +174,7 @@
 <div class="row">
    <input type="hidden" name="customerId" value="${loginId}">
    <input type="hidden" name="itemNo" value="${itemDto.itemNo}">
-   <input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none">
+   <input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none" style="font-weight:bold;">
 </div>
 <div class="row">
    ${itemDto.itemMemo}
@@ -394,8 +394,5 @@
          </c:otherwise>
       </c:choose>
    </div>
-</div>
-<div class="center">
-   <a href="buylist">목록으로 <i class="fa-solid fa-arrow-right"></i></a>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -66,18 +66,21 @@
 
    	<c:forEach var="itemDto" items="${itemList}">
     	<div class="swiper-slide">
-    		<div class="row">
+    		<div class="row" style="font-size:14px;">
 	    		<div>
 		    		<a href="item/buydetail?itemNo=${itemDto.itemNo}">
 						<img src="/image/download/${itemDto.imageNo}">
 		    		</a>
 	    		</div>
-	    		<div class="row">
-	    			${itemDto.itemName}
-	    			<br>
-	    			<fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0"/>원
+	    		<div class="row left float-container mb-20" style="font-weight:bold;">
+	    			<div class="float-left">
+		    			${itemDto.itemName}
+	    			</div>
+	    			<div class="float-right">
+		    			<fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0"/>원
+	    			</div>
 	    		</div>
-	    		<div class="row">
+	    		<div class="row left">
 	    			${itemDto.itemMemo}
 	    		</div>
     		</div>
