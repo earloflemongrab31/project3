@@ -45,7 +45,7 @@ public class OrdersController {
 	
 	@PostMapping("/detail")
 	public String list(
-			@RequestParam String itemName,
+			@RequestParam String[] itemName,
 			@RequestParam String[] itemSize,
 			@RequestParam String[] itemColor,
 			@RequestParam int[] itemCnt,
@@ -83,7 +83,7 @@ public class OrdersController {
 								.ordersNo(ordersDto.getOrdersNo())
 								.customerId(loginId)
 								.itemNo(ordersDto.getItemNo())
-								.itemName(itemName)
+								.itemName(itemName[i])
 								.itemPrice(ordersDto.getItemPrice())
 								.itemColor(itemColor[i])
 								.itemSize(itemSize[i])
