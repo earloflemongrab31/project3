@@ -18,9 +18,9 @@
 <table class="table table-border">
 	<thead>
 		<tr>
-			<th>카테고리번호</th>
+			<td>카테고리번호</td>
 			<td>${itemDto.itemCate}</td>
-			<th>상품명</th>
+			<td>상품명</td>
 			<td>${itemDto.itemName}</td>
 		</tr>
 	</thead>
