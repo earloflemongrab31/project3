@@ -57,17 +57,14 @@ public class CustomerRestController {
 			return "NNNNN";
 		}
 	}
-<<<<<<< HEAD
 	
 	@GetMapping("/block-ad")
 	public String blockAd(HttpSession session) {
 		session.setAttribute("blockAd", "Y");
 		return "redirect:/";
 	}
-=======
 	@GetMapping("/count")
 	public List<CustomerJoinCountVO>count(){
 		return customerDao.selectCountList();
 }
->>>>>>> refs/remotes/origin/main
 }
