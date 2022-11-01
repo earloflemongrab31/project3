@@ -27,9 +27,7 @@
                      itemNo:$(this).data("item-no")
                   },
                   success:function(resp){
-                     
                         $(that).next(".like-span").text(resp.reviewCnt);
-                        $(that).next("span").remove(".like-span-remove");
                   }
                })
             });
@@ -39,59 +37,20 @@
       $(function(){
          $(".image-big").click(function(){
             
-            var width=$(this).css("width");
+            var width=$(this).css("width",100);
             
             $(this).animate({
                width:"+=50"
-            });
+            }); 
+            
          if(parseInt(width) >=150){
             $(this).animate({
-               width :100
-            })   ;
+               width :"100"
+            });
          }
          });
       });
       
-         
-    
-     //리뷰 좋아요 ajax
-     $(function(){
-        $(".review-like-btn").click(function(e){
-           e.preventDefault();
-           var that=this;
-           
-           $.ajax({
-              url:"/rest/review/like",
-              method:"post",
-              data:{
-                 reviewNo:$(this).data("review-no"),
-                 itemNo:$(this).data("item-no")
-              },
-              success:function(resp){
-                 
-                    $(that).next(".like-span").text(resp.reviewCnt);
-                    $(that).next("span").remove(".like-span-remove");
-              }
-           })
-        });
-     });
-   
-   //사진크게
-   $(function(){
-      $(".image-big").click(function(){
-         
-         var width=$(this).css("width");
-         
-         $(this).animate({
-            width:"+=50"
-         });
-      if(parseInt(width) >=150){
-         $(this).animate({
-            width :100
-         })   ;
-      }
-      });
-   });
     
       $(function(){
       $(".cart-in").click(function(){
@@ -285,7 +244,6 @@ function fail(){
                   <span>해당 상품의 리뷰가 없습니다</span>
                </h4>
             </c:when>
-
             <c:otherwise>
                <h5>리뷰수${fn:length(reviewList)}</h5>
                <table class="table left table-review-list">
@@ -303,6 +261,7 @@ function fail(){
                            </td>
                         </tr>
 
+						<!-- 신고 -->
                         <tr rowspan="6">
                            <td>
                            <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" />**** / ${list.reviewDate} 
@@ -316,14 +275,15 @@ function fail(){
                               </c:choose>
                            </td>
                         </tr>
-
+                        
+						<!--제품/포장상태/배송상태  -->
                         <tr rowspan="6">
                            <td>
                               제품명 : ${itemDto.itemName} / 포장상태 :
                               ${list.reviewPackaging} / 배송상태 : ${list.reviewShipping}
                            </td>
                         </tr>
-
+						
                         <tr rowspan="6" height="160">
                            <!--블라인드여부에따라 다르게 표시 -->
                            <c:choose>
@@ -337,41 +297,32 @@ function fail(){
                               <td  style="text-align: center; vertical-align: middle;">
                                  <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100">
                               </td>
-                             ${list.imageNo}
-
+                              
                            <!--좋아요  -->                
-                           <%-- <c:if test="${list.reviewCnt==0}">
                               <td style="text-align: center; vertical-align: middle;">
-                                 <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♡</a>
-                              </td>
-                           </c:if> --%>
-                           
-                           <c:if test="${list.reviewCnt>=0}">
-                              <td style="text-align: center; vertical-align: middle;">
-                             <%--  <a href="/review/like?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">♥${list.reviewCnt}</a>  --%>
-                                 <c:if test="${loginId==null && list.reviewCnt>0}">
-                                    ♥${list.reviewCnt}
-                                 </c:if>
-                                 <c:if test="${loginId==null && list.reviewCnt==0}">
-                                    ♡
-                                 </c:if>
-                                 <c:if test="${loginId!=null}">
-                                    <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
+                             <c:choose>
+                             	<c:when test="${loginId==null}">
+                             		♥${list.reviewCnt}
+                             	</c:when>
+                             	<c:otherwise>
+                             		<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
                                     <span class="like-span">${list.reviewCnt}</span>
-                                 </c:if>
+                             	</c:otherwise>
+                             </c:choose>
                               </td>
-                           </c:if>
+                          
+                          <!--리뷰 삭제-->
                              <tr>
                                 <td>
                                 <c:if test="${loginId == list.customerId}">
                                    (
                                    <a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
                                       <i class="fa-solid fa-trash"></i>
-                                   </a> <!--리뷰 삭제-->
+                                   </a> 
                                    )
                                 </c:if>
+                                
                           <!--관리자로 접근 했을 때만 블라인드 처리가능  -->
-                  
                            <c:choose>
                                  <c:when test="${list.reviewBlind}">
                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
@@ -388,23 +339,17 @@ function fail(){
                               </c:choose>
                                  </td>
                              </tr>
-                        </tr>
-
                      </c:forEach>
                   </tbody>
-            </c:otherwise>
+            </c:otherwise>  
          </c:choose>
+         
                <h5>
                      사용자 총 평점
                      <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
                      pattern="#,##0.00"></fmt:formatNumber>
                </h5>
       </table>
-
       </div>
    </div>
-
-
-
-</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
