@@ -75,6 +75,45 @@ public class BuyController {
 		
 		return "redirect:success";
 	}
+	@PostMapping("/cart-insert")
+	public String cartInsert(
+			@ModelAttribute BuyDto buyDto,
+			@RequestParam String[] itemSize,
+			@RequestParam String[] itemColor,
+			@RequestParam String[] itemName,
+			@RequestParam int[] itemCnt,
+			@RequestParam int[] imageNo,
+			@RequestParam int[] itemNo,
+			@RequestParam int[] cartNo,
+			@RequestParam int[] itemTotalPrice,
+			@RequestParam(required = false) int usePoint) {
+		
+		
+		if(usePoint > 0) {
+			customerDao.usePoint(usePoint, buyDto.getCustomerId());
+		}
+		
+		//주문 완료 시 구매 테이블 삽입
+		for(int i=0; i<itemSize.length; i++) {
+			buyDto.setItemSize(itemSize[i]);
+			buyDto.setItemColor(itemColor[i]);
+			buyDto.setItemName(itemName[i]);
+			buyDto.setItemCnt(itemCnt[i]);
+			buyDto.setImageNo(imageNo[i]);
+			buyDto.setItemNo(itemNo[i]);
+			buyDto.setItemTotalPrice(itemTotalPrice[i]);
+			cartDao.delete(cartNo[i]);
+			buyDao.insert(buyDto);
+			//회원 돈 차감
+			customerDao.cash(buyDto);
+			//상품 수량 차감
+			buyDao.minus(buyDto);
+			//상품 품절 확인을 위한 총수량 차감
+			buyDao.itemMinus(buyDto);
+		}
+		
+		return "redirect:success";
+	}
 	
 	@GetMapping("/success")
 	public String success(Model model, HttpSession session) {

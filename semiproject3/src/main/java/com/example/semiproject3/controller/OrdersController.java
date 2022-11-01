@@ -82,7 +82,6 @@ public class OrdersController {
 
 	@PostMapping("/cart-buy")
 	public String cartBuy(
-			@ModelAttribute List<CartListVO> cartList,
 			Model model,
 			HttpSession session) {
 		
@@ -95,12 +94,12 @@ public class OrdersController {
 		model.addAttribute("addressList", addressDao.selectList(loginId));
 		
 		//주문 내역 불러오기
-		model.addAttribute("cartList", cartList);
+		model.addAttribute("cartList", cartDao.selectList(loginId));
 		
 		//장바구니 개수
 		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
-		return "orders/detail";
+		return "orders/cartBuy";
 	}
 	
 	
