@@ -66,12 +66,28 @@
             $(".item-form").attr("method", "post");
          });
       });
+      
+       //작은 이미지 클릭하면 큰 이미지 변경
+      $(function(){
+        $(".item-mini-image").click(function(){
+           var selectedImage = $(this).data("image-no");
+           $("img[data-image=main]").attr("src", "/image/download/"+selectedImage);
+        });
+     });
 </script>
 
 <style>
    #box{
       padding: 5px;
       border-top: 1px solid #D5D5D5;
+   }
+   
+   /*    사진 밑에 작게 만드는 옵션 */
+      .image.item-mini-image{
+      object-fit: cover;
+      width: 50px;
+      max-height: 50px;
+      cursor: pointer;
    }
 </style>
 
@@ -92,33 +108,44 @@
 <div class="float-left w-50">
    <table class="table">
       <tbody>
-         <tr>
-            <th class="w-50" style="height:480px;">
+          <tr>
+            <th class="center">
                <c:forEach var="buylistView" items="${buyImageList}">
                <c:if test="${buylistView.imageMain == 1}">
-                  <img src="/image/download/${buylistView.imageNo}" width="200" >
+                  <img src="/image/download/${buylistView.imageNo}" style="width:320px; height: 430px;" data-image="main">
                   <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
-               </c:if>
-               </c:forEach>
-               <c:forEach var="buylistView" items="${buyImageList}">
-               <c:if test="${buylistView.imageMain == 0}">
-                  <img src="/image/download/${buylistView.imageNo}" width="100" >
                </c:if>
                </c:forEach>
             </th>
          </tr>
          <tr>
+            <td class="center">
+                <c:forEach var="buylistView" items="${buyImageList}">
+                    <c:if test="${buylistView.imageMain == 1}">
+                        <img src="/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
+                           data-image-no="${buylistView.imageNo}"> 
+                    </c:if>
+                </c:forEach>
+                <c:forEach var="buylistView" items="${buyImageList}">
+                    <c:if test="${buylistView.imageMain == 0}">
+                       <img src="/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
+                          data-image-no="${buylistView.imageNo}">
+                    </c:if>
+                </c:forEach>
+            </td>
+        </tr>
+         <tr>
             <td class="right">
             ${itemDto.itemLikeCnt}
             
             <c:if test="${isLike == null}">
-               ♥
+               <i class="fa-regular fa-heart"></i>
             </c:if>
             <c:if test="${isLike == true}">
-               <a href="like?itemNo=${itemDto.itemNo}">♥</a>
+               <a href="like?itemNo=${itemDto.itemNo}"><i class="fa-solid fa-heart"></i></a>
             </c:if>
             <c:if test="${isLike == false}">
-               <a href="like?itemNo=${itemDto.itemNo}">♡</a>
+               <a href="like?itemNo=${itemDto.itemNo}"><i class="fa-regular fa-heart"></i></a>
             </c:if>
             </td>
          </tr>
@@ -287,10 +314,10 @@
                               <td style="text-align: center; vertical-align: middle;">
                              <c:choose>
                                 <c:when test="${loginId==null}">
-                                   ♥${list.reviewCnt}
+                                   <i class="fa-regular fa-heart"></i>${list.reviewCnt}
                                 </c:when>
                                 <c:otherwise>
-                                   <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
+                                   <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}"><i class="fa-solid fa-heart"></i></a>
                                     <span class="like-span">${list.reviewCnt}</span>
                                 </c:otherwise>
                              </c:choose>
@@ -325,17 +352,15 @@
                                  </td>
                              </tr>
                      </c:forEach>
-                      <h5>
-                     사용자 총 평점
-                     <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
-                     pattern="#,##0.00"></fmt:formatNumber>
-               	</h5>
-                  </tbody>
-            </c:otherwise>  
-         </c:choose>
-         
-              
-      </table>
-      </div>
+                        <h5>
+                           사용자 총 평점
+                           <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
+                           pattern="#,##0.00"></fmt:formatNumber>
+                        </h5>
+               </tbody>
+            </table>
+         </c:otherwise>
+      </c:choose>
    </div>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

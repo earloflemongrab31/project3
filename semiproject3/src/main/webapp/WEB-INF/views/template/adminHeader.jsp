@@ -210,7 +210,7 @@
 		<a href="#">회원관리</a>
 		<ul>
 			<li><a href="/customer/list">회원목록</a></li>
-			<li><a href="/rest/research/count">설문조사결과</a></li>
+			<li><a href="/research/list">설문조사결과</a></li>
 			<li><a href="/review/reportList">리뷰신고목록</a></li>
 		</ul>
 	</li>
