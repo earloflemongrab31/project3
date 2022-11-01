@@ -96,7 +96,7 @@ public class CustomerDaoImpl implements CustomerDao{
 				+ "customer_birth,"
 				+ "customer_email,"
 				+ "customer_point,"
-				+ "customer_money"
+				+ "customer_money,"
 				+ "customer_join"
 				+ ") "
 				+ "values(?,?,?,?,?,?,?,?,?,?,?,to_date(sysdate, 'YYYY-MM-DD'))";
