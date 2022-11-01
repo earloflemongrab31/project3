@@ -55,11 +55,11 @@ public class AddBasicController {
    public String addBasic(Model model,HttpSession session,
 		   @ModelAttribute(name="vo") AddressUniteVO vo) {
 	   
+   String loginId = (String) session.getAttribute(SessionConstant.ID);
 	   
-	int count = addressDao.count(vo);
+	int count = addressDao.count(vo, loginId);
 	vo.setCount(count);
 	
-	String loginId = (String) session.getAttribute(SessionConstant.ID);
 	List<AddressDto>listBasic=addressDao.selectOneBasic(loginId);
 	model.addAttribute("listBasic",addressDao.selectOneBasic(loginId));
 	model.addAttribute("list",addressDao.selectList(loginId, vo));

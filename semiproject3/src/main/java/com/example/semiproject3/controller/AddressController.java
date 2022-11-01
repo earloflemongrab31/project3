@@ -85,10 +85,11 @@ public class AddressController {
    public String list(Model model,HttpSession session,
 		   @ModelAttribute(name="vo") AddressUniteVO vo) {
    
-   int count = addressDao.count(vo);
+   String loginId = (String) session.getAttribute(SessionConstant.ID);
+   
+   int count = addressDao.count(vo, loginId);
    vo.setCount(count);
 		   
-   String loginId = (String) session.getAttribute(SessionConstant.ID);
    List<AddressDto>listBasic = addressDao.selectOneBasic(loginId);
    model.addAttribute("listBasic",addressDao.selectOneBasic(loginId));
    model.addAttribute("list",addressDao.selectList(loginId, vo));
