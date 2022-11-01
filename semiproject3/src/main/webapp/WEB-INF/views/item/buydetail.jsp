@@ -10,6 +10,64 @@
 <!-- 회원정보에 없는 이메일을 입력할 시에 출력되는 경고창 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
+<<<<<<< HEAD
+    $(function(){
+        var responseMessage = "<c:out value="${message}" />";
+        if (responseMessage != ""){
+            alert(responseMessage)
+        }
+    });
+        
+      //리뷰 좋아요 ajax
+         $(function(){
+            $(".review-like-btn").click(function(e){
+               e.preventDefault();
+               var that=this;
+               
+               $.ajax({
+                  url:"/rest/review/like",
+                  method:"post",
+                  data:{
+                     reviewNo:$(this).data("review-no"),
+                     itemNo:$(this).data("item-no")
+                  },
+                  success:function(resp){
+                        $(that).next(".like-span").text(resp.reviewCnt);
+                  }
+               })
+            });
+         });
+      
+      //사진크게
+      $(function(){
+         $(".image-big").click(function(){
+            
+            var width=$(this).css("width",100);
+            
+            $(this).animate({
+               width:"+=50"
+            }); 
+            
+         if(parseInt(width) >=150){
+            $(this).animate({
+               width :"100"
+            });
+         }
+         });
+      });
+      
+    
+      $(function(){
+      $(".cart-in").click(function(){
+         $(".item-form").attr("action", "/cart/insert");
+         $(".item-form").attr("method", "post");
+      });
+      $(".buy").click(function(){
+         $(".item-form").attr("action", "/orders/detail");
+         $(".item-form").attr("method", "get");
+      });
+      });
+=======
 	$(function(){
 		var responseMessage = "<c:out value="${message}" />";
 		if (responseMessage != ""){
@@ -65,6 +123,7 @@
 			$(".item-form").attr("method", "post");
 		});
 	});
+>>>>>>> refs/remotes/origin/main
 </script>
 
 <style>
@@ -247,6 +306,31 @@
 	<hr>
 </div>
 
+<<<<<<< HEAD
+      <div class="row">
+         <c:choose>
+            <c:when test="${reviewList.isEmpty()}">
+               <h4 style="padding-left: 20px">
+                  <span>해당 상품의 리뷰가 없습니다</span>
+               </h4>
+            </c:when>
+            <c:otherwise>
+               <h5>리뷰수${fn:length(reviewList)}</h5>
+               <table class="table left table-review-list">
+                  <tbody>
+                     <c:forEach var="list" items="${reviewList}">
+                        <tr rowspan="7" id="box">
+                           <td>
+                              <c:if test="${list.reviewStar==1}">★(${list.reviewStar})</c:if>
+                              <c:if test="${list.reviewStar==2}">★★(${list.reviewStar})</c:if>
+                              <c:if test="${list.reviewStar==3}">★★★(${list.reviewStar})</c:if>
+                              <c:if test="${list.reviewStar==4}">★★★★(${list.reviewStar})</c:if>
+                              <c:if test="${list.reviewStar==5}">★★★★★(${list.reviewStar})</c:if>
+                              <c:set var="total" value="${total+list.reviewStar}" />
+                         
+                           </td>
+                        </tr>
+=======
 <div class="row">
 <c:choose>
 	<c:when test="${reviewList.isEmpty()}">
@@ -285,7 +369,102 @@
 </c:choose>
 </td>
 </tr>
+>>>>>>> refs/remotes/origin/main
 
+<<<<<<< HEAD
+						<!-- 신고 -->
+                        <tr rowspan="6">
+                           <td>
+                           <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" />**** / ${list.reviewDate} 
+                              <c:choose>
+                                 <c:when test="${loginId != list.customerId}">
+                                    <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">/ [신고]</a>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <a href="#" onclick="fail();"> / [신고]</a>
+                                 </c:otherwise>
+                              </c:choose>
+                           </td>
+                        </tr>
+                        
+						<!--제품/포장상태/배송상태  -->
+                        <tr rowspan="6">
+                           <td>
+                              제품명 : ${itemDto.itemName} / 포장상태 :
+                              ${list.reviewPackaging} / 배송상태 : ${list.reviewShipping}
+                           </td>
+                        </tr>
+						
+                        <tr rowspan="6" height="160">
+                           <!--블라인드여부에따라 다르게 표시 -->
+                           <c:choose>
+                              <c:when test="${list.reviewBlind}">
+                                 <td width="770" style="vertical-align: middle;">블라인드처리된게시물입니다.</td>
+                              </c:when>
+                              <c:otherwise>
+                                 <td width="770" style="vertical-align: middle;">${list.reviewContent}</td>
+                              </c:otherwise>
+                           </c:choose>
+                              <td  style="text-align: center; vertical-align: middle;">
+                                 <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100">
+                              </td>
+                              
+                           <!--좋아요  -->                
+                              <td style="text-align: center; vertical-align: middle;">
+                             <c:choose>
+                             	<c:when test="${loginId==null}">
+                             		♥${list.reviewCnt}
+                             	</c:when>
+                             	<c:otherwise>
+                             		<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
+                                    <span class="like-span">${list.reviewCnt}</span>
+                             	</c:otherwise>
+                             </c:choose>
+                              </td>
+                          
+                          <!--리뷰 삭제-->
+                             <tr>
+                                <td>
+                                <c:if test="${loginId == list.customerId}">
+                                   (
+                                   <a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                      <i class="fa-solid fa-trash"></i>
+                                   </a> 
+                                   )
+                                </c:if>
+                                
+                          <!--관리자로 접근 했을 때만 블라인드 처리가능  -->
+                           <c:choose>
+                                 <c:when test="${list.reviewBlind}">
+                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                            <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[해제]
+                                         </a>
+                                 </c:when>
+                                 <c:otherwise>
+                                    
+                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                       <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]
+                                       </a>
+                                    
+                                 </c:otherwise>
+                              </c:choose>
+                                 </td>
+                             </tr>
+                     </c:forEach>
+                  </tbody>
+            </c:otherwise>  
+         </c:choose>
+         
+               <h5>
+                     사용자 총 평점
+                     <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
+                     pattern="#,##0.00"></fmt:formatNumber>
+               </h5>
+      </table>
+      </div>
+   </div>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+=======
 <tr rowspan="6">
 <td>
 제품명 : ${itemDto.itemName} / 포장상태 :
@@ -377,3 +556,4 @@ pattern="#,##0.00"></fmt:formatNumber>
 
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+>>>>>>> refs/remotes/origin/main
