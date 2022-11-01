@@ -184,6 +184,7 @@ public class BuyDaoImpl implements BuyDao {
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
+	//구매후 상품 수량 감소
 	@Override
 	public void minus(BuyDto buyDto) {
 		String sql= "update item_cnt set item_total_cnt = item_total_cnt - ? where item_no = ? and item_size = ? and item_color = ?";
@@ -191,7 +192,16 @@ public class BuyDaoImpl implements BuyDao {
 				buyDto.getItemCnt(), buyDto.getItemNo(), buyDto.getItemSize(), buyDto.getItemColor()
 		};
 		jdbcTemplate.update(sql,param);
-		
+	}
+	
+	//상품 품절확인을 위한 총 수량 감소
+	@Override
+	public void itemMinus(BuyDto buyDto) {
+		String sql= "update item set item_total_cnt = item_total_cnt - ? where item_no = ?";
+		Object[] param= {
+				buyDto.getItemCnt(), buyDto.getItemNo()
+		};
+		jdbcTemplate.update(sql,param);
 	}
 
 //	//구매 정보

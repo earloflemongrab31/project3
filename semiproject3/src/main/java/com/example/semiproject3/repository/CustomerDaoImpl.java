@@ -97,8 +97,9 @@ public class CustomerDaoImpl implements CustomerDao{
 				+ "customer_email,"
 				+ "customer_point,"
 				+ "customer_money"
+				+ "customer_join"
 				+ ") "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?)";
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,to_date(sysdate, 'YYYY-MM-DD'))";
 		Object[] param = {
 				customerDto.getCustomerId(), customerDto.getCustomerPw(), customerDto.getCustomerPwsearch(),
 				customerDto.getCustomerNick(), customerDto.getCustomerName(), customerDto.getCustomerPhone(),

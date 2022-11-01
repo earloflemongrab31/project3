@@ -57,7 +57,7 @@
 	 		<td class="right cntPrice" rowspan="2">
 	 			<c:set var="cntPrice" value="${cartDto.itemCnt*cartDto.itemPrice}"/>
 	 			<fmt:formatNumber value="${cntPrice}" pattern="#,##0"/>원
-	 			<input type="hidden" name="itemPrice" value="${cartDto.itemCnt*cartDto.itemPrice}">
+	 			<input type="hidden" name="itemPrice" value="${cartDto.itemPrice}">
 	 		</td>
 	 	</tr>
 	 	<tr>	

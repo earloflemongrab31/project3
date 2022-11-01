@@ -31,7 +31,7 @@
 				<c:if test="${itemDto.imageMain == 1}">
 					<div class="row float-left w-33">
 						<a href="buydetail?itemNo=${itemDto.itemNo}">
-							<img src="/image/download/${itemDto.imageNo}" class="w-75">
+							<img src="/image/download/${itemDto.imageNo}" style="width:320px; height: 430px;">
 						</a>
 						<br><br>
 	<%-- 					${itemDto.itemNo}<br> --%>
