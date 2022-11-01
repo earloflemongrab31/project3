@@ -1,5 +1,7 @@
 package com.example.semiproject3.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.repository.CartDao;
+import com.example.semiproject3.vo.CartListVO;
 
 @CrossOrigin
 @RestController
@@ -21,7 +24,7 @@ public class CartRestController {
 	private CartDao cartDao;
 	
 	@PostMapping("/")
-	private String cntPlus (
+	private List<CartListVO> cntPlus (
 			@RequestParam int itemCnt,
 			@RequestParam int cartNo,
 			HttpSession session) {
@@ -30,6 +33,6 @@ public class CartRestController {
 		
 		cartDao.cntPlus(itemCnt, cartNo, loginId);
 		
-		return "NNNNY";
+		return cartDao.selectList(loginId);
 	}
 }

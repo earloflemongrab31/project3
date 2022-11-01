@@ -21,8 +21,13 @@
 					cartNo: cartNo
 				},
 				success: function(resp){
-					console.log(itemPrice * itemCnt);
 					that.parent("td").next().find(".price-result").text(itemPrice * itemCnt);
+					var totalPay = 0;
+					for(var i=0; i<resp.length; i++){
+						totalPay += resp[i].itemCnt * resp[i].itemPrice;			
+					}
+					$("#pay-total").text(totalPay);
+					$("#pay-real-total").text(totalPay + 3000);
 				}
 			});
 		});
@@ -70,16 +75,17 @@
 			</td>
 			<td rowspan="2">
 				<span class="price-result">${cartDto.itemPrice * cartDto.itemCnt}</span>원
+				<c:set var="total" value="${total + cartDto.itemPrice * cartDto.itemCnt}"></c:set>
 	 		</td>
 	 	</tr>
 	 	<tr>	
 	 		<td>옵션</td>
-	 		<td>${cartDto.itemColor} / ${cartDto.itemSize}</td>
-	 		<input type="hidden" name="itemColor" value="${cartDto.itemColor}">
-	 		<input type="hidden" name="itemSize" value="${cartDto.itemSize}">
+	 		<td>
+		 		${cartDto.itemColor} / ${cartDto.itemSize}
+		 		<input type="hidden" name="itemColor" value="${cartDto.itemColor}">
+		 		<input type="hidden" name="itemSize" value="${cartDto.itemSize}">
+	 		</td>
 		</tr>
-	 		<c:set var="total" value="${total+cntPrice}"/>
-	 		<c:set var="deliveryFee" value="${cartDto.deliveryFee}"/>
  	</c:forEach>
  	</tbody>
  	<tfoot>
@@ -90,10 +96,8 @@
 		</tr>
  		<tr>
  			<td class="center" colspan="6">
-				상품 총금액 : 
-				<fmt:formatNumber value="${total}" pattern="#,##0"/>원
-				 + ${deliveryFee}원(배송비) = 
-				<fmt:formatNumber value="${total+deliveryFee}" pattern="#,##0"/>원
+				상품 총금액 : <span id="pay-total">${total}</span>원
+				 + 3000원(배송비) = <span id="pay-real-total">${total+3000}</span>원
 			</td>
 		</tr>
  		<tr>
