@@ -6,6 +6,7 @@ import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.entity.CustomerLikeDto;
 import com.example.semiproject3.vo.CustomerListSearchVO;
+import com.example.semiproject3.vo.LikeCountVO;
 
 public interface CustomerLikeDao {
 	
@@ -34,6 +35,8 @@ public interface CustomerLikeDao {
 	int count(CustomerListSearchVO vo);
 	int searchCount(CustomerListSearchVO vo);
 	int listCount(CustomerListSearchVO vo);
+
+	List<LikeCountVO> selectCountList();
 
 	
 }
