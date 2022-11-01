@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CustomerLikeDto;
 import com.example.semiproject3.vo.CustomerListSearchVO;
+import com.example.semiproject3.vo.LikeCountVO;
 
 @Repository
 public class CustomerLikeDaoImpl implements CustomerLikeDao {
@@ -179,6 +180,23 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 		String sql = "select count(*) from customer_like";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+	
+	private RowMapper<LikeCountVO> countMapper = new RowMapper<LikeCountVO>() {
+		@Override
+		public LikeCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			LikeCountVO vo = new LikeCountVO();
+			vo.setItemNo(rs.getInt("item_no"));
+			vo.setCnt(rs.getInt("cnt"));
+			return vo;
+		}
+	};
+	
+	@Override
+	public List<LikeCountVO> selectCountList() {
+		String sql = "select item_no, count(*) cnt from customer_like group by item_no order by cnt desc";
+		return jdbcTemplate.query(sql, countMapper);
+	}
+	
 }
 
 

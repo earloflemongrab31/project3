@@ -9,9 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.semiproject3.entity.AddressDto;
 import com.example.semiproject3.entity.ResearchDto;
-import com.example.semiproject3.vo.BuyListCountVO;
 import com.example.semiproject3.vo.ResearchCountVO;
 
 @Repository
@@ -98,9 +96,82 @@ public class ResearchDaoImpl implements ResearchDao{
 				return vo;
 			}
 		};
+		private RowMapper<ResearchCountVO> countMapper1 = new RowMapper<ResearchCountVO>() {
+			@Override
+			public ResearchCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ResearchCountVO vo = new ResearchCountVO();
+				vo.setResearchAge(rs.getString("research_age"));
+				vo.setCnt(rs.getInt("cnt"));
+				return vo;
+			}
+		};
+		private RowMapper<ResearchCountVO> countMapper2 = new RowMapper<ResearchCountVO>() {
+			@Override
+			public ResearchCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ResearchCountVO vo = new ResearchCountVO();
+				vo.setResearchPath(rs.getString("research_path"));
+				vo.setCnt(rs.getInt("cnt"));
+				return vo;
+			}
+		};
+		private RowMapper<ResearchCountVO> countMapper3 = new RowMapper<ResearchCountVO>() {
+			@Override
+			public ResearchCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ResearchCountVO vo = new ResearchCountVO();
+				vo.setResearchInterest(rs.getString("research_interest"));
+				vo.setCnt(rs.getInt("cnt"));
+				return vo;
+			}
+		};
+		private RowMapper<ResearchCountVO> countMapper4 = new RowMapper<ResearchCountVO>() {
+			@Override
+			public ResearchCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ResearchCountVO vo = new ResearchCountVO();
+				vo.setResearchBest(rs.getString("research_best"));
+				vo.setCnt(rs.getInt("cnt"));
+				return vo;
+			}
+		};
+		private RowMapper<ResearchCountVO> countMapper5 = new RowMapper<ResearchCountVO>() {
+			@Override
+			public ResearchCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ResearchCountVO vo = new ResearchCountVO();
+				vo.setResearchSatisfaction(rs.getString("research_satisfaction"));
+				vo.setCnt(rs.getInt("cnt"));
+				return vo;
+			}
+		};
 		@Override
 		public List<ResearchCountVO> selectCountList() {
 			String sql = "select research_sex, count(*) cnt from research group by research_sex order by cnt desc";
 			return jdbcTemplate.query(sql, countMapper);
+		}
+
+		@Override
+		public List<ResearchCountVO> selectCountList1() {
+			String sql = "select research_age, count(*) cnt from research group by research_age order by cnt desc";
+			return jdbcTemplate.query(sql, countMapper1);
+		}
+
+		@Override
+		public List<ResearchCountVO> selectCountList2() {
+			String sql = "select research_path, count(*) cnt from research group by research_path order by cnt desc";
+			return jdbcTemplate.query(sql, countMapper2);
+		}
+		@Override
+		public List<ResearchCountVO> selectCountList3() {
+			String sql = "select research_interest, count(*) cnt from research group by research_interest order by cnt desc";
+			return jdbcTemplate.query(sql, countMapper3);
+		}
+		@Override
+		public List<ResearchCountVO> selectCountList4() {
+			String sql = "select research_best, count(*) cnt from research group by research_best order by cnt desc";
+			return jdbcTemplate.query(sql, countMapper4);
+		}
+
+		@Override
+		public List<ResearchCountVO> selectCountList5() {
+			String sql = "select research_satisfaction, count(*) cnt from research group by research_satisfaction order by cnt desc";
+			return jdbcTemplate.query(sql, countMapper5);
 		}
 }
