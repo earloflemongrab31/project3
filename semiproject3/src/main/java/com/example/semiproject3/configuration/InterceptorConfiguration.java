@@ -31,15 +31,22 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 					.addPathPatterns(//인터셉터가 감시할 주소
 							"/customer/**",//회원 전체
 							"/notice/**",//공지사항 전체
-							"/item/**"//아이템 전체
+							"/item/**",//아이템 전체
+							"/warehouse/**",//재고 전체
+							"/admin/**",//관리자 전체
+							"/company/**",//협력사 전체
+							"/research/list",//설문조사 목록
+							"/review/reportList",//신고목록
+							"/center/edit"//고객센터 수정
+							
 					)
 					.excludePathPatterns(//위의 주소에서 제외할 주소
 							"/customer/insert*",//회원가입
 							"/customer/login",//로그인
-							"/customer/check_password",//비밀번호찾기
-							"/customer/change_pw",//비밀번호 변경
-							"/customer/buy_history",//주문/배송조회
-							"/customer/goodbye_result",//탈퇴완료
+							"/customer/checkPassword",//비밀번호찾기
+							"/customer/changePw",//비밀번호 변경
+							"/customer/buyHistory",//주문/배송조회
+							"/customer/goodbyeResult",//탈퇴완료
 							"/notice/list",//공지사항 목록
 							"/notice/detail",//공지사항 상세보기
 							"/item/detail", //아이템 상세
