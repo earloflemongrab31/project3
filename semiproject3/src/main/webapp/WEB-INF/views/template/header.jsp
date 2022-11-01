@@ -332,11 +332,12 @@
 	
 	
 	/* 사이드메뉴 토글 */
-	$(function(){
-		$(".accordian").find("li").click(function(e){
-			e.stopPropagation();
-			
-          	$(this).children("ul").slideToggle();			
+    $(function(){
+		$(".main-cate").children("ul").hide();
+
+		$(".main-cate").click(function(){
+
+            $(this).children("ul").slideToggle();
 		});
 	});
 	
