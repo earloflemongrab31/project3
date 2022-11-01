@@ -45,6 +45,7 @@ public class OrdersController {
 	
 	@PostMapping("/detail")
 	public String list(
+			@RequestParam String[] itemName,
 			@RequestParam String[] itemSize,
 			@RequestParam String[] itemColor,
 			@RequestParam int[] itemCnt,
@@ -66,6 +67,7 @@ public class OrdersController {
 											.itemSize(itemSize[i])
 											.customerId(loginId)
 						.build()) == null;
+			System.out.println("아이템 컬러 사이즈 : " + itemColor.length);
 			
 			boolean cartSearch = cartDao.selectOne(CartDto.builder()
 											.itemNo(cartDto.getItemNo())
@@ -79,7 +81,7 @@ public class OrdersController {
 								.ordersNo(ordersDto.getOrdersNo())
 								.customerId(loginId)
 								.itemNo(ordersDto.getItemNo())
-								.itemName(ordersDto.getItemName())
+								.itemName(itemName[i])
 								.itemPrice(ordersDto.getItemPrice())
 								.itemColor(itemColor[i])
 								.itemSize(itemSize[i])
@@ -101,7 +103,9 @@ public class OrdersController {
 //								.imageNo(ordersDto.getImageNo())
 						.build());
 			}
-			
+			System.out.println(ordersDto.getItemName());
+			System.out.println(itemName[i]);
+			System.out.println(itemColor[i]);
 			if(!cartSearch && cartNo != null) {
 				System.out.println(cartDao);
 				System.out.println(Arrays.toString(cartNo));
