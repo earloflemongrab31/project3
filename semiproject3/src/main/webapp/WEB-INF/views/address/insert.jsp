@@ -72,7 +72,7 @@ $(function(){
 	
 	<div class="row">
 		<label>전화번호 <input name="addressTel" type="text" required placeholder="010XXXXXXXXX"
-			class="input mt-10 w-100" autocomplete="off">
+			class="input mt-10 w-100" autocomplete="off" maxlength="11">
 		</label>
 		
 	</div>
