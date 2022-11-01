@@ -23,7 +23,7 @@
 		<tr>
 			<td class="w-25">말머리</td>
 			<td>
-				<select class="input" name="noticeHead">
+				<select class="input input-none" name="noticeHead">
 					<option value="">선택</option>
 					<option disabled>------</option>
 					<option value="">공지</option>
@@ -53,7 +53,7 @@
 	<tfoot>
 		<tr>
 			<td class="right" colspan="2">
-				<a class="btn btn-neutral" href="list">목록</a>
+				<a class="btn btn-neutral btn-border" href="list">목록</a>
 				<button class="btn btn-positive" type="submit">등록</button>
 			</td>
 		</tr>

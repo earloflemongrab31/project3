@@ -220,7 +220,7 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<th class="w-34 center" style="vertical-align:middle;" rowspan="2"><i class="fa-solid fa-user fa-3x"></i></th>
+					<th class="w-25 center" style="vertical-align:middle;" rowspan="2"><i class="fa-solid fa-user fa-2x"></i></th>
 					<td>${loginId}[${loginGrade}]</td>
 				</tr>
 				<tr>

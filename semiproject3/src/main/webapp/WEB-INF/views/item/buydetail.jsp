@@ -66,10 +66,6 @@
 	         $(".item-form").attr("method", "get");
 	      });
       });
-      
-      $(function(){
-    	  
-      });
 </script>
 
 <style>
@@ -88,24 +84,6 @@
 	}
 </script>
 
-
-<style>
-	.image.item-mini-image{
-		object-fit: cover;
-		width: 50px;
-		max-height: 50px;
-		cursor: pointer;
-	}
-</style>
-<script type="text/javascript">
-	$(function(){
-		$(".item-mini-image").click(function(){
-			var selectedImage = $(this).data("imageNo");
-			console.log(selectedImage);
-		});
-	});
-</script>
-
 <div class="container-1000 mt-50 mb-50">
 
 <div class="float-container">
@@ -115,34 +93,20 @@
 	<table class="table">
 		<tbody>
 			<tr>
-				<th class="center">
+				<th class="w-50" style="height:480px;">
 					<c:forEach var="buylistView" items="${buyImageList}">
 					<c:if test="${buylistView.imageMain == 1}">
-						<img src="/image/download/${buylistView.imageNo}" class="w-60">
+						<img src="/image/download/${buylistView.imageNo}" width="200" >
 						<input type="hidden" name="imageNo" value="${buylistView.imageNo}">
 					</c:if>
 					</c:forEach>
 					<c:forEach var="buylistView" items="${buyImageList}">
 					<c:if test="${buylistView.imageMain == 0}">
-						<img src="/image/download/${buylistView.imageNo}" class="w-70 hide">
+						<img src="/image/download/${buylistView.imageNo}" width="100" >
 					</c:if>
 					</c:forEach>
 				</th>
 			</tr>
-	        <tr>
-	            <td class="center">
-	                <c:forEach var="buylistView" items="${buyImageList}">
-	                    <c:if test="${buylistView.imageMain == 1}">
-	                    	<img src="/image/download/${buylistView.imageNo}" class="w-10 image image-blur item-mini-image"> 
-	                    </c:if>
-	                </c:forEach>
-	                <c:forEach var="buylistView" items="${buyImageList}">
-	                    <c:if test="${buylistView.imageMain == 0}">
-	                    	<img src="/image/download/${buylistView.imageNo}" class="w-10 image image-blur item-mini-image" >
-	                    </c:if>
-	                </c:forEach>
-	            </td>
-	        </tr>
 			<tr>
 				<td class="right">
 				${itemDto.itemLikeCnt}
@@ -229,148 +193,148 @@
 </div>
 
 
-<!-- <div class="flexbox"> -->
-<!-- <div class=" w-50 center item item-detail"> -->
-<!-- 	<span>상세보기</span> -->
-<!-- </div> -->
-<%-- <c:if test="${fn:length(reviewList)>0}"> --%>
-<!-- <div class="w-50 center item item-review unchecked"> -->
-<%-- 	<span>리뷰${fn:length(reviewList)}</span> --%>
-<!-- </div> -->
-<%-- </c:if> --%>
+<div class="flexbox">
+<div class=" w-50 center item item-detail">
+	<span>상세보기</span>
+</div>
+<c:if test="${fn:length(reviewList)>0}">
+<div class="w-50 center item item-review unchecked">
+	<span>리뷰${fn:length(reviewList)}</span>
+</div>
+</c:if>
 
-<%-- <c:if test="${fn:length(reviewList)==0}"> --%>
-<!-- <div class="w-50 center item item-review unchecked"> -->
-<!-- 	<span>리뷰</span> -->
-<!-- </div> -->
-<%-- </c:if> --%>
-<!-- </div> -->
+<c:if test="${fn:length(reviewList)==0}">
+<div class="w-50 center item item-review unchecked">
+	<span>리뷰</span>
+</div>
+</c:if>
+</div>
       
-<!-- <div class = "row center mb-30 detail"> -->
-<!-- 	<div class = "row center mb-30"> -->
-<%-- 		<h4>${itemDto.itemContent}</h4> --%>
-<!-- 	</div> -->
-<!-- </div> -->
+<div class = "row center mb-30 detail">
+	<div class = "row center mb-30">
+		<h4>${itemDto.itemContent}</h4>
+	</div>
+</div>
 
-<!-- <div class="row center mt-40 mb-40 review hide"> -->
-<!-- 	<div class="row center mb-30"> -->
-<!-- 		<h4>REVIEW</h4> -->
-<!-- 	<hr> -->
-<!-- </div> -->
+<div class="row center mt-40 mb-40 review hide">
+	<div class="row center mb-30">
+		<h4>REVIEW</h4>
+	<hr>
+</div>
 
-<!--       <div class="row"> -->
-<%--          <c:choose> --%>
-<%--             <c:when test="${reviewList.isEmpty()}"> --%>
-<!--                <h4 style="padding-left: 20px"> -->
-<!--                   <span>해당 상품의 리뷰가 없습니다</span> -->
-<!--                </h4> -->
-<%--             </c:when> --%>
-<%--             <c:otherwise> --%>
-<%--                <h5>리뷰수${fn:length(reviewList)}</h5> --%>
-<!--                <table class="table left table-review-list"> -->
-<!--                   <tbody> -->
-<%--                      <c:forEach var="list" items="${reviewList}"> --%>
-<!--                         <tr rowspan="7" id="box"> -->
-<!--                            <td> -->
-<%--                               <c:if test="${list.reviewStar==1}">★(${list.reviewStar})</c:if> --%>
-<%--                               <c:if test="${list.reviewStar==2}">★★(${list.reviewStar})</c:if> --%>
-<%--                               <c:if test="${list.reviewStar==3}">★★★(${list.reviewStar})</c:if> --%>
-<%--                               <c:if test="${list.reviewStar==4}">★★★★(${list.reviewStar})</c:if> --%>
-<%--                               <c:if test="${list.reviewStar==5}">★★★★★(${list.reviewStar})</c:if> --%>
-<%--                               <c:set var="total" value="${total+list.reviewStar}" /> --%>
+      <div class="row">
+         <c:choose>
+            <c:when test="${reviewList.isEmpty()}">
+               <h4 style="padding-left: 20px">
+                  <span>해당 상품의 리뷰가 없습니다</span>
+               </h4>
+            </c:when>
+            <c:otherwise>
+               <h5>리뷰수${fn:length(reviewList)}</h5>
+               <table class="table left table-review-list">
+                  <tbody>
+                     <c:forEach var="list" items="${reviewList}">
+                        <tr rowspan="7" id="box">
+                           <td>
+                              <c:if test="${list.reviewStar==1}">★(${list.reviewStar})</c:if>
+                              <c:if test="${list.reviewStar==2}">★★(${list.reviewStar})</c:if>
+                              <c:if test="${list.reviewStar==3}">★★★(${list.reviewStar})</c:if>
+                              <c:if test="${list.reviewStar==4}">★★★★(${list.reviewStar})</c:if>
+                              <c:if test="${list.reviewStar==5}">★★★★★(${list.reviewStar})</c:if>
+                              <c:set var="total" value="${total+list.reviewStar}" />
                          
-<!--                            </td> -->
-<!--                         </tr> -->
+                           </td>
+                        </tr>
 
-<!-- 						신고 -->
-<!--                         <tr rowspan="6"> -->
-<!--                            <td> -->
-<%--                            <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" />**** / ${list.reviewDate}  --%>
-<%--                               <c:choose> --%>
-<%--                                  <c:when test="${loginId != list.customerId}"> --%>
-<%--                                     <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">/ [신고]</a> --%>
-<%--                                  </c:when> --%>
-<%--                                  <c:otherwise> --%>
-<!--                                     <a href="#" onclick="fail();"> / [신고]</a> -->
-<%--                                  </c:otherwise> --%>
-<%--                               </c:choose> --%>
-<!--                            </td> -->
-<!--                         </tr> -->
+						<!-- 신고 -->
+                        <tr rowspan="6">
+                           <td>
+                           <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" />**** / ${list.reviewDate} 
+                              <c:choose>
+                                 <c:when test="${loginId != list.customerId}">
+                                    <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">/ [신고]</a>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <a href="#" onclick="fail();"> / [신고]</a>
+                                 </c:otherwise>
+                              </c:choose>
+                           </td>
+                        </tr>
                         
-<!-- 						제품/포장상태/배송상태  -->
-<!--                         <tr rowspan="6"> -->
-<!--                            <td> -->
-<%--                               제품명 : ${itemDto.itemName} / 포장상태 : --%>
-<%--                               ${list.reviewPackaging} / 배송상태 : ${list.reviewShipping} --%>
-<!--                            </td> -->
-<!--                         </tr> -->
+						<!--제품/포장상태/배송상태  -->
+                        <tr rowspan="6">
+                           <td>
+                              제품명 : ${itemDto.itemName} / 포장상태 :
+                              ${list.reviewPackaging} / 배송상태 : ${list.reviewShipping}
+                           </td>
+                        </tr>
 						
-<!--                         <tr rowspan="6" height="160"> -->
-<!--                            블라인드여부에따라 다르게 표시 -->
-<%--                            <c:choose> --%>
-<%--                               <c:when test="${list.reviewBlind}"> --%>
-<!--                                  <td width="770" style="vertical-align: middle;">블라인드처리된게시물입니다.</td> -->
-<%--                               </c:when> --%>
-<%--                               <c:otherwise> --%>
-<%--                                  <td width="770" style="vertical-align: middle;">${list.reviewContent}</td> --%>
-<%--                               </c:otherwise> --%>
-<%--                            </c:choose> --%>
-<!--                               <td  style="text-align: center; vertical-align: middle;"> -->
-<%--                                  <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100"> --%>
-<!--                               </td> -->
+                        <tr rowspan="6" height="160">
+                           <!--블라인드여부에따라 다르게 표시 -->
+                           <c:choose>
+                              <c:when test="${list.reviewBlind}">
+                                 <td width="770" style="vertical-align: middle;">블라인드처리된게시물입니다.</td>
+                              </c:when>
+                              <c:otherwise>
+                                 <td width="770" style="vertical-align: middle;">${list.reviewContent}</td>
+                              </c:otherwise>
+                           </c:choose>
+                              <td  style="text-align: center; vertical-align: middle;">
+                                 <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100">
+                              </td>
                               
-<!--                            좋아요                  -->
-<!--                               <td style="text-align: center; vertical-align: middle;"> -->
-<%--                              <c:choose> --%>
-<%--                              	<c:when test="${loginId==null}"> --%>
-<%--                              		♥${list.reviewCnt} --%>
-<%--                              	</c:when> --%>
-<%--                              	<c:otherwise> --%>
-<%--                              		<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a> --%>
-<%--                                     <span class="like-span">${list.reviewCnt}</span> --%>
-<%--                              	</c:otherwise> --%>
-<%--                              </c:choose> --%>
-<!--                               </td> -->
+                           <!--좋아요  -->                
+                              <td style="text-align: center; vertical-align: middle;">
+                             <c:choose>
+                             	<c:when test="${loginId==null}">
+                             		♥${list.reviewCnt}
+                             	</c:when>
+                             	<c:otherwise>
+                             		<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">♥</a>
+                                    <span class="like-span">${list.reviewCnt}</span>
+                             	</c:otherwise>
+                             </c:choose>
+                              </td>
                           
-<!--                           리뷰 삭제 -->
-<!--                              <tr> -->
-<!--                                 <td> -->
-<%--                                 <c:if test="${loginId == list.customerId}"> --%>
-<!--                                    ( -->
-<%--                                    <a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}"> --%>
-<!--                                       <i class="fa-solid fa-trash"></i> -->
-<!--                                    </a>  -->
-<!--                                    ) -->
-<%--                                 </c:if> --%>
+                          <!--리뷰 삭제-->
+                             <tr>
+                                <td>
+                                <c:if test="${loginId == list.customerId}">
+                                   (
+                                   <a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                      <i class="fa-solid fa-trash"></i>
+                                   </a> 
+                                   )
+                                </c:if>
                                 
-<!--                           관리자로 접근 했을 때만 블라인드 처리가능  -->
-<%--                            <c:choose> --%>
-<%--                                  <c:when test="${list.reviewBlind}"> --%>
-<%--                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}"> --%>
-<!--                                             <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[해제] -->
-<!--                                          </a> -->
-<%--                                  </c:when> --%>
-<%--                                  <c:otherwise> --%>
+                          <!--관리자로 접근 했을 때만 블라인드 처리가능  -->
+                           <c:choose>
+                                 <c:when test="${list.reviewBlind}">
+                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                            <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[해제]
+                                         </a>
+                                 </c:when>
+                                 <c:otherwise>
                                     
-<%--                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}"> --%>
-<!--                                        <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정] -->
-<!--                                        </a> -->
+                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                       <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]
+                                       </a>
                                     
-<%--                                  </c:otherwise> --%>
-<%--                               </c:choose> --%>
-<!--                                  </td> -->
-<!--                              </tr> -->
-<%--                      </c:forEach> --%>
-<!--                   </tbody> -->
-<%--             </c:otherwise>   --%>
-<%--          </c:choose> --%>
+                                 </c:otherwise>
+                              </c:choose>
+                                 </td>
+                             </tr>
+                     </c:forEach>
+                  </tbody>
+            </c:otherwise>  
+         </c:choose>
          
 <!--                <h5> -->
 <!--                      사용자 총 평점 -->
 <%--                      <fmt:formatNumber value=" ${total/fn:length(reviewList)}" --%>
 <%--                      pattern="#,##0.00"></fmt:formatNumber> --%>
 <!--                </h5> -->
-<!--       </table> -->
-<!--       </div> -->
+      </table>
+      </div>
    </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

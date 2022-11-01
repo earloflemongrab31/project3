@@ -214,6 +214,10 @@
 		
 		$(".ad").find(".delete").click(function(){
 			$(this).parent().slideUp();
+			$.ajax({
+				url: "http://localhost:8888/rest/customer/block-ad",
+				method: "get"
+			});
 		});
 		
 		// datepicker 할 때 필요한 기능 - 안 바꿀거면 지워도 됨
@@ -525,7 +529,16 @@
             minHeight: 300,
             maxHeight: 300,
             placeholder: "내용을 작성하세요.",//도움말
-            lang: "ko-KR"//언어 설정
+//             lang: "ko-KR"//언어 설정
+			toolbar: [
+			   // [groupName, [list of button]]
+			   ['style', ['bold', 'italic', 'underline', 'clear']],
+			   ['font', ['strikethrough', 'superscript', 'subscript']],
+			   ['fontsize', ['fontsize']],
+			   ['color', ['color']],
+			   ['para', ['ul', 'ol', 'paragraph']],
+			   ['height', ['height']]
+			 ]
         });
     });
     
@@ -775,8 +788,8 @@
 		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
 			<img src="/image/googleplay.png">
 		</a>
-		<span class="float-right delete" style="font-family:sans-serif; margin-left:5px;">
-			<a href="/block-ad" style="color:white;">다신 보지 않기 <i class="fa-solid fa-xmark"></i></a></span>
+		<span class="float-right delete" style="margin-left:5px;">
+			한동안 보지 않기 <i class="fa-solid fa-xmark"></i></span>
 	</div>
 </c:if>
 
@@ -894,7 +907,7 @@
 		</a>
 	</li>
 	<form action="/item/buylist" method="get" autocomplete="off">
-		<button class="float-right btn btn-neutral" type="submit">search</button>
+		<button class="float-right btn btn-neutral" style="padding-top:5px;" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
 		<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
 	</form>
