@@ -175,6 +175,7 @@ public class ReviewDaoImpl implements ReviewDao {
 		Object[] param= {reviewBlind,reviewNo};
 		return jdbcTemplate.update(sql,param)>0;
 	}
+
 //리뷰 눌렀을떄 하나 플러스 
 @Override
 	public void plus(int reviewNo) {
