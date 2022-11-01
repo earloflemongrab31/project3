@@ -104,6 +104,17 @@
          return false;
       }
    }
+   
+   function fail2(){
+	   var result=confirm('로그인후 사용할 수 있습니다. 로그인하시겠습니까?');
+	   
+	   if(result){
+			location.replace("/customer/login");   
+	   }else{
+		   
+	   }
+	      }
+	   
 </script>
 
 <div class="container-1000 mt-50 mb-50">
@@ -321,10 +332,10 @@
                              <c:choose>
                              
                                 <c:when test="${loginId==null && list.reviewCnt ==0}">
-                                   <i class="fa-regular fa-heart"></i>
+                                   <a href="#" onclick="fail2()"><i class="fa-regular fa-heart"></i></a>
                                 </c:when>
                                 <c:when test="${loginId==null && list.reviewCnt >0}">
-                                   <i class="fa-solid fa-heart"></i>${list.reviewCnt}
+                                   <a href="#" onclick="fail2()"><i class="fa-solid fa-heart"></i>${list.reviewCnt}</a>
                                 </c:when>
                                 <c:when test="${loginId!=null && list.reviewCnt == 0}">
                                 	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
