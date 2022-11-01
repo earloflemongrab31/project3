@@ -364,6 +364,7 @@
                                 </c:if>
                                 
                           <!--관리자로 접근 했을 때만 블라인드 처리가능  -->
+                          <c:if test="${admin != null}">
                            <c:choose>
                                  <c:when test="${list.reviewBlind}">
                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
@@ -378,6 +379,7 @@
                                     
                                  </c:otherwise>
                               </c:choose>
+                              </c:if>
                                  </td>
                              </tr>
                      </c:forEach>
