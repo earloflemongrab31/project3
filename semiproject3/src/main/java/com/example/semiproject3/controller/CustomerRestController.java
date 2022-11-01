@@ -1,6 +1,10 @@
 package com.example.semiproject3.controller;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
+=======
+import java.util.List;
+>>>>>>> refs/remotes/origin/main
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.repository.CustomerDao;
+import com.example.semiproject3.vo.CustomerJoinCountVO;
 
 @CrossOrigin
 @RestController
@@ -53,10 +57,17 @@ public class CustomerRestController {
 			return "NNNNN";
 		}
 	}
+<<<<<<< HEAD
 	
 	@GetMapping("/block-ad")
 	public String blockAd(HttpSession session) {
 		session.setAttribute("blockAd", "Y");
 		return "redirect:/";
 	}
+=======
+	@GetMapping("/count")
+	public List<CustomerJoinCountVO>count(){
+		return customerDao.selectCountList();
+}
+>>>>>>> refs/remotes/origin/main
 }

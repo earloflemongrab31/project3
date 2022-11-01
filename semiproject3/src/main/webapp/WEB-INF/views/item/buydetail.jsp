@@ -10,6 +10,13 @@
 <!-- 회원정보에 없는 이메일을 입력할 시에 출력되는 경고창 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
+   $(function(){
+      var responseMessage = "<c:out value="${message}" />";
+      if (responseMessage != ""){
+          alert(responseMessage)
+      }
+   });
+        
    //리뷰 좋아요 ajax
    $(function(){
       $(".review-like-btn").click(function(e){
@@ -60,14 +67,13 @@
          });
       });
       
-      
-  	
+       //작은 이미지 클릭하면 큰 이미지 변경
       $(function(){
-		$(".item-mini-image").click(function(){
-			var selectedImage = $(this).data("image-no");
-			$("img[data-image=main]").attr("src", "/image/download/"+selectedImage);
-		});
-	});
+        $(".item-mini-image").click(function(){
+           var selectedImage = $(this).data("image-no");
+           $("img[data-image=main]").attr("src", "/image/download/"+selectedImage);
+        });
+     });
 </script>
 
 <style>
@@ -76,12 +82,13 @@
       border-top: 1px solid #D5D5D5;
    }
    
-   	.image.item-mini-image{
-		object-fit: cover;
-		width: 50px;
-		max-height: 50px;
-		cursor: pointer;
-	}
+	/*    사진 밑에 작게 만드는 옵션 */
+      .image.item-mini-image{
+      object-fit: cover;
+      width: 50px;
+      max-height: 50px;
+      cursor: pointer;
+   }
 </style>
 
 
@@ -101,11 +108,11 @@
 <div class="float-left w-50">
    <table class="table">
       <tbody>
-         <tr>
+          <tr>
             <th class="center">
                <c:forEach var="buylistView" items="${buyImageList}">
                <c:if test="${buylistView.imageMain == 1}">
-                  <img src="/image/download/${buylistView.imageNo}" class="w-65" data-image="main">
+                  <img src="/image/download/${buylistView.imageNo}" style="width:320px; height: 430px;" data-image="main">
                   <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
                </c:if>
                </c:forEach>
@@ -116,13 +123,13 @@
                 <c:forEach var="buylistView" items="${buyImageList}">
                     <c:if test="${buylistView.imageMain == 1}">
                         <img src="/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
-                        	data-image-no="${buylistView.imageNo}"> 
+                           data-image-no="${buylistView.imageNo}"> 
                     </c:if>
                 </c:forEach>
                 <c:forEach var="buylistView" items="${buyImageList}">
                     <c:if test="${buylistView.imageMain == 0}">
-                    	<img src="/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
-                    		data-image-no="${buylistView.imageNo}">
+                       <img src="/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
+                          data-image-no="${buylistView.imageNo}">
                     </c:if>
                 </c:forEach>
             </td>
@@ -303,22 +310,20 @@
                                  <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100">
                               </td>
                               
-                            <!--좋아요  -->                 
+                           <!--좋아요  -->                
                               <td style="text-align: center; vertical-align: middle;">
                              <c:choose>
                                 <c:when test="${loginId==null}">
                                    <i class="fa-regular fa-heart"></i>${list.reviewCnt}
                                 </c:when>
                                 <c:otherwise>
-                                   <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
-									<i class="fa-solid fa-heart"></i>
-									</a>
+                                   <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}"><i class="fa-solid fa-heart"></i></a>
                                     <span class="like-span">${list.reviewCnt}</span>
                                 </c:otherwise>
                              </c:choose>
                               </td>
                           
-                            <!--리뷰 삭제-->
+                          <!--리뷰 삭제-->
                              <tr>
                                 <td>
                                 <c:if test="${loginId == list.customerId}">
@@ -347,17 +352,15 @@
                                  </td>
                              </tr>
                      </c:forEach>
-                  </tbody>
-            </c:otherwise>  
-         </c:choose>
-         
-<!--                <h5> -->
-<!--                      사용자 총 평점 -->
-<%--                      <fmt:formatNumber value=" ${total/fn:length(reviewList)}" --%>
-<%--                      pattern="#,##0.00"></fmt:formatNumber> --%>
-<!--                </h5> -->
-
-      </table>
-      </div>
-   </div>
+	                     <h5>
+	                     	사용자 총 평점
+	                     	<fmt:formatNumber value=" ${total/fn:length(reviewList)}"
+	                     	pattern="#,##0.00"></fmt:formatNumber>
+	               		</h5>
+					</tbody>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.BuyDto;
 import com.example.semiproject3.entity.CustomerDto;
+import com.example.semiproject3.vo.CustomerJoinCountVO;
 import com.example.semiproject3.vo.CustomerListSearchVO;
+import com.example.semiproject3.vo.LikeCountVO;
 
 @Repository
 public class CustomerDaoImpl implements CustomerDao{
@@ -304,6 +306,21 @@ public class CustomerDaoImpl implements CustomerDao{
 			String sql = "update customer set customer_money = customer_money - ? where customer_id=?";
 			Object[] param = {buyDto.getItemTotalPrice(), buyDto.getCustomerId()};
 			return jdbcTemplate.update(sql, param) > 0;
+		}
+		
+		private RowMapper<CustomerJoinCountVO> countMapper = new RowMapper<CustomerJoinCountVO>() {
+			@Override
+			public CustomerJoinCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				CustomerJoinCountVO vo = new CustomerJoinCountVO();
+				vo.setCustomerJoin(rs.getDate("customer_join"));
+				vo.setCnt(rs.getInt("cnt"));
+				return vo;
+			}
+		};
+		@Override
+		public List<CustomerJoinCountVO> selectCountList() {
+			String sql = "select customer_join, count(*) cnt from customer group by customer_join order by customer_join asc";
+			return jdbcTemplate.query(sql, countMapper);
 		}
 		
 }
