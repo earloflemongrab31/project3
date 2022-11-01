@@ -305,42 +305,42 @@
 	</div>
 
 	<div class="row float-container">
-		<div class="float-left w-30 ms-50">
+		<div class="float-left w-33">
 			<div class="row center">
 				<h3>성별현황</h3>
 				<canvas id="myChart"></canvas>
 			</div>
 		</div>
 		
-		<div class="float-left w-30 ms-50">
+		<div class="float-left w-33">
 			<div class="row center">
 				<h3>나이현황</h3>
 				<canvas id="myChart2"></canvas>
 			</div>
 		</div>
 		
-		<div class="float-left w-30 ms-50">
+		<div class="float-left w-33">
 			<div class="row center">
 				<h3>유입경로</h3>
 				<canvas id="myChart3"></canvas>
 			</div>
 		</div>
 		
-		<div class="float-left w-30 ms-50">
+		<div class="float-left w-33">
 			<div class="row center">
 				<h3>관심있는물품</h3>
 				<canvas id="myChart4"></canvas>
 			</div>
 		</div>
 		
-		<div class="float-left w-30 ms-50">
+		<div class="float-left w-33">
 			<div class="row center">
 				<h3>장점</h3>
 				<canvas id="myChart5"></canvas>
 			</div>
 		</div>
 		
-		<div class="float-left w-30 ms-50">
+		<div class="float-left w-33">
 			<div class="row center">
 				<h3>만족도</h3>
 				<canvas id="myChart6"></canvas>

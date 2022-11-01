@@ -177,7 +177,7 @@
 		<hr>
 	</div>
 
-	<div class="row float-container">
+	<div class="row float-container center">
 		<div class="float-left w-100">
 			<div class="row center">
 				<h3>상품 별 판매 현황</h3>
@@ -185,7 +185,7 @@
 			</div>
 		</div>
 	<div class="row float-container">
-		<div class="float-left w-50 ">
+		<div class="float-left w-50">
 			<div class="row center">
 				<h3>찜한 상품 번호</h3>
 				<canvas id="myChart1"></canvas>
@@ -339,7 +339,7 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<th class="w-34 center" style="vertical-align:middle;" rowspan="2"><i class="fa-solid fa-user fa-3x"></i></th>
+					<th class="w-25 center" style="vertical-align:middle;" rowspan="2"><i class="fa-solid fa-user fa-2x"></i></th>
 					<td>${loginId}[${loginGrade}]</td>
 				</tr>
 				<tr>

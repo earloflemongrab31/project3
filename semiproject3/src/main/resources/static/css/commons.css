@@ -52,8 +52,20 @@ div.logo{
 .w-75{
 	width: 75%;
 }
+.w-70{
+	width: 70%;
+}
+.w-65{
+	width: 65%;
+}
+.w-60{
+	width: 60%;
+}
 .w-50{
     width: 50%;
+}
+.w-40{
+    width: 40%;
 }
 .w-33{
     width: 33%;
@@ -63,6 +75,9 @@ div.logo{
 }
 .w-25{
     width: 25%;
+}
+.w-10{
+	width: 10%;
 }
 
 /* 
@@ -112,7 +127,7 @@ div.logo{
     - 부정버튼 : 현재의 작업이 위험함을 알리거나 부정적인 효과를 처리하는 버튼
 */
 .btn{
-    font-size: 14px;
+    font-size: 16px;
     padding: 0.5em;
     border: none;
     cursor: pointer;
@@ -123,7 +138,7 @@ div.logo{
     text-decoration: none;
 }
 a.btn{
-	font-size: 14px;
+	font-size: 16px;
     padding: 0.7em 0.5em;
     border: none;
 }
@@ -261,7 +276,7 @@ font-size: 14px;
 }
 
 .table-border tr > th{
-	background-color: #f6f3f1;
+	background-color: #f4f4f5;
 }
 
 .table.table-border > thead > tr > th, 
@@ -293,7 +308,7 @@ font-size: 14px;
 /* .table.table-hover > thead > tr:hover,  */
 .table.table-hover > tbody > tr:hover, 
 .table.table-hover > tfoot > tr:hover{
-    background-color: #FAF9F7;
+    background-color: #f4f4f5;
 }
 
 /* 

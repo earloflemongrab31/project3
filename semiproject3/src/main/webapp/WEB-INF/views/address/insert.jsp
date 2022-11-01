@@ -78,22 +78,25 @@ $(function(){
 	</div>
 		
 
-
-    <div class="row">
-        <label>
- 			<button class="btn btn-neutral btn-find-address">
-          	  <i class="fa-solid fa-house"></i> 주소검색
-        	</button>
-        </label>
- 	</div>
-
 	<div class="row">
+		주소
+	</div>
+
+    <div class="float-container">
+
+	<div class="float-left">
 		<input type="text" class="input" name="addressPost" placeholder="우편번호" size="6" maxlength="6" required>
 	</div>
-       
+	<div class="float-right">
+		<button class="btn btn-neutral btn-find-address">
+    		<i class="fa-solid fa-house"></i> 주소검색
+      	</button>
+	</div>
+ 	</div>
     <div class="row">
         <input type="text" class="input w-100" name="addressHost" placeholder="기본주소" required>
     </div>
+       
 
     <div class="row">
         <input type="text" class="input w-100" name="addressDetailHost" placeholder="상세주소">

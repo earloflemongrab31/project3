@@ -20,7 +20,7 @@
 			</div>
 			<div class="row right mt-50">
 				<a href="/block-survey">
-					다신 보지 않기 <i class="fa-solid fa-xmark"></i>
+					한동안 보지 않기 <i class="fa-solid fa-xmark"></i>
 				</a>
 			</div>
 		</div>

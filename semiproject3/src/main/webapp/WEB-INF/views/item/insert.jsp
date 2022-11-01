@@ -10,7 +10,7 @@
 
 <form action="insert" method="post" enctype="multipart/form-data">
 
-	<div class ="container-600 mt-50 mb-50">
+	<div class ="container-800 mt-50 mb-50">
 	
 	<div class="row center mb-30">
 		<h1>상품 등록</h1>
@@ -113,9 +113,11 @@
 					</td>
 				</tr>
 				<tr valign="middle">
-					<td>상품 상세설명</td>
-					<td>
-						<textarea class="input w-100 fix-size"
+					<td colspan="2">상품 상세설명</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea class="input w-100 content"
 							name="itemContent" rows="10" cols="75" required></textarea>
 					</td>
 				</tr>
