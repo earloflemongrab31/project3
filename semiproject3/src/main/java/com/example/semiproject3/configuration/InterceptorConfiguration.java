@@ -11,6 +11,7 @@ import com.example.semiproject3.interceptor.CustomerNoticePermissionCheckInterce
 
 //스프링 설정파일
 //- application.properties에서 설정하기 어려운 복잡한 설정을 interface WebMvcConfigurer
+
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
 	
