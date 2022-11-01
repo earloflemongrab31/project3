@@ -59,6 +59,15 @@
             $(".item-form").attr("method", "post");
          });
       });
+      
+      
+  	
+      $(function(){
+		$(".item-mini-image").click(function(){
+			var selectedImage = $(this).data("image-no");
+			$("img[data-image=main]").attr("src", "/image/download/"+selectedImage);
+		});
+	});
 </script>
 
 <style>
@@ -66,6 +75,13 @@
       padding: 5px;
       border-top: 1px solid #D5D5D5;
    }
+   
+   	.image.item-mini-image{
+		object-fit: cover;
+		width: 50px;
+		max-height: 50px;
+		cursor: pointer;
+	}
 </style>
 
 
@@ -75,24 +91,6 @@
          return false;
       }
    }
-</script>
-
-<style>
-	.image.item-mini-image{
-		object-fit: cover;
-		width: 50px;
-		max-height: 50px;
-		cursor: pointer;
-	}
-</style>
-
-<script type="text/javascript">
-	$(function(){
-		$(".item-mini-image").click(function(){
-			var selectedImage = $(this).data("image-no");
-			console.log(selectedImage);
-		});
-	});
 </script>
 
 <div class="container-1000 mt-50 mb-50">
@@ -107,13 +105,8 @@
             <th class="center">
                <c:forEach var="buylistView" items="${buyImageList}">
                <c:if test="${buylistView.imageMain == 1}">
-                  <img src="/image/download/${buylistView.imageNo}" class="w-65">
+                  <img src="/image/download/${buylistView.imageNo}" class="w-65" data-image="main">
                   <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
-               </c:if>
-               </c:forEach>
-               <c:forEach var="buylistView" items="${buyImageList}">
-               <c:if test="${buylistView.imageMain == 0}">
-                  <img src="/image/download/${buylistView.imageNo}" class="w-65 hide">
                </c:if>
                </c:forEach>
             </th>
