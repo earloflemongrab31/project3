@@ -46,36 +46,18 @@ public class CartController {
 		cartDto.setCustomerId(loginId);
 		
 		for(int i = 0; i < itemColor.length; i++) {
-
-			boolean search = cartDao.selectOne(CartDto.builder()
-											.itemNo(cartDto.getItemNo())
-											.itemSize(itemSize[i])
-											.itemColor(itemColor[i])
-											.customerId(loginId)
-									.build()) == null;
+			cartDto.setItemColor(itemColor[i]);
+			cartDto.setItemSize(itemSize[i]);
+			cartDto.setItemTotalCnt(itemTotalCnt[i]);
+			cartDto.setItemCnt(itemCnt[i]);
 			
+			boolean search = cartDao.selectOne(cartDto) == null;
 			
 			if(search) {
-				cartDao.insert(CartDto.builder()
-							.customerId(loginId)
-							.itemNo(cartDto.getItemNo())
-							.itemName(cartDto.getItemName())
-							.itemPrice(cartDto.getItemPrice())
-							.itemColor(itemColor[i])
-							.itemSize(itemSize[i])
-							.itemCnt(itemCnt[i])
-							.itemTotalCnt(itemTotalCnt[i])
-//							.cartPrice(cartDto.getCartPrice())
-						.build());
+				cartDao.insert(cartDto);
 			}
 			else {
-				cartDao.plus(CartDto.builder()
-							.customerId(loginId)
-							.itemNo(cartDto.getItemNo())
-							.itemColor(itemColor[i])
-							.itemSize(itemSize[i])
-							.itemCnt(itemCnt[i])
-						.build());
+				cartDao.plus(cartDto);
 			}
 		}
 		

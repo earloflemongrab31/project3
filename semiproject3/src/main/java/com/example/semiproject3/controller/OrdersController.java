@@ -45,84 +45,37 @@ public class OrdersController {
 	
 	@PostMapping("/detail")
 	public String list(
-			@RequestParam String itemName,
 			@RequestParam String[] itemSize,
 			@RequestParam String[] itemColor,
 			@RequestParam int[] itemCnt,
 			@ModelAttribute OrdersDto ordersDto,
-			@RequestParam(required=false) int[] cartNo,
-			@ModelAttribute CartDto cartDto,
-			Model model, 
-			HttpSession session) {
+			Model model) {
 		
-		//아이디가지고오기
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		if(ordersDao.selectList(loginId) != null) {
-			ordersDao.deleteAll(loginId);
+		
+		//주문 모두 지우기
+		if(ordersDao.selectList(ordersDto.getCustomerId()) != null) {
+			ordersDao.deleteAll(ordersDto.getCustomerId());
 		}
 		
 		//주문 테이블 값 넣기
 		for(int i=0; i < itemColor.length; i++) {
-			boolean search = ordersDao.selectOne(OrdersDto.builder()
-											.itemNo(ordersDto.getItemNo())
-											.itemName(ordersDto.getItemName())
-											.itemColor(itemColor[i])
-											.itemSize(itemSize[i])
-											.customerId(loginId)
-						.build()) == null;
-			
-			boolean cartSearch = cartDao.selectOne(CartDto.builder()
-											.itemNo(cartDto.getItemNo())
-											.itemSize(itemSize[i])
-											.itemColor(itemColor[i])
-											.customerId(loginId)
-						.build()) == null;
-			
-			if(search) {
-				ordersDao.insert(OrdersDto.builder()
-								.ordersNo(ordersDto.getOrdersNo())
-								.customerId(loginId)
-								.itemNo(ordersDto.getItemNo())
-								.itemName(itemName)
-								.itemPrice(ordersDto.getItemPrice())
-								.itemColor(itemColor[i])
-								.itemSize(itemSize[i])
-								.itemCnt(itemCnt[i])
-								.imageNo(ordersDto.getImageNo())
-						.build());
-				
-			}
-			else {
-				ordersDao.plus(OrdersDto.builder()
-//								.ordersNo(ordersDto.getOrdersNo())
-								.customerId(loginId)
-								.itemNo(ordersDto.getItemNo())
-//								.itemName(ordersDto.getItemName())
-//								.itemPrice(ordersDto.getItemPrice())
-								.itemColor(itemColor[i])
-								.itemSize(itemSize[i])
-								.itemCnt(itemCnt[i])
-//								.imageNo(ordersDto.getImageNo())
-						.build());
-			}
-			if(!cartSearch && cartNo != null) {
-				System.out.println(cartDao);
-				System.out.println(Arrays.toString(cartNo));
-				cartDao.delete(cartNo[i]);
-			}
+			ordersDto.setItemColor(itemColor[i]);
+			ordersDto.setItemSize(itemSize[i]);
+
+			ordersDao.insert(ordersDto);
 		}
 		
 		//회원 정보 불러오기
-		model.addAttribute("customerDto", customerDao.selectOne(loginId));
+		model.addAttribute("customerDto", customerDao.selectOne(ordersDto.getCustomerId()));
 
 		//주소 정보 불러오기
-		model.addAttribute("addressList", addressDao.selectList(loginId));
+		model.addAttribute("addressList", addressDao.selectList(ordersDto.getCustomerId()));
 		
 		//주문 내역 불러오기
-		model.addAttribute("ordersList", ordersDao.selectList(loginId));
+		model.addAttribute("ordersList", ordersDao.selectList(ordersDto.getCustomerId()));
 		
 		//장바구니 개수
-		model.addAttribute("cartCount",cartDao.cartCount(loginId));
+		model.addAttribute("cartCount",cartDao.cartCount(ordersDto.getCustomerId()));
 		
 		return "orders/detail";
 	}
