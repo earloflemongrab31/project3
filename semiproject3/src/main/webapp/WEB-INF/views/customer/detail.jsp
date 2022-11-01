@@ -8,7 +8,7 @@
 </jsp:include>
 
 <section>
-	<div class="container-500">
+	<div class="container-550">
 	<div class="row center">
 		<h1>${customerDto.customerId} 님</h1>
 		<hr>
@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td>${customerDto.customerTel}</td>
+				<td>${customerDto.customerPhone}</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
@@ -41,6 +41,12 @@
 				<th>포인트</th>
 				<td>
 					<fmt:formatNumber value="${customerDto.customerPoint}" pattern="#,##0"/> point
+				</td>
+			</tr>
+			<tr>
+				<th>소지금</th>
+				<td>
+					<fmt:formatNumber value="${customerDto.customerMoney}" pattern="#,##0"/> 원
 				</td>
 			</tr>
 			<tr>
