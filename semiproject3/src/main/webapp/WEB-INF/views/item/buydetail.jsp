@@ -374,7 +374,7 @@
                                  <c:otherwise>
                                     
                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
-                                       <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]
+                                       <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]<i class="fa-regular fa-eye-slash"></i>
                                        </a>
                                     
                                  </c:otherwise>
