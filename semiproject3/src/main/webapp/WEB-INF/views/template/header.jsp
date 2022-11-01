@@ -818,7 +818,7 @@
 	</div>
 	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
 		<div class="right-word row float-right">
-			${loginId}님, 안녕하세요.
+			[${loginGrade}] ${loginId}님, 안녕하세요.
 		</div>
 	</c:if>
 	<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
