@@ -677,7 +677,8 @@
         $(".input-option").on("input",function(){
 	        var color = $(this).find("option:selected").data("color");//선택한 색
 	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
-	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
+	        var totalcnt = $(this).find("option:selected").data("total-cnt");//선택한 옵션의 재고
+	        
 	        if(!color) return;//값 없으면 리턴
 	        
  	        for(var i=0; i<selectedOption.length; i++){
@@ -709,11 +710,13 @@
 	        var colorOption = $("<input>").addClass("w-25 input input-none").val(color).attr("type", "text").attr("name", "itemColor").prop("readonly", true);
 	        var sizeOption = $("<input>").addClass("w-25 input input-none").val(size).attr("type", "text").attr("name", "itemSize").prop("readonly", true);
 	        var cnt = $("<input>").addClass("w-25 input").attr("type", "number").attr("name", "itemCnt").attr("min", 1).attr("max", totalcnt).val(1);
+	        var totalCnt = $("<input>").attr("type", "hidden").attr("name", "itemTotalCnt").val(totalcnt);
 	        
 	        colorOption.appendTo(plusLine);
 	        sizeOption.appendTo(plusLine);
 	        cnt.appendTo(plusLine);
 	        icon.appendTo(plusLine);
+	        totalCnt.appendTo(plusLine);
 	
 	        plusLine.appendTo($(".option-area"));
 	

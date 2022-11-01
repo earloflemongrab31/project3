@@ -32,16 +32,18 @@ public class CartController {
 	
 	//카트담기
 	@PostMapping("/insert")
-	public String insert(@RequestParam int itemNo,
+	public String insert(
 			@ModelAttribute CartDto cartDto,
 			@RequestParam String[] itemColor,
 			@RequestParam String[] itemSize,
+			@RequestParam int[] itemTotalCnt,
 			@RequestParam int[] itemCnt,
 			HttpSession session) {
 		
 		//아이디가지고오기 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
+		cartDto.setCustomerId(loginId);
 		
 		for(int i = 0; i < itemColor.length; i++) {
 
@@ -50,43 +52,34 @@ public class CartController {
 											.itemSize(itemSize[i])
 											.itemColor(itemColor[i])
 											.customerId(loginId)
-					.build()) == null;
+									.build()) == null;
 			
-			//등록 아이템에 미리 번호 생성
-//			int cartNo = cartDao.sequence();
-//			cartDto.setCartNo(cartNo);
 			
 			if(search) {
 				cartDao.insert(CartDto.builder()
-							.cartNo(cartDto.getCartNo())
 							.customerId(loginId)
 							.itemNo(cartDto.getItemNo())
-							.itemTotalCnt(cartDto.getItemTotalCnt())
 							.itemName(cartDto.getItemName())
+							.itemPrice(cartDto.getItemPrice())
 							.itemColor(itemColor[i])
 							.itemSize(itemSize[i])
 							.itemCnt(itemCnt[i])
-							.itemPrice(cartDto.getItemPrice())
-							.cartPrice(cartDto.getCartPrice())
+							.itemTotalCnt(itemTotalCnt[i])
+//							.cartPrice(cartDto.getCartPrice())
 						.build());
 			}
 			else {
 				cartDao.plus(CartDto.builder()
-//							.cartNo(cartDto.getCartNo())
 							.customerId(loginId)
 							.itemNo(cartDto.getItemNo())
-//							.itemTotalCnt(cartDto.getItemTotalCnt())
-//							.itemName(cartDto.getItemName())
 							.itemColor(itemColor[i])
 							.itemSize(itemSize[i])
 							.itemCnt(itemCnt[i])
-//							.itemPrice(cartDto.getItemPrice())
-//							.cartPrice(cartDto.getCartPrice())
 						.build());
 			}
 		}
 		
-		return "redirect:/item/buydetail?itemNo="+itemNo;
+		return "redirect:/item/buydetail?itemNo="+cartDto.getItemNo();
 	};
 	
 	//카트 리스트
