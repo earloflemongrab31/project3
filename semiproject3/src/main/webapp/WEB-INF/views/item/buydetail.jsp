@@ -82,7 +82,7 @@
       border-top: 1px solid #D5D5D5;
    }
    
-	/*    사진 밑에 작게 만드는 옵션 */
+   /*    사진 밑에 작게 만드는 옵션 */
       .image.item-mini-image{
       object-fit: cover;
       width: 50px;
@@ -352,15 +352,15 @@
                                  </td>
                              </tr>
                      </c:forEach>
-	                     <h5>
-	                     	사용자 총 평점
-	                     	<fmt:formatNumber value=" ${total/fn:length(reviewList)}"
-	                     	pattern="#,##0.00"></fmt:formatNumber>
-	               		</h5>
-					</tbody>
-				</table>
-			</c:otherwise>
-		</c:choose>
-	</div>
+                        <h5>
+                           사용자 총 평점
+                           <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
+                           pattern="#,##0.00"></fmt:formatNumber>
+                        </h5>
+               </tbody>
+            </table>
+         </c:otherwise>
+      </c:choose>
+   </div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
