@@ -87,7 +87,7 @@
                 </tr>
                 <!-- 달력 변경할 수 있으면 하기 cdn은 넣어놓음 -->
                 <tr>
-                    <th>생년월일</td>
+                    <th>생년월일<span class="required">*</span></td>
                     <td>					
                     <input class="input w-40" type="date" name="customerBirth">
  

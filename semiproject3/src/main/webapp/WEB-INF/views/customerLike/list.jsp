@@ -9,7 +9,7 @@
 </jsp:include>
 
 <section>
-<div class ="container-600">
+<div class ="container-600 mt-50 mb-50">
    <div class = "row center">
       <h1>찜한 상품</h1>
       <hr>
@@ -37,7 +37,7 @@
 								<td>${customerLikeDto.likeTime}</td>
 								<td>
 									<a class="btn btn-border" href="http://localhost:8888/item/buydetail?itemNo=${customerLikeDto.itemNo}">
-										[확인]
+										확인
 									</a>
 								</td>
 							</tr>

@@ -330,17 +330,6 @@
       });
    });
 	
-	
-	/* 사이드메뉴 토글 */
-    $(function(){
-		$(".main-cate").children("ul").hide();
-
-		$(".main-cate").click(function(){
-
-            $(this).children("ul").slideToggle();
-		});
-	});
-	
 	/* 회원가입 */
     $(function(){
         var inputStatus = {
@@ -786,7 +775,17 @@
             }
 		});
 	});
-    
+	
+	$(function(){
+		$("input[name=usePoint]").on("blur",function(){
+			var usePoint = parseInt($(this).val());
+			$("#use-point").text(usePoint);
+			var totalPrice = parseInt($("input[name=itemTotalPrice]").val());
+			var payMoney = totalPrice + 3000 - usePoint;
+			$("#total-price").text(payMoney);
+		});
+	});
+	
 </script>
 
 </head>

@@ -6,7 +6,7 @@
 
 <aside class="right">
 	<ul class="accordian">
-		<li class="main-cate">
+		<li>
 			MY 정보
 			<ul>
 				<li><a href="/customer/mypage">개인정보 조회</a>
@@ -17,7 +17,7 @@
 				<li><a href="/customer/goodbye">회원 탈퇴</a></li>
 			</ul>
 		</li>
-		<li class="main-cate">
+		<li>
 			쇼핑 정보
 			<ul>
 				<li><a href="/buy/list">주문/배송 조회</a></li>

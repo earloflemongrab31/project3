@@ -128,7 +128,7 @@
 <form action = "list" method="get" >
 	<div class="row center">
 		
-		<select class="input" name="type" required>
+		<select class="input input-none" name="type" required>
 			<option value="item_name" <c:if test="${type == 'item_name'}"></c:if>>상품명</option>
 		</select>
 			

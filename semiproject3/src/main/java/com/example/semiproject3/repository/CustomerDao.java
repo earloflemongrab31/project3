@@ -63,4 +63,6 @@ public interface CustomerDao {
 	boolean cash(BuyDto buyDto);
 
 	List<CustomerJoinCountVO> selectCountList();
+
+	boolean usePoint(int customerPoint, String loginId);
 }
