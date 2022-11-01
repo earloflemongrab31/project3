@@ -9,7 +9,7 @@
 <html>
 <head>
 	
-	<title>semi 지도 </title>
+	<title>SeSam 본사위치/물류창고</title>
 </head>
 	<style>
 		#map{
@@ -41,6 +41,7 @@
              //moveMapWithMarker(lat, lng);
 
              var text = $(this).text();
+             $(".span-eatting").text(text);
              moveMapWithMarkerAndText(lat, lng, text);
          });
          
@@ -129,7 +130,7 @@
 	
 	<div class="container-1200">
 		<div class="row center">
-			<h1>SeSam 의류물류창고</h1>
+			<h1>SeSam 본사위치/물류창고</h1>
 			<hr>
 		</div>
 		<div class="row">
@@ -137,60 +138,74 @@
 				<tr>
 					<td>
 						<h3>
-							<a class="move-link" href="#" data-lat="37.4765227" data-lng="126.6989232">역삼센터</a>
+							<a class="move-link" href="#" data-lat="37.4765227" data-lng="126.6989232">당산센터(본사)</a>
 						</h3>
 							<br>
-							역삼동 서울특별시 강남구
+							<div>위치 : 서울특별시 영등포구 선유동2로 57 이레빌딩 19층</div>
+							<br>
+							<div class="mt-5">대표번호 : 02)444-5555 / 010)6666-7777</div>
 							<hr>
+							
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<h3>
-							<a class="move-link" href="#" data-lat="37.2666222" data-lng="126.9996409">수원센터</a>
+							<a class="move-link" href="#" data-lat="37.2666222" data-lng="126.9996409">수원센터(물류창고)</a>
 						</h3>
 						<br>
-						컨시어지 수원리브로점 경기도 수원시 팔달구 매산로1가
+							<div>컨시어지 수원리브로점 경기도 수원시 팔달구 매산로1가</div>
+							<br>
+							<div class="mt-5">대표번호 : 031)344-5255 / 010)6466-7577</div>
 						<hr>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<h3>
-							<a class="move-link" href="#" data-lat="35.1691262" data-lng="129.0574637">부산센터</a>
+							<a class="move-link" href="#" data-lat="35.1691262" data-lng="129.0574637">부산센터(물류창고)</a>
 						</h3>
 						<br>
-						부산광역시 부산진구 연지동 105
+							<div>부산광역시 부산진구 연지동 105</div>
+							<br>
+							<div class="mt-5">대표번호 : 051)344-5255 / 010)2366-2377</div>
 						<hr>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<h3>
-							<a class="move-link" href="#" data-lat="35.2215738" data-lng="128.6774283">창원센터</a>
+							<a class="move-link" href="#" data-lat="35.2215738" data-lng="128.6774283">창원센터(물류창고)</a>
 						</h3>
 						<br>
-						환타지아 경상남도 창원시 성산구 중앙동 97-4
+						<div>환타지아 경상남도 창원시 성산구 중앙동 97-4</div>
+						<br>
+							<div class="mt-5">대표번호 : 061)674-655 / 010)9966-2377</div>
 						<hr>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<h3>
-							<a class="move-link" href="#" data-lat="34.8109053" data-lng="127.6712255">여수센터</a>
+							<a class="move-link" href="#" data-lat="34.8109053" data-lng="127.6712255">여수센터(물류창고)</a>
 						</h3>
 						<br>
 						평여119안전센터 전라남도 여수시 평여동 651-6
+						<br>
+							<div class="mt-5">대표번호 : 041)944-5255 / 010)9966-1234</div>
 						<hr>
 					</td>
 				</tr>
 			</table>
 		</div>
 		
-		<table class="mt-40 ms-50" style="float:left">
+		<table class="mt-70 ms-50" style="float:left">
+		
 			<tr>
 				<td width="70%">
-					
+					<div class="center">
+						<h2><span class="span-eatting"></span></h2>
+					</div>
 					<div id="map">_______________________________________________________</div>
 				</td>
 			</tr>
