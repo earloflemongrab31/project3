@@ -450,7 +450,7 @@ ul.pagination > li > a{
     padding: 0;
     list-style: none;
     font-family: "Noto Serif KR";
-    z-index: 2;
+    z-index: 1;
 }
 
 .dropdown-menu{
