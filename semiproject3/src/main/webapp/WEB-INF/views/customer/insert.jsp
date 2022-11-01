@@ -15,7 +15,7 @@
         
 
 
-    <div class="container-800 mt-50 mb-50">
+    <div class="container-1000 mt-50 mb-50">
         <div class="row center mb-50">
             <h1>JOIN US</h1>
         </div>
@@ -24,7 +24,7 @@
         <table class="table table-slit mb-30">
             <thead>
                 <tr>
-                    <th class="left w-25">기본정보</th>
+                    <th class="left w-15">기본정보</th>
                     <td class="right"><span class="required">*</span>필수입력 사항</td>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                 <tr>
                     <th>아이디<span class="required">*</span></th>
                     <td>
-                        <input class="input" type="text" name="customerId">
+                        <input class="input w-40" type="text" name="customerId">
                         <span class="NNNNY-message"><i class="fa-solid fa-check"></i></span>
                         <span class="NNNNN-message">이미 사용 중인 아이디입니다.</span>
                         <span class="fail-message">영문 소문자/숫자, 5~20자로 설정해야 합니다.</span>
@@ -41,7 +41,7 @@
                 <tr>
                     <th>비밀번호<span class="required">*</span></th>
                     <td>
-                        <input class="input" type="password" name="customerPw">
+                        <input class="input w-40" type="password" name="customerPw">
                         <span class="NNNNY-message"><i class="fa-solid fa-check"></i></span>
                         <span class="fail-message">영문 대소문자/숫자/특수[!@#$]를 포함한 8~16자로 설정해야 합니다.</span>
                     </td>
@@ -50,7 +50,7 @@
                 <tr>
                     <th>비밀번호 확인<span class="required">*</span></th>
                     <td>
-                        <input class="input" type="password" id="customer-pwcheck">
+                        <input class="input w-40" type="password" id="customer-pwcheck">
                         <span class="NNNNY-message"><i class="fa-solid fa-check"></i></span>
                         <span class="fail-message">비밀번호가 일치하지 않습니다.</span>
                     </td>
@@ -58,19 +58,19 @@
                 <tr>
                     <th rowspan="2" style="vertical-align:middle">비밀번호 확인 질문<span class="required">*</span></th>
                     <td>
-                        <input type="text" class="input input-none" readonly placeholder="나의 보물 1호는?">
+                        <input type="text" class="input input-none w-40" readonly placeholder="나의 보물 1호는?">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input class="input" type="text" name="customerPwsearch" placeholder="질문답변">
+                        <input class="input w-40" type="text" name="customerPwsearch" placeholder="질문답변">
                         <span class="fail-message">필수 입력 항목입니다.</span>
                     </td>
                 </tr>
                 <tr>
                     <th>닉네임<span class="required">*</span></th>
                     <td>
-                        <input class="input" type="text" name="customerNick">
+                        <input class="input w-40" type="text" name="customerNick">
                         <span class="NNNNY-message"><i class="fa-solid fa-check"></i></span>
                         <span class="NNNNN-message">이미 사용 중인 닉네임입니다.</span>
                         <span class="fail-message">한글/숫자, 1~10자로 설정해야 합니다.</span>
@@ -80,15 +80,23 @@
                 <tr>
                     <th>이름<span class="required">*</span></th>
                     <td>
-                        <input class="input" type="text" name="customerName">
+                        <input class="input w-40" type="text" name="customerName">
                         <span class="fail-message">필수 입력 사항입니다.</span>
                         <span class="NNNNN-message">한글만 입력 가능합니다.</span>
+                    </td>
+                </tr>
+                <!-- 달력 변경할 수 있으면 하기 cdn은 넣어놓음 -->
+                <tr>
+                    <th>생년월일</td>
+                    <td>					
+                    <input class="input w-40" type="date" name="customerBirth">
+ 
                     </td>
                 </tr>
                 <tr>
                     <th>휴대전화<span class="required">*</span></th>
                     <td>
-                        <input class="input" type="tel" name="customerPhone" maxlength="11" placeholder="010XXXXXXXXX">
+                        <input class="input w-40" type="tel" name="customerPhone" maxlength="11" placeholder="010XXXXXXXXX">
                         <span class="fail-message">필수 입력 사항입니다.</span>
                         <span class="NNNNN-message">형식에 맞게 입력 가능합니다.</span>
                     </td>
@@ -104,24 +112,16 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 달력 변경할 수 있으면 하기 cdn은 넣어놓음 -->
                 <tr>
-                    <th class="w-25">생년월일</td>
-                    <td>					
-                    <input class="input w-75" type="date" name="customerBirth">
- 
-                    </td>
-                </tr>
-                <tr>
-                    <th>일반전화</td>
+                    <th class="w-15">일반전화</td>
                     <td>
-                        <input class="input w-75" type="tel" name="customerTel" maxlength="11">
+                        <input class="input w-40" type="tel" name="customerTel" maxlength="11">
                     </td>
                 </tr>
                 <tr>
                     <th>이메일</td>
                     <td>
-                        <input class="input w-75" type="email" name="customerEmail">
+                        <input class="input w-40" type="email" name="customerEmail">
                     </td>
                 </tr>
             </tbody>
