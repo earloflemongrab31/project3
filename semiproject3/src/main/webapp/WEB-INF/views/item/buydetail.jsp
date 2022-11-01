@@ -10,13 +10,6 @@
 <!-- 회원정보에 없는 이메일을 입력할 시에 출력되는 경고창 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-	$(function(){
-		var responseMessage = "<c:out value="${message}" />";
-		if (responseMessage != ""){
-		    alert(responseMessage)
-		}
-	});
-        
 	//리뷰 좋아요 ajax
 	$(function(){
 		$(".review-like-btn").click(function(e){
@@ -63,7 +56,7 @@
 	      });
 	      $(".buy").click(function(){
 	         $(".item-form").attr("action", "/orders/detail");
-	         $(".item-form").attr("method", "get");
+	         $(".item-form").attr("method", "post");
 	      });
       });
 </script>
@@ -283,7 +276,7 @@
                                  <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100">
                               </td>
                               
-                           <!--좋아요  -->                
+                         	<!--좋아요  -->                 
                               <td style="text-align: center; vertical-align: middle;">
                              <c:choose>
                              	<c:when test="${loginId==null}">
@@ -296,7 +289,7 @@
                              </c:choose>
                               </td>
                           
-                          <!--리뷰 삭제-->
+                         	<!--리뷰 삭제-->
                              <tr>
                                 <td>
                                 <c:if test="${loginId == list.customerId}">
@@ -334,6 +327,7 @@
                      <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
                      pattern="#,##0.00"></fmt:formatNumber>
                </h5>
+
       </table>
       </div>
    </div>
