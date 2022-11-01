@@ -201,9 +201,9 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 @Override
-public List<ReviewDto> selectList(ReviewListSearchVO vo, String loginId) {
+public List<ReviewDto> selectList(ReviewListSearchVO vo) {
 	if(vo.isSearch()) {
-		return search(vo,loginId);
+		return search(vo);
 	}
 	else {
 		return list(vo);
@@ -218,7 +218,7 @@ public List<ReviewDto> list(ReviewListSearchVO vo) {
 }
 
 @Override
-public List<ReviewDto> search(ReviewListSearchVO vo, String loginId) {
+public List<ReviewDto> search(ReviewListSearchVO vo) {
 	String sql = "select * from ("
 			+ "select rownum rn, TMP.* from ("
 				+ "select * from review where instr(#1,?) > 0 "
@@ -227,7 +227,7 @@ public List<ReviewDto> search(ReviewListSearchVO vo, String loginId) {
 		+ ") where rn between ? and ?";
 	sql = sql.replace("#1", vo.getType());
 	Object[] param = {
-			vo.getKeyword(), loginId, vo.startRow(), vo.endRow()
+			vo.getKeyword(),vo.startRow(), vo.endRow()
 };
 return jdbcTemplate.query(sql, mapper1, param);
 }
@@ -259,7 +259,7 @@ public int listCount(ReviewListSearchVO vo) {
 @Override
 public List<ReviewDto> customerSelectList(String loginId, ReviewListSearchVO vo) {
 	if(vo.isSearch()) {
-		return search(vo,loginId);
+		return search(vo);
 	}
 	else {
 		return list(vo);
