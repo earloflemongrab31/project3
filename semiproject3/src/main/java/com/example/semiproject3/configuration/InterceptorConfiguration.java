@@ -37,7 +37,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 							"/notice/**"//공지사항 전체
 					)
 					.excludePathPatterns(//위의 주소에서 제외할 주소
-							"/customer/join*",//회원가입
+							"/customer/insert*",//회원가입
 							"/customer/login",//로그인
 							"/customer/goodbye_result",//탈퇴완료
 							"/notice/list",//공지사항 목록
