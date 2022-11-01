@@ -103,7 +103,7 @@
 				<input type="hidden" name="ordersNo" value="${ordersDto.ordersNo}">
 				<input type="hidden" name="itemNo" value="${ordersDto.itemNo}">
 				<tr>
-					<th class="w-25" rowspan="4">
+					<th class="w-25" rowspan="4" style="vertical-align: bottom;">
 						<img class="w-100" src="/image/download/${ordersDto.imageNo}">
 						<input type="hidden" name="imageNo" value="${ordersDto.imageNo}">
 					</th>
@@ -112,11 +112,6 @@
 						<input type="text" class="input input-none w-100" name="itemName" 
 							value="${ordersDto.itemName}" readonly>
 					</td>
-<!-- 					<td class="right"> -->
-<%-- 					<a href="delete?ordersNo=${ordersDto.orderNo}"> --%>
-<!-- 					삭제 -->
-<!-- 					</a> -->
-<!-- 					</td> -->
 					<td rowspan="4">
 						금액 : 
 						<c:set var="itemTotal" value="${ordersDto.itemPrice * ordersDto.itemCnt}"></c:set>

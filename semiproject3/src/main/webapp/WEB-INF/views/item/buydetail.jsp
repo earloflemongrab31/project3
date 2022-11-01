@@ -130,7 +130,7 @@
                <c:forEach var="buylistView" items="${buyImageList}">
                <c:if test="${buylistView.imageMain == 1}">
                   <img src="/image/download/${buylistView.imageNo}" style="width:320px; height: 430px;" data-image="main">
-                  <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
+<%--                   <input type="hidden" name="imageNo" value="${buylistView.imageNo}"> --%>
                </c:if>
                </c:forEach>
             </th>
@@ -171,10 +171,10 @@
 </div>
 
 <div class="float-left w-50">
-<div class="row">
+<div class="row mb-20" style="font-weight:bold;">
    <input type="hidden" name="customerId" value="${loginId}">
    <input type="hidden" name="itemNo" value="${itemDto.itemNo}">
-   <input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none" style="font-weight:bold;">
+   ${itemDto.itemName}
 </div>
 <div class="row">
    ${itemDto.itemMemo}
@@ -200,13 +200,13 @@
                </c:if>
                <c:forEach var="itemDto" items="${buylist}">
 	               <c:if test="${itemDto.itemTotalCnt !=0}">
-	                  <option data-color="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+	                  <option data-name="${itemDto.itemName}" data-color="${itemDto.itemColor}" 
+	                  data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}" data-image="${itemDto.imageNo}">
 	                  ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
 	                  </option>
 	               </c:if>
                </c:forEach>
             </select>
-            <input class="input w-100" type="hidden" name="itemTotalCnt" value="">
          </td>
       </tr>
    </tbody>

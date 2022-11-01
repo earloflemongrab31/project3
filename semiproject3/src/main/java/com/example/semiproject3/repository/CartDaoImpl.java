@@ -179,7 +179,7 @@ public class CartDaoImpl implements CartDao{
 	//장바구니에 상품이 있는지 중복조회
 	@Override
 	public CartDto selectOne(CartDto cartDto) {
-		String sql = "select * from cart where item_no = ? and item_size = ? and item_color = ? and customer_id = ?";
+		String sql = "select * from cart_list_view where item_no = ? and item_size = ? and item_color = ? and customer_id = ?";
 		Object[] param = {
 				cartDto.getItemNo(), cartDto.getItemSize(), cartDto.getItemColor(), cartDto.getCustomerId()
 		};

@@ -49,6 +49,7 @@ public class OrdersController {
 			@RequestParam String[] itemSize,
 			@RequestParam String[] itemColor,
 			@RequestParam int[] itemCnt,
+			@RequestParam int[] imageNo,
 			@ModelAttribute OrdersDto ordersDto,
 			@RequestParam(required=false) int[] cartNo,
 			@ModelAttribute CartDto cartDto,
@@ -65,7 +66,7 @@ public class OrdersController {
 		for(int i=0; i < itemColor.length; i++) {
 			boolean search = ordersDao.selectOne(OrdersDto.builder()
 											.itemNo(ordersDto.getItemNo())
-											.itemName(ordersDto.getItemName())
+											.itemName(itemName[i])
 											.itemColor(itemColor[i])
 											.itemSize(itemSize[i])
 											.customerId(loginId)
@@ -88,21 +89,19 @@ public class OrdersController {
 								.itemColor(itemColor[i])
 								.itemSize(itemSize[i])
 								.itemCnt(itemCnt[i])
-								.imageNo(ordersDto.getImageNo())
+								.imageNo(imageNo[i])
 						.build());
 				
 			}
 			else {
 				ordersDao.plus(OrdersDto.builder()
-//								.ordersNo(ordersDto.getOrdersNo())
 								.customerId(loginId)
 								.itemNo(ordersDto.getItemNo())
-//								.itemName(ordersDto.getItemName())
-//								.itemPrice(ordersDto.getItemPrice())
+								.itemName(itemName[i])
 								.itemColor(itemColor[i])
 								.itemSize(itemSize[i])
 								.itemCnt(itemCnt[i])
-//								.imageNo(ordersDto.getImageNo())
+								.imageNo(imageNo[i])
 						.build());
 			}
 			if(!cartSearch && cartNo != null) {

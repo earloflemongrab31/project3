@@ -11,7 +11,7 @@
 		$(".input[name=itemCnt]").on("input",function(){
 			var cnt = $(this).val();
 			var price = $(this).find("itemPrice");
-			$(".input[name=itemCnt]").attr("value", cnt);
+			$(this).attr("value", cnt);
 		});
 		
 	});
@@ -49,10 +49,6 @@
 			<td>수량</td>
 			<td>
 				<input type="number" class="itemCnt input w-100" name="itemCnt" value="${cartDto.itemCnt}" min="0" max="${cartDto.itemTotalCnt}">
-<!-- 				<span> -->
-<!-- 				<button class="plus btn">+</button> -->
-<!-- 				<button class="minus btn">-</button> -->
-<!-- 				</span> -->
 			</td>
 	 		<td class="right cntPrice" rowspan="2">
 	 			<c:set var="cntPrice" value="${cartDto.itemCnt*cartDto.itemPrice}"/>

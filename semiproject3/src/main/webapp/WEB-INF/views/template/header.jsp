@@ -675,11 +675,13 @@
 
         var selectedOption = [];
         $(".input-option").on("input",function(){
+        	var name = $(this).find("option:selected").data("name");//선택한 상품이름
 	        var color = $(this).find("option:selected").data("color");//선택한 색
 	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
 	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
+	        var imageno = $(this).find("option:selected").data("image");//선택한 상품이미지
 	        if(!color) return;//값 없으면 리턴
-	        
+	       
  	        for(var i=0; i<selectedOption.length; i++){
  	        	if(selectedOption[i] === color + "-" + size){
  	 				alert("이미 선택된 옵션입니다.");
@@ -706,19 +708,24 @@
 	            $(this).parent(".option").remove();
 	        });
 	        
+	        var nameOption = $("<input>").addClass("w-25 input").val(name).attr("type", "hidden").attr("name", "itemName").prop("readonly", true);
 	        var colorOption = $("<input>").addClass("w-25 input input-none").val(color).attr("type", "text").attr("name", "itemColor").prop("readonly", true);
 	        var sizeOption = $("<input>").addClass("w-25 input input-none").val(size).attr("type", "text").attr("name", "itemSize").prop("readonly", true);
 	        var cnt = $("<input>").addClass("w-25 input").attr("type", "number").attr("name", "itemCnt").attr("min", 1).attr("max", totalcnt).val(1);
+	        var totalCnt = $("<input>").addClass("w-25 input").val(totalcnt).attr("type", "hidden").attr("name", "itemTotalCnt").prop("readonly", true);
+	        var imageNo = $("<input>").addClass("w-25 input").val(imageno).attr("type", "hidden").attr("name", "imageNo").prop("readonly", true);
 	        
+	        nameOption.appendTo(plusLine);
 	        colorOption.appendTo(plusLine);
 	        sizeOption.appendTo(plusLine);
 	        cnt.appendTo(plusLine);
+	        totalCnt.appendTo(plusLine);
+	        imageNo.appendTo(plusLine);
 	        icon.appendTo(plusLine);
 	
 	        plusLine.appendTo($(".option-area"));
 	
 	        $(".input-option").val("");
-	        $("input[name=itemTotalCnt]").attr("value", totalcnt);
 	        selectedOption.push(color+"-"+size);
 			console.log(selectedOption);
         });

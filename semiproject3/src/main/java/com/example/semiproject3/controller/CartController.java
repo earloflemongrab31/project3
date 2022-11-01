@@ -34,6 +34,8 @@ public class CartController {
 	@PostMapping("/insert")
 	public String insert(@RequestParam int itemNo,
 			@ModelAttribute CartDto cartDto,
+			@RequestParam int[] itemTotalCnt,
+			@RequestParam String[] itemName,
 			@RequestParam String[] itemColor,
 			@RequestParam String[] itemSize,
 			@RequestParam int[] itemCnt,
@@ -61,8 +63,8 @@ public class CartController {
 							.cartNo(cartDto.getCartNo())
 							.customerId(loginId)
 							.itemNo(cartDto.getItemNo())
-							.itemTotalCnt(cartDto.getItemTotalCnt())
-							.itemName(cartDto.getItemName())
+							.itemTotalCnt(itemTotalCnt[i])
+							.itemName(itemName[i])
 							.itemColor(itemColor[i])
 							.itemSize(itemSize[i])
 							.itemCnt(itemCnt[i])
@@ -72,16 +74,11 @@ public class CartController {
 			}
 			else {
 				cartDao.plus(CartDto.builder()
-//							.cartNo(cartDto.getCartNo())
 							.customerId(loginId)
 							.itemNo(cartDto.getItemNo())
-//							.itemTotalCnt(cartDto.getItemTotalCnt())
-//							.itemName(cartDto.getItemName())
 							.itemColor(itemColor[i])
 							.itemSize(itemSize[i])
 							.itemCnt(itemCnt[i])
-//							.itemPrice(cartDto.getItemPrice())
-//							.cartPrice(cartDto.getCartPrice())
 						.build());
 			}
 		}
@@ -103,25 +100,7 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-
-//	@ResponseBody
-//	@GetMapping("/cartInsert")
-//	public String cartInsert(
-//			@RequestParam int itemNo,
-//			HttpSession session	) {
-//
-//		String result = "00";
-//		
-//		System.out.println("/cartInsert ================"+ itemNo);		
-//		//Card db insert
-//		
-//		//
-//		
-//		return result;
-//	}
-
-	
-
+	//카트 삭제
 	@GetMapping("/delete")
 	public String delete(Model model,
 			@RequestParam int cartNo,
