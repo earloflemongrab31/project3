@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
-import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.vo.CartListVO;
 
 @Controller
 @RequestMapping("/cart")
@@ -33,7 +33,7 @@ public class CartController {
 	//카트담기
 	@PostMapping("/insert")
 	public String insert(
-			@ModelAttribute CartDto cartDto,
+			@ModelAttribute CartListVO cartListVO,
 			@RequestParam String[] itemColor,
 			@RequestParam String[] itemSize,
 			@RequestParam int[] itemTotalCnt,
@@ -43,25 +43,25 @@ public class CartController {
 		//아이디가지고오기 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
-		cartDto.setCustomerId(loginId);
+		cartListVO.setCustomerId(loginId);
 		
 		for(int i = 0; i < itemColor.length; i++) {
-			cartDto.setItemColor(itemColor[i]);
-			cartDto.setItemSize(itemSize[i]);
-			cartDto.setItemTotalCnt(itemTotalCnt[i]);
-			cartDto.setItemCnt(itemCnt[i]);
+			cartListVO.setItemColor(itemColor[i]);
+			cartListVO.setItemSize(itemSize[i]);
+			cartListVO.setItemTotalCnt(itemTotalCnt[i]);
+			cartListVO.setItemCnt(itemCnt[i]);
 			
-			boolean search = cartDao.selectOne(cartDto) == null;
+			boolean search = cartDao.selectOne(cartListVO) == null;
 			
 			if(search) {
-				cartDao.insert(cartDto);
+				cartDao.insert(cartListVO);
 			}
 			else {
-				cartDao.plus(cartDto);
+				cartDao.plus(cartListVO);
 			}
 		}
 		
-		return "redirect:/item/buydetail?itemNo="+cartDto.getItemNo();
+		return "redirect:/item/buydetail?itemNo="+cartListVO.getItemNo();
 	};
 	
 	//카트 리스트

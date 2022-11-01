@@ -43,7 +43,7 @@
 <div class="row center">
 		장바구니 상품(${cartCount})
 </div>
-<form action="/orders/detail" method="post">
+<form action="/orders/cart-buy" method="post">
 <table class="table table-border" >
  	<tbody>
  	<c:forEach var="cartDto" items="${cartList}">

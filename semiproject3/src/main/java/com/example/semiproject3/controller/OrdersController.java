@@ -1,6 +1,6 @@
 package com.example.semiproject3.controller;
 
-import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
-import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
+import com.example.semiproject3.vo.CartListVO;
 import com.example.semiproject3.vo.OrdersListSearchVO;
 
 @Controller
@@ -76,6 +76,29 @@ public class OrdersController {
 		
 		//장바구니 개수
 		model.addAttribute("cartCount",cartDao.cartCount(ordersDto.getCustomerId()));
+		
+		return "orders/detail";
+	}
+
+	@PostMapping("/cart-buy")
+	public String cartBuy(
+			@ModelAttribute List<CartListVO> cartList,
+			Model model,
+			HttpSession session) {
+		
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		
+		//회원 정보 불러오기
+		model.addAttribute("customerDto", customerDao.selectOne(loginId));
+		
+		//주소 정보 불러오기
+		model.addAttribute("addressList", addressDao.selectList(loginId));
+		
+		//주문 내역 불러오기
+		model.addAttribute("cartList", cartList);
+		
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
 		return "orders/detail";
 	}
