@@ -31,7 +31,13 @@
             itemNo:$(this).data("item-no")
          },
          success:function(resp){
-               $(that).next(".like-span").text(resp.reviewCnt);
+        	 if(resp.reviewCnt>0){
+        	 	$(that).next(".like-span").text("♥"+resp.reviewCnt);
+        	 }else{
+        		 $(that).next(".like-span").text("♡");
+        	 }
+        	 
+        
          }
          })
       });
@@ -313,12 +319,24 @@
                            <!--좋아요  -->                
                               <td style="text-align: center; vertical-align: middle;">
                              <c:choose>
-                                <c:when test="${loginId==null}">
-                                   <i class="fa-regular fa-heart"></i>${list.reviewCnt}
+                             
+                                <c:when test="${loginId==null && list.reviewCnt ==0}">
+                                   <i class="fa-regular fa-heart"></i>
+                                </c:when>
+                                <c:when test="${loginId==null && list.reviewCnt >0}">
+                                   <i class="fa-solid fa-heart"></i>${list.reviewCnt}
+                                </c:when>
+                                <c:when test="${loginId!=null && list.reviewCnt == 0}">
+                                	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
+                                		좋아요
+                                	</a>
+                                	<span class="like-span"><i class="fa-regular fa-heart"></i>${list.reviewCnt}</span>
                                 </c:when>
                                 <c:otherwise>
-                                   <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}"><i class="fa-solid fa-heart"></i></a>
-                                    <span class="like-span">${list.reviewCnt}</span>
+                                   <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
+                                   		좋아요
+                                   </a>
+                                    <span class="like-span"><i class="fa-solid fa-heart"></i>${list.reviewCnt}</span>
                                 </c:otherwise>
                              </c:choose>
                               </td>
