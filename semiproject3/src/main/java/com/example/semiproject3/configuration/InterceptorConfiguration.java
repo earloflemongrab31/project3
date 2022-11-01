@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.example.semiproject3.interceptor.AdminInterceptor;
 import com.example.semiproject3.interceptor.CustomerInterceptor;
 import com.example.semiproject3.interceptor.CustomerNoticePermissionCheckInterceptor;
 
@@ -16,6 +17,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private CustomerInterceptor customerInterceptor;
+	
+	@Autowired
+	private AdminInterceptor adminInterceptor;
 	
 	@Autowired
 	private CustomerNoticePermissionCheckInterceptor permissionCheckInterceptor;
@@ -33,7 +37,6 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 							"/notice/**",//공지사항 전체
 							"/item/**",//아이템 전체
 							"/warehouse/**",//재고 전체
-							"/admin/**",//관리자 전체
 							"/company/**",//협력사 전체
 							"/research/list",//설문조사 목록
 							"/review/reportList",//신고목록
@@ -53,6 +56,19 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 							"/item/insert", //아이템 등록
 							"/item/list" //아이템 목록
 					);
+		
+		
+		//관리자용 인터셉터
+				registry.addInterceptor(adminInterceptor)
+							.addPathPatterns(//인터셉터가 감시할 주소
+								"/customer/edit*",//회원수정
+								"/customer/goodbye"//회원탈퇴
+								
+							)
+							.excludePathPatterns(//위의 주소에서 제외할 주소
+							);
+				
+		
 		
 		//관리자만 공지사항을 등록할 수 있도록 검사하는 인터셉터
 				registry.addInterceptor(permissionCheckInterceptor)
