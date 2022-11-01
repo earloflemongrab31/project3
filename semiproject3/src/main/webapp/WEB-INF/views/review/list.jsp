@@ -28,7 +28,7 @@ td, th {
 				<h4 style="padding-left: 20px">작성한 리뷰가 없습니다.</h4>
 			</c:when>
 			<c:otherwise>
-				<table class="table table-hover table-border ">
+				<table class="table table-border ">
 					<thead>
 						<tr>
 							<th width="5%">번호</th>
@@ -53,7 +53,7 @@ td, th {
 								<td>${reviewDto.reviewDate}</td>
 								<td>${reviewDto.reviewCnt}개</td>
 								<td>
-									<a class="btn btn-border" href="http://localhost:8888/item/buydetail?itemNo=${reviewDto.itemNo}">
+									<a class="btn btn-border w-100" href="http://localhost:8888/item/buydetail?itemNo=${reviewDto.itemNo}">
 										확인
 									</a>
 								</td>

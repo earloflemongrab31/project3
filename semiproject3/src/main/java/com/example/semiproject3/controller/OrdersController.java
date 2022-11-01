@@ -57,6 +57,9 @@ public class OrdersController {
 		
 		//아이디가지고오기
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		if(ordersDao.selectList(loginId) != null) {
+			ordersDao.deleteAll(loginId);
+		}
 		
 		//주문 테이블 값 넣기
 		for(int i=0; i<itemColor.length; i++) {
@@ -157,8 +160,11 @@ public class OrdersController {
 		return "redirect:detail";
 	}
 
-	
-
-
+	@GetMapping("/delete-all")
+	public String deleteAll(HttpSession session) {
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		ordersDao.deleteAll(loginId);
+		return "redirect:/";
+	}
 	
 }

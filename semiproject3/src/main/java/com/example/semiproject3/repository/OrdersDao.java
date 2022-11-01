@@ -53,5 +53,7 @@ public interface OrdersDao {
 	void plus(OrdersDto ordersDto);
 	
 	void minus(OrdersDto ordersDto);
+
+	boolean deleteAll(String loginId);
 	
 }
