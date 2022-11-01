@@ -9,9 +9,27 @@
 <script>
 	$(function(){
 		$(".input[name=itemCnt]").on("input",function(){
-			var cnt = $(this).val();
-			var price = $(this).find("itemPrice");
-			$(".input[name=itemCnt]").attr("value", cnt);
+			var itemCnt = $(this).val();
+			var cartNo = $(this).parent("td").find("input[name=cartNo]").val();
+			var itemPrice = $(this).parent("td").find("input[name=itemPrice]").val();
+			var that = $(this);
+			$.ajax({
+				url: "http://localhost:8888/rest/cart/",
+				method: "post",
+				data: {
+					itemCnt: itemCnt,
+					cartNo: cartNo
+				},
+				success: function(resp){
+					that.parent("td").next().find(".price-result").text(itemPrice * itemCnt);
+					var totalPay = 0;
+					for(var i=0; i<resp.length; i++){
+						totalPay += resp[i].itemCnt * resp[i].itemPrice;			
+					}
+					$("#pay-total").text(totalPay);
+					$("#pay-real-total").text(totalPay + 3000);
+				}
+			});
 		});
 		
 	});
@@ -19,13 +37,13 @@
 </script>
 
 <div class="container-600 mt-50 mb-50">
-<div class="row center mb-50">
+<div class="row center mb-30">
 	 <h1>CART</h1>
 </div>
 <div class="row center">
 		장바구니 상품(${cartCount})
 </div>
-<form action="/orders/detail" method="post">
+<form action="/orders/cart-buy" method="post">
 <table class="table table-border" >
  	<tbody>
  	<c:forEach var="cartDto" items="${cartList}">
@@ -41,33 +59,33 @@
 		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
 			</tr>
  		</c:if>
+		<tr>
+			<td>수량</td>
+			<td>
 		 		<input type="hidden" name="cartNo" value="${cartDto.cartNo}">
 		 		<input type="hidden" name="customerId" value="${cartDto.customerId}">
 		 		<input type="hidden" name="itemNo" value="${cartDto.itemNo}">
 		 		<input type="hidden" name="itemName" value="${cartDto.itemName}">
-		<tr>
-			<td>수량</td>
-			<td>
-				<input type="number" class="itemCnt input w-100" name="itemCnt" value="${cartDto.itemCnt}" min="0" max="${cartDto.itemTotalCnt}">
+	 			<input type="hidden" name="itemPrice" value="${cartDto.itemPrice}">
+				<input type="number" class="itemCnt input w-100" name="itemCnt" value="${cartDto.itemCnt}" min="1" max="${cartDto.itemTotalCnt}">
 <!-- 				<span> -->
 <!-- 				<button class="plus btn">+</button> -->
 <!-- 				<button class="minus btn">-</button> -->
 <!-- 				</span> -->
 			</td>
-	 		<td class="right cntPrice" rowspan="2">
-	 			<c:set var="cntPrice" value="${cartDto.itemCnt*cartDto.itemPrice}"/>
-	 			<fmt:formatNumber value="${cntPrice}" pattern="#,##0"/>원
-	 			<input type="hidden" name="itemPrice" value="${cartDto.itemPrice}">
+			<td rowspan="2">
+				<span class="price-result">${cartDto.itemPrice * cartDto.itemCnt}</span>원
+				<c:set var="total" value="${total + cartDto.itemPrice * cartDto.itemCnt}"></c:set>
 	 		</td>
 	 	</tr>
 	 	<tr>	
 	 		<td>옵션</td>
-	 		<td>${cartDto.itemColor} / ${cartDto.itemSize}</td>
-	 		<input type="hidden" name="itemColor" value="${cartDto.itemColor}">
-	 		<input type="hidden" name="itemSize" value="${cartDto.itemSize}">
+	 		<td>
+		 		${cartDto.itemColor} / ${cartDto.itemSize}
+		 		<input type="hidden" name="itemColor" value="${cartDto.itemColor}">
+		 		<input type="hidden" name="itemSize" value="${cartDto.itemSize}">
+	 		</td>
 		</tr>
-	 		<c:set var="total" value="${total+cntPrice}"/>
-	 		<c:set var="deliveryFee" value="${cartDto.deliveryFee}"/>
  	</c:forEach>
  	</tbody>
  	<tfoot>
@@ -78,10 +96,8 @@
 		</tr>
  		<tr>
  			<td class="center" colspan="6">
-				상품 총금액 : 
-				<fmt:formatNumber value="${total}" pattern="#,##0"/>원
-				 + ${deliveryFee}원(배송비) = 
-				<fmt:formatNumber value="${total+deliveryFee}" pattern="#,##0"/>원
+				상품 총금액 : <span id="pay-total">${total}</span>원
+				 + 3000원(배송비) = <span id="pay-real-total">${total+3000}</span>원
 			</td>
 		</tr>
  		<tr>

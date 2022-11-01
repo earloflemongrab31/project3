@@ -110,7 +110,7 @@ public class CartDaoImpl implements CartDao{
 	
 	//카트 담기
 	@Override
-	public void insert(CartDto cartDto) {
+	public void insert(CartListVO cartListVO) {
 		String sql="insert into cart("
 				+ "cart_no, "
 				+ "customer_id, "
@@ -124,11 +124,11 @@ public class CartDaoImpl implements CartDao{
 				+ "cart_price) "
 				+ "values(cart_seq.nextval,?,?,?,?,?,?,?,?,?)";
 		Object[] param= {
-				cartDto.getCustomerId(), 
-				cartDto.getItemNo(), cartDto.getItemTotalCnt(), 
-				cartDto.getItemName(), cartDto.getItemColor(), 
-				cartDto.getItemSize(), cartDto.getItemCnt(), 
-				cartDto.getItemPrice(), cartDto.getCartPrice()
+				cartListVO.getCustomerId(), 
+				cartListVO.getItemNo(), cartListVO.getItemTotalCnt(), 
+				cartListVO.getItemName(), cartListVO.getItemColor(), 
+				cartListVO.getItemSize(), cartListVO.getItemCnt(), 
+				cartListVO.getItemPrice(), cartListVO.getCartPrice()
 		};
 		jdbcTemplate.update(sql,param);	
 	}
@@ -158,10 +158,11 @@ public class CartDaoImpl implements CartDao{
 	
 	//장바구니에 있는 상품 수량 변경(중복인경우)
 	@Override
-	public void plus(CartDto cartDto) {
+	public void plus(CartListVO cartListVO) {
 		String sql= "update cart set item_cnt = item_cnt + ? where item_no = ? and item_size = ? and item_color = ? and customer_id = ?";
 		Object[] param= {
-				cartDto.getItemCnt(), cartDto.getItemNo(), cartDto.getItemSize(), cartDto.getItemColor(), cartDto.getCustomerId()
+				cartListVO.getItemCnt(), cartListVO.getItemNo(), 
+				cartListVO.getItemSize(), cartListVO.getItemColor(), cartListVO.getCustomerId()
 		};
 		jdbcTemplate.update(sql,param);
 	}
@@ -178,12 +179,19 @@ public class CartDaoImpl implements CartDao{
 	
 	//장바구니에 상품이 있는지 중복조회
 	@Override
-	public CartDto selectOne(CartDto cartDto) {
+	public CartDto selectOne(CartListVO cartListVO) {
 		String sql = "select * from cart where item_no = ? and item_size = ? and item_color = ? and customer_id = ?";
 		Object[] param = {
-				cartDto.getItemNo(), cartDto.getItemSize(), cartDto.getItemColor(), cartDto.getCustomerId()
+				cartListVO.getItemNo(), cartListVO.getItemSize(), cartListVO.getItemColor(), cartListVO.getCustomerId()
 		};
 		return jdbcTemplate.query(sql, extractor, param);
+	}
+
+	@Override
+	public boolean cntPlus(int itemCnt, int cartNo, String loginId) {
+		String sql = "update cart set item_cnt=? where cart_no=? and customer_id=?";
+		Object[] param = {itemCnt, cartNo, loginId};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
 }

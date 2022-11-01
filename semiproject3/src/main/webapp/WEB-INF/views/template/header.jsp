@@ -677,7 +677,8 @@
         $(".input-option").on("input",function(){
 	        var color = $(this).find("option:selected").data("color");//선택한 색
 	        var size = $(this).find("option:selected").data("size");//선택한 사이즈
-	        var totalcnt = $(this).find("option:selected").data("cnt");//선택한 옵션의 재고
+	        var totalcnt = $(this).find("option:selected").data("total-cnt");//선택한 옵션의 재고
+	        
 	        if(!color) return;//값 없으면 리턴
 	        
  	        for(var i=0; i<selectedOption.length; i++){
@@ -709,16 +710,17 @@
 	        var colorOption = $("<input>").addClass("w-25 input input-none").val(color).attr("type", "text").attr("name", "itemColor").prop("readonly", true);
 	        var sizeOption = $("<input>").addClass("w-25 input input-none").val(size).attr("type", "text").attr("name", "itemSize").prop("readonly", true);
 	        var cnt = $("<input>").addClass("w-25 input").attr("type", "number").attr("name", "itemCnt").attr("min", 1).attr("max", totalcnt).val(1);
+	        var totalCnt = $("<input>").attr("type", "hidden").attr("name", "itemTotalCnt").val(totalcnt);
 	        
 	        colorOption.appendTo(plusLine);
 	        sizeOption.appendTo(plusLine);
 	        cnt.appendTo(plusLine);
 	        icon.appendTo(plusLine);
+	        totalCnt.appendTo(plusLine);
 	
 	        plusLine.appendTo($(".option-area"));
 	
 	        $(".input-option").val("");
-	        $("input[name=itemTotalCnt]").attr("value", totalcnt);
 	        selectedOption.push(color+"-"+size);
 			console.log(selectedOption);
         });
@@ -778,10 +780,20 @@
 	
 	$(function(){
 		$("input[name=usePoint]").on("blur",function(){
-			var usePoint = parseInt($(this).val());
+			var usePoint = $(this).val();
+			var totalPay = parseInt($("#total-pay").text());
+			var payMoney = totalPay - usePoint;
+			
+			if(usePoint < 0){
+				return;
+			}
+			if(!usePoint){
+				$(this).val(0);
+				$("#use-point").text("0");
+				$("#total-price").text(totalPay);
+				return;
+			}
 			$("#use-point").text(usePoint);
-			var totalPrice = parseInt($("input[name=itemTotalPrice]").val());
-			var payMoney = totalPrice + 3000 - usePoint;
 			$("#total-price").text(payMoney);
 		});
 	});
@@ -818,7 +830,7 @@
 	</div>
 	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
 		<div class="right-word row float-right">
-			${loginId}님, 안녕하세요.
+			[${loginGrade}] ${loginId}님, 안녕하세요.
 		</div>
 	</c:if>
 	<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
