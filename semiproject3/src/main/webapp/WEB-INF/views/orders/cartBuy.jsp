@@ -103,7 +103,7 @@
 				<input type="hidden" name="cartNo" value="${cartDto.cartNo}">
 				<input type="hidden" name="itemNo" value="${cartDto.itemNo}">
 				<tr>
-					<th class="w-25" rowspan="4">
+					<th class="w-25" rowspan="4" style="vertical-align: bottom;">
 						<img class="w-100" src="/image/download/${cartDto.imageNo}">
 						<input type="hidden" name="imageNo" value="${cartDto.imageNo}">
 					</th>

@@ -73,7 +73,7 @@
 <!-- 				<button class="minus btn">-</button> -->
 <!-- 				</span> -->
 			</td>
-			<td rowspan="2">
+			<td class="center" width="100" rowspan="2">
 				<span class="price-result">${cartDto.itemPrice * cartDto.itemCnt}</span>원
 				<c:set var="total" value="${total + cartDto.itemPrice * cartDto.itemCnt}"></c:set>
 	 		</td>

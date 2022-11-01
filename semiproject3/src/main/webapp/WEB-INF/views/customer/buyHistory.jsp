@@ -20,7 +20,7 @@
 					<td class="center">상품현황</td>
 				</tr>
 				<tr>
-					<td class="w-25" rowspan="3">
+					<td class="w-25" rowspan="3" style="vertical-align: bottom;">
 						<a href="/item/buydetail?itemNo=${buyItem.itemNo}">
 							<img class="w-100" src="/image/download/${buyItem.imageNo}">
 						</a>

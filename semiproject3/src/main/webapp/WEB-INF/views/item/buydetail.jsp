@@ -130,7 +130,7 @@
                <c:forEach var="buylistView" items="${buyImageList}">
                <c:if test="${buylistView.imageMain == 1}">
                   <img src="/image/download/${buylistView.imageNo}" style="width:320px; height: 430px;" data-image="main">
-<%--                   <input type="hidden" name="imageNo" value="${buylistView.imageNo}"> --%>
+                  <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
                </c:if>
                </c:forEach>
             </th>
@@ -171,10 +171,10 @@
 </div>
 
 <div class="float-left w-50">
-<div class="row mb-20" style="font-weight:bold;">
+<div class="row">
    <input type="hidden" name="customerId" value="${loginId}">
    <input type="hidden" name="itemNo" value="${itemDto.itemNo}">
-   ${itemDto.itemName}
+   <input type="text" name="itemName" value="${itemDto.itemName}" readonly class="input input-none" style="font-weight:bold;">
 </div>
 <div class="row">
    ${itemDto.itemMemo}
