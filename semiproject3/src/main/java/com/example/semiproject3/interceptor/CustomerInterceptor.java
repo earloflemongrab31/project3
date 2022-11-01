@@ -19,7 +19,8 @@ import com.example.semiproject3.constant.SessionConstant;
 //		- 작업 종료 후(afterCompletion)
 
 //이 클래스의 목적은 회원이 아닌 존재가 회원 기능에 접근하는 것을 차단하는 것
-@Component//단일 기능을 수행하는 도구
+
+@Component
 public class CustomerInterceptor implements HandlerInterceptor{
 
 	//preHandle에서 true/false를 반환하면 통과/차단이 가능

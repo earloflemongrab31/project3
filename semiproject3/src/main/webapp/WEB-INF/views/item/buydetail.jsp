@@ -31,7 +31,13 @@
             itemNo:$(this).data("item-no")
          },
          success:function(resp){
-               $(that).next(".like-span").text(resp.reviewCnt);
+        	 if(resp.reviewCnt>0){
+        	 	$(that).next(".like-span").text("♥"+resp.reviewCnt);
+        	 }else{
+        		 $(that).next(".like-span").text("♡");
+        	 }
+        	 
+        
          }
          })
       });
@@ -82,7 +88,7 @@
       border-top: 1px solid #D5D5D5;
    }
    
-	/*    사진 밑에 작게 만드는 옵션 */
+   /*    사진 밑에 작게 만드는 옵션 */
       .image.item-mini-image{
       object-fit: cover;
       width: 50px;
@@ -98,6 +104,17 @@
          return false;
       }
    }
+   
+   function fail2(){
+	   var result=confirm('로그인후 사용할 수 있습니다. 로그인하시겠습니까?');
+	   
+	   if(result){
+			location.replace("/customer/login");   
+	   }else{
+		   
+	   }
+	      }
+	   
 </script>
 
 <div class="container-1000 mt-50 mb-50">
@@ -313,12 +330,24 @@
                            <!--좋아요  -->                
                               <td style="text-align: center; vertical-align: middle;">
                              <c:choose>
-                                <c:when test="${loginId==null}">
-                                   <i class="fa-regular fa-heart"></i>${list.reviewCnt}
+                             
+                                <c:when test="${loginId==null && list.reviewCnt ==0}">
+                                   <a href="#" onclick="fail2()"><i class="fa-regular fa-heart"></i></a>
+                                </c:when>
+                                <c:when test="${loginId==null && list.reviewCnt >0}">
+                                   <a href="#" onclick="fail2()"><i class="fa-solid fa-heart"></i>${list.reviewCnt}</a>
+                                </c:when>
+                                <c:when test="${loginId!=null && list.reviewCnt == 0}">
+                                	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
+                                		좋아요
+                                	</a>
+                                	<span class="like-span"><i class="fa-regular fa-heart"></i>${list.reviewCnt}</span>
                                 </c:when>
                                 <c:otherwise>
-                                   <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}"><i class="fa-solid fa-heart"></i></a>
-                                    <span class="like-span">${list.reviewCnt}</span>
+                                   <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
+                                   		좋아요
+                                   </a>
+                                    <span class="like-span"><i class="fa-solid fa-heart"></i>${list.reviewCnt}</span>
                                 </c:otherwise>
                              </c:choose>
                               </td>
@@ -335,6 +364,7 @@
                                 </c:if>
                                 
                           <!--관리자로 접근 했을 때만 블라인드 처리가능  -->
+                          <c:if test="${admin != null}">
                            <c:choose>
                                  <c:when test="${list.reviewBlind}">
                                        <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
@@ -349,18 +379,19 @@
                                     
                                  </c:otherwise>
                               </c:choose>
+                              </c:if>
                                  </td>
                              </tr>
                      </c:forEach>
-	                     <h5>
-	                     	사용자 총 평점
-	                     	<fmt:formatNumber value=" ${total/fn:length(reviewList)}"
-	                     	pattern="#,##0.00"></fmt:formatNumber>
-	               		</h5>
-					</tbody>
-				</table>
-			</c:otherwise>
-		</c:choose>
-	</div>
+                        <h5>
+                           사용자 총 평점
+                           <fmt:formatNumber value=" ${total/fn:length(reviewList)}"
+                           pattern="#,##0.00"></fmt:formatNumber>
+                        </h5>
+               </tbody>
+            </table>
+         </c:otherwise>
+      </c:choose>
+   </div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
