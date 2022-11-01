@@ -193,7 +193,7 @@
     .swiper-slide img {
       display: block;
       width: 100%;
-      height: 480px;
+      height: 100%;
       object-fit: cover;
     }
     
@@ -203,6 +203,10 @@
     .footer{
     	padding: 1em 3em;
     }
+    
+  	a.footer-underline:hover{
+		text-decoration: underline;
+	}
     
 </style>
 <script type="text/javascript">
@@ -749,6 +753,7 @@
 		$("a.delete").click(function(e){
             var choice = confirm("삭제하시겠습니까?");
             if(choice){
+            	alert("삭제되었습니다.");
                 return true;
             }
             else{
@@ -761,6 +766,18 @@
 		$("a.logout").click(function(e){
             var choice = confirm("로그아웃 하시겠습니까?");
             if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
+	$(function(){
+		$("a.buy-delete").click(function(e){
+            var choice = confirm("주문 취소하시겠습니까?");
+            if(choice){
+                alert("주문이 취소되었습니다.");
                 return true;
             }
             else{

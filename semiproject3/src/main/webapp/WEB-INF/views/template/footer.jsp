@@ -3,11 +3,6 @@
     
 </main>
 
-<style>
-	a.footer-underline:hover{
-		text-decoration: underline;
-	}
-</style>
 <footer class="float-container">
 
 <div class="footer float-left w-50">

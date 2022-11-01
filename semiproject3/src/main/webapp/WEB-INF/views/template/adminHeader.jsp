@@ -80,6 +80,10 @@
     .footer a{
     	color: #E6E8EB;
     }
+    
+ 	a.footer-underline:hover{
+		text-decoration: underline;
+	}
 </style>
 <script type="text/javascript">
 

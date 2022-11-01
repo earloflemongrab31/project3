@@ -64,6 +64,9 @@ div.logo{
 .w-50{
     width: 50%;
 }
+.w-40{
+    width: 40%;
+}
 .w-33{
     width: 33%;
 }
@@ -304,7 +307,7 @@ font-size: 14px;
 /* .table.table-hover > thead > tr:hover,  */
 .table.table-hover > tbody > tr:hover, 
 .table.table-hover > tfoot > tr:hover{
-    background-color: #FAF9F7;
+    background-color: #f4f4f5;
 }
 
 /* 
