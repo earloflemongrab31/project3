@@ -21,10 +21,14 @@
 	<hr>
 </div>
 
-<div class="row">
-	<h2>구매자 정보</h2>
+<div class="floate-container">
+	<div class="float-left">
+		<h2>구매자 정보</h2>
+	</div>
+	<div class="row float-right">
+		<a href="delete-all" class="btn btn-neutral buy-delete">구매취소</a>
+	</div>
 </div>
-
 <div class="row mb-30">
 	<table class="table table-slit">
 		<tbody>
@@ -43,7 +47,7 @@
 	</table>
 </div>
 
-<div class="row">
+<div class="row float-left">
 	<h2>배송지 정보</h2>
 </div>
 <div class="row mb-30">

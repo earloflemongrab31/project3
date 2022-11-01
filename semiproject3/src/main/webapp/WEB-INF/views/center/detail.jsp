@@ -57,7 +57,7 @@
 				</tr>
 		 	</tbody>
 	 	</table>
-	 </div>
+</div>
 	 
 	 
 	<c:if test="${centerDto.adminContent != null}">
@@ -91,14 +91,15 @@
 	 </div>
 	 </c:if>
 	 
-	 	<div class="row right">
+ 	<div class="row right">
 		<a class="btn btn-neutral" href="list">목록</a>
 		<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
 			<a class="btn btn-positive" href="edit?centerNo=${centerDto.centerNo}">답변등록</a>
 			<a class="btn btn-negative" href="delete?centerNo=${centerDto.centerNo}">삭제하기</a>
 		</c:if>
-		</div>
-		
 	</div>
+		
+</div>
+	
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 

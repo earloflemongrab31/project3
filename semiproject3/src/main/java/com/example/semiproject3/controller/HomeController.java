@@ -28,13 +28,13 @@ import com.example.semiproject3.repository.MainImageDao;
 @Controller
 public class HomeController {
 	
-
+//	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
 //	화니꼬
 //	private final File directory = new File("C:/study/main");
 //	D드라이브용
-//	private final File directory = new File("D:/upload");
-	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/study/main");
+//	private final File directory = new File("D:/study/itemImage");
 	
 	@Autowired
 	private CartDao cartDao;
@@ -115,9 +115,5 @@ public class HomeController {
 		session.setAttribute("blockSurvey", "Y");
 		return "redirect:/";
 	}
-	@GetMapping("/block-ad")
-	public String blockAd(HttpSession session) {
-		session.setAttribute("blockAd", "Y");
-		return "redirect:/";
-	}
+
 }

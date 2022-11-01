@@ -137,11 +137,11 @@
 </div>
 
 <!-- 검색창 -->
-<form action = "list" method="get" >
+<form action = "list" method="get" autocomplete="off">
 	<div class="row center">
 		
-		<select class="input" name="type" required>
-		<option value="center_title" <c:if test="${type == 'center_title'}"></c:if>>문의사항 제목</option>
+		<select class="input input-none" name="type" required>
+		<option value="center_title" <c:if test="${type == 'center_title'}"></c:if>>제목</option>
 		
 		</select>
 			
