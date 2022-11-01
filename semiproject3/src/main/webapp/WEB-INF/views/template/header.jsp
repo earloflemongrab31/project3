@@ -780,10 +780,20 @@
 	
 	$(function(){
 		$("input[name=usePoint]").on("blur",function(){
-			var usePoint = parseInt($(this).val());
+			var usePoint = $(this).val();
+			var totalPay = parseInt($("#total-pay").text());
+			var payMoney = totalPay - usePoint;
+			
+			if(usePoint < 0){
+				return;
+			}
+			if(!usePoint){
+				$(this).val(0);
+				$("#use-point").text("0");
+				$("#total-price").text(totalPay);
+				return;
+			}
 			$("#use-point").text(usePoint);
-			var totalPrice = parseInt($("input[name=itemTotalPrice]").val());
-			var payMoney = totalPrice + 3000 - usePoint;
 			$("#total-price").text(payMoney);
 		});
 	});

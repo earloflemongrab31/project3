@@ -46,42 +46,32 @@ public class BuyController {
 			@RequestParam int[] imageNo,
 			@RequestParam int[] itemNo,
 			@RequestParam int[] ordersNo,
-			@RequestParam(required = false) int usePoint,
-			HttpSession session) {
+			@RequestParam int[] itemTotalPrice,
+			@RequestParam(required = false) int usePoint) {
 		
-		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
 		if(usePoint > 0) {
-			customerDao.usePoint(usePoint, loginId);
+			customerDao.usePoint(usePoint, buyDto.getCustomerId());
 		}
 		
 		//주문 완료 시 구매 테이블 삽입
 		for(int i=0; i<itemSize.length; i++) {
-			buyDto.setCustomerId(loginId);
 			buyDto.setItemSize(itemSize[i]);
 			buyDto.setItemColor(itemColor[i]);
 			buyDto.setItemName(itemName[i]);
 			buyDto.setItemCnt(itemCnt[i]);
 			buyDto.setImageNo(imageNo[i]);
 			buyDto.setItemNo(itemNo[i]);
-			buyDao.insert(buyDto);
+			buyDto.setItemTotalPrice(itemTotalPrice[i]);
 			ordersDao.delete(ordersNo[i]);
+			buyDao.insert(buyDto);
+			//회원 돈 차감
+			customerDao.cash(buyDto);
+			//상품 수량 차감
+			buyDao.minus(buyDto);
+			//상품 품절 확인을 위한 총수량 차감
+			buyDao.itemMinus(buyDto);
 		}
-//			@ModelAttribute List<BuyDto> BuyList,
-//			HttpSession session,
-//			@RequestParam int[] ordersNo) {
-//		for(BuyDto buyItem : BuyList) {
-//			buyDao.insert(buyItem);
-//		}
-		
-		//회원 돈 차감
-		customerDao.cash(buyDto);
-		
-		//상품 수량 차감
-		buyDao.minus(buyDto);
-		
-		//상품 품절 확인을 위한 총수량 차감
-		buyDao.itemMinus(buyDto);
 		
 		return "redirect:success";
 	}

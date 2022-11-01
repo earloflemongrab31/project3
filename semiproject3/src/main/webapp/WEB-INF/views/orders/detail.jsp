@@ -159,16 +159,16 @@
 			<tr>
 				<th rowspan="2" class="w-25">총 구매 금액</th>
 				<td>
-					${ordersDto.itemPrice * ordersDto.itemCnt}원
+					<c:forEach var="ordersDto" items="${ordersList}">
+						<c:set var="payPrice" value="${payPrice + ordersDto.itemPrice * ordersDto.itemCnt}"/>
+					</c:forEach>
+					${payPrice}원
 					+ 3000원(배송비) 
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<c:forEach var="ordersDto" items="${ordersList}">
-						<c:set var="payPrice" value="${payPrice + ordersDto.itemPrice * ordersDto.itemCnt}"/>
-					</c:forEach>
-						${payPrice + 3000}원
+					<span id="total-pay">${payPrice + 3000}</span>원
 				</td>
 			</tr>
 			<tr>
@@ -183,7 +183,7 @@
 			<tr>
 				<th rowspan="2" class="w-25">최종 결제 금액</th>
 				<td>
-					${ordersDto.itemPrice * ordersDto.itemCnt}원
+					${payPrice}원
 					+ 3000원(배송비) - <span id="use-point">0</span>point(사용 포인트)
 				</td>
 			</tr>
