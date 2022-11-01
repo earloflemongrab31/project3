@@ -46,9 +46,14 @@ public class BuyController {
 			@RequestParam int[] imageNo,
 			@RequestParam int[] itemNo,
 			@RequestParam int[] ordersNo,
+			@RequestParam(required = false) int usePoint,
 			HttpSession session) {
 		
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
+		if(usePoint > 0) {
+			customerDao.usePoint(usePoint, loginId);
+		}
 		
 		//주문 완료 시 구매 테이블 삽입
 		for(int i=0; i<itemSize.length; i++) {

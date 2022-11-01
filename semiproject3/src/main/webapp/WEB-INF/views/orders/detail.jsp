@@ -120,7 +120,7 @@
 					<td rowspan="4">
 						금액 : 
 						<c:set var="itemTotal" value="${ordersDto.itemPrice * ordersDto.itemCnt}"></c:set>
-						<fmt:formatNumber value="${itemTotal}" pattern="#,##0원"/>
+							<fmt:formatNumber value="${itemTotal}" pattern="#,##0원"/>
 						<input type="hidden" name="itemTotalPrice" value="${itemTotal}">
 					</td>
 				</tr>
@@ -157,18 +157,39 @@
 	<table class="table table-slit">
 		<tbody>
 			<tr>
-				<th rowspan="2" class="w-25">최종 결제 금액</th>
+				<th rowspan="2" class="w-25">총 구매 금액</th>
 				<td>
-					<fmt:formatNumber value="${ordersDto.itemPrice * ordersDto.itemCnt}" pattern="#,##0원"/>
-					+ 3,000원(배송비) 
+					${ordersDto.itemPrice * ordersDto.itemCnt}원
+					+ 3000원(배송비) 
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<c:forEach var="ordersDto" items="${ordersList}">
-						<c:set var="itemTotalPrice" value="${itemTotalPrice + ordersDto.itemPrice * ordersDto.itemCnt}"/>
+						<c:set var="payPrice" value="${payPrice + ordersDto.itemPrice * ordersDto.itemCnt}"/>
 					</c:forEach>
-						<fmt:formatNumber value="${itemTotalPrice + 3000}" pattern="#,##0원"/>
+						${payPrice + 3000}원
+				</td>
+			</tr>
+			<tr>
+				<th>포인트</th>
+				<td>
+					<input class="input w-33" type="number" name="usePoint" value="0"
+							min="0" max="${customerDto.customerPoint}">
+					사용 가능 포인트 : 
+					${customerDto.customerPoint} point
+				</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="w-25">최종 결제 금액</th>
+				<td>
+					${ordersDto.itemPrice * ordersDto.itemCnt}원
+					+ 3000원(배송비) - <span id="use-point">0</span>point(사용 포인트)
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span id="total-price">${payPrice + 3000}</span>원
 				</td>
 			</tr>
 		</tbody>

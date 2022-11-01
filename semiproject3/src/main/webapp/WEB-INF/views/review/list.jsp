@@ -15,7 +15,7 @@ td, th {
 </style>
 
 <section>
-<div class="container-900">
+<div class="container-900 mt-50 mb-50">
 	<div class="row center">
 		<h1>REVIEW</h1>
 		<hr>
