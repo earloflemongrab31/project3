@@ -39,13 +39,13 @@
 		 			</a>
 		 		</td>
 		 		<td colspan="2">${cartDto.itemName}</td>
+		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
+			</tr>
+ 		</c:if>
 		 		<input type="hidden" name="cartNo" value="${cartDto.cartNo}">
 		 		<input type="hidden" name="customerId" value="${cartDto.customerId}">
 		 		<input type="hidden" name="itemNo" value="${cartDto.itemNo}">
 		 		<input type="hidden" name="itemName" value="${cartDto.itemName}">
-		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
-			</tr>
- 		</c:if>
 		<tr>
 			<td>수량</td>
 			<td>

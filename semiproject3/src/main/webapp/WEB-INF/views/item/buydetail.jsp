@@ -198,32 +198,6 @@ function fail(){
             </select>
                   <input class="input w-100" type="hidden" name="itemTotalCnt" value="">
             </td>
-<!--          <td> -->
-<!--             <select class="input w-100" name="itemColor"> -->
-<!--                <option value="">선택</option> -->
-<%--                <c:if test="${empty buylist}"> --%>
-<!--                   <option>상품준비중</option> -->
-<%--                </c:if> --%>
-<%--                <c:forEach var="itemDto" items="${buylist}"> --%>
-<%--                   <option value="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}"> --%>
-<%--                   ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt}) --%>
-<!--                   </option> -->
-<%--                </c:forEach> --%>
-<!--             </select> -->
-<!--                <input class="input w-100" type="hidden" name="itemSize" value="" > -->
-<!--                <input class="input w-100" type="hidden" name="itemTotalCnt" value=""> -->
-<!--             </td> -->
-<!--          </tr> -->
-<!--          <tr> -->
-<!--             <th>Qnty</th> -->
-<!--             <td> -->
-<!--                <button class="minus-btn" type="button">-</button> -->
-
-<!--                <input class="input w-100" type="number" name="itemCnt" min="0" max="" > -->
-
-<!--                <button class="plus-btn" type="button">+</button> -->
-<!--             </td> -->
-<!--          </tr> -->
       </tbody>
    </table>
    
