@@ -125,13 +125,6 @@ public class OrdersController {
 		return "orders/detail";
 	}
 	
-//	//목록
-//	@GetMapping("/list")
-//	public String list(Model model) {
-//		
-//		model.addAttribute("ordersList",ordersDao.selectList());
-//		return "orders/list";
-//	}
 	
 	
 	//페이징처리
@@ -162,15 +155,7 @@ public class OrdersController {
 	}
 
 	
-	
-//	@GetMapping("/address")
-//	public String address(@ModelAttribute AddressDto addressDto, HttpSession session) {
-//	String loginId = (String) session.getAttribute(SessionConstant.ID);
-//	OrdersDto ordersDto = new OrdersDto();
-//	ordersDto.setCustomerId(loginId);
-//	ordersDto.setAddressNo(0);
-//	
-//		return "orders/address";
+
 
 	
 }

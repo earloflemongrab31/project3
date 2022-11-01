@@ -108,6 +108,19 @@
 
 </div>
 
+<!-- 검색창 -->
+<form action = "list" method="get" >
+	<div class="row center">
+		
+		<select class="input" name="type" required>
+			<option value="customer_id" <c:if test="${type == 'customer_id'}"></c:if>>아이디</option>
+			<option value="customer_nick" <c:if test="${type == 'customer_nick'}"></c:if>>닉네임</option>
+		</select>
+			
+		<input class="input" type="search" name="keyword" placeholder="검색어" required>
+			<button class="btn btn-positive">검색</button>
+	</div>
+</form>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
 
