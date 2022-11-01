@@ -24,7 +24,7 @@
 	 				<td class="center" colspan="2">
 						<c:forEach var="itemImageView" items="${itemImageList}">
 							<c:if test="${itemImageView.imageMain == 1}">
-								<img src="/image/download/${itemImageView.imageNo}" width="200" >
+								<img src="/image/download/${itemImageView.imageNo}" style="width:224px; height: 301px;" >
 							</c:if>
 						</c:forEach>
 					</td>
@@ -33,7 +33,7 @@
 					<td class="center" colspan="2">
 						<c:forEach var="itemImageView" items="${itemImageList}">
 							<c:if test="${itemImageView.imageMain == 0}">
-								<img src="/image/download/${itemImageView.imageNo}" width="100" >
+								<img src="/image/download/${itemImageView.imageNo}" style="width:160px; height: 215px;">
 							</c:if>
 						</c:forEach>
 					</td>
@@ -98,14 +98,14 @@
 	 	</table>
 	 	
 	 	<div class="row right">
+		<a class="btn btn-neutral" href="list">목록</a>
 	 	<a class="btn btn-nuetral btn-border" href="../warehouse/detail?itemNo=${itemDto.itemNo}">재고관리</a>
 		<a class="btn btn-positive" href="update?itemNo=${itemDto.itemNo}">수정하기</a>
 		<a class="btn btn-negative" href="delete?itemNo=${itemDto.itemNo}">삭제하기</a>
-		<a class="btn btn-neutral" href="list">목록</a>
 		</div>
 		
 	</div>
-	
+</div>
 	
 	
 	

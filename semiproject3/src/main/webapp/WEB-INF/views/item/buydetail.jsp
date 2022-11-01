@@ -185,7 +185,7 @@
 <table class="table">
    <tbody>
       <tr>
-         <th>Price</th>
+         <th class="w-33">Price</th>
          <td>
             <fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0원"></fmt:formatNumber>
             <input type="hidden" name="itemPrice" value="${itemDto.itemPrice}">
@@ -195,13 +195,15 @@
          <td>
             <select class="input w-100 input-option">
                <option value="">선택</option>
-               <c:if test="${empty buylist}">
+               <c:if test="${empty buylist || itemDto.itemTotalCnt == 0}">
                   <option disabled>상품준비중</option>
                </c:if>
                <c:forEach var="itemDto" items="${buylist}">
-                  <option data-color="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
-                  ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
-                  </option>
+	               <c:if test="${itemDto.itemTotalCnt !=0}">
+	                  <option data-color="${itemDto.itemColor}" data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}">
+	                  ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+	                  </option>
+	               </c:if>
                </c:forEach>
             </select>
             <input class="input w-100" type="hidden" name="itemTotalCnt" value="">
@@ -225,7 +227,6 @@
             <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
             <button class="btn btn-positive buy" type="submit">구매하기</button>
             <button class="btn btn-positive cart-in" type="submit">장바구니</button>    
-            <a href="buylist">목록으로</a>
          </td>
       </tr>
    </tbody>
@@ -393,5 +394,8 @@
          </c:otherwise>
       </c:choose>
    </div>
+</div>
+<div class="center">
+   <a href="buylist">목록으로 <i class="fa-solid fa-arrow-right"></i></a>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
