@@ -71,6 +71,7 @@ public class OrdersController {
 											.customerId(loginId)
 						.build()) == null;
 			System.out.println("아이템 컬러 사이즈 : " + itemColor.length);
+			System.out.println("아이템 이름 사이즈 : " + itemName.length);
 			
 			boolean cartSearch = cartDao.selectOne(CartDto.builder()
 											.itemNo(cartDto.getItemNo())
