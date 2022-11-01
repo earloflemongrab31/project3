@@ -52,6 +52,12 @@ div.logo{
 .w-75{
 	width: 75%;
 }
+.w-70{
+	width: 70%;
+}
+.w-60{
+	width: 60%;
+}
 .w-50{
     width: 50%;
 }
@@ -260,7 +266,7 @@ font-size: 14px;
 }
 
 .table-border tr > th{
-	background-color: #f6f3f1;
+	background-color: #f6f3f1;;
 }
 
 .table.table-border > thead > tr > th, 
