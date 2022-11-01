@@ -200,8 +200,8 @@
                </c:if>
                <c:forEach var="itemDto" items="${buylist}">
 	               <c:if test="${itemDto.itemTotalCnt !=0}">
-	                  <option data-name="${itemDto.itemName}" data-color="${itemDto.itemColor}" 
-	                  data-size="${itemDto.itemSize}" data-cnt="${itemDto.itemTotalCnt}" data-image="${itemDto.imageNo}">
+	                  <option data-total-cnt="${itemDto.itemTotalCnt}" data-color="${itemDto.itemColor}" 
+	                  		data-size="${itemDto.itemSize}">
 	                  ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
 	                  </option>
 	               </c:if>

@@ -60,7 +60,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//관리자용 인터셉터
 				registry.addInterceptor(adminInterceptor)
 							.addPathPatterns(//인터셉터가 감시할 주소
+
 //								"/customer/edit*",//회원수정
+
 								"/customer/goodbye"//회원탈퇴
 								
 							)
@@ -79,7 +81,6 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	}
 }
  
-
 
 
 

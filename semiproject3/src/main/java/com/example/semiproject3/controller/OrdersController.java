@@ -1,6 +1,6 @@
 package com.example.semiproject3.controller;
 
-import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
-import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.entity.OrdersDto;
 import com.example.semiproject3.repository.AddressDao;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.OrdersDao;
+import com.example.semiproject3.vo.CartListVO;
 import com.example.semiproject3.vo.OrdersListSearchVO;
 
 @Controller
@@ -45,85 +45,62 @@ public class OrdersController {
 	
 	@PostMapping("/detail")
 	public String list(
-			@RequestParam String[] itemName,
 			@RequestParam String[] itemSize,
 			@RequestParam String[] itemColor,
 			@RequestParam int[] itemCnt,
 			@RequestParam int[] imageNo,
 			@ModelAttribute OrdersDto ordersDto,
-			@RequestParam(required=false) int[] cartNo,
-			@ModelAttribute CartDto cartDto,
-			Model model, 
-			HttpSession session) {
+			Model model) {
 		
-		//아이디가지고오기
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		if(ordersDao.selectList(loginId) != null) {
-			ordersDao.deleteAll(loginId);
+		
+		//주문 모두 지우기
+		if(ordersDao.selectList(ordersDto.getCustomerId()) != null) {
+			ordersDao.deleteAll(ordersDto.getCustomerId());
 		}
 		
 		//주문 테이블 값 넣기
 		for(int i=0; i < itemColor.length; i++) {
-			boolean search = ordersDao.selectOne(OrdersDto.builder()
-											.itemNo(ordersDto.getItemNo())
-											.itemName(itemName[i])
-											.itemColor(itemColor[i])
-											.itemSize(itemSize[i])
-											.customerId(loginId)
-						.build()) == null;
-			
-			boolean cartSearch = cartDao.selectOne(CartDto.builder()
-											.itemNo(cartDto.getItemNo())
-											.itemSize(itemSize[i])
-											.itemColor(itemColor[i])
-											.customerId(loginId)
-						.build()) == null;
-			
-			if(search) {
-				ordersDao.insert(OrdersDto.builder()
-								.ordersNo(ordersDto.getOrdersNo())
-								.customerId(loginId)
-								.itemNo(ordersDto.getItemNo())
-								.itemName(itemName[i])
-								.itemPrice(ordersDto.getItemPrice())
-								.itemColor(itemColor[i])
-								.itemSize(itemSize[i])
-								.itemCnt(itemCnt[i])
-								.imageNo(imageNo[i])
-						.build());
-				
-			}
-			else {
-				ordersDao.plus(OrdersDto.builder()
-								.customerId(loginId)
-								.itemNo(ordersDto.getItemNo())
-								.itemName(itemName[i])
-								.itemColor(itemColor[i])
-								.itemSize(itemSize[i])
-								.itemCnt(itemCnt[i])
-								.imageNo(imageNo[i])
-						.build());
-			}
-			if(!cartSearch && cartNo != null) {
-				System.out.println(cartDao);
-				System.out.println(Arrays.toString(cartNo));
-				cartDao.delete(cartNo[i]);
-			}
+			ordersDto.setItemColor(itemColor[i]);
+			ordersDto.setItemSize(itemSize[i]);
+
+			ordersDao.insert(ordersDto);
 		}
 		
 		//회원 정보 불러오기
-		model.addAttribute("customerDto", customerDao.selectOne(loginId));
+		model.addAttribute("customerDto", customerDao.selectOne(ordersDto.getCustomerId()));
 
+		//주소 정보 불러오기
+		model.addAttribute("addressList", addressDao.selectList(ordersDto.getCustomerId()));
+		
+		//주문 내역 불러오기
+		model.addAttribute("ordersList", ordersDao.selectList(ordersDto.getCustomerId()));
+		
+		//장바구니 개수
+		model.addAttribute("cartCount",cartDao.cartCount(ordersDto.getCustomerId()));
+		
+		return "orders/detail";
+	}
+
+	@PostMapping("/cart-buy")
+	public String cartBuy(
+			Model model,
+			HttpSession session) {
+		
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		
+		//회원 정보 불러오기
+		model.addAttribute("customerDto", customerDao.selectOne(loginId));
+		
 		//주소 정보 불러오기
 		model.addAttribute("addressList", addressDao.selectList(loginId));
 		
 		//주문 내역 불러오기
-		model.addAttribute("ordersList", ordersDao.selectList(loginId));
+		model.addAttribute("cartList", cartDao.selectList(loginId));
 		
 		//장바구니 개수
 		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		
-		return "orders/detail";
+		return "orders/cartBuy";
 	}
 	
 	
