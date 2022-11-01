@@ -9,9 +9,22 @@
 <script>
 	$(function(){
 		$(".input[name=itemCnt]").on("input",function(){
-			var cnt = $(this).val();
-			var price = $(this).find("itemPrice");
-			$(".input[name=itemCnt]").attr("value", cnt);
+			var itemCnt = $(this).val();
+			var cartNo = $(this).parent("td").find("input[name=cartNo]").val();
+			var itemPrice = $(this).parent("td").find("input[name=itemPrice]").val();
+			var that = $(this);
+			$.ajax({
+				url: "http://localhost:8888/rest/cart/",
+				method: "post",
+				data: {
+					itemCnt: itemCnt,
+					cartNo: cartNo
+				},
+				success: function(resp){
+					console.log(itemPrice * itemCnt);
+					that.parent("td").next().find(".price-result").text(itemPrice * itemCnt);
+				}
+			});
 		});
 		
 	});
@@ -41,23 +54,22 @@
 		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
 			</tr>
  		</c:if>
+		<tr>
+			<td>수량</td>
+			<td>
 		 		<input type="hidden" name="cartNo" value="${cartDto.cartNo}">
 		 		<input type="hidden" name="customerId" value="${cartDto.customerId}">
 		 		<input type="hidden" name="itemNo" value="${cartDto.itemNo}">
 		 		<input type="hidden" name="itemName" value="${cartDto.itemName}">
-		<tr>
-			<td>수량</td>
-			<td>
-				<input type="number" class="itemCnt input w-100" name="itemCnt" value="${cartDto.itemCnt}" min="0" max="${cartDto.itemTotalCnt}">
+	 			<input type="hidden" name="itemPrice" value="${cartDto.itemPrice}">
+				<input type="number" class="itemCnt input w-100" name="itemCnt" value="${cartDto.itemCnt}" min="1" max="${cartDto.itemTotalCnt}">
 <!-- 				<span> -->
 <!-- 				<button class="plus btn">+</button> -->
 <!-- 				<button class="minus btn">-</button> -->
 <!-- 				</span> -->
 			</td>
-	 		<td class="right cntPrice" rowspan="2">
-	 			<c:set var="cntPrice" value="${cartDto.itemCnt*cartDto.itemPrice}"/>
-	 			<fmt:formatNumber value="${cntPrice}" pattern="#,##0"/>원
-	 			<input type="hidden" name="itemPrice" value="${cartDto.itemPrice}">
+			<td rowspan="2">
+				<span class="price-result">${cartDto.itemPrice * cartDto.itemCnt}</span>원
 	 		</td>
 	 	</tr>
 	 	<tr>	

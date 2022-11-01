@@ -185,6 +185,13 @@ public class CartDaoImpl implements CartDao{
 		};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+
+	@Override
+	public boolean cntPlus(int itemCnt, int cartNo, String loginId) {
+		String sql = "update cart set item_cnt=? where cart_no=? and customer_id=?";
+		Object[] param = {itemCnt, cartNo, loginId};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 	
 }
 		

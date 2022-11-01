@@ -32,5 +32,8 @@ public interface CartDao {
 	//장바구니에 상품이 있는지 중복조회
 	CartDto selectOne(CartDto cartDto);
 	
+	//비동기로 개수 올리면 업데이트
+	boolean cntPlus(int itemCnt, int cartNo, String loginId);
+	
 	
 }

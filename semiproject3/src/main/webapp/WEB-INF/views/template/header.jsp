@@ -721,7 +721,6 @@
 	        plusLine.appendTo($(".option-area"));
 	
 	        $(".input-option").val("");
-	        $("input[name=itemTotalCnt]").attr("value", totalcnt);
 	        selectedOption.push(color+"-"+size);
 			console.log(selectedOption);
         });
