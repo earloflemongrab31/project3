@@ -56,7 +56,7 @@
 		 			</a>
 		 		</td>
 		 		<td colspan="2">${cartDto.itemName}</td>
-		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
+		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}"><i class="fa-solid fa-xmark"></i></a></td>
 			</tr>
  		</c:if>
 		<tr>
