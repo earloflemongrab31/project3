@@ -13,7 +13,19 @@
   	vertical-align : middle;
 	}
 </style>
-	
+
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
+
 <form action="insert" method="post" enctype="multipart/form-data">
 <div class ="container-900 mt-50 mb-50">
 
@@ -77,7 +89,7 @@
 			</table>
 		</div>
 		<div class="row right">
-			<button class="btn btn-positive" type="submit">저장</button>
+			<button class="btn btn-positive btn-pass" type="submit">저장</button>
 		</div>
 	</div>
 </form>

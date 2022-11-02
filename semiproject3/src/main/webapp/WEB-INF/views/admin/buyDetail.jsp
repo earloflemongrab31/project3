@@ -21,7 +21,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="w-25" rowspan="3">
+				<td class="w-25" rowspan="3" style="vertical-align: bottom;">
 					<a href="/item/buydetail?itemNo=${buyDto.itemNo}">
 						<img class="w-100" src="/image/download/${buyDto.imageNo}">
 					</a>

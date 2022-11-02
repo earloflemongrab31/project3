@@ -7,7 +7,17 @@
 	<jsp:param value="Q&A게시판" name="title" />
 </jsp:include>
 
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 
 <form action="edit" method="post" enctype="multipart/form-data">
 
@@ -56,7 +66,7 @@
 					<tr>
 						<td class="right">
 							<a class="btn btn-neutral" href="list">목록</a>
-							<button class="btn btn-positive" type="submit">등록</button>
+							<button class="btn btn-positive btn-pass" type="submit">등록</button>
 						</td>
 					</tr>
 				</tfoot>

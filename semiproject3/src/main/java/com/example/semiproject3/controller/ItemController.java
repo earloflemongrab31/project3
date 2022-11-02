@@ -73,11 +73,11 @@ public class ItemController {
 //	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
 //	화니꼬
-	private final File directory = new File("C:/study/itemImage");
+//	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
 //	private final File directory = new File("D:/study/main");
 //	private final File directory = new File("D:/upload");
-//	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/study/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -237,9 +237,13 @@ public class ItemController {
 	
 	//베스트 상품 목록(회원용)
 	@GetMapping("/bestlist")
-	public String bestlist(Model model) {
+	public String bestlist(Model model, HttpSession session) {
 		
 		model.addAttribute("buylist", itemDao.bestList());
+		
+		//장바구니 개수
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("cartCount",cartDao.cartCount(loginId));
 		return "item/bestlist";
 	}
 	

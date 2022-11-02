@@ -5,7 +5,17 @@
 	<jsp:param value="관리자 회원정보 수정" name="title"/>
 </jsp:include>
 
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 <!-- 
 	변경이 불가능한 항목에 대한 처리 방법
 	[1] 읽기 전용 처리(readonly) - 전송은 됨
@@ -41,7 +51,7 @@
 	
 	<div class="row right">
 		<a href="list" class="btn btn-neutral">목록</a>
-		<button type="submit" class="btn btn-positive">수정</button>	
+		<button type="submit" class="btn btn-positive btn-pass">수정</button>	
 	</div>
 </div>
 </form>
