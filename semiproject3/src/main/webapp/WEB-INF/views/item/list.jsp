@@ -45,7 +45,7 @@
 					<td>${itemDto.itemMemo}</td>
 					<td>${itemDto.itemPrice}원</td>
 					<td>
-						<a class="btn btn-border"  href="detail?itemNo=${itemDto.itemNo}">
+						<a class="btn btn-border w-100"  href="detail?itemNo=${itemDto.itemNo}">
 						확인
 						</a>
 					</td>
