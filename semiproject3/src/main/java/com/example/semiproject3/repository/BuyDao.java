@@ -36,6 +36,9 @@ public interface BuyDao {
 	//구매후 상품 수량 감소
 	void minus(BuyDto buyDto);
 	
+	//상품 품절확인을 위한 총 수량 감소
+	void itemMinus(BuyDto buyDto);
+	
 	List<BuyListCountVO> selectCountList();
 	
 }

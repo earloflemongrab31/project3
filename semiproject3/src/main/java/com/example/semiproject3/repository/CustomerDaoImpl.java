@@ -96,9 +96,10 @@ public class CustomerDaoImpl implements CustomerDao{
 				+ "customer_birth,"
 				+ "customer_email,"
 				+ "customer_point,"
-				+ "customer_money"
+				+ "customer_money,"
+				+ "customer_join"
 				+ ") "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?)";
+				+ "values(?,?,?,?,?,?,?,?,?,5000,?,to_date(sysdate, 'YYYY-MM-DD'))";
 		Object[] param = {
 				customerDto.getCustomerId(), customerDto.getCustomerPw(), customerDto.getCustomerPwsearch(),
 				customerDto.getCustomerNick(), customerDto.getCustomerName(), customerDto.getCustomerPhone(),
@@ -321,6 +322,13 @@ public class CustomerDaoImpl implements CustomerDao{
 		public List<CustomerJoinCountVO> selectCountList() {
 			String sql = "select customer_join, count(*) cnt from customer group by customer_join order by customer_join asc";
 			return jdbcTemplate.query(sql, countMapper);
+		}
+
+		@Override
+		public boolean usePoint(int customerPoint, String loginId) {
+			String sql = "update customer set customer_point = customer_point - ? where customer_id=?";
+			Object[] param = {customerPoint, loginId};
+			return jdbcTemplate.update(sql, param) > 0;
 		}
 		
 }

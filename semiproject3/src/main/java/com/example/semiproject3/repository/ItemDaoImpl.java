@@ -181,7 +181,7 @@ public class ItemDaoImpl implements ItemDao {
 		String sql = "select * from ("
 						+ "select tmp.*, rownum rn from("
 							+ "select * from ("
-								+ "select * from buy_list_view where image_main=1"
+								+ "select * from buy_list_view where image_main=1 and item_total_cnt > 0"
 							+ ") order by item_date desc"
 						+ ") tmp"
 					+ ") where rn between 1 and 9";

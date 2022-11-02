@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.semiproject3.constant.SessionConstant;
-import com.example.semiproject3.entity.CartDto;
 import com.example.semiproject3.repository.CartDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ItemDao;
+import com.example.semiproject3.vo.CartListVO;
 
 @Controller
 @RequestMapping("/cart")
@@ -32,61 +32,36 @@ public class CartController {
 	
 	//카트담기
 	@PostMapping("/insert")
-	public String insert(@RequestParam int itemNo,
-			@ModelAttribute CartDto cartDto,
+	public String insert(
+			@ModelAttribute CartListVO cartListVO,
 			@RequestParam String[] itemColor,
 			@RequestParam String[] itemSize,
+			@RequestParam int[] itemTotalCnt,
 			@RequestParam int[] itemCnt,
 			HttpSession session) {
 		
 		//아이디가지고오기 
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
+		cartListVO.setCustomerId(loginId);
 		
 		for(int i = 0; i < itemColor.length; i++) {
-
-			boolean search = cartDao.selectOne(CartDto.builder()
-											.itemNo(cartDto.getItemNo())
-											.itemSize(itemSize[i])
-											.itemColor(itemColor[i])
-											.customerId(loginId)
-					.build()) == null;
+			cartListVO.setItemColor(itemColor[i]);
+			cartListVO.setItemSize(itemSize[i]);
+			cartListVO.setItemTotalCnt(itemTotalCnt[i]);
+			cartListVO.setItemCnt(itemCnt[i]);
 			
-			//등록 아이템에 미리 번호 생성
-//			int cartNo = cartDao.sequence();
-//			cartDto.setCartNo(cartNo);
+			boolean search = cartDao.selectOne(cartListVO) == null;
 			
 			if(search) {
-				cartDao.insert(CartDto.builder()
-							.cartNo(cartDto.getCartNo())
-							.customerId(loginId)
-							.itemNo(cartDto.getItemNo())
-							.itemTotalCnt(cartDto.getItemTotalCnt())
-							.itemName(cartDto.getItemName())
-							.itemColor(itemColor[i])
-							.itemSize(itemSize[i])
-							.itemCnt(itemCnt[i])
-							.itemPrice(cartDto.getItemPrice())
-							.cartPrice(cartDto.getCartPrice())
-						.build());
+				cartDao.insert(cartListVO);
 			}
 			else {
-				cartDao.plus(CartDto.builder()
-//							.cartNo(cartDto.getCartNo())
-							.customerId(loginId)
-							.itemNo(cartDto.getItemNo())
-//							.itemTotalCnt(cartDto.getItemTotalCnt())
-//							.itemName(cartDto.getItemName())
-							.itemColor(itemColor[i])
-							.itemSize(itemSize[i])
-							.itemCnt(itemCnt[i])
-//							.itemPrice(cartDto.getItemPrice())
-//							.cartPrice(cartDto.getCartPrice())
-						.build());
+				cartDao.plus(cartListVO);
 			}
 		}
 		
-		return "redirect:/item/buydetail?itemNo="+itemNo;
+		return "redirect:/item/buydetail?itemNo="+cartListVO.getItemNo();
 	};
 	
 	//카트 리스트

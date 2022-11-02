@@ -11,17 +11,13 @@
 <script src="/checkbox.js"></script> 
 
 <section>
-<div class ="container-800">
+<div class ="container-800 mt-50 mb-50">
 
    <div class = "row center">
       <h1>ADDRESS</h1>
       <hr>
    </div>
    
-      <div class="row right">
-		<a class="btn btn-positive" href="insert">새주소 등록</a>
-		<a class="btn btn-positive" href="list">주소 목록으로 돌아가기</a>
-	</div>
    
    
 <div class="row left">
@@ -65,6 +61,8 @@
 		</c:choose>
 
    <div class="row right">
+		<a class="btn btn-neutral" href="list">목록</a>
+		<a class="btn btn-positive" href="insert">새주소 등록</a>
       <input type="button"  class="btn btn-positive" onclick="upGo()"; value="기본배송지등록" />
    </div>
 

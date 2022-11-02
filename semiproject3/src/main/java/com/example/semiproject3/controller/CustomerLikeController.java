@@ -41,13 +41,13 @@ public class CustomerLikeController {
 	public String list(Model model,HttpSession session,
 			@ModelAttribute(name="vo") CustomerListSearchVO vo) {
 		
-		int count = customerLikeDao.count(vo);
-		vo.setCount(count);
+//		int count = customerLikeDao.count(vo);
+//		vo.setCount(count);
 		
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
 		model.addAttribute("list",customerLikeDao.selectList(loginId));
-		model.addAttribute("list",customerLikeDao.selectList(vo));
+		//model.addAttribute("list",customerLikeDao.selectList(vo));
 		model.addAttribute("param",vo);
 		
 		//장바구니 개수

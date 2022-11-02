@@ -12,7 +12,7 @@
 <!-- 	}); -->
 <!-- </script> -->
 
-<form action="/buy/insert" method="post">
+<form action="/buy/cart-insert" method="post">
 
 <div class="container-1000 mt-50 mb-50">
 <input type="hidden" name="customerId" value="${customerDto.customerId}">
@@ -99,27 +99,27 @@
 <div class="row mb-30">
 	<table class="table table-slit">
 		<tbody>
-			<c:forEach var="ordersDto" items="${ordersList}">
-				<input type="hidden" name="ordersNo" value="${ordersDto.ordersNo}">
-				<input type="hidden" name="itemNo" value="${ordersDto.itemNo}">
+			<c:forEach var="cartDto" items="${cartList}">
+				<input type="hidden" name="cartNo" value="${cartDto.cartNo}">
+				<input type="hidden" name="itemNo" value="${cartDto.itemNo}">
 				<tr>
 					<th class="w-25" rowspan="4">
-						<img class="w-100" src="/image/download/${ordersDto.imageNo}">
-						<input type="hidden" name="imageNo" value="${ordersDto.imageNo}">
+						<img class="w-100" src="/image/download/${cartDto.imageNo}">
+						<input type="hidden" name="imageNo" value="${cartDto.imageNo}">
 					</th>
 					<td>상품명</td>
 					<td>
 						<input type="text" class="input input-none w-100" name="itemName" 
-							value="${ordersDto.itemName}" readonly>
+							value="${cartDto.itemName}" readonly>
 					</td>
 <!-- 					<td class="right"> -->
-<%-- 					<a href="delete?ordersNo=${ordersDto.orderNo}"> --%>
+<%-- 					<a href="delete?cartNo=${cartDto.orderNo}"> --%>
 <!-- 					삭제 -->
 <!-- 					</a> -->
 <!-- 					</td> -->
 					<td rowspan="4">
 						금액 : 
-						<c:set var="itemTotal" value="${ordersDto.itemPrice * ordersDto.itemCnt}"></c:set>
+						<c:set var="itemTotal" value="${cartDto.itemPrice * cartDto.itemCnt}"></c:set>
 							<fmt:formatNumber value="${itemTotal}" pattern="#,##0원"/>
 						<input type="hidden" name="itemTotalPrice" value="${itemTotal}">
 					</td>
@@ -128,21 +128,21 @@
 					<td>사이즈</td>
 					<td>
 						<input type="text" class="input input-none w-100" name="itemSize"
-							value="${ordersDto.itemSize}" readonly>
+							value="${cartDto.itemSize}" readonly>
 					</td>
 				</tr>
 				<tr>
 					<td>컬러</td>
 					<td>
 						<input type="text" class="input input-none w-100" name="itemColor"
-							value="${ordersDto.itemColor}" readonly>
+							value="${cartDto.itemColor}" readonly>
 					</td>
 				</tr>
 				<tr>
 					<td>수량</td>
 					<td>
 						<input type="number" class="input input-none w-100" name="itemCnt" 
-								value="${ordersDto.itemCnt}" readonly>
+								value="${cartDto.itemCnt}" readonly>
 					</td>
 				</tr>
 			</c:forEach>
@@ -159,8 +159,8 @@
 			<tr>
 				<th rowspan="2" class="w-25">총 구매 금액</th>
 				<td>
-					<c:forEach var="ordersDto" items="${ordersList}">
-						<c:set var="payPrice" value="${payPrice + ordersDto.itemPrice * ordersDto.itemCnt}"/>
+					<c:forEach var="cartDto" items="${cartList}">
+						<c:set var="payPrice" value="${payPrice + cartDto.itemPrice * cartDto.itemCnt}"/>
 					</c:forEach>
 					${payPrice}원
 					+ 3000원(배송비) 

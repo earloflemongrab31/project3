@@ -8,7 +8,7 @@
 </jsp:include>
 
 <section>
-	<div class="container-550">
+	<div class="container-550 mt-50 mb-50">
 	<div class="row center">
 		<h1>${customerDto.customerId} 님</h1>
 		<hr>
