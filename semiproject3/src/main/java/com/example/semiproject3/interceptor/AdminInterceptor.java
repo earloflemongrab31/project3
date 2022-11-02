@@ -12,22 +12,22 @@ import com.example.semiproject3.constant.SessionConstant;
 @Component
 public class AdminInterceptor implements HandlerInterceptor{
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		
-		HttpSession session = request.getSession();
-		String GRADE = (String)session.getAttribute(SessionConstant.GRADE);
-		String MAINGRADE = (String)session.getAttribute(SessionConstant.MAINGRADE);
-		boolean admin = GRADE != null && GRADE.equals("관리자") && MAINGRADE != null && MAINGRADE.equals("메인관리자");
-	
-		
-		if(admin) {
-			return true;
-		}
-		else {
-			response.sendError(403);
-			return false;
-		}
-	}
+   @Override
+   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+         throws Exception {
+      
+
+      
+      HttpSession session = request.getSession();
+      String GRADE = (String)session.getAttribute(SessionConstant.GRADE);
+      boolean admin = GRADE != null && GRADE.equals("일반관리자") || GRADE != null && GRADE.equals("메인관리자");
+      
+      if(admin) {
+         return true;
+      }
+      else {
+         response.sendError(403);
+         return false;
+      }
+   }
 }

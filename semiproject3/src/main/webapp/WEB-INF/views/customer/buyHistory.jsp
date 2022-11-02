@@ -18,15 +18,18 @@
 				<tr>
 					<td class="left" colspan="2">주문번호 [${buyItem.buyNo}]</td>
 					<td class="center">상품현황</td>
+					<td class="center">리뷰</td>
+					
 				</tr>
 				<tr>
-					<td class="w-25" rowspan="3">
+					<td class="w-25" rowspan="3" style="vertical-align: bottom;">
 						<a href="/item/buydetail?itemNo=${buyItem.itemNo}">
 							<img class="w-100" src="/image/download/${buyItem.imageNo}">
 						</a>
 					</td>
 					<td>${buyItem.itemName}</td>
 					<td class="w-25 center" rowspan="3">${buyItem.deliveryStatus}</td> 
+					<td class= "center" rowspan="3"> <a  href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
 				</tr>
 				<tr>
 					<td> 옵션 : ${buyItem.itemSize} / ${buyItem.itemColor}</td>

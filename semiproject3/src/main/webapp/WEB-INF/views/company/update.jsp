@@ -7,6 +7,18 @@
     <jsp:param value="협력사 리스트" name="title"/>
 </jsp:include>
 
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
+
 <form action="update" method="post">
 
 	<div class ="container-900 mt-50 mb-50">
@@ -68,7 +80,7 @@
 					<tr>
 						<td class="right" colspan="2">
 							<a class="btn btn-neutral" href="list">목록</a>
-							<button class="btn btn-positive" type="submit">수정</button>
+							<button class="btn btn-positive bnt-pass" type="submit">수정</button>
 						</td>
 					</tr>
 				</tfoot>

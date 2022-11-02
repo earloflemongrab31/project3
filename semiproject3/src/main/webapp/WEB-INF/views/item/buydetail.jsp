@@ -43,23 +43,17 @@
       });
    });
    
-      //사진크게
-      $(function(){
-         $(".image-big").click(function(){
-            
-            var width=$(this).css("width",100);
-            
-            $(this).animate({
-               width:"+=50"
-            }); 
-            
-         if(parseInt(width) >=150){
-            $(this).animate({
-               width :"100"
-            });
-         }
-         });
-      });
+   		//리뷰 사진
+	   $(function(){
+	       $(".image-big").click(function(){
+	          var width=$(this).attr("width");
+	          if(width=="100"){
+	             var width= $(this).attr("width","200");
+	          }else{
+	             var width= $(this).attr("width","100");
+	          }
+	       })
+	    });
       
     
       $(function(){
@@ -223,8 +217,6 @@
    <tbody>
       <tr>
          <td class="right">
-            <!--리뷰는 한사람이 하나의 상품에만 달수 있다. -->            
-            <a href="/review/insert?itemNo=${itemDto.itemNo}">리뷰달기</a>
             <button class="btn btn-positive buy" type="submit">구매하기</button>
             <button class="btn btn-positive cart-in" type="submit">장바구니</button>    
          </td>
@@ -279,7 +271,7 @@
                <table class="table left table-review-list">
                   <tbody>
                      <c:forEach var="list" items="${reviewList}">
-                        <tr rowspan="7" id="box">
+                        <tr id="box">
                            <td>
                               <c:if test="${list.reviewStar==1}">★(${list.reviewStar})</c:if>
                               <c:if test="${list.reviewStar==2}">★★(${list.reviewStar})</c:if>
@@ -292,7 +284,7 @@
                         </tr>
 
                   <!-- 신고 -->
-                        <tr rowspan="6">
+                        <tr>
                            <td>
                            <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" />**** / ${list.reviewDate} 
                               <c:choose>
@@ -307,14 +299,14 @@
                         </tr>
                         
                   <!--제품/포장상태/배송상태  -->
-                        <tr rowspan="6">
+                        <tr>
                            <td>
                               제품명 : ${itemDto.itemName} / 포장상태 :
                               ${list.reviewPackaging} / 배송상태 : ${list.reviewShipping}
                            </td>
                         </tr>
                   
-                        <tr rowspan="6" height="160">
+                        <tr height="160">
                            <!--블라인드여부에따라 다르게 표시 -->
                            <c:choose>
                               <c:when test="${list.reviewBlind}">
@@ -329,7 +321,7 @@
                               </td>
                               
                            <!--좋아요  -->                
-                              <td style="text-align: center; vertical-align: middle;">
+                              <td width="100" style="text-align: center; vertical-align: middle;">
                              <c:choose>
                              
                                 <c:when test="${loginId==null && list.reviewCnt ==0}">
@@ -342,7 +334,7 @@
                                 	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
                                 		좋아요
                                 	</a>
-                                	<span class="like-span"><i class="fa-regular fa-heart"></i>${list.reviewCnt}</span>
+                                	<span class="like-span"><i class="fa-regular fa-heart"></i></span>
                                 </c:when>
                                 <c:otherwise>
                                    <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">

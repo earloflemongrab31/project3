@@ -171,9 +171,9 @@ public class OrdersDaoImpl implements OrdersDao {
 	//주문 목록에 있는 상품 수량 변경(중복인경우)
 	@Override
 	public void plus(OrdersDto ordersDto) {
-		String sql= "update orders set item_cnt = item_cnt + ? where item_no = ? and item_size = ? and item_color = ? and customer_id = ?";
+		String sql= "update orders set item_cnt = item_cnt + ? where item_no = ? and item_name = ? and item_size = ? and item_color = ? and customer_id = ? and image_no = ?";
 		Object[] param= {
-				ordersDto.getItemCnt(), ordersDto.getItemNo(), ordersDto.getItemSize(), ordersDto.getItemColor(), ordersDto.getCustomerId()
+				ordersDto.getItemCnt(), ordersDto.getItemNo(), ordersDto.getItemName(), ordersDto.getItemSize(), ordersDto.getItemColor(), ordersDto.getCustomerId() , ordersDto.getImageNo()
 		};
 		jdbcTemplate.update(sql,param);
 	}

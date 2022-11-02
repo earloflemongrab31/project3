@@ -78,25 +78,7 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-
-//	@ResponseBody
-//	@GetMapping("/cartInsert")
-//	public String cartInsert(
-//			@RequestParam int itemNo,
-//			HttpSession session	) {
-//
-//		String result = "00";
-//		
-//		System.out.println("/cartInsert ================"+ itemNo);		
-//		//Card db insert
-//		
-//		//
-//		
-//		return result;
-//	}
-
-	
-
+	//카트 삭제
 	@GetMapping("/delete")
 	public String delete(Model model,
 			@RequestParam int cartNo,

@@ -3,7 +3,17 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="설문조사" name="title"/>
 </jsp:include>
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 <form action="insert" method="post" class="research-form">
 
 	<div class="container-800 mt-50">
@@ -168,7 +178,7 @@
 	</div>
 	<div class="page">
 	    <div class="row">
-	        <h2>7. 고객님의 지불방식을 선택해주세요.</h2>
+	        <h2>7. 고객님의 소지금 충전 방식을 선택해주세요.</h2>
 	    </div>
 	    <div class="row">
 	        <label>
@@ -224,7 +234,7 @@
 	</div>
 	<!-- 설문조사 끝나면 활성화시키기 -->
 	<div class="row center">
-	    <button type="submit" class="btn btn-positive">제출하기</button>
+	    <button type="submit" class="btn btn-positive btn-pass">제출하기</button>
 	</div>
 	
 	</div>

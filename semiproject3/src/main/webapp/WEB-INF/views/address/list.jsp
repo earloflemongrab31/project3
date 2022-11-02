@@ -86,7 +86,7 @@ function upGo(){
          <c:otherwise>
             <table class="table table-border">
                <thead>
-             <tr>
+             <tr align="center">
                   <th>번호</th>
                   <th width="20%">배송지명</th>
                   <th width="10%">우편번호</th>
@@ -136,7 +136,7 @@ function upGo(){
          <c:otherwise>
             <table class="table table-border">
                <thead>
-             <tr>
+             <tr align="center">
              <th>
                      <input type="checkbox" class="check-all">
                   </th>

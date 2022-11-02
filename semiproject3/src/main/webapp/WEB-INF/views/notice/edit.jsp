@@ -6,7 +6,17 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="공지사항 수정 페이지" name="title"/>
 </jsp:include>
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 <form action="edit" method="post">
 	
 <input name="noticeNo" type="hidden" value="${noticeDto.noticeNo}">
@@ -67,7 +77,7 @@
 		<tr>
 			<td class="right" colspan="2">
 				<a class="btn btn-neutral" href="list">목록</a>
-				<button class="btn btn-positive" type="submit">수정</button>
+				<button class="btn btn-positive btn-pass" type="submit">수정</button>
 			</td>
 		</tr>
 	</tfoot>

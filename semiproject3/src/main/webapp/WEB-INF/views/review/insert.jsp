@@ -4,7 +4,17 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="상품리뷰" name="title" />
 </jsp:include>
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 <form action="insert" method="post" enctype="multipart/form-data">
 
 	<div class="container-500 mt-50 mb-50">
@@ -66,7 +76,7 @@
 	</div>
 	
 	<div class="row center">
-	    <button type="submit" class="btn btn-positive">작성완료</button>
+	    <button type="submit" class="btn btn-positive btn-pass">작성완료</button>
 	</div>
 	
 	</div>

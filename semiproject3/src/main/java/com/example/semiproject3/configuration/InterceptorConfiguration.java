@@ -14,74 +14,87 @@ import com.example.semiproject3.interceptor.CustomerNoticePermissionCheckInterce
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
-	
-	@Autowired
-	private CustomerInterceptor customerInterceptor;
-	
-	@Autowired
-	private AdminInterceptor adminInterceptor;
-	
-	@Autowired
-	private CustomerNoticePermissionCheckInterceptor permissionCheckInterceptor;
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		//registry에 추가하여 인터셉터가 작동하도록 설정
-		//(참고) 등록 코드 작성 순으로 실행됨
-		
-		//회원용 인터셉터
-		registry.addInterceptor(customerInterceptor)
-					.addPathPatterns(//인터셉터가 감시할 주소
-							"/customer/**",//회원 전체
-							"/notice/**",//공지사항 전체
-							"/item/**",//아이템 전체
-							"/warehouse/**",//재고 전체
-							"/company/**",//협력사 전체
-							"/research/list",//설문조사 목록
-							"/review/reportList",//신고목록
-							"/center/edit"//고객센터 수정
-							
-					)
-					.excludePathPatterns(//위의 주소에서 제외할 주소
-							"/customer/insert*",//회원가입
-							"/customer/login",//로그인
-							"/customer/checkPassword",//비밀번호찾기
-							"/customer/changePw",//비밀번호 변경
-							"/customer/buyHistory",//주문/배송조회
-							"/customer/goodbyeResult",//탈퇴완료
-							"/notice/list",//공지사항 목록
-							"/notice/detail",//공지사항 상세보기
-							"/item/detail", //아이템 상세
-							"/item/insert", //아이템 등록
-							"/item/list" //아이템 목록
-					);
-		
-		
-		//관리자용 인터셉터
-				registry.addInterceptor(adminInterceptor)
-							.addPathPatterns(//인터셉터가 감시할 주소
+   
+   @Autowired
+   private CustomerInterceptor customerInterceptor;
+   
+   @Autowired
+   private AdminInterceptor adminInterceptor;
+   
+   @Autowired
+   private CustomerNoticePermissionCheckInterceptor permissionCheckInterceptor;
+   
+   @Override
+   public void addInterceptors(InterceptorRegistry registry) {
+      //registry에 추가하여 인터셉터가 작동하도록 설정
+      //(참고) 등록 코드 작성 순으로 실행됨
 
-//								"/customer/edit*",//회원수정
+      //회원용 인터셉터
+      registry.addInterceptor(customerInterceptor)
+               .addPathPatterns(//인터셉터가 감시할 주소 / 회원만 통과
+                  "/address/**",
+                     "/buy/**",
+                     "/cart/**",
+                     "/center/**",
+                     "/company/**",
+                     "/customer/**",
+                     "/customerLike/**",
+                     "/item/**",
+                     "/notice/**",
+                     "/orders/**",
+                     "/research/**",
+                     "/review/**"
+                     )
+               .excludePathPatterns(//위의 주소에서 제외할 주소(비회원 확인 가능)
+                   "/center/list", // Q&A 목록
+                     "/customer/insert",//회원가입
+                     "/customer/login",//로그인
+                     "/customer/insertSuccess",//회원가입 성공
+                     "/customer/insert_success",//회원가입 성공
+                     "/customer/checkPassword",//비밀번호찾기
+                     "/customer/changePassword",//비밀번호찾기 후 변경
+                     "/customer/goodbye_result", // 회원탈퇴 완료
+                     "/item/bestlist", // 상품 best6
+                     "/item/buydetail", // 상품 상세
+                     "/item/buylist",// 상품 목록
+                     "/notice/list", // 공지사항 목록
+                     "/notice/detail" // 공지사항 상세
+                     );
+      
+      
+      //관리자용 인터셉터
+      registry.addInterceptor(adminInterceptor)
+               .addPathPatterns(//인터셉터가 감시할 주소  // 관리자만통과
+//               "/admin/**",
+                  "/admin/",
+                  "/admin/buyDetail",
+                  "/admin/buyList",
+                  "/admin/edit",
+                  "/admin/home",
+                  "/admin/insert",
+                  "/admin/list",
+                  "/admin/mainEdit",
+                  "/center/edit",
+                    "/company/**",
+                    "/customer/list",
+                    "/customer/edit",
+                    "/item/detail",
+                    "/item/insert",
+                    "/item/list",
+                    "/item/update",
+                    "/notice/edit",
+                    "/notice/insert",
+                    "/orders/list",
+                    "/research/list",
+                    "/research/listChart",
+                    "/review/reportList",
+                    "/warehouse/**"
+                    );
+//               .excludePathPatterns(// 회원,비회원도 가능
+//                  
+//                );
 
-								"/customer/goodbye"//회원탈퇴
-								
-							)
-							.excludePathPatterns(//위의 주소에서 제외할 주소
-							);
-				
-		
-		
-		//관리자만 공지사항을 등록할 수 있도록 검사하는 인터셉터
-				registry.addInterceptor(permissionCheckInterceptor)
-							.addPathPatterns(
-									"/notice/edit", 
-									"/notice/write"
-							);
-				
-	}
+            
+   
 }
- 
-
-
-
-
+}

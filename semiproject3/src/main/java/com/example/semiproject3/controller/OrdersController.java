@@ -48,6 +48,7 @@ public class OrdersController {
 			@RequestParam String[] itemSize,
 			@RequestParam String[] itemColor,
 			@RequestParam int[] itemCnt,
+			@RequestParam int[] imageNo,
 			@ModelAttribute OrdersDto ordersDto,
 			Model model) {
 		

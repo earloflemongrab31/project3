@@ -781,8 +781,8 @@
 	$(function(){
 		$("input[name=usePoint]").on("blur",function(){
 			var usePoint = $(this).val();
-			var totalPay = parseInt($("#total-pay").text());
-			var payMoney = totalPay - usePoint;
+			var totalPay = parseInt($("#except-delivery").text());
+			var payMoney = totalPay - usePoint + 3000;
 			
 			if(usePoint < 0){
 				return;
@@ -790,7 +790,7 @@
 			if(!usePoint){
 				$(this).val(0);
 				$("#use-point").text("0");
-				$("#total-price").text(totalPay);
+				$("#total-price").text(totalPay+3000);
 				return;
 			}
 			$("#use-point").text(usePoint);
@@ -940,7 +940,9 @@
 		<input type="hidden" name="type" value="item_name">
 		<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
 	</form>
-		<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
+		<c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자'}">
+			<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
+		</c:if>
 	<c:choose>
 		<c:when test="${loginId == null}">
 			<li class="float-right"><a href="/customer/login">LOGIN</a></li>
