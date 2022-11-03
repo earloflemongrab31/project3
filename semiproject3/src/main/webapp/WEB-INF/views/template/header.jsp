@@ -210,6 +210,11 @@
 	.sold{
 	    animation: almostSoldOut 0.5s linear 0s infinite alternate;
 	}
+	
+	/*리뷰 비활성화 호버끄기*/
+	.table a.review-disable{
+	pointer-events: none;
+	}
     
 </style>
 <script type="text/javascript">
@@ -222,7 +227,7 @@
 		$(".ad").find(".delete").click(function(){
 			$(this).parent().slideUp();
 			$.ajax({
-				url: "http://localhost:8888/rest/customer/block-ad",
+				url: "//localhost:8888/rest/customer/block-ad",
 				method: "get"
 			});
 		});
@@ -534,6 +539,12 @@
 			$("#use-point").text(usePoint);
 			$("#total-price").text(payMoney);
 		});
+	});
+	
+	//리뷰 활성화 , 비활성화
+	$(function(){
+		$(".review-disable").click("disable", false);
+		$(".review-able").click("disable", true);
 	});
 	
 </script>

@@ -12,7 +12,7 @@
 	        //console.log(inputPw);
 	        
 	        $.ajax({
-	            url: "http://localhost:8888/rest/customer/pw",
+	            url: "//localhost:8888/rest/customer/pw",
 	            method:"post",
 	            data:{
 	                inputPw: inputPw,
