@@ -36,7 +36,7 @@
 	        if(judge){
 	            var that = this;
 	            $.ajax({
-	                url: "http://localhost:8888/rest/customer/id",
+	                url: "//localhost:8888/rest/customer/id",
 	                method: "post",
 	                data: {
 	                    inputId: inputId
@@ -107,7 +107,7 @@
 	        if(judge){
 	            var that = this;
 	            $.ajax({
-	                url: "http://localhost:8888/rest/customer/nick",
+	                url: "//localhost:8888/rest/customer/nick",
 	                method: "post",
 	                data: {
 	                    inputNick: inputNick

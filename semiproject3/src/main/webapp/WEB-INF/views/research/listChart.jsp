@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	$(function() {
 		$.ajax({
-			url : "http://localhost:8888/rest/research/count",
+			url : "//localhost:8888/rest/research/count",
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
