@@ -6,8 +6,7 @@
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
-
-<c:if test="${blockSurvey != 'Y'}">
+<c:if test="${blockSurvey != 'Y' && loginGrade != '일반관리자' && loginGrade != '메인관리자' && researchOverlap < 1}">
 	<!-- 풀스크린 수정 필요할 듯... -->
 	<div class="fullscreen">
 		<div class="modal screen-center survey">

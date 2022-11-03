@@ -76,14 +76,11 @@ public class AddBasicController {
    @PostMapping("/addBasic")
    public String basicUpdate(@RequestParam(value="addressNo[]") List<Integer> addressNo, @RequestParam(value="addressBasic") String addressBasic,
 		   HttpSession session) {
-//	   System.out.println(addressNo.get(0));
-//	   System.out.println(addressBasic);
 	   String loginId = (String) session.getAttribute(SessionConstant.ID);
 	   boolean result = false;
 	   for(int i = 0; i < addressNo.size(); i++) {
     	 result = addressDao.addBasic(addressNo.get(i),addressBasic);
     		if(result) {
-//    			System.out.println("통과체크");
     		addressDao.addBasicUpdate(addressNo.get(i),loginId);
     		}
 	   }

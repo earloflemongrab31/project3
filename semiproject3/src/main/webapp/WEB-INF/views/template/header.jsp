@@ -153,18 +153,6 @@
     .NNNNN-message{
         display:none;
     } 
-    .input.NNNNN ~ .NNNNN-message,
-    .input.NNNNY ~ .NNNNY-message,
-    .input.fail ~ .fail-message,
-    .input.admin ~ .admin-message{
-        display: inline-block;
-    }
-    .NNNNN-message,
-    .NNNNY-message,
-    .fail-message,
-    .admin-message{
-        display: none;
-    }
 	/* swiper */
     .swiper{
         width: 100%;
@@ -345,193 +333,6 @@
       });
    });
 	
-	/* 회원가입 */
-    $(function(){
-        var inputStatus = {
-            memberIdValid:false,
-            memberNickValid:false,
-            memberPwValid:false,
-            memberPwcheckValid:false,
-            memberPwsearchValid:false,
-            memberNameValid:false,
-            memberPhoneValid:false
-        };
-        $(".input[name=customerId]").blur(function(){
-            var inputId = $(this).val();
-            var regex = /^[a-z][a-z0-9_-]{4,19}$/;
-            var judge = regex.test(inputId);
-            $(this).removeClass("fail NNNNN NNNNY");
-            if(judge){
-                var that = this;
-                $.ajax({
-                    url: "http://localhost:8888/rest/customer/id",
-                    method: "post",
-                    data: {
-                        inputId: inputId
-                    },
-                    success:function(resp){
-                        if(resp == "NNNNY"){
-                            $(that).addClass("NNNNY");
-                            inputStatus.memberIdValid = true;
-                        }
-                        else{
-                            $(that).addClass("NNNNN");
-                            inputStatus.memberIdValid = false;
-                        }
-                    }
-                });
-            }
-            else{
-                $(this).addClass("fail");
-                inputStatus.memberIdValid = false;
-            }
-        });
-        $(".input[name=customerPw").blur(function(){
-            var inputPw = $(this).val();
-            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
-            var judge = regex.test(inputPw);
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-                inputStatus.memberPwValid = true;
-            }
-            else{
-                $(this).addClass("fail");
-                inputStatus.memberPwValid = false;
-            }
-            $("#customer-pwcheck").blur();
-        });
-        $("#customer-pwcheck").blur(function(){
-            var pwCheck = $(this).val();
-            if(!pwCheck){
-                $(this).removeClass("fail NNNNY");
-                inputStatus.memberPwcheckValid = false;
-                return;
-            };
-            if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
-            var pw = $(".input[name=customerPw").val();
-            var judge = pw == pwCheck;
-            
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-                inputStatus.memberPwcheckValid = true;
-            }
-            else{
-                $(this).addClass("fail");
-                inputStatus.memberPwcheckValid = false;
-            }
-        });
-        $(".input[name=customerNick]").blur(function(){
-            var inputNick = $(this).val();
-            var regex = /^[가-힣][가-힣0-9]{0,9}$/;
-            var judge = regex.test(inputNick);
-            $(this).removeClass("fail NNNNN NNNNY admin");
-            if(inputNick == '관리자'){
-                $(this).addClass("admin");
-                inputStatus.memberNickValid = false;
-                return;
-            }
-            if(judge){
-                var that = this;
-                $.ajax({
-                    url: "http://localhost:8888/rest/customer/nick",
-                    method: "post",
-                    data: {
-                        inputNick: inputNick
-                    },
-                    success: function(resp){
-                        if(resp == "NNNNY"){
-                            $(that).addClass("NNNNY");
-                            inputStatus.memberNickValid = true;
-                        }
-                        else{
-                            $(that).addClass("NNNNN");
-                            inputStatus.memberNickValid = false;
-                        }
-                    }
-                });
-            }
-            else{
-                $(this).addClass("fail");
-                inputStatus.memberNickValid = false;
-            }
-        });
-        $(".input[name=customerPwsearch").blur(function(){
-            var pwsearch = $(this).val();
-            $(this).removeClass("fail");
-            if(pwsearch == ""){
-                $(this).addClass("fail");
-                inputStatus.memberPwsearchValid = false;
-            }
-            else{
-                $(this).removeClass("fail");
-                inputStatus.memberPwsearchValid = true;
-            }
-        });
-        
-        $(".input[name=customerName").blur(function(){
-            var name = $(this).val();
-            var regex = /^[가-힣]{2,7}$/;
-            var judge = regex.test(name);
-            
-            $(this).removeClass("fail NNNNN");
-            if(name == ""){
-                $(this).addClass("fail");
-                inputStatus.memberNameValid = false;
-            }
-            else{
-                if(!judge){
-                    $(this).addClass("NNNNN");
-                    inputStatus.memberNameValid = false;
-                    return;
-                }
-                $(this).removeClass("fail");
-                inputStatus.memberNameValid = true;
-            }
-        });
-        $(".input[name=customerPhone").blur(function(){
-            var phone = $(this).val();
-            var regex = /^01[016789][1-9]\d{6,7}$/;
-            var judge = regex.test(phone);
-            
-            $(this).removeClass("fail NNNNN");
-            if(phone == ""){
-                $(this).addClass("fail");
-                inputStatus.memberPhoneValid = false;
-            }
-            else{
-                if(!judge){
-                    $(this).addClass("NNNNN");
-                    inputStatus.memberPhoneValid = false;
-                    return;
-                }
-                $(this).removeClass("fail");
-                inputStatus.memberPhoneValid = true;
-            }
-        });
-        var inputStatus = {
-                memberIdValid:false,
-                memberNickValid:false,
-                memberPwValid:false,
-                memberPwcheckValid:false,
-                memberPwsearchValid:false,
-                memberNameValid:false,
-                memberPhoneValid:false,
-                valid:function(){
-                    return this.memberIdValid && this.memberNameValid && this.memberNickValid && this.memberPhoneValid 
-                            && this.memberPwValid && this.memberPwcheckValid && this.memberPwsearchValid;
-                }
-            };
-            
-        $(".join-form").submit(function(){
-            if(!inputStatus.valid()){
-                return false;
-            }
-            return true;
-        });
-    });
-	
     $(function(){
         $("textarea.content").summernote({
             height: 200,//높이
@@ -551,80 +352,7 @@
         });
     });
     
-    /* 비밀번호 변경 */
-    $(function(){
-        $(".btn-check-pw").click(function(){
-            var inputPw = $(".input[name=checkPw]").val();
-            var loginId = $("input[name=loginId]").val();
-            //console.log(inputPw);
-            
-            $.ajax({
-                url: "http://localhost:8888/rest/customer/pw",
-                method:"post",
-                data:{
-                    inputPw: inputPw,
-                    loginId: loginId
-                },
-                success: function(resp){
-                    if(resp == "NNNNY"){
-                        $(".check-pw").addClass("NNNNY");
-                        $(".input-pw").addClass("NNNNY");
-                    }
-                    else{
-                    	$(".input[name=checkPw]").addClass("NNNNN");
-                    }
-                }
-            });
-        });
-        
-        $(".input[name=customerPw").blur(function(){
-            var inputPw = $(this).val();
-            if(!inputPw){
-	            $("#customer-pwcheck").removeClass("fail NNNNY");
-            }
-            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
-            var judge = regex.test(inputPw);
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-            }
-            else{
-                $(this).addClass("fail");
-            }
-            $("#customer-pwcheck").blur();
-        });
-        $("#customer-pwcheck").blur(function(){
-            var pwCheck = $(this).val();
-            if(!pwCheck){
-                $(this).removeClass("fail NNNNY");
-                return;
-            };
-            if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
-            var pw = $(".input[name=customerPw").val();
-            var judge = pw == pwCheck;
-            
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-            }
-            else{
-                $(this).addClass("fail");
-            }
-        });
-    	
-	    $(".change-pw").submit(function(){
-	        $(".input[name=customerPw]").blur();
-	        $("#customer-pwcheck").blur();
-	
-	        if($(".input.NNNNY").length == 2){
-	            return true;
-	        }
-	        return false;
-	    });
-	    
-    });
-    
-    /* 메인이미지 스와이퍼 */
+    /* 메인이미지 이미지 슬라이더 */
     $(function(){
         var swiper = new Swiper('.swiper.main', {
             // 화면 넘기기 옵션
@@ -644,7 +372,7 @@
             effect: "fade",//페이드 인-아웃 효과
         });
     });
-    /* 새상품이미지 스와이퍼 */
+    /* 새상품이미지 이미지 슬라이더 */
     $(function(){
         var swiper = new Swiper('.swiper.mySwiper', {
             // 화면 넘기기 옵션
@@ -707,7 +435,7 @@
 	        
 	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
 	            
-	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark");//i 태그 엑스 표시 추가
+	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark middle");//i 태그 엑스 표시 추가
 	        icon.click(function(){//누르면 가장 상위 option class를 가지는 tr 삭제
 	        	var deleteColor = $(this).parent(".option").find("input[name=itemColor]").val();
 	        	var deleteSize = $(this).parent(".option").find("input[name=itemSize]").val();
@@ -739,20 +467,6 @@
 	        selectedOption.push(color+"-"+size);
 			console.log(selectedOption);
         });
-
-// 	    $("select[name=itemColor]").change(function(){
-        	
-// 			var color = $(this).val();
-// 			var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
-// 			var totalcnt = $(this).find("option:selected").attr("data-cnt");
-// 			console.log(color);		
-// 			console.log(size);
-// 			console.log(totalcnt);
-// 			$("input[name=itemSize]").attr("value", size);
-// 			$("input[name=itemTotalCnt]").attr("value", totalcnt);
-// 			$("input[name=itemCnt]").attr("max", totalcnt);
-// 			$("input[name=itemCnt]").val(0);
-// 		});
 	});
     
     //게시글 삭제 시 즉시 삭제 방지
@@ -795,17 +509,26 @@
 	
 	$(function(){
 		$("input[name=usePoint]").on("blur",function(){
-			var usePoint = $(this).val();
-			var totalPay = parseInt($("#except-delivery").text());
-			var payMoney = totalPay - usePoint + 3000;
+			var usePoint = $(this).val();//회원이 입력한 포인트
+			var customerPoint = $(this).attr("max");//회원이 가지고 있는 포인트
+			var totalPay = parseInt($("#except-delivery").text());//상품 전체 총 금액
+			var payMoney = totalPay - usePoint + 3000;//총 결제 금액
 			
-			if(usePoint < 0){
-				return;
-			}
-			if(!usePoint){
+			var overPoint1 = customerPoint > payMoney && usePoint > payMoney//총 금액보다 포인트를 더 작성했을 때
+			var overPoint2 = customerPoint < payMoney && usePoint < customerPoint//회원이 가지고있는 포인트보다 더 작성했을 때
+			
+			
+			if(usePoint < 0 || !usePoint){
 				$(this).val(0);
 				$("#use-point").text("0");
 				$("#total-price").text(totalPay+3000);
+				return;
+			}
+			if(overPoint1 || overPoint2){
+				$(this).val(0);
+				$("#use-point").text("0");
+				$("#total-price").text(totalPay+3000);
+				alert("보유하신 포인트 또는 총 결제 금액보다 많은 수를 입력할 수 없습니다.");
 				return;
 			}
 			$("#use-point").text(usePoint);
@@ -820,15 +543,9 @@
 <body>
 
 <header>
-<!-- 
-	광고 구현 중
-	1. 구글플레이 이미지 중간 맞춤
-	2. 새로고침 할 때마다 나옴
-	3. 관리자 페이지 들어가면 없애야 할 듯
- -->
 <c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자' && blockAd != 'Y'}">
 	<div class="float-container ad">
-		&emsp;&emsp;"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span>지금 바로 앱스토어에서 다운 받기
+		&emsp;&emsp;"쇼핑몰명 앱" 설치 시 <span style="color:orange;">5,000point 지급!</span> 지금 바로 앱스토어에서 다운 받기
 		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
 			<img src="/image/googleplay.png">
 		</a>
@@ -953,7 +670,7 @@
 	<form action="/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" style="padding-top:5px;" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
-		<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
+		<input class="float-right input input-underline find" name="keyword">
 	</form>
 		<c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자'}">
 			<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>

@@ -54,7 +54,7 @@
 		<input type="hidden" value="${customerDto.customerMoney}" name="customerMoney">
 	</div>
 	<div class="row float-right">
-		<a href="delete-all" class="btn btn-neutral buy-delete">구매취소</a>
+		<a href="delete-all" class="btn btn-neutral buy-delete btn-pass">구매취소</a>
 	</div>
 </div>
 <div class="row mb-30">
@@ -145,11 +145,6 @@
 						<input type="text" class="input input-none w-100" name="itemName" 
 							value="${cartDto.itemName}" readonly>
 					</td>
-<!-- 					<td class="right"> -->
-<%-- 					<a href="delete?cartNo=${cartDto.orderNo}"> --%>
-<!-- 					삭제 -->
-<!-- 					</a> -->
-<!-- 					</td> -->
 					<td rowspan="4">
 						금액 : 
 						<c:set var="itemTotal" value="${cartDto.itemPrice * cartDto.itemCnt}"></c:set>

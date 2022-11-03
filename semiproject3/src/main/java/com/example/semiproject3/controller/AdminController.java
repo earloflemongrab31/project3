@@ -83,13 +83,6 @@ public class AdminController {
 		return "redirect:list";
 	}
 	
-//	@GetMapping("/list")
-//	  public String list(Model model) {
-//		List<AdminDto>list=adminDao.selectList();
-//		      model.addAttribute("list",adminDao.selectList());
-//		      return "admin/list";
-//	  }
-//	
 	
 	//페이징
 	@GetMapping("/list")
