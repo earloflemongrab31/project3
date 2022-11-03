@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CenterDto;
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.vo.CenterListSearchVO;
 
 @Repository
@@ -210,5 +211,14 @@ public class CenterDaoImpl implements CenterDao {
 		CenterListSearchVO vo = new CenterListSearchVO();
 		return list(vo);
 	}
+
+
+
+	@Override
+	public boolean updateMoney(String customerId) {
+		String sql = "update center set money_confirm='Y' where customer_id=?";
+		return jdbcTemplate.update(sql, customerId) > 0;
+	}
+
 }
 	

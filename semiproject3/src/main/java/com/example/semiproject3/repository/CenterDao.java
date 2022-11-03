@@ -35,5 +35,7 @@ public interface CenterDao {
 	boolean delete(int centerNo);
 	
 	List<CenterDto> selectListForMain();
+
+	boolean updateMoney(String customerId);
 	
 }

@@ -41,6 +41,9 @@
 						<c:if test="${centerDto.adminContent != null}">
 							[답변완료]
 						</c:if>
+						<c:if test="${centerDto.centerHead == '소지금' && centerDto.moneyConfirm == 'Y'}">
+							[지급완료]
+						</c:if>
 					</a>
 					
 				</td>

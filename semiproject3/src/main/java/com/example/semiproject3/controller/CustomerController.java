@@ -139,6 +139,9 @@ public class CustomerController {
 
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute CustomerDto customerDto, RedirectAttributes attr)  {
+		if(customerDto.getCustomerMoney() > 0) {
+			centerDao.updateMoney(customerDto.getCustomerId());
+		}
 		boolean result = customerDao.update(customerDto);
 		if(result) {
 			attr.addAttribute("customerId", customerDto.getCustomerId());
