@@ -19,6 +19,7 @@
 			<thead>
 				<tr>
 					<th>글번호</th>
+					<th>말머리</th>
 					<th width="50%">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
@@ -31,6 +32,8 @@
 				<tr>
 				
 				<td>${centerDto.centerNo}</td>
+				
+				<td>${centerDto.centerHead}</td>
 					
 				<td>
 					<a href="detail?centerNo=${centerDto.centerNo}">
@@ -142,6 +145,7 @@
 		
 		<select class="input input-none" name="type" required>
 		<option value="center_title" <c:if test="${type == 'center_title'}"></c:if>>제목</option>
+		<option value="center_head" <c:if test="${type == 'center_head'}"></c:if>>말머리</option>
 		<option value="customer_id" <c:if test="${type == 'customer_id'}"></c:if>>작성자</option>
 		
 		</select>

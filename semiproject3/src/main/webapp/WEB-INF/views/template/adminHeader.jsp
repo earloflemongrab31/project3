@@ -193,7 +193,11 @@
 <ul class="dropdown-menu">
 	<!-- 좌측 드롭다운 메뉴 -->
 	<li class="float-left">
-		<a href="/admin/main">메인관리</a>
+		<a href="#">메인관리</a>
+		<ul>
+			<li><a href="/admin/main">메인이미지</a></li>
+			<li><a href="/admin/survey">팝업이미지</a></li>
+		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">상품관리</a>

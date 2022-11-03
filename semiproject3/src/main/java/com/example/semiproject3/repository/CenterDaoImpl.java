@@ -34,6 +34,8 @@ public class CenterDaoImpl implements CenterDao {
 				centerDto.setAdminContent(rs.getString("admin_content"));
 				centerDto.setCustomerDate(rs.getDate("customer_date"));
 				centerDto.setAdminDate(rs.getDate("admin_date"));
+				centerDto.setCenterHead(rs.getString("center_head"));
+				centerDto.setMoneyConfirm(rs.getString("money_confirm"));
 				return centerDto;
 			}
 		};
@@ -54,6 +56,8 @@ public class CenterDaoImpl implements CenterDao {
 					centerDto.setAdminContent(rs.getString("admin_content"));
 					centerDto.setCustomerDate(rs.getDate("customer_date"));
 					centerDto.setAdminDate(rs.getDate("admin_date"));
+					centerDto.setCenterHead(rs.getString("center_head"));
+					centerDto.setMoneyConfirm(rs.getString("money_confirm"));
 					return centerDto;
 				}
 				else {
@@ -70,11 +74,12 @@ public class CenterDaoImpl implements CenterDao {
 					+ "customer_id,"
 					+ "center_title,"
 					+ "customer_content,"
-					+ "customer_date)"
-					+ "values (center_seq.nextval, ?, ?, ?, sysdate)";
+					+ "customer_date, "
+					+ "center_head)"
+					+ "values (center_seq.nextval, ?, ?, ?, sysdate, ?)";
 			Object[] param = {
-					centerDto.getCustomerId(),
-					centerDto.getCenterTitle(), centerDto.getCustomerContent()
+					centerDto.getCustomerId(), centerDto.getCenterTitle(), 
+					centerDto.getCustomerContent(), centerDto.getCenterHead()
 			};
 			jdbcTemplate.update(sql, param);
 			

@@ -111,21 +111,6 @@ public class CustomerController {
 		return "customer/detail";
 	}
 	
-//	@GetMapping("/list")
-//	public String list(Model model, 
-//					@RequestParam(required = false) String type,
-//					@RequestParam(required = false) String keyword) {
-//		boolean isSearch = type != null && keyword != null;
-//		if(isSearch) { // 검색
-//			model.addAttribute("list", customerDao.selectList(type, keyword));
-//		}
-//		else { //목록
-//			model.addAttribute("list", customerDao.selectList());
-//		}
-//		return "customer/list";
-//	}
-//	
-	
 	@GetMapping("/list")
 	public String list(Model model, 
 			@ModelAttribute(name="vo") CustomerListSearchVO vo) {
