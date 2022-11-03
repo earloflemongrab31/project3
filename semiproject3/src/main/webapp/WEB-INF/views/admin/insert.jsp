@@ -2,11 +2,21 @@
     pageEncoding="UTF-8"%>
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="관리자 등록" name="title"/>
+   <jsp:param value="관리자 등록" name="title"/>
 </jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	$(window).on("beforeunload", function(){
+	    return false;
+	});
+	$(".btn-pass").click(function(){
+	    $(window).off("beforeunload");
+	    return true;
+	});
+});
+</script>
 <!-- 테이블 폰트 변경해야함 -->
 
 <form action="insert" method="post" autocomplete="off">
@@ -48,11 +58,10 @@
         </table>
 
     <div class="row center">
-        <button class="btn btn-positive w-25" type="submit">등록</button>
-    </div>	
-    </div>	
+        <button class="btn btn-positive w-25 btn-pass" type="submit">등록</button>
+    </div>   
+    </div>   
 </form>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
-
 

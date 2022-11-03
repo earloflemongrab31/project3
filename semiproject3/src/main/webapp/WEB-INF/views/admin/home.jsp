@@ -279,7 +279,7 @@
 			</div>
 		</div>
 		
-		<div class="float-left w-40 ms-10">
+		<div class="float-left w-30 ms-10">
 			<div class="row center">
 			<h3>Q&A</h3>
 				<hr>

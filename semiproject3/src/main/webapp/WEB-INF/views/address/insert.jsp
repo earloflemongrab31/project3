@@ -38,6 +38,15 @@
             }
         }).open();
     }
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
 </script>
 
 
@@ -104,7 +113,7 @@ $(function(){
     
     
     <div class="row right">
-		<button class="btn btn-positive" type="submit">등록</button>
+		<button class="btn btn-positive btn-pass" type="submit">등록</button>
 	</div>
 
 </div>

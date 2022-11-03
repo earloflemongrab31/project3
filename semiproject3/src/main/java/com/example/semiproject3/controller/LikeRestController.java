@@ -19,6 +19,11 @@ public class LikeRestController {
 	
 	@GetMapping("/count")
 	public List<LikeCountVO>count(){
+<<<<<<< HEAD
 		return customerLikeDao.selectCountList(null);
 }
+=======
+		return customerLikeDao.selectCountList();
+	}
+>>>>>>> refs/remotes/origin/main
 }

@@ -36,7 +36,7 @@ public interface CustomerLikeDao {
 	int searchCount(CustomerListSearchVO vo);
 	int listCount(CustomerListSearchVO vo);
 
-	List<LikeCountVO> selectCountList(String loginId);
+	List<LikeCountVO> selectCountList();
 
 	
 }

@@ -192,7 +192,7 @@ public class CustomerLikeDaoImpl implements CustomerLikeDao {
 	};
 	
 	@Override
-	public List<LikeCountVO> selectCountList(String loginId) {
+	public List<LikeCountVO> selectCountList() {
 		String sql = "select item_no, count(*) cnt from customer_like group by item_no order by cnt desc";
 		return jdbcTemplate.query(sql, countMapper);
 	}

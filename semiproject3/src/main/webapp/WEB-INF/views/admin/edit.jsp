@@ -6,6 +6,17 @@
 	<jsp:param value="메인관리자 변경" name="title"/>
 </jsp:include>
 
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 
 <form action="edit" method="post">
 
@@ -35,7 +46,7 @@
 	
 	<div class="row right">
 		<a href="list" class="btn btn-neutral">목록</a>
-		<button type="submit" class="btn btn-positive">수정</button>	
+		<button type="submit" class="btn btn-positive btn-pass">수정</button>	
 	</div>
 </div>
 </form>

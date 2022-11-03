@@ -6,7 +6,17 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="관리자페이지" name="title"/>
 </jsp:include>
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 
 <form action="insert" method="post" enctype="multipart/form-data">
 
@@ -141,7 +151,7 @@
 				<tr class="right">
 					<td colspan="2">
 						<a class="btn btn-neutral btn-border" href="list">목록</a>
-						<button class="btn btn-positive" type="submit">등록</button>
+						<button class="btn btn-positive btn-pass" type="submit">등록</button>
 					</td>
 				</tr>
 			</tfoot>

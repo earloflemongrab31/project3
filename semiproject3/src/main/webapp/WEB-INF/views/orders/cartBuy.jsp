@@ -6,13 +6,40 @@
 	<jsp:param value="주문페이지" name="title"/>
 </jsp:include>
 
-<!-- <script> -->
-<!-- 	$(window).on("beforeunload", function(){ -->
-<!-- 	    return false; -->
-<!-- 	}); -->
-<!-- </script> -->
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+	
+	$(function(){
+		$(".btn-buy").click(function(){
+			var customerMoney = $("input[name=customerMoney]").val();
+			var totalPrice = parseInt($("#total-price").text());
+			if(customerMoney >= totalPrice){
+				var choice = confirm("구매하시겠습니까?");
+				if(choice){
+					return $(".buy-form").submit(true);
+				}
+				else{
+					return $(".buy-form").submit(false);
+				}
+			}
+			else{
+				alert("소지금이 부족합니다. 현재 잔액 : " + customerMoney + "원");
+				return $(".buy-form").submit(false);
+			}			
+		});
+	});
 
-<form action="/buy/cart-insert" method="post">
+</script>
+
+<form class="buy-form" action="/buy/cart-insert" method="post">
 
 <div class="container-1000 mt-50 mb-50">
 <input type="hidden" name="customerId" value="${customerDto.customerId}">
@@ -24,6 +51,7 @@
 <div class="floate-container">
 	<div class="float-left">
 		<h2>구매자 정보</h2>
+		<input type="hidden" value="${customerDto.customerMoney}" name="customerMoney">
 	</div>
 	<div class="row float-right">
 		<a href="delete-all" class="btn btn-neutral buy-delete">구매취소</a>
@@ -47,8 +75,13 @@
 	</table>
 </div>
 
+<div class="float-container">
 <div class="row float-left">
-	<h2>배송지 정보</h2>
+   <h2>배송지 정보</h2>
+</div>
+	<div class="row float-right">
+      <a href="/address/list" class="btn btn-neutral">배송지 관리</a>
+   </div>
 </div>
 <div class="row mb-30">
 	<table class="table table-slit">
@@ -103,7 +136,7 @@
 				<input type="hidden" name="cartNo" value="${cartDto.cartNo}">
 				<input type="hidden" name="itemNo" value="${cartDto.itemNo}">
 				<tr>
-					<th class="w-25" rowspan="4">
+					<th class="w-25" rowspan="4" style="vertical-align: bottom;">
 						<img class="w-100" src="/image/download/${cartDto.imageNo}">
 						<input type="hidden" name="imageNo" value="${cartDto.imageNo}">
 					</th>
@@ -197,7 +230,7 @@
 </div>
 
 <div class="row center">
-	<button class="btn btn-positive" type="submit">구매하기</button>
+	<button class="btn btn-positive btn-pass btn-buy" type="submit">구매하기</button>
 </div>
 
 </div>

@@ -46,6 +46,16 @@
 $(function(){
     $(".btn-find-address").click(findAddress);
 });
+
+$(function(){
+	$(window).on("beforeunload", function(){
+	    return false;
+	});
+	$(".btn-pass").click(function(){
+	    $(window).off("beforeunload");
+	    return true;
+	});
+});
   </script>
     
     
@@ -87,7 +97,7 @@ $(function(){
  	</div>
 
 	<div class="row">
-		<input type="text" class="input" name="addressPost" placeholder="우편번호" size="6" maxlength="6" required>
+		<input type="text" class="input" name="addressPost" placeholder="우편번호" size="6" maxlength="6" required value="${addressDto.addressPost}">
 	</div>
        
     <div class="row">
@@ -100,7 +110,7 @@ $(function(){
     
 
     <div class="row right">
-		<button class="btn btn-positive" type="submit">수정</button>
+		<button class="btn btn-positive btn-pass" type="submit">수정</button>
 	</div>
 
 </div>

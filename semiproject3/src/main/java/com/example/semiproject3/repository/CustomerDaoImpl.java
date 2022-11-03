@@ -104,7 +104,7 @@ public class CustomerDaoImpl implements CustomerDao{
 				customerDto.getCustomerId(), customerDto.getCustomerPw(), customerDto.getCustomerPwsearch(),
 				customerDto.getCustomerNick(), customerDto.getCustomerName(), customerDto.getCustomerPhone(),
 				customerDto.getCustomerTel(), customerDto.getCustomerBirth(), customerDto.getCustomerEmail(),
-				customerDto.getCustomerPoint(), customerDto.getCustomerMoney()
+				customerDto.getCustomerMoney()
 				
 		};
 		jdbcTemplate.update(sql, param);
@@ -320,7 +320,7 @@ public class CustomerDaoImpl implements CustomerDao{
 		};
 		@Override
 		public List<CustomerJoinCountVO> selectCountList() {
-			String sql = "select customer_join, count(*) cnt from customer group by customer_join order by customer_join asc";
+			String sql = "select customer_join, count(*) cnt from customer group by customer_join order by customer_join desc";
 			return jdbcTemplate.query(sql, countMapper);
 		}
 

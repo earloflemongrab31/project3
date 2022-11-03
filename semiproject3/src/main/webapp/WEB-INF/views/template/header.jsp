@@ -781,8 +781,8 @@
 	$(function(){
 		$("input[name=usePoint]").on("blur",function(){
 			var usePoint = $(this).val();
-			var totalPay = parseInt($("#total-pay").text());
-			var payMoney = totalPay - usePoint;
+			var totalPay = parseInt($("#except-delivery").text());
+			var payMoney = totalPay - usePoint + 3000;
 			
 			if(usePoint < 0){
 				return;
@@ -790,7 +790,7 @@
 			if(!usePoint){
 				$(this).val(0);
 				$("#use-point").text("0");
-				$("#total-price").text(totalPay);
+				$("#total-price").text(totalPay+3000);
 				return;
 			}
 			$("#use-point").text(usePoint);
@@ -813,7 +813,7 @@
  -->
 <c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자' && blockAd != 'Y'}">
 	<div class="float-container ad">
-		"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span> 지금 바로 앱스토어에서 다운 받기
+		&emsp;&emsp;"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span>지금 바로 앱스토어에서 다운 받기
 		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
 			<img src="/image/googleplay.png">
 		</a>
@@ -940,7 +940,9 @@
 		<input type="hidden" name="type" value="item_name">
 		<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
 	</form>
-		<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
+		<c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자'}">
+			<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
+		</c:if>
 	<c:choose>
 		<c:when test="${loginId == null}">
 			<li class="float-right"><a href="/customer/login">LOGIN</a></li>

@@ -6,7 +6,17 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="재고등록" name="title"/>
 </jsp:include>
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 <form action="insert" method="post">
 
 	<div class ="container-900 mt-50 mb-50">
@@ -131,7 +141,7 @@
                 </div>
                 
 			<div class="row center mt-30">
-				<button class="btn btn-positive" type="submit">등록</button>
+				<button class="btn btn-positive btn-pass" type="submit">등록</button>
 			</div>
 
  	
@@ -179,7 +189,7 @@
         </table>
         </div>
         <div class="row right">
-	       <a class="btn btn-positive" href="/company/insert">등록</a>
+	       <a class="btn btn-positive btn-pass" href="/company/insert">등록</a>
 	    </div>
 	</div>
     </div>  

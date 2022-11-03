@@ -5,7 +5,17 @@
 <jsp:include page="/WEB-INF/views/template/customerHeader.jsp">
 	<jsp:param value="회원정보변경" name="title"/>
 </jsp:include>
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 <form action="information" method="post" autocomplete="off">
 
 <section>
@@ -37,7 +47,7 @@
 			</label>
 		</div>
 		<div class="row">
-			<button class="btn btn-positive w-100" type="submit">변경하기</button>
+			<button class="btn btn-positive w-100 btn-pass" type="submit">변경하기</button>
 		</div>
 	
 	

@@ -32,7 +32,7 @@
 					<td>${buyDto.buyDate}</td>
 					<td>${buyDto.deliveryStatus}</td>
 					<td>
-						<a class="btn btn-border"  href="admin-buydetail?buyNo=${buyDto.buyNo}">
+						<a class="btn btn-border w-100"  href="admin-buydetail?buyNo=${buyDto.buyNo}">
 							확인
 						</a>
 					</td>
@@ -117,6 +117,6 @@
 </ul>	
 
 
-
+</div>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

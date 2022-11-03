@@ -6,7 +6,17 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="상품 수정 페이지" name="title"/>
 </jsp:include>
-
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 
 <form action = "update" method="post" enctype ="multipart/form-data">
 
@@ -182,7 +192,7 @@
 				<tr class="right">
 					<td colspan="2">
 						<a class="btn btn-neutral" href="list">목록</a>
-						<button class="btn btn-positive" type="submit">수정</button>
+						<button class="btn btn-positive bnt-pass" type="submit">수정</button>
 					</td>
 				</tr>
 			</tfoot>

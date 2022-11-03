@@ -8,7 +8,17 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script language="JavaScript" src="http://www.webmadang.net/javascript/js/calendarDateInput.js"></script>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+	$(function(){
+		$(window).on("beforeunload", function(){
+		    return false;
+		});
+		$(".btn-pass").click(function(){
+		    $(window).off("beforeunload");
+		    return true;
+		});
+	});
+</script>
 <!-- 테이블 폰트 변경해야함 -->
 <form class="join-form" action="insert" method="post" autocomplete="off">
 
@@ -128,7 +138,7 @@
         </table>
     </div>
     <div class="row center">
-        <button class="btn btn-positive w-25 btn-join" type="submit">가입하기</button>
+        <button class="btn btn-positive w-25 btn-join btn-pass" type="submit">가입하기</button>
     </div>	
     </div>	
 </form>
