@@ -207,6 +207,21 @@
   	a.footer-underline:hover{
 		text-decoration: underline;
 	}
+	
+	/*품절 임박*/
+	@keyframes almostSoldOut{
+           from{
+               color: darkred;
+           }
+
+           to{
+               color: red;
+           }
+       }
+
+	.sold{
+	    animation: almostSoldOut 0.5s linear 0s infinite alternate;
+	}
     
 </style>
 <script type="text/javascript">
