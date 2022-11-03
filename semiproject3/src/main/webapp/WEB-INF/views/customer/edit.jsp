@@ -32,11 +32,6 @@
 		<h1>회원 정보 수정</h1>
 		<hr>
 	</div>
-
-	<div class="row left">
-		<label>회원 포인트</label>
-		<input class="input w-100" name="customerPoint"  value="${customerDto.customerPoint}">
-	</div>
 		
 	<div class="row left">
 		<label>회원 등급</label>
@@ -44,8 +39,13 @@
 	</div>
 	
 	<div class="row left">
-		<label>회원 적립금</label>
+		<label>회원 소지금</label>
 		<input class="input w-100" name="customerMoney" value="${customerDto.customerMoney}">
+	</div>
+
+	<div class="row left">
+		<label>회원 포인트</label>
+		<input class="input w-100" name="customerPoint"  value="${customerDto.customerPoint}">
 	</div>
 	
 	

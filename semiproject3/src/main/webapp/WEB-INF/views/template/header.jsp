@@ -435,7 +435,7 @@
 	        
 	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
 	            
-	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark");//i 태그 엑스 표시 추가
+	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark middle");//i 태그 엑스 표시 추가
 	        icon.click(function(){//누르면 가장 상위 option class를 가지는 tr 삭제
 	        	var deleteColor = $(this).parent(".option").find("input[name=itemColor]").val();
 	        	var deleteSize = $(this).parent(".option").find("input[name=itemSize]").val();
@@ -509,17 +509,26 @@
 	
 	$(function(){
 		$("input[name=usePoint]").on("blur",function(){
-			var usePoint = $(this).val();
-			var totalPay = parseInt($("#except-delivery").text());
-			var payMoney = totalPay - usePoint + 3000;
+			var usePoint = $(this).val();//회원이 입력한 포인트
+			var customerPoint = $(this).attr("max");//회원이 가지고 있는 포인트
+			var totalPay = parseInt($("#except-delivery").text());//상품 전체 총 금액
+			var payMoney = totalPay - usePoint + 3000;//총 결제 금액
 			
-			if(usePoint < 0){
-				return;
-			}
-			if(!usePoint){
+			var overPoint1 = customerPoint > payMoney && usePoint > payMoney//총 금액보다 포인트를 더 작성했을 때
+			var overPoint2 = customerPoint < payMoney && usePoint < customerPoint//회원이 가지고있는 포인트보다 더 작성했을 때
+			
+			
+			if(usePoint < 0 || !usePoint){
 				$(this).val(0);
 				$("#use-point").text("0");
 				$("#total-price").text(totalPay+3000);
+				return;
+			}
+			if(overPoint1 || overPoint2){
+				$(this).val(0);
+				$("#use-point").text("0");
+				$("#total-price").text(totalPay+3000);
+				alert("보유하신 포인트 또는 총 결제 금액보다 많은 수를 입력할 수 없습니다.");
 				return;
 			}
 			$("#use-point").text(usePoint);
