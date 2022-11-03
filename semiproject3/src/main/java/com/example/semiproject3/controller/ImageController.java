@@ -31,8 +31,6 @@ public class ImageController {
 //	화니꼬
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-//	private final File directory = new File("D:/upload");
-//	private final File directory = new File("D:/study/main");
 	private final File directory = new File("D:/study/itemImage");
 
 	//이미지 불러오기
