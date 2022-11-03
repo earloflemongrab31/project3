@@ -24,7 +24,7 @@
          //지도 생성
          var container = document.querySelector('#map');
          var options = {
-             center: new kakao.maps.LatLng(33.450701, 126.570667),
+             center: new kakao.maps.LatLng(37.5338, 126.897),
              level: 3
          };
 
@@ -73,8 +73,6 @@
              // 마커가 지도 위에 표시되도록 설정합니다
              marker.setMap(map);
 
-             // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-             // marker.setMap(null);
          }
          //지도 이동 + 마커
          function moveMapWithMarkerAndText(lat, lng, text) {            
@@ -95,16 +93,13 @@
              // 마커가 지도 위에 표시되도록 설정합니다
              marker.setMap(map);
 
-             // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-             // marker.setMap(null);
 
              var tag = $("#info-window-template").text();
              tag = tag.replace("{{제목}}", text);
-             tag = tag.replace("{{내용}}", "lorem ipsum");
 
              var iwContent = tag; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
              var iwPosition = new kakao.maps.LatLng(lat, lng); //인포윈도우 표시 위치입니다
-             var iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+             var iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
              // 인포윈도우를 생성하고 지도에 표시합니다
              var infowindow = new kakao.maps.InfoWindow({
@@ -120,9 +115,9 @@
 	</script>
 	
 	 <script type="text/template" id="info-window-template">
-        <div class="info-window">
+        <div class="info-window center">
 			<center>
-            	<h3>{{제목}}</h3>
+            	<h4>{{제목}}</h4>
 			</center>
         </div>
     </script>
@@ -190,7 +185,7 @@
 							<a class="move-link" href="#" data-lat="34.8109053" data-lng="127.6712255">여수센터(물류창고)</a>
 						</h3>
 						<br>
-						평여119안전센터 전라남도 여수시 평여동 651-6
+						<div>평여119안전센터 전라남도 여수시 평여동 651-6</div>
 						<br>
 							<div class="mt-5">대표번호 : 041)944-5255 / 010)9966-1234</div>
 						<hr>
@@ -203,7 +198,7 @@
 				<tr>
 					<td width="70%">
 						<div class="center">
-							<h2><span class="span-eatting"></span></h2>
+							<h2><span class="span-eatting">당산센터(본사)</span></h2>
 						</div>
 						<div id="map"></div>
 					</td>
