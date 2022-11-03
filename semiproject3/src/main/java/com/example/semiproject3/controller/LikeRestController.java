@@ -19,6 +19,6 @@ public class LikeRestController {
 	
 	@GetMapping("/count")
 	public List<LikeCountVO>count(){
-		return customerLikeDao.selectCountList();
+		return customerLikeDao.selectCountList(null);
 }
 }

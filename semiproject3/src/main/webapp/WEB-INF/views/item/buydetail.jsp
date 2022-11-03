@@ -17,11 +17,14 @@
       }
    });
         
+   
+
    //리뷰 좋아요 ajax
    $(function(){
       $(".review-like-btn").click(function(e){
          e.preventDefault();
          var that=this;
+         
          
          $.ajax({
          url:"/rest/review/like",
@@ -32,9 +35,11 @@
          },
          success:function(resp){
         	 if(resp.reviewCnt>0){
-        	 	$(that).next(".like-span").text("♥"+resp.reviewCnt);
+        	 	//$(that).next(".like-span").text("♥"+resp.reviewCnt);
+        	 	$(that).text("♥"+resp.reviewCnt);
         	 }else{
-        		 $(that).next(".like-span").text("♡");
+        		 //$(that).next(".like-span").text("♡");
+        		 $(that).text("♡");
         	 }
         	 
         
@@ -43,23 +48,18 @@
       });
    });
    
-      //사진크게
+      //리뷰사진
       $(function(){
-         $(".image-big").click(function(){
-            
-            var width=$(this).css("width",100);
-            
-            $(this).animate({
-               width:"+=50"
-            }); 
-            
-         if(parseInt(width) >=150){
-            $(this).animate({
-               width :"100"
-            });
-         }
-         });
+    	  $(".image-big").click(function(){
+    		  var width=$(this).attr("width");
+    		  if(width=="100"){
+    			  var width= $(this).attr("width","200");
+    		  }else{
+    			  var width= $(this).attr("width","100");
+    		  }
+    	  })
       });
+      
       
     
       $(function(){
@@ -340,15 +340,15 @@
                                 </c:when>
                                 <c:when test="${loginId!=null && list.reviewCnt == 0}">
                                 	<a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
-                                		좋아요
+                                		<i class="fa-regular fa-heart"></i>
                                 	</a>
-                                	<span class="like-span"><i class="fa-regular fa-heart"></i>${list.reviewCnt}</span>
+                                	
                                 </c:when>
                                 <c:otherwise>
                                    <a class="review-like-btn"  data-review-no="${list.reviewNo}" data-item-no="${itemDto.itemNo}">
-                                   		좋아요
+                                   		<i class="fa-solid fa-heart"></i>${list.reviewCnt}
                                    </a>
-                                    <span class="like-span"><i class="fa-solid fa-heart"></i>${list.reviewCnt}</span>
+                                    
                                 </c:otherwise>
                              </c:choose>
                               </td>
