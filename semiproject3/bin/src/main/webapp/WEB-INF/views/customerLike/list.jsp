@@ -39,7 +39,7 @@
 	                  </td>
 	                  <td>${customerLikeDto.likeTime}</td>
 	                  <td>
-	                   	<a href="http://localhost:8888/item/buydetail?itemNo=${customerLikeDto.itemNo}">확인</a>
+	                   	<a href="//localhost:8888/item/buydetail?itemNo=${customerLikeDto.itemNo}">확인</a>
 	                  </td>
 					</tr>
 				</c:forEach>

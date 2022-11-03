@@ -14,7 +14,7 @@
 			var itemPrice = $(this).parent("td").find("input[name=itemPrice]").val();
 			var that = $(this);
 			$.ajax({
-				url: "http://localhost:8888/rest/cart/",
+				url: "//localhost:8888/rest/cart/",
 				method: "post",
 				data: {
 					itemCnt: itemCnt,

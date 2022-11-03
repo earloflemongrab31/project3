@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	$(function() {
 		$.ajax({
-			url : "http://localhost:8888/rest/buy/count",
+			url : "//localhost:8888/rest/buy/count",
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
@@ -64,7 +64,7 @@
 		})
 		
 			$.ajax({
-			url : "http://localhost:8888/rest/like/count",
+			url : "//localhost:8888/rest/like/count",
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
@@ -116,7 +116,7 @@
 			},
 		})
 		$.ajax({
-			url : "http://localhost:8888/rest/customer/count",
+			url : "//localhost:8888/rest/customer/count",
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
@@ -205,7 +205,7 @@
 			<div class="row center">
 			<h3>가입목록</h3>
 				<hr>
-				<small><a class="btn"  href="http://localhost:8888/customer/list">[더보기]</a></small>
+				<small><a class="btn"  href="//localhost:8888/customer/list">[더보기]</a></small>
 			</div>
 			<div class="row">
 				<table class="table table-border">
@@ -235,7 +235,7 @@
 			<div class="row center">
 			<h3>NOTICE</h3>
 				<hr>
-				<small><a class="btn"  href="http://localhost:8888/notice/list">[더보기]</a></small>
+				<small><a class="btn"  href="//localhost:8888/notice/list">[더보기]</a></small>
 			</div>
 			<div class="row">
 				<table class="table table-border">
@@ -252,7 +252,7 @@
 							<tr>
 								<td>${noticeDto.noticeNo}</td>
 								<td>
-									<a href="http://localhost:8888/notice/detail?noticeNo=${noticeDto.noticeNo}">
+									<a href="//localhost:8888/notice/detail?noticeNo=${noticeDto.noticeNo}">
 										${noticeDto.noticeTitle}
 									</a>
 								</td>		
@@ -283,7 +283,7 @@
 			<div class="row center">
 			<h3>Q&A</h3>
 				<hr>
-				<small><a class="btn"  href="http://localhost:8888/center/list">[더보기]</a></small>
+				<small><a class="btn"  href="//localhost:8888/center/list">[더보기]</a></small>
 			</div>
 			<div class="row">
 				<table class="table table-border">
@@ -300,7 +300,7 @@
 							<tr>
 								<td>${centerDto.centerNo}</td>
 								<td>
-									<a href="http://localhost:8888/center/detail?centerNo=${centerDto.centerNo}">
+									<a href="//localhost:8888/center/detail?centerNo=${centerDto.centerNo}">
 									${centerDto.centerTitle}
 									<c:if test="${centerDto.adminContent != null}">
 										[답변완료]

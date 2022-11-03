@@ -227,7 +227,7 @@
 		$(".ad").find(".delete").click(function(){
 			$(this).parent().slideUp();
 			$.ajax({
-				url: "http://localhost:8888/rest/customer/block-ad",
+				url: "//localhost:8888/rest/customer/block-ad",
 				method: "get"
 			});
 		});

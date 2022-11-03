@@ -28,7 +28,13 @@
 						</a>
 					</td>
 					<td>${buyItem.itemName}</td>
-					<td class="w-25 center" rowspan="3">${buyItem.deliveryStatus}</td>
+					<td class="w-25 center" rowspan="3">
+						${buyItem.deliveryStatus} 
+						
+						<c:if test="${buyItem.deliveryStatus=='배송완료'}">
+							<p class="mt-10"><a href="#">[환불신청]</a></p>
+						</c:if>
+					</td>
 					<c:choose>
 						<c:when test="${buyItem.deliveryStatus == '배송완료'}">
 							<td class= "center" rowspan="3"> <a class="review-able" href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
