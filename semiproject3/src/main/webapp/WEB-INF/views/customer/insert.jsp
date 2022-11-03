@@ -42,7 +42,7 @@
                 <tr>
                     <th>아이디<span class="required">*</span></th>
                     <td>
-                        <input class="input w-40" type="text" name="customerId">
+                        <input class="input w-40" type="text" name="customerId" autofocus>
                         <span class="NNNNY-message"><i class="fa-solid fa-check"></i></span>
                         <span class="NNNNN-message">이미 사용 중인 아이디입니다.</span>
                         <span class="fail-message">영문 소문자/숫자, 5~20자로 설정해야 합니다.</span>
