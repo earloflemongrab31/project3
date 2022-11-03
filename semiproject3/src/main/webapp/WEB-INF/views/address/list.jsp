@@ -25,11 +25,11 @@ function upGo(){
 	   $("input[name='addressNo']:checked").each(function(i) {
 	      checkboxValues.push($(this).val());
 	    });
-	   window.location = "http://localhost:8888/address/edit?addressNo=" + checkboxValues;
+	   window.location = "//localhost:8888/address/edit?addressNo=" + checkboxValues;
 	   }
 	}
 	function add(){
-	   window.location = "http://localhost:8888/address/addBasic"
+	   window.location = "//localhost:8888/address/addBasic"
 	   }
 	function delNo(){
 	  

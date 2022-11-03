@@ -26,7 +26,7 @@
 	</div>
 	
 	<div class="row">
-		<input class="input w-100 id" type="text" name="customerId" placeholder="아이디" required autocomplete="off">
+		<input class="input w-100 id" type="text" name="customerId" placeholder="아이디" required autocomplete="off" autofocus>
 	</div>
 	
 	<div class="row">
