@@ -193,12 +193,22 @@
                   <option disabled>상품준비중</option>
                </c:if>
                <c:forEach var="itemDto" items="${buylist}">
-	               <c:if test="${itemDto.itemTotalCnt !=0}">
-	                  <option data-total-cnt="${itemDto.itemTotalCnt}" data-color="${itemDto.itemColor}" 
-	                  		data-size="${itemDto.itemSize}">
-	                  ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
-	                  </option>
-	               </c:if>
+	           		<c:if test="${itemDto.itemTotalCnt !=0}">
+	               		<c:choose>
+	               			<c:when test="${itemDto.itemTotalCnt < 10}">
+	               				<option data-total-cnt="${itemDto.itemTotalCnt}" data-color="${itemDto.itemColor}" 
+				               		data-size="${itemDto.itemSize}">
+			           				${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})[품절 임박]
+			           			</option>
+	               			</c:when>
+	               			<c:otherwise>
+				       			<option data-total-cnt="${itemDto.itemTotalCnt}" data-color="${itemDto.itemColor}" 
+				               		data-size="${itemDto.itemSize}">
+			           				${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+			           			</option>
+	               			</c:otherwise>
+	               		</c:choose>
+	           		</c:if>
                </c:forEach>
             </select>
          </td>
