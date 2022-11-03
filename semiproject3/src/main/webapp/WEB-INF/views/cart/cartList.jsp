@@ -40,6 +40,8 @@
 <div class="row center mb-30">
 	 <h1>CART</h1>
 </div>
+<c:choose>
+<c:when test="${!empty cartList}">
 <div class="row center">
 		장바구니 상품(${cartCount})
 </div>
@@ -68,10 +70,6 @@
 		 		<input type="hidden" name="itemName" value="${cartDto.itemName}">
 	 			<input type="hidden" name="itemPrice" value="${cartDto.itemPrice}">
 				<input type="number" class="itemCnt input w-100" name="itemCnt" value="${cartDto.itemCnt}" min="1" max="${cartDto.itemTotalCnt}">
-<!-- 				<span> -->
-<!-- 				<button class="plus btn">+</button> -->
-<!-- 				<button class="minus btn">-</button> -->
-<!-- 				</span> -->
 			</td>
 			<td class="center" width="100" rowspan="2">
 				<span class="price-result">${cartDto.itemPrice * cartDto.itemCnt}</span>원
@@ -88,24 +86,35 @@
 		</tr>
  	</c:forEach>
  	</tbody>
- 	<tfoot>
+	<tfoot>
  		<tr>
  			<td class="left" colspan="6">
  				총 주문 금액
  			</td>
 		</tr>
  		<tr>
- 			<td class="center" colspan="6">
-				상품 총금액 : <span id="pay-total">${total}</span>원
-				 + 3000원(배송비) = <span id="pay-real-total">${total+3000}</span>원
-			</td>
-		</tr>
+	 			<td class="center" colspan="6">
+					상품 총금액 : <span id="pay-total">${total}</span>원
+					 + 3000원(배송비) = <span id="pay-real-total">${total+3000}</span>원
+				</td>
+			</tr>
  		<tr>
  			<td class="center" colspan="6">
 				<button class="btn btn-positive" type="submit">주문하기</button>
 			</td>
 		</tr>
- </table>
+	</tfoot>
+</table>
 </form>
+</c:when>
+<c:otherwise>
+	<div class="row center mt-30">
+		<h3>장바구니에 담긴 상품이 없습니다.</h3>
+	</div>
+	<div class="row center mt-30">
+		<a href="/" class="btn btn-positive">쇼핑하러 가기</a>
+	</div>
+</c:otherwise>
+</c:choose>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
