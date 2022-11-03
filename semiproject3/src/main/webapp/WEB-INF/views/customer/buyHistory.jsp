@@ -32,10 +32,17 @@
 						${buyItem.deliveryStatus} 
 						
 						<c:if test="${buyItem.deliveryStatus=='배송완료'}">
-							<p><a href="#">[환불신청]</a></p>
+							<p class="mt-10"><a href="#">[환불신청]</a></p>
 						</c:if>
 					</td>
-					<td class= "center" rowspan="3"> <a  href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+					<c:choose>
+						<c:when test="${buyItem.deliveryStatus == '배송완료'}">
+							<td class= "center" rowspan="3"> <a class="review-able" href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+						</c:when>
+						<c:otherwise>
+							<td class= "center" rowspan="3"> <a class="review-disable" href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				<tr>
 					<td> 옵션 : ${buyItem.itemSize} / ${buyItem.itemColor}</td>
