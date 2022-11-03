@@ -237,6 +237,9 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
-	
+	@GetMapping("/survey")
+	public String survey() {
+		return "admin/survey";
+	}
 	
 }
