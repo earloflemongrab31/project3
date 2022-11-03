@@ -153,18 +153,6 @@
     .NNNNN-message{
         display:none;
     } 
-    .input.NNNNN ~ .NNNNN-message,
-    .input.NNNNY ~ .NNNNY-message,
-    .input.fail ~ .fail-message,
-    .input.admin ~ .admin-message{
-        display: inline-block;
-    }
-    .NNNNN-message,
-    .NNNNY-message,
-    .fail-message,
-    .admin-message{
-        display: none;
-    }
 	/* swiper */
     .swiper{
         width: 100%;
@@ -373,7 +361,7 @@
         });
         $(".input[name=customerPw").blur(function(){
             var inputPw = $(this).val();
-            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
+            var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
             var judge = regex.test(inputPw);
             $(this).removeClass("fail NNNNY");
             if(judge){
@@ -412,7 +400,7 @@
             var regex = /^[가-힣][가-힣0-9]{0,9}$/;
             var judge = regex.test(inputNick);
             $(this).removeClass("fail NNNNN NNNNY admin");
-            if(inputNick == '관리자'){
+            if(inputNick.search("관리자") >= 0){
                 $(this).addClass("admin");
                 inputStatus.memberNickValid = false;
                 return;
@@ -536,80 +524,7 @@
         });
     });
     
-    /* 비밀번호 변경 */
-    $(function(){
-        $(".btn-check-pw").click(function(){
-            var inputPw = $(".input[name=checkPw]").val();
-            var loginId = $("input[name=loginId]").val();
-            //console.log(inputPw);
-            
-            $.ajax({
-                url: "http://localhost:8888/rest/customer/pw",
-                method:"post",
-                data:{
-                    inputPw: inputPw,
-                    loginId: loginId
-                },
-                success: function(resp){
-                    if(resp == "NNNNY"){
-                        $(".check-pw").addClass("NNNNY");
-                        $(".input-pw").addClass("NNNNY");
-                    }
-                    else{
-                    	$(".input[name=checkPw]").addClass("NNNNN");
-                    }
-                }
-            });
-        });
-        
-        $(".input[name=customerPw").blur(function(){
-            var inputPw = $(this).val();
-            if(!inputPw){
-	            $("#customer-pwcheck").removeClass("fail NNNNY");
-            }
-            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
-            var judge = regex.test(inputPw);
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-            }
-            else{
-                $(this).addClass("fail");
-            }
-            $("#customer-pwcheck").blur();
-        });
-        $("#customer-pwcheck").blur(function(){
-            var pwCheck = $(this).val();
-            if(!pwCheck){
-                $(this).removeClass("fail NNNNY");
-                return;
-            };
-            if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
-            var pw = $(".input[name=customerPw").val();
-            var judge = pw == pwCheck;
-            
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-            }
-            else{
-                $(this).addClass("fail");
-            }
-        });
-    	
-	    $(".change-pw").submit(function(){
-	        $(".input[name=customerPw]").blur();
-	        $("#customer-pwcheck").blur();
-	
-	        if($(".input.NNNNY").length == 2){
-	            return true;
-	        }
-	        return false;
-	    });
-	    
-    });
-    
-    /* 메인이미지 스와이퍼 */
+    /* 메인이미지 이미지 슬라이더 */
     $(function(){
         var swiper = new Swiper('.swiper.main', {
             // 화면 넘기기 옵션
@@ -629,7 +544,7 @@
             effect: "fade",//페이드 인-아웃 효과
         });
     });
-    /* 새상품이미지 스와이퍼 */
+    /* 새상품이미지 이미지 슬라이더 */
     $(function(){
         var swiper = new Swiper('.swiper.mySwiper', {
             // 화면 넘기기 옵션

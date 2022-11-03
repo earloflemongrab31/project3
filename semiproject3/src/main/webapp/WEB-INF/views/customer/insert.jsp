@@ -4,8 +4,6 @@
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
 
-
-
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script language="JavaScript" src="http://www.webmadang.net/javascript/js/calendarDateInput.js"></script>
 <script type="text/javascript">
@@ -19,11 +17,7 @@
 		});
 	});
 </script>
-<!-- 테이블 폰트 변경해야함 -->
 <form class="join-form" action="insert" method="post" autocomplete="off">
-
-        
-
 
     <div class="container-1000 mt-50 mb-50">
         <div class="row center mb-50">
@@ -67,8 +61,8 @@
                 </tr>	
                 <tr>
                     <th rowspan="2" style="vertical-align:middle">비밀번호 확인 질문<span class="required">*</span></th>
-                    <td>
-                        <input type="text" class="input input-none w-40" readonly placeholder="나의 보물 1호는?">
+                    <td style="font-size:16px; padding:1em;">
+                        나의 보물 1호는?
                     </td>
                 </tr>
                 <tr>
@@ -95,7 +89,6 @@
                         <span class="NNNNN-message">한글만 입력 가능합니다.</span>
                     </td>
                 </tr>
-                <!-- 달력 변경할 수 있으면 하기 cdn은 넣어놓음 -->
                 <tr>
                     <th>생년월일<span class="required">*</span></td>
                     <td>					
@@ -125,7 +118,7 @@
                 <tr>
                     <th class="w-15">일반전화</td>
                     <td>
-                        <input class="input w-40" type="tel" name="customerTel" maxlength="11">
+                        <input class="input w-40" type="tel" name="customerTel" maxlength="11" placeholder="	">
                     </td>
                 </tr>
                 <tr>
