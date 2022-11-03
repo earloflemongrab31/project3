@@ -28,8 +28,15 @@
 						</a>
 					</td>
 					<td>${buyItem.itemName}</td>
-					<td class="w-25 center" rowspan="3">${buyItem.deliveryStatus}</td> 
-					<td class= "center" rowspan="3"> <a  href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+					<td class="w-25 center" rowspan="3">${buyItem.deliveryStatus}</td>
+					<c:choose>
+						<c:when test="${buyItem.deliveryStatus == '배송완료'}">
+							<td class= "center" rowspan="3"> <a class="review-able" href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+						</c:when>
+						<c:otherwise>
+							<td class= "center" rowspan="3"> <a class="review-disable" href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				<tr>
 					<td> 옵션 : ${buyItem.itemSize} / ${buyItem.itemColor}</td>
