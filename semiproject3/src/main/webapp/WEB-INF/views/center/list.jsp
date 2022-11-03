@@ -142,6 +142,7 @@
 		
 		<select class="input input-none" name="type" required>
 		<option value="center_title" <c:if test="${type == 'center_title'}"></c:if>>제목</option>
+		<option value="customer_id" <c:if test="${type == 'customer_id'}"></c:if>>작성자</option>
 		
 		</select>
 			
