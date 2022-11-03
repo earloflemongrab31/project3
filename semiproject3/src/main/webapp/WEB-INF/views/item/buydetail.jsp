@@ -218,7 +218,7 @@
 </div>
 
 <div class="row" style="min-height:280px;">
-   <ul class="option-area" style="list-style: none;">
+   <ul class="option-area middle" style="list-style: none;">
          
    </ul>
 </div>

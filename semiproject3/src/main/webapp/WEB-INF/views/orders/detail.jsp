@@ -21,6 +21,7 @@
 		$(".btn-buy").click(function(){
 			var customerMoney = $("input[name=customerMoney]").val();
 			var totalPrice = parseInt($("#total-price").text());
+
 			if(customerMoney >= totalPrice){
 				var choice = confirm("구매하시겠습니까?");
 				if(choice){
@@ -31,8 +32,14 @@
 				}
 			}
 			else{
-				alert("소지금이 부족합니다. 현재 잔액 : " + customerMoney + "원");
-				return $(".buy-form").submit(false);
+				var choice = confirm("소지금이 부족합니다. (현재 잔액 : " + customerMoney + "원) 충전 페이지로 이동하시겠습니까?");
+				if(choice){
+					$(".buy-form").attr("action", "/center/insert").attr("method", "get");
+					return $(".buy-form").submit(true);
+				}
+				else{
+					return $(".buy-form").submit(false);
+				}
 			}			
 		});
 	});
@@ -54,7 +61,7 @@
 		<input type="hidden" value="${customerDto.customerMoney}" name="customerMoney">
 	</div>
 	<div class="row float-right">
-		<a href="delete-all" class="btn btn-neutral buy-delete">구매취소</a>
+		<a href="delete-all" class="btn btn-neutral buy-delete btn-pass">구매취소</a>
 	</div>
 </div>
 <div class="row mb-30">
