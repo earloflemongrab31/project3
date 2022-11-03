@@ -104,7 +104,7 @@ public class CustomerDaoImpl implements CustomerDao{
 				customerDto.getCustomerId(), customerDto.getCustomerPw(), customerDto.getCustomerPwsearch(),
 				customerDto.getCustomerNick(), customerDto.getCustomerName(), customerDto.getCustomerPhone(),
 				customerDto.getCustomerTel(), customerDto.getCustomerBirth(), customerDto.getCustomerEmail(),
-				customerDto.getCustomerPoint(), customerDto.getCustomerMoney()
+				customerDto.getCustomerMoney()
 				
 		};
 		jdbcTemplate.update(sql, param);
