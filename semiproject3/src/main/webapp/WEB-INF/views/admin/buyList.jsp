@@ -44,7 +44,7 @@
 </div>
 
 <div class="row center">
-	<form action="list" method="get">
+	<form action="admin-buylist" method="get">
 		<select class="input" name="type" required>
 			<option value="customer_id">아이디</option>
 		</select>
