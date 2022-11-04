@@ -94,7 +94,7 @@
 	
 	/* 설문조사 */
 	.fullscreen > .modal.survey{
-		background-image: url("/image/survey.png");
+		background-image: url("${pageContext.request.contextPath}/image/survey.png");
 	    background-size: 100%;
 	    background-repeat: no-repeat;
 	}
