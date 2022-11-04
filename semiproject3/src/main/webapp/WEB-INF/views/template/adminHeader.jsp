@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="${param.title}" name="title"/>
-</jsp:include> --%>
 
 <!DOCTYPE html>
 <html>
@@ -20,12 +17,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
 
 <!-- 디자인 틀 -->
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css">
 
 <!-- 틀 선 디자인할 때 주석 풀기 -->
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> --%>
 
 <!-- 아이콘 cdn -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -43,9 +40,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
 <!-- summernote 라이브러리 -->
-<link rel="stylesheet" type="text/css" href="/summernote/summernote-lite.css">
-<script src="/summernote/summernote-lite.js"></script>
-<script src="/summernote/lang/summernote-ko-KR.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/summernote/summernote-lite.css">
+<script src="${pageContext.request.contextPath}/summernote/summernote-lite.js"></script>
+<script src="${pageContext.request.contextPath}/summernote/lang/summernote-ko-KR.min.js"></script>
 
 <style>
     /* 카테고리 대분류-소분류 */
@@ -176,12 +173,12 @@
 
 <div class="float-container">
 	<div class="logo float-left">
-		<a class="w-100" href="/admin/">
-			<img class="w-100" src="/image/logo.png">
+		<a class="w-100" href="${pageContext.request.contextPath}/admin/">
+			<img class="w-100" src="${pageContext.request.contextPath}/image/logo.png">
 		</a>
 	</div>
 	<div class="right-word row float-right">
-		<a href="/">회원페이지</a>
+		<a href="${pageContext.request.contextPath}/">회원페이지</a>
 	</div>
 </div>
 
@@ -195,48 +192,48 @@
 	<li class="float-left">
 		<a href="#">메인관리</a>
 		<ul>
-			<li><a href="/admin/main">메인이미지</a></li>
-			<li><a href="/admin/survey">팝업이미지</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/main">메인이미지</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/survey">팝업이미지</a></li>
 		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">상품관리</a>
 		<ul>
-			<li><a href="/item/list">상품목록</a></li>
-			<li><a href="/item/insert">상품등록</a></li>
-			<li><a href="/warehouse/invenList">재고관리</a></li>
-			<li><a href="/company/list">협력사관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/item/list">상품목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/item/insert">상품등록</a></li>
+			<li><a href="${pageContext.request.contextPath}/warehouse/invenList">재고관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/company/list">협력사관리</a></li>
 		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">주문관리</a>
 		<ul>
-			<li><a href="/buy/admin-buylist">주문목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/buy/admin-buylist">주문목록</a></li>
 		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">회원관리</a>
 		<ul>
-			<li><a href="/customer/list">회원목록</a></li>
-			<li><a href="/research/list">설문조사결과</a></li>
-			<li><a href="/review/reportList">리뷰신고목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/customer/list">회원목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/research/list">설문조사결과</a></li>
+			<li><a href="${pageContext.request.contextPath}/review/reportList">리뷰신고목록</a></li>
 		</ul>
 	</li>
 	<li class="float-left">
 		<a href="#">관리자관리</a>
 		<ul>
-			<li><a href="/admin/list">관리자목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/list">관리자목록</a></li>
 		</ul>
 		</li>
 	<li class="float-left">
 		<a href="#">고객센터</a>
 		<ul>
-			<li><a href="/notice/list">공지사항</a></li>
-			<li><a href="/center/list">Q&A</a></li>
+			<li><a href="${pageContext.request.contextPath}/notice/list">공지사항</a></li>
+			<li><a href="${pageContext.request.contextPath}/center/list">Q&A</a></li>
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
-	<li class="float-right"><a class="logout" href="/customer/logout">LOGOUT</a></li>
+	<li class="float-right"><a class="logout" href="${pageContext.request.contextPath}/customer/logout">LOGOUT</a></li>
 </ul>
 </div>
 </nav>

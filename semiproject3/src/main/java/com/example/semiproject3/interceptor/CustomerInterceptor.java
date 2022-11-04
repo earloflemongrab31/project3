@@ -36,7 +36,7 @@ public class CustomerInterceptor implements HandlerInterceptor{
 			//선택지는 2가지가 있다
 			
 			//[1] 로그인 페이지로 리다이렉트
-			response.sendRedirect("/customer/login");
+			response.sendRedirect(request.getContextPath()+"/customer/login");
 			
 			//[2] HTTP 상태 코드 중에서 미인증(401)을 반환
 			//- 추가로 상태번호에 따른 처리가 필요하다

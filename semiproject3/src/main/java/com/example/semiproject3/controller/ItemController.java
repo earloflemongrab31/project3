@@ -61,7 +61,8 @@ public class ItemController {
 //	C드라이브용
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-	private final File directory = new File("D:/study/itemImage");
+//	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/upload/kh10C/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct

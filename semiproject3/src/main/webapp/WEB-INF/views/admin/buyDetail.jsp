@@ -22,8 +22,8 @@
 		<tbody>
 			<tr>
 				<td class="w-25" rowspan="3" style="vertical-align: bottom;">
-					<a href="/item/buydetail?itemNo=${buyDto.itemNo}">
-						<img class="w-100" src="/image/download/${buyDto.imageNo}">
+					<a href="${pageContext.request.contextPath}/item/buydetail?itemNo=${buyDto.itemNo}">
+						<img class="w-100" src="${pageContext.request.contextPath}/image/download/${buyDto.imageNo}">
 					</a>
 				</td>
 				<td>${buyDto.itemName}</td>

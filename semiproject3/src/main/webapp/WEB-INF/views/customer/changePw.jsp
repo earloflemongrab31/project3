@@ -11,7 +11,7 @@
 	        var loginId = $("input[name=loginId]").val();
 	        
 	        $.ajax({
-	            url: "//localhost:8888/rest/customer/pw",
+	            url: "${pageContext.request.contextPath}/rest/customer/pw",
 	            method:"post",
 	            data:{
 	                inputPw: inputPw,

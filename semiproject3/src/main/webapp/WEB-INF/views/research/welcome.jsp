@@ -23,7 +23,7 @@
 	</div>
 	
 	<div class="row">
-		<a href="/" class="btn btn-positive w-100">쇼핑하러 가기</a>
+		<a href="${pageContext.request.contextPath}/" class="btn btn-positive w-100">쇼핑하러 가기</a>
 	</div>
 	<div class="row center">
 		&copy; Semi3 Corp. All rights reserved.

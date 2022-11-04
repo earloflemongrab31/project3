@@ -34,7 +34,7 @@
 			else{
 				var choice = confirm("소지금이 부족합니다. (현재 잔액 : " + customerMoney + "원) 충전 페이지로 이동하시겠습니까?");
 				if(choice){
-					$(".buy-form").attr("action", "/center/insert").attr("method", "get");
+					$(".buy-form").attr("action", "${pageContext.request.contextPath}/center/insert").attr("method", "get");
 					return $(".buy-form").submit(true);
 				}
 				else{
@@ -46,7 +46,7 @@
 
 </script>
 
-<form class="buy-form" action="/buy/insert" method="post">
+<form class="buy-form" action="${pageContext.request.contextPath}/buy/insert" method="post">
 
 <div class="container-1000 mt-50 mb-50">
 <input type="hidden" name="customerId" value="${customerDto.customerId}">
@@ -87,7 +87,7 @@
    <h2>배송지 정보</h2>
 </div>
 	<div class="row float-right">
-      <a href="/address/list" class="btn btn-neutral">배송지 관리</a>
+      <a href="${pageContext.request.contextPath}/address/list" class="btn btn-neutral">배송지 관리</a>
    </div>
 </div>
 <div class="row mb-30">
@@ -144,7 +144,7 @@
 				<input type="hidden" name="itemNo" value="${ordersDto.itemNo}">
 				<tr>
 					<th class="w-25" rowspan="4" style="vertical-align: bottom;">
-						<img class="w-100" src="/image/download/${ordersDto.imageNo}">
+						<img class="w-100" src="${pageContext.request.contextPath}/image/download/${ordersDto.imageNo}">
 						<input type="hidden" name="imageNo" value="${ordersDto.imageNo}">
 					</th>
 					<td>상품명</td>

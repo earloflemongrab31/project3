@@ -7,8 +7,8 @@
     <jsp:param value="기본배송지 등록" name="title"/>
 </jsp:include>
 
-<script src="/confirm-link.js"></script> 
-<script src="/checkbox.js"></script> 
+<script src="${pageContext.request.contextPath}/confirm-link.js"></script> 
+<script src="${pageContext.request.contextPath}/checkbox.js"></script> 
 
 <section>
 <div class ="container-800 mt-50 mb-50">

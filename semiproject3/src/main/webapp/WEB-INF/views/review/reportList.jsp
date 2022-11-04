@@ -37,13 +37,13 @@
          	<td>${reportList.reportNo}</td>
             <td>
             ${reportList.who}
-<%--             	<a href="/customer/mypage?customerId=${reportList.who}">${reportList.who}</a> --%>
+<%--             	<a href="${pageContext.request.contextPath}/customer/mypage?customerId=${reportList.who}">${reportList.who}</a> --%>
             </td>
             <td>${reportList.reportRadio}</td>
             <td>${reportList.reportContent}</td>
             <td>
             ${reportList.customerId}
-<%--             	<a href="/customer/mypage?customerId=${reportList.customerId}">${reportList.customerId}</a> --%>
+<%--             	<a href="${pageContext.request.contextPath}/customer/mypage?customerId=${reportList.customerId}">${reportList.customerId}</a> --%>
             </td>
             <td>${reportList.reviewContent}</td>
          </tr>

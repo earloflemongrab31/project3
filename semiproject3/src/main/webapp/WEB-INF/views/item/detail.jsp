@@ -24,7 +24,7 @@
 	 				<td class="center" colspan="2">
 						<c:forEach var="itemImageView" items="${itemImageList}">
 							<c:if test="${itemImageView.imageMain == 1}">
-								<img src="/image/download/${itemImageView.imageNo}" style="width:224px; height: 301px;" >
+								<img src="${pageContext.request.contextPath}/image/download/${itemImageView.imageNo}" style="width:224px; height: 301px;" >
 							</c:if>
 						</c:forEach>
 					</td>
@@ -33,7 +33,7 @@
 					<td class="center" colspan="2">
 						<c:forEach var="itemImageView" items="${itemImageList}">
 							<c:if test="${itemImageView.imageMain == 0}">
-								<img src="/image/download/${itemImageView.imageNo}" style="width:160px; height: 215px;">
+								<img src="${pageContext.request.contextPath}/image/download/${itemImageView.imageNo}" style="width:160px; height: 215px;">
 							</c:if>
 						</c:forEach>
 					</td>

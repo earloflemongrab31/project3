@@ -8,8 +8,8 @@
 </jsp:include>
 
 
-<script src="/confirm-link.js"></script> 
-<script src="/checkbox.js"></script> 
+<script src="${pageContext.request.contextPath}/confirm-link.js"></script> 
+<script src="${pageContext.request.contextPath}/checkbox.js"></script> 
 <script type="text/javascript">
 function upGo(){
 	   var checkboxValues = [];

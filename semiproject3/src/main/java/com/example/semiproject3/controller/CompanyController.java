@@ -67,7 +67,8 @@ public class CompanyController {
                      .build());
                
                //파일저장
-               File dir=new File("D:/upload/card");
+//               File dir=new File("D:/upload/card");
+               File dir=new File("D:/upload/kh10C/card");
                dir.mkdirs();
                File target = new File(dir,String.valueOf(imageNo));
                file.transferTo(target);
@@ -153,7 +154,8 @@ public class CompanyController {
          return ResponseEntity.notFound().build();
       }
       //파일불러고오기 
-      File dir=new File("D:/upload");
+//      File dir=new File("D:/upload/card");
+      File dir=new File("D:/upload/kh10C/card");
       File target=new File(dir,String.valueOf(cardNo));
       byte[] data=FileUtils.readFileToByteArray(target);
       ByteArrayResource resource=new ByteArrayResource(data);

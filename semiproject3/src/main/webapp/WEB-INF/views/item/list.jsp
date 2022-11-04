@@ -34,7 +34,7 @@
 <%--			이미지   --%>
 <!-- 				<tr><td>  -->
 <%-- 					<c:forEach var="itemImageView" items="${itemImageList}"> --%>
-<%-- 							<img src="/image/download/${itemImageView.imageNo}" width="200" > --%>
+<%-- 							<img src="${pageContext.request.contextPath}/image/download/${itemImageView.imageNo}" width="200" > --%>
 <%-- 						</c:forEach> --%>
 <!-- 				</tr></td> -->
 			
