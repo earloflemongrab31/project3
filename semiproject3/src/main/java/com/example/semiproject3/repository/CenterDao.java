@@ -13,7 +13,7 @@ public interface CenterDao {
 	//등록
 	void insert(CenterDto centerDto);
 	
-	//목록 & 타입키워드 목록 -> 필요 없지 않나용?	
+	//목록 & 타입키워드
 	List<CenterDto> selectList();
 	List<CenterDto> selectList(String type, String keyword);
 
@@ -35,5 +35,7 @@ public interface CenterDao {
 	boolean delete(int centerNo);
 	
 	List<CenterDto> selectListForMain();
+
+	boolean updateMoney(String customerId);
 	
 }

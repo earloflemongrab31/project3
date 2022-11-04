@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.semiproject3.entity.CenterDto;
+import com.example.semiproject3.entity.CustomerDto;
 import com.example.semiproject3.vo.CenterListSearchVO;
 
 @Repository
@@ -34,6 +35,8 @@ public class CenterDaoImpl implements CenterDao {
 				centerDto.setAdminContent(rs.getString("admin_content"));
 				centerDto.setCustomerDate(rs.getDate("customer_date"));
 				centerDto.setAdminDate(rs.getDate("admin_date"));
+				centerDto.setCenterHead(rs.getString("center_head"));
+				centerDto.setMoneyConfirm(rs.getString("money_confirm"));
 				return centerDto;
 			}
 		};
@@ -54,6 +57,8 @@ public class CenterDaoImpl implements CenterDao {
 					centerDto.setAdminContent(rs.getString("admin_content"));
 					centerDto.setCustomerDate(rs.getDate("customer_date"));
 					centerDto.setAdminDate(rs.getDate("admin_date"));
+					centerDto.setCenterHead(rs.getString("center_head"));
+					centerDto.setMoneyConfirm(rs.getString("money_confirm"));
 					return centerDto;
 				}
 				else {
@@ -70,11 +75,12 @@ public class CenterDaoImpl implements CenterDao {
 					+ "customer_id,"
 					+ "center_title,"
 					+ "customer_content,"
-					+ "customer_date)"
-					+ "values (center_seq.nextval, ?, ?, ?, sysdate)";
+					+ "customer_date, "
+					+ "center_head)"
+					+ "values (center_seq.nextval, ?, ?, ?, sysdate, ?)";
 			Object[] param = {
-					centerDto.getCustomerId(),
-					centerDto.getCenterTitle(), centerDto.getCustomerContent()
+					centerDto.getCustomerId(), centerDto.getCenterTitle(), 
+					centerDto.getCustomerContent(), centerDto.getCenterHead()
 			};
 			jdbcTemplate.update(sql, param);
 			
@@ -205,5 +211,14 @@ public class CenterDaoImpl implements CenterDao {
 		CenterListSearchVO vo = new CenterListSearchVO();
 		return list(vo);
 	}
+
+
+
+	@Override
+	public boolean updateMoney(String customerId) {
+		String sql = "update center set money_confirm='Y' where customer_id=?";
+		return jdbcTemplate.update(sql, customerId) > 0;
+	}
+
 }
 	

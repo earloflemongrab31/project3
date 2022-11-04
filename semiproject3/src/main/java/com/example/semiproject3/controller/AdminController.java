@@ -167,7 +167,10 @@ public class AdminController {
 	}
 	
 	@GetMapping("/main")
-	public String main() {
+	public String main(
+			Model model) {
+		model.addAttribute("mainEditDto", mainEditDao.select());
+		model.addAttribute("pathList", mainImageDao.selectAll());
 		return "admin/mainEdit";
 	}
 	
@@ -234,6 +237,9 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
-	
+	@GetMapping("/survey")
+	public String survey() {
+		return "admin/survey";
+	}
 	
 }
