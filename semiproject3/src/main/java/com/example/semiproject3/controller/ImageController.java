@@ -28,7 +28,7 @@ public class ImageController {
 
 //	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
-//	화니꼬
+//	C드라이브용
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
 	private final File directory = new File("D:/study/itemImage");

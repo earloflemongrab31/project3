@@ -25,29 +25,15 @@ public class CustomerLikeController {
 	@Autowired
 	private CartDao cartDao;
 	
-//	@GetMapping("/list")
-//	public String list(Model model,HttpSession session) {
-//		String loginId = (String) session.getAttribute(SessionConstant.ID);
-//	//	System.out.println(loginId);
-//		
-//	
-//		model.addAttribute("list", customerLikeDao.selectList(loginId));
-//		  
-//		  return "customerLike/list";
-//		  
-
 	//페이징처리
 	@GetMapping("/list")
 	public String list(Model model,HttpSession session,
 			@ModelAttribute(name="vo") CustomerListSearchVO vo) {
 		
-//		int count = customerLikeDao.count(vo);
-//		vo.setCount(count);
-		
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
 		model.addAttribute("list",customerLikeDao.selectList(loginId));
-		//model.addAttribute("list",customerLikeDao.selectList(vo));
+
 		model.addAttribute("param",vo);
 		
 		//장바구니 개수
@@ -56,7 +42,5 @@ public class CustomerLikeController {
 		return "customerLike/list";
 		
 	}
-	
-	
 	
 }

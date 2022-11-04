@@ -24,12 +24,6 @@ public class CartController {
 	@Autowired
 	private CartDao cartDao;
 	
-	@Autowired
-	private ItemDao itemDao;
-	
-	@Autowired
-	private CustomerDao customerDao;
-	
 	//카트담기
 	@PostMapping("/insert")
 	public String insert(

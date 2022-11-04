@@ -146,18 +146,6 @@ public class BuyDaoImpl implements BuyDao {
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
-
-	//구매 목록 검색
-//	@Override
-//	public List<BuyDto> selectList(String loginId, String type, String keyword) {
-//		String sql = "select * from buy "
-//				+ "where instr(#1, ?) > 0 and customer_id=? "
-//				+ "order by buy_no desc";
-//		sql = sql.replace("#1", type);
-//		Object[] param = {keyword, loginId};
-//		return jdbcTemplate.query(sql, mapper, param);
-//	}
-	
 	//회원 구매 목록 페이징수
 	@Override
 	public int buyCount(BuyListSearchVO vo, String loginId) {
@@ -203,15 +191,6 @@ public class BuyDaoImpl implements BuyDao {
 		};
 		jdbcTemplate.update(sql,param);
 	}
-
-//	//구매 정보
-//	@Override
-//	public BuyDto selectOne(int buyNo) {
-//		String sql = "select * from buy where buy_no = ?";
-//		Object[] param = {buyNo};
-//		return jdbcTemplate.query(sql, extractor, param);
-//	}
-	
 
 	@Override
 	public BuyDto selectOne(int buyNo) {

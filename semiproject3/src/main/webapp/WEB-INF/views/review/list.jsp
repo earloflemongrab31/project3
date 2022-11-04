@@ -130,9 +130,7 @@ td, th {
 
 </div>
 
-
-
-
+</div>
 
 </section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

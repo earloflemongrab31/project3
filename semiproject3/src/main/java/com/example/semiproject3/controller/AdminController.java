@@ -92,7 +92,6 @@ public class AdminController {
 		int count = adminDao.count(vo);
 		vo.setCount(count);
 		
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("list",adminDao.selectList());
 		return "admin/list";
 	}

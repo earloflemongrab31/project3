@@ -114,8 +114,8 @@ $(function(){
 	</div>
 
 </div>
-    </form>
 </section>
+   </form>
 
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>
     

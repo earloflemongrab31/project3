@@ -48,9 +48,9 @@
 
 <!-- jQuery -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<script src="http://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-3.6.1.js"></script> -->
 <!-- 배포 시 min 버전으로 -->
-<!-- <script src="http://code.jquery.com/jquery-3.6.1.min.js"></script> -->
+<script src="http://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
 <!-- summernote 라이브러리 -->
@@ -280,14 +280,12 @@
         
         //항목에 체크가 되어야 다음 버튼 활성화
         $("input").on("input", function(){
-            // console.log($(this).parent().parent().next().find(".next"));
             if($(this).prop("checked")){
                 $(this).parent().parent().next().find(".next").attr("disabled", false);
             }
         });
         
         $("textarea").on("input", function(){
-            // console.log($(this).val().length);
             if($(this).val().length >= 10){
                 $(this).parent().next().find(".next").attr("disabled", false);
             }
@@ -470,7 +468,6 @@
 	
 	        $(".input-option").val("");
 	        selectedOption.push(color+"-"+size);
-			console.log(selectedOption);
         });
 	});
     
@@ -514,15 +511,17 @@
 	
 	$(function(){
 		$("input[name=usePoint]").on("blur",function(){
-			var usePoint = $(this).val();//회원이 입력한 포인트
-			var customerPoint = $(this).attr("max");//회원이 가지고 있는 포인트
+			var usePoint = parseInt($(this).val());//회원이 입력한 포인트
+			var customerPoint = parseInt($(this).attr("max"));//회원이 가지고 있는 포인트
 			var totalPay = parseInt($("#except-delivery").text());//상품 전체 총 금액
-			var payMoney = totalPay - usePoint + 3000;//총 결제 금액
-			
+			var payMoney = totalPay + 3000;//배송비 포함 결제 금액
+			console.log(usePoint);
+			console.log(customerPoint);
+			console.log(totalPay);
+			console.log(payMoney);
 			var overPoint1 = customerPoint > payMoney && usePoint > payMoney//총 금액보다 포인트를 더 작성했을 때
-			var overPoint2 = customerPoint < payMoney && usePoint < customerPoint//회원이 가지고있는 포인트보다 더 작성했을 때
-			
-			
+			var overPoint2 = customerPoint < payMoney && usePoint > customerPoint//회원이 가지고있는 포인트보다 더 작성했을 때
+
 			if(usePoint < 0 || !usePoint){
 				$(this).val(0);
 				$("#use-point").text("0");
@@ -530,14 +529,14 @@
 				return;
 			}
 			if(overPoint1 || overPoint2){
-				$(this).val(0);
-				$("#use-point").text("0");
-				$("#total-price").text(totalPay+3000);
 				alert("보유하신 포인트 또는 총 결제 금액보다 많은 수를 입력할 수 없습니다.");
+				$(this).val("0");
+				$("#use-point").text("0");
+				$("#total-price").text(payMoney);
 				return;
 			}
 			$("#use-point").text(usePoint);
-			$("#total-price").text(payMoney);
+			$("#total-price").text(payMoney-usePoint);
 		});
 	});
 	
@@ -556,7 +555,7 @@
 <header>
 <c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자' && blockAd != 'Y'}">
 	<div class="float-container ad">
-		&emsp;&emsp;"쇼핑몰명 앱" 설치 시 <span style="color:orange;">5,000point 지급!</span> 지금 바로 앱스토어에서 다운 받기
+		&emsp;&emsp;"SeSam 앱" 설치 시 <span style="color:orange;">5,000point 지급!</span> 지금 바로 앱스토어에서 다운 받기
 		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
 			<img src="/image/googleplay.png">
 		</a>

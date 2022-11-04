@@ -20,7 +20,7 @@
    
    
    
-<div class="row left">
+	<div class="row left">
 		<c:choose>
 			<c:when test="${list.isEmpty()}">
 				<h4 style="padding-left:20px">
@@ -66,7 +66,7 @@
       <input type="button"  class="btn btn-positive" onclick="upGo()"; value="기본배송지등록" />
    </div>
 
-</div>
+	</div>
 
 <!-- 페이징 처리 -->
 <ul class="pagination">
@@ -128,6 +128,7 @@
 	</c:choose>
 </li>
 </ul>	
+</div>
 
 </section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

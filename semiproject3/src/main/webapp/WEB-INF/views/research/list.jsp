@@ -14,7 +14,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -62,7 +61,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -110,7 +108,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -157,7 +154,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -204,7 +200,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -251,7 +246,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];

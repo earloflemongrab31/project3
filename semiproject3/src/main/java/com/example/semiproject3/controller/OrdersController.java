@@ -37,9 +37,6 @@ public class OrdersController {
 	private CustomerDao customerDao;
 	
 	@Autowired
-	private ItemDao itemDao;
-	
-	@Autowired
 	private CartDao cartDao;
 	
 	

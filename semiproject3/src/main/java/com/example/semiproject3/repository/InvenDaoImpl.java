@@ -62,25 +62,7 @@ public class InvenDaoImpl implements InvenDao{
 		String sql= "select * from inven order by inven_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
-	
-//	@Override
-//	public void plus(int quantity, int itemNo) {
-//		String sql= "update item set item_total_cnt = item_total_cnt + ? where item_no=?";
-//		Object[] param= {
-//				quantity,
-//				itemNo
-//		};
-//		jdbcTemplate.update(sql,param);
-//	}
-//	@Override
-//	public void minus(int quantity, int itemNo) {
-//		String sql= "update item set item_total_cnt = item_total_cnt - ? where item_no=?";
-//		Object[] param= {
-//				quantity,
-//				itemNo
-//		};
-//		jdbcTemplate.update(sql,param);
-//	}
+
 	@Override
 	public void invenIn(int quantity,int itemNo) {
 		String sql= "update item set inven_in=inven_in+? where item_no=?";

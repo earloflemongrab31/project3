@@ -19,7 +19,7 @@
 	
 	$(function(){
 		$(".btn-buy").click(function(){
-			var customerMoney = $("input[name=customerMoney]").val();
+			var customerMoney = parseInt($("input[name=customerMoney]").val());
 			var totalPrice = parseInt($("#total-price").text());
 
 			if(customerMoney >= totalPrice){

@@ -98,12 +98,6 @@ function upGo(){
             <tbody align="center">
                <c:forEach var="addressDto" items="${listBasic}" varStatus="status">
                   <tr>
-<!--                   <th width="25%">상세주소</tr> -->
-<!--                </thead> -->
-
-<!--                <tbody align="center"> -->
-<%--                      <c:forEach var="addressDto" items="${listBaisc}"> --%>
-<!--                      <tr> -->
                      <td>${status.count}</td>
                      <td>${addressDto.addressName}</td>
                      <td>${addressDto.addressPost}</td>

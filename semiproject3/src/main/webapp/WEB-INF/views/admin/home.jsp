@@ -15,7 +15,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -25,8 +24,6 @@
 					values.push(resp[i].cnt);
 
 				}
-				//             console.log(labels);
-				//             console.log(values);
 				// labels 와 values 를 사용해서 차트를 생성
 				const ctx = document.querySelector('#myChart');
 				const myChart = new Chart(ctx, {
@@ -68,7 +65,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -78,8 +74,6 @@
 					values.push(resp[i].cnt);
 
 				}
-				//             console.log(labels);
-				//             console.log(values);
 				// labels 와 values 를 사용해서 차트를 생성
 				const ctx = document.querySelector('#myChart1');
 				const myChart = new Chart(ctx, {
@@ -120,7 +114,6 @@
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -130,8 +123,6 @@
 					values.push(resp[i].cnt);
 
 				}
-				//             console.log(labels);
-				//             console.log(values);
 				// labels 와 values 를 사용해서 차트를 생성
 				const ctx = document.querySelector('#myChart2');
 				const myChart = new Chart(ctx, {
