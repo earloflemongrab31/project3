@@ -52,24 +52,6 @@
 </table>
 </div>
 			
-	</div>
-	
-
-<!-- 검색창 -->
-<form action = "reportList" method="get" >
-	<div class="row center">
-		<input type="hidden" name="size" value="${vo.size}">
-		<select class="input" name="type" required>
-		<option value="report_no" selected <c:if test="${vo.type == 'report_no'}"></c:if>>번호</option>
-		<option value="who" selected <c:if test="${vo.type == 'who'}"></c:if>>신고자아이디</option>
-		</select>
-
-		<input class="input" name="keyword" type="search" placeholder="검색어" required="required" value="${param.keyword}">
-		<button class="btn btn-positive">검색</button>
-	</div>
-	
-</form>
-	
 <!-- 페이징 처리 -->
 <ul class="pagination">
 <li>
@@ -131,8 +113,20 @@
 </li>
 </ul>		
     
+
+<!-- 검색창 -->
+<form action = "reportList" method="get" >
+	<div class="row center">
+		<input type="hidden" name="size" value="${vo.size}">
+		<select class="input" name="type" required>
+		<option value="report_no" selected <c:if test="${vo.type == 'report_no'}"></c:if>>번호</option>
+		<option value="who" selected <c:if test="${vo.type == 'who'}"></c:if>>신고자아이디</option>
+		</select>
+
+		<input class="input" name="keyword" type="search" placeholder="검색어" required="required" value="${param.keyword}">
+		<button class="btn btn-positive">검색</button>
+	</div>    
+</form>
     
-    
-    
-    
+</div> 
   <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>  

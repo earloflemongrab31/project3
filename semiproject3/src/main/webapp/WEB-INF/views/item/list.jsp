@@ -59,7 +59,7 @@
 		<a class="btn btn-positive" href="insert">상품등록</a>
 	</div>
 	
-</div>
+
 	
 <!-- 페이지 네비게이터 -->
 <div class="row center">
@@ -139,5 +139,5 @@
 
 </div>	
 
-
+</div>
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

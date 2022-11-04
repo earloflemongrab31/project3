@@ -12,7 +12,7 @@
 	<div class="flexbox">
 		<div class="w-100">
 			<div class="row">사업장 번호 : 111-22-33333</div>
-			<div class="row">위치 : 서울특별시 영등포구 선유동2로 57 이레빌딩 19층 C강의장</div>
+			<div class="row"><a href="/map/mapList" class="footer-underline">위치 : 서울특별시 영등포구 선유동2로 57 이레빌딩 19층 C강의장</a></div>
 			<div class="row">대표 번호 : 02)444-5555 / 010)6666-7777</div>
 		</div>
 	</div>
