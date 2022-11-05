@@ -19,7 +19,7 @@
 			<c:if test="${itemDto.imageMain == 1}">
 					<div class="row float-left w-33">
 						<a href="buydetail?itemNo=${itemDto.itemNo}">
-							<img src="/image/download/${itemDto.imageNo}" style="width:320px; height: 430px;">
+							<img src="${pageContext.request.contextPath}/image/download/${itemDto.imageNo}" style="width:320px; height: 430px;">
 						</a>
 						<c:choose>
 							<c:when test="${itemDto.itemTotalCnt == 0}">

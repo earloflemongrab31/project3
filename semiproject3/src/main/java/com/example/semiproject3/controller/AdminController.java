@@ -92,7 +92,6 @@ public class AdminController {
 		int count = adminDao.count(vo);
 		vo.setCount(count);
 		
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("list",adminDao.selectList());
 		return "admin/list";
 	}
@@ -219,7 +218,8 @@ public class AdminController {
 						.imageMain("0")
 				.build());
 				
-				File dir = new File("D:/study/main");
+				File dir = new File("D:/upload/kh10C/main");
+//				File dir = new File("D:/study/main");
 //					맥북용
 //				File dir = new File(System.getProperty("user.home")+"/upload/main");
 				dir.mkdirs();

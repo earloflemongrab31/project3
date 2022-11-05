@@ -11,11 +11,10 @@
 <script type="text/javascript">
 	$(function() {
 		$.ajax({
-			url : "//localhost:8888/rest/buy/count",
+			url : "${pageContext.request.contextPath}/rest/buy/count",
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -25,8 +24,6 @@
 					values.push(resp[i].cnt);
 
 				}
-				//             console.log(labels);
-				//             console.log(values);
 				// labels 와 values 를 사용해서 차트를 생성
 				const ctx = document.querySelector('#myChart');
 				const myChart = new Chart(ctx, {
@@ -64,11 +61,10 @@
 		})
 		
 			$.ajax({
-			url : "//localhost:8888/rest/like/count",
+			url : "${pageContext.request.contextPath}/rest/like/count",
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -78,8 +74,6 @@
 					values.push(resp[i].cnt);
 
 				}
-				//             console.log(labels);
-				//             console.log(values);
 				// labels 와 values 를 사용해서 차트를 생성
 				const ctx = document.querySelector('#myChart1');
 				const myChart = new Chart(ctx, {
@@ -116,11 +110,10 @@
 			},
 		})
 		$.ajax({
-			url : "//localhost:8888/rest/customer/count",
+			url : "${pageContext.request.contextPath}/rest/customer/count",
 			method : "get",
 			dataType : "json", // 서버에서 돌아오리라 믿고 있는 타입
 			success : function(resp) {
-				// console.log(resp);
 				// 비어있는 배열 2개를 만들고 resp 의 데이터를 분산 저장
 				var labels = [];
 				var values = [];
@@ -130,8 +123,6 @@
 					values.push(resp[i].cnt);
 
 				}
-				//             console.log(labels);
-				//             console.log(values);
 				// labels 와 values 를 사용해서 차트를 생성
 				const ctx = document.querySelector('#myChart2');
 				const myChart = new Chart(ctx, {
@@ -205,7 +196,7 @@
 			<div class="row center">
 			<h3>가입목록</h3>
 				<hr>
-				<small><a class="btn"  href="//localhost:8888/customer/list">[더보기]</a></small>
+				<small><a class="btn"  href="${pageContext.request.contextPath}/customer/list">[더보기]</a></small>
 			</div>
 			<div class="row">
 				<table class="table table-border">
@@ -235,7 +226,7 @@
 			<div class="row center">
 			<h3>NOTICE</h3>
 				<hr>
-				<small><a class="btn"  href="//localhost:8888/notice/list">[더보기]</a></small>
+				<small><a class="btn"  href="${pageContext.request.contextPath}/notice/list">[더보기]</a></small>
 			</div>
 			<div class="row">
 				<table class="table table-border">
@@ -252,7 +243,7 @@
 							<tr>
 								<td>${noticeDto.noticeNo}</td>
 								<td>
-									<a href="//localhost:8888/notice/detail?noticeNo=${noticeDto.noticeNo}">
+									<a href="${pageContext.request.contextPath}/notice/detail?noticeNo=${noticeDto.noticeNo}">
 										${noticeDto.noticeTitle}
 									</a>
 								</td>		
@@ -283,7 +274,7 @@
 			<div class="row center">
 			<h3>Q&A</h3>
 				<hr>
-				<small><a class="btn"  href="//localhost:8888/center/list">[더보기]</a></small>
+				<small><a class="btn"  href="${pageContext.request.contextPath}/center/list">[더보기]</a></small>
 			</div>
 			<div class="row">
 				<table class="table table-border">
@@ -300,7 +291,7 @@
 							<tr>
 								<td>${centerDto.centerNo}</td>
 								<td>
-									<a href="//localhost:8888/center/detail?centerNo=${centerDto.centerNo}">
+									<a href="${pageContext.request.contextPath}/center/detail?centerNo=${centerDto.centerNo}">
 									${centerDto.centerTitle}
 									<c:if test="${centerDto.adminContent != null}">
 										[답변완료]

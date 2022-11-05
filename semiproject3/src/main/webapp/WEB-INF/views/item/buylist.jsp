@@ -20,7 +20,7 @@
 				<h1>상품 준비 중입니다.</h1>
 			</div>
 			<div class="row center">
-				<a href="/" class="btn btn-neutral">메인페이지 이동 <i class="fa-solid fa-arrow-right"></i></a>
+				<a href="${pageContext.request.contextPath}/" class="btn btn-neutral">메인페이지 이동 <i class="fa-solid fa-arrow-right"></i></a>
 			</div>
 		</c:when>
 		<c:otherwise>
@@ -31,7 +31,7 @@
 				<c:if test="${itemDto.imageMain == 1}">
 					<div class="row float-left w-33">
 						<a href="buydetail?itemNo=${itemDto.itemNo}">
-							<img src="/image/download/${itemDto.imageNo}" style="width:320px; height: 430px;">
+							<img src="${pageContext.request.contextPath}/image/download/${itemDto.imageNo}" style="width:320px; height: 430px;">
 						</a>
 						<c:choose>
 							<c:when test="${itemDto.itemTotalCnt == 0}">

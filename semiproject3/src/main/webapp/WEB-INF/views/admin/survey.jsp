@@ -35,7 +35,7 @@
     	<button type="button" class="btn btn-neutral btn-preview">미리보기</button>
     </div>
    	<div class="w-100 center" id="popup-preview">
-   		<img class="w-50 hide" src="/image/survey.png">
+   		<img class="w-50 hide" src="${pageContext.request.contextPath}/image/survey.png">
    	</div>
     <div class="row center">
     	<button type="button" class="btn btn-positive">수정하기</button>

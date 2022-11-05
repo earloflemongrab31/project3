@@ -14,7 +14,7 @@
 			var itemPrice = $(this).parent("td").find("input[name=itemPrice]").val();
 			var that = $(this);
 			$.ajax({
-				url: "//localhost:8888/rest/cart/",
+				url: "${pageContext.request.contextPath}/rest/cart/",
 				method: "post",
 				data: {
 					itemCnt: itemCnt,
@@ -45,15 +45,15 @@
 <div class="row center">
 		장바구니 상품(${cartCount})
 </div>
-<form action="/orders/cart-buy" method="post">
+<form action="${pageContext.request.contextPath}/orders/cart-buy" method="post">
 <table class="table table-border" >
  	<tbody>
  	<c:forEach var="cartDto" items="${cartList}">
  		<c:if test="${cartDto.imageMain == 1}">
 	 		<tr>
 		 		<td class="center" rowspan="3" style="vertical-align: bottom;">
-		 			<a href="/item/buydetail?itemNo=${cartDto.itemNo}">
-		 				<img src="/image/download/${cartDto.imageNo}" width="100">
+		 			<a href="${pageContext.request.contextPath}/item/buydetail?itemNo=${cartDto.itemNo}">
+		 				<img src="${pageContext.request.contextPath}/image/download/${cartDto.imageNo}" width="100">
 		 				<input type="hidden" name="imageNo" value="${cartDto.imageNo}">
 		 			</a>
 		 		</td>
@@ -112,7 +112,7 @@
 		<h3>장바구니에 담긴 상품이 없습니다.</h3>
 	</div>
 	<div class="row center mt-30">
-		<a href="/" class="btn btn-positive">쇼핑하러 가기</a>
+		<a href="${pageContext.request.contextPath}/" class="btn btn-positive">쇼핑하러 가기</a>
 	</div>
 </c:otherwise>
 </c:choose>

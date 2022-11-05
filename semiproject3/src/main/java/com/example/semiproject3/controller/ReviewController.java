@@ -88,7 +88,8 @@ public class ReviewController {
 							.imageSize(file.getSize())
 							.build());
 					//파일저장
-					File dir=new File("D:/upload/reviewImage");
+//					File dir=new File("D:/upload/reviewImage");
+					File dir=new File("D:/upload/kh10C/reviewImage");
 					dir.mkdirs();
 					File target = new File(dir,String.valueOf(imageNo));
 					file.transferTo(target);
@@ -181,21 +182,6 @@ public class ReviewController {
 		return "redirect:/item/buydetail?itemNo="+itemNo;
 	}
 	
-//	//신고목록
-//	@GetMapping("/reportList")
-//	public String reportList(Model model, 
-//					@RequestParam(required = false) String type,
-//					@RequestParam(required = false) String keyword) {
-//		boolean isSearch = type != null && keyword != null;
-//		if(isSearch) { // 검색
-//			model.addAttribute("reportList", reportDao.selectList(type, keyword));
-//		}
-//		else { //목록
-//			model.addAttribute("reportList", reportDao.selectList());
-//		}
-//		return "review/reportList";
-//		
-		
 	//신고목록 페이징 처리
 	@GetMapping("/reportList")
 	public String reportList(Model model,
@@ -235,22 +221,6 @@ public class ReviewController {
       model.addAttribute("param",vo);
       return "review/list"; 
   }
-	
-	
-	
-//	@GetMapping("/list")
-//	public String list(Model model, HttpSession session,
-//			@ModelAttribute(name="vo") ReviewListSearchVO vo) {
-//		
-//		String loginId = (String) session.getAttribute(SessionConstant.ID);
-//		
-//		model.addAttribute("list",reviewDao.customerSelectList(loginId,vo));
-//		model.addAttribute("cartCount",cartDao.cartCount(loginId));
-//		model.addAttribute("param",vo);
-//		return "review/list";
-//	}
-	
-
 	
 	@GetMapping("/delete")
 	public String delete(

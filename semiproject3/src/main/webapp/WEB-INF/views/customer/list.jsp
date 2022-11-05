@@ -106,8 +106,6 @@
 
 </div>	
 
-</div>
-
 <!-- 검색창 -->
 <form action = "list" method="get" >
 	<div class="row center">
@@ -122,6 +120,6 @@
 	</div>
 </form>
 
+</div>
+
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
-
-

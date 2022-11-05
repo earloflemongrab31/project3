@@ -8,8 +8,8 @@
 </jsp:include>
 
 
-<script src="/confirm-link.js"></script> 
-<script src="/checkbox.js"></script> 
+<script src="${pageContext.request.contextPath}/confirm-link.js"></script> 
+<script src="${pageContext.request.contextPath}/checkbox.js"></script> 
 <script type="text/javascript">
 function upGo(){
 	   var checkboxValues = [];
@@ -98,12 +98,6 @@ function upGo(){
             <tbody align="center">
                <c:forEach var="addressDto" items="${listBasic}" varStatus="status">
                   <tr>
-<!--                   <th width="25%">상세주소</tr> -->
-<!--                </thead> -->
-
-<!--                <tbody align="center"> -->
-<%--                      <c:forEach var="addressDto" items="${listBaisc}"> --%>
-<!--                      <tr> -->
                      <td>${status.count}</td>
                      <td>${addressDto.addressName}</td>
                      <td>${addressDto.addressPost}</td>

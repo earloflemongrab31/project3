@@ -36,7 +36,7 @@
 	        if(judge){
 	            var that = this;
 	            $.ajax({
-	                url: "//localhost:8888/rest/customer/id",
+	                url: "${pageContext.request.contextPath}/rest/customer/id",
 	                method: "post",
 	                data: {
 	                    inputId: inputId
@@ -96,6 +96,7 @@
 	    });
 	    $(".input[name=customerNick]").blur(function(){
 	        var inputNick = $(this).val();
+	        console.log(inputNick);
 	        var regex = /^[가-힣][가-힣0-9]{0,9}$/;
 	        var judge = regex.test(inputNick);
 	        $(this).removeClass("fail NNNNN NNNNY admin");
@@ -107,7 +108,7 @@
 	        if(judge){
 	            var that = this;
 	            $.ajax({
-	                url: "//localhost:8888/rest/customer/nick",
+	                url: "${pageContext.request.contextPath}/rest/customer/nick",
 	                method: "post",
 	                data: {
 	                    inputNick: inputNick

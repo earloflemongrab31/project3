@@ -93,7 +93,7 @@
 	 <div class="float-container">
  		<c:if test="${centerDto.centerHead == '소지금' && loginGrade.contains('관리자') && centerDto.moneyConfirm == 'N'}">
 			<div class="float-left">
-				<a class="btn btn-neutral left" href="/customer/edit?customerId=${centerDto.customerId}">충전하기</a>
+				<a class="btn btn-neutral left" href="${pageContext.request.contextPath}/customer/edit?customerId=${centerDto.customerId}">충전하기</a>
 			</div>
 		</c:if>
 		<div class="float-right">

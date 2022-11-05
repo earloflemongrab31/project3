@@ -37,19 +37,11 @@ public class OrdersDaoImpl implements OrdersDao {
 					.ordersNo(rs.getInt("orders_no"))
 					.customerId(rs.getString("customer_id"))
 					.itemNo(rs.getInt("item_no"))
-//					.addressName(rs.getString("address_name"))
-//					.addressPhone(rs.getString("address_phone"))
-//					.addressPost(rs.getString("address_post"))
-//					.addressHost(rs.getString("address_host"))
-//					.addressDetailHost(rs.getString("address_detail_host"))
-//					.payMoney(rs.getInt("pay_money"))
-//					.imageNo(rs.getInt("image_no"))
 					.itemName(rs.getString("item_name"))
 					.itemPrice(rs.getInt("item_price"))
 					.itemColor(rs.getString("item_color"))
 					.itemSize(rs.getString("item_size"))
 					.itemCnt(rs.getInt("item_cnt"))
-//					.ordersTime(rs.getDate("orders_time"))
 					.imageNo(rs.getInt("image_no"))
 				.build();
 		}
@@ -57,14 +49,6 @@ public class OrdersDaoImpl implements OrdersDao {
 			return null;
 		}
 	};
-	
-	
-
-	@Override
-	public List<OrdersDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	//주문 목록에 담기
 	@Override
@@ -109,49 +93,6 @@ public class OrdersDaoImpl implements OrdersDao {
 		String sql = "delete orders where orders_no=?";
 		Object[] param = {ordersNo};
 		jdbcTemplate.update(sql, param);
-	}
-
-//	@Override
-//	public boolean update(OrdersDto ordersDto) {
-//		String sql = "update orders set "
-//						+ "address_name,"
-//						+ "address_phone,"
-//						+ "address_post,"
-//						+ "address_host,"
-//						+ "address_detail_host,"
-//						+ "pay_money,"
-//						+ "delivery_fee,"
-//						+ "image_no,"
-//					+ "orders_time) values(?,?,?,?,?,?,3000,?,sysdate)";
-//		Object[] param = {
-//				ordersDto.getAddressName(),
-//				ordersDto.getAddressPhone(),
-//				ordersDto.getAddressPost(),
-//				ordersDto.getAddressHost(),
-//				ordersDto.getAddressDetailHost(),
-//				ordersDto.getPayMoney(),
-//				ordersDto.getImageNo()
-//		};
-//				
-//		return jdbcTemplate.update(sql, param) > 0;
-//	}
-
-	@Override
-	public boolean check(OrdersDto ordersDto) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public List<OrdersDto> selectList(String type, String keyword) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int selectOrders(int ordersNo) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -246,12 +187,6 @@ public class OrdersDaoImpl implements OrdersDao {
 	public int listCount(OrdersListSearchVO vo) {
 		String sql = "select count(*) from orders";
 		return jdbcTemplate.queryForObject(sql, int.class);
-	}
-
-	@Override
-	public OrdersDto selectOne2(int itemCnt) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

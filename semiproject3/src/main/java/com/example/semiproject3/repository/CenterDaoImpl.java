@@ -84,7 +84,6 @@ public class CenterDaoImpl implements CenterDao {
 			};
 			jdbcTemplate.update(sql, param);
 			
-			System.out.println(centerDto);
 		}	
 
 		

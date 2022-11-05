@@ -34,7 +34,7 @@
 <%--			이미지   --%>
 <!-- 				<tr><td>  -->
 <%-- 					<c:forEach var="itemImageView" items="${itemImageList}"> --%>
-<%-- 							<img src="/image/download/${itemImageView.imageNo}" width="200" > --%>
+<%-- 							<img src="${pageContext.request.contextPath}/image/download/${itemImageView.imageNo}" width="200" > --%>
 <%-- 						</c:forEach> --%>
 <!-- 				</tr></td> -->
 			
@@ -59,7 +59,7 @@
 		<a class="btn btn-positive" href="insert">상품등록</a>
 	</div>
 	
-</div>
+
 	
 <!-- 페이지 네비게이터 -->
 <div class="row center">
@@ -139,5 +139,5 @@
 
 </div>	
 
-
+</div>
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

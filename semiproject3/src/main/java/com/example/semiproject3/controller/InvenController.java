@@ -27,7 +27,6 @@ public class InvenController {
 	private ItemDao itemDao;
 	
 	@Autowired
-	
 	private InvenDao invenDao;
 	
 	@Autowired
@@ -35,22 +34,6 @@ public class InvenController {
 
 	@Autowired
 	private ItemCntDao itemCntDao;
-	
-//	@GetMapping("/itemList")
-//	public String itemList(
-//			Model model,
-//			@RequestParam(required = false) String type,
-//			@RequestParam(required = false) String keyword) {
-//			boolean isSearch = type != null && keyword != null;
-//			if(isSearch) {//검색
-//				model.addAttribute("itemList", itemDao.selectList(type, keyword));
-//				}
-//			else {//목록
-//				model.addAttribute("itemList", itemDao.selectList());
-//				}
-//		return "warehouse/itemList";
-//	}
-	
 	
 	//전체 상품 현황 리스트
 	@GetMapping("/itemList")

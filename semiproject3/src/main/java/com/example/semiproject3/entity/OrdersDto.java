@@ -17,12 +17,4 @@ public class OrdersDto {
 	private String itemSize;
 	private int itemCnt;
 	private int imageNo;
-
-//	private int payMoney;
-//	private Date ordersTime;
-//	private String addressName;
-//	private String addressPhone;
-//	private String addressPost;
-//	private String addressHost;
-//	private String addressDetailHost;
 }

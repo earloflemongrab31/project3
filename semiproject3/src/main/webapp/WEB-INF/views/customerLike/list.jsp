@@ -36,7 +36,7 @@
 								<td>${customerLikeDto.itemNo}</td>
 								<td>${customerLikeDto.likeTime}</td>
 								<td>
-									<a class="btn btn-border" href="//localhost:8888/item/buydetail?itemNo=${customerLikeDto.itemNo}">
+									<a class="btn btn-border" href="${pageContext.request.contextPath}/item/buydetail?itemNo=${customerLikeDto.itemNo}">
 										확인
 									</a>
 								</td>
