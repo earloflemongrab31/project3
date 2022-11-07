@@ -22,9 +22,17 @@
 	<table class="table">
 		<tbody>
 			<tr>
-				<td>제목</td>
-			</tr>
+				<td>말머리</td>
+				<td>
+				<select class="input input-none" name="centerHead">
+					<option value="">선택</option>
+					<option disabled>------</option>
+					<option value="소지금">소지금</option>
+					<option value="기타">기타</option>
+				</select>
+			</td>
 			<tr>
+				<td>제목</td>
 				<td>
 					<input name="centerTitle" type="text" required
 						class="input mt-10 w-100" autocomplete="off">
@@ -34,7 +42,7 @@
 				<td>내용</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2">
 					<textarea class="content" name="customerContent" required></textarea>
 				</td>
 			</tr>

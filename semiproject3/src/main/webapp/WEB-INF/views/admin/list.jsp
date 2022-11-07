@@ -51,7 +51,7 @@
 			</div>
 		</c:if>
 	</div>
-</div>
+
 	
 <!-- 페이징 처리 -->
 <ul class="pagination">
@@ -112,7 +112,8 @@
 		</c:otherwise>
 	</c:choose>
 </li>
-</ul>	
+</ul>
+</div>	
 	
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
 

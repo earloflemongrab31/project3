@@ -87,7 +87,7 @@ div.logo{
 }
 
 /* 
-    어차피 정렬은 left, centet, right밖에 없다.
+    어차피 정렬은 left, center, right밖에 없다.
 */
 .left{text-align: left;}
 .center{text-align: center;}
@@ -491,7 +491,6 @@ ul.pagination > li > a{
     left: 0;
     display: none;
     width: 100%;
-    padding: 0.5em 0;
     background-color: rgba(255, 255, 255, 0.9);
 }
 .dropdown-menu li:hover > ul{

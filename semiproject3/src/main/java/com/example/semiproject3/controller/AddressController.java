@@ -31,9 +31,6 @@ public class AddressController {
 	private AddressDao addressDao;
    
 	@Autowired
-	private CustomerDao customerDao;
-	
-	@Autowired
 	private CartDao cartDao;
    
    //등록
@@ -58,28 +55,6 @@ public class AddressController {
       return "redirect:list";
    }
    
-//   //목록
-//   @GetMapping("/list")
-//   public String list(Model model, HttpSession session,
-//               @RequestParam(required = false) String type,
-//               @RequestParam(required = false) String keyword) {
-//
-//		  String loginId = (String) session.getAttribute(SessionConstant.ID);
-//
-//	      boolean isSearch = type != null && keyword != null;
-//	      if(isSearch) { // 검색
-//	         model.addAttribute("list", addressDao.selectList(type, keyword));
-//	      }
-//	      else { //목록
-//	         model.addAttribute("list", addressDao.selectList(loginId));
-//	      }
-//      
-//	      List<AddressDto>listBasic=addressDao.selectOneBasic(loginId);
-//	      model.addAttribute("listBasic", listBasic);
-//  	
-//	      return "address/list";
-//   }
-  
    //목록 페이징 처리
    @GetMapping("/list")
    public String list(Model model,HttpSession session,

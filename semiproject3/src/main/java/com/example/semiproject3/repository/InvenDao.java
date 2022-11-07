@@ -13,11 +13,6 @@ public interface InvenDao {
 	//전체선택
 	List<InvenDto> selectList();
 	
-	//입고완료 상태일때만 아이템 총수량 업데이트 (아이템 컨트롤러 총수량으로 넘김)
-//	void plus(int quantity, int itemNo);
-	//출고완료 상태일때만 아이템 총수량 업데이트 (아이템 컨트롤러 총수량으로 넘김)
-//	void minus(int quantity, int itemNo);
-	
 	//총입고수량
 	void invenIn(int quantity,int itemNo);
 	//총출고수량

@@ -9,10 +9,9 @@
 	    $(".btn-check-pw").click(function(){
 	        var inputPw = $(".input[name=checkPw]").val();
 	        var loginId = $("input[name=loginId]").val();
-	        //console.log(inputPw);
 	        
 	        $.ajax({
-	            url: "//localhost:8888/rest/customer/pw",
+	            url: "${pageContext.request.contextPath}/rest/customer/pw",
 	            method:"post",
 	            data:{
 	                inputPw: inputPw,

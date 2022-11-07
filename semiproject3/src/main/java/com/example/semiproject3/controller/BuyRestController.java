@@ -20,5 +20,5 @@ public class BuyRestController {
 	@GetMapping("/count")
 	public List<BuyListCountVO> count(){
 		return buyDao.selectCountList();
-}
+	}
 }
