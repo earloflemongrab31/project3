@@ -39,17 +39,17 @@
 					<option disabled>------</option>
 					<c:choose>
 						<c:when test="${noticeDto.noticeHead == '긴급'}">
-				            <option value="">공지</option>
+				            <option value="공지">공지</option>
 							<option selected value="긴급">긴급</option>
 				            <option value="이벤트">이벤트</option>
 			            </c:when>
 						<c:when test="${noticeDto.noticeHead == '이벤트'}">
-				            <option value="">공지</option>
+				            <option value="공지">공지</option>
 							<option value="긴급">긴급</option>
 				            <option selected value="이벤트">이벤트</option>
 			            </c:when>
 			        	<c:otherwise>
-				            <option selected value="">공지</option>
+				            <option selected value="공지">공지</option>
 							<option value="긴급">긴급</option>
 				            <option	value="이벤트">이벤트</option>
 			        	</c:otherwise>
