@@ -9,17 +9,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.example.semiproject3.constant.SessionConstant;
 
-//인터셉터(Interceptor)
-//- 서버의 처리 과정에 개입해서 원하는 방향의 작업을 추가하는 도구
-//- 간섭 객체
-//- 특정 인터페이스를 상속받아서 자격을 획득한다(HandlerInterceptor)
-//- 간섭 시점에 따라 원하는 메소드를 재정의하여 사용
-//		- 작업 시작 전(preHandle)
-//		- 작업 중(postHandle)
-//		- 작업 종료 후(afterCompletion)
-
-//이 클래스의 목적은 회원이 아닌 존재가 회원 기능에 접근하는 것을 차단하는 것
-
 @Component
 public class CustomerInterceptor implements HandlerInterceptor{
 
@@ -47,7 +36,7 @@ public class CustomerInterceptor implements HandlerInterceptor{
 			//선택지는 2가지가 있다
 			
 			//[1] 로그인 페이지로 리다이렉트
-			response.sendRedirect("/customer/login");
+			response.sendRedirect(request.getContextPath()+"/customer/login");
 			
 			//[2] HTTP 상태 코드 중에서 미인증(401)을 반환
 			//- 추가로 상태번호에 따른 처리가 필요하다

@@ -46,9 +46,6 @@ public class NoticeController {
 		String adminId = (String) session.getAttribute(SessionConstant.ID);
 		noticeDto.setAdminId(adminId);
 		
-//		noticeDao.insert(noticeDto);
-//		return "redirect:list";
-		
 		int noticeNo = noticeDao.insert2(noticeDto);
 		attr.addAttribute("noticeNo",noticeNo);
 		return "redirect:detail";

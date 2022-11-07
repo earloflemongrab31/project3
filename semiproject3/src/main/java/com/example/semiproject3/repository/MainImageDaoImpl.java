@@ -31,19 +31,6 @@ public class MainImageDaoImpl implements MainImageDao{
 				.build();
 	};
 	
-//	private ResultSetExtractor<MainImageDto> extractor = (rs)->{
-//		if(rs.next()) {
-//			return	MainImageDto.builder()
-//					.mainNo(rs.getInt("main_no"))
-//					.imageNo(rs.getInt("image_no"))
-//					.imagePath(rs.getString("image_path"))
-//				.build();
-//		}
-//		else {
-//			return null;
-//		}
-//	};
-	
 	@Override
 	public List<MainImageDto> selectAll() {
 		String sql = "select * from main_image";

@@ -21,7 +21,7 @@
 </div>
 
 <div class="row">
-	<a href="/buy/list" class="btn btn-positive w-100">주문내역 보기</a>
+	<a href="${pageContext.request.contextPath}/buy/list" class="btn btn-positive w-100">주문내역 보기</a>
 </div>
 <div class="row center">
 	&copy; Semi3 Corp. All rights reserved.

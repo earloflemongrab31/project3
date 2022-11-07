@@ -19,7 +19,7 @@
 	
 	$(function(){
 		$(".btn-buy").click(function(){
-			var customerMoney = $("input[name=customerMoney]").val();
+			var customerMoney = parseInt($("input[name=customerMoney]").val());
 			var totalPrice = parseInt($("#total-price").text());
 			if(customerMoney >= totalPrice){
 				var choice = confirm("구매하시겠습니까?");
@@ -31,15 +31,21 @@
 				}
 			}
 			else{
-				alert("소지금이 부족합니다. 현재 잔액 : " + customerMoney + "원");
-				return $(".buy-form").submit(false);
+				var choice = confirm("소지금이 부족합니다. (현재 잔액 : " + customerMoney + "원) 충전 페이지로 이동하시겠습니까?");
+				if(choice){
+					$(".buy-form").attr("action", "${pageContext.request.contextPath}/center/insert").attr("method", "get");
+					return $(".buy-form").submit(true);
+				}
+				else{
+					return $(".buy-form").submit(false);
+				}
 			}			
 		});
 	});
 
 </script>
 
-<form class="buy-form" action="/buy/cart-insert" method="post">
+<form class="buy-form" action="${pageContext.request.contextPath}/buy/cart-insert" method="post">
 
 <div class="container-1000 mt-50 mb-50">
 <input type="hidden" name="customerId" value="${customerDto.customerId}">
@@ -80,7 +86,7 @@
    <h2>배송지 정보</h2>
 </div>
 	<div class="row float-right">
-      <a href="/address/list" class="btn btn-neutral">배송지 관리</a>
+      <a href="${pageContext.request.contextPath}/address/list" class="btn btn-neutral">배송지 관리</a>
    </div>
 </div>
 <div class="row mb-30">
@@ -137,7 +143,7 @@
 				<input type="hidden" name="itemNo" value="${cartDto.itemNo}">
 				<tr>
 					<th class="w-25" rowspan="4" style="vertical-align: bottom;">
-						<img class="w-100" src="/image/download/${cartDto.imageNo}">
+						<img class="w-100" src="${pageContext.request.contextPath}/image/download/${cartDto.imageNo}">
 						<input type="hidden" name="imageNo" value="${cartDto.imageNo}">
 					</th>
 					<td>상품명</td>
@@ -211,7 +217,7 @@
 			<tr>
 				<th rowspan="2" class="w-25">최종 결제 금액</th>
 				<td>
-					${payPrice}원
+					<span id="except-delivery">${payPrice}</span>원
 					+ 3000원(배송비) - <span id="use-point">0</span>point(사용 포인트)
 				</td>
 			</tr>

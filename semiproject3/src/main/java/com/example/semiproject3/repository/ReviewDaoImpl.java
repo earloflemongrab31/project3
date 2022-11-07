@@ -139,7 +139,6 @@ public class ReviewDaoImpl implements ReviewDao {
    @Override
    public ReviewDto selectOne2(int reviewNo) {
       String sql="select * from review where review_no=?";
-	  //String sql="select * from review_real where item_no=?";
       Object[] param= {reviewNo};
       return jdbcTemplate.query(sql,extractor2,param);
    }
@@ -167,103 +166,103 @@ public class ReviewDaoImpl implements ReviewDao {
       return jdbcTemplate.query(sql, mapper,param);
    }
    
-//블라인드처리 
-@Override
-	public boolean updateBlind(int reviewNo, boolean b) {
-		String sql=" update review set review_blind=? where review_no=?";
-		String reviewBlind= b?"Y":null;
-		Object[] param= {reviewBlind,reviewNo};
-		return jdbcTemplate.update(sql,param)>0;
-	}
-
-//리뷰 눌렀을떄 하나 플러스 
-@Override
-	public void plus(int reviewNo) {
-		String sql="update review set review_cnt=review_cnt+1 where review_no=?";
+	//블라인드처리 
+	@Override
+		public boolean updateBlind(int reviewNo, boolean b) {
+			String sql=" update review set review_blind=? where review_no=?";
+			String reviewBlind= b?"Y":null;
+			Object[] param= {reviewBlind,reviewNo};
+			return jdbcTemplate.update(sql,param)>0;
+		}
+	
+	//리뷰 눌렀을떄 하나 플러스 
+	@Override
+		public void plus(int reviewNo) {
+			String sql="update review set review_cnt=review_cnt+1 where review_no=?";
+			Object[] param= {reviewNo};
+			jdbcTemplate.update(sql,param);
+		}
+	
+	@Override
+		public void minus(int reviewNo) {
+		String sql="update review set review_cnt=review_cnt-1 where review_no=?";
 		Object[] param= {reviewNo};
 		jdbcTemplate.update(sql,param);
+			
+		}
+	
+	//삭제
+	@Override
+		public boolean delete(int reviewNo) {
+			String sql="delete review where review_no=?";
+			Object[] param= {reviewNo};
+			return jdbcTemplate.update(sql,param)>0;
+		}
+	
+	@Override
+	public List<ReviewDto> selectList(ReviewListSearchVO vo) {
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
 	}
-
-@Override
-	public void minus(int reviewNo) {
-	String sql="update review set review_cnt=review_cnt-1 where review_no=?";
-	Object[] param= {reviewNo};
-	jdbcTemplate.update(sql,param);
-		
+	
+	@Override
+	public List<ReviewDto> list(ReviewListSearchVO vo) {
+		String sql = "select * from (select rownum rn, TMP.* from(select * from review order by review_no desc)TMP) where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper1, param);
 	}
-
-//삭제
-@Override
-	public boolean delete(int reviewNo) {
-		String sql="delete review where review_no=?";
-		Object[] param= {reviewNo};
-		return jdbcTemplate.update(sql,param)>0;
-	}
-
-@Override
-public List<ReviewDto> selectList(ReviewListSearchVO vo) {
-	if(vo.isSearch()) {
-		return search(vo);
-	}
-	else {
-		return list(vo);
-	}
-}
-
-@Override
-public List<ReviewDto> list(ReviewListSearchVO vo) {
-	String sql = "select * from (select rownum rn, TMP.* from(select * from review order by review_no desc)TMP) where rn between ? and ?";
-	Object[] param = {vo.startRow(), vo.endRow()};
+	
+	@Override
+	public List<ReviewDto> search(ReviewListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from review where instr(#1,?) > 0 "
+					+ "order by review_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+				vo.getKeyword(),vo.startRow(), vo.endRow()
+	};
 	return jdbcTemplate.query(sql, mapper1, param);
-}
-
-@Override
-public List<ReviewDto> search(ReviewListSearchVO vo) {
-	String sql = "select * from ("
-			+ "select rownum rn, TMP.* from ("
-				+ "select * from review where instr(#1,?) > 0 "
-				+ "order by review_no desc"
-			+ ")TMP"
-		+ ") where rn between ? and ?";
-	sql = sql.replace("#1", vo.getType());
-	Object[] param = {
-			vo.getKeyword(),vo.startRow(), vo.endRow()
-};
-return jdbcTemplate.query(sql, mapper1, param);
-}
-
-@Override
-public int count(ReviewListSearchVO vo) {
-	if(vo.isSearch()) {
-		return searchCount(vo);
 	}
-	else {
-		return listCount(vo);
+	
+	@Override
+	public int count(ReviewListSearchVO vo) {
+		if(vo.isSearch()) {
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
 	}
-}
-
-@Override
-public int searchCount(ReviewListSearchVO vo) {
-	String sql = "select count(*) from review where instr(#1, ?) > 0";
-	sql = sql.replace("#1", vo.getType());
-	Object[] param = {vo.getKeyword()};
-	return jdbcTemplate.queryForObject(sql, int.class, param);
-}
-
-@Override
-public int listCount(ReviewListSearchVO vo) {
-	String sql = "select count(*) from review";
-	return jdbcTemplate.queryForObject(sql, int.class);
+	
+	@Override
+	public int searchCount(ReviewListSearchVO vo) {
+		String sql = "select count(*) from review where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
-
-@Override
-public List<ReviewDto> customerSelectList(String loginId, ReviewListSearchVO vo) {
-	if(vo.isSearch()) {
-		return search(vo);
-	}
-	else {
-		return list(vo);
-	}
+	
+	@Override
+	public int listCount(ReviewListSearchVO vo) {
+		String sql = "select count(*) from review";
+		return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	
+	@Override
+	public List<ReviewDto> customerSelectList(String loginId, ReviewListSearchVO vo) {
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
 	
 	}
 }

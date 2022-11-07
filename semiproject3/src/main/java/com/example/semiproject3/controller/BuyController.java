@@ -123,29 +123,6 @@ public class BuyController {
 		return "buy/success";
 	}
 	
-//	//구매 목록 및 검색 회원용
-//	@GetMapping("/list")
-//	public String list(Model model, 
-//			@RequestParam(required = false) String type,
-//			@RequestParam(required = false) String keyword,
-//			HttpSession session) {
-//		String loginId =(String)session.getAttribute(SessionConstant.ID);
-//		
-//		boolean isSearch = type != null && keyword != null;
-//		if(isSearch) {
-//			model.addAttribute("buyList", buyDao.selectList(loginId, type, keyword));
-//		}
-//		else {
-//			model.addAttribute("buyList", buyDao.selectList(loginId));
-//		}
-//		
-//		//장바구니 개수
-//		model.addAttribute("cartCount",cartDao.cartCount(loginId));
-//		
-//		return "/customer/buyHistory";
-//	}
-//	
-	
 	//구매 목록 및 검색 회원용 페이징처리
 	@GetMapping("/list")
 	public String list(Model model, HttpSession session,
@@ -163,15 +140,6 @@ public class BuyController {
 	return "/customer/buyHistory";
 	}
 	
-	
-	
-//	//구매 목록 관리자용
-//	@GetMapping("/admin-buylist")
-//	public String adminBuylist(Model model) {
-//		model.addAttribute("buyList", buyDao.selectListAll());
-//		
-//		return "/admin/buyList";
-//	}
 
 	@GetMapping("/admin-buylist")
 	public String adminBuylist(Model model,

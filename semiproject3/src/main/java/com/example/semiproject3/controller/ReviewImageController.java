@@ -31,7 +31,8 @@ public class ReviewImageController {
 //	C드라이브용
 //	private final File directory = new File("C:/study/reviewImage");
 //	D드라이브용
-	private final File directory=new File("D:/study/reviewImage");
+//	private final File directory=new File("D:/study/reviewImage");
+	private final File directory=new File("D:/upload/kh10C/reviewImage");
 	
 	//이미지 불러오기
 	@GetMapping("/download/{imageNo}")
