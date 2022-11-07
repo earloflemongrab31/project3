@@ -83,13 +83,6 @@ public class AdminController {
 		return "redirect:list";
 	}
 	
-//	@GetMapping("/list")
-//	  public String list(Model model) {
-//		List<AdminDto>list=adminDao.selectList();
-//		      model.addAttribute("list",adminDao.selectList());
-//		      return "admin/list";
-//	  }
-//	
 	
 	//페이징
 	@GetMapping("/list")
@@ -99,7 +92,6 @@ public class AdminController {
 		int count = adminDao.count(vo);
 		vo.setCount(count);
 		
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("list",adminDao.selectList());
 		return "admin/list";
 	}
@@ -174,7 +166,10 @@ public class AdminController {
 	}
 	
 	@GetMapping("/main")
-	public String main() {
+	public String main(
+			Model model) {
+		model.addAttribute("mainEditDto", mainEditDao.select());
+		model.addAttribute("pathList", mainImageDao.selectAll());
 		return "admin/mainEdit";
 	}
 	
@@ -223,7 +218,8 @@ public class AdminController {
 						.imageMain("0")
 				.build());
 				
-				File dir = new File("D:/study/main");
+				File dir = new File("D:/upload/kh10C/main");
+//				File dir = new File("D:/study/main");
 //					맥북용
 //				File dir = new File(System.getProperty("user.home")+"/upload/main");
 				dir.mkdirs();
@@ -241,6 +237,9 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
-	
+	@GetMapping("/survey")
+	public String survey() {
+		return "admin/survey";
+	}
 	
 }

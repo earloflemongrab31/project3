@@ -1,5 +1,3 @@
-
-
 package com.example.semiproject3.controller;
 
 import java.io.File;
@@ -29,12 +27,12 @@ public class CompanyImageController {
 	
 
 //	맥북용
-//	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
-//	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
-//	화니꼬
+//	private final File directory = new File(System.getProperty("user.home")+"/upload/companyImage");
+//	C드라이브용
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-	private final File directory = new File("D:/upload/card");
+//	private final File directory = new File("D:/upload/card");
+	private final File directory = new File("D:/upload/kh10C/card");
 	
 	//이미지 불러오기
 	@GetMapping("/download/{imageNo}")

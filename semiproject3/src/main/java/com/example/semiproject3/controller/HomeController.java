@@ -24,17 +24,18 @@ import com.example.semiproject3.repository.ImageDao;
 import com.example.semiproject3.repository.ItemDao;
 import com.example.semiproject3.repository.MainEditDao;
 import com.example.semiproject3.repository.MainImageDao;
+import com.example.semiproject3.repository.ResearchDao;
 
 @Controller
 public class HomeController {
 	
 //	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
-//	화니꼬
+//	C드라이브용
 //	private final File directory = new File("C:/study/main");
 //	D드라이브용
-	private final File directory = new File("D:/study/main");
-//	private final File directory = new File("D:/study/itemImage");
+//	private final File directory = new File("D:/study/main");
+	private final File directory = new File("D:/upload/kh10C/main");
 	
 	@Autowired
 	private CartDao cartDao;
@@ -50,6 +51,9 @@ public class HomeController {
 	
 	@Autowired
 	private ItemDao itemDao;
+	
+	@Autowired
+	private ResearchDao researchDao;
 	
 	@GetMapping("/")
 	public String home(
@@ -68,6 +72,9 @@ public class HomeController {
 		
 		//새상품 리스트-이미지 등록된 상품 시간 역순
 		model.addAttribute("itemList", itemDao.selectList());
+		
+		//설문조사 이행 여부
+		model.addAttribute("researchOverlap", researchDao.overlapId(loginId));
 		
 		return "home";
 

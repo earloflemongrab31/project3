@@ -3,7 +3,79 @@
 <jsp:include page="/WEB-INF/views/template/customerHeader.jsp">
 	<jsp:param value="비밀번호변경" name="title"/>
 </jsp:include>
-
+<script>
+/* 비밀번호 변경 */
+	$(function(){
+	    $(".btn-check-pw").click(function(){
+	        var inputPw = $(".input[name=checkPw]").val();
+	        var loginId = $("input[name=loginId]").val();
+	        
+	        $.ajax({
+	            url: "${pageContext.request.contextPath}/rest/customer/pw",
+	            method:"post",
+	            data:{
+	                inputPw: inputPw,
+	                loginId: loginId
+	            },
+	            success: function(resp){
+	                if(resp == "NNNNY"){
+	                    $(".check-pw").addClass("NNNNY");
+	                    $(".input-pw").addClass("NNNNY");
+	                }
+	                else{
+	                	$(".input[name=checkPw]").addClass("NNNNN");
+	                }
+	            }
+	        });
+	    });
+	    
+	    $(".input[name=customerPw").blur(function(){
+	        var inputPw = $(this).val();
+	        if(!inputPw){
+	            $("#customer-pwcheck").removeClass("fail NNNNY");
+	        }
+	        var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
+	        var judge = regex.test(inputPw);
+	        $(this).removeClass("fail NNNNY");
+	        if(judge){
+	            $(this).addClass("NNNNY");
+	        }
+	        else{
+	            $(this).addClass("fail");
+	        }
+	        $("#customer-pwcheck").blur();
+	    });
+	    $("#customer-pwcheck").blur(function(){
+	        var pwCheck = $(this).val();
+	        if(!pwCheck){
+	            $(this).removeClass("fail NNNNY");
+	            return;
+	        };
+	        if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
+	        var pw = $(".input[name=customerPw").val();
+	        var judge = pw == pwCheck;
+	        
+	        $(this).removeClass("fail NNNNY");
+	        if(judge){
+	            $(this).addClass("NNNNY");
+	        }
+	        else{
+	            $(this).addClass("fail");
+	        }
+	    });
+		
+	    $(".change-pw").submit(function(){
+	        $(".input[name=customerPw]").blur();
+	        $("#customer-pwcheck").blur();
+	
+	        if($(".input.NNNNY").length == 2){
+	            return true;
+	        }
+	        return false;
+	    });
+	    
+	});
+</script>
 <section>
     <div class="container-300 mt-50 mb-50">
     

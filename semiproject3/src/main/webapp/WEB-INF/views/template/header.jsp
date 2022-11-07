@@ -27,12 +27,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
 
 <!-- 디자인 틀 -->
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css">
 
 <!-- 틀 선 디자인할 때 주석 풀기 -->
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> --%>
 
 <!-- 아이콘 cdn -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -48,15 +48,15 @@
 
 <!-- jQuery -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<script src="http://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-3.6.1.js"></script> -->
 <!-- 배포 시 min 버전으로 -->
-<!-- <script src="http://code.jquery.com/jquery-3.6.1.min.js"></script> -->
+<script src="http://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
 <!-- summernote 라이브러리 -->
-<link rel="stylesheet" type="text/css" href="/summernote/summernote-lite.css">
-<script src="/summernote/summernote-lite.js"></script>
-<script src="/summernote/lang/summernote-ko-KR.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/summernote/summernote-lite.css">
+<script src="${pageContext.request.contextPath}/summernote/summernote-lite.js"></script>
+<script src="${pageContext.request.contextPath}/summernote/lang/summernote-ko-KR.min.js"></script>
 
 <style>
 	.input.find{
@@ -94,7 +94,7 @@
 	
 	/* 설문조사 */
 	.fullscreen > .modal.survey{
-		background-image: url("/image/survey.png");
+		background-image: url("${pageContext.request.contextPath}/image/survey.png");
 	    background-size: 100%;
 	    background-repeat: no-repeat;
 	}
@@ -153,18 +153,6 @@
     .NNNNN-message{
         display:none;
     } 
-    .input.NNNNN ~ .NNNNN-message,
-    .input.NNNNY ~ .NNNNY-message,
-    .input.fail ~ .fail-message,
-    .input.admin ~ .admin-message{
-        display: inline-block;
-    }
-    .NNNNN-message,
-    .NNNNY-message,
-    .fail-message,
-    .admin-message{
-        display: none;
-    }
 	/* swiper */
     .swiper{
         width: 100%;
@@ -207,6 +195,26 @@
   	a.footer-underline:hover{
 		text-decoration: underline;
 	}
+	
+	/*품절 임박*/
+	@keyframes almostSoldOut{
+           from{
+               color: darkred;
+           }
+
+           to{
+               color: red;
+           }
+       }
+
+	.sold{
+	    animation: almostSoldOut 0.5s linear 0s infinite alternate;
+	}
+	
+	/*리뷰 비활성화 호버끄기*/
+	.table a.review-disable{
+	pointer-events: none;
+	}
     
 </style>
 <script type="text/javascript">
@@ -219,7 +227,7 @@
 		$(".ad").find(".delete").click(function(){
 			$(this).parent().slideUp();
 			$.ajax({
-				url: "http://localhost:8888/rest/customer/block-ad",
+				url: "${pageContext.request.contextPath}/rest/customer/block-ad",
 				method: "get"
 			});
 		});
@@ -272,14 +280,12 @@
         
         //항목에 체크가 되어야 다음 버튼 활성화
         $("input").on("input", function(){
-            // console.log($(this).parent().parent().next().find(".next"));
             if($(this).prop("checked")){
                 $(this).parent().parent().next().find(".next").attr("disabled", false);
             }
         });
         
         $("textarea").on("input", function(){
-            // console.log($(this).val().length);
             if($(this).val().length >= 10){
                 $(this).parent().next().find(".next").attr("disabled", false);
             }
@@ -300,7 +306,7 @@
 			$(this).removeClass("unchecked");
 			$(this).prev("div").addClass("unchecked");
 			$(".customer-join").addClass("hide");
-			$(".login-form").attr("action", "/admin/login");
+			$(".login-form").attr("action", "${pageContext.request.contextPath}/admin/login");
 			$(".login-form").find(".id").attr("name", "adminId");
 			$(".login-form").find(".pw").attr("name", "adminPw");
 		});
@@ -330,193 +336,6 @@
       });
    });
 	
-	/* 회원가입 */
-    $(function(){
-        var inputStatus = {
-            memberIdValid:false,
-            memberNickValid:false,
-            memberPwValid:false,
-            memberPwcheckValid:false,
-            memberPwsearchValid:false,
-            memberNameValid:false,
-            memberPhoneValid:false
-        };
-        $(".input[name=customerId]").blur(function(){
-            var inputId = $(this).val();
-            var regex = /^[a-z][a-z0-9_-]{4,19}$/;
-            var judge = regex.test(inputId);
-            $(this).removeClass("fail NNNNN NNNNY");
-            if(judge){
-                var that = this;
-                $.ajax({
-                    url: "http://localhost:8888/rest/customer/id",
-                    method: "post",
-                    data: {
-                        inputId: inputId
-                    },
-                    success:function(resp){
-                        if(resp == "NNNNY"){
-                            $(that).addClass("NNNNY");
-                            inputStatus.memberIdValid = true;
-                        }
-                        else{
-                            $(that).addClass("NNNNN");
-                            inputStatus.memberIdValid = false;
-                        }
-                    }
-                });
-            }
-            else{
-                $(this).addClass("fail");
-                inputStatus.memberIdValid = false;
-            }
-        });
-        $(".input[name=customerPw").blur(function(){
-            var inputPw = $(this).val();
-            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
-            var judge = regex.test(inputPw);
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-                inputStatus.memberPwValid = true;
-            }
-            else{
-                $(this).addClass("fail");
-                inputStatus.memberPwValid = false;
-            }
-            $("#customer-pwcheck").blur();
-        });
-        $("#customer-pwcheck").blur(function(){
-            var pwCheck = $(this).val();
-            if(!pwCheck){
-                $(this).removeClass("fail NNNNY");
-                inputStatus.memberPwcheckValid = false;
-                return;
-            };
-            if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
-            var pw = $(".input[name=customerPw").val();
-            var judge = pw == pwCheck;
-            
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-                inputStatus.memberPwcheckValid = true;
-            }
-            else{
-                $(this).addClass("fail");
-                inputStatus.memberPwcheckValid = false;
-            }
-        });
-        $(".input[name=customerNick]").blur(function(){
-            var inputNick = $(this).val();
-            var regex = /^[가-힣][가-힣0-9]{0,9}$/;
-            var judge = regex.test(inputNick);
-            $(this).removeClass("fail NNNNN NNNNY admin");
-            if(inputNick == '관리자'){
-                $(this).addClass("admin");
-                inputStatus.memberNickValid = false;
-                return;
-            }
-            if(judge){
-                var that = this;
-                $.ajax({
-                    url: "http://localhost:8888/rest/customer/nick",
-                    method: "post",
-                    data: {
-                        inputNick: inputNick
-                    },
-                    success: function(resp){
-                        if(resp == "NNNNY"){
-                            $(that).addClass("NNNNY");
-                            inputStatus.memberNickValid = true;
-                        }
-                        else{
-                            $(that).addClass("NNNNN");
-                            inputStatus.memberNickValid = false;
-                        }
-                    }
-                });
-            }
-            else{
-                $(this).addClass("fail");
-                inputStatus.memberNickValid = false;
-            }
-        });
-        $(".input[name=customerPwsearch").blur(function(){
-            var pwsearch = $(this).val();
-            $(this).removeClass("fail");
-            if(pwsearch == ""){
-                $(this).addClass("fail");
-                inputStatus.memberPwsearchValid = false;
-            }
-            else{
-                $(this).removeClass("fail");
-                inputStatus.memberPwsearchValid = true;
-            }
-        });
-        
-        $(".input[name=customerName").blur(function(){
-            var name = $(this).val();
-            var regex = /^[가-힣]{2,7}$/;
-            var judge = regex.test(name);
-            
-            $(this).removeClass("fail NNNNN");
-            if(name == ""){
-                $(this).addClass("fail");
-                inputStatus.memberNameValid = false;
-            }
-            else{
-                if(!judge){
-                    $(this).addClass("NNNNN");
-                    inputStatus.memberNameValid = false;
-                    return;
-                }
-                $(this).removeClass("fail");
-                inputStatus.memberNameValid = true;
-            }
-        });
-        $(".input[name=customerPhone").blur(function(){
-            var phone = $(this).val();
-            var regex = /^01[016789][1-9]\d{6,7}$/;
-            var judge = regex.test(phone);
-            
-            $(this).removeClass("fail NNNNN");
-            if(phone == ""){
-                $(this).addClass("fail");
-                inputStatus.memberPhoneValid = false;
-            }
-            else{
-                if(!judge){
-                    $(this).addClass("NNNNN");
-                    inputStatus.memberPhoneValid = false;
-                    return;
-                }
-                $(this).removeClass("fail");
-                inputStatus.memberPhoneValid = true;
-            }
-        });
-        var inputStatus = {
-                memberIdValid:false,
-                memberNickValid:false,
-                memberPwValid:false,
-                memberPwcheckValid:false,
-                memberPwsearchValid:false,
-                memberNameValid:false,
-                memberPhoneValid:false,
-                valid:function(){
-                    return this.memberIdValid && this.memberNameValid && this.memberNickValid && this.memberPhoneValid 
-                            && this.memberPwValid && this.memberPwcheckValid && this.memberPwsearchValid;
-                }
-            };
-            
-        $(".join-form").submit(function(){
-            if(!inputStatus.valid()){
-                return false;
-            }
-            return true;
-        });
-    });
-	
     $(function(){
         $("textarea.content").summernote({
             height: 200,//높이
@@ -536,80 +355,7 @@
         });
     });
     
-    /* 비밀번호 변경 */
-    $(function(){
-        $(".btn-check-pw").click(function(){
-            var inputPw = $(".input[name=checkPw]").val();
-            var loginId = $("input[name=loginId]").val();
-            //console.log(inputPw);
-            
-            $.ajax({
-                url: "http://localhost:8888/rest/customer/pw",
-                method:"post",
-                data:{
-                    inputPw: inputPw,
-                    loginId: loginId
-                },
-                success: function(resp){
-                    if(resp == "NNNNY"){
-                        $(".check-pw").addClass("NNNNY");
-                        $(".input-pw").addClass("NNNNY");
-                    }
-                    else{
-                    	$(".input[name=checkPw]").addClass("NNNNN");
-                    }
-                }
-            });
-        });
-        
-        $(".input[name=customerPw").blur(function(){
-            var inputPw = $(this).val();
-            if(!inputPw){
-	            $("#customer-pwcheck").removeClass("fail NNNNY");
-            }
-            var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;//나중에 필수 추가 비밀번호 추가하기
-            var judge = regex.test(inputPw);
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-            }
-            else{
-                $(this).addClass("fail");
-            }
-            $("#customer-pwcheck").blur();
-        });
-        $("#customer-pwcheck").blur(function(){
-            var pwCheck = $(this).val();
-            if(!pwCheck){
-                $(this).removeClass("fail NNNNY");
-                return;
-            };
-            if(!$(".input[name=customerPw]").hasClass("NNNNY")) return;
-            var pw = $(".input[name=customerPw").val();
-            var judge = pw == pwCheck;
-            
-            $(this).removeClass("fail NNNNY");
-            if(judge){
-                $(this).addClass("NNNNY");
-            }
-            else{
-                $(this).addClass("fail");
-            }
-        });
-    	
-	    $(".change-pw").submit(function(){
-	        $(".input[name=customerPw]").blur();
-	        $("#customer-pwcheck").blur();
-	
-	        if($(".input.NNNNY").length == 2){
-	            return true;
-	        }
-	        return false;
-	    });
-	    
-    });
-    
-    /* 메인이미지 스와이퍼 */
+    /* 메인이미지 이미지 슬라이더 */
     $(function(){
         var swiper = new Swiper('.swiper.main', {
             // 화면 넘기기 옵션
@@ -629,7 +375,7 @@
             effect: "fade",//페이드 인-아웃 효과
         });
     });
-    /* 새상품이미지 스와이퍼 */
+    /* 새상품이미지 이미지 슬라이더 */
     $(function(){
         var swiper = new Swiper('.swiper.mySwiper', {
             // 화면 넘기기 옵션
@@ -692,7 +438,7 @@
 	        
 	        var plusLine = $("<li>").addClass("flexbox option w-100");//option 클래스를 가지는 한칸 만들기
 	            
-	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark");//i 태그 엑스 표시 추가
+	        var icon = $("<i>").addClass("w-25 right fa-solid fa-xmark middle");//i 태그 엑스 표시 추가
 	        icon.click(function(){//누르면 가장 상위 option class를 가지는 tr 삭제
 	        	var deleteColor = $(this).parent(".option").find("input[name=itemColor]").val();
 	        	var deleteSize = $(this).parent(".option").find("input[name=itemSize]").val();
@@ -722,22 +468,7 @@
 	
 	        $(".input-option").val("");
 	        selectedOption.push(color+"-"+size);
-			console.log(selectedOption);
         });
-
-// 	    $("select[name=itemColor]").change(function(){
-        	
-// 			var color = $(this).val();
-// 			var size = $(this).find("option:selected").attr("data-size");//가능 //문자열로 읽어온다. //find - 내부에 있는걸 탐색하는 기능
-// 			var totalcnt = $(this).find("option:selected").attr("data-cnt");
-// 			console.log(color);		
-// 			console.log(size);
-// 			console.log(totalcnt);
-// 			$("input[name=itemSize]").attr("value", size);
-// 			$("input[name=itemTotalCnt]").attr("value", totalcnt);
-// 			$("input[name=itemCnt]").attr("max", totalcnt);
-// 			$("input[name=itemCnt]").val(0);
-// 		});
 	});
     
     //게시글 삭제 시 즉시 삭제 방지
@@ -780,22 +511,39 @@
 	
 	$(function(){
 		$("input[name=usePoint]").on("blur",function(){
-			var usePoint = $(this).val();
-			var totalPay = parseInt($("#except-delivery").text());
-			var payMoney = totalPay - usePoint + 3000;
-			
-			if(usePoint < 0){
-				return;
-			}
-			if(!usePoint){
+			var usePoint = parseInt($(this).val());//회원이 입력한 포인트
+			var customerPoint = parseInt($(this).attr("max"));//회원이 가지고 있는 포인트
+			var totalPay = parseInt($("#except-delivery").text());//상품 전체 총 금액
+			var payMoney = totalPay + 3000;//배송비 포함 결제 금액
+			console.log(usePoint);
+			console.log(customerPoint);
+			console.log(totalPay);
+			console.log(payMoney);
+			var overPoint1 = customerPoint > payMoney && usePoint > payMoney//총 금액보다 포인트를 더 작성했을 때
+			var overPoint2 = customerPoint < payMoney && usePoint > customerPoint//회원이 가지고있는 포인트보다 더 작성했을 때
+
+			if(usePoint < 0 || !usePoint){
 				$(this).val(0);
 				$("#use-point").text("0");
 				$("#total-price").text(totalPay+3000);
 				return;
 			}
+			if(overPoint1 || overPoint2){
+				alert("보유하신 포인트 또는 총 결제 금액보다 많은 수를 입력할 수 없습니다.");
+				$(this).val("0");
+				$("#use-point").text("0");
+				$("#total-price").text(payMoney);
+				return;
+			}
 			$("#use-point").text(usePoint);
-			$("#total-price").text(payMoney);
+			$("#total-price").text(payMoney-usePoint);
 		});
+	});
+	
+	//리뷰 활성화 , 비활성화
+	$(function(){
+		$(".review-disable").click("disable", false);
+		$(".review-able").click("disable", true);
 	});
 	
 </script>
@@ -805,17 +553,11 @@
 <body>
 
 <header>
-<!-- 
-	광고 구현 중
-	1. 구글플레이 이미지 중간 맞춤
-	2. 새로고침 할 때마다 나옴
-	3. 관리자 페이지 들어가면 없애야 할 듯
- -->
 <c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자' && blockAd != 'Y'}">
 	<div class="float-container ad">
-		&emsp;&emsp;"쇼핑몰명 앱" 설치 시 <span style="color:orange;">쿠폰팩 증정!</span>지금 바로 앱스토어에서 다운 받기
+		&emsp;&emsp;"SeSam 앱" 설치 시 <span style="color:orange;">5,000point 지급!</span> 지금 바로 앱스토어에서 다운 받기
 		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
-			<img src="/image/googleplay.png">
+			<img src="${pageContext.request.contextPath}/image/googleplay.png">
 		</a>
 		<span class="float-right delete" style="margin-left:5px;">
 			한동안 보지 않기 <i class="fa-solid fa-xmark"></i></span>
@@ -824,8 +566,8 @@
 
 <div class="float-container">
 	<div class="logo float-left">
-		<a class="w-100" href="/">
-			<img class="w-100" src="/image/logo.png">
+		<a class="w-100" href="${pageContext.request.contextPath}/">
+			<img class="w-100" src="${pageContext.request.contextPath}/image/logo.png">
 		</a>
 	</div>
 	<c:if test="${loginGrade == '일반' || loginGrade == 'VIP'}">
@@ -835,7 +577,7 @@
 	</c:if>
 	<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
 		<div class="right-word row float-right">
-			<a href="/admin/">관리자페이지</a>
+			<a href="${pageContext.request.contextPath}/admin/">관리자페이지</a>
 		</div>
 	</c:if>
 </div>
@@ -847,109 +589,109 @@
 <ul class="dropdown-menu">
 	<!-- 좌측 드롭다운 메뉴 -->
 	<li class="float-left">
-		<a href="/item/bestlist">BEST</a>
+		<a href="${pageContext.request.contextPath}/item/bestlist">BEST</a>
 	</li>
 	<li class="float-left">
-		<a href="/item/buylist">New</a>
+		<a href="${pageContext.request.contextPath}/item/buylist">New</a>
 	</li>
 	<li class="float-left">
-		<a href="/item/buylist?keyword=100">outer</a>
+		<a href="${pageContext.request.contextPath}/item/buylist?keyword=100">outer</a>
 		<ul>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=101">자켓</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=101">자켓</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=102">코트</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=102">코트</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=103">가디건</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=103">가디건</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=104">패딩</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=104">패딩</a>
 			</li>
 		</ul>
 	</li>
 	<li class="float-left">
-		<a href="/item/buylist?keyword=200">top</a>
+		<a href="${pageContext.request.contextPath}/item/buylist?keyword=200">top</a>
 		<ul>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=201">민소매</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=201">민소매</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=202">티셔츠</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=202">티셔츠</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=203">맨투맨</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=203">맨투맨</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=204">니트</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=204">니트</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=205">블라우스</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=205">블라우스</a>
 			</li>
 		</ul>
 	</li>
 	<li class="float-left">
-		<a href="/item/buylist?keyword=300">pants</a>
+		<a href="${pageContext.request.contextPath}/item/buylist?keyword=300">pants</a>
 		<ul>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=301">청바지</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=301">청바지</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=302">면바지</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=302">면바지</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=303">슬랙스</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=303">슬랙스</a>
 			</li>
 		</ul>
 	</li>
 	<li class="float-left">
-		<a href="/item/buylist?type=cate_code&keyword=401">skirt</a>
+		<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=401">skirt</a>
 	</li>
 	<li class="float-left">
-		<a href="/item/buylist?type=cate_code&keyword=501">dress</a>
+		<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=501">dress</a>
 	</li>
 	<li class="float-left">
-		<a href="/item/buylist?keyword=600">acc</a>
+		<a href="${pageContext.request.contextPath}/item/buylist?keyword=600">acc</a>
 		<ul>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=601">쥬얼리</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=601">쥬얼리</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=602">모자</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=602">모자</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=603">가방</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=603">가방</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=604">신발</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=604">신발</a>
 			</li>
 			<li>
-				<a href="/item/buylist?type=cate_code&keyword=605">양말</a>
+				<a href="${pageContext.request.contextPath}/item/buylist?type=cate_code&keyword=605">양말</a>
 			</li>
 		</ul>
 	</li>
 	<!-- 우측 드롭다운 메뉴 : 순서 반대로 구현 -->
 	<li class="float-right cart">
-		<a href="/cart/cartList"><span id="cart-count"></span>
+		<a href="${pageContext.request.contextPath}/cart/cartList"><span id="cart-count"></span>
 			<i class="fa-solid fa-cart-shopping"><c:if test="${cartCount != 0}">${cartCount}</c:if></i>
 		</a>
 	</li>
-	<form action="/item/buylist" method="get" autocomplete="off">
+	<form action="${pageContext.request.contextPath}/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" style="padding-top:5px;" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
-		<input class="float-right input input-underline find" name="keyword" placeholder="가을 신상">
+		<input class="float-right input input-underline find" name="keyword">
 	</form>
 		<c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자'}">
-			<li class="float-right"><a href="/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
+			<li class="float-right"><a href="${pageContext.request.contextPath}/customer/mypage?customerId=${loginId}">MYPAGE</a></li>
 		</c:if>
 	<c:choose>
 		<c:when test="${loginId == null}">
-			<li class="float-right"><a href="/customer/login">LOGIN</a></li>
-			<li class="float-right"><a href="/customer/insert">JOIN US</a></li>
+			<li class="float-right"><a href="${pageContext.request.contextPath}/customer/login">LOGIN</a></li>
+			<li class="float-right"><a href="${pageContext.request.contextPath}/customer/insert">JOIN US</a></li>
 		</c:when>
 		<c:otherwise>
-			<li class="float-right"><a class="logout" href="/customer/logout">LOGOUT</a></li>
+			<li class="float-right"><a class="logout" href="${pageContext.request.contextPath}/customer/logout">LOGOUT</a></li>
 		</c:otherwise>
 	</c:choose>
 </ul>

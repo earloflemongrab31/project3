@@ -36,7 +36,7 @@
 				<select class="input input-none" name="noticeHead">
 					<option value="">선택</option>
 					<option disabled>------</option>
-					<option value="">공지</option>
+					<option value="공지">공지</option>
 					<option value="긴급">긴급</option>
 		            <option value="이벤트">이벤트</option>
 				</select>

@@ -163,9 +163,7 @@ public class AddressDaoImpl implements AddressDao{
 	@Override
 	public boolean addBasicUpdate(int addressNo, String loginId) {
 		String sql = "update address set address_basic= 'N' where address_no != ? and customer_id = ?";
-//		"update address set "
-//		+ "address_basic= 'N' where address_no != ?";
-		
+
 		Object[] param = {
 				addressNo,
 				loginId
@@ -176,7 +174,6 @@ public class AddressDaoImpl implements AddressDao{
 		//처음 주소 등록할때 
 	@Override
 	public boolean basicUpdate(int addressNo) {
-//		System.out.println("addressNo :" +addressNo);
 		String sql = "update address set "
 				+ "address_basic='N'"
 				+ "where address_no != ?";
@@ -207,9 +204,9 @@ public class AddressDaoImpl implements AddressDao{
 					+ "order by address_no desc"
 				+ ")TMP"
 			+ ") where rn between ? and ?";
-Object[] param = {customerId, begin, end};
-return jdbcTemplate.query(sql, mapper, param);
-}
+		Object[] param = {customerId, begin, end};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 
 	@Override
 	public AddressDto selectOne(String loginId) {
@@ -262,7 +259,7 @@ return jdbcTemplate.query(sql, mapper, param);
 		else {
 			return listCount(vo, loginId);
 		}
-}
+	}
 	
 
 	@Override

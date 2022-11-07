@@ -90,11 +90,5 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
                     "/review/reportList",
                     "/warehouse/**"
                     );
-//               .excludePathPatterns(// 회원,비회원도 가능
-//                  
-//                );
-
-            
-   
-}
+   }
 }

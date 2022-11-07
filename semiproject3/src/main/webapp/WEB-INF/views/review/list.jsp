@@ -53,7 +53,7 @@ td, th {
 								<td>${reviewDto.reviewDate}</td>
 								<td>${reviewDto.reviewCnt}개</td>
 								<td>
-									<a class="btn btn-border w-100" href="http://localhost:8888/item/buydetail?itemNo=${reviewDto.itemNo}">
+									<a class="btn btn-border w-100" href="${pageContext.request.contextPath}/item/buydetail?itemNo=${reviewDto.itemNo}">
 										확인
 									</a>
 								</td>
@@ -130,9 +130,7 @@ td, th {
 
 </div>
 
-
-
-
+</div>
 
 </section>
 <jsp:include page="/WEB-INF/views/template/customerFooter.jsp"></jsp:include>

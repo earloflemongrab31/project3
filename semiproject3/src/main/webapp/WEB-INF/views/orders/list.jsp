@@ -34,16 +34,6 @@
 			<tbody align="center">
 			<c:forEach var="ordersDto" items="${orders}">
 				
-				
-
-				
-<%--			이미지   --%>
-<!-- 				<tr><td>  -->
-<%-- 					<c:forEach var="itemImageView" items="${itemImageList}"> --%>
-<%-- 							<img src="/image/download/${itemImageView.imageNo}" width="200" > --%>
-<%-- 						</c:forEach> --%>
-<!-- 				</tr></td> -->
-			
 				<tr>
 				<td>${ordersDto.ordersNo}</td>
 					<td>${ordersDto.customerId}</td>
@@ -122,11 +112,6 @@
 </li>
 </ul>			
 
-
-
-	
-	
-	
 <!-- 검색창 -->
 <form action = "list" method="get" >
 	<div class="row center">

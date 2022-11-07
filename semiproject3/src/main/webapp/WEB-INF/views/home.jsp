@@ -6,8 +6,7 @@
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
-
-<c:if test="${blockSurvey != 'Y'}">
+<c:if test="${blockSurvey != 'Y' && loginGrade != '일반관리자' && loginGrade != '메인관리자' && researchOverlap < 1}">
 	<!-- 풀스크린 수정 필요할 듯... -->
 	<div class="fullscreen">
 		<div class="modal screen-center survey">
@@ -19,7 +18,7 @@
 				<h3><a href="research/insert">설문조사 페이지 이동</a></h3>
 			</div>
 			<div class="row right mt-50">
-				<a href="/block-survey">
+				<a href="${pageContext.request.contextPath}/block-survey">
 					한동안 보지 않기 <i class="fa-solid fa-xmark"></i>
 				</a>
 			</div>
@@ -35,7 +34,7 @@
    	<c:forEach var="mainImageDto" items="${mainImageList}">
     	<div class="swiper-slide">
     		<a href="${mainImageDto.imagePath}">
-				<img src="/download/${mainImageDto.imageNo}" class="w-100">
+				<img src="${pageContext.request.contextPath}/download/${mainImageDto.imageNo}" class="w-100">
     		</a>
 	    </div>
 	</c:forEach>
@@ -69,7 +68,7 @@
     		<div class="row" style="font-size:14px;">
 	    		<div>
 		    		<a href="item/buydetail?itemNo=${itemDto.itemNo}">
-						<img src="/image/download/${itemDto.imageNo}">
+						<img src="${pageContext.request.contextPath}/image/download/${itemDto.imageNo}">
 		    		</a>
 	    		</div>
 	    		<div class="row left float-container mb-20" style="font-weight:bold;">

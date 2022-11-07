@@ -90,13 +90,19 @@
 	 	</table>
 	 </div>
 	 </c:if>
-	 
- 	<div class="row right">
-		<a class="btn btn-neutral" href="list">목록</a>
-		<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
-			<a class="btn btn-positive" href="edit?centerNo=${centerDto.centerNo}">답변등록</a>
-			<a class="btn btn-negative" href="delete?centerNo=${centerDto.centerNo}">삭제하기</a>
+	 <div class="float-container">
+ 		<c:if test="${centerDto.centerHead == '소지금' && loginGrade.contains('관리자') && centerDto.moneyConfirm == 'N'}">
+			<div class="float-left">
+				<a class="btn btn-neutral left" href="${pageContext.request.contextPath}/customer/edit?customerId=${centerDto.customerId}">충전하기</a>
+			</div>
 		</c:if>
+		<div class="float-right">
+	 		<c:if test="${loginGrade == '일반관리자' || loginGrade == '메인관리자'}">
+				<a class="btn btn-positive" href="edit?centerNo=${centerDto.centerNo}">답변등록</a>
+				<a class="btn btn-negative" href="delete?centerNo=${centerDto.centerNo}">삭제하기</a>
+			</c:if>
+			<a class="btn btn-neutral" href="list">목록</a>
+		</div>
 	</div>
 		
 </div>

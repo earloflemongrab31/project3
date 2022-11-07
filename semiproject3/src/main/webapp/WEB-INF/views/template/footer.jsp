@@ -12,7 +12,7 @@
 	<div class="flexbox">
 		<div class="w-100">
 			<div class="row">사업장 번호 : 111-22-33333</div>
-			<div class="row"><a href="/map/mapList">위치 : 서울특별시 영등포구 선유동2로 57 이레빌딩 19층 C강의장</a></div>
+			<div class="row"><a href="${pageContext.request.contextPath}/map/mapList" class="footer-underline">위치 : 서울특별시 영등포구 선유동2로 57 이레빌딩 19층 C강의장</a></div>
 			<div class="row">대표 번호 : 02)444-5555 / 010)6666-7777</div>
 		</div>
 	</div>
@@ -30,8 +30,8 @@
 		<div class="w-50">
 			<!-- 고객센터 밑으로 뺐는데 hover 효과가 좀 작은 것 같음 고민 해보기 -->
 			<div class="row"><i class="fa-solid fa-headset"></i> 고객소통게시판</div>
-			<div class="row"><a href="/notice/list" class="footer-underline">공지사항</a></div>
-			<div class="row"><a href="/center/list" class="footer-underline">Q & A / 자주 묻는 질문</a></div>
+			<div class="row"><a href="${pageContext.request.contextPath}/notice/list" class="footer-underline">공지사항</a></div>
+			<div class="row"><a href="${pageContext.request.contextPath}/center/list" class="footer-underline">Q & A / 자주 묻는 질문</a></div>
 		</div>
 	</div>
 </div>

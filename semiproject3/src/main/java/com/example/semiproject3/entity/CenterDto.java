@@ -18,6 +18,6 @@ public class CenterDto {
 	private String adminContent;
 	private Date customerDate;
 	private Date adminDate;
-	
+	private String centerHead;
+	private String moneyConfirm;
 }
-

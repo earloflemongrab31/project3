@@ -87,7 +87,7 @@ div.logo{
 }
 
 /* 
-    어차피 정렬은 left, centet, right밖에 없다.
+    어차피 정렬은 left, center, right밖에 없다.
 */
 .left{text-align: left;}
 .center{text-align: center;}

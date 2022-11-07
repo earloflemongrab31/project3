@@ -67,7 +67,8 @@ public class CompanyController {
                      .build());
                
                //파일저장
-               File dir=new File("D:/upload/card");
+//               File dir=new File("D:/upload/card");
+               File dir=new File("D:/upload/kh10C/card");
                dir.mkdirs();
                File target = new File(dir,String.valueOf(imageNo));
                file.transferTo(target);
@@ -91,12 +92,6 @@ public class CompanyController {
       return "company/detail";
    }
    
-//   @GetMapping("/list")
-//   public String list(Model model){
-//      model.addAttribute("list",companyDao.selectList());
-//      return "company/list";
-//   }
-
    //목록(페이징처리)
    @GetMapping("/list")
    public String list(Model model, 
@@ -150,23 +145,6 @@ public class CompanyController {
       return "redirect:detail";
    }
    
- 
-   
-//명함 이미지 
-//   @GetMapping("/cardList")
-//   public String cardList(Model model,
-//         @ModelAttribute(name="vo") CardListSearchVO vo) {
-//      
-//   //페이지 네비게이터를 위한 게시글 수를 전달
-//   int    count = cardDao.count(vo);
-//   vo.setCount(count);
-//   
-//   model.addAttribute("cardList", cardDao.selectList(vo));
-//      return "company/cardList";
-//   }   
-   
-
-   
    @GetMapping("/download")
    public ResponseEntity<ByteArrayResource> download(
          @RequestParam int cardNo) throws IOException{
@@ -176,7 +154,7 @@ public class CompanyController {
          return ResponseEntity.notFound().build();
       }
       //파일불러고오기 
-      File dir=new File("D:/upload");
+      File dir=new File("D:/upload/kh10C/card");
       File target=new File(dir,String.valueOf(cardNo));
       byte[] data=FileUtils.readFileToByteArray(target);
       ByteArrayResource resource=new ByteArrayResource(data);

@@ -10,7 +10,7 @@
 	</div>
 	
 	<div class="row center">
-		<a class="btn btn-neutral" href="/">홈으로 이동</a>
+		<a class="btn btn-neutral" href="${pageContext.request.contextPath}/">홈으로 이동</a>
 	</div>
 </div>
 

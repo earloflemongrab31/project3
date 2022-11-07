@@ -42,42 +42,27 @@ import com.example.semiproject3.vo.ItemListSearchVO;
 public class ItemController {
 	
 	@Autowired
-	private OrdersDao ordersDao;
-	
-	@Autowired
 	private ItemDao itemDao;
 	
 	@Autowired
 	private ImageDao imageDao;
 	
 	@Autowired
-	private InvenDao invenDao;
-	
-	@Autowired
 	private CustomerLikeDao customerLikeDao;
 	
-	@Autowired
-	private CustomerDao customerDao;
-
 	@Autowired
 	private CartDao cartDao;
 	
 	@Autowired
 	private ReviewDao reviewDao;
-	@Autowired
-	private ReviewLikeDao reviewLikeDao;
-	@Autowired
-	private AddressDao addressDao;
-	
 
 //	맥북용
 //	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
-//	화니꼬
+//	C드라이브용
 //	private final File directory = new File("C:/study/itemImage");
 //	D드라이브용
-//	private final File directory = new File("D:/study/main");
-//	private final File directory = new File("D:/upload");
-	private final File directory = new File("D:/study/itemImage");
+//	private final File directory = new File("D:/study/itemImage");
+	private final File directory = new File("D:/upload/kh10C/itemImage");
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
@@ -275,8 +260,6 @@ public class ItemController {
 		}
 		
 		 model.addAttribute("reviewList",reviewDao.selectList2(itemNo));
-		//model.addAttribute("reviewList",reviewDao.selectList(itemNo));
-		//model.addAttribute("imageList",imageDao.selectReviewImageList(reviewNo));
 
 		return "item/buydetail";
 	}

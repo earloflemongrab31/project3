@@ -37,7 +37,7 @@ td, th {
 					<tr>
 						<td>${cardDto.companyName}</td>
 						<td>
-							<img src="/companyImage/download/${cardDto.imageNo}" width="100" >
+							<img src="${pageContext.request.contextPath}/companyImage/download/${cardDto.imageNo}" width="100" >
 						</td>
 					</tr>
 			</c:forEach>

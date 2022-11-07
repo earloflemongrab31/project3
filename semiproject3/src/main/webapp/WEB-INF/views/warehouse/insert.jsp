@@ -180,8 +180,8 @@
 					<td>${list.customerNumber}</td>
 					<td>${list.companyExplan}</td>
                         <td>
-                            <a href="/company/update?companyNo=${list.companyNo}">수정</a>
-                            <a href="/company/delete?companyNo=${list.companyNo}">삭제</a>
+                            <a href="${pageContext.request.contextPath}/company/update?companyNo=${list.companyNo}">수정</a>
+                            <a href="${pageContext.request.contextPath}/company/delete?companyNo=${list.companyNo}">삭제</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -189,7 +189,7 @@
         </table>
         </div>
         <div class="row right">
-	       <a class="btn btn-positive btn-pass" href="/company/insert">등록</a>
+	       <a class="btn btn-positive btn-pass" href="${pageContext.request.contextPath}/company/insert">등록</a>
 	    </div>
 	</div>
     </div>  

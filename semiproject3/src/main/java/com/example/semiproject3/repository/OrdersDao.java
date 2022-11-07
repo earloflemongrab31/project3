@@ -7,33 +7,17 @@ import com.example.semiproject3.vo.OrdersListSearchVO;
 
 public interface OrdersDao {
 
-	//목록
-	List<OrdersDto> selectList();
-	
 	//주문 입력
 	void insert(OrdersDto ordersDto);
-	
-	//주문하기
-//	boolean update(OrdersDto ordersDto);
 	
 	//주문 삭제
 	void delete(int ordersNo);
 	
-	//주문 체크
-	boolean check(OrdersDto ordersDto);
-	
-	//회원이 주문할 아이템
-	List<OrdersDto> selectList(String type, String keyword);
-	
 	//회원 중복 옵션 방지
 	OrdersDto selectOne2(OrdersDto ordersDto);
 
-	//회원이 선택한 총 주문수 
-	int selectOrders(int ordersNo);
-	
 	//주문 목록에 있는지 중복 조회
 	OrdersDto selectOne(OrdersDto ordersDto);
-	OrdersDto selectOne2(int itemCnt);
 	
 	//주문 목록
 	List<OrdersDto> selectList(String loginId);

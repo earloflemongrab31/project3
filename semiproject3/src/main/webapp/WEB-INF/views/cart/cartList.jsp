@@ -14,7 +14,7 @@
 			var itemPrice = $(this).parent("td").find("input[name=itemPrice]").val();
 			var that = $(this);
 			$.ajax({
-				url: "http://localhost:8888/rest/cart/",
+				url: "${pageContext.request.contextPath}/rest/cart/",
 				method: "post",
 				data: {
 					itemCnt: itemCnt,
@@ -40,23 +40,25 @@
 <div class="row center mb-30">
 	 <h1>CART</h1>
 </div>
+<c:choose>
+<c:when test="${!empty cartList}">
 <div class="row center">
 		장바구니 상품(${cartCount})
 </div>
-<form action="/orders/cart-buy" method="post">
+<form action="${pageContext.request.contextPath}/orders/cart-buy" method="post">
 <table class="table table-border" >
  	<tbody>
  	<c:forEach var="cartDto" items="${cartList}">
  		<c:if test="${cartDto.imageMain == 1}">
 	 		<tr>
 		 		<td class="center" rowspan="3" style="vertical-align: bottom;">
-		 			<a href="/item/buydetail?itemNo=${cartDto.itemNo}">
-		 				<img src="/image/download/${cartDto.imageNo}" width="100">
+		 			<a href="${pageContext.request.contextPath}/item/buydetail?itemNo=${cartDto.itemNo}">
+		 				<img src="${pageContext.request.contextPath}/image/download/${cartDto.imageNo}" width="100">
 		 				<input type="hidden" name="imageNo" value="${cartDto.imageNo}">
 		 			</a>
 		 		</td>
 		 		<td colspan="2">${cartDto.itemName}</td>
-		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}">삭제</a></td>
+		 		<td class="right"><a href="delete?cartNo=${cartDto.cartNo}"><i class="fa-solid fa-xmark"></i></a></td>
 			</tr>
  		</c:if>
 		<tr>
@@ -68,10 +70,6 @@
 		 		<input type="hidden" name="itemName" value="${cartDto.itemName}">
 	 			<input type="hidden" name="itemPrice" value="${cartDto.itemPrice}">
 				<input type="number" class="itemCnt input w-100" name="itemCnt" value="${cartDto.itemCnt}" min="1" max="${cartDto.itemTotalCnt}">
-<!-- 				<span> -->
-<!-- 				<button class="plus btn">+</button> -->
-<!-- 				<button class="minus btn">-</button> -->
-<!-- 				</span> -->
 			</td>
 			<td class="center" width="100" rowspan="2">
 				<span class="price-result">${cartDto.itemPrice * cartDto.itemCnt}</span>원
@@ -88,24 +86,35 @@
 		</tr>
  	</c:forEach>
  	</tbody>
- 	<tfoot>
+	<tfoot>
  		<tr>
  			<td class="left" colspan="6">
  				총 주문 금액
  			</td>
 		</tr>
  		<tr>
- 			<td class="center" colspan="6">
-				상품 총금액 : <span id="pay-total">${total}</span>원
-				 + 3000원(배송비) = <span id="pay-real-total">${total+3000}</span>원
-			</td>
-		</tr>
+	 			<td class="center" colspan="6">
+					상품 총금액 : <span id="pay-total">${total}</span>원
+					 + 3000원(배송비) = <span id="pay-real-total">${total+3000}</span>원
+				</td>
+			</tr>
  		<tr>
  			<td class="center" colspan="6">
 				<button class="btn btn-positive" type="submit">주문하기</button>
 			</td>
 		</tr>
- </table>
+	</tfoot>
+</table>
 </form>
+</c:when>
+<c:otherwise>
+	<div class="row center mt-30">
+		<h3>장바구니에 담긴 상품이 없습니다.</h3>
+	</div>
+	<div class="row center mt-30">
+		<a href="${pageContext.request.contextPath}/" class="btn btn-positive">쇼핑하러 가기</a>
+	</div>
+</c:otherwise>
+</c:choose>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

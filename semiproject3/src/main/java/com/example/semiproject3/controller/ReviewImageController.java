@@ -27,14 +27,12 @@ public class ReviewImageController {
 	
 
 //	맥북용
-//	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
-//	private final File directory = new File(System.getProperty("user.home")+"/upload/itemImage");
-//	화니꼬
-//	private final File directory = new File("C:/study/itemImage");
+//	private final File directory = new File(System.getProperty("user.home")+"/upload/reviewImage");
+//	C드라이브용
+//	private final File directory = new File("C:/study/reviewImage");
 //	D드라이브용
-//	private final File directory = new File("D:/upload");
-//	private final File directory = new File("D:/study/reviewImage");
-	private final File directory=new File("D:/upload/reviewImage");
+//	private final File directory=new File("D:/study/reviewImage");
+	private final File directory=new File("D:/upload/kh10C/reviewImage");
 	
 	//이미지 불러오기
 	@GetMapping("/download/{imageNo}")

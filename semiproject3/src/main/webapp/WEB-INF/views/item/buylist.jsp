@@ -20,7 +20,7 @@
 				<h1>상품 준비 중입니다.</h1>
 			</div>
 			<div class="row center">
-				<a href="/" class="btn btn-neutral">메인페이지 이동 <i class="fa-solid fa-arrow-right"></i></a>
+				<a href="${pageContext.request.contextPath}/" class="btn btn-neutral">메인페이지 이동 <i class="fa-solid fa-arrow-right"></i></a>
 			</div>
 		</c:when>
 		<c:otherwise>
@@ -31,23 +31,43 @@
 				<c:if test="${itemDto.imageMain == 1}">
 					<div class="row float-left w-33">
 						<a href="buydetail?itemNo=${itemDto.itemNo}">
-							<img src="/image/download/${itemDto.imageNo}" style="width:320px; height: 430px;">
+							<img src="${pageContext.request.contextPath}/image/download/${itemDto.imageNo}" style="width:320px; height: 430px;">
 						</a>
 						<c:choose>
 							<c:when test="${itemDto.itemTotalCnt == 0}">
-								<div class="row center float-container mb-20"style="font-size:14px; font-weight:bold; padding:0 22px;">
-									품절
-								</div>
-							</c:when>
-							<c:otherwise>
 								<div class="row left float-container mb-20" style="font-size:14px; font-weight:bold; padding:0 22px;">
 				    				<div class="float-left">
 					    				${itemDto.itemName}
 				    				</div>
 				    				<div class="float-right">
-				    					<fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0"/>원
+				    					[<span>품절</span>]
 				    				</div>
 			    				</div>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${itemDto.itemTotalCnt < 10}">
+										<div class="row left float-container mb-20" style="font-size:14px; font-weight:bold; padding:0 22px;">
+						    				<div class="float-left">
+							    				${itemDto.itemName}
+							    				[<span class="sold">품절 임박</span>]
+						    				</div>
+						    				<div class="float-right">
+						    					<fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0"/>원
+						    				</div>
+					    				</div>
+									</c:when>
+									<c:otherwise>
+										<div class="row left float-container mb-20" style="font-size:14px; font-weight:bold; padding:0 22px;">
+						    				<div class="float-left">
+							    				${itemDto.itemName}
+						    				</div>
+						    				<div class="float-right">
+						    					<fmt:formatNumber value="${itemDto.itemPrice}" pattern="#,##0"/>원
+						    				</div>
+					    				</div>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 					</div>

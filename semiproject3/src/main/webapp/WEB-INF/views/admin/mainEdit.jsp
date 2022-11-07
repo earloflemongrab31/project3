@@ -15,7 +15,7 @@
 	<h3>내용</h3>
 </div>
 <div class="row">
-	<textarea class="content" name="mainContent"></textarea>
+	<textarea class="content" name="mainContent">${mainEditDto.mainContent}</textarea>
 </div>
 
 <div class="image-box">

@@ -101,13 +101,6 @@ public class CartDaoImpl implements CartDao{
 		}
 	};
 	
-	//번호 생성
-//	@Override
-//	public int sequence() {
-//		String sql = "select cart_seq.nextval from dual";
-//		return jdbcTemplate.queryForObject(sql, int.class);
-//	}
-	
 	//카트 담기
 	@Override
 	public void insert(CartListVO cartListVO) {

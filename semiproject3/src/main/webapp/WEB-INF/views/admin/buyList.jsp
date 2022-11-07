@@ -43,17 +43,6 @@
 	</table>
 </div>
 
-<div class="row center">
-	<form action="list" method="get">
-		<select class="input" name="type" required>
-			<option value="customer_id">아이디</option>
-		</select>
-		<input type="search" name="keword" class="input" required>
-		<button type="submit" class="btn btn-positive">검색</button>
-	</form>
-</div>
-
-</div>
 
 <!-- 페이징 처리 -->
 <ul class="pagination">
@@ -116,7 +105,17 @@
 </li>
 </ul>	
 
+<div class="row center">
+	<form action="admin-buylist" method="get">
+		<select class="input" name="type" required>
+			<option value="customer_id">아이디</option>
+		</select>
+		<input type="search" name="keword" class="input" required>
+		<button type="submit" class="btn btn-positive">검색</button>
+	</form>
+</div>
 
 </div>
+
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

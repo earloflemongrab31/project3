@@ -24,7 +24,7 @@
          var that=this;
          
          $.ajax({
-         url:"/rest/review/like",
+         url:"${pageContext.request.contextPath}/rest/review/like",
          method:"post",
          data:{
             reviewNo:$(this).data("review-no"),
@@ -58,11 +58,11 @@
     
       $(function(){
          $(".cart-in").click(function(){
-            $(".item-form").attr("action", "/cart/insert");
+            $(".item-form").attr("action", "${pageContext.request.contextPath}/cart/insert");
             $(".item-form").attr("method", "post");
          });
          $(".buy").click(function(){
-            $(".item-form").attr("action", "/orders/detail");
+            $(".item-form").attr("action", "${pageContext.request.contextPath}/orders/detail");
             $(".item-form").attr("method", "post");
          });
       });
@@ -71,7 +71,7 @@
       $(function(){
         $(".item-mini-image").click(function(){
            var selectedImage = $(this).data("image-no");
-           $("img[data-image=main]").attr("src", "/image/download/"+selectedImage);
+           $("img[data-image=main]").attr("src", "${pageContext.request.contextPath}/image/download/"+selectedImage);
         });
      });
 </script>
@@ -115,7 +115,7 @@
 
 <div class="float-container">
 
-<form class="item-form" action="/cart/insert" method="post">
+<form class="item-form" action="${pageContext.request.contextPath}/cart/insert" method="post">
 <div class="float-left w-50">
    <table class="table">
       <tbody>
@@ -123,7 +123,7 @@
             <th class="center">
                <c:forEach var="buylistView" items="${buyImageList}">
                <c:if test="${buylistView.imageMain == 1}">
-                  <img src="/image/download/${buylistView.imageNo}" style="width:320px; height: 430px;" data-image="main">
+                  <img src="${pageContext.request.contextPath}/image/download/${buylistView.imageNo}" style="width:320px; height: 430px;" data-image="main">
                   <input type="hidden" name="imageNo" value="${buylistView.imageNo}">
                </c:if>
                </c:forEach>
@@ -133,13 +133,13 @@
             <td class="center">
                 <c:forEach var="buylistView" items="${buyImageList}">
                     <c:if test="${buylistView.imageMain == 1}">
-                        <img src="/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
+                        <img src="${pageContext.request.contextPath}/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
                            data-image-no="${buylistView.imageNo}"> 
                     </c:if>
                 </c:forEach>
                 <c:forEach var="buylistView" items="${buyImageList}">
                     <c:if test="${buylistView.imageMain == 0}">
-                       <img src="/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
+                       <img src="${pageContext.request.contextPath}/image/download/${buylistView.imageNo}" class="image image-blur item-mini-image" 
                           data-image-no="${buylistView.imageNo}">
                     </c:if>
                 </c:forEach>
@@ -193,12 +193,22 @@
                   <option disabled>상품준비중</option>
                </c:if>
                <c:forEach var="itemDto" items="${buylist}">
-	               <c:if test="${itemDto.itemTotalCnt !=0}">
-	                  <option data-total-cnt="${itemDto.itemTotalCnt}" data-color="${itemDto.itemColor}" 
-	                  		data-size="${itemDto.itemSize}">
-	                  ${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
-	                  </option>
-	               </c:if>
+	           		<c:if test="${itemDto.itemTotalCnt !=0}">
+	               		<c:choose>
+	               			<c:when test="${itemDto.itemTotalCnt < 10}">
+	               				<option data-total-cnt="${itemDto.itemTotalCnt}" data-color="${itemDto.itemColor}" 
+				               		data-size="${itemDto.itemSize}">
+			           				${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})[품절 임박]
+			           			</option>
+	               			</c:when>
+	               			<c:otherwise>
+				       			<option data-total-cnt="${itemDto.itemTotalCnt}" data-color="${itemDto.itemColor}" 
+				               		data-size="${itemDto.itemSize}">
+			           				${itemDto.itemColor}/${itemDto.itemSize}(잔여수량:${itemDto.itemTotalCnt})
+			           			</option>
+	               			</c:otherwise>
+	               		</c:choose>
+	           		</c:if>
                </c:forEach>
             </select>
          </td>
@@ -208,7 +218,7 @@
 </div>
 
 <div class="row" style="min-height:280px;">
-   <ul class="option-area" style="list-style: none;">
+   <ul class="option-area middle" style="list-style: none;">
          
    </ul>
 </div>
@@ -289,7 +299,7 @@
                            <c:out value="${fn:substring(list.customerId, 0, fn:length(list.customerId) - 4)}" />**** / ${list.reviewDate} 
                               <c:choose>
                                  <c:when test="${loginId != list.customerId}">
-                                    <a href="/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">/ [신고]</a>
+                                    <a href="${pageContext.request.contextPath}/review/report?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">/ [신고]</a>
                                  </c:when>
                                  <c:otherwise>
                                     <a href="#" onclick="fail();"> / [신고]</a>
@@ -317,7 +327,7 @@
                               </c:otherwise>
                            </c:choose>
                               <td  style="text-align: center; vertical-align: middle;">
-                                 <img class="image-big" src="/reviewImage/download/${list.imageNo}" width="100">
+                                 <img class="image-big" src="${pageContext.request.contextPath}/reviewImage/download/${list.imageNo}" width="100">
                               </td>
                               
                            <!--좋아요  -->                
@@ -350,7 +360,7 @@
                                 <td>
                                 <c:if test="${loginId == list.customerId}">
                                    (
-                                   <a href="/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                   <a href="${pageContext.request.contextPath}/review/delete?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
                                       <i class="fa-solid fa-trash"></i>
                                    </a> 
                                    )
@@ -360,13 +370,13 @@
                           <c:if test="${admin != null}">
                            <c:choose>
                                  <c:when test="${list.reviewBlind}">
-                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                       <a href="${pageContext.request.contextPath}/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
                                             <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[해제]
                                          </a>
                                  </c:when>
                                  <c:otherwise>
                                     
-                                       <a href="/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
+                                       <a href="${pageContext.request.contextPath}/review/blind?reviewNo=${list.reviewNo}&itemNo=${itemDto.itemNo}">
                                        <i class="fa-sharp fa-solid fa-person-walking-with-cane"></i>[설정]
                                        </a>
                                     

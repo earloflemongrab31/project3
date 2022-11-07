@@ -23,13 +23,26 @@
 				</tr>
 				<tr>
 					<td class="w-25" rowspan="3" style="vertical-align: bottom;">
-						<a href="/item/buydetail?itemNo=${buyItem.itemNo}">
-							<img class="w-100" src="/image/download/${buyItem.imageNo}">
+						<a href="${pageContext.request.contextPath}/item/buydetail?itemNo=${buyItem.itemNo}">
+							<img class="w-100" src="${pageContext.request.contextPath}/image/download/${buyItem.imageNo}">
 						</a>
 					</td>
 					<td>${buyItem.itemName}</td>
-					<td class="w-25 center" rowspan="3">${buyItem.deliveryStatus}</td> 
-					<td class= "center" rowspan="3"> <a  href="/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+					<td class="w-25 center" rowspan="3">
+						${buyItem.deliveryStatus} 
+						
+						<c:if test="${buyItem.deliveryStatus=='배송완료'}">
+							<p class="mt-10"><a href="#">[환불신청]</a></p>
+						</c:if>
+					</td>
+					<c:choose>
+						<c:when test="${buyItem.deliveryStatus == '배송완료'}">
+							<td class= "center" rowspan="3"> <a class="review-able" href="${pageContext.request.contextPath}/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+						</c:when>
+						<c:otherwise>
+							<td class= "center" rowspan="3"> <a class="review-disable" href="${pageContext.request.contextPath}/review/insert?itemNo=${buyItem.itemNo}">[리뷰작성]</a></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				<tr>
 					<td> 옵션 : ${buyItem.itemSize} / ${buyItem.itemColor}</td>
@@ -51,7 +64,7 @@
 <li>
 	<c:choose>
 		<c:when test="${not vo.isFirst()}">
-			<a href="/buy/list?p=${vo.firstBlock()}&${vo.parameter()}">
+			<a href="${pageContext.request.contextPath}/buy/list?p=${vo.firstBlock()}&${vo.parameter()}">
 				<i class="fa-solid fa-angles-left"></i>
 			</a>
 		</c:when>
@@ -65,7 +78,7 @@
 <li>
 	<c:choose>
 		<c:when test="${vo.hasPrev()}">
-			<a href="/buy/list?p=${vo.prevBlock()}&${vo.parameter()}">
+			<a href="${pageContext.request.contextPath}/buy/list?p=${vo.prevBlock()}&${vo.parameter()}">
 				<i class="fa-solid fa-chevron-left"></i>
 			</a>
 		</c:when>
@@ -76,14 +89,14 @@
 </li>
  
 <c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<li <c:if test="${i==param.p}">class="on"</c:if>><a href="/buy/list?p=${i}&${vo.parameter()}">${i}</a></li>
+	<li <c:if test="${i==param.p}">class="on"</c:if>><a href="${pageContext.request.contextPath}/buy/list?p=${i}&${vo.parameter()}">${i}</a></li>
 </c:forEach>
 
 <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 <li>
 	<c:choose>
 		<c:when test="${vo.hasNext()}">
-			<a href="/buy/list?p=${vo.nextBlock()}&${vo.parameter()}">
+			<a href="${pageContext.request.contextPath}/buy/list?p=${vo.nextBlock()}&${vo.parameter()}">
 				<i class="fa-solid fa-chevron-right"></i>
 			</a>
 		</c:when>
@@ -96,7 +109,7 @@
 <li>
 	<c:choose>
 		<c:when test="${not vo.isLast()}">
-			<a href="/buy/list?p=${vo.lastBlock()}&${vo.parameter()}">
+			<a href="${pageContext.request.contextPath}/buy/list?p=${vo.lastBlock()}&${vo.parameter()}">
 				<i class="fa-solid fa-angles-right"></i>
 			</a>
 		</c:when>

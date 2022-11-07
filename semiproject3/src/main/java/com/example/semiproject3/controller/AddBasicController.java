@@ -31,26 +31,6 @@ public class AddBasicController {
    @Autowired
    private CartDao cartDao;
    
-//   @GetMapping("/addBasic")
-//   // 기본주소 리스트 출력
-//   public String addBasic(Model model, HttpSession session, 
-//		   @RequestParam(required = false) String type, 
-//		   @RequestParam(required = false) String keyword) {
-//
-//	   String loginId = (String) session.getAttribute(SessionConstant.ID);
-//	   boolean isSearch = type != null && keyword != null;
-//	   if(isSearch) { // 검색
-//		   model.addAttribute("list", addressDao.selectList(type, keyword));
-//	   }
-//	   else { //목록
-//		   model.addAttribute("list", addressDao.selectList(loginId));
-//	   }
-//	   List<AddressDto>listBasic=addressDao.selectOneBasic(loginId);
-//	      model.addAttribute("listBasic", listBasic);
-//	   return "address/addBasic";
-//   }
-//   
-   
    @GetMapping("/addBasic")
    public String addBasic(Model model,HttpSession session,
 		   @ModelAttribute(name="vo") AddressUniteVO vo) {
@@ -76,14 +56,11 @@ public class AddBasicController {
    @PostMapping("/addBasic")
    public String basicUpdate(@RequestParam(value="addressNo[]") List<Integer> addressNo, @RequestParam(value="addressBasic") String addressBasic,
 		   HttpSession session) {
-//	   System.out.println(addressNo.get(0));
-//	   System.out.println(addressBasic);
 	   String loginId = (String) session.getAttribute(SessionConstant.ID);
 	   boolean result = false;
 	   for(int i = 0; i < addressNo.size(); i++) {
     	 result = addressDao.addBasic(addressNo.get(i),addressBasic);
     		if(result) {
-//    			System.out.println("통과체크");
     		addressDao.addBasicUpdate(addressNo.get(i),loginId);
     		}
 	   }
