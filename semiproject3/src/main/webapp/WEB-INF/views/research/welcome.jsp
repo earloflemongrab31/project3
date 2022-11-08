@@ -4,7 +4,7 @@
     <jsp:param value="설문조사" name="title"/>
 </jsp:include>
 
-<meta http-equiv="refresh" content="5; url=http:/">
+<meta http-equiv="refresh" content="5; url=${pageContext.request.contextPath}/">
 
 <div class="container-300 mt-50 mb-50">
 	<div class="row center mb-30">
