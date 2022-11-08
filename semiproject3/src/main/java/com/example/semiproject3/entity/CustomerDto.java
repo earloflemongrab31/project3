@@ -22,7 +22,7 @@ public class CustomerDto {
 	private Date customerBirth;
 	private String customerEmail;
 	private int customerPoint;
-	private int customerMoney;
+	private long customerMoney;
 	private String customerGrade;
 	private Date customerJoin;
 	private Date customerLogin;
