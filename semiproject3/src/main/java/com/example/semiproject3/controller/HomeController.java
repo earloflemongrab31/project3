@@ -34,7 +34,6 @@ public class HomeController {
 //	C드라이브용
 //	private final File directory = new File("C:/study/main");
 //	D드라이브용
-//	private final File directory = new File("D:/study/main");
 	private final File directory = new File("D:/upload/kh10C/main");
 	
 	@Autowired

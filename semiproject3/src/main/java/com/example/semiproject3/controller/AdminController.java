@@ -218,10 +218,9 @@ public class AdminController {
 						.imageMain("0")
 				.build());
 				
-//				File dir = new File("D:/upload/kh10C/main");
-//				File dir = new File("D:/study/main");
+				File dir = new File("D:/upload/kh10C/main");
 //					맥북용
-				File dir = new File(System.getProperty("user.home")+"/upload/main");
+//				File dir = new File(System.getProperty("user.home")+"/upload/main");
 				dir.mkdirs();
 				
 				File target = new File(dir, String.valueOf(imageNo));
