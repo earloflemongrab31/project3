@@ -2,10 +2,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>400 error</title>
+<script src="http://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+	$(function(){
+		$("#go-back").click(function(){
+			history.back();
+		});
+	});
+</script>
 </head>
 <body>
-<h1>400</h1>
-<a href="${pageContext.request.contextPath}/">쇼핑몰 메인페이지</a>
+<h1>잘못된 요청입니다.</h1>
+<button type="button" id="go-back">뒤로가기</button>
 </body>
 </html>
