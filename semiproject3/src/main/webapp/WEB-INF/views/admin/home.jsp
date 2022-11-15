@@ -7,7 +7,7 @@
    <jsp:param value="관리자 페이지" name="title" />
 </jsp:include>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="//cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$.ajax({

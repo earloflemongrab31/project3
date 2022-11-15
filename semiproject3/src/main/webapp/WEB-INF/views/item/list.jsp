@@ -132,7 +132,7 @@
 			<option value="item_name" <c:if test="${type == 'item_name'}"></c:if>>상품명</option>
 		</select>
 			
-		<input class="input" type="search" name="keyword" placeholder="검색어" required>
+		<input class="input" type="search" name="keyword" placeholder="검색어" value="${param.keyword}" required>
 			<button class="btn btn-positive">검색</button>
 	</div>
 </form>

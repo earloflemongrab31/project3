@@ -14,8 +14,6 @@ td, th {
 }
 </style>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <div class ="container-1000 mt-50 mb-50">
 
 	<div class = "row center mb-30">

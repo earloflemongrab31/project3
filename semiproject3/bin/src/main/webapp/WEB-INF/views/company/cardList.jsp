@@ -14,9 +14,6 @@ td, th {
 }
 </style>
 
-
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <div class ="container-900 mt-40">
 
 	<div class = "row center mb-30">
@@ -111,8 +108,7 @@ td, th {
 </li>
 </ul>	
 	
-
-
+</div>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include> 
     

@@ -4,7 +4,7 @@
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="//code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript"></script>
 <!-- 테이블 폰트 변경해야함 -->
 <form class="join-form" action="insert" method="post" autocomplete="off">
