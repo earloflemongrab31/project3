@@ -19,9 +19,9 @@
 </title>
 
 <!-- 글꼴 cdn -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="//fonts.googleapis.com">
+<link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
+<link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
 
 <!-- 디자인 틀 -->
 <link rel="stylesheet" type="text/css" href="/css/reset.css">

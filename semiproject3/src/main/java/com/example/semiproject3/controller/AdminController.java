@@ -219,7 +219,6 @@ public class AdminController {
 				.build());
 				
 				File dir = new File("D:/upload/kh10C/main");
-//				File dir = new File("D:/study/main");
 //					맥북용
 //				File dir = new File(System.getProperty("user.home")+"/upload/main");
 				dir.mkdirs();

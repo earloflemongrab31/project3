@@ -5,7 +5,7 @@
    <jsp:param value="관리자 등록" name="title"/>
 </jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="//code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 $(function(){
 	$(window).on("beforeunload", function(){

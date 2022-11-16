@@ -4,8 +4,8 @@
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script language="JavaScript" src="http://www.webmadang.net/javascript/js/calendarDateInput.js"></script>
+<script src="//code.jquery.com/jquery-3.6.1.js"></script>
+<script language="JavaScript" src="//www.webmadang.net/javascript/js/calendarDateInput.js"></script>
 <script type="text/javascript">
 /* 회원가입 */
 	$(function(){

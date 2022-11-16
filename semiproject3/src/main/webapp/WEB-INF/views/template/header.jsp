@@ -19,12 +19,12 @@
 </title>
 
 <!-- 부트스트랩 cdn -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <!-- 글꼴 cdn -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="//fonts.googleapis.com">
+<link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
+<link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
 
 <!-- 디자인 틀 -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
@@ -35,23 +35,23 @@
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> --%>
 
 <!-- 아이콘 cdn -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
 <!-- lightpick 사용을 위한 CDN 추가 -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
-<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
+<script src="//cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 
 <!-- swiper 의존성 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<script src="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
 <!-- jQuery -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<!-- <script src="http://code.jquery.com/jquery-3.6.1.js"></script> -->
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+<!-- <script src="//code.jquery.com/jquery-3.6.1.js"></script> -->
 <!-- 배포 시 min 버전으로 -->
-<script src="http://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script src="//code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
 <!-- summernote 라이브러리 -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/summernote/summernote-lite.css">
@@ -62,7 +62,7 @@
 	.input.find{
 	    padding-left: 2em;
 	    padding-top: 0.25em;
-		background-image: url("/image/search.webp");
+		background-image: url("${pageContext.request.contextPath}/image/search.webp");
 	    background-size: 1em;
 	    background-repeat: no-repeat;
 	    background-position-x: 0.5em;
@@ -556,7 +556,7 @@
 <c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자' && blockAd != 'Y'}">
 	<div class="float-container ad">
 		&emsp;&emsp;"SeSam 앱" 설치 시 <span style="color:orange;">5,000point 지급!</span> 지금 바로 앱스토어에서 다운 받기
-		<a href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
+		<a href="//play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700058439438694_creativeid_477136209358_device_c&gclid=Cj0KCQjwnbmaBhD-ARIsAGTPcfVKNmc0jEnLgOhSuzblsyh0eJfXILaAubbz457HBJSfKVSPzXMuzCYaAkcaEALw_wcB&gclsrc=aw.ds">
 			<img src="${pageContext.request.contextPath}/image/googleplay.png">
 		</a>
 		<span class="float-right delete" style="margin-left:5px;">
@@ -680,7 +680,7 @@
 	<form action="${pageContext.request.contextPath}/item/buylist" method="get" autocomplete="off">
 		<button class="float-right btn btn-neutral" style="padding-top:5px;" type="submit">search</button>
 		<input type="hidden" name="type" value="item_name">
-		<input class="float-right input input-underline find" name="keyword">
+		<input class="float-right input input-underline find" name="keyword" value="${param.keyword}">
 	</form>
 		<c:if test="${loginGrade != '일반관리자' && loginGrade != '메인관리자'}">
 			<li class="float-right"><a href="${pageContext.request.contextPath}/customer/mypage?customerId=${loginId}">MYPAGE</a></li>

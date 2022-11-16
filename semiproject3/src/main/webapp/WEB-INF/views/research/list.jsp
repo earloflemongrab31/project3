@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
     <jsp:param value="설문조사 결과" name="title"/>
 </jsp:include>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="//cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$.ajax({
@@ -289,8 +289,6 @@
 		})
 	})
 </script>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 
 <section>
 	<div class="row center mb-30">

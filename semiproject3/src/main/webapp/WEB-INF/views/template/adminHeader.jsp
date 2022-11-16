@@ -12,9 +12,9 @@
 </title>
 
 <!-- 글꼴 cdn -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="//fonts.googleapis.com">
+<link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
+<link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
 
 <!-- 디자인 틀 -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
@@ -25,19 +25,19 @@
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> --%>
 
 <!-- 아이콘 cdn -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
 <!-- lightpick 사용을 위한 CDN 추가 -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
-<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
+<script src="//cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 
 <!-- jQuery -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<!-- <script src="http://code.jquery.com/jquery-3.6.1.js"></script> -->
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+<!-- <script src="//code.jquery.com/jquery-3.6.1.js"></script> -->
 <!-- 배포 시 min 버전으로 -->
-<script src="http://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script src="//code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
 <!-- summernote 라이브러리 -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/summernote/summernote-lite.css">

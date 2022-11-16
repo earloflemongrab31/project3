@@ -88,8 +88,9 @@ public class ReviewController {
 							.imageSize(file.getSize())
 							.build());
 					//파일저장
-//					File dir=new File("D:/upload/reviewImage");
 					File dir=new File("D:/upload/kh10C/reviewImage");
+					//맥북용
+//					File dir=new File(System.getProperty("user.home")+"/upload/reviewImage");
 					dir.mkdirs();
 					File target = new File(dir,String.valueOf(imageNo));
 					file.transferTo(target);

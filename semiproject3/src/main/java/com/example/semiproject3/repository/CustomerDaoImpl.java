@@ -39,7 +39,7 @@ public class CustomerDaoImpl implements CustomerDao{
 			customerDto.setCustomerBirth(rs.getDate("customer_birth"));
 			customerDto.setCustomerEmail(rs.getString("customer_email"));
 			customerDto.setCustomerPoint(rs.getInt("customer_point"));
-			customerDto.setCustomerMoney(rs.getInt("customer_money"));
+			customerDto.setCustomerMoney(rs.getLong("customer_money"));
 			customerDto.setCustomerGrade(rs.getString("customer_grade"));
 			customerDto.setCustomerJoin(rs.getDate("customer_join"));
 			customerDto.setCustomerLogin(rs.getDate("customer_login"));
@@ -67,7 +67,7 @@ public class CustomerDaoImpl implements CustomerDao{
 				customerDto.setCustomerBirth(rs.getDate("customer_birth"));
 				customerDto.setCustomerEmail(rs.getString("customer_email"));
 				customerDto.setCustomerPoint(rs.getInt("customer_point"));
-				customerDto.setCustomerMoney(rs.getInt("customer_money"));
+				customerDto.setCustomerMoney(rs.getLong("customer_money"));
 				customerDto.setCustomerGrade(rs.getString("customer_grade"));
 				customerDto.setCustomerJoin(rs.getDate("customer_join"));
 				customerDto.setCustomerLogin(rs.getDate("customer_login"));
