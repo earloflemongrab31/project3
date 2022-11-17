@@ -13,7 +13,7 @@
 	<h1>전체 상품 현황</h1>
 	<hr>
 </div>
- 
+
  
 <div class="row center">
 	<form action="itemList" method="get">
