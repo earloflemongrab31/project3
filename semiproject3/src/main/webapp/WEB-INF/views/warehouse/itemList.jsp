@@ -19,7 +19,7 @@
 	<form action="itemList" method="get">
 	<select class="input input-none" name="type" required>
 		<option value="cate_code">카테고리</option>
-		<option value="inven_name">상품명</option>
+		<option value="item_name">상품명</option>
 	</select>
 	<input class="input"  name="keyword" value="${param.keyword}" required>
 	<button class="btn btn-positive">검색</button>
