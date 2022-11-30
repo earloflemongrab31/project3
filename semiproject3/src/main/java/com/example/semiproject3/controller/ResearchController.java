@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.semiproject3.constant.SessionConstant;
 import com.example.semiproject3.entity.ResearchDto;
+import com.example.semiproject3.repository.AdminDao;
 import com.example.semiproject3.repository.CustomerDao;
 import com.example.semiproject3.repository.ResearchDao;
 
@@ -22,6 +24,8 @@ public class ResearchController {
 	ResearchDao researchDao;
 	@Autowired
 	CustomerDao customerDao;
+	@Autowired
+	AdminDao adminDao;
 	
 	@GetMapping("/insert")
 	public String insert(HttpSession session) {
@@ -65,7 +69,8 @@ public class ResearchController {
 		return "research/confirm";
 	}
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(Model model, HttpSession session) {
+		model.addAttribute("adminDto", adminDao.selectOne((String)session.getAttribute(SessionConstant.ID)));
 		model.addAttribute("researchList", researchDao.selectList());
 		return "research/list";
 	}

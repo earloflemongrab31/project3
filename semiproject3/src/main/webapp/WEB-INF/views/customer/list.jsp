@@ -110,7 +110,7 @@
 <form action = "list" method="get" >
 	<div class="row center">
 		
-		<select class="input" name="type" required>
+		<select class="input input-none" name="type" required>
 			<option value="customer_id" <c:if test="${type == 'customer_id'}"></c:if>>아이디</option>
 			<option value="customer_nick" <c:if test="${type == 'customer_nick'}"></c:if>>닉네임</option>
 		</select>

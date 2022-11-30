@@ -118,7 +118,7 @@
 <form action = "reportList" method="get" >
 	<div class="row center">
 		<input type="hidden" name="size" value="${vo.size}">
-		<select class="input" name="type" required>
+		<select class="input input-none" name="type" required>
 		<option value="report_no" selected <c:if test="${vo.type == 'report_no'}"></c:if>>번호</option>
 		<option value="who" selected <c:if test="${vo.type == 'who'}"></c:if>>신고자아이디</option>
 		</select>

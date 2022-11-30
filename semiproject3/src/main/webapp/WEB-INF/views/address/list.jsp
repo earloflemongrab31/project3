@@ -25,11 +25,11 @@ function upGo(){
 	   $("input[name='addressNo']:checked").each(function(i) {
 	      checkboxValues.push($(this).val());
 	    });
-	   window.location = "//localhost:8888/address/edit?addressNo=" + checkboxValues;
+	   window.location = "${pageContext.request.contextPath}/address/edit?addressNo=" + checkboxValues;
 	   }
 	}
 	function add(){
-	   window.location = "//localhost:8888/address/addBasic"
+	   window.location = "${pageContext.request.contextPath}/address/addBasic"
 	   }
 	function delNo(){
 	  
@@ -112,7 +112,7 @@ function upGo(){
       </div>
   
    <div class="row right">
-         <input type="button" onclick="add()";  class="btn btn-positive"  value="기본배송지설정" />
+         <input type="button" onclick="add()"  class="btn btn-positive"  value="기본배송지설정" />
          </div>
 
     

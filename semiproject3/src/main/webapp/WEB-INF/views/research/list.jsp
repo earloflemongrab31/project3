@@ -349,7 +349,7 @@
 					<td>${loginId}[${loginGrade}]</td>
 				</tr>
 				<tr>
-					<td>안녕하세요, ${adminDto.adminName}님</td>
+					<td>안녕하세요, ${adminDto.adminNick}님</td>
 				</tr>
 			</tbody>
 		</table>
