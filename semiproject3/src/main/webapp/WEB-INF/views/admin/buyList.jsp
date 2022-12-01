@@ -107,10 +107,10 @@
 
 <div class="row center">
 	<form action="admin-buylist" method="get">
-		<select class="input" name="type" required>
+		<select class="input input-none" name="type" required>
 			<option value="customer_id">아이디</option>
 		</select>
-		<input type="search" name="keword" class="input" required>
+		<input type="search" name="keyword" class="input" value="${param.keyword}" required>
 		<button type="submit" class="btn btn-positive">검색</button>
 	</form>
 </div>
